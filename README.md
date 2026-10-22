@@ -21,6 +21,7 @@ Buka `http://localhost:4173`.
 - **Bahasa & Input** menampilkan pengaturan shell mobile.
 - Tombol **GitHub Repo** dan ikon GitHub di dock membuka informasi koneksi repositori.
 - Tombol refresh pada kartu repositori membaca ulang metadata workspace.
+- **Browser Plugin** menerima kata pencarian atau URL, lalu membuka target di tab browser baru. Aktivitas browsing disimpan lokal pada perangkat dan panelnya menampilkan sumber konfigurasi `planetbintang/` serta tombol hapus data.
 
 ## API read-only
 

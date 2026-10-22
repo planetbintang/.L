@@ -34,8 +34,29 @@ updateClock();
 setInterval(updateClock, 30000);
 
 const desktopState = { index: null, app: 'explorer', fileFilter: '' };
+const browserState = { history: JSON.parse(localStorage.getItem('planetbintang-browser-history') || '[]') };
 const formatBytes = (bytes = 0) => bytes < 1024 ? `${bytes} B` : bytes < 1024 ** 2 ? `${(bytes / 1024).toFixed(1)} KB` : `${(bytes / 1024 ** 2).toFixed(1)} MB`;
 const api = async (url, options) => { const response = await fetch(url, options); if (!response.ok) throw new Error((await response.json().catch(() => ({}))).error || `HTTP ${response.status}`); return response.json(); };
+
+function browserTarget(value) {
+  const query = value.trim();
+  if (!query) return '';
+  if (/^(https?:\/\/|mailto:|tel:)/i.test(query)) return query;
+  if (/^[\w.-]+\.[a-z]{2,}(\/.*)?$/i.test(query)) return `https://${query}`;
+  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+}
+function rememberBrowserVisit(value, target) {
+  browserState.history = [{ label: value, target, visitedAt: new Date().toISOString() }, ...browserState.history.filter((item) => item.target !== target)].slice(0, 5);
+  localStorage.setItem('planetbintang-browser-history', JSON.stringify(browserState.history));
+}
+function launchBrowser(value) {
+  const target = browserTarget(value);
+  if (!target) { toast('Browser siap', 'Masukkan kata pencarian atau URL terlebih dahulu.'); $('#browserInput').focus(); return; }
+  rememberBrowserVisit(value.trim(), target);
+  const opened = window.open(target, '_blank', 'noopener,noreferrer');
+  toast(opened ? 'Browser dibuka' : 'Popup diblokir', opened ? `Membuka ${target}` : 'Izinkan tab baru untuk menjalankan URL.');
+}
+$('#browserForm').addEventListener('submit', (event) => { event.preventDefault(); launchBrowser($('#browserInput').value); });
 
 function applyIndex(data) {
   desktopState.index = data;
@@ -53,10 +74,17 @@ $('#indexNowButton').addEventListener('click', refreshIndex);
 
 const modal = $('#appModal');
 function setModal(app, body) {
-  const meta = { explorer: ['▤', 'File Explorer', 'Filesystem seluruh workspace'], index: ['⌁', 'Workspace Index', 'Data sistem & metadata'], access: ['⌘', 'Repo Access', 'GitHub, remote, dan branch'], settings: ['⚙', 'Bahasa & Input', 'Preferensi aplikasi'] }[app];
+  const meta = { browser: ['⌕', 'Browser Plugin', 'Pencarian URL dan aktivitas browsing'], explorer: ['▤', 'File Explorer', 'Filesystem seluruh workspace'], index: ['⌁', 'Workspace Index', 'Data sistem & metadata'], access: ['⌘', 'Repo Access', 'GitHub, remote, dan branch'], settings: ['⚙', 'Bahasa & Input', 'Preferensi aplikasi'] }[app];
   $('#modalIcon').textContent = meta[0]; $('#modalTitle').textContent = meta[1]; $('#modalSubtitle').textContent = meta[2]; $('#modalBody').innerHTML = body;
   modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); desktopState.app = app; setDrawer(false);
 }
+function openBrowser() {
+  const historyRows = browserState.history.length ? browserState.history.map((item) => `<button class="browser-history-row" data-browser-target="${encodeURIComponent(item.target)}"><span>↗</span><div><b>${item.label}</b><small>${item.target}</small></div><i>›</i></button>`).join('') : '<div class="modal-empty">Belum ada aktivitas browsing lokal.</div>';
+  setModal('browser', `<div class="browser-settings"><div class="detail-box"><h4>Konfigurasi browser</h4><p>Sumber input sistem: <b>planetbintang/</b></p><p>Mode pembukaan: <b>tab browser baru</b></p><p>Penyimpanan aktivitas: <b>local device</b></p></div><div class="detail-box"><div class="browser-modal-head"><h4>Aktivitas browsing</h4><button id="clearBrowserHistory" class="clear-history">Hapus data</button></div><div class="browser-history-list">${historyRows}</div></div></div>`);
+  $$('.browser-history-row').forEach((row) => row.addEventListener('click', () => launchBrowser(decodeURIComponent(row.dataset.browserTarget))));
+  $('#clearBrowserHistory')?.addEventListener('click', () => { browserState.history = []; localStorage.removeItem('planetbintang-browser-history'); openBrowser(); toast('Data browsing dihapus', 'Riwayat lokal planetbintang/ sudah dibersihkan.'); });
+}
+$('#browserActivityButton').addEventListener('click', openBrowser);
 function openExplorer() {
   const entries = (desktopState.index?.entries || []).filter((entry) => !desktopState.fileFilter || entry.path.toLowerCase().includes(desktopState.fileFilter));
   const rows = entries.length ? entries.map((entry) => `<tr class="file-row" data-file-path="${encodeURIComponent(entry.path)}"><td class="file-name">${entry.kind === 'system' ? '◈' : '□'} ${entry.path}</td><td>${entry.extension || 'folderless'}</td><td>${formatBytes(entry.size)}</td><td>${entry.kind}</td></tr>`).join('') : '<tr><td colspan="4" class="modal-empty">Belum ada data indeks. Segarkan repo terlebih dahulu.</td></tr>';
@@ -77,7 +105,7 @@ function openAccess() {
   setModal('access', `<div class="detail-box"><p>Workspace root</p><b>${desktopState.index?.root || '/workspace'}</b></div><div class="detail-box"><p>Remote GitHub</p><b>${gitMeta.remote || 'Belum terhubung'}</b></div><div class="detail-box"><p>Visibility</p><b>${gitMeta.visibility || 'Belum terdeteksi'}</b></div><div class="detail-box"><p>Mode akses</p><b>Read-only filesystem</b></div>`);
 }
 function openSettings() { setModal('settings', '<div class="detail-box"><h4>Bahasa & Input</h4><p>Antarmuka mobile menggunakan Bahasa Indonesia.</p><p>Input sentuh aktif · layout responsif · tema liquid glass.</p></div><div class="detail-box"><h4>Tentang shell</h4><p>Planetbintang Mobile Workspace dapat menjalankan alat GitHub dari repositori ini melalui browser.</p></div>'); }
-function openApp(app) { ({ explorer: openExplorer, index: openIndex, access: openAccess, settings: openSettings })[app]?.(); }
+function openApp(app) { ({ browser: openBrowser, explorer: openExplorer, index: openIndex, access: openAccess, settings: openSettings })[app]?.(); }
 $$('[data-open-app]').forEach((button) => button.addEventListener('click', () => openApp(button.dataset.openApp)));
 $('#modalClose').addEventListener('click', () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); });
 $('#modalRefresh').addEventListener('click', () => { if (desktopState.app === 'explorer') openExplorer(); else if (desktopState.app === 'index') openIndex(); else if (desktopState.app === 'access') openAccess(); refreshIndex(); });
