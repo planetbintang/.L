@@ -52,7 +52,8 @@ function rememberBrowserVisit(value, target) {
 function launchBrowser(value) {
   const target = browserTarget(value);
   if (!target) { toast('Browser siap', 'Masukkan kata pencarian atau URL terlebih dahulu.'); $('#browserInput').focus(); return; }
-  rememberBrowserVisit(value.trim(), target);
+  const settings = JSON.parse(localStorage.getItem('planetbintang-mobile-settings') || '{}');
+  if (!settings.privateBrowsing) rememberBrowserVisit(value.trim(), target);
   const opened = window.open(target, '_blank', 'noopener,noreferrer');
   toast(opened ? 'Browser dibuka' : 'Popup diblokir', opened ? `Membuka ${target}` : 'Izinkan tab baru untuk menjalankan URL.');
 }
@@ -104,7 +105,17 @@ function openAccess() {
   const gitMeta = desktopState.index?.git || {};
   setModal('access', `<div class="detail-box"><p>Workspace root</p><b>${desktopState.index?.root || '/workspace'}</b></div><div class="detail-box"><p>Remote GitHub</p><b>${gitMeta.remote || 'Belum terhubung'}</b></div><div class="detail-box"><p>Visibility</p><b>${gitMeta.visibility || 'Belum terdeteksi'}</b></div><div class="detail-box"><p>Mode akses</p><b>Read-only filesystem</b></div>`);
 }
-function openSettings() { setModal('settings', '<div class="detail-box"><h4>Bahasa & Input</h4><p>Antarmuka mobile menggunakan Bahasa Indonesia.</p><p>Input sentuh aktif · layout responsif · tema liquid glass.</p></div><div class="detail-box"><h4>Tentang shell</h4><p>Planetbintang Mobile Workspace dapat menjalankan alat GitHub dari repositori ini melalui browser.</p></div>'); }
+function openSettings() {
+  const settings = JSON.parse(localStorage.getItem('planetbintang-mobile-settings') || '{}');
+  setModal('settings', `<div class="detail-box mobile-settings-head"><span class="eyebrow">MOBILE ONLY / PORTRAIT LOCK</span><h4>Setelan sistem seluler</h4><p>Antarmuka ini selalu berjalan dalam mode mobile, termasuk saat domain dibuka dari desktop.</p></div><div class="mobile-setting-list"><label class="mobile-setting-row"><span><b>Input sentuh</b><small>Optimalkan tombol dan gesture untuk layar sentuh</small></span><input class="mobile-setting-toggle" data-setting-key="touch" type="checkbox" ${settings.touch !== false ? 'checked' : ''} /></label><label class="mobile-setting-row"><span><b>Notifikasi workspace</b><small>Tampilkan status sinkronisasi di layar utama</small></span><input class="mobile-setting-toggle" data-setting-key="notifications" type="checkbox" ${settings.notifications !== false ? 'checked' : ''} /></label><label class="mobile-setting-row"><span><b>Mode privat browsing</b><small>Jangan simpan aktivitas browser di perangkat</small></span><input class="mobile-setting-toggle" data-setting-key="privateBrowsing" type="checkbox" ${settings.privateBrowsing ? 'checked' : ''} /></label></div><div class="detail-box"><h4>Tentang sistem</h4><p>Planetbintang Mobile Workspace · Bahasa Indonesia · Liquid Glass UI.</p><p>Sumber konfigurasi: <b>planetbintang/</b></p></div>`);
+  $$('.mobile-setting-toggle').forEach((toggle) => toggle.addEventListener('change', (event) => {
+    const current = JSON.parse(localStorage.getItem('planetbintang-mobile-settings') || '{}');
+    current[event.target.dataset.settingKey] = event.target.checked;
+    localStorage.setItem('planetbintang-mobile-settings', JSON.stringify(current));
+    if (event.target.dataset.settingKey === 'privateBrowsing' && event.target.checked) { browserState.history = []; localStorage.removeItem('planetbintang-browser-history'); }
+    toast('Setelan mobile disimpan', `${event.target.closest('.mobile-setting-row').querySelector('b').textContent} diperbarui.`);
+  }));
+}
 function openApp(app) { ({ browser: openBrowser, explorer: openExplorer, index: openIndex, access: openAccess, settings: openSettings })[app]?.(); }
 $$('[data-open-app]').forEach((button) => button.addEventListener('click', () => openApp(button.dataset.openApp)));
 $('#modalClose').addEventListener('click', () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); });

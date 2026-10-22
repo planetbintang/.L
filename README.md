@@ -4,6 +4,8 @@ Launcher mobile berbasis HTML/CSS/JS untuk menjalankan alat repositori GitHub `p
 
 Launcher juga menyediakan metadata PWA (`manifest.webmanifest`) sehingga dapat dipasang ke home screen perangkat dan dibuka dalam mode standalone.
 
+Shell selalu dikunci ke kanvas portrait mobile. Pada viewport desktop, sistem tetap menampilkan ukuran dan navigasi mobile, bukan mode desktop. Panel **Setelan sistem seluler** menyediakan preferensi input sentuh, notifikasi workspace, dan mode privat browsing yang disimpan lokal.
+
 ## Menjalankan
 
 ```bash
