@@ -80,6 +80,7 @@ function applyIndex(data) {
   $('#trackedCount').textContent = (data.git?.tracked ?? 0).toLocaleString('id-ID');
   $('#modifiedCount').textContent = (data.git?.modified ?? 0).toLocaleString('id-ID');
   $('#ignoredCount').textContent = (data.system ?? 0).toLocaleString('id-ID');
+  $('#stageFileCount').textContent = `${data.files.toLocaleString('id-ID')} FILES`;
   $('#repoName').textContent = data.git?.name || 'sumberkode/.L';
   $('#repoPath').textContent = data.root;
   $('#repoVisibility').textContent = data.git?.visibility || 'REPO TERHUBUNG';
@@ -125,6 +126,13 @@ function openSettings() { modal.classList.remove('open'); $('#sectionName').text
 function openApp(app) { ({ explorer: openExplorer, index: openIndex, access: openAccess, settings: openSettings })[app]?.(); }
 $$('[data-open-app]').forEach((button) => button.addEventListener('click', () => openApp(button.dataset.openApp)));
 $('#indexNowButton').addEventListener('click', refreshIndex);
+$('#desktopSearch').addEventListener('input', (event) => {
+  const query = event.target.value.trim().toLowerCase();
+  if (query.includes('file') || query.includes('explorer') || query.includes('storage')) openApp('explorer');
+  else if (query.includes('repo') || query.includes('git') || query.includes('remote')) openApp('access');
+  else if (query.includes('index') || query.includes('workspace') || query.includes('7d')) openApp('index');
+  else if (query.includes('setting') || query.includes('input')) openApp('settings');
+});
 $('#modalClose').addEventListener('click', () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); });
 $('#modalRefresh').addEventListener('click', () => { if (desktopState.app === 'explorer') openExplorer(); else if (desktopState.app === 'index') openIndex(); else if (desktopState.app === 'access') openAccess(); refreshIndex(); });
 modal.addEventListener('click', (event) => { if (event.target === modal) $('#modalClose').click(); });
