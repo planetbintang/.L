@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050606" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Planetbintang Mobile Workspace</title>
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="manifest" href="./manifest.webmanifest" />
   </head>
   <body>
     <main class="phone-frame" aria-label="Planetbintang Mobile Workspace">
@@ -17,7 +21,7 @@
 
         <section class="home-content">
           <div class="clock-card"><strong id="mobileClock">07:31</strong><span id="mobileDate">SELASA, 23 JUNI</span></div>
-          <div class="welcome-copy"><span class="eyebrow">MOBILE WORKSPACE</span><h1>Ruang kerja<br /><em>yang bergerak.</em></h1><p>Jalankan repositori GitHub dan alat workspace dari satu layar.</p></div>
+          <div class="welcome-copy"><span class="eyebrow">PLANETBINTANG OS · MOBILE</span><h1>Ruang kerja<br /><em>yang bergerak.</em></h1><p>GitHub, file, dan status workspace dalam satu sistem seluler yang ringkas.</p></div>
 
           <nav class="side-app-dock" aria-label="Aplikasi cepat">
             <button class="app-icon blue" data-open-app="explorer" aria-label="File Explorer"><span>▤</span><small>Files</small></button>
@@ -26,6 +30,7 @@
             <button class="app-icon amber" data-open-app="settings" aria-label="Pengaturan"><span>⚙</span><small>Setelan</small></button>
           </nav>
 
+          <div class="system-glance"><div><span>STATUS SISTEM</span><strong><i class="status-dot"></i> Semua normal</strong></div><div><span>WORKSPACE</span><strong id="glanceFiles">-- file</strong></div><div><span>MODE</span><strong>Read-only</strong></div></div>
           <div class="repo-mini-card"><div class="repo-mark">.L</div><div><span>REPOSITORI AKTIF</span><strong id="repoName">planetbintang/.L</strong><small id="repoBranch">branch: --</small></div><button id="indexNowButton" aria-label="Segarkan repositori">↻</button></div>
           <div class="home-actions"><button class="home-action primary" data-open-app="explorer"><span>▤</span><b>Buka Files</b><small>Jelajahi workspace</small></button><button class="home-action" data-open-app="access"><span>⌘</span><b>GitHub Repo</b><small>Lihat koneksi repo</small></button></div>
         </section>

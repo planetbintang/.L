@@ -2,6 +2,8 @@
 
 Launcher mobile berbasis HTML/CSS/JS untuk menjalankan alat repositori GitHub `planetbintang/.L` dari satu layar. Tampilan utama mengikuti referensi perangkat seluler: bezel gelap, wallpaper abstrak bernuansa kaca cair, dock aplikasi vertikal, dan navigasi bawah.
 
+Launcher juga menyediakan metadata PWA (`manifest.webmanifest`) sehingga dapat dipasang ke home screen perangkat dan dibuka dalam mode standalone.
+
 ## Menjalankan
 
 ```bash

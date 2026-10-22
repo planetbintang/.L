@@ -41,6 +41,7 @@ function applyIndex(data) {
   desktopState.index = data;
   $('#repoName').textContent = data.git?.name || 'planetbintang/.L';
   $('#repoBranch').textContent = `branch: ${data.git?.branch || '--'} · ${data.files.toLocaleString('id-ID')} file`;
+  $('#glanceFiles').textContent = `${data.files.toLocaleString('id-ID')} file`;
   $('#drawerStatus').textContent = `${data.files.toLocaleString('id-ID')} file siap digunakan`;
 }
 async function refreshIndex() {
