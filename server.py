@@ -52,8 +52,9 @@ def repo_metadata() -> dict:
     branch = git("branch", "--show-current") or "detached"
     status_lines = [line for line in git("status", "--short").splitlines() if line.strip()]
     visibility = remote_visibility(remote)
+    remote_slug = remote.split("github.com", 1)[1].lstrip(":/").removesuffix(".git") if "github.com" in remote else "planetbintang/.L"
     return {
-        "name": "sumberkode/.L",
+        "name": remote_slug or "planetbintang/.L",
         "root": str(ROOT),
         "remote": remote,
         "branch": branch,

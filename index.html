@@ -2,124 +2,43 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#081a3d" />
-    <title>Bahasa & Input System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050606" />
+    <title>Planetbintang Mobile Workspace</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <div class="window-glow glow-left"></div>
-      <div class="window-glow glow-right"></div>
+    <main class="phone-frame" aria-label="Planetbintang Mobile Workspace">
+      <section class="phone-screen" id="phoneScreen">
+        <div class="wallpaper-glow glow-one"></div><div class="wallpaper-glow glow-two"></div><div class="wallpaper-glow glow-three"></div>
+        <div class="liquid-shape shape-one"></div><div class="liquid-shape shape-two"></div><div class="liquid-shape shape-three"></div>
 
-      <header class="topbar">
-        <div class="brand-lockup">
-          <div class="brand-orb" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-          <div>
-            <p class="eyebrow">ALRA OS KERNEL V3.4.1</p>
-            <h1>Bahasa & Input</h1>
-          </div>
-        </div>
-        <div class="breadcrumb"><span>Pengaturan</span><b>›</b><span>Pengaturan & Konfigurasi</span></div>
-        <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Cari dalam modul..." /><kbd>⌘ K</kbd></label>
-        <div class="top-actions">
-          <button class="icon-button" title="Notifikasi">♧<i></i></button>
-          <button class="icon-button" title="Bantuan">?</button>
-          <button class="icon-button close" title="Tutup">×</button>
-        </div>
-      </header>
+        <header class="status-bar"><button class="menu-trigger" id="menuTrigger" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button><div class="status-title">PLANETBINTANG</div><div class="status-icons" aria-label="Status perangkat"><span>◔</span><span>▣</span><b>82%</b></div></header>
 
-      <div class="workspace">
-        <aside class="sidebar">
-          <div class="sidebar-title"><span class="tiny-mark">✦</span><span>KATEGORI PENGATURAN</span></div>
-          <nav class="nav-list" aria-label="Kategori pengaturan">
-            <button class="nav-item active" data-section="general"><span class="nav-icon">◈</span><span>Umum & Tampilan</span><em>Aktif</em></button>
-            <button class="nav-item" data-section="security"><span class="nav-icon">◉</span><span>Keamanan & Privasi</span><em>Aman</em></button>
-            <button class="nav-item" data-section="network"><span class="nav-icon">⌁</span><span>Jaringan & Koneksi</span></button>
-            <button class="nav-item" data-section="performance"><span class="nav-icon">◒</span><span>Performa & CPU</span></button>
-            <button class="nav-item" data-section="storage"><span class="nav-icon">▱</span><span>Penyimpanan Data</span></button>
-            <button class="nav-item" data-section="alerts"><span class="nav-icon">♧</span><span>Notifikasi & Suara</span></button>
-            <button class="nav-item" data-section="personal"><span class="nav-icon">◌</span><span>Personalisasi Tema</span></button>
-            <button class="nav-item" data-section="account"><span class="nav-icon">♙</span><span>Akun & Profil</span></button>
+        <section class="home-content">
+          <div class="clock-card"><strong id="mobileClock">07:31</strong><span id="mobileDate">SELASA, 23 JUNI</span></div>
+          <div class="welcome-copy"><span class="eyebrow">MOBILE WORKSPACE</span><h1>Ruang kerja<br /><em>yang bergerak.</em></h1><p>Jalankan repositori GitHub dan alat workspace dari satu layar.</p></div>
+
+          <nav class="side-app-dock" aria-label="Aplikasi cepat">
+            <button class="app-icon blue" data-open-app="explorer" aria-label="File Explorer"><span>▤</span><small>Files</small></button>
+            <button class="app-icon violet" data-open-app="index" aria-label="Workspace Index"><span>⌁</span><small>Index</small></button>
+            <button class="app-icon mint" data-open-app="access" aria-label="Repo Access"><span>⌘</span><small>GitHub</small></button>
+            <button class="app-icon amber" data-open-app="settings" aria-label="Pengaturan"><span>⚙</span><small>Setelan</small></button>
           </nav>
-          <div class="sidebar-footer">
-            <div class="sync-row"><span class="status-dot"></span><span>Konfigurasi tersinkronisasi</span></div>
-            <p>ALRA OS Kernel v3.4.1</p><p>Media layanan stabil</p>
-          </div>
-        </aside>
 
-        <main class="content-area">
-          <section class="desktop-home" id="desktopHome">
-            <div class="desktop-canvas-art" aria-hidden="true"><span class="art-ring ring-a"></span><span class="art-ring ring-b"></span><span class="art-ring ring-c"></span><span class="art-line line-a"></span><span class="art-line line-b"></span><span class="art-triangle"></span><span class="art-orb"></span></div>
-            <div class="desktop-brand-mark"><span class="mini-3d-icon blue">▣</span><strong>NURNNER NOTIFIKASI</strong></div>
-            <div class="desktop-recording"><span class="record-dot"></span><strong>RECORDIN</strong><small>workspace live</small></div>
-            <div class="desktop-toolbar"><button class="toolbar-icon blue">▣</button><button class="toolbar-icon cyan">⌁</button><button class="toolbar-icon purple">⌂</button><button class="toolbar-icon blue">▤</button><button class="toolbar-icon gold">✓</button></div>
-            <div class="desktop-resolution">3600×2147</div>
-            <label class="desktop-search"><span>⌕</span><input id="desktopSearch" type="search" placeholder="Cari aplikasi atau file workspace..." /><kbd>⌘ K</kbd></label>
-            <div class="stage-dock dock-left"><button class="stage-app" data-open-app="settings"><span class="mini-3d-icon blue">⚙</span><em>Settings</em></button><button class="stage-app" data-open-app="index"><span class="mini-3d-icon cyan">▥</span><em>Indexer</em></button><button class="stage-app" data-open-app="access"><span class="mini-3d-icon purple">⌘</span><em>Repo Access</em></button><button class="stage-app" data-open-app="explorer"><span class="mini-3d-icon blue">▤</span><em>Explorer</em></button></div>
-            <div class="stage-dock dock-center"><button class="stage-app" data-open-app="index"><span class="mini-3d-icon cyan">◈</span><em>Core 7D</em></button><button class="stage-app" data-open-app="access"><span class="mini-3d-icon gold">✓</span><em>Secure</em></button><button class="stage-app" data-open-app="explorer"><span class="mini-3d-icon blue">◫</span><em>Files</em></button><button class="stage-app" data-open-app="settings"><span class="mini-3d-icon purple">◌</span><em>Input</em></button><button class="stage-app" data-open-app="explorer"><span class="mini-3d-icon blue">↗</span><em>Launch</em></button></div>
-            <div class="stage-dock dock-right"><button class="stage-app" data-open-app="access"><span class="mini-3d-icon cyan">◉</span><em>Remote</em></button><button class="stage-app" data-open-app="index"><span class="mini-3d-icon gold">✓</span><em>Git</em></button><button class="stage-app" data-open-app="explorer"><span class="mini-3d-icon blue">▱</span><em>Storage</em></button><button class="stage-app" data-open-app="settings"><span class="mini-3d-icon purple">⌁</span><em>Network</em></button><button class="stage-app" data-open-app="explorer"><span class="mini-3d-icon blue">7D</span><em>Studio</em></button></div>
-            <div class="desktop-status"><span class="status-dot"></span><span>Filesystem aktif</span><b id="stageFileCount">-- FILES</b><span>·</span><span>/ sumberkode</span></div>
-            <div class="desktop-heading">
-              <div><div class="section-kicker"><span class="globe">◫</span><span>DESKTOP WORKSPACE</span><span class="slash">/</span><span>INDEXED FILESYSTEM</span></div><h2>Workspace Desktop</h2><p>Kelola aplikasi, filesystem, dan sumber data repositori dari satu tampilan.</p></div>
-              <div class="desktop-clock"><strong id="desktopClock">--:--</strong><span id="desktopDate">memuat waktu sistem</span></div>
-            </div>
-            <div class="repo-banner"><div class="repo-avatar">.L</div><div class="repo-copy"><strong id="repoName">sumberkode/.L</strong><span id="repoPath">/home/ubuntu/sumberkode</span></div><span class="repo-visibility" id="repoVisibility">REPO TERHUBUNG</span><span class="repo-branch" id="repoBranch">branch: --</span><button class="primary-button" id="indexNowButton">↻ Indeks Sekarang</button></div>
-            <div class="desktop-grid">
-              <article class="desktop-card filesystem-card"><div class="app-card-head"><div class="app-icon blue">▤</div><div><strong>File Explorer</strong><span>Filesystem seluruh workspace</span></div><button class="card-menu" data-open-app="explorer">•••</button></div><div class="file-summary"><div><strong id="fileCount">--</strong><span>file terindeks</span></div><div><strong id="folderCount">--</strong><span>folder aktif</span></div><div><strong id="workspaceSize">--</strong><span>ukuran workspace</span></div></div><button class="open-app-button" data-open-app="explorer">Buka File Explorer <b>↗</b></button></article>
-              <article class="desktop-card index-card"><div class="app-card-head"><div class="app-icon cyan">⌁</div><div><strong>Workspace Index</strong><span>Data sistem & metadata</span></div><span class="live-pill"><i></i> LIVE</span></div><div class="index-progress"><div class="progress-track"><i id="indexProgress"></i></div><span id="indexStatus">Menunggu indeks pertama</span></div><div class="index-metrics"><span><b id="trackedCount">--</b> tracked</span><span><b id="modifiedCount">--</b> modified</span><span><b id="ignoredCount">--</b> system</span></div><button class="open-app-button" data-open-app="index">Lihat Workspace Index <b>↗</b></button></article>
-              <article class="desktop-card access-card"><div class="app-card-head"><div class="app-icon purple">⌘</div><div><strong>Repo Access</strong><span>Privat / publik terdeteksi</span></div></div><div class="access-row"><span class="access-dot"></span><div><strong id="accessTitle">Local workspace aktif</strong><small>Mode aman · read-only filesystem</small></div></div><div class="access-tags"><span>Git remote</span><span>Branch</span><span>Metadata</span></div><button class="open-app-button" data-open-app="access">Kelola Repo Access <b>↗</b></button></article>
-            </div>
-            <div class="desktop-section-label"><span>APLIKASI DESKTOP</span><i></i><small>klik aplikasi untuk membuka modal</small></div>
-            <div class="app-dock"><button class="dock-app active" data-open-app="explorer"><span class="dock-icon blue">▤</span><strong>Explorer</strong><small>filesystem</small></button><button class="dock-app" data-open-app="index"><span class="dock-icon cyan">⌁</span><strong>Indexer</strong><small>workspace</small></button><button class="dock-app" data-open-app="access"><span class="dock-icon purple">⌘</span><strong>Repo Access</strong><small>repository</small></button><button class="dock-app" data-open-app="settings"><span class="dock-icon orange">⚙</span><strong>Settings</strong><small>bahasa & input</small></button></div>
-          </section>
-          <section class="content-header">
-            <div>
-              <div class="section-kicker"><span class="globe">⊕</span><span>PENGATURAN SISTEM</span><span class="slash">/</span><span id="sectionName">UMUM & TAMPILAN</span></div>
-              <h2>Bahasa & Input System</h2>
-              <p>Kelola bahasa, tampilan, serta konfigurasi inti LL pada desktop Anda.</p>
-            </div>
-            <div class="header-actions"><button class="ghost-button" id="resetButton">↺ Reset</button><button class="primary-button" id="saveButton">Simpan Pengaturan <span>↗</span></button></div>
-          </section>
+          <div class="repo-mini-card"><div class="repo-mark">.L</div><div><span>REPOSITORI AKTIF</span><strong id="repoName">planetbintang/.L</strong><small id="repoBranch">branch: --</small></div><button id="indexNowButton" aria-label="Segarkan repositori">↻</button></div>
+          <div class="home-actions"><button class="home-action primary" data-open-app="explorer"><span>▤</span><b>Buka Files</b><small>Jelajahi workspace</small></button><button class="home-action" data-open-app="access"><span>⌘</span><b>GitHub Repo</b><small>Lihat koneksi repo</small></button></div>
+        </section>
 
-          <section class="dashboard-grid">
-            <article class="panel hero-panel">
-              <div class="panel-heading"><div><span class="panel-index">01</span><h3>Preferensi Bahasa</h3></div><span class="live-pill"><i></i> Sistem aktif</span></div>
-              <div class="settings-list" id="settingsList">
-                <button class="setting-row featured" data-setting="language"><span class="row-icon">◎</span><span class="setting-copy"><strong>System Language</strong><small>Bahasa antarmuka utama untuk sistem</small></span><span class="setting-value">Bahasa Indonesia <b>(Indonesia)</b></span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="add-language"><span class="row-icon">＋</span><span class="setting-copy"><strong>Add Language</strong><small>Tambah bahasa pilihan dan input lokal</small></span><span class="setting-value muted">Melayu, English (US), English (UK), 日本語, 한국어</span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="keyboard"><span class="row-icon">⌨</span><span class="setting-copy"><strong>Keyboard Settings</strong><small>Profil layout dan shortcut keyboard</small></span><span class="setting-value">Alra Keyboard v3.2 <b>Putih-Biru</b></span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="virtual"><span class="row-icon">▦</span><span class="setting-copy"><strong>Virtual Keyboard</strong><small>Keyboard di layar untuk input sentuh</small></span><span class="setting-value"><span class="value-dot"></span> Active <b>(Retina Layout)</b></span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="physical"><span class="row-icon">▤</span><span class="setting-copy"><strong>Physical Keyboard</strong><small>Perangkat input yang tersambung</small></span><span class="setting-value">Standard 104-Key <b>/ Bluetooth</b></span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="voice"><span class="row-icon">♬</span><span class="setting-copy"><strong>Voice Input</strong><small>Input suara dan pengenalan ucapan</small></span><span class="setting-value"><span class="value-dot"></span> Enabled <b>(Alra Voice)</b></span><span class="chevron">›</span></button>
-                <button class="setting-row" data-setting="tts"><span class="row-icon">◖</span><span class="setting-copy"><strong>Text to Speech</strong><small>Mesin suara untuk pembacaan sistem</small></span><span class="setting-value">Alra Neural TTS Engine</span><span class="chevron">›</span></button>
-              </div>
-            </article>
+        <footer class="bottom-nav"><button class="bottom-nav-item active"><span>⌂</span><small>Beranda</small></button><button class="bottom-nav-item" id="bottomMenu"><span>☷</span><small>Menu</small></button><button class="bottom-nav-item" data-open-app="index"><span>◈</span><small>Status</small></button><button class="bottom-nav-item" data-open-app="settings"><span>⚙</span><small>Setelan</small></button></footer>
+        <div class="gesture-bar"></div>
 
-            <aside class="right-column">
-              <article class="panel ll-panel">
-                <div class="panel-heading compact"><div><span class="panel-index">02</span><h3>LL Core Display</h3></div><span class="core-chip">LL <i></i></span></div>
-                <p class="panel-description">Atur posisi garis L pada dua sudut layar desktop.</p>
-                <div class="corner-preview">
-                  <div class="corner-box"><span class="corner-label">SUDUT KIRI</span><div class="ll-corner left-corner position-1"><b>LL</b></div></div>
-                  <div class="corner-box"><span class="corner-label">SUDUT KANAN</span><div class="ll-corner right-corner position-1"><b>LL</b></div></div>
-                </div>
-                <div class="position-control"><div><strong>Posisi L</strong><small id="positionHelp">Garis horizontal berada di atas inti LL</small></div><div class="segmented" role="group" aria-label="Posisi garis L"><button class="segment active" data-position="1">1 <span>Atas</span></button><button class="segment" data-position="2">2 <span>Kanan</span></button></div></div>
-                <label class="toggle-row"><span><strong>Tampilkan LL Core</strong><small>Selalu tampil di desktop</small></span><input id="llToggle" type="checkbox" checked /><i class="toggle-ui"></i></label>
-              </article>
-              <article class="panel desktop-panel">
-                <div class="panel-heading compact"><div><span class="panel-index">03</span><h3>Desktop UI</h3></div><span class="mini-status">SYNC</span></div>
-                <div class="desktop-stats"><div><span>Resolusi</span><strong>2560 × 1440</strong></div><div><span>Skala UI</span><strong>100%</strong></div><div><span>Frame rate</span><strong>60 FPS</strong></div></div>
-                <div class="theme-picker"><span>Tema antarmuka</span><button class="theme-option selected" data-theme="midnight"><i></i>Midnight</button><button class="theme-option" data-theme="light"><i></i>Light</button></div>
-              </article>
-            </aside>
-          </section>
-          <footer class="content-footer"><span><i class="status-dot"></i> Semua sistem berjalan normal</span><span>Build 2026.10.22 <b>•</b> Workspace / sumberkode</span></footer>
-        </main>
-      </div>
-    </div>
+        <aside class="menu-drawer" id="menuDrawer" aria-hidden="true"><div class="drawer-backdrop" id="drawerBackdrop"></div><div class="drawer-panel"><div class="drawer-head"><div><span class="eyebrow">PLANETBINTANG / .L</span><h2>Menu sistem</h2></div><button id="menuClose" aria-label="Tutup menu">×</button></div><p class="drawer-intro">Pilih konten menu untuk membuka alat workspace mobile.</p><nav class="menu-list" aria-label="Konten menu"><button data-open-app="explorer"><span class="menu-symbol blue">▤</span><div><b>File Explorer</b><small>Semua file di workspace</small></div><i>›</i></button><button data-open-app="index"><span class="menu-symbol violet">⌁</span><div><b>Workspace Index</b><small>Statistik dan metadata sistem</small></div><i>›</i></button><button data-open-app="access"><span class="menu-symbol mint">⌘</span><div><b>Repo Access</b><small>GitHub, remote, dan branch</small></div><i>›</i></button><button data-open-app="settings"><span class="menu-symbol amber">⚙</span><div><b>Bahasa & Input</b><small>Preferensi aplikasi</small></div><i>›</i></button></nav><div class="drawer-status"><span class="status-dot"></span><div><b id="drawerStatus">Workspace siap digunakan</b><small>Mode read-only · mobile shell aktif</small></div></div></div></aside>
+      </section>
+    </main>
+
     <div class="app-modal" id="appModal" aria-hidden="true"><div class="modal-window"><header class="modal-bar"><div class="modal-title"><span class="modal-app-icon" id="modalIcon">▤</span><strong id="modalTitle">File Explorer</strong><small id="modalSubtitle">Filesystem seluruh workspace</small></div><div class="modal-controls"><button id="modalRefresh" title="Muat ulang">↻</button><button id="modalClose" title="Tutup">×</button></div></header><div class="modal-body" id="modalBody"></div></div></div>
-    <div class="toast" id="toast" role="status"><span>✓</span><div><strong>Pengaturan tersimpan</strong><small>Konfigurasi desktop telah diperbarui.</small></div></div>
+    <div class="toast" id="toast" role="status"><span>✓</span><div><strong>Pengaturan tersimpan</strong><small>Konfigurasi workspace telah diperbarui.</small></div></div>
     <script src="./app.js"></script>
   </body>
 </html>
