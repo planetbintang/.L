@@ -49,6 +49,20 @@
         </aside>
 
         <main class="content-area">
+          <section class="desktop-home" id="desktopHome">
+            <div class="desktop-heading">
+              <div><div class="section-kicker"><span class="globe">◫</span><span>DESKTOP WORKSPACE</span><span class="slash">/</span><span>INDEXED FILESYSTEM</span></div><h2>Workspace Desktop</h2><p>Kelola aplikasi, filesystem, dan sumber data repositori dari satu tampilan.</p></div>
+              <div class="desktop-clock"><strong id="desktopClock">--:--</strong><span id="desktopDate">memuat waktu sistem</span></div>
+            </div>
+            <div class="repo-banner"><div class="repo-avatar">.L</div><div class="repo-copy"><strong id="repoName">sumberkode/.L</strong><span id="repoPath">/home/ubuntu/sumberkode</span></div><span class="repo-visibility" id="repoVisibility">REPO TERHUBUNG</span><span class="repo-branch" id="repoBranch">branch: --</span><button class="primary-button" id="indexNowButton">↻ Indeks Sekarang</button></div>
+            <div class="desktop-grid">
+              <article class="desktop-card filesystem-card"><div class="app-card-head"><div class="app-icon blue">▤</div><div><strong>File Explorer</strong><span>Filesystem seluruh workspace</span></div><button class="card-menu" data-open-app="explorer">•••</button></div><div class="file-summary"><div><strong id="fileCount">--</strong><span>file terindeks</span></div><div><strong id="folderCount">--</strong><span>folder aktif</span></div><div><strong id="workspaceSize">--</strong><span>ukuran workspace</span></div></div><button class="open-app-button" data-open-app="explorer">Buka File Explorer <b>↗</b></button></article>
+              <article class="desktop-card index-card"><div class="app-card-head"><div class="app-icon cyan">⌁</div><div><strong>Workspace Index</strong><span>Data sistem & metadata</span></div><span class="live-pill"><i></i> LIVE</span></div><div class="index-progress"><div class="progress-track"><i id="indexProgress"></i></div><span id="indexStatus">Menunggu indeks pertama</span></div><div class="index-metrics"><span><b id="trackedCount">--</b> tracked</span><span><b id="modifiedCount">--</b> modified</span><span><b id="ignoredCount">--</b> system</span></div><button class="open-app-button" data-open-app="index">Lihat Workspace Index <b>↗</b></button></article>
+              <article class="desktop-card access-card"><div class="app-card-head"><div class="app-icon purple">⌘</div><div><strong>Repo Access</strong><span>Privat / publik terdeteksi</span></div></div><div class="access-row"><span class="access-dot"></span><div><strong id="accessTitle">Local workspace aktif</strong><small>Mode aman · read-only filesystem</small></div></div><div class="access-tags"><span>Git remote</span><span>Branch</span><span>Metadata</span></div><button class="open-app-button" data-open-app="access">Kelola Repo Access <b>↗</b></button></article>
+            </div>
+            <div class="desktop-section-label"><span>APLIKASI DESKTOP</span><i></i><small>klik aplikasi untuk membuka modal</small></div>
+            <div class="app-dock"><button class="dock-app active" data-open-app="explorer"><span class="dock-icon blue">▤</span><strong>Explorer</strong><small>filesystem</small></button><button class="dock-app" data-open-app="index"><span class="dock-icon cyan">⌁</span><strong>Indexer</strong><small>workspace</small></button><button class="dock-app" data-open-app="access"><span class="dock-icon purple">⌘</span><strong>Repo Access</strong><small>repository</small></button><button class="dock-app" data-open-app="settings"><span class="dock-icon orange">⚙</span><strong>Settings</strong><small>bahasa & input</small></button></div>
+          </section>
           <section class="content-header">
             <div>
               <div class="section-kicker"><span class="globe">⊕</span><span>PENGATURAN SISTEM</span><span class="slash">/</span><span id="sectionName">UMUM & TAMPILAN</span></div>
@@ -94,6 +108,7 @@
         </main>
       </div>
     </div>
+    <div class="app-modal" id="appModal" aria-hidden="true"><div class="modal-window"><header class="modal-bar"><div class="modal-title"><span class="modal-app-icon" id="modalIcon">▤</span><strong id="modalTitle">File Explorer</strong><small id="modalSubtitle">Filesystem seluruh workspace</small></div><div class="modal-controls"><button id="modalRefresh" title="Muat ulang">↻</button><button id="modalClose" title="Tutup">×</button></div></header><div class="modal-body" id="modalBody"></div></div></div>
     <div class="toast" id="toast" role="status"><span>✓</span><div><strong>Pengaturan tersimpan</strong><small>Konfigurasi desktop telah diperbarui.</small></div></div>
     <script src="./app.js"></script>
   </body>
