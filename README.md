@@ -6,6 +6,8 @@ Launcher juga menyediakan metadata PWA (`manifest.webmanifest`) sehingga dapat d
 
 Shell selalu dikunci ke kanvas portrait mobile. Pada viewport desktop, sistem tetap menampilkan ukuran dan navigasi mobile, bukan mode desktop. Panel **Setelan sistem seluler** menyediakan preferensi input sentuh, notifikasi workspace, dan mode privat browsing yang disimpan lokal.
 
+Browser Plugin memakai webview internal. URL baru dibuka di dalam modal shell sehingga alamat utama tetap berada pada `https://planetbintang.github.io/.L/`, bukan berpindah ke domain target. Setelan juga menyertakan tema gelap/terang, bahasa `id-ID`, sumber pengetahuan `.nz` lokal, katalog data media, sesi/arsip lokal, dan mode privat browsing yang diadaptasi dari `planetbintang/al.l`.
+
 ## Menjalankan
 
 ```bash
