@@ -4,6 +4,29 @@
   const fmt = new Intl.NumberFormat('id-ID');
   const state = { data: null, repo: '', path: '', query: '', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
 
+  // Root virtual sistem: folder /data /pro /media /acct /config /sys /system_ext /cache
+  // dengan sub-folder, file (nama + ekstensi + fungsi) dan manajemen terpusat per folder.
+  const VIRTUAL_REPO = 'planetbintang/.SYSTEM';
+  const VIRTUAL_INDEX_URL = 'data/trees/0000000000000000/index.json';
+  const VIRTUAL_SHORTCUTS = ['data', 'pro', 'media', 'acct', 'config', 'sys', 'system_ext', 'cache'];
+  const EXT_FUNCTION = {
+    APK: 'Paket aplikasi Android (Java/Kotlin terdex)', SO: 'Pustaka bersama native ELF (C/C++)', JAR: 'Pustaka/framework Java',
+    XML: 'Konfigurasi/manifest berbasis teks', RC: 'Skrip init service (Android init language)', PROP: 'Pasangan kunci=nilai properti',
+    TXT: 'Teks biasa (log/laporan)', DB: 'Database SQLite', CONF: 'File konfigurasi teks', BIN: 'Data biner mentah',
+    IMG: 'Image partisi/filesystem', ODEX: 'Hasil AOT dex teroptimasi', VDEX: 'Verifikasi dex compact', MP4: 'Video (H.264/HEVC)',
+    MKV: 'Kontainer video Matroska', JPG: 'Foto terkompresi', PNG: 'Gambar lossless', WEBP: 'Gambar web modern', MP3: 'Audio terkompresi',
+    FLAC: 'Audio lossless', OGG: 'Audio Vorbis (nada dering/notifikasi)', PDF: 'Dokumen portabel', DOCX: 'Dokumen Word Office Open XML',
+    KO: 'Modul kernel loadable', LIST: 'Daftar teks baris-per-item', ZIP: 'Arsip terkompresi', DAT: 'Data terstruktur biner/teks',
+    LOG: 'Log teks historis', UEVENT: 'Event uevent perangkat', PROC: 'Daftar PID cgroup (teks)', SIZE: 'Ukuran sektor perangkat (teks)',
+  };
+  function isVirtualRepo() { return state.repo === VIRTUAL_REPO; }
+  function extensionFunction(path) {
+    const e = ext(path);
+    if (e && EXT_FUNCTION[e]) return EXT_FUNCTION[e];
+    const dot = String(path).lastIndexOf('.');
+    return dot > 0 ? `File berekstensi .${path.slice(dot + 1)}` : 'File sistem tanpa ekstensi (node/procs/teks)';
+  }
+
   function el(tag, value, className) {
     const item = document.createElement(tag);
     if (className) item.className = className;
@@ -78,6 +101,38 @@
   }
 
   function renderAssessment(repo) {
+    if (isVirtualRepo()) {
+      const manifest = state.manifest || {};
+      const directory = currentDirectory();
+      $('#fileTreeStatus').textContent = `ROOT VIRTUAL SISTEM · ${fmt.format(manifest.fileCount || 0)} file · ${fmt.format(manifest.directoryCount || 0)} folder · ${humanSize(manifest.totalBytes || 0)} metadata`;
+      $('#fileIntegrityStatus').textContent = 'Struktur virtual: LENGKAP · shard SHA-256 terverifikasi · bukan pohon Git';
+      $('#fileActivityStatus').textContent = 'Manajemen terpusat: /data /pro /media /acct /config /sys /system_ext /cache';
+      if (state.selected) return;
+      $('#fileSelectionTitle').textContent = 'Pusat Manajemen Folder Sistem';
+      const panel = $('#fileSelectionData'); panel.replaceChildren();
+      addInfo(panel, 'Jenis sistem', 'Root virtual File Manager (folder sistem tertanam)');
+      addInfo(panel, 'Folder tingkat root', VIRTUAL_SHORTCUTS.map((name) => `/${name}`).join(' · '));
+      addInfo(panel, 'Total entri terkelola', `${fmt.format(manifest.entryCount || 0)} path`);
+      addInfo(panel, 'Folder terkelola', fmt.format(Object.keys(manifest.directories || {}).length - 1));
+      addInfo(panel, 'Isi path aktif', `${fmt.format(directory.entryCount || 0)} item${state.path ? ` · /${state.path}` : ' · /'}`);
+      const block = el('div', undefined, 'fm-candidate-list');
+      block.append(el('span', 'Fungsi tiap folder root', 'fm-info-label'));
+      const list = el('ul');
+      [
+        ['/data — data aplikasi & sistem persisten (local, misc, system, anr, log)',],
+        ['/pro — partisi proprietary vendor (bin, lib, app, framework, overlay)',],
+        ['/media — penyimpanan pengguna (DCIM, Documents, Music, Pictures, Video)',],
+        ['/acct — cgroup akun proses per-UID (u0_aXX, system, root)',],
+        ['/config — konfigurasi jaringan, init, sound, bluetooth',],
+        ['/sys — sysfs kernel (block, class, devices, power, module, firmware)',],
+        ['/system_ext — partisi OEM (etc, lib64, priv-app, framework)',],
+        ['/cache — cache sistem (recovery, dalvik-cache, downloads)',],
+      ].forEach(([line]) => list.append(el('li', line)));
+      block.append(list);
+      panel.append(block, el('p', 'Setiap folder memakai ikon folder File Manager yang sama untuk semua jenis nama folder. Isi blob tidak dipublikasikan; hanya metadata nama, ekstensi, ukuran, dan fungsi.', 'fm-inspector-disclaimer'));
+      $('#fileOpenGitHub').hidden = true;
+      return;
+    }
     const tree = repo?.tree || {}; const assessment = repo?.staticAssessment || {};
     const label = treeStateLabel(tree);
     $('#fileTreeStatus').textContent = `${label} · ${fmt.format(tree.fileCount || 0)} file · ${fmt.format(tree.directoryCount || 0)} folder · ${humanSize(tree.totalBytes || 0)} tercatat${tree.sizeUnknownCount ? ` · ${fmt.format(tree.sizeUnknownCount)} size N/A` : ''}`;
@@ -105,11 +160,27 @@
 
   function renderSelection(entry) {
     const repo = repoNow(); state.selected = entry?.path || null;
-    $('#fileSelectionTitle').textContent = entry ? basename(entry.path) : repo?.fullName || 'Pilih repository';
+    $('#fileSelectionTitle').textContent = entry ? basename(entry.path) : repo?.fullName || 'Pilih file atau folder';
     const panel = $('#fileSelectionData'); panel.replaceChildren();
     if (!entry) { renderAssessment(repo); return; }
     addInfo(panel, 'Path', `/${entry.path}`, true);
     addInfo(panel, 'Jenis', entry.type === 'directory' ? 'Folder' : entry.type === 'submodule' ? 'Git submodule' : 'File');
+    if (isVirtualRepo()) {
+      addInfo(panel, 'Fungsi', entry.function || (entry.type === 'directory' ? 'Folder manajemen terpusat sistem' : extensionFunction(entry.path)));
+      addInfo(panel, 'Ekstensi', entry.type === 'directory' ? '— (folder)' : ext(entry.path) || 'tanpa ekstensi');
+      if (entry.type === 'directory') {
+        const sub = state.manifest?.directories?.[entry.path];
+        addInfo(panel, 'Isi folder', sub ? `${fmt.format(sub.entryCount)} item · manajemen terpusat aktif` : 'belum termuat');
+      } else {
+        addInfo(panel, 'Ukuran metadata', sizeText(entry));
+      }
+      addInfo(panel, 'Mode', entry.mode || '—', true);
+      addInfo(panel, 'Root virtual', `/${String(entry.path).split('/')[0]}`);
+      panel.append(el('p', 'Struktur virtual: nama folder khas sistem, file dengan ekstensi dan fungsinya, dikelola terpusat dari satu tampilan File Manager.', 'fm-inspector-disclaimer'));
+      $('#fileOpenGitHub').hidden = true;
+      $('#fileOpenEditorButton').hidden = true;
+      return;
+    }
     if (entry.type !== 'directory') addInfo(panel, 'Ukuran metadata Git', sizeText(entry));
     addInfo(panel, 'Mode Git', entry.mode || '—', true);
     addInfo(panel, 'Git object SHA', entry.sha || '—', true);
@@ -143,10 +214,19 @@
 
   function renderShortcuts(items) {
     const list = $('#fileFolderShortcuts'); list.replaceChildren();
-    const folders = items.filter((item) => item.type === 'directory').slice(0, 80);
+    let folders = items.filter((item) => item.type === 'directory').slice(0, 80);
+    if (isVirtualRepo() && !state.path) {
+      const byName = new Map(folders.map((item) => [basename(item.path), item]));
+      const ordered = VIRTUAL_SHORTCUTS.map((name) => byName.get(name)).filter(Boolean);
+      folders = [...ordered, ...folders.filter((item) => !VIRTUAL_SHORTCUTS.includes(basename(item.path)))];
+    }
     if (!folders.length) { list.append(el('p', 'Tidak ada subfolder pada path ini.', 'fm-shortcuts-empty')); return; }
     folders.forEach((item) => {
-      const button = el('button', basename(item.path), 'fm-shortcut'); button.type = 'button'; button.title = `Buka /${item.path}`;
+      const button = el('button', undefined, 'fm-shortcut'); button.type = 'button'; button.title = `Buka /${item.path}`;
+      if (item.type === 'directory') {
+        const img = document.createElement('img'); img.src = './file-manager-icon.png'; img.alt = ''; img.className = 'fm-shortcut-icon';
+        button.append(img, el('span', basename(item.path)));
+      } else button.textContent = basename(item.path);
       button.addEventListener('click', () => goTo(item.path)); list.append(button);
     });
   }
@@ -185,7 +265,7 @@
     const requestedRepo = state.repo;
     const requestedPath = state.path;
     const directory = currentDirectory(); const page = directory.pages?.[state.pageIndex];
-    if (!page?.url || !/^data\/trees\/[a-f0-9]{16}\/pages\/[a-f0-9]{32}\.json\.gz$/.test(page.url)) return;
+    if (!page?.url || !/^(?:data\/trees\/[a-f0-9]{16}\/pages\/|[a-f0-9]{16}\/pages\/)[a-f0-9]{32}\.json\.gz$/.test(page.url)) return;
     state.loading = true; renderTiles();
     try {
       const response = await fetch(`./${page.url}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
@@ -227,7 +307,8 @@
     state.requestId += 1; const requestId = state.requestId; const requestedRepo = state.repo; state.loading = false;
     const repo = repoNow(); state.manifest = null; state.entries = []; state.pageIndex = 0; state.pageCount = 0; state.path = ''; state.selected = null;
     renderBreadcrumbs(); renderAssessment(repo); renderTiles();
-    const source = String(repo?.tree?.indexUrl || '');
+    let source = String(repo?.tree?.indexUrl || '');
+    if (isVirtualRepo()) source = VIRTUAL_INDEX_URL;
     if (!/^data\/trees\/[a-f0-9]{16}\/index\.json$/.test(source)) {
       $('#fileTreeStatus').textContent = 'Indeks pohon belum tersedia pada snapshot.';
       return;
@@ -247,12 +328,23 @@
   }
 
   let handlersBound = false;
+  function virtualRepoEntry() {
+    return {
+      name: '.SYSTEM', fullName: VIRTUAL_REPO, url: '', branch: 'main', visibility: 'virtual',
+      appType: 'Root virtual sistem (folder tertanam)', lastCommitAt: null,
+      tree: { state: 'complete', indexUrl: VIRTUAL_INDEX_URL, entryCount: 0, fileCount: 0, directoryCount: 0, totalBytes: 0 },
+      staticAssessment: {},
+    };
+  }
+
   async function init(data, preserveLocation = true) {
     const previousRepo = state.repo; const previousPath = state.path;
-    state.data = data;
+    const list = [...(data.repositories || [])];
+    if (!list.some((repo) => repo.fullName === VIRTUAL_REPO)) list.unshift(virtualRepoEntry());
+    state.data = { ...data, repositories: list };
     const select = $('#fileRepoSelect'); select.replaceChildren();
-    (data.repositories || []).forEach((repo) => select.add(new Option(repo.fullName || repo.name, repo.fullName || repo.name)));
-    const preferred = data.repositories?.find((repo) => repo.fullName === previousRepo) || data.repositories?.find((repo) => repo.fullName === 'planetbintang/.L') || data.repositories?.[0];
+    list.forEach((repo) => select.add(new Option(repo.fullName === VIRTUAL_REPO ? `${repo.fullName} — ROOT SISTEM /` : repo.fullName || repo.name, repo.fullName || repo.name)));
+    const preferred = list.find((repo) => repo.fullName === previousRepo) || list.find((repo) => repo.fullName === VIRTUAL_REPO) || list.find((repo) => repo.fullName === 'planetbintang/.L') || list[0];
     state.repo = preferred?.fullName || '';
     if (state.repo) select.value = state.repo;
     if (!handlersBound) {
