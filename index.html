@@ -22,9 +22,17 @@
       </nav>
       <div class="topbar-actions">
         <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
+        <button class="icon-button shell-button" id="shellButton" type="button" aria-expanded="false" aria-controls="shellPanel" title="Buka shell sistem">Shell</button>
         <button class="icon-button settings-button" id="settingsButton" type="button" aria-expanded="false" aria-controls="settingsPanel" title="Pengaturan dashboard">Pengaturan</button>
       </div>
     </header>
+
+    <section class="system-shell panel" id="shellPanel" hidden aria-label="Shell sistem aman">
+      <header class="shell-header"><div><p class="eyebrow">PLANETBINTANG <span>/</span> ROOT SHELL</p><small>Browser safe mode · allowlist baca-saja</small></div><button class="shell-close" id="shellClose" type="button" aria-label="Tutup shell">×</button></header>
+      <div class="shell-disclaimer">Konsol ini menjalankan perintah dashboard yang terdaftar. Tidak menjalankan shell OS, kode bebas, atau isi repo.</div>
+      <div class="shell-output" id="shellOutput" role="log" aria-live="polite" aria-relevant="additions"></div>
+      <form class="shell-form" id="shellForm"><label><span>. &gt;</span><input id="shellInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-label="Perintah shell" /></label><button type="submit">Jalankan</button></form>
+    </section>
 
     <main class="shell">
       <section class="hero panel" id="overview" aria-labelledby="heroTitle">
@@ -92,5 +100,6 @@
     <footer class="footer"><a class="footer-brand" href="#top"><img src="./system-icon.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber GitHub</span><a href="https://github.com/planetbintang/.L" target="_blank" rel="noopener noreferrer">Source dashboard ↗</a></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
     <script src="./dashboard.js" defer></script>
+    <script src="./system-shell.js" defer></script>
   </body>
 </html>

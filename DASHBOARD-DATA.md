@@ -17,3 +17,7 @@ GitHub Pages hanya menyajikan HTML/CSS/JavaScript statis. Dashboard tidak menjal
 Workflow `.github/workflows/sync-dashboard.yml` berjalan setiap hari pada 04:17 UTC dan dapat dijalankan manual. Agar workflow dapat membaca metadata repo privat dan endpoint trafik, pemilik perlu menambahkan secret Actions `PLANETBINTANG_READ_TOKEN` di pengaturan repo `.L`. Token harus read-only, pemiliknya harus memiliki akses ke seluruh 45 repo pada `data/repository-scope.json`, dan izinnya harus mengizinkan pembacaan metadata, contents tingkat atas, serta repository traffic. Workflow memakai `GITHUB_TOKEN` repo-scoped hanya untuk menulis snapshot baru ke branch `io`.
 
 Jika secret belum ada, workflow berhenti aman tanpa mengubah snapshot. Token tidak pernah ditempatkan di HTML, JavaScript, manifest, atau hasil dashboard. Jangan memakai token dengan izin write pada repo sumber.
+
+## Shell dashboard
+
+Header dashboard menyediakan browser shell untuk tugas allowlist baca-saja (`status`, `list`, pencarian, buka repo, peta host, ringkasan, dan root-map). Input pengguna tidak dievaluasi sebagai JavaScript atau perintah OS. Ini sengaja dibatasi karena halaman publik tidak boleh mengeksekusi kode repo atau menyediakan remote shell.

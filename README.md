@@ -28,3 +28,11 @@ python3 -m http.server 4173
 ```
 
 Lalu buka `http://localhost:4173/`. Untuk menjalankan API shell lama, ikuti petunjuk server yang ada pada proyek dan gunakan runtime yang sesuai.
+
+## Root Shell dan fitur sistem
+
+Tombol **Shell** pada header menyediakan konsol perintah browser: `help`, `status`, `list`, `search <teks>`, `open <nama-repo>`, `hosts`, dan skrip allowlist `run repo-summary`, `run pages-audit`, `run dns-map`, `run traffic-summary`, serta `run root-map <nama-repo>`. Setiap repo tampil sebagai kartu fitur dengan tipe aplikasi perkiraan, SHA, deployment, traffic agregat dan root map yang difilter.
+
+Shell publik ini hanya melakukan operasi baca-saja pada snapshot dan navigasi ke host yang sudah terdaftar. Ia sengaja tidak mempunyai `eval`, akses shell OS, write, atau kemampuan menjalankan skrip arbitrer/kode repo. Eksekusi proses sungguhan membutuhkan backend terautentikasi dan runtime terisolasi; GitHub Pages tidak menyediakan fungsi itu.
+
+Tema utama dashboard menggunakan putih dengan aksen biru. Logo yang sama menjadi ikon workspace dan tombol masuk sistem.
