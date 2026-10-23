@@ -4,21 +4,31 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const routes = {
     system: { group: 'system', hash: '#overview' },
-    projects: { group: 'workspace', view: 'projects', hash: '#workspace/projects' },
-    issues: { group: 'workspace', view: 'issues', hash: '#workspace/issues' },
-    code: { group: 'workspace', view: 'code', hash: '#workspace/code' },
-    analytics: { group: 'workspace', view: 'analytics', hash: '#workspace/analytics' },
-    ai: { group: 'workspace', view: 'ai', hash: '#workspace/ai' },
-    'workspace-account': { group: 'workspace', view: 'account', hash: '#workspace/account' },
-    'workspace-help': { group: 'workspace', view: 'help', hash: '#workspace/help' },
-    'file-manager': { group: 'file-manager', hash: '#fileManager' },
-    repositories: { group: 'repositories', hash: '#repositories' },
-    hosts: { group: 'hosts', hash: '#hosts' },
+    projects: { group: 'workspace', view: 'projects', menu: 'plan', hash: '#workspace/projects' },
+    issues: { group: 'workspace', view: 'issues', menu: 'plan', hash: '#workspace/issues' },
+    code: { group: 'workspace', view: 'code', menu: 'code', hash: '#workspace/code' },
+    analytics: { group: 'workspace', view: 'analytics', menu: 'insights', hash: '#workspace/analytics' },
+    ai: { group: 'workspace', view: 'ai', menu: 'insights', hash: '#workspace/ai' },
+    'workspace-account': { group: 'workspace', view: 'account', menu: 'insights', hash: '#workspace/account' },
+    'workspace-help': { group: 'workspace', view: 'help', menu: 'insights', hash: '#workspace/help' },
+    'file-manager': { group: 'file-manager', menu: 'code', hash: '#fileManager' },
+    repositories: { group: 'repositories', menu: 'code', hash: '#repositories' },
+    hosts: { group: 'hosts', menu: 'insights', hash: '#hosts' },
   };
+  const platformRoutes = [
+    ['branches', 'code'], ['commits', 'code'], ['tags', 'code'],
+    ['milestones', 'plan'], ['roadmap', 'plan'],
+    ['pull-requests', 'review'], ['merge-requests', 'review'], ['review-queue', 'review'], ['discussions', 'review'], ['activity', 'review'],
+    ['pipelines', 'delivery'], ['deployments', 'delivery'], ['environments', 'delivery'], ['packages', 'delivery'], ['security', 'delivery'],
+    ['integrations', 'insights'],
+  ];
+  platformRoutes.forEach(([name, menu]) => { routes[name] = { group: 'platform', menu, hash: `#platform/${name}` }; });
+
   const workspaceRoutes = new Map(Object.entries(routes).filter(([, route]) => route.view).map(([name, route]) => [route.view, name]));
   const pages = [...document.querySelectorAll('[data-system-page]')];
-  const navLinks = [...document.querySelectorAll('.main-nav [data-system-route]')];
+  const navLinks = [...document.querySelectorAll('.main-nav a[data-system-route]')];
   const routeLinks = [...document.querySelectorAll('[data-system-route]')];
+  const menuDetails = [...document.querySelectorAll('.nav-dropdown[data-menu]')];
   const syncHub = $('#syncHub');
   const syncButton = $('#syncHubRefresh');
   let currentRoute = 'system';
@@ -28,12 +38,15 @@
     if (!hash || hash === 'top' || hash === 'overview') return 'system';
     if (hash === 'workspace') return 'projects';
     if (hash.startsWith('workspace/')) return workspaceRoutes.get(hash.slice('workspace/'.length)) || 'projects';
+    if (hash.startsWith('platform/')) {
+      const route = hash.slice('platform/'.length);
+      return routes[route]?.group === 'platform' ? route : null;
+    }
     return ({ fileManager: 'file-manager', repositories: 'repositories', hosts: 'hosts' })[hash] || null;
   }
 
-  function routeForWorkspaceView(view) {
-    return workspaceRoutes.get(view) || 'projects';
-  }
+  function routeForWorkspaceView(view) { return workspaceRoutes.get(view) || 'projects'; }
+  function closeMenus() { menuDetails.forEach((menu) => { menu.open = false; }); }
 
   function applyRoute(name, options = {}) {
     const routeName = routes[name] ? name : 'system';
@@ -47,8 +60,17 @@
       if (link.dataset.systemRoute === routeName) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
+    menuDetails.forEach((menu) => {
+      const active = Boolean(route.menu && menu.dataset.menu === route.menu);
+      const summary = $('summary', menu);
+      if (active) summary?.setAttribute('aria-current', 'page');
+      else summary?.removeAttribute('aria-current');
+      menu.classList.toggle('has-active-route', active);
+    });
+    closeMenus();
 
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
+    if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     const settings = $('#settingsPanel');
     if (changed && settings && !settings.hidden) {
       settings.hidden = true;
@@ -62,10 +84,16 @@
     event.preventDefault();
     applyRoute(link.dataset.systemRoute, { scroll: true });
   }));
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('.nav-dropdown')) closeMenus();
+  });
   document.addEventListener('planetbintang:workspace-view', (event) => {
     const next = routeForWorkspaceView(event.detail?.view);
     if (next !== currentRoute) applyRoute(next, { scroll: false });
   });
+  document.querySelectorAll('[data-open-settings]').forEach((button) => button.addEventListener('click', () => {
+    closeMenus(); $('#settingsButton')?.click();
+  }));
   window.addEventListener('popstate', () => {
     const next = routeFromHash(); if (next) applyRoute(next, { updateUrl: false, scroll: true });
   });
@@ -79,30 +107,28 @@
     if (state) state.textContent = label;
     if (dot) dot.dataset.state = phase;
   }
-
   function updateHub(data = window.PBSystemSnapshot?.data) {
     if (!syncHub) return;
-    const snapshot = data;
     const meta = $('#syncHubMeta');
-    if (!snapshot) {
+    if (!data) {
       if (meta) meta.textContent = 'Snapshot belum tersedia di browser ini.';
       $('#syncHubDashboard').textContent = 'Menunggu';
     } else {
-      const parsedDate = snapshot.updatedAt ? new Date(snapshot.updatedAt) : null;
+      const parsedDate = data.updatedAt ? new Date(data.updatedAt) : null;
       const date = parsedDate && !Number.isNaN(parsedDate.getTime()) ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(parsedDate) + ' UTC' : 'waktu tidak tercatat';
-      const count = snapshot.repositoryCount || snapshot.repositories?.length || 0;
-      const sha = snapshot.dataSha256 ? ` · SHA ${snapshot.dataSha256.slice(0, 12)}` : '';
+      const count = data.repositoryCount || data.repositories?.length || 0;
+      const sha = data.dataSha256 ? ` · SHA ${data.dataSha256.slice(0, 12)}` : '';
       if (meta) meta.textContent = `${count} repo · ${date}${sha}`;
       $('#syncHubDashboard').textContent = 'Tersedia';
     }
     const statuses = window.PBSystemSnapshot?.consumers || {};
     $('#syncHubWorkspace').textContent = statuses.workspace === 'ready' ? 'Tersinkron' : statuses.workspace === 'error' ? 'Periksa' : 'Memuat';
     $('#syncHubFiles').textContent = statuses['file-manager'] === 'ready' ? 'Tersinkron' : statuses['file-manager'] === 'error' ? 'Periksa' : 'Memuat';
+    $('#syncHubPlatform').textContent = statuses['platform-view'] === 'ready' ? 'Tersinkron' : statuses['platform-view'] === 'error' ? 'Periksa' : 'Memuat';
   }
-
   function openHub() {
     if (!syncHub) return;
-    updateHub();
+    closeMenus(); updateHub();
     if (!syncHub.open) syncHub.showModal();
     $('#syncHubClose')?.focus();
   }
@@ -122,7 +148,7 @@
       else if (detail.status === 'loading') setHubState(`Menyegarkan ${name}…`, 'loading');
       else {
         const statuses = window.PBSystemSnapshot?.consumers || {};
-        if (statuses.workspace === 'ready' && statuses['file-manager'] === 'ready') setHubState('Snapshot dan menu tersinkron', 'ready');
+        if (statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' && statuses['platform-view'] === 'ready') setHubState('Snapshot dan menu tersinkron', 'ready');
       }
     } else if (detail.phase === 'ready') {
       setHubState('Snapshot dan menu tersinkron', 'ready'); updateHub();
@@ -132,28 +158,23 @@
       setHubState('Gagal memuat; data sebelumnya dipertahankan', 'error'); updateHub();
     }
   });
-
   syncButton?.addEventListener('click', async () => {
-    if (!window.PBSystemSnapshot?.refresh) {
-      setHubState('Pusat snapshot tidak tersedia', 'error'); return;
-    }
+    if (!window.PBSystemSnapshot?.refresh) { setHubState('Pusat snapshot tidak tersedia', 'error'); return; }
     syncButton.disabled = true; syncButton.textContent = 'Memuat snapshot…';
     try {
       const ok = await window.PBSystemSnapshot.refresh();
       if (!ok) setHubState('Gagal memuat; data sebelumnya dipertahankan', 'error');
       updateHub();
-    } catch {
-      setHubState('Gagal memuat; data sebelumnya dipertahankan', 'error');
-    } finally {
-      syncButton.disabled = false; syncButton.textContent = 'Muat ulang snapshot';
-    }
+    } catch { setHubState('Gagal memuat; data sebelumnya dipertahankan', 'error'); }
+    finally { syncButton.disabled = false; syncButton.textContent = 'Muat ulang snapshot'; }
   });
 
   window.PBSystemNavigation = { navigate: (name) => applyRoute(name, { scroll: true }) };
   updateHub();
   if (window.PBSystemSnapshot?.data) {
     const statuses = window.PBSystemSnapshot.consumers || {};
-    setHubState(statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' ? 'Snapshot dan menu tersinkron' : 'Snapshot tersedia; menyelaraskan menu', statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' ? 'ready' : 'loading');
+    const ready = statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' && statuses['platform-view'] === 'ready';
+    setHubState(ready ? 'Snapshot dan menu tersinkron' : 'Snapshot tersedia; menyelaraskan menu', ready ? 'ready' : 'loading');
   }
   applyRoute(routeFromHash() || 'system', { updateUrl: false, scroll: false });
 })();

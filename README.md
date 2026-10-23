@@ -1,6 +1,6 @@
 # Planetbintang Root System
 
-Dashboard publik utama untuk workspace repositori Planetbintang: **https://planetbintang.github.io/.L/**. Ikon brand yang diberikan pemilik dipakai sebagai ikon PWA dan pusat Snapshot Hub. Alias root yang ditampilkan adalah `.` → `planetbintang/`.
+Dashboard publik utama untuk workspace repositori Planetbintang: **https://planetbintang.github.io/.L/**. Ikon brand dipakai sebagai ikon PWA; klik logo header/hero mengembalikan pengguna ke beranda. Snapshot Hub adalah tombol terpisah. Alias root yang ditampilkan adalah `.` → `planetbintang/`.
 
 ## Dashboard utama
 
@@ -22,7 +22,13 @@ Dashboard publik utama untuk workspace repositori Planetbintang: **https://plane
 
 - Setiap menu header membuka satu view tersendiri; header tetap melekat dan navigasi tetap dapat digeser pada layar kecil. Route menu workspace, File Manager, repositori, domain/host, dan Sistem dapat dibuka lewat hash URL.
 
-- Ikon logo header maupun hero membuka Snapshot Hub. Tombolnya mengambil ulang snapshot publik yang telah diterbitkan lalu menyegarkan Dashboard, Workspace, dan File Manager dari snapshot bersama yang sama; tombol itu tidak menjalankan workflow Actions.
+- Header memiliki lima dropdown utama (Code, Plan, Review, Delivery, Insights), masing-masing dengan lima pintasan fitur. Halaman Branches/Commits memakai metadata snapshot; Pull Requests, Merge Requests, Discussions, CI, deploy, packages, dan security menyediakan shortcut ke provider sumber tanpa memalsukan status live.
+
+- Perbedaan pengalaman provider ditampilkan transparan: GitHub menjadi snapshot read-only aktif; GitLab menonjolkan lifecycle DevSecOps; Bitbucket menonjolkan pola Atlassian/Jira dan Pipelines; `.L` menambahkan root lintas repo, File Manager `/`, dan hash struktur bersama. Hanya GitHub yang memiliki snapshot terhubung; GitLab dan Bitbucket belum memiliki connector/API di sesi ini.
+
+- Milestones dan Roadmap adalah planner lokal dengan tanggal/status yang tersimpan pada browser ini. Fitur lintas provider lainnya membuka provider setelah login; data PR/MR live, pipeline, security scan, reviewer, dan registry tidak diambil oleh Pages.
+
+- Logo header dan logo hero hanya kembali ke halaman utama. Tombol Hub membuka Snapshot Hub; refresh mengambil snapshot publik yang telah diterbitkan lalu menyegarkan Dashboard, Workspace, File Manager, dan halaman platform dari objek snapshot bersama yang sama. Refresh browser tidak menjalankan workflow Actions.
 
 - Tugas, masalah, profil, permintaan AI, dan draft kode disimpan di `localStorage` browser saat ini; data tersebut tidak disinkronkan ke GitHub. Analitik dihitung dari snapshot metadata repositori dan trafik GitHub agregat jika tersedia.
 
@@ -58,4 +64,4 @@ Tombol **Shell** pada header menyediakan konsol perintah browser allowlist baca-
 
 Shell publik ini hanya melakukan operasi baca-saja pada snapshot dan navigasi ke host yang sudah terdaftar. Ia sengaja tidak mempunyai `eval`, akses shell OS, write, atau kemampuan menjalankan skrip arbitrer/kode repo. Eksekusi proses sungguhan membutuhkan backend terautentikasi dan runtime terisolasi; GitHub Pages tidak menyediakan fungsi itu.
 
-Tema utama dashboard menggunakan putih dengan aksen biru. Logo yang sama menjadi ikon workspace dan tombol masuk sistem.
+Tema utama dashboard menggunakan permukaan es putih-biru, frosted glass, bayangan berlapis dan elevasi 3D CSS yang responsif. Kartu File Manager tetap 40×60 px; logo dan ikon folder dipertahankan.
