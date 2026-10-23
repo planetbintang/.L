@@ -535,7 +535,17 @@
     const directory = currentDirectory(); state.pageCount = directory.pages?.length || 0;
     $('#fileSearchInput').value = '';
     renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles(); syncUrlPath();
-    if (state.pageCount) await loadNextPage();
+    // Saat File Manager pertama dibuka, root `.L` harus menampilkan seluruh
+    // folder dan file langsung di `/`, bukan berhenti pada halaman shard pertama.
+    // Folder di bawah root tetap lazy-load agar repositori besar tetap ringan.
+    if (state.pageCount) {
+      const eagerRoot = isLRepo() && !path;
+      do {
+        const pageBefore = state.pageIndex;
+        await loadNextPage();
+        if (state.pageIndex === pageBefore) break;
+      } while (eagerRoot && state.pageIndex < state.pageCount && !state.loading);
+    }
     else renderTiles();
   }
 
