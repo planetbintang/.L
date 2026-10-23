@@ -493,3 +493,35 @@ body {
 .provider-universe-art,
 .provider-magnet-art { animation-play-state: running; }
 .provider-card { contain: layout paint; }
+
+/* 3D folder tiles: the File Manager brand mark remains file-manager-icon.png. */
+.fm-shortcut-icon,
+.file-tile.is-directory .file-tile-icon img {
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(20, 93, 224, .28));
+}
+.fm-shortcut-icon { width:18px; height:18px; }
+.file-tile.is-directory .file-tile-icon img { width:20px; height:20px; }
+.file-tile.is-directory:hover .file-tile-icon img { filter: drop-shadow(0 3px 6px rgba(20, 93, 224, .46)); transform:translateY(-1px); }
+@media (max-width:650px) {
+  .topbar {
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:8px;
+    height:66px;
+    min-height:66px;
+    padding:0 12px;
+    overflow-x:auto;
+    overflow-y:visible;
+    scrollbar-width:none;
+  }
+  .topbar::-webkit-scrollbar { display:none; }
+  .topbar .brand { flex:0 0 auto; }
+  .topbar .main-nav { flex:0 0 auto; width:auto; height:100%; gap:4px; overflow:visible; }
+  .topbar .main-nav .nav-dropdown { flex:0 0 auto; min-width:max-content; height:100%; }
+  .topbar .main-nav .nav-dropdown > summary { padding:0 6px; font-size:9px; }
+  .topbar .topbar-actions { flex:0 0 auto; gap:4px; }
+  .topbar .topbar-actions .connection-state { display:none; }
+  .topbar .topbar-actions .icon-button { padding:8px 7px; font-size:8px; }
+}

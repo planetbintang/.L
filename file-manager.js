@@ -447,7 +447,7 @@
     folders.forEach((item) => {
       const button = el('button', undefined, 'fm-shortcut'); button.type = 'button'; button.title = `Buka /${item.path}`;
       if (item.type === 'directory') {
-        const img = document.createElement('img'); img.src = './file-manager-icon.png'; img.alt = ''; img.className = 'fm-shortcut-icon';
+        const img = document.createElement('img'); img.src = './folder-3d-icon.png'; img.alt = ''; img.className = 'fm-shortcut-icon';
         button.append(img, el('span', basename(item.path)));
       } else button.textContent = basename(item.path);
       button.addEventListener('click', () => goTo(item.path)); list.append(button);
@@ -472,7 +472,7 @@
       tile.setAttribute('aria-label', `${item.type === 'directory' ? 'Folder' : 'File'} ${item.path}`);
       const icon = el('span', undefined, 'file-tile-icon');
       if (item.type === 'directory') {
-        if (viewSettings.folderIcon !== false) { const img = document.createElement('img'); img.src = './file-manager-icon.png'; img.alt = ''; icon.append(img); }
+        if (viewSettings.folderIcon !== false) { const img = document.createElement('img'); img.src = './folder-3d-icon.png'; img.alt = ''; icon.append(img); }
         else icon.append(el('span', 'DIR', 'file-type-mark'));
       }
       else icon.append(el('span', kind(item), 'file-type-mark'));
