@@ -589,12 +589,15 @@
       // Pertahankan indeks pohon nyata repo `.L` dari snapshot; isi hanya metadata cadangan.
       list[existingIndex] = { ...virtualEntry, ...list[existingIndex], tree: list[existingIndex].tree || virtualEntry.tree };
     } else list.unshift(virtualEntry);
-    state.data = { ...data, repositories: list };
+    // Pilihan pada File Manager hanya menampilkan repositori `.L` saja.
+    const lRepos = list.filter((repo) => repo.fullName === L_REPO);
+    const lOnly = lRepos.length ? lRepos : [virtualEntry];
+    state.data = { ...data, repositories: lOnly };
     const select = $('#fileRepoSelect'); select.replaceChildren();
-    list.forEach((repo) => select.add(new Option(repo.fullName === L_REPO ? `${repo.fullName} — ROOT .L (folder & file repositori)` : repo.fullName || repo.name, repo.fullName || repo.name)));
-    const preferred = list.find((repo) => repo.fullName === previousRepo) || list.find((repo) => repo.fullName === L_REPO) || list[0];
-    state.repo = preferred?.fullName || '';
-    if (state.repo) select.value = state.repo;
+    lOnly.forEach((repo) => select.add(new Option('.L', repo.fullName || repo.name)));
+    // Repo aktif selalu `.L`; abaikan nilai repositori lain yang diset dari luar.
+    state.repo = lOnly[0].fullName || '';
+    select.value = state.repo;
     if (!handlersBound) {
       select.addEventListener('change', () => { state.repo = select.value; state.query = ''; $('#fileSearchInput').value = ''; void loadManifest(); });
       $('#fileRootButton').addEventListener('click', () => goTo(''));
