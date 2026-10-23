@@ -223,8 +223,8 @@
     void loadDirectory(normalized);
   }
 
-  async function loadManifest() {
-    state.requestId += 1; state.loading = false;
+  async function loadManifest(targetPath = '') {
+    state.requestId += 1; const requestId = state.requestId; const requestedRepo = state.repo; state.loading = false;
     const repo = repoNow(); state.manifest = null; state.entries = []; state.pageIndex = 0; state.pageCount = 0; state.path = ''; state.selected = null;
     renderBreadcrumbs(); renderAssessment(repo); renderTiles();
     const source = String(repo?.tree?.indexUrl || '');
@@ -236,28 +236,35 @@
       const response = await fetch(`./${source}?t=${Date.now()}`, { cache: 'no-store', credentials: 'omit' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const manifest = await parseResponse(response);
+      if (requestId !== state.requestId || requestedRepo !== state.repo) return;
       if (manifest.repository !== state.repo || !manifest.directories || !Object.hasOwn(manifest.directories, '')) throw new Error('Manifest tidak valid');
       state.manifest = manifest;
-      await loadDirectory('');
+      const normalized = normalizePath(targetPath);
+      await loadDirectory(normalized && isDirectory(normalized) ? normalized : '');
     } catch (error) {
-      $('#fileTreeStatus').textContent = `Manifest pohon gagal dimuat: ${error.message}`;
+      if (requestId === state.requestId) $('#fileTreeStatus').textContent = `Manifest pohon gagal dimuat: ${error.message}`;
     }
   }
 
-  async function init(data) {
+  let handlersBound = false;
+  async function init(data, preserveLocation = true) {
+    const previousRepo = state.repo; const previousPath = state.path;
     state.data = data;
     const select = $('#fileRepoSelect'); select.replaceChildren();
     (data.repositories || []).forEach((repo) => select.add(new Option(repo.fullName || repo.name, repo.fullName || repo.name)));
-    const preferred = data.repositories?.find((repo) => repo.fullName === 'planetbintang/.L') || data.repositories?.[0];
+    const preferred = data.repositories?.find((repo) => repo.fullName === previousRepo) || data.repositories?.find((repo) => repo.fullName === 'planetbintang/.L') || data.repositories?.[0];
     state.repo = preferred?.fullName || '';
     if (state.repo) select.value = state.repo;
-    select.addEventListener('change', () => { state.repo = select.value; state.query = ''; $('#fileSearchInput').value = ''; void loadManifest(); });
-    $('#fileRootButton').addEventListener('click', () => goTo(''));
-    $('#fileUpButton').addEventListener('click', () => goTo(state.path.split('/').slice(0, -1).join('/')));
-    $('#filePathForm').addEventListener('submit', (event) => { event.preventDefault(); goTo($('#filePathInput').value); });
-    $('#fileSearchInput').addEventListener('input', (event) => { state.query = event.target.value.trim(); renderTiles(); });
-    $('#fileLoadMoreButton').addEventListener('click', () => void loadNextPage());
-    await loadManifest();
+    if (!handlersBound) {
+      select.addEventListener('change', () => { state.repo = select.value; state.query = ''; $('#fileSearchInput').value = ''; void loadManifest(); });
+      $('#fileRootButton').addEventListener('click', () => goTo(''));
+      $('#fileUpButton').addEventListener('click', () => goTo(state.path.split('/').slice(0, -1).join('/')));
+      $('#filePathForm').addEventListener('submit', (event) => { event.preventDefault(); goTo($('#filePathInput').value); });
+      $('#fileSearchInput').addEventListener('input', (event) => { state.query = event.target.value.trim(); renderTiles(); });
+      $('#fileLoadMoreButton').addEventListener('click', () => void loadNextPage());
+      handlersBound = true;
+    }
+    await loadManifest(preserveLocation && state.repo === previousRepo ? previousPath : '');
   }
 
   async function loadTreeIndex() {
@@ -266,12 +273,14 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await parseResponse(response);
       if (!Array.isArray(data.repositories)) throw new Error('Snapshot tidak valid');
-      await init(data);
+      await init(data, false);
     } catch (error) {
       $('#fileTreeStatus').textContent = `Gagal memuat pohon: ${error.message}`;
       $('#fileEmpty').hidden = false; $('#fileEmpty').textContent = 'File Manager tidak dapat membaca snapshot saat ini.';
     }
   }
 
-  loadTreeIndex();
+  window.PBFileManager = { applySnapshot: (data) => init(data, true) };
+  if (window.PBSystemSnapshot?.subscribe) window.PBSystemSnapshot.subscribe('file-manager', (data) => init(data, true));
+  else loadTreeIndex();
 })();

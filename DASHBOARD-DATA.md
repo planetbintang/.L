@@ -18,6 +18,12 @@ Workflow `.github/workflows/sync-dashboard.yml` berjalan setiap hari pada 04:17 
 
 Jika secret belum ada, workflow berhenti aman tanpa mengubah snapshot. Token tidak pernah ditempatkan di HTML, JavaScript, manifest, atau hasil dashboard. Jangan memakai token dengan izin write pada repo sumber.
 
+## Snapshot Hub dan navigasi
+
+Menu header menampilkan satu view pada satu waktu sementara header tetap tersedia. Ikon brand membuka Snapshot Hub. Tombol muat ulang di hub mengambil ulang `data/repositories.json` yang telah diterbitkan, lalu mengirim objek snapshot yang sama ke Dashboard, Workspace, dan File Manager. Status hub hanya mengonfirmasi bahwa view browser telah menerima snapshot; ia tidak memulai GitHub Actions, bukan koneksi langsung ke 45 repo, dan tidak menyinkronkan localStorage antarperangkat.
+
+Untuk membuat snapshot baru, gunakan alur GitHub Actions yang terautentikasi. Snapshot browser tetap mencakup metadata/tree saja: isi blob privat tidak dapat dibuka melalui Pages dan kode di repo tidak dijalankan. File publik dapat dipreview satu per satu di Code workspace sesuai batas ukuran yang didokumentasikan.
+
 ## Shell dashboard
 
 Header dashboard menyediakan browser shell untuk tugas allowlist baca-saja (`status`, `list`, pencarian, buka repo, peta host, ringkasan, dan root-map). File Manager membuka path `/`, menelusuri hierarki folder, dan memuat halaman item secara bertahap. Input pengguna tidak dievaluasi sebagai JavaScript/perintah OS dan tidak ada kode repo yang dijalankan; ini sengaja dibatasi karena halaman publik tidak boleh menyediakan remote shell.

@@ -4,6 +4,8 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const state = { data: null, query: '', visibility: 'all', appType: 'all' };
+  const snapshotConsumers = new Map();
+  const consumerStates = new Map();
   const fmt = new Intl.NumberFormat('id-ID');
   const fmtDate = (value) => {
     if (!value) return '—';
@@ -38,6 +40,20 @@
     node.textContent = label;
     node.parentElement.classList.toggle('is-live', Boolean(live));
   };
+  function announceSync(phase, detail = {}) {
+    window.dispatchEvent(new CustomEvent('planetbintang:snapshot-state', { detail: { phase, ...detail } }));
+  }
+  async function runSnapshotConsumer(name, handler, data) {
+    consumerStates.set(name, 'loading'); announceSync('consumer', { name, status: 'loading' });
+    try {
+      await handler(data);
+      consumerStates.set(name, 'ready'); announceSync('consumer', { name, status: 'ready' });
+      return true;
+    } catch (error) {
+      consumerStates.set(name, 'error'); announceSync('consumer', { name, status: 'error', message: error.message });
+      return false;
+    }
+  }
 
   function renderSummary(data) {
     $('#metricTotal').textContent = fmt.format(data.repositoryCount || data.repositories.length);
@@ -175,6 +191,7 @@
 
   async function loadSnapshot(cacheBust = false) {
     setConnection('Memuat snapshot', false);
+    announceSync('loading');
     try {
       const suffix = cacheBust ? `?t=${Date.now()}` : '';
       const response = await fetch(`./data/repositories.json${suffix}`, { cache: cacheBust ? 'no-store' : 'no-cache', credentials: 'omit' });
@@ -186,14 +203,28 @@
       buildAppFilter(data.repositories);
       renderRepositories();
       renderHosts(data);
+      const results = await Promise.all([...snapshotConsumers].map(([name, handler]) => runSnapshotConsumer(name, handler, data)));
+      announceSync(results.every(Boolean) ? 'ready' : 'partial', { updatedAt: data.updatedAt, repositoryCount: data.repositoryCount || data.repositories.length, dataSha256: data.dataSha256 || '' });
       return true;
     } catch (error) {
       setConnection('Snapshot gagal', false);
+      announceSync('error', { message: error.message });
       $('#snapshotStatus').textContent = 'Data belum tersedia';
       $('#repoGrid').replaceChildren(text('div', `Tidak dapat membaca data dashboard: ${error.message}`, 'empty-card'));
       return false;
     }
   }
+
+  window.PBSystemSnapshot = {
+    get data() { return state.data; },
+    get consumers() { return Object.fromEntries(consumerStates); },
+    subscribe(name, handler) {
+      snapshotConsumers.set(name, handler);
+      if (state.data) void runSnapshotConsumer(name, handler, state.data);
+      return () => { snapshotConsumers.delete(name); consumerStates.delete(name); };
+    },
+    refresh() { return loadSnapshot(true); },
+  };
 
   $('#searchInput').addEventListener('input', (event) => { state.query = event.target.value; renderRepositories(); });
   $('#visibilityFilter').addEventListener('change', (event) => { state.visibility = event.target.value; renderRepositories(); });
@@ -216,7 +247,6 @@
     await loadSnapshot(true);
     $('#reloadButton').textContent = 'Muat ulang';
   });
-  $('#logoEntry').addEventListener('click', () => $('#repositories').scrollIntoView({ behavior: 'smooth', block: 'start' }));
   $('#themeButton').addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     try { localStorage.setItem('planetbintang-dashboard-theme', document.body.classList.contains('light-mode') ? 'soft' : 'white'); } catch {}

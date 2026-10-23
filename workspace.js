@@ -96,9 +96,10 @@
     try { localStorage.setItem('pb-workspace-current-view',view); } catch {}
     if (scroll) $('#workspace').scrollIntoView({behavior:'smooth',block:'start'});
     if (view === 'analytics') renderAnalytics();
+    document.dispatchEvent(new CustomEvent('planetbintang:workspace-view', { detail: { view } }));
   }
+  window.PBWorkspace = { showView };
   $$('#workspaceNav [data-workspace-view]').forEach((button)=>button.addEventListener('click',()=>showView(button.dataset.workspaceView)));
-  $$('[data-workspace-target]').forEach((link)=>link.addEventListener('click',(event)=>{event.preventDefault();showView(link.dataset.workspaceTarget,true);}));
 
   function barChart(node, entries, color = 'blue') {
     node.replaceChildren(); const max=Math.max(1,...entries.map((x)=>x.value));
@@ -146,7 +147,7 @@
   }
   document.addEventListener('planetbintang:file-selected',(event)=>{selectedFile=event.detail;$('#codeRepoSelect').value=selectedFile.fullName;$('#codePathInput').value=`/${selectedFile.path}`;$('#codeGithubLink').href=selectedFile.url||'https://github.com/planetbintang';loadSelectedFile(selectedFile);});
   $('#fileOpenEditorButton').addEventListener('click',()=>{if(!selectedFile)return;showView('code',true);});
-  $('#codePickFile').addEventListener('click',()=>$('#fileManager').scrollIntoView({behavior:'smooth',block:'start'}));
+  $('#codePickFile').addEventListener('click',()=>{if(window.PBSystemNavigation?.navigate)window.PBSystemNavigation.navigate('file-manager');else $('#fileManager').scrollIntoView({behavior:'smooth',block:'start'});});
   $('#codeRepoSelect').addEventListener('change',()=>{const r=repos.find(x=>x.fullName===$('#codeRepoSelect').value);if(r){setCodeStatus(r.visibility==='private'?'Repo privat; pilih file melalui GitHub setelah autentikasi.':'Pilih file pada File Manager untuk memuat sumber publik.','warn');$('#fileRepoSelect').value=r.fullName;$('#fileRepoSelect').dispatchEvent(new Event('change'));}});
   $('#codeEditor').addEventListener('input',()=>$('#codeDirtyState').textContent='Belum disimpan · draft hanya lokal');
   $('#codeSaveDraft').addEventListener('click',()=>{if(!selectedFile){setCodeStatus('Pilih file terlebih dahulu dari File Manager.','warn');return;}const drafts=read(STORE.drafts,{});drafts[draftKey(selectedFile)]={content:$('#codeEditor').value,updatedAt:new Date().toISOString()};if(write(STORE.drafts,drafts)){setCodeStatus('Draft disimpan di localStorage browser ini. Tidak ada perubahan dikirim ke GitHub.');$('#codeDirtyState').textContent='Draft lokal tersimpan';renderAnalytics();notify('Draft lokal tersimpan.');}else setCodeStatus('Gagal menyimpan; ruang localStorage mungkin penuh.','error');});
@@ -167,18 +168,21 @@
   function renderAiHistory(){const root=$('#aiHistory');root.replaceChildren();const history=read(STORE.ai,[]);if(!history.length){root.append(safeText('p','Belum ada permintaan tersimpan.','workspace-empty-small'));return;}history.forEach((item)=>{const row=document.createElement('article');row.append(safeText('b',item.repo||'Semua repo'),safeText('time',new Date(item.createdAt).toLocaleString('id-ID')),safeText('p',item.prompt));root.append(row);});}
   $('#aiSaveRequest').addEventListener('click',saveAiRequest);$('#aiClearRequest').addEventListener('click',()=>{$('#aiPrompt').value='';$('#aiStatus').textContent='Permintaan dibersihkan dari editor; riwayat lokal tidak dihapus.';});
   $$('[data-ai-intent]').forEach((button)=>button.addEventListener('click',()=>{const repo=$('#aiRepoSelect').value||'repo pilihan';const file=selectedFile&&selectedFile.fullName===$('#aiRepoSelect').value?` ${selectedFile.path}`:'';$('#aiPrompt').value=`${button.dataset.aiIntent} ${repo}${file}.\n\nKonteks/hasil yang diinginkan:\n`;showView('ai');$('#aiPrompt').focus();}));
-  async function init() {
+  function applySnapshot(data) {
+    if (!Array.isArray(data.repositories)) throw new Error('Snapshot workspace tidak valid');
+    repos=data.repositories;
     repoOptions($('#taskRepoSelect'));repoOptions($('#issueRepoFilter'),true);repoOptions($('#codeRepoSelect'));repoOptions($('#defaultRepoSelect'));repoOptions($('#aiRepoSelect'));
-    // Populate snapshot-backed workspace analytics and all repo selectors without exposing source files.
-    try {
-      const response=await fetch(`./data/repositories.json?workspace=${Date.now()}`,{cache:'no-store',credentials:'omit'});if(!response.ok)throw new Error(`HTTP ${response.status}`);
-      const data=await response.json();if(!Array.isArray(data.repositories))throw new Error('snapshot invalid');repos=data.repositories;
-      repoOptions($('#taskRepoSelect'));repoOptions($('#issueRepoFilter'),true);repoOptions($('#codeRepoSelect'));repoOptions($('#defaultRepoSelect'));repoOptions($('#aiRepoSelect'));
-      const selected=read(STORE.defaultRepo,'planetbintang/.L');for(const id of ['taskRepoSelect','codeRepoSelect','defaultRepoSelect','aiRepoSelect'])if([...$(`#${id}`).options].some(o=>o.value===selected))$(`#${id}`).value=selected;
-      $('#wsRepoCount').textContent=fmt.format(repos.length);$('#wsPagesCount').textContent=fmt.format(data.pagesEnabledCount||0);
-      $('#issueRepoFilter').value='all';
-      renderAnalytics();
-    } catch(error) { $('#wsRepoCount').textContent='—';$('#wsPagesCount').textContent='—';notify(`Workspace snapshot tidak dimuat: ${error.message}`,'error'); }
+    const selected=read(STORE.defaultRepo,'planetbintang/.L');
+    for(const id of ['taskRepoSelect','codeRepoSelect','defaultRepoSelect','aiRepoSelect'])if([...$(`#${id}`).options].some(o=>o.value===selected))$(`#${id}`).value=selected;
+    $('#wsRepoCount').textContent=fmt.format(repos.length);$('#wsPagesCount').textContent=fmt.format(data.pagesEnabledCount||0);
+    $('#issueRepoFilter').value='all';
+    renderAnalytics();
+  }
+  window.PBWorkspace.applySnapshot = applySnapshot;
+  if (window.PBSystemSnapshot?.subscribe) window.PBSystemSnapshot.subscribe('workspace', applySnapshot);
+
+  function init() {
+    repoOptions($('#taskRepoSelect'));repoOptions($('#issueRepoFilter'),true);repoOptions($('#codeRepoSelect'));repoOptions($('#defaultRepoSelect'));repoOptions($('#aiRepoSelect'));
     renderTasks();renderIssues();renderAiHistory();
     let current='projects';try{current=localStorage.getItem('pb-workspace-current-view')||'projects';}catch{}showView(current);
   }

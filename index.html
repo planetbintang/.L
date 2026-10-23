@@ -7,19 +7,27 @@
     <meta name="description" content="Planetbintang Root System — file manager path / untuk indeks Git, peta repositori, integritas struktur, host, dan trafik agregat." />
     <link rel="icon" href="./system-icon.png" type="image/png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./dashboard.css?v=20261023-texture-v1" />
+    <link rel="stylesheet" href="./dashboard.css?v=20261023-snapshot-hub-v1" />
     <link rel="stylesheet" href="./workspace.css?v=20261023-workspace-v2" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
-    <a class="skip-link" href="#repositories">Lewati ke daftar repositori</a>
+    <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
     <header class="topbar" id="top">
-      <a class="brand" href="#top" aria-label="Planetbintang Root System, kembali ke atas">
+      <a class="brand" href="#top" aria-label="Buka pusat sinkronisasi snapshot Planetbintang" data-sync-hub-trigger>
         <span class="brand-icon-frame"><img src="./system-icon.png" alt="Logo sistem Planetbintang" /></span>
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Navigasi sistem">
-        <a href="#overview">Sistem</a><a href="#workspace" data-workspace-target="projects">Proyek</a><a href="#workspace" data-workspace-target="issues">Masalah</a><a href="#workspace" data-workspace-target="code">Code</a><a href="#workspace" data-workspace-target="analytics">Analitik</a><a href="#workspace" data-workspace-target="ai">AI</a><a href="#fileManager">File Manager</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
+        <a href="#overview" data-system-route="system" aria-current="page">Sistem</a>
+        <a href="#workspace/projects" data-system-route="projects" data-workspace-target="projects">Proyek</a>
+        <a href="#workspace/issues" data-system-route="issues" data-workspace-target="issues">Masalah</a>
+        <a href="#workspace/code" data-system-route="code" data-workspace-target="code">Code</a>
+        <a href="#workspace/analytics" data-system-route="analytics" data-workspace-target="analytics">Analitik</a>
+        <a href="#workspace/ai" data-system-route="ai" data-workspace-target="ai">AI</a>
+        <a href="#fileManager" data-system-route="file-manager">File Manager</a>
+        <a href="#repositories" data-system-route="repositories">Repositori</a>
+        <a href="#hosts" data-system-route="hosts">Domain & host</a>
       </nav>
       <div class="topbar-actions">
         <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
@@ -35,29 +43,37 @@
       <form class="shell-form" id="shellForm"><label><span>. &gt;</span><input id="shellInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help" aria-label="Perintah shell" /></label><button type="submit">Jalankan</button></form>
     </section>
 
+    <dialog class="sync-hub" id="syncHub" aria-labelledby="syncHubTitle">
+      <header class="sync-hub-heading"><div><p class="eyebrow">PLANETBINTANG <span>/</span> SNAPSHOT HUB</p><h2 id="syncHubTitle">Pusat sinkronisasi</h2><p>Logo sistem membuka satu status snapshot untuk dashboard, workspace, dan File Manager.</p></div><button class="sync-hub-close" id="syncHubClose" type="button" aria-label="Tutup pusat sinkronisasi">×</button></header>
+      <div class="sync-hub-status" role="status" aria-live="polite"><i id="syncHubDot"></i><span><b id="syncHubState">Memeriksa snapshot</b><small id="syncHubMeta">Menunggu data indeks…</small></span></div>
+      <div class="sync-hub-modules"><div><span>Dashboard</span><b id="syncHubDashboard">Snapshot</b></div><div><span>Workspace</span><b id="syncHubWorkspace">Menunggu</b></div><div><span>File Manager</span><b id="syncHubFiles">Menunggu</b></div></div>
+      <div class="sync-hub-actions"><button class="workspace-primary" id="syncHubRefresh" type="button">Muat ulang snapshot</button><a class="workspace-secondary" href="https://github.com/planetbintang/.L/actions/workflows/sync-dashboard.yml" target="_blank" rel="noopener noreferrer">Buka alur sinkronisasi ↗</a></div>
+      <p class="sync-hub-note">Muat ulang mengambil snapshot yang sudah diterbitkan dan menyegarkan menu dari data yang sama. Pembuatan snapshot baru berjalan melalui GitHub Actions. File privat dan eksekusi kode repositori tidak tersedia di GitHub Pages.</p>
+    </dialog>
+
     <main class="shell">
-      <section class="hero panel" id="overview" aria-labelledby="heroTitle">
+      <section class="hero panel" id="overview" data-system-page="system" aria-labelledby="heroTitle">
         <div class="hero-copy">
           <p class="eyebrow">PUBLIC SYSTEM DASHBOARD <span>/</span> ROOT .</p>
           <h1 id="heroTitle">Satu pintu.<br /><em>Seluruh sistem.</em></h1>
-          <p class="hero-description">Peta baca-saja untuk repositori Planetbintang. Ikon brand membuka ruang kerja; setiap aplikasi tetap berjalan di runtime asalnya.</p>
+          <p class="hero-description">Peta baca-saja untuk repositori Planetbintang. Logo sistem membuka pusat sinkronisasi; setiap aplikasi tetap berjalan di runtime asalnya.</p>
           <div class="hero-meta"><span class="root-chip"><b>.</b> / planetbintang</span><span class="sync-chip" id="snapshotStatus">Menyiapkan data snapshot…</span></div>
         </div>
-        <button class="hero-logo" id="logoEntry" type="button" aria-label="Buka ruang kerja repositori">
+        <button class="hero-logo" id="logoEntry" type="button" aria-label="Buka pusat sinkronisasi snapshot" data-sync-hub-trigger>
           <span class="logo-outline"><img src="./system-icon.png" alt="" /></span>
-          <span class="logo-entry-label">BUKA SISTEM <b>↘</b></span>
+          <span class="logo-entry-label">PUSAT SINKRONISASI <b>↔</b></span>
         </button>
         <div class="hero-corner" aria-hidden="true">PB <span>001</span></div>
       </section>
 
-      <section class="metrics" aria-label="Ringkasan sistem">
+      <section class="metrics" id="metricsOverview" data-system-page="system" aria-label="Ringkasan sistem">
         <article class="metric-card"><span class="metric-label">REPOSITORI TERINDEKS</span><strong id="metricTotal">—</strong><small>cakupan tetap: planetbintang</small></article>
         <article class="metric-card"><span class="metric-label">PUBLIK / PRIVAT</span><strong><span id="metricPublic">—</span><i>/</i><span id="metricPrivate">—</span></strong><small>nama & tautan ditampilkan atas permintaan pemilik</small></article>
         <article class="metric-card"><span class="metric-label">GITHUB PAGES</span><strong id="metricPages">—</strong><small>situs statis yang terdeteksi aktif</small></article>
         <article class="metric-card metric-card-dark"><span class="metric-label">INDEKS SHA-256</span><strong class="hash-value" id="metricHash">—</strong><small>sidik data snapshot saat ini</small></article>
       </section>
 
-    <section id="workspace" class="workspace-section" aria-label="Workspace Planetbintang">
+    <section id="workspace" class="workspace-section" data-system-page="workspace" hidden aria-label="Workspace Planetbintang">
     <header class="workspace-heading">
       <div><p class="eyebrow">WORKSPACE <span>/</span> PLANETBINTANG</p><h2>Ruang kerja sistem</h2><p class="section-description">Kelola tugas lokal, telusuri kode, dan pantau metadata repo. Perubahan lokal tidak mengubah GitHub sampai backend resmi tersambung.</p></div>
       <div class="workspace-identity"><span class="workspace-avatar" id="workspaceAvatar">PB</span><span><b id="workspaceGreeting">Workspace lokal</b><small id="workspaceMode">Data tersimpan di browser ini</small></span></div>
@@ -121,7 +137,7 @@
     </section>
   </section>
 
-    <section class="section-block file-manager-section" id="fileManager" aria-labelledby="fileManagerTitle">
+    <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
         <div class="section-heading">
           <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
           <div class="file-manager-brand"><img src="./file-manager-icon.png" alt="Ikon folder sistem Planetbintang" /><span>ROOT PATH <b>/</b></span></div>
@@ -164,7 +180,7 @@
         </div>
       </section>
 
-      <section class="section-block" id="repositories" aria-labelledby="repoTitle">
+      <section class="section-block" id="repositories" data-system-page="repositories" hidden aria-labelledby="repoTitle">
         <div class="section-heading">
           <div><p class="eyebrow">SYSTEM INDEX <span>/</span> 01</p><h2 id="repoTitle">Repositori & aplikasi</h2><p class="section-description">Nama dan tautan privat terlihat di dashboard publik sesuai instruksi pemilik. Isi kode tetap berada di GitHub dan memerlukan login.</p></div>
           <a class="text-link" href="https://github.com/planetbintang" target="_blank" rel="noopener noreferrer">Buka profil GitHub <span>↗</span></a>
@@ -179,7 +195,7 @@
         <div class="repo-grid" id="repoGrid" aria-live="polite"><div class="loading-card">Memuat indeks sistem…</div></div>
       </section>
 
-      <section class="section-block host-section" id="hosts" aria-labelledby="hostTitle">
+      <section class="section-block host-section" id="hosts" data-system-page="hosts" hidden aria-labelledby="hostTitle">
         <div class="section-heading">
           <div><p class="eyebrow">NETWORK MAP <span>/</span> 02</p><h2 id="hostTitle">Domain, host & DNS publik</h2><p class="section-description">Pemetaan memakai domain publik dari metadata repositori dan alamat DNS publik saat snapshot dibuat. IP bersama GitHub dapat berubah.</p></div>
           <span class="snapshot-date" id="dnsUpdated">DNS snapshot: —</span>
@@ -187,17 +203,18 @@
         <div class="host-grid" id="hostGrid"><div class="loading-card">Menyiapkan peta host…</div></div>
       </section>
 
-      <section class="privacy-note panel" aria-label="Batasan data publik">
+      <section class="privacy-note panel" id="systemPrivacy" data-system-page="system" aria-label="Batasan data publik">
         <span class="privacy-symbol" aria-hidden="true">i</span>
         <div><strong>Metadata publik, bukan salinan isi kode</strong><p>File Manager menampilkan nama path seluruh pohon repo terpilih dan hash/ukuran metadata Git; beberapa path sensitif disaring. Nama serta path repo privat terlihat publik sesuai instruksi pemilik, tetapi isi blob file, kredensial, anggota, alamat IP pengunjung, dan trafik individual tidak diterbitkan. Pemeriksaan hanya membaca struktur dan tidak menjalankan kode. GitHub Pages statis; PHP, Python server, shell, Terraform, database, dan backend repo tidak dieksekusi di sini.</p></div>
       </section>
     </main>
 
-    <footer class="footer"><a class="footer-brand" href="#top"><img src="./system-icon.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber GitHub</span><a href="https://github.com/planetbintang/.L" target="_blank" rel="noopener noreferrer">Source dashboard ↗</a></footer>
+    <footer class="footer"><a class="footer-brand" href="#top" data-system-route="system"><img src="./system-icon.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber GitHub</span><a href="https://github.com/planetbintang/.L" target="_blank" rel="noopener noreferrer">Source dashboard ↗</a></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
-    <script src="./dashboard.js?v=20261023-system-shell-blue" defer></script>
+    <script src="./dashboard.js?v=20261023-snapshot-hub-v1" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
-    <script src="./file-manager.js?v=20261023-file-tree-v2" defer></script>
-    <script src="./workspace.js?v=20261023-workspace-v2" defer></script>
+    <script src="./file-manager.js?v=20261023-snapshot-hub-v1" defer></script>
+    <script src="./workspace.js?v=20261023-snapshot-hub-v1" defer></script>
+    <script src="./system-navigation.js?v=20261023-snapshot-router-v1" defer></script>
   </body>
 </html>
