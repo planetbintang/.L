@@ -7,7 +7,7 @@ site:
       title: Documentation
       path: documentation
       content:
-        directory: ./documentation
+        directory: /dokumen
     - type: space
       key: space-2
       title: Imported content
@@ -15,5 +15,5 @@ site:
       default: true
       draft: true
       content:
-        directory: ./imported-content
+        directory: /datadokumen
         language: id
