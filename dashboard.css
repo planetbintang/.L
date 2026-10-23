@@ -72,7 +72,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .fm-root-button{border-color:#b9ccf5;background:var(--blue-soft);color:#124cb4;margin-bottom:6px}
 .fm-root-button:hover,.fm-shortcut:hover{border-color:var(--blue);background:#fff}
 .fm-folder-shortcuts{max-height:220px;overflow:auto}
-.fm-shortcut{display:block}
+.fm-shortcut{display:flex;align-items:center;gap:5px}
+.fm-shortcut-icon{width:14px;height:14px;flex:0 0 14px;object-fit:contain;display:inline-block;vertical-align:-3px;margin-right:5px}
 .fm-shortcuts-empty{font-size:8px;line-height:1.5;color:#888;margin:6px 0}
 .fm-browser{min-width:0;padding:10px 12px;display:flex;flex-direction:column}
 .fm-breadcrumbs{min-height:26px;display:flex;align-items:center;gap:3px;border-bottom:1px solid #e4e8f1;margin-bottom:9px;padding-bottom:7px;overflow:auto;white-space:nowrap}
