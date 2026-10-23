@@ -7,7 +7,8 @@
     <meta name="description" content="Planetbintang Root System — file manager path / untuk indeks Git, peta repositori, integritas struktur, host, dan trafik agregat." />
     <link rel="icon" href="./system-icon.png" type="image/png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./dashboard.css?v=20261023-file-tree-v1" />
+    <link rel="stylesheet" href="./dashboard.css?v=20261023-workspace-v1" />
+    <link rel="stylesheet" href="./workspace.css?v=20261023-workspace-v2" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -18,7 +19,7 @@
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Navigasi sistem">
-        <a href="#overview">Sistem</a><a href="#fileManager">File Manager</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
+        <a href="#overview">Sistem</a><a href="#workspace" data-workspace-target="projects">Proyek</a><a href="#workspace" data-workspace-target="issues">Masalah</a><a href="#workspace" data-workspace-target="code">Code</a><a href="#workspace" data-workspace-target="analytics">Analitik</a><a href="#workspace" data-workspace-target="ai">AI</a><a href="#fileManager">File Manager</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
       </nav>
       <div class="topbar-actions">
         <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
@@ -56,7 +57,71 @@
         <article class="metric-card metric-card-dark"><span class="metric-label">INDEKS SHA-256</span><strong class="hash-value" id="metricHash">—</strong><small>sidik data snapshot saat ini</small></article>
       </section>
 
-      <section class="section-block file-manager-section" id="fileManager" aria-labelledby="fileManagerTitle">
+    <section id="workspace" class="workspace-section" aria-label="Workspace Planetbintang">
+    <header class="workspace-heading">
+      <div><p class="eyebrow">WORKSPACE <span>/</span> PLANETBINTANG</p><h2>Ruang kerja sistem</h2><p class="section-description">Kelola tugas lokal, telusuri kode, dan pantau metadata repo. Perubahan lokal tidak mengubah GitHub sampai backend resmi tersambung.</p></div>
+      <div class="workspace-identity"><span class="workspace-avatar" id="workspaceAvatar">PB</span><span><b id="workspaceGreeting">Workspace lokal</b><small id="workspaceMode">Data tersimpan di browser ini</small></span></div>
+    </header>
+    <nav class="workspace-nav" id="workspaceNav" aria-label="Menu workspace" role="tablist">
+      <button type="button" role="tab" data-workspace-view="projects" aria-selected="true">▦ Proyek</button>
+      <button type="button" role="tab" data-workspace-view="issues" aria-selected="false">◎ Masalah</button>
+      <button type="button" role="tab" data-workspace-view="code" aria-selected="false">⌘ Code</button>
+      <button type="button" role="tab" data-workspace-view="analytics" aria-selected="false">▥ Analitik</button>
+      <button type="button" role="tab" data-workspace-view="account" aria-selected="false">⚙ Pengaturan akun</button>
+      <button type="button" role="tab" data-workspace-view="help" aria-selected="false">? Bantuan</button>
+      <button type="button" role="tab" data-workspace-view="ai" class="workspace-ai-tab" aria-selected="false">✦ AI</button>
+    </nav>
+
+    <section class="workspace-panel" data-workspace-panel="projects" role="tabpanel">
+      <div class="workspace-panel-heading"><div><p class="eyebrow">OVERVIEW <span>/</span> 01</p><h3>Proyek & papan tugas</h3><p>Susun pekerjaan per repositori dalam papan lokal sederhana.</p></div><span class="local-badge">LOCAL · BROWSER</span></div>
+      <div class="workspace-kpis"><article><small>REPO TERINDEKS</small><b id="wsRepoCount">—</b><span>snapshot GitHub</span></article><article><small>TUGAS AKTIF</small><b id="wsTaskCount">0</b><span>tersimpan lokal</span></article><article><small>MASALAH LOKAL</small><b id="wsIssueCount">0</b><span>belum terkirim ke GitHub</span></article><article><small>HALAMAN AKTIF</small><b id="wsPagesCount">—</b><span>GitHub Pages snapshot</span></article></div>
+      <form id="taskCreateForm" class="workspace-create-form"><label><span>TUGAS BARU</span><input id="taskTitleInput" maxlength="140" required placeholder="Contoh: periksa formulir checkout" /></label><label><span>REPOSITORI</span><select id="taskRepoSelect"></select></label><label><span>STATUS</span><select id="taskStatusInput"><option value="backlog">Backlog</option><option value="progress">Dalam proses</option><option value="review">Review</option></select></label><button type="submit" class="workspace-primary">+ Tambah tugas</button></form>
+      <div class="kanban-board" id="taskBoard"><section class="kanban-column" data-task-column="backlog"><header><b>Backlog</b><span id="taskCountBacklog">0</span></header><div class="kanban-cards" id="taskBacklog"></div></section><section class="kanban-column" data-task-column="progress"><header><b>Dalam proses</b><span id="taskCountProgress">0</span></header><div class="kanban-cards" id="taskProgress"></div></section><section class="kanban-column" data-task-column="review"><header><b>Review</b><span id="taskCountReview">0</span></header><div class="kanban-cards" id="taskReview"></div></section></div>
+      <p class="workspace-note">Papan ini tersimpan di localStorage browser ini. Belum tersinkron sebagai Project GitHub.</p>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="issues" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">ISSUE TRACKER <span>/</span> 02</p><h3>Masalah & diskusi</h3><p>Catat masalah, labeli, ubah status, dan tambahkan komentar secara lokal.</p></div><span class="local-badge">BELUM TERHUBUNG KE GITHUB ISSUES</span></div>
+      <div class="issue-workspace">
+        <aside class="issue-filters"><h4>Filter</h4><label>Repositori<select id="issueRepoFilter"></select></label><label>Status<select id="issueStatusFilter"><option value="all">Semua</option><option value="open">Terbuka</option><option value="closed">Selesai</option></select></label><label>Label<input id="issueLabelFilter" placeholder="mis. bug, UI" maxlength="32" /></label><form id="issueCreateForm"><label>Masalah baru<input id="issueTitleInput" required maxlength="140" placeholder="Ringkas masalah" /></label><button class="workspace-primary" type="submit">+ Buat masalah lokal</button></form></aside>
+        <div class="issue-list-pane"><div class="issue-list-heading"><b id="issueResultCount">Masalah lokal</b><small>Urut terbaru</small></div><div id="issueList" class="issue-list"></div></div>
+        <article id="issueDetail" class="issue-detail"><div class="workspace-empty">Pilih masalah di daftar atau buat masalah lokal baru.</div></article>
+      </div>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="code" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">CODE WORKSPACE <span>/</span> 03</p><h3>Penampil & editor draft</h3><p>File publik dapat dimuat dari GitHub. Edit disimpan sebagai draft lokal dan tidak melakukan commit/deploy.</p></div><span class="local-badge">TANPA EKSEKUSI KODE</span></div>
+      <div class="code-toolbar"><label>Repo<select id="codeRepoSelect"></select></label><label>Path file<input id="codePathInput" placeholder="Pilih file dari File Manager" readonly /></label><button id="codePickFile" type="button" class="workspace-secondary">Pilih di File Manager</button><a id="codeGithubLink" class="workspace-secondary" href="https://github.com/planetbintang" target="_blank" rel="noopener noreferrer">Buka GitHub</a></div>
+      <div class="code-status" id="codeStatus" aria-live="polite">Pilih file dari File Manager. Isi repo privat memerlukan autentikasi GitHub; Pages tidak menyimpan token.</div>
+      <label class="visually-hidden" for="codeEditor">Editor draft lokal</label><textarea id="codeEditor" class="code-editor" spellcheck="false" autocapitalize="off" placeholder="Isi file publik akan tampil di sini. Untuk file privat, salin-tempel kode setelah membuka GitHub; konten ini tetap lokal."></textarea>
+      <div class="code-actions"><button id="codeSaveDraft" class="workspace-primary" type="button">Simpan draft lokal</button><button id="codeRestoreSource" class="workspace-secondary" type="button">Pulihkan sumber</button><button id="codeFormatJson" class="workspace-secondary" type="button">Format JSON</button><button id="codeCheckSyntax" class="workspace-secondary" type="button">Periksa sintaks</button><button id="codeDownload" class="workspace-secondary" type="button">Unduh draft</button><span id="codeDirtyState">Belum ada perubahan</span></div>
+      <p class="workspace-note">Draft disimpan hanya pada browser perangkat ini. Tidak ada file privat yang diambil dari server publik; tidak ada tombol tulis, run, atau deploy otomatis. Gunakan GitHub setelah autentikasi untuk mengirim perubahan.</p>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="analytics" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">ANALYTICS <span>/</span> 04</p><h3>Analitik sistem</h3><p>Ringkasan nyata dari snapshot repo dan pohon Git; bukan metrik pengunjung situs.</p></div><span class="local-badge">SNAPSHOT READ-ONLY</span></div>
+      <div class="analytics-kpis"><article><small>REPO</small><b id="analyticsRepos">—</b></article><article><small>PATH TERINDEKS</small><b id="analyticsPaths">—</b></article><article><small>FILE</small><b id="analyticsFiles">—</b></article><article><small>VIEW GITHUB 14 HARI</small><b id="analyticsViews">—</b></article><article><small>CLONE GITHUB 14 HARI</small><b id="analyticsClones">—</b></article></div>
+      <div class="analytics-grid"><article class="analytics-card"><h4>Bahasa utama terdeteksi</h4><div id="languageChart" class="bar-chart"></div></article><article class="analytics-card"><h4>Jenis sistem</h4><div id="systemChart" class="bar-chart"></div></article><article class="analytics-card"><h4>Visibilitas repositori</h4><div id="visibilityChart" class="bar-chart"></div></article><article class="analytics-card"><h4>Aktivitas lokal workspace</h4><div id="localActivityChart" class="bar-chart"></div><small class="analytics-footnote">Tugas dan masalah lokal hanya terlihat pada browser ini.</small></article></div>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="account" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">ACCOUNT SETTINGS <span>/</span> 05</p><h3>Pengaturan akun & workspace</h3><p>Preferensi lokal, tidak mengubah identitas atau pengaturan GitHub.</p></div><span class="local-badge">PERANGKAT INI</span></div>
+      <div class="account-layout"><aside class="account-menu"><a href="#profileSettings" class="active">♙ Profil lokal</a><a href="#securitySettings">◇ Keamanan</a><a href="#integrationSettings">⌁ Integrasi</a><a href="#notificationSettings">♧ Notifikasi</a></aside><form id="profileForm" class="account-form"><section id="profileSettings"><h4>Profil tampilan</h4><label>Nama tampilan<input id="profileName" maxlength="60" placeholder="Nama yang tampil di workspace" /></label><label>Email (opsional, hanya lokal)<input id="profileEmail" type="email" maxlength="120" placeholder="nama@example.com" /></label></section><section id="securitySettings"><h4>Preferensi workspace</h4><label>Repo awal File Manager<select id="defaultRepoSelect"></select></label><label>Tema tampilan<select id="workspaceTheme"><option value="white">Putih + biru</option><option value="soft">Putih lembut + biru</option></select></label></section><section id="integrationSettings"><h4>Konektor & izin</h4><div class="integration-row"><span><b>GitHub</b><small>Snapshot publik tersedia; penulisan membutuhkan OAuth/backend.</small></span><em class="status-connected">SNAPSHOT</em></div><div class="integration-row"><span><b>AI provider</b><small>Belum terhubung ke runtime situs. Kunci API tidak pernah ditaruh di browser.</small></span><em class="status-pending">BELUM TERHUBUNG</em></div><div class="integration-row"><span><b>Eksekusi / deploy</b><small>Belum tersedia dari GitHub Pages statis.</small></span><em class="status-pending">NONAKTIF</em></div></section><section id="notificationSettings"><h4>Data lokal</h4><p>Profil, draft kode, papan tugas, masalah, dan permintaan AI hanya disimpan di localStorage browser ini.</p></section><button class="workspace-primary" type="submit">Simpan preferensi lokal</button><span id="profileSaveStatus" aria-live="polite"></span></form></div>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="help" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">HELP CENTER <span>/</span> 06</p><h3>Pusat bantuan & komunitas</h3><p>Panduan memakai dashboard dan tautan dukungan ke repo sumber.</p></div></div>
+      <div class="help-search"><span>⌕</span><input id="helpSearch" placeholder="Cari panduan, file, konektor…" aria-label="Cari panduan bantuan" /></div><div class="help-cards" id="helpCards"><a href="https://github.com/planetbintang/.L/blob/io/README.md" target="_blank" rel="noopener noreferrer"><b>▤ Dokumentasi API & sistem</b><span>README, model data, snapshot dan batas runtime</span><small>Buka dokumentasi ↗</small></a><a href="https://github.com/planetbintang/.L/issues" target="_blank" rel="noopener noreferrer"><b>⚑ Laporkan masalah dashboard</b><span>Issue GitHub perlu login; jangan masukkan token atau rahasia.</span><small>Buka issue tracker ↗</small></a><a href="https://github.com/planetbintang" target="_blank" rel="noopener noreferrer"><b>◎ Komunitas & repositori</b><span>Lihat repositori yang dapat diakses akun Anda.</span><small>Buka GitHub ↗</small></a><article><b>▧ File Manager</b><span>Pilih repo, mulai dari `/`, lalu buka folder. SHA adalah identitas objek, bukan isi kode.</span><small>Tip penggunaan</small></article><article><b>⌘ Editor draft</b><span>File publik dapat dibaca; draft hanya lokal. Commit dilakukan terpisah melalui GitHub.</span><small>Privasi kode</small></article><article><b>✦ AI & eksekusi</b><span>Memerlukan layanan backend terautentikasi; tidak berjalan di Pages statis.</span><small>Batas platform</small></article></div>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="ai" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">AI TOOLBOX <span>/</span> 07</p><h3>AI untuk kode & operasi</h3><p>Ruang permintaan AI dengan kontrol scope. Saat ini permintaan hanya bisa disimpan lokal karena endpoint AI/backend belum terhubung.</p></div><span class="local-badge ai-offline">AI OFFLINE</span></div>
+      <div class="ai-layout"><aside class="ai-tools"><h4>Alur kerja yang disiapkan</h4><button type="button" data-ai-intent="Buat draft kode baru untuk" >✦ Buat kode</button><button type="button" data-ai-intent="Usulkan edit kode untuk" >✎ Edit kode</button><button type="button" data-ai-intent="Rapikan dan jelaskan kode pada" >≋ Rapikan kode</button><button type="button" data-ai-intent="Evaluasi bug dan risiko secara statis untuk" >⌕ Evaluasi kesalahan</button><button type="button" data-ai-intent="Rencanakan uji sandbox yang terisolasi untuk" >▷ Rencana eksekusi aman</button><button type="button" data-ai-intent="Siapkan checklist deploy terverifikasi untuk" >⇧ Rencana deploy</button></aside><div class="ai-compose"><label>Repositori<select id="aiRepoSelect"></select></label><label>Permintaan / konteks<textarea id="aiPrompt" rows="7" maxlength="5000" placeholder="Jelaskan perubahan yang diinginkan. Hindari menempelkan secret, token, atau data pribadi."></textarea></label><div class="ai-actions"><button id="aiSaveRequest" type="button" class="workspace-primary">Simpan permintaan lokal</button><button id="aiClearRequest" type="button" class="workspace-secondary">Bersihkan</button><span id="aiStatus" aria-live="polite">Tidak ada kode dikirim ke model atau dijalankan.</span></div><div class="ai-history-wrap"><h4>Permintaan tersimpan</h4><div id="aiHistory" class="ai-history"></div></div></div></div>
+      <div class="ai-safety"><b>Integrasi belum aktif.</b> Untuk AI yang benar-benar membaca/mengubah repo, mengeksekusi skrip, dan deploy, diperlukan backend privat dengan autentikasi GitHub, penyimpanan secret server-side, sandbox terisolasi, persetujuan perubahan, serta pipeline deployment. UI ini tidak menyimpan token, tidak mengirim source code, tidak mengeksekusi perintah, dan tidak membuat klaim bahwa operasi telah berjalan.</div>
+    </section>
+  </section>
+
+    <section class="section-block file-manager-section" id="fileManager" aria-labelledby="fileManagerTitle">
         <div class="section-heading">
           <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
           <div class="file-manager-brand"><img src="./file-manager-icon.png" alt="Ikon folder sistem Planetbintang" /><span>ROOT PATH <b>/</b></span></div>
@@ -81,6 +146,7 @@
             <h3 id="fileSelectionTitle">Pilih file atau folder</h3>
             <div id="fileSelectionData" class="fm-selection-data">Isi file tidak dimuat. Penilaian memakai metadata tree, Git SHA, mode, ukuran, bahasa dan nama entry point.</div>
             <a id="fileOpenGitHub" class="repo-action primary fm-open-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Buka path di GitHub ↗</a>
+            <button id="fileOpenEditorButton" class="repo-action fm-open-link" type="button" hidden>Buka editor lokal</button>
             <div class="fm-assessment-note">Tidak menjalankan kode repo dan bukan audit kerentanan. Jalur rahasia/credential terdeteksi disaring.</div>
           </aside>
         </div>
@@ -131,6 +197,7 @@
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
     <script src="./dashboard.js?v=20261023-system-shell-blue" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
-    <script src="./file-manager.js?v=20261023-file-tree-v1" defer></script>
+    <script src="./file-manager.js?v=20261023-file-tree-v2" defer></script>
+    <script src="./workspace.js?v=20261023-workspace-v2" defer></script>
   </body>
 </html>

@@ -21,3 +21,11 @@ Jika secret belum ada, workflow berhenti aman tanpa mengubah snapshot. Token tid
 ## Shell dashboard
 
 Header dashboard menyediakan browser shell untuk tugas allowlist baca-saja (`status`, `list`, pencarian, buka repo, peta host, ringkasan, dan root-map). File Manager membuka path `/`, menelusuri hierarki folder, dan memuat halaman item secara bertahap. Input pengguna tidak dievaluasi sebagai JavaScript/perintah OS dan tidak ada kode repo yang dijalankan; ini sengaja dibatasi karena halaman publik tidak boleh menyediakan remote shell.
+
+## Workspace browser
+
+Menu Proyek/Kanban, Issues/diskusi, profil, preferensi, dan permintaan AI disimpan pada `localStorage` browser yang digunakan. Ini bukan GitHub Projects atau GitHub Issues dan tidak tersinkron antarpengguna/perangkat. Analitik hanya menghitung agregat snapshot repositori, struktur Git, serta trafik GitHub repo jika tersedia; bukan pemantauan pengunjung situs.
+
+Code workspace hanya mengambil berkas publik dari `raw.githubusercontent.com` untuk preview hingga 1 MiB, lalu memungkinkan draft lokal dan unduh file draft. Tidak ada sumber repo privat yang diambil. Draft tidak ditulis ke GitHub dan pemeriksa sintaks lokal tidak menjalankan kode. Bila koneksi gagal, pengguna dapat membuka GitHub setelah autentikasi atau menempelkan isi secara manual; jangan simpan credential di halaman ini.
+
+Toolbox AI saat ini hanya menyimpan prompt secara lokal. Provider AI dan backend situs belum terhubung. Fitur AI yang benar-benar membuat/mengubah kode, mengakses repo privat, mengeksekusi proses, atau deploy memerlukan layanan server privat dengan autentikasi, secret hanya di server, sandbox per proses dengan batas resource, tinjauan perubahan dan persetujuan deployment. GitHub Pages statis tidak menyediakan fungsi tersebut; jangan menaruh API token atau menambahkan remote shell ke JavaScript publik.

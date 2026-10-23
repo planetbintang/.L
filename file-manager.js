@@ -116,6 +116,12 @@
     panel.append(el('p', 'Hash adalah identitas objek Git dari metadata tree; isi file tidak diunduh.', 'fm-inspector-disclaimer'));
     const link = $('#fileOpenGitHub'); const url = githubPathUrl(repo, entry);
     link.hidden = !url; if (url) link.href = url;
+    const editorButton = $('#fileOpenEditorButton');
+    editorButton.hidden = entry.type !== 'file';
+    if (entry.type === 'file') document.dispatchEvent(new CustomEvent('planetbintang:file-selected', { detail: {
+      fullName: repo?.fullName || '', visibility: repo?.visibility || '', branch: repo?.branch || '', path: entry.path,
+      sha: entry.sha || '', url, size: entry.size, sizeKnown: entry.sizeKnown !== false,
+    } }));
   }
 
   function renderBreadcrumbs() {

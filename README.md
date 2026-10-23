@@ -18,9 +18,17 @@ Dashboard publik utama untuk workspace repositori Planetbintang: **https://plane
 
 - Panel Pengaturan menampilkan alias root, status sumber GitHub, status snapshot, opsi tema lokal, dan kebijakan privasi.
 
+- Menu workspace menambahkan papan Proyek/Kanban, Issues lokal dengan komentar dan status, Code workspace, Analitik snapshot, Pengaturan akun lokal, pusat Bantuan, serta toolbox AI.
+
+- Tugas, masalah, profil, permintaan AI, dan draft kode disimpan di `localStorage` browser saat ini; data tersebut tidak disinkronkan ke GitHub. Analitik dihitung dari snapshot metadata repositori dan trafik GitHub agregat jika tersedia.
+
+- Code workspace memuat source file publik dari `raw.githubusercontent.com` untuk ditinjau di browser. Repo privat tidak diambil; draft dapat disimpan lokal atau diunduh. Aksi simpan tidak melakukan commit atau deploy. Pemeriksa sintaks hanya mem-parse format yang didukung tanpa menjalankan skrip.
+
+- Toolbox AI membantu menyiapkan tipe permintaan untuk membuat/mengedit/merapikan kode, evaluasi, eksekusi terisolasi, dan deploy. Saat ini AI/provider dan backend belum terhubung; permintaan hanya disimpan lokal, tidak dikirim dan tidak dijalankan.
+
 - Tidak mengeksekusi kode repo. Snapshot hanya menyimpan path dan metadata Git (SHA, mode, ukuran bila tersedia); isi blob tidak diunduh. Path yang menyerupai secret, credential, token, password, key, env, backup, atau dump disaring. Nama/path repo privat tampil publik atas permintaan pemilik.
 
-- GitHub Pages hanya menyajikan aset statis; backend PHP/Python, shell, Terraform, database dan binary harus dijalankan pada runtime asal yang sesuai. File Manager tidak menyediakan sandbox eksekusi.
+- GitHub Pages hanya menyajikan aset statis; backend PHP/Python, shell, Terraform, database dan binary harus dijalankan pada runtime asal yang sesuai. File Manager tidak menyediakan sandbox eksekusi atau akses tulis ke GitHub.
 
 ## Sinkronisasi data
 
