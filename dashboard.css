@@ -537,3 +537,51 @@ body {
     z-index:300;
   }
 }
+
+
+/* Cinematic 3D/7D-style ambient layer for the four hero cards. */
+.provider-grid { perspective: 1500px; perspective-origin: 50% 42%; }
+.provider-card {
+  transform-style: preserve-3d;
+  isolation: isolate;
+  background-size: 180% 180%;
+  background-position: 50% 50%;
+  will-change: background-position, transform;
+}
+.provider-card::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .72;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 25% 22%, rgba(255,255,255,.28) 0 1px, transparent 2px), radial-gradient(circle at 76% 68%, rgba(119,221,255,.5) 0 1px, transparent 2px);
+  background-size: 72px 64px, 108px 92px;
+  animation: seven-dust 18s linear infinite;
+}
+.provider-planet { animation: planet-backdrop 14s ease-in-out infinite alternate; }
+.provider-galaxy { animation: galaxy-backdrop 18s linear infinite; }
+.provider-universe { animation: universe-backdrop 20s ease-in-out infinite alternate; }
+.provider-magnet { animation: magnet-backdrop 10s ease-in-out infinite alternate; }
+.provider-planet .provider-orb,
+.provider-galaxy .provider-galaxy-art,
+.provider-universe .provider-universe-art,
+.provider-magnet .provider-magnet-art { transform: translateZ(26px); }
+.provider-card:hover .provider-orb,
+.provider-card:hover .provider-galaxy-art,
+.provider-card:hover .provider-universe-art,
+.provider-card:hover .provider-magnet-art { transform: translateZ(46px) scale(1.025); transition: transform .45s ease; }
+.provider-planet::after { background: linear-gradient(125deg, rgba(150,242,255,.3), transparent 24%, transparent 66%, rgba(48,141,255,.24)); }
+.provider-galaxy::before { background-image: radial-gradient(circle, #fff 0 1px, transparent 1.8px), radial-gradient(circle, #8abaff 0 1px, transparent 2px); background-size: 43px 37px, 83px 67px; }
+.provider-universe::before { background: radial-gradient(ellipse at 70% 55%, rgba(184,98,255,.35), transparent 30%), radial-gradient(ellipse at 22% 34%, rgba(26,168,255,.25), transparent 32%); filter: blur(14px); }
+.provider-magnet::before { background: repeating-radial-gradient(ellipse at center, transparent 0 18px, rgba(76,181,255,.12) 19px 20px, transparent 21px 36px); animation: field-ambient 6s ease-in-out infinite; }
+@keyframes seven-dust { 0% { transform: translate3d(-2%, -1%, 0) rotate(0deg); opacity: .34; } 50% { opacity: .8; } 100% { transform: translate3d(3%, 2%, 0) rotate(8deg); opacity: .46; } }
+@keyframes planet-backdrop { 0% { background-position: 28% 42%; filter: saturate(1); } 100% { background-position: 72% 58%; filter: saturate(1.35) brightness(1.08); } }
+@keyframes galaxy-backdrop { to { background-position: 100% 0, 0 100%, 0 0; } }
+@keyframes universe-backdrop { 0% { background-position: 70% 34%, 0 0; } 100% { background-position: 35% 66%, 100% 100%; } }
+@keyframes magnet-backdrop { 0% { background-position: 50% 50%, 0 0; } 100% { background-position: 42% 58%, 100% 100%; } }
+@keyframes field-ambient { 50% { transform: scale(1.12) rotate(12deg); opacity: .72; } }
+@media (prefers-reduced-motion: reduce) {
+  .provider-card, .provider-card::before { animation: none !important; }
+}
