@@ -24,6 +24,9 @@
     LOG: 'Log teks historis', UEVENT: 'Event uevent perangkat', PROC: 'Daftar PID cgroup (teks)', SIZE: 'Ukuran sektor perangkat (teks)',
   };
   function isVirtualRepo() { return state.repo === VIRTUAL_REPO || (state.repo === L_REPO && state.manifest?.virtual === true); }
+  // Repo `.L` selalu memakai indeks pohon nyata (folder & file repositori),
+  // termasuk saat dibuka dari File Manager di menu utama.
+  function isLRepo() { return state.repo === L_REPO; }
   function syncUrlPath() {
     if (!isVirtualRepo()) return;
     const target = `#fileManager${state.path ? `/${state.path}` : ''}`;
@@ -399,7 +402,8 @@
     const repo = repoNow(); state.manifest = null; state.entries = []; state.pageIndex = 0; state.pageCount = 0; state.path = ''; state.selected = null;
     renderBreadcrumbs(); renderAssessment(repo); renderTiles();
     let source = String(repo?.tree?.indexUrl || '');
-    if (repo?.fullName === L_REPO) source = VIRTUAL_INDEX_URL;
+    // `.L` memakai indeks pohon nyata (folder & file repositori), bukan shard virtual.
+    if (!source && repo?.fullName === L_REPO) source = 'data/trees/3cf0c9cf3dddc379/index.json';
     if (!/^data\/trees\/[a-f0-9]{16}\/index\.json$/.test(source)) {
       $('#fileTreeStatus').textContent = 'Indeks pohon belum tersedia pada snapshot.';
       return;
@@ -421,9 +425,9 @@
   let handlersBound = false;
   function virtualRepoEntry() {
     return {
-      name: '.L', fullName: L_REPO, url: 'https://github.com/planetbintang/.L', branch: 'io', visibility: 'virtual',
-      appType: 'Sub URL /.L — root virtual sistem (folder tertanam)', lastCommitAt: null,
-      tree: { state: 'complete', indexUrl: VIRTUAL_INDEX_URL, entryCount: 0, fileCount: 0, directoryCount: 0, totalBytes: 0 },
+      name: '.L', fullName: L_REPO, url: 'https://github.com/planetbintang/.L', branch: 'io', visibility: 'public',
+      appType: 'Repositori .L — folder & file pohon nyata di File Manager menu utama', lastCommitAt: null,
+      tree: { state: 'complete', indexUrl: 'data/trees/3cf0c9cf3dddc379/index.json', entryCount: 0, fileCount: 0, directoryCount: 0, totalBytes: 0 },
       staticAssessment: {},
     };
   }
@@ -433,11 +437,13 @@
     const list = [...(data.repositories || [])];
     const virtualEntry = virtualRepoEntry();
     const existingIndex = list.findIndex((repo) => repo.fullName === L_REPO);
-    if (existingIndex >= 0) list[existingIndex] = { ...list[existingIndex], ...virtualEntry, tree: virtualEntry.tree };
-    else list.unshift(virtualEntry);
+    if (existingIndex >= 0) {
+      // Pertahankan indeks pohon nyata repo `.L` dari snapshot; isi hanya metadata cadangan.
+      list[existingIndex] = { ...virtualEntry, ...list[existingIndex], tree: list[existingIndex].tree || virtualEntry.tree };
+    } else list.unshift(virtualEntry);
     state.data = { ...data, repositories: list };
     const select = $('#fileRepoSelect'); select.replaceChildren();
-    list.forEach((repo) => select.add(new Option(repo.fullName === L_REPO ? `${repo.fullName} — ROOT SISTEM /.L` : repo.fullName || repo.name, repo.fullName || repo.name)));
+    list.forEach((repo) => select.add(new Option(repo.fullName === L_REPO ? `${repo.fullName} — ROOT .L (folder & file repositori)` : repo.fullName || repo.name, repo.fullName || repo.name)));
     const preferred = list.find((repo) => repo.fullName === previousRepo) || list.find((repo) => repo.fullName === L_REPO) || list[0];
     state.repo = preferred?.fullName || '';
     if (state.repo) select.value = state.repo;
