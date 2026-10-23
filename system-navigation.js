@@ -55,7 +55,30 @@
   }
 
   function routeForWorkspaceView(view) { return workspaceRoutes.get(view) || 'projects'; }
-  function closeMenus() { menuDetails.forEach((menu) => { menu.open = false; }); }
+  function setMenuOpen(menu, open) {
+    if (!menu) return;
+    menu.open = Boolean(open);
+    menu.querySelector(':scope > summary')?.setAttribute('aria-expanded', String(Boolean(open)));
+  }
+  function closeMenus(except = null) {
+    menuDetails.forEach((menu) => { if (menu !== except) setMenuOpen(menu, false); });
+  }
+  menuDetails.forEach((menu) => {
+    const summary = menu.querySelector(':scope > summary');
+    if (!summary) return;
+    summary.setAttribute('aria-haspopup', 'menu');
+    summary.setAttribute('aria-expanded', 'false');
+    // Explicit handling keeps dropdowns reliable across browsers and responsive overflow layouts.
+    summary.addEventListener('click', (event) => {
+      event.preventDefault();
+      const next = !menu.open;
+      closeMenus(menu);
+      setMenuOpen(menu, next);
+    });
+    menu.addEventListener('toggle', () => {
+      summary.setAttribute('aria-expanded', String(menu.open));
+    });
+  });
 
   function applyRoute(name, options = {}) {
     const routeName = routes[name] ? name : 'system';

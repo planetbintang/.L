@@ -503,6 +503,8 @@ body {
 .fm-shortcut-icon { width:18px; height:18px; }
 .file-tile.is-directory .file-tile-icon img { width:20px; height:20px; }
 .file-tile.is-directory:hover .file-tile-icon img { filter: drop-shadow(0 3px 6px rgba(20, 93, 224, .46)); transform:translateY(-1px); }
+.topbar { position:relative; z-index:100; }
+.nav-dropdown-menu { z-index:200; pointer-events:auto; }
 @media (max-width:650px) {
   .topbar {
     display:flex;
@@ -524,4 +526,14 @@ body {
   .topbar .topbar-actions { flex:0 0 auto; gap:4px; }
   .topbar .topbar-actions .connection-state { display:none; }
   .topbar .topbar-actions .icon-button { padding:8px 7px; font-size:8px; }
+  .nav-dropdown-menu,
+  .nav-dropdown:last-child .nav-dropdown-menu {
+    position:fixed;
+    top:72px;
+    left:8px;
+    right:8px;
+    width:auto;
+    max-height:calc(100dvh - 84px);
+    z-index:300;
+  }
 }
