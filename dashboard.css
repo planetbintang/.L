@@ -585,3 +585,80 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .provider-card, .provider-card::before { animation: none !important; }
 }
+
+
+/* Header alignment pass: five dropdowns + three action controls share one control rail. */
+@media (min-width:651px) {
+  .topbar {
+    display:grid;
+    grid-template-columns:minmax(205px, auto) minmax(0, 1fr) auto;
+    grid-template-areas:"brand nav actions";
+    align-items:center;
+    column-gap:clamp(10px, 1.8vw, 28px);
+    overflow:visible;
+  }
+  .topbar .brand { grid-area:brand; align-self:center; }
+  .topbar .main-nav {
+    grid-area:nav;
+    display:grid;
+    grid-template-columns:repeat(5, minmax(64px, 1fr));
+    align-items:center;
+    justify-content:stretch;
+    gap:clamp(4px, .8vw, 12px);
+    width:100%;
+    height:44px;
+    overflow:visible;
+  }
+  .topbar .main-nav .nav-dropdown {
+    display:flex;
+    align-items:center;
+    justify-content:stretch;
+    width:100%;
+    min-width:0;
+    height:44px;
+  }
+  .topbar .main-nav .nav-dropdown > summary {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:38px;
+    min-height:38px;
+    box-sizing:border-box;
+    padding:8px 7px;
+    white-space:nowrap;
+  }
+  .topbar .topbar-actions {
+    grid-area:actions;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    height:44px;
+    gap:clamp(5px, .7vw, 10px);
+    min-width:max-content;
+  }
+  .topbar .topbar-actions .icon-button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:38px;
+    min-height:38px;
+    box-sizing:border-box;
+    white-space:nowrap;
+  }
+  .topbar .connection-state { align-items:center; white-space:nowrap; }
+}
+@media (min-width:651px) and (max-width:1100px) {
+  .topbar { grid-template-columns:minmax(170px, auto) minmax(0, 1fr) auto; column-gap:8px; padding-inline:14px; }
+  .topbar .main-nav { grid-template-columns:repeat(5, minmax(58px, 1fr)); gap:3px; }
+  .topbar .main-nav .nav-dropdown > summary { font-size:9px; padding-inline:3px; }
+  .topbar .topbar-actions { gap:3px; }
+  .topbar .topbar-actions .connection-state { display:none; }
+  .topbar .topbar-actions .icon-button { padding-inline:7px; font-size:8px; }
+}
+@media (max-width:650px) {
+  .topbar .main-nav .nav-dropdown > summary,
+  .topbar .topbar-actions .icon-button { height:34px; min-height:34px; box-sizing:border-box; }
+  .topbar .main-nav .nav-dropdown > summary { display:flex; align-items:center; justify-content:center; }
+  .topbar .topbar-actions { align-items:center; }
+}
