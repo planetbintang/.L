@@ -109,3 +109,76 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .fm-load-more{align-self:flex-start;margin:3px 2px 8px;font:8px var(--mono);color:#145de0;border-color:#b9ccf5}
 .fm-load-more:hover{background:#eaf1ff;border-color:#145de0}
 .fm-load-more[hidden]{display:none!important}
+
+
+/* High-resolution white/blue texture — visual treatment only; content and system marks stay unchanged. */
+body {
+  background-image:
+    radial-gradient(ellipse 72rem 38rem at 78% -8%, rgba(20, 93, 224, .055), transparent 72%),
+    radial-gradient(ellipse 58rem 34rem at 8% 36%, rgba(55, 132, 244, .025), transparent 72%),
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(20, 93, 224, .026) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(20, 93, 224, .026) 47px 48px);
+  background-attachment: fixed;
+}
+.topbar {
+  background: rgba(255, 255, 255, .91);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+.hero.panel {
+  border-color: rgba(20, 93, 224, .28);
+  box-shadow: 0 24px 72px rgba(22, 73, 151, .075);
+  background-image:
+    radial-gradient(ellipse 34rem 24rem at 82% 48%, rgba(34, 111, 232, .085), transparent 72%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(20, 93, 224, .024) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(20, 93, 224, .024) 39px 40px);
+}
+.hero::before {
+  border-color: rgba(20, 93, 224, .18);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .72;
+  background-image:
+    radial-gradient(circle at 82% 49%, transparent 0 86px, rgba(20, 93, 224, .15) 86.5px 87.5px, transparent 88px 122px, rgba(20, 93, 224, .085) 122.5px 123.5px, transparent 124px 158px, rgba(20, 93, 224, .055) 158.5px 159.5px, transparent 160px),
+    radial-gradient(circle at 82% 49%, rgba(20, 93, 224, .16) .7px, transparent .95px);
+  background-size: auto, 9px 9px;
+  mask-image: linear-gradient(90deg, transparent 17%, #000 55%);
+}
+.hero-copy,
+.hero-logo,
+.hero-corner {
+  z-index: 1;
+}
+.hero h1 em {
+  color: #315f9e;
+}
+.logo-outline {
+  border-color: rgba(20, 93, 224, .34);
+  box-shadow: 0 10px 32px rgba(20, 93, 224, .075);
+}
+.metric-card {
+  border-color: rgba(20, 93, 224, .2);
+  background-image:
+    linear-gradient(135deg, rgba(20, 93, 224, .035), transparent 58%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(20, 93, 224, .018) 31px 32px);
+}
+.metric-card-dark {
+  border-color: #145de0;
+  background-color: #145de0;
+  background-image:
+    radial-gradient(ellipse at 100% 0%, rgba(255, 255, 255, .18), transparent 62%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(255, 255, 255, .075) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(255, 255, 255, .065) 47px 48px);
+}
+@media (max-width: 650px) {
+  .hero::after {
+    background-position: center, center;
+    mask-image: linear-gradient(90deg, transparent 5%, #000 40%);
+    opacity: .58;
+  }
+}
