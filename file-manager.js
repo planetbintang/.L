@@ -12,7 +12,69 @@
   const VIRTUAL_REPO = 'planetbintang/.SYSTEM';
   const L_REPO = 'planetbintang/.L';
   const VIRTUAL_INDEX_URL = 'data/trees/0000000000000000/index.json';
-  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache'];
+  // Folder tingkat root yang dikelola pada ROOT .L — termasuk folder sistem
+  // virtual (/proc /sys /media /acct /pro /config /cache /system_ext) yang
+  // selalu ditampilkan di samping folder nyata repositori (.github data scripts).
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext'];
+  const VIRTUAL_ROOT_META = {
+    proc: { desc: 'Virtual filesystem proses (pid, stat, cmdline)', items: 3 },
+    sys: { desc: 'Sysfs perangkat & kernel (class, bus, devices)', items: 3 },
+    media: { desc: 'Mount point penyimpanan eksternal', items: 2 },
+    acct: { desc: 'Cgroup accounting proses Android', items: 2 },
+    pro: { desc: 'Folder konfigurasi profil sistem', items: 2 },
+    config: { desc: 'Konfigurasi terpusat sistem & layanan', items: 2 },
+    cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
+    system_ext: { desc: 'Partisi system_ext (produk & ODM)', items: 2 },
+  };
+  function isVirtualRootName(name) { return VIRTUAL_SHORTCUTS.includes(name) && name !== 'data'; }
+  function virtualRootEntry(name) {
+    const meta = VIRTUAL_ROOT_META[name] || { desc: 'Folder virtual root — manajemen terpusat struktur sistem', items: 0 };
+    return {
+      path: name, type: 'directory', mode: '040755', sha: '', size: 0, sizeKnown: true,
+      title: `/${name}`, desc: meta.desc, items: meta.items,
+      function: `Folder virtual root /${name} — sub URL File Manager dengan pengaturan terpusat`,
+      subUrl: `#fileManager/${name}`, virtualRoot: true,
+    };
+  }
+  function virtualChildren(path) {
+    const children = {
+      proc: [
+        { path: 'proc/self', type: 'directory', mode: '041777', function: 'Symlink proses saat ini' },
+        { path: 'proc/stat', type: 'file', mode: '0100444', size: 0, sizeKnown: false, codeContent: 'cpu  864210 21930 152110 5210480 30210 4180 2990 0 0 0\ncpu0 108210 2710 19010 651310 3790 520 370 0 0 0\nintr 184122330 42 0 0 ...\nctxt 92114832\nbtime 1761200000\nprocesses 31245\nprocs_running 3\nprocs_blocked 0' },
+        { path: 'proc/version', type: 'file', mode: '0100444', size: 84, sizeKnown: true, codeContent: 'Linux version 5.15.149-android13-8-00001 (build@android-build) #1 SMP PREEMPT' },
+      ],
+      sys: [
+        { path: 'sys/class', type: 'directory', mode: '040755', function: 'Kelas perangkat (net, power_supply, usb)' },
+        { path: 'sys/bus', type: 'directory', mode: '040755', function: 'Bus perangkat (platform, i2c, usb)' },
+        { path: 'sys/kernel', type: 'directory', mode: '040755', function: 'Parameter kernel (mm, sched)' },
+      ],
+      media: [
+        { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Storage emulated pengguna (0..N)' },
+        { path: 'media/asec', type: 'directory', mode: '040770', function: 'Container aplikasi terenkripsi' },
+      ],
+      acct: [
+        { path: 'acct/current', type: 'file', mode: '0100644', size: 28, sizeKnown: true, codeContent: '/uid_10123/pid_4567/apps' },
+        { path: 'acct/debug', type: 'file', mode: '0100644', size: 0, sizeKnown: false, codeContent: '# cgroup accounting debug (tidak tersedia saat runtime)' },
+      ],
+      pro: [
+        { path: 'pro/profiles', type: 'directory', mode: '040755', function: 'Profil perangkat & kebijakan' },
+        { path: 'pro/pro.conf', type: 'file', mode: '0100644', size: 96, sizeKnown: true, codeContent: '[profile]\ndefault = base\nfallback = safe\nmode = managed' },
+      ],
+      config: [
+        { path: 'config/services', type: 'directory', mode: '040755', function: 'Konfigurasi layanan sistem' },
+        { path: 'config/system.conf', type: 'file', mode: '0100644', size: 120, sizeKnown: true, codeContent: 'manager centralized=true\nroot=/\nauto-mount=proc,sys\nlog-level=info' },
+      ],
+      cache: [
+        { path: 'cache/recovery', type: 'directory', mode: '040770', function: 'Antrean perintah recovery (update_engine)' },
+        { path: 'cache/global.config', type: 'file', mode: '0100644', size: 64, sizeKnown: true, codeContent: 'wipe_on_boot=false\nverbose_log=false' },
+      ],
+      system_ext: [
+        { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext' },
+        { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
+      ],
+    };
+    return children[path] || [];
+  }
   const EXT_FUNCTION = {
     APK: 'Paket aplikasi Android (Java/Kotlin terdex)', SO: 'Pustaka bersama native ELF (C/C++)', JAR: 'Pustaka/framework Java',
     XML: 'Konfigurasi/manifest berbasis teks', RC: 'Skrip init service (Android init language)', PROP: 'Pasangan kunci=nilai properti',
@@ -27,6 +89,16 @@
   // Repo `.L` selalu memakai indeks pohon nyata (folder & file repositori),
   // termasuk saat dibuka dari File Manager di menu utama.
   function isLRepo() { return state.repo === L_REPO; }
+  // Root .L = gabungan pohon nyata repositori + folder sistem virtual tingkat root.
+  function lRootVirtualNames() {
+    const existing = new Set(Object.keys(state.manifest?.directories || {}));
+    return VIRTUAL_SHORTCUTS.filter((name) => !existing.has(name));
+  }
+  function isLVirtualPath(path) {
+    if (!isLRepo()) return false;
+    const top = String(path || '').split('/')[0];
+    return Boolean(top) && isVirtualRootName(top);
+  }
   function syncUrlPath() {
     if (!isVirtualRepo()) return;
     const target = `#fileManager${state.path ? `/${state.path}` : ''}`;
@@ -94,7 +166,19 @@
   function kind(entry) { return entry.type === 'directory' ? 'DIR' : entry.type === 'submodule' ? 'SUB' : ext(entry.path) || 'FILE'; }
   function treeStateLabel(tree) { return tree?.state === 'complete' ? 'LENGKAP' : tree?.state === 'partial' ? 'PARSIAL' : tree?.state === 'empty' ? 'KOSONG' : 'TIDAK TERSEDIA'; }
   function currentDirectory() { return state.manifest?.directories?.[state.path] || { entryCount: 0, pages: [] }; }
-  function isDirectory(path) { return Boolean(state.manifest?.directories && Object.hasOwn(state.manifest.directories, path)); }
+  function isDirectory(path) {
+    if (Boolean(state.manifest?.directories && Object.hasOwn(state.manifest.directories, path))) return true;
+    // Folder sistem virtual tingkat root .L juga dianggap direktori valid.
+    return isLVirtualPath(path);
+  }
+
+  function lVirtualEntriesFor(prefix) {
+    const top = String(prefix || '').split('/')[0];
+    if (!top) return VIRTUAL_SHORTCUTS.filter((name) => isVirtualRootName(name)).map(virtualRootEntry);
+    if (!isVirtualRootName(top)) return [];
+    if (!prefix || prefix === top) return [];
+    return virtualChildren(top).filter((item) => item.path.startsWith(`${prefix}/`) && !item.path.slice(prefix.length + 1).includes('/'));
+  }
 
   // ---- Pengaturan & tampilan terpusat per folder (localStorage) ----
   const SETTINGS_STORE = 'planetbintang.fm.virtual-settings.v1';
@@ -147,23 +231,32 @@
       const directory = currentDirectory();
       $('#fileTreeStatus').textContent = `SUB URL /.L · ROOT SISTEM · ${fmt.format(manifest.fileCount || 0)} file · ${fmt.format(manifest.directoryCount || 0)} folder · ${humanSize(manifest.totalBytes || 0)} metadata`;
       $('#fileIntegrityStatus').textContent = 'Struktur virtual: LENGKAP · shard SHA-256 terverifikasi · bukan pohon Git';
-      $('#fileActivityStatus').textContent = 'Manajemen terpusat: /data /proc /sys /media /acct /pro /config /cache';
+      $('#fileActivityStatus').textContent = 'Manajemen terpusat: /data /proc /sys /media /acct /pro /config /cache /system_ext';
       if (state.selected) return;
       $('#fileSelectionTitle').textContent = 'Pusat Manajemen Folder Sistem (.L)';
       const panel = $('#fileSelectionData'); panel.replaceChildren();
       addInfo(panel, 'Jenis sistem', 'Sub URL repository `.L` — root virtual File Manager');
       addInfo(panel, 'Basis sub URL', 'planetbintang.github.io/.L/ → path `/`');
       addInfo(panel, 'Folder tingkat root', VIRTUAL_SHORTCUTS.map((name) => `/${name}`).join(' · '));
-      addInfo(panel, 'Total entri terkelola', `${fmt.format(manifest.entryCount || 0)} path`);
-      addInfo(panel, 'Folder terkelola', fmt.format(Object.keys(manifest.directories || {}).length - 1));
-      addInfo(panel, 'Isi path aktif', `${fmt.format(directory.entryCount || 0)} item${state.path ? ` · /${state.path}` : ' · /'}`);
+      const managedDirs = new Set(Object.keys(manifest.directories || {}));
+      lRootVirtualNames().forEach((name) => managedDirs.add(name));
+      addInfo(panel, 'Total entri terkelola', `${fmt.format((manifest.entryCount || 0) + virtualChildren('__root__').length)} path`);
+      addInfo(panel, 'Folder terkelola', fmt.format(Math.max(0, managedDirs.size - 1)));
+      addInfo(panel, 'Isi path aktif', `${fmt.format((directory.entryCount || 0) + (state.path ? 0 : lRootVirtualNames().length))} item${state.path ? ` · /${state.path}` : ' · /'}`);
       addInfo(panel, 'URL aktif saat ini', `${window.location.origin}${window.location.pathname}#fileManager${state.path ? `/${state.path}` : ''}`, true);
       const block = el('div', undefined, 'fm-candidate-list');
       block.append(el('span', 'Fungsi tiap folder root (klik judul untuk membuka)', 'fm-info-label'));
       const list = el('ul');
-      const roots = Array.isArray(manifest.roots) && manifest.roots.length
-        ? manifest.roots
-        : VIRTUAL_SHORTCUTS.map((name) => ({ path: name, title: `/${name}`, desc: 'Folder virtual root — manajemen terpusat struktur sistem', items: 0 }));
+      // Folder root = daftar shortcut sistem (VIRTUAL_SHORTCUTS) + folder nyata repositori.
+      const realDirNames = Object.keys(manifest.directories || {}).filter((name) => name && !name.includes('/'));
+      const rootOrder = [...new Set([...VIRTUAL_SHORTCUTS, ...realDirNames])];
+      const roots = rootOrder.map((name) => {
+        if (isVirtualRootName(name)) return virtualRootEntry(name);
+        const fromManifest = Array.isArray(manifest.roots) ? manifest.roots.find((item) => basename(item.path) === name) : null;
+        if (fromManifest) return fromManifest;
+        const dir = manifest.directories?.[name];
+        return { path: name, title: `/${name}`, desc: 'Folder nyata repositori .L — pohon Git terverifikasi', items: dir?.entryCount || 0 };
+      });
       roots.forEach((root) => {
         const li = el('li');
         const link = el('button', `${root.title} (${fmt.format(root.items || 0)} item)`, 'fm-root-link');
@@ -270,6 +363,47 @@
       syncUrlPath();
       return;
     }
+    // Folder sistem virtual pada ROOT .L (di luar pohon Git nyata): tampilkan
+    // inspector gaya manajemen terpusat — fungsi, sub URL, & pengaturan folder.
+    if (isLRepo() && isLVirtualPath(entry.path)) {
+      const vEntry = entry.virtualRoot ? entry : (() => {
+        const top = String(entry.path).split('/')[0];
+        const child = virtualChildren(top).find((item) => item.path === entry.path);
+        return child || { ...entry, function: `Item dalam folder virtual /${top}` };
+      })();
+      const merged = { ...vEntry, path: entry.path, type: entry.type || vEntry.type };
+      addInfo(panel, 'Fungsi', merged.function || extensionFunction(merged.path));
+      addInfo(panel, 'Ekstensi', merged.type === 'directory' ? '— (folder)' : ext(merged.path) || 'tanpa ekstensi');
+      if (merged.type === 'directory') {
+        const kids = virtualChildren(merged.path);
+        addInfo(panel, 'Isi folder', `${fmt.format(kids.length)} item · manajemen terpusat aktif`);
+        addInfo(panel, 'Sub URL folder', merged.subUrl || `#fileManager/${merged.path}`, true);
+      } else {
+        addInfo(panel, 'Ukuran metadata', sizeText(merged));
+      }
+      addInfo(panel, 'Mode', merged.mode || '—', true);
+      addInfo(panel, 'Root virtual', `/${String(merged.path).split('/')[0]}`);
+      if (merged.type === 'directory') {
+        const heading = el('div', undefined, 'fm-candidate-list');
+        heading.append(el('span', 'PENGATURAN TERPUSAT FOLDER', 'fm-info-label'));
+        const controls = el('div', undefined, 'fm-folder-settings');
+        const openButton = el('button', 'Buka sebagai sub URL ↗', 'text-button fm-suburl-open');
+        openButton.type = 'button';
+        openButton.addEventListener('click', () => goTo(merged.path));
+        controls.append(openButton);
+        heading.append(controls);
+        panel.append(heading);
+      } else if (merged.codeContent) {
+        const block = el('div', undefined, 'fm-candidate-list');
+        block.append(el('span', 'ISI KODE CONTOH (sesuai nama/fungsi file)', 'fm-info-label'));
+        block.append(el('pre', merged.codeContent, 'fm-code-preview'));
+        panel.append(block);
+      }
+      panel.append(el('p', 'Folder sistem virtual tingkat root `.L`: bukan bagian pohon Git repositori; ditampilkan terpusat di File Manager menu utama.', 'fm-inspector-disclaimer'));
+      $('#fileOpenGitHub').hidden = true;
+      $('#fileOpenEditorButton').hidden = true;
+      return;
+    }
     if (entry.type !== 'directory') addInfo(panel, 'Ukuran metadata Git', sizeText(entry));
     addInfo(panel, 'Mode Git', entry.mode || '—', true);
     addInfo(panel, 'Git object SHA', entry.sha || '—', true);
@@ -325,8 +459,11 @@
     const viewSettings = isVirtualRepo() ? readFolderSettings(state.path) : { dense: false, folderIcon: true };
     pane.classList.toggle('is-dense', Boolean(viewSettings.dense));
     const query = state.query.toLocaleLowerCase('id');
-    const items = sortItems(state.entries.filter((item) => !query || item.path.toLocaleLowerCase('id').includes(query)));
-    renderShortcuts(state.entries);
+    // Root .L: sisipkan folder sistem virtual di samping entri pohon nyata.
+    const lRootVirtual = (isLRepo() && !state.path) ? lVirtualEntriesFor('') : [];
+    const allItems = [...state.entries, ...lRootVirtual];
+    const items = sortItems(allItems.filter((item) => !query || item.path.toLocaleLowerCase('id').includes(query)));
+    renderShortcuts(allItems);
     $('#fileEmpty').hidden = items.length > 0;
     $('#fileEmpty').textContent = state.query ? 'Tidak ada kecocokan pada halaman folder yang sudah dimuat.' : 'Folder ini kosong atau semua nama sensitif disaring.';
     for (const item of items) {
@@ -381,6 +518,17 @@
   }
 
   async function loadDirectory(path) {
+    if (isLRepo() && isLVirtualPath(path)) {
+      // Folder sistem virtual: isi statis dari definisi root .L.
+      state.requestId += 1; state.loading = false;
+      state.path = path; state.query = ''; state.selected = null;
+      const top = String(path).split('/')[0];
+      state.entries = path === top ? virtualChildren(top) : lVirtualEntriesFor(path);
+      state.pageIndex = 0; state.pageCount = 0;
+      $('#fileSearchInput').value = '';
+      renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles();
+      return;
+    }
     if (!isDirectory(path)) { $('#fileTreeStatus').textContent = `Path tidak ditemukan: /${path}`; return; }
     state.requestId += 1; state.loading = false;
     state.path = path; state.query = ''; state.selected = null; state.entries = []; state.pageIndex = 0;
