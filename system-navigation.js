@@ -33,6 +33,7 @@
   const syncButton = $('#syncHubRefresh');
   let currentRoute = 'system';
 
+  const SYSTEM_ROOTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache'];
   function routeFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
     if (!hash || hash === 'top' || hash === 'overview') return 'system';
@@ -42,7 +43,15 @@
       const route = hash.slice('platform/'.length);
       return routes[route]?.group === 'platform' ? route : null;
     }
-    return ({ fileManager: 'file-manager', repositories: 'repositories', hosts: 'hosts' })[hash] || null;
+    // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
+    if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
+    return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;
+  }
+
+  function filePathFromHash() {
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (!hash.startsWith('fileManager/')) return '';
+    return hash.slice('fileManager/'.length).split('/').filter((part) => part && part !== '.' && part !== '..').join('/');
   }
 
   function routeForWorkspaceView(view) { return workspaceRoutes.get(view) || 'projects'; }
@@ -50,12 +59,15 @@
 
   function applyRoute(name, options = {}) {
     const routeName = routes[name] ? name : 'system';
-    const route = routes[routeName];
+    let route = routes[routeName];
     const { updateUrl = true, scroll = true } = options;
+    // Sub URL folder sistem: #fileManager/<path> tetap berada pada rute file-manager.
+    if (name === 'file-manager') route = { ...route, hash: `#fileManager${filePathFromHash() ? `/${filePathFromHash()}` : ''}` };
     const changed = currentRoute !== routeName;
     currentRoute = routeName;
     document.body.dataset.systemRoute = routeName;
     pages.forEach((page) => { page.hidden = page.dataset.systemPage !== route.group; });
+    if (route.group === 'file-manager') window.PBFileManager?.setPath(filePathFromHash());
     navLinks.forEach((link) => {
       if (link.dataset.systemRoute === routeName) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
@@ -169,7 +181,7 @@
     finally { syncButton.disabled = false; syncButton.textContent = 'Muat ulang snapshot'; }
   });
 
-  window.PBSystemNavigation = { navigate: (name) => applyRoute(name, { scroll: true }) };
+  window.PBSystemNavigation = { navigate: (name) => applyRoute(name, { scroll: true }), systemRoots: SYSTEM_ROOTS };
   updateHub();
   if (window.PBSystemSnapshot?.data) {
     const statuses = window.PBSystemSnapshot.consumers || {};
