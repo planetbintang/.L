@@ -177,7 +177,7 @@
     setConnection('Memuat snapshot', false);
     try {
       const suffix = cacheBust ? `?t=${Date.now()}` : '';
-      const response = await fetch(`./data/repositories.json${suffix}`, { cache: cacheBust ? 'no-store' : 'default', credentials: 'omit' });
+      const response = await fetch(`./data/repositories.json${suffix}`, { cache: cacheBust ? 'no-store' : 'no-cache', credentials: 'omit' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (!Array.isArray(data.repositories)) throw new Error('Format snapshot tidak valid');

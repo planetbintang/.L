@@ -161,7 +161,7 @@
   });
   writeLine('Planetbintang Root Shell · browser safe mode', 'system');
   writeLine("Ketik 'help'. Hanya perintah allowlist baca-saja yang berjalan; shell OS/kode bebas tidak tersedia di GitHub Pages.", 'system');
-  fetch('./data/repositories.json', { credentials: 'omit' }).then((response) => {
+  fetch('./data/repositories.json', { credentials: 'omit', cache: 'no-cache' }).then((response) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return response.json();
   }).then((data) => { snapshot = data; writeLine(`Snapshot siap: ${number(data.repositoryCount)} repo.`, 'system'); })
