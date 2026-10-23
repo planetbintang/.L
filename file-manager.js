@@ -4,11 +4,15 @@
   const fmt = new Intl.NumberFormat('id-ID');
   const state = { data: null, repo: '', path: '', query: '', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
 
-  // Root virtual sistem: folder /data /pro /media /acct /config /sys /system_ext /cache
-  // dengan sub-folder, file (nama + ekstensi + fungsi) dan manajemen terpusat per folder.
+  // Root virtual sistem pada repository `.L` (sub URL planetbintang.github.io/.L/):
+  // folder /data /proc /sys /media /acct /pro /config /cache — masing-masing adalah
+  // sub-URL File Manager (`#fileManager/<folder>`), berisi sub-folder khas sistem,
+  // file dengan nama/ekstensi/fungsi serta isi kode contoh, dan tampilan+pengaturan
+  // terpusat per folder.
   const VIRTUAL_REPO = 'planetbintang/.SYSTEM';
+  const L_REPO = 'planetbintang/.L';
   const VIRTUAL_INDEX_URL = 'data/trees/0000000000000000/index.json';
-  const VIRTUAL_SHORTCUTS = ['data', 'pro', 'media', 'acct', 'config', 'sys', 'system_ext', 'cache'];
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache'];
   const EXT_FUNCTION = {
     APK: 'Paket aplikasi Android (Java/Kotlin terdex)', SO: 'Pustaka bersama native ELF (C/C++)', JAR: 'Pustaka/framework Java',
     XML: 'Konfigurasi/manifest berbasis teks', RC: 'Skrip init service (Android init language)', PROP: 'Pasangan kunci=nilai properti',
@@ -19,7 +23,12 @@
     KO: 'Modul kernel loadable', LIST: 'Daftar teks baris-per-item', ZIP: 'Arsip terkompresi', DAT: 'Data terstruktur biner/teks',
     LOG: 'Log teks historis', UEVENT: 'Event uevent perangkat', PROC: 'Daftar PID cgroup (teks)', SIZE: 'Ukuran sektor perangkat (teks)',
   };
-  function isVirtualRepo() { return state.repo === VIRTUAL_REPO; }
+  function isVirtualRepo() { return state.repo === VIRTUAL_REPO || (state.repo === L_REPO && state.manifest?.virtual === true); }
+  function syncUrlPath() {
+    if (!isVirtualRepo()) return;
+    const target = `#fileManager${state.path ? `/${state.path}` : ''}`;
+    if (window.location.hash !== target) window.history.replaceState({ systemRoute: 'file-manager' }, '', target);
+  }
   function extensionFunction(path) {
     const e = ext(path);
     if (e && EXT_FUNCTION[e]) return EXT_FUNCTION[e];
@@ -81,11 +90,40 @@
   }
   function kind(entry) { return entry.type === 'directory' ? 'DIR' : entry.type === 'submodule' ? 'SUB' : ext(entry.path) || 'FILE'; }
   function treeStateLabel(tree) { return tree?.state === 'complete' ? 'LENGKAP' : tree?.state === 'partial' ? 'PARSIAL' : tree?.state === 'empty' ? 'KOSONG' : 'TIDAK TERSEDIA'; }
-  function sortItems(items) {
-    return [...items].sort((a, b) => Number(b.type === 'directory') - Number(a.type === 'directory') || basename(a.path).localeCompare(basename(b.path), 'id', { sensitivity: 'base' }));
-  }
   function currentDirectory() { return state.manifest?.directories?.[state.path] || { entryCount: 0, pages: [] }; }
   function isDirectory(path) { return Boolean(state.manifest?.directories && Object.hasOwn(state.manifest.directories, path)); }
+
+  // ---- Pengaturan & tampilan terpusat per folder (localStorage) ----
+  const SETTINGS_STORE = 'planetbintang.fm.virtual-settings.v1';
+  function readAllSettings() {
+    try { return JSON.parse(localStorage.getItem(SETTINGS_STORE) || '{}') || {}; } catch { return {}; }
+  }
+  function readFolderSettings(path) {
+    const all = readAllSettings();
+    return { sort: 'dir-first', folderIcon: true, dense: false, ...(all[path] || {}) };
+  }
+  function saveFolderSettings(path, patch) {
+    try {
+      const all = readAllSettings();
+      all[path] = { ...readFolderSettings(path), ...patch };
+      localStorage.setItem(SETTINGS_STORE, JSON.stringify(all));
+    } catch { /* penyimpanan penuh/diblokir — pengaturan tetap di memori */ }
+    renderTiles();
+  }
+  function sortItems(items) {
+    const settings = isVirtualRepo() ? readFolderSettings(state.path) : null;
+    if (settings) {
+      const list = [...items];
+      if (settings.sort === 'size') {
+        return list.sort((a, b) => Number(b.type === 'directory') - Number(a.type === 'directory')
+          || (Number(b.size || 0) - Number(a.size || 0)) || basename(a.path).localeCompare(basename(b.path), 'id'));
+      }
+      if (settings.sort === 'name') {
+        return list.sort((a, b) => basename(a.path).localeCompare(basename(b.path), 'id', { sensitivity: 'base' }));
+      }
+    }
+    return [...items].sort((a, b) => Number(b.type === 'directory') - Number(a.type === 'directory') || basename(a.path).localeCompare(basename(b.path), 'id', { sensitivity: 'base' }));
+  }
 
   function addInfo(parent, label, value, mono = false) {
     const row = el('div', undefined, 'fm-info-row');
@@ -104,32 +142,35 @@
     if (isVirtualRepo()) {
       const manifest = state.manifest || {};
       const directory = currentDirectory();
-      $('#fileTreeStatus').textContent = `ROOT VIRTUAL SISTEM · ${fmt.format(manifest.fileCount || 0)} file · ${fmt.format(manifest.directoryCount || 0)} folder · ${humanSize(manifest.totalBytes || 0)} metadata`;
+      $('#fileTreeStatus').textContent = `SUB URL /.L · ROOT SISTEM · ${fmt.format(manifest.fileCount || 0)} file · ${fmt.format(manifest.directoryCount || 0)} folder · ${humanSize(manifest.totalBytes || 0)} metadata`;
       $('#fileIntegrityStatus').textContent = 'Struktur virtual: LENGKAP · shard SHA-256 terverifikasi · bukan pohon Git';
-      $('#fileActivityStatus').textContent = 'Manajemen terpusat: /data /pro /media /acct /config /sys /system_ext /cache';
+      $('#fileActivityStatus').textContent = 'Manajemen terpusat: /data /proc /sys /media /acct /pro /config /cache';
       if (state.selected) return;
-      $('#fileSelectionTitle').textContent = 'Pusat Manajemen Folder Sistem';
+      $('#fileSelectionTitle').textContent = 'Pusat Manajemen Folder Sistem (.L)';
       const panel = $('#fileSelectionData'); panel.replaceChildren();
-      addInfo(panel, 'Jenis sistem', 'Root virtual File Manager (folder sistem tertanam)');
+      addInfo(panel, 'Jenis sistem', 'Sub URL repository `.L` — root virtual File Manager');
+      addInfo(panel, 'Basis sub URL', 'planetbintang.github.io/.L/ → path `/`');
       addInfo(panel, 'Folder tingkat root', VIRTUAL_SHORTCUTS.map((name) => `/${name}`).join(' · '));
       addInfo(panel, 'Total entri terkelola', `${fmt.format(manifest.entryCount || 0)} path`);
       addInfo(panel, 'Folder terkelola', fmt.format(Object.keys(manifest.directories || {}).length - 1));
       addInfo(panel, 'Isi path aktif', `${fmt.format(directory.entryCount || 0)} item${state.path ? ` · /${state.path}` : ' · /'}`);
+      addInfo(panel, 'URL aktif saat ini', `${window.location.origin}${window.location.pathname}#fileManager${state.path ? `/${state.path}` : ''}`, true);
       const block = el('div', undefined, 'fm-candidate-list');
-      block.append(el('span', 'Fungsi tiap folder root', 'fm-info-label'));
+      block.append(el('span', 'Fungsi tiap folder root (klik judul untuk membuka)', 'fm-info-label'));
       const list = el('ul');
-      [
-        ['/data — data aplikasi & sistem persisten (local, misc, system, anr, log)',],
-        ['/pro — partisi proprietary vendor (bin, lib, app, framework, overlay)',],
-        ['/media — penyimpanan pengguna (DCIM, Documents, Music, Pictures, Video)',],
-        ['/acct — cgroup akun proses per-UID (u0_aXX, system, root)',],
-        ['/config — konfigurasi jaringan, init, sound, bluetooth',],
-        ['/sys — sysfs kernel (block, class, devices, power, module, firmware)',],
-        ['/system_ext — partisi OEM (etc, lib64, priv-app, framework)',],
-        ['/cache — cache sistem (recovery, dalvik-cache, downloads)',],
-      ].forEach(([line]) => list.append(el('li', line)));
+      const roots = Array.isArray(manifest.roots) && manifest.roots.length
+        ? manifest.roots
+        : VIRTUAL_SHORTCUTS.map((name) => ({ path: name, title: `/${name}`, desc: 'Folder virtual root — manajemen terpusat struktur sistem', items: 0 }));
+      roots.forEach((root) => {
+        const li = el('li');
+        const link = el('button', `${root.title} (${fmt.format(root.items || 0)} item)`, 'fm-root-link');
+        link.type = 'button';
+        link.addEventListener('click', () => goTo(root.path));
+        li.append(link, el('span', ` ${root.desc || ''}`));
+        list.append(li);
+      });
       block.append(list);
-      panel.append(block, el('p', 'Setiap folder memakai ikon folder File Manager yang sama untuk semua jenis nama folder. Isi blob tidak dipublikasikan; hanya metadata nama, ekstensi, ukuran, dan fungsi.', 'fm-inspector-disclaimer'));
+      panel.append(block, el('p', 'Setiap folder memakai ikon folder File Manager yang sama untuk semua jenis nama folder. Isi file berupa kode contoh sesuai nama/fungsi folder; blob repo nyata tidak dipublikasikan.', 'fm-inspector-disclaimer'));
       $('#fileOpenGitHub').hidden = true;
       return;
     }
@@ -171,14 +212,59 @@
       if (entry.type === 'directory') {
         const sub = state.manifest?.directories?.[entry.path];
         addInfo(panel, 'Isi folder', sub ? `${fmt.format(sub.entryCount)} item · manajemen terpusat aktif` : 'belum termuat');
+        addInfo(panel, 'Sub URL folder', entry.subUrl || `#fileManager/${entry.path}`, true);
       } else {
         addInfo(panel, 'Ukuran metadata', sizeText(entry));
       }
       addInfo(panel, 'Mode', entry.mode || '—', true);
       addInfo(panel, 'Root virtual', `/${String(entry.path).split('/')[0]}`);
-      panel.append(el('p', 'Struktur virtual: nama folder khas sistem, file dengan ekstensi dan fungsinya, dikelola terpusat dari satu tampilan File Manager.', 'fm-inspector-disclaimer'));
+      // Pengaturan & tampilan terpusat per folder: preferensi lokal tersimpan di localStorage.
+      if (entry.type === 'directory') {
+        const settings = readFolderSettings(entry.path);
+        const heading = el('div', undefined, 'fm-candidate-list');
+        heading.append(el('span', 'PENGATURAN TERPUSAT FOLDER', 'fm-info-label'));
+        const controls = el('div', undefined, 'fm-folder-settings');
+        const sortLabel = el('label', undefined, 'fm-setting-row');
+        const sortSelect = document.createElement('select');
+        [['name', 'Urut: nama'], ['dir-first', 'Urut: folder dulu'], ['size', 'Urut: ukuran']]
+          .forEach(([value, text]) => sortSelect.add(new Option(text, value)));
+        sortSelect.value = settings.sort;
+        sortSelect.addEventListener('change', () => saveFolderSettings(entry.path, { sort: sortSelect.value }));
+        sortLabel.append(el('span', 'Urutan tampilan'), sortSelect);
+        const iconRow = el('label', undefined, 'fm-setting-row');
+        const iconToggle = document.createElement('input');
+        iconToggle.type = 'checkbox'; iconToggle.checked = settings.folderIcon !== false;
+        iconToggle.addEventListener('change', () => saveFolderSettings(entry.path, { folderIcon: iconToggle.checked }));
+        iconRow.append(el('span', 'Ikon folder File Manager'), iconToggle);
+        const denseRow = el('label', undefined, 'fm-setting-row');
+        const denseToggle = document.createElement('input');
+        denseToggle.type = 'checkbox'; denseToggle.checked = Boolean(settings.dense);
+        denseToggle.addEventListener('change', () => { saveFolderSettings(entry.path, { dense: denseToggle.checked }); renderTiles(); });
+        denseRow.append(el('span', 'Tampilan padat'), denseToggle);
+        const openButton = el('button', 'Buka sebagai sub URL ↗', 'text-button fm-suburl-open');
+        openButton.type = 'button';
+        openButton.addEventListener('click', () => goTo(entry.path));
+        controls.append(sortLabel, iconRow, denseRow, openButton);
+        heading.append(controls);
+        panel.append(heading);
+      } else if (entry.codeContent) {
+        const block = el('div', undefined, 'fm-candidate-list');
+        block.append(el('span', 'ISI KODE CONTOH (sesuai nama/fungsi file)', 'fm-info-label'));
+        const pre = el('pre', entry.codeContent, 'fm-code-preview');
+        const copy = el('button', 'Salin isi kode', 'text-button');
+        copy.type = 'button';
+        copy.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(entry.codeContent); copy.textContent = 'Tersalin ✓'; }
+          catch { copy.textContent = 'Gagal menyalin'; }
+          setTimeout(() => { copy.textContent = 'Salin isi kode'; }, 1600);
+        });
+        block.append(pre, copy);
+        panel.append(block);
+      }
+      panel.append(el('p', 'Struktur virtual repository `.L`: folder = sub URL dengan pengaturan terpusat; file memiliki nama, ekstensi, fungsi, dan isi kode contoh.', 'fm-inspector-disclaimer'));
       $('#fileOpenGitHub').hidden = true;
       $('#fileOpenEditorButton').hidden = true;
+      syncUrlPath();
       return;
     }
     if (entry.type !== 'directory') addInfo(panel, 'Ukuran metadata Git', sizeText(entry));
@@ -233,17 +319,22 @@
 
   function renderTiles() {
     const pane = $('#fileTiles'); pane.replaceChildren();
+    const viewSettings = isVirtualRepo() ? readFolderSettings(state.path) : { dense: false, folderIcon: true };
+    pane.classList.toggle('is-dense', Boolean(viewSettings.dense));
     const query = state.query.toLocaleLowerCase('id');
     const items = sortItems(state.entries.filter((item) => !query || item.path.toLocaleLowerCase('id').includes(query)));
     renderShortcuts(state.entries);
     $('#fileEmpty').hidden = items.length > 0;
     $('#fileEmpty').textContent = state.query ? 'Tidak ada kecocokan pada halaman folder yang sudah dimuat.' : 'Folder ini kosong atau semua nama sensitif disaring.';
     for (const item of items) {
-      const tile = el('button', undefined, `file-tile${state.selected === item.path ? ' is-selected' : ''}${item.type === 'directory' ? ' is-directory' : ''}`);
+      const tile = el('button', undefined, `file-tile${state.selected === item.path ? ' is-selected' : ''}${item.type === 'directory' ? ' is-directory' : ''}${viewSettings.dense ? ' is-dense' : ''}`);
       tile.type = 'button'; tile.setAttribute('role', 'listitem'); tile.title = `/${item.path}${item.type === 'directory' ? '/' : ''}`;
       tile.setAttribute('aria-label', `${item.type === 'directory' ? 'Folder' : 'File'} ${item.path}`);
       const icon = el('span', undefined, 'file-tile-icon');
-      if (item.type === 'directory') { const img = document.createElement('img'); img.src = './file-manager-icon.png'; img.alt = ''; icon.append(img); }
+      if (item.type === 'directory') {
+        if (viewSettings.folderIcon !== false) { const img = document.createElement('img'); img.src = './file-manager-icon.png'; img.alt = ''; icon.append(img); }
+        else icon.append(el('span', 'DIR', 'file-type-mark'));
+      }
       else icon.append(el('span', kind(item), 'file-type-mark'));
       tile.append(icon, el('span', basename(item.path), 'file-tile-name'), el('span', item.type === 'directory' ? 'FOLDER' : `${kind(item)} · ${sizeText(item)}`, 'file-tile-meta'));
       tile.addEventListener('click', () => {
@@ -292,7 +383,7 @@
     state.path = path; state.query = ''; state.selected = null; state.entries = []; state.pageIndex = 0;
     const directory = currentDirectory(); state.pageCount = directory.pages?.length || 0;
     $('#fileSearchInput').value = '';
-    renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles();
+    renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles(); syncUrlPath();
     if (state.pageCount) await loadNextPage();
     else renderTiles();
   }
@@ -308,7 +399,7 @@
     const repo = repoNow(); state.manifest = null; state.entries = []; state.pageIndex = 0; state.pageCount = 0; state.path = ''; state.selected = null;
     renderBreadcrumbs(); renderAssessment(repo); renderTiles();
     let source = String(repo?.tree?.indexUrl || '');
-    if (isVirtualRepo()) source = VIRTUAL_INDEX_URL;
+    if (repo?.fullName === L_REPO) source = VIRTUAL_INDEX_URL;
     if (!/^data\/trees\/[a-f0-9]{16}\/index\.json$/.test(source)) {
       $('#fileTreeStatus').textContent = 'Indeks pohon belum tersedia pada snapshot.';
       return;
@@ -318,7 +409,7 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const manifest = await parseResponse(response);
       if (requestId !== state.requestId || requestedRepo !== state.repo) return;
-      if (manifest.repository !== state.repo || !manifest.directories || !Object.hasOwn(manifest.directories, '')) throw new Error('Manifest tidak valid');
+      if (manifest.repository !== state.repo && !(state.repo === L_REPO && manifest.repository === L_REPO)) throw new Error('Manifest tidak valid');
       state.manifest = manifest;
       const normalized = normalizePath(targetPath);
       await loadDirectory(normalized && isDirectory(normalized) ? normalized : '');
@@ -330,8 +421,8 @@
   let handlersBound = false;
   function virtualRepoEntry() {
     return {
-      name: '.SYSTEM', fullName: VIRTUAL_REPO, url: '', branch: 'main', visibility: 'virtual',
-      appType: 'Root virtual sistem (folder tertanam)', lastCommitAt: null,
+      name: '.L', fullName: L_REPO, url: 'https://github.com/planetbintang/.L', branch: 'io', visibility: 'virtual',
+      appType: 'Sub URL /.L — root virtual sistem (folder tertanam)', lastCommitAt: null,
       tree: { state: 'complete', indexUrl: VIRTUAL_INDEX_URL, entryCount: 0, fileCount: 0, directoryCount: 0, totalBytes: 0 },
       staticAssessment: {},
     };
@@ -340,11 +431,14 @@
   async function init(data, preserveLocation = true) {
     const previousRepo = state.repo; const previousPath = state.path;
     const list = [...(data.repositories || [])];
-    if (!list.some((repo) => repo.fullName === VIRTUAL_REPO)) list.unshift(virtualRepoEntry());
+    const virtualEntry = virtualRepoEntry();
+    const existingIndex = list.findIndex((repo) => repo.fullName === L_REPO);
+    if (existingIndex >= 0) list[existingIndex] = { ...list[existingIndex], ...virtualEntry, tree: virtualEntry.tree };
+    else list.unshift(virtualEntry);
     state.data = { ...data, repositories: list };
     const select = $('#fileRepoSelect'); select.replaceChildren();
-    list.forEach((repo) => select.add(new Option(repo.fullName === VIRTUAL_REPO ? `${repo.fullName} — ROOT SISTEM /` : repo.fullName || repo.name, repo.fullName || repo.name)));
-    const preferred = list.find((repo) => repo.fullName === previousRepo) || list.find((repo) => repo.fullName === VIRTUAL_REPO) || list.find((repo) => repo.fullName === 'planetbintang/.L') || list[0];
+    list.forEach((repo) => select.add(new Option(repo.fullName === L_REPO ? `${repo.fullName} — ROOT SISTEM /.L` : repo.fullName || repo.name, repo.fullName || repo.name)));
+    const preferred = list.find((repo) => repo.fullName === previousRepo) || list.find((repo) => repo.fullName === L_REPO) || list[0];
     state.repo = preferred?.fullName || '';
     if (state.repo) select.value = state.repo;
     if (!handlersBound) {
