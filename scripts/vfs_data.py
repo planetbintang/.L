@@ -114,6 +114,19 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("anr", "DIR", None, "040775", "Laporan Application Not Responding", ""),
         ("tombstones", "DIR", None, "040775", "Dump memori crash native", ""),
         ("log", "DIR", None, "040775", "Log persisten sistem dan radio", ""),
+        ("app", "DIR", None, "040751", "APK terinstal per-paket (split .apk/.dex/.lib)", ""),
+        ("app-private", "DIR", None, "040771", "Folder privat tiap paket (db, cache, lib)", ""),
+        ("dalvik-cache", "DIR", None, "040771", "Artefak AOT dex per-abivarian (arm64)", ""),
+        ("user", "DIR", None, "040751", "Profil pengguna per-ID (0 = system)", ""),
+        ("resource-cache", "DIR", None, "040775", "Cache resource APK (drawable, theme)", ""),
+        ("backup", "DIR", None, "040770", "Data cadangan Full-Backup/transport", ""),
+        ("secure", "DIR", None, "040700", "Data aman: keystore & gatekeeper", ""),
+        ("connctl", "DIR", None, "040700", "Socket kontrol koneksi jaringan", ""),
+        ("ss", "DIR", None, "040711", "Storage sandbox untuk shell/sandboxed apps", ""),
+        ("property", "DIR", None, "040771", "Shared memory properti sistem (contexts)", ""),
+        ("factory", "DIR", None, "040775", "Data factory-test / kalibrasi", ""),
+        ("bluetooth_share", "DIR", None, "040770", "Temp share file antar perangkat BT", ""),
+        ("vendor", "DIR", None, "040775", "Data partisi vendor (hal config, firmware)", ""),
         ("package.xml", "FILE", 8192, "100644", "Manifest daftar paket terpasang (XML)",
          '<?xml version="1.0" encoding="utf-8"?>\n'
          '<packages version="1">\n'
@@ -136,6 +149,19 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("irq", "DIR", None, "040755", "Statistik interupsi per-CPU", ""),
         ("net", "DIR", None, "040755", "Info jaringan: tcp, dev, route", ""),
         ("sysvipc", "DIR", None, "040755", "Semaphore/shm/msgqueue IPC aktif", ""),
+        ("sys", "DIR", None, "040755", "Kernel tunables sysctl (vm, net, kernel)", ""),
+        ("scsi", "DIR", None, "040755", "Host & device SCSI/mmcblk", ""),
+        ("tty", "DIR", None, "040755", "Driver terminal: driver/tty/&lt;dev&gt;", ""),
+        ("zoneinfo", "DIR", None, "040755", "Info zona memory/NUMA kernel", ""),
+        ("self", "DIR", None, "040755", "Symlink proses pemanggil (cmdline, fd, stat)", ""),
+        ("thread-self", "DIR", None, "040755", "Symlink thread pemanggil saat ini", ""),
+        ("kcore", "FILE", 0, "100400", "Core image fisik kernel (ELF dibaca langsung)", ""),
+        ("kmsg_bytes", "FILE", 16, "100200", "Batas buffer printk (tulis)", "1048576\n"),
+        ("consoles", "FILE", 64, "100444", "Daftar console aktif (major minor)", "144 ttyMSM0\n136 pts/0\n"),
+        ("devices", "FILE", 512, "100444", "Device karakter/blok terdaftar",
+         "Character devices:\n  1 virtual\n  5 /dev/tty\nBlock devices:\n 179 mmcblk\n"),
+        ("ioports", "FILE", 128, "100444", "Port I/O (kosong pada aarch64)", "No I/O ports on aarch64\n"),
+        ("loadavg", "FILE", 32, "100444", "Rata-rata beban 1/5/15 menit", "4.12 3.88 3.41 2/1284 5678\n"),
         ("cmdline", "FILE", 128, "100644", "Baris perintah boot kernel",
          '/init second_stage androidboot.hardware=qcom androidboot.serialno=PB1024 selinux=1\n'),
         ("cpuinfo", "FILE", 2048, "100644", "Daftar core & arsitektur CPU",
@@ -167,6 +193,14 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("module", "DIR", None, "040755", "Modul kernel termuat + parameters", ""),
         ("firmware", "DIR", None, "040755", "Firmware perangkat (bios, memmap)", ""),
         ("android", "DIR", None, "040755", "Node binder/rpc & property Android", ""),
+        ("bus", "DIR", None, "040755", "Bus perangkat: pci, platform, usb, spi, i2c", ""),
+        ("dev", "DIR", None, "040755", "Node karakter/blok major:minor (devtmpfs)", ""),
+        ("driver", "DIR", None, "040755", "Driver terikat: gpu, input, rtc", ""),
+        ("hypervisor", "DIR", None, "040755", "Info hypervisor (gunyah/kvm)", ""),
+        ("namespaces", "DIR", None, "040755", "Namespace cgroup/pid/net aktif", ""),
+        ("pnp", "DIR", None, "040755", "Perangkat Plug-and-Play (PNP) bus", ""),
+        ("scsi_host", "DIR", None, "040755", "Host SCSI/UFS (state, can_queue)", ""),
+        ("vm", "DIR", None, "040755", "Statistik VM: stat, compact, hugepages", ""),
         ("busy", "FILE", 2, "100644", "Flag busy CPU (0/1)", "0\n"),
         ("kernel_version", "FILE", 64, "100644", "Versi kernel (teks)", "5.10.198-android12-9\n"),
     ],
@@ -180,6 +214,10 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("Ringtones", "DIR", None, "040775", "Nada dering sistem (ogg)", ""),
         ("Notifications", "DIR", None, "040775", "Suara notifikasi (ogg)", ""),
         ("Audiobooks", "DIR", None, "040775", "Buku audio (mp3)", ""),
+        ("Alarms", "DIR", None, "040775", "Suara alarm (ogg/mp3)", ""),
+        ("Podcasts", "DIR", None, "040775", "Episode podcast (mp3)", ""),
+        ("Movies", "DIR", None, "040775", "Film tersimpan (mp4/mkv)", ""),
+        ("Books", "DIR", None, "040775", "Ebook (epub/pdf)", ""),
     ],
     "acct": [
         ("u0_a89", "DIR", None, "040751", "Cgroup UID 10089 (com.planetbintang.files)", ""),
@@ -187,6 +225,10 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("system", "DIR", None, "040751", "Cgroup proses milik akun system", ""),
         ("root", "DIR", None, "040751", "Cgroup proses milik root", ""),
         ("readahead", "DIR", None, "040755", "Data prefetch boot", ""),
+        ("uid_1000", "DIR", None, "040751", "Cgroup agregat UID 1000 (system_server)", ""),
+        ("uid_2000", "DIR", None, "040751", "Cgroup agregat UID 2000 (shell)", ""),
+        ("logd", "DIR", None, "040751", "Cgroup daemon logger", ""),
+        ("stats", "DIR", None, "040751", "Cgroup statsd (pelaporan statistik)", ""),
     ],
     "pro": [
         ("bin", "DIR", None, "040775", "Utilitas proprietary vendor (ELF)", ""),
@@ -194,6 +236,11 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("app", "DIR", None, "040775", "Aplikasi sistem bawaan vendor (.apk)", ""),
         ("framework", "DIR", None, "040775", "Framework Java OEM (.jar)", ""),
         ("overlay", "DIR", None, "040775", "Overlay RRO resource sistem (.apk)", ""),
+        ("etc", "DIR", None, "040755", "Konfigurasi vendor: vintf, permissions, init", ""),
+        ("firmware", "DIR", None, "040755", "Firmware SoC (modem, dsp, gpu)", ""),
+        ("media", "DIR", None, "040755", "Aset media bootanimation & audio vendor", ""),
+        ("usr", "DIR", None, "040755", "share/keychain/idmap vendor", ""),
+        ("lib64", "DIR", None, "040775", "Pustaka 64-bit vendor (.so arm64)", ""),
         ("build.prop", "FILE", 4096, "100644", "Properti build vendor (key=value)",
          'ro.product.vendor.brand=Planetbintang\nro.product.vendor.model=PB-Root\n'
          'ro.build.version.sdk=34\nvendor.display.enable_default_color_mode=1\n'),
@@ -204,6 +251,10 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("init", "DIR", None, "040755", "Skrip init stage awal (rc, teapot)", ""),
         ("sound", "DIR", None, "040755", "Konfigurasi mixer ALSA", ""),
         ("bluetooth", "DIR", None, "040755", "Pairing & cache bluetooth", ""),
+        ("vintf", "DIR", None, "040755", "Manifest HAL/compatibility (VINTF XML)", ""),
+        ("permissions", "DIR", None, "040755", "File permission fitur (xml /etc)", ""),
+        ("selinux", "DIR", None, "040755", "Konteks & policy SELinux (file_contexts)", ""),
+        ("apns", "DIR", None, "040755", "Konfigurasi APN operator (xml)", ""),
         ("hosts", "FILE", 256, "100644", "Pemetaan nama host statis",
          '127.0.0.1\tlocalhost\n::1\tlocalhost\n192.168.4.1\tplanetbintang.ap\n'),
         ("resolv.conf", "FILE", 128, "100644", "Resolver DNS", "nameserver 8.8.8.8\nnameserver 1.1.1.1\noptions timeout:2 attempts:3\n"),
@@ -216,6 +267,10 @@ SYSTEM_TREE: dict[str, list[tuple]] = {
         ("dalvik-cache", "DIR", None, "040775", "Hasil kompilasi dex → odex/vdex", ""),
         ("downloads", "DIR", None, "040775", "Cache unduhan sistem", ""),
         ("clockstats", "DIR", None, "040775", "Statistik waktu antar-boot", ""),
+        ("recovery_marker", "DIR", None, "040775", "Marker & bitmap boot recovery", ""),
+        ("oem", "DIR", None, "040775", "Cache provisioning OEM (setup wizard)", ""),
+        ("vold", "DIR", None, "040775", "Cache volume daemon (adoptable/encrypt)", ""),
+        ("checkin", "DIR", None, "040775", "Laporan check-in statsd tertunda", ""),
         ("usagestat.xml", "FILE", 1024, "100644", "Statistik pemakaian app (XML)",
          '<?xml version="1.0" encoding="utf-8"?>\n<usagestats version="1" endTime="3600">\n'
          '  <container pkg="com.planetbintang.files" lastTimeUsed="3500" totalTimeForeground="120000"/>\n</usagestats>\n'),
@@ -439,4 +494,278 @@ SAMPLE_FILES: dict[str, list[tuple]] = {
                      'on property:sys.boot_completed=1\n    start vendor.teapot\n')],
     "cache/recovery": [("last_kmsg", "FILE", 2048, "100644", "Kmsg saat recovery (.log-free text)",
                        '[recovery] applying package update...\n')],
+
+    # ---- folder fisik nyata tambahan: /data (partisi userdata Android) ----
+    "data/app": [
+        ("~~PlN3tB1nt4ng~==com.planetbintang.files-1", "DIR", None, "040751",
+         "Paket terinstal Planet Files (base.apk + split + lib)", ""),
+        ("~~QwErTyUiOp~==com.vendor.camera-2", "DIR", None, "040751",
+         "Paket terinstal Kamera vendor (base.apk + split config.arm64_v8a)", ""),
+    ],
+    "data/app/~~PlN3tB1nt4ng~==com.planetbintang.files-1": [
+        ("base.apk", "FILE", 8388608, "100644", "APK utama paket (classes.dex + resources.arsc)",
+         'AndroidManifest.xml: package="com.planetbintang.files" versionCode=12 versionName="2.1"\n'
+         'uses-sdk minSdk=24 targetSdk=34\nMETA-INF/CERT.SF signature v2 (RSA 2048)\n'),
+        ("split_config.arm64_v8a.apk", "FILE", 2097152, "100644", "Split ABI native arm64",
+         'lib/arm64-v8a/libpbcore.so (embedded)\nfbe=true abi=arm64-v8a density=-1 locale=-1\n'),
+        ("oat/arm64/base.odex", "FILE", 4194304, "100644", "Artefak AOT base.apk (.odex)",
+         "ODEX040 magic dex\nquickened methods=1204 field lookups=318\n"),
+        ("oat/arm64/base.vdex", "FILE", 1048576, "100644", "Verifikasi vdex base.apk",
+         "VDEX006 header: dex_count=1 verifier_deps=sha1\n"),
+        ("package_status", "FILE", 64, "100644", "Status instalasi paket", "installed verified enabled\n"),
+    ],
+    "data/app/~~QwErTyUiOp~==com.vendor.camera-2": [
+        ("base.apk", "FILE", 15728640, "100644", "APK kamera vendor",
+         'AndroidManifest.xml: package="com.vendor.camera" sharedUserId not set\n'
+         'uses-permission CAMERA RECORD_AUDIO ACCESS_FINE_LOCATION\n'),
+        ("split_config.xxhdpi.apk", "FILE", 1048576, "100644", "Split resource densitas xxhdpi",
+         'res/drawable-xxhdpi/* (embedded)\nfbe=false abi=- density=xxhdpi\n'),
+    ],
+    "data/app-private": [
+        ("com.planetbintang.files", "DIR", None, "040771", "Data privat paket (db + prefs + cache)", ""),
+    ],
+    "data/app-private/com.planetbintang.files": [
+        ("databases", "DIR", None, "040771", "Database SQLite privat aplikasi", ""),
+        ("shared_prefs", "DIR", None, "040771", "SharedPreferences privat", ""),
+        ("cache", "DIR", None, "040771", "Cache internal aplikasi", ""),
+        ("code_cache", "DIR", None, "040771", "JIT profile & dex hasil compile-on-install", ""),
+        ("files", "DIR", None, "040771", "File internal aplikasi", ""),
+        ("lib", "DIR", None, "040771", "Symlink pustaka native bawaan APK", ""),
+    ],
+    "data/app-private/com.planetbintang.files/databases": [
+        ("index.db", "FILE", 4096, "100600", "Indeks pohon file aplikasi (.db)",
+         "CREATE TABLE nodes(path TEXT PRIMARY KEY, type INT, size INT);\n"
+         "INSERT INTO nodes VALUES('/data/local/files.txt',0,128);\n"),
+    ],
+    "data/app-private/com.planetbintang.files/shared_prefs": [
+        ("settings.xml", "FILE", 256, "100600", "Preferensi privat aplikasi",
+         "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map>\n"
+         "  <string name=\"theme\">dark</string>\n  <long name=\"last_sync\" value=\"1761220800000\"/>\n</map>\n"),
+    ],
+    "data/app-private/com.planetbintang.files/files": [
+        ("journal.log", "FILE", 1024, "100600", "Jurnal aktivitas aplikasi",
+         "2026-10-23T04:17:02Z SYNC start repo=planetbintang/.L\n2026-10-23T04:17:09Z SYNC done entries=168\n"),
+    ],
+    "data/dalvik-cache": [
+        ("arm64", "DIR", None, "040771", "Artefak AOT untuk abivariant arm64", ""),
+    ],
+    "data/dalvik-cache/arm64": [
+        ("system@framework@services.jar@classes.odex", "FILE", 8388608, "100644", "AOT services.jar",
+         "ODEX040 arch=arm64 dependencies=framework.jar boot.oat map=\n"),
+        ("system@bin@cmd@classes.vdex", "FILE", 262144, "100644", "Verifikasi vdex binari cmd",
+         "VDEX006 dex_count=1 quickening_metadata=none\n"),
+    ],
+    "data/user": [
+        ("0", "DIR", None, "040771", "Root storage pengguna utama (id 0)", ""),
+        ("10", "DIR", None, "040771", "Root storage pengguna kedua (id 10)", ""),
+    ],
+    "data/user/0": [
+        ("com.planetbintang.files", "DIR", None, "040771", "Home data aplikasi utk user 0", ""),
+    ],
+    "data/user/0/com.planetbintang.files": [
+        ("no_backup", "DIR", None, "040771", "Data yang dikecualikan dari backup", ""),
+        ("app_SGAM", "DIR", None, "040771", "Data in-app security guard", ""),
+    ],
+    "data/resource-cache": [
+        ("data@app@~~PlN3tB1nt4ng~==com.planetbintang.files-1@base.apk@idmap", "FILE", 65536, "100660",
+         "IDMap overlay resource APK (.idmap)", "HIDL idmap header v3 target=/pro/overlay/FrameworksResTarget.apk\n"),
+    ],
+    "data/backup": [
+        ("com.planetbintang.files.tar", "FILE", 32768, "100600", "Arsip Full-Backup paket (.tar)",
+         "ANDROID_BACKUP v6 pkg=com.planetbintang.files includes=databases,shared_prefs\n"),
+    ],
+    "data/secure": [
+        ("gatekeeper", "DIR", None, "040700", "Enklave gatekeeper per-user", ""),
+        ("keystore", "DIR", None, "040700", "Keybox keystore2 per-user", ""),
+        ("locksettings.db", "FILE", 4096, "100600", "State kunci layar (.db)",
+         "CREATE TABLE locksettings(device_id INTEGER, lock_quality INT);\nINSERT INTO locksettings VALUES(0,2);\n"),
+    ],
+    "data/connctl": [
+        ("connctl.sock", "FILE", 0, "140700", "Socket unix kontrol ConnectivityManager", ""),
+    ],
+    "data/ss": [
+        ("adopted_1d975fc4-0e51-4f22-a60e-52b0f9ab5172", "DIR", None, "040711",
+         "Volume adopted (UUID) sandbox apps", ""),
+    ],
+    "data/property": [
+        ("default_contexts", "FILE", 512, "100660", "Label SELinux utk properti ctx",
+         "/dev/__properties/u:object_r:system_prop:s0\n/dev/__properties/ap:u:object_r:apex_prop:s0\n"),
+    ],
+    "data/factory": [
+        ("sensor_calibration.bin", "FILE", 2048, "100660", "Kalibrasi sensor produksi",
+         "MAG_CAL offset=[12,-3,45] scale=[1.002,0.999,1.001]\n"),
+    ],
+    "data/bluetooth_share": [
+        ("incoming", "DIR", None, "040770", "Folder file Bluetooth masuk", ""),
+    ],
+    "data/vendor": [
+        ("hal", "DIR", None, "040775", "Data HAL vendor (camera, sensors)", ""),
+        ("firmware", "DIR", None, "040775", "Firmware unduhan runtime (modem)", ""),
+    ],
+    "data/vendor/hal": [
+        ("camera_stats.log", "FILE", 4096, "100660", "Statistik HAL kamera",
+         "open_session=1 fps=30 gain=1.03 ae_state=converged\n"),
+    ],
+    # ---- folder fisik nyata tambahan: /proc ----
+    "proc/sys": [
+        ("vm", "DIR", None, "040755", "Tunables memori virtual", ""),
+        ("net", "DIR", None, "040755", "Tunables jaringan (ipv4/ipv6/core)", ""),
+        ("kernel", "DIR", None, "040755", "Tunables kernel (hostname, panic)", ""),
+    ],
+    "proc/sys/vm": [
+        ("swappiness", "FILE", 2, "100644", "Kecenderungan swap (0-200)", "100\n"),
+        ("overcommit_memory", "FILE", 2, "100644", "Kebijakan overcommit", "0\n"),
+    ],
+    "proc/sys/net/ipv4": [
+        ("ip_forward", "FILE", 2, "100644", "Forwarding IPv4 on/off", "0\n"),
+        ("tcp_congestion_control", "FILE", 8, "100644", "Algoritma TCP default", "cubic\n"),
+    ],
+    "proc/sys/kernel": [
+        ("hostname", "FILE", 16, "100644", "Nama host sistem", "planetbintang\n"),
+        ("osrelease", "FILE", 32, "100644", "Rilis kernel", "5.10.198-android12-9\n"),
+    ],
+    "proc/scsi": [
+        ("scsi", "DIR", None, "040755", "Device SCSI per-host (0/1/...)", ""),
+    ],
+    "proc/tty": [
+        ("drivers", "FILE", 256, "100644", "Driver tty terdaftar",
+         "slave\ttty\t/\t362\tyes\nttyS\tserial\t/\t64\tno\t\n"),
+        ("driver/usbserial-0", "FILE", 128, "100644", "Node driver usbserial port 0",
+         "USB serial converter: vendor=2e04 product=c001 port_count=1\n"),
+    ],
+    "proc/zoneinfo": [
+        ("node0", "FILE", 512, "100644", "Ringkasan zona NUMA node 0",
+         "Node 0, zone   Normal   pages free 230123 min 1024 low 2048 high 4096\n"),
+    ],
+    "proc/self": [
+        ("cmdline", "FILE", 32, "100644", "Perintah proses pemanggil", "/system/bin/sh\0-ls\0"),
+        ("fd", "DIR", None, "040755", "Deskriptor file terbuka (symlink 0,1,2,...)", ""),
+    ],
+    "proc/thread-self": [
+        ("stat", "FILE", 128, "100644", "Statistik thread pemanggil",
+         "5678 (sh) R 1 5678 5678 0 -1 4198656 120 0 0 0 5 2 0 0 20 0 1 0 999\n"),
+    ],
+    # ---- folder fisik nyata tambahan: /sys ----
+    "sys/bus": [
+        ("platform", "DIR", None, "040755", "Bus platform device (soc peripherals)", ""),
+        ("usb", "DIR", None, "040755", "Bus USB: devices & drivers", ""),
+    ],
+    "sys/dev": [
+        ("block", "DIR", None, "040755", "Symlink blok by major:minor", ""),
+    ],
+    "sys/driver": [
+        ("gpu", "DIR", None, "040755", "Driver GPU (drm card0)", ""),
+    ],
+    "sys/hypervisor": [
+        ("version", "FILE", 16, "100644", "Versi hypervisor", "gunyah-1.2\n"),
+    ],
+    "sys/namespaces": [
+        ("cgroup", "DIR", None, "040755", "Namespace cgroup aktif", ""),
+    ],
+    "sys/pnp": [
+        ("00:00", "DIR", None, "040755", "Device PNP 00:00 (pnpbios)", ""),
+    ],
+    "sys/scsi_host": [
+        ("host0", "DIR", None, "040755", "Host UFSHCI (state, can_queue)", ""),
+    ],
+    "sys/vm": [
+        ("stat", "FILE", 256, "100644", "Statistik halaman VM",
+         "pgpgin 1245000 pgpgout 982000 fault 4521000 majflt 1200 pgscan 340000\n"),
+    ],
+    "sys/block/mmcblk0/mmcblk0p12": [
+        ("size", "FILE", 16, "100644", "Ukuran partisi data (sektor)", "117440512\n"),
+    ],
+    "sys/class/graphics": [
+        ("fb0", "DIR", None, "040755", "Framebuffer utama (virtual_size)", ""),
+    ],
+    "sys/devices/virtual": [
+        ("graphics", "DIR", None, "040755", "Perangkat virtual: fb0, tty", ""),
+    ],
+    "sys/fs/cgroup/memory": [
+        ("memory.limit_in_bytes", "FILE", 16, "100644", "Batas memory root cgroup", "9223372036854771712\n"),
+    ],
+    # ---- folder fisik nyata tambahan: /media ----
+    "media/0": [
+        ("Internal storage", "DIR", None, "040775", "Mount volume utama (emulated)", ""),
+    ],
+    "media/0/Internal storage": [
+        ("DCIM", "DIR", None, "040775", "Salinan mount DCIM via FUSE", ""),
+        ("Download", "DIR", None, "040775", "Salinan mount Download via FUSE", ""),
+    ],
+    # ---- folder fisik nyata tambahan: /acct ----
+    "acct/uid_1000": [
+        ("cgroup.procs", "FILE", 64, "100644", "PID agregat UID 1000", "1200\n1201\n1240\n1290\n"),
+    ],
+    "acct/uid_2000": [
+        ("cgroup.procs", "FILE", 32, "100644", "PID agregat UID 2000", "4500\n"),
+    ],
+    "acct/logd": [
+        ("cgroup.procs", "FILE", 16, "100644", "PID logd", "900\n"),
+    ],
+    "acct/stats": [
+        ("cpuacct.usage", "FILE", 16, "100644", "Akumulasi CPU ns statsd", "18422330000\n"),
+    ],
+    # ---- folder fisik nyata tambahan: /pro ----
+    "pro/etc": [
+        ("vintf", "DIR", None, "040755", "Fragment manifest VINTF", ""),
+        ("permissions", "DIR", None, "040755", "Permission feature vendor", ""),
+        ("init.hardware.rc", "FILE", 1024, "100644", "Trigger HAL hardware (.rc)",
+         'on property:vendor.hal_camera=ready\n    start vendor.cameraserver\n'),
+    ],
+    "pro/etc/vintf": [
+        ("manifest.xml", "FILE", 4096, "100644", "Manifest HAL vendor (VINTF)",
+         '<manifest version="2.0" type="device">\n  <hal format="aidl">\n'
+         '    <name>android.hardware.camera.provider</name><version>1</version>\n'
+         '    <interface>ICameraProvider/default</interface>\n  </hal>\n</manifest>\n'),
+    ],
+    "pro/firmware": [
+        ("modem.mbn", "FILE", 1048576, "100644", "Firmware modem DSP (.mbn)",
+         "QCDT MBN header magic=0x4D424E00 image=mdm9207\n"),
+        ("adsp.b01", "FILE", 524288, "100644", "Segment audio DSP (.bNN)", "DTAG01 signed segment adsp\n"),
+    ],
+    "pro/media": [
+        ("bootanimation.zip", "FILE", 2097152, "100644", "Animasi boot (zip part0/part1)",
+         "PK\\x03\\x04 part0/desc.txt count=84 fps=30\n"),
+    ],
+    "pro/usr": [
+        ("keychain", "DIR", None, "040755", "Sertifikat CA vendor", ""),
+        ("idmap2", "DIR", None, "040755", "Cache idmap2 overlay", ""),
+    ],
+    "pro/lib64": [
+        ("libvndfwk_detect_jni.qti.so", "FILE", 32768, "100644", "Deteksi framework vendor JNI",
+         "// vndfwk_detect_jni.c\nint VendorDetect(void){ return __system_property_get(\"ro.vendor.api_level\", b); }\n"),
+    ],
+    # ---- folder fisik nyata tambahan: /config ----
+    "config/vintf": [
+        ("compatibility_matrix.xml", "FILE", 2048, "100644", "Matriks kompatibilitas VINTF",
+         '<compatibility-matrix version="4.0" type="framework">\n  <hal format="hidl" optional="false">\n'
+         '    <name>android.hidl.allocator</name><version>1.0</version>\n  </hal>\n</compatibility-matrix>\n'),
+    ],
+    "config/permissions": [
+        ("android.hardware.camera.xml", "FILE", 512, "100644", "Feature permission kamera",
+         '<permissions><feature name="android.hardware.camera.any"/><uses-permission name="android.permission.CAMERA"/></permissions>\n'),
+    ],
+    "config/selinux": [
+        ("file_contexts", "FILE", 4096, "100644", "Label path → konteks SELinux",
+         '/data(/.*)?          u:object_r:system_data_file:s0\n/pro(/.*)?            u:object_r:vendor_file:s0\n'),
+    ],
+    "config/apns": [
+        ("apns-conf.xml", "FILE", 8192, "100644", "Daftar APN operator",
+         '<apn carrier="Telkomsel" mcc="510" mnc="10" apn="internet" type="default,supl"/>\n'),
+    ],
+    # ---- folder fisik nyata tambahan: /cache ----
+    "cache/recovery_marker": [
+        ("boot-recovery", "FILE", 32, "100644", "Marker boot ke recovery", "recovery\n--update_engine\n"),
+    ],
+    "cache/oem": [
+        ("setup_done.dat", "FILE", 16, "100644", "Penanda provisioning selesai", "done=1\n"),
+    ],
+    "cache/vold": [
+        ("metadata.bin", "FILE", 1024, "100600", "Metadata volume adoptable",
+         "STORAGE_TYPE=TYPE_ADOPTABLE uuid=1d975fc4-0e51-4f22-a60e-52b0f9ab5172\n"),
+    ],
+    "cache/checkin": [
+        ("checkin.pb", "FILE", 512, "100660", "Buffer check-in statsd (protobuf)",
+         "StatsLog: buffer 12 events tag=MOBILE_DATA sample_rate=1.0\n"),
+    ],
 }
