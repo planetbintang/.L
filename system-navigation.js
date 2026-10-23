@@ -124,23 +124,30 @@
     const meta = $('#syncHubMeta');
     if (!data) {
       if (meta) meta.textContent = 'Snapshot belum tersedia di browser ini.';
-      $('#syncHubDashboard').textContent = 'Menunggu';
     } else {
       const parsedDate = data.updatedAt ? new Date(data.updatedAt) : null;
       const date = parsedDate && !Number.isNaN(parsedDate.getTime()) ? new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(parsedDate) + ' UTC' : 'waktu tidak tercatat';
       const count = data.repositoryCount || data.repositories?.length || 0;
       const sha = data.dataSha256 ? ` · SHA ${data.dataSha256.slice(0, 12)}` : '';
       if (meta) meta.textContent = `${count} repo · ${date}${sha}`;
-      $('#syncHubDashboard').textContent = 'Tersedia';
     }
     const statuses = window.PBSystemSnapshot?.consumers || {};
-    $('#syncHubWorkspace').textContent = statuses.workspace === 'ready' ? 'Tersinkron' : statuses.workspace === 'error' ? 'Periksa' : 'Memuat';
-    $('#syncHubFiles').textContent = statuses['file-manager'] === 'ready' ? 'Tersinkron' : statuses['file-manager'] === 'error' ? 'Periksa' : 'Memuat';
-    $('#syncHubPlatform').textContent = statuses['platform-view'] === 'ready' ? 'Tersinkron' : statuses['platform-view'] === 'error' ? 'Periksa' : 'Memuat';
+  }
+  function renderHubUrls(data = window.PBSystemSnapshot?.data) {
+    const target = $('#syncHubUrls');
+    if (!target) return;
+    const repos = (data?.repositories || []).filter((repo) => repo?.name || repo?.fullName);
+    if (!repos.length) { target.innerHTML = '<div class="hub-url-empty">Katalog URL belum tersedia.</div>'; return; }
+    target.innerHTML = repos.map((repo, index) => {
+      const name = String(repo.name || repo.fullName.split('/').pop()) || 'root';
+      const slug = encodeURIComponent(name).replace(/%2F/g, '/');
+      const url = `https://planetbintang.github.io/.L/${slug}/`;
+      return `<a class="hub-url-item" href="${url}" target="_blank" rel="noopener noreferrer"><b>${String(index + 1).padStart(2, '0')}</b><span>${url}</span><i aria-hidden="true">↗</i></a>`;
+    }).join('');
   }
   function openHub() {
     if (!syncHub) return;
-    closeMenus(); updateHub();
+    closeMenus(); updateHub(); renderHubUrls();
     if (!syncHub.open) syncHub.showModal();
     $('#syncHubClose')?.focus();
   }
