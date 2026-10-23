@@ -1,9 +1,15 @@
 {
-  "name": "Planetbintang Mobile Workspace",
-  "short_name": "Planetbintang OS",
+  "name": "Planetbintang Root System",
+  "short_name": "PB Root",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#050606",
-  "theme_color": "#050606",
-  "description": "Sistem seluler untuk menjalankan workspace GitHub planetbintang/.L."
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Dashboard publik baca-saja untuk peta repositori, domain, aplikasi, dan metadata sistem Planetbintang.",
+  "icons": [
+    { "src": "./system-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./system-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./system-icon.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
 }

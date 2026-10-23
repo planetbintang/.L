@@ -1,58 +1,96 @@
 <!doctype html>
 <html lang="id">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#050606" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Planetbintang Mobile Workspace</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="Planetbintang Root System — dashboard publik untuk peta repositori, domain, host, SHA, aplikasi, dan trafik agregat." />
+    <link rel="icon" href="./system-icon.png" type="image/png" />
     <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./dashboard.css" />
+    <title>Planetbintang · Root System</title>
   </head>
   <body>
-    <main class="phone-frame" aria-label="Planetbintang Mobile Workspace">
-      <section class="phone-screen" id="phoneScreen">
-        <div class="wallpaper-glow glow-one"></div><div class="wallpaper-glow glow-two"></div><div class="wallpaper-glow glow-three"></div>
-        <div class="liquid-shape shape-one"></div><div class="liquid-shape shape-two"></div><div class="liquid-shape shape-three"></div>
-        <div class="ll-corner-system ll-corner-left" aria-label="LL Core sudut kiri"><span class="ll-line"></span><strong>LL</strong><small>CORE / L</small></div>
-        <div class="ll-corner-system ll-corner-right" aria-label="LL Core sudut kanan"><small>CORE / L</small><strong>LL</strong><span class="ll-line"></span></div>
+    <a class="skip-link" href="#repositories">Lewati ke daftar repositori</a>
+    <header class="topbar" id="top">
+      <a class="brand" href="#top" aria-label="Planetbintang Root System, kembali ke atas">
+        <span class="brand-icon-frame"><img src="./system-icon.png" alt="Logo sistem Planetbintang" /></span>
+        <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navigasi sistem">
+        <a href="#overview">Sistem</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
+      </nav>
+      <div class="topbar-actions">
+        <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
+        <button class="icon-button settings-button" id="settingsButton" type="button" aria-expanded="false" aria-controls="settingsPanel" title="Pengaturan dashboard">Pengaturan</button>
+      </div>
+    </header>
 
-        <header class="status-bar"><button class="menu-trigger" id="menuTrigger" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button><div class="status-title">PLANETBINTANG</div><div class="status-icons" aria-label="Status perangkat"><span>◔</span><span>▣</span><b>82%</b></div></header>
+    <main class="shell">
+      <section class="hero panel" id="overview" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">PUBLIC SYSTEM DASHBOARD <span>/</span> ROOT .</p>
+          <h1 id="heroTitle">Satu pintu.<br /><em>Seluruh sistem.</em></h1>
+          <p class="hero-description">Peta baca-saja untuk repositori Planetbintang. Ikon brand membuka ruang kerja; setiap aplikasi tetap berjalan di runtime asalnya.</p>
+          <div class="hero-meta"><span class="root-chip"><b>.</b> / planetbintang</span><span class="sync-chip" id="snapshotStatus">Menyiapkan data snapshot…</span></div>
+        </div>
+        <button class="hero-logo" id="logoEntry" type="button" aria-label="Buka ruang kerja repositori">
+          <span class="logo-outline"><img src="./system-icon.png" alt="" /></span>
+          <span class="logo-entry-label">BUKA SISTEM <b>↘</b></span>
+        </button>
+        <div class="hero-corner" aria-hidden="true">PB <span>001</span></div>
+      </section>
 
-        <section class="home-content">
-          <div class="clock-card"><strong id="mobileClock">07:31</strong><span id="mobileDate">SELASA, 23 JUNI</span></div>
-          <div class="welcome-copy"><span class="eyebrow">PLANETBINTANG OS · MOBILE</span><h1>Ruang kerja<br /><em>yang bergerak.</em></h1><p>GitHub, file, dan status workspace dalam satu sistem seluler yang ringkas.</p></div>
+      <section class="metrics" aria-label="Ringkasan sistem">
+        <article class="metric-card"><span class="metric-label">REPOSITORI TERINDEKS</span><strong id="metricTotal">—</strong><small>cakupan tetap: planetbintang</small></article>
+        <article class="metric-card"><span class="metric-label">PUBLIK / PRIVAT</span><strong><span id="metricPublic">—</span><i>/</i><span id="metricPrivate">—</span></strong><small>nama & tautan ditampilkan atas permintaan pemilik</small></article>
+        <article class="metric-card"><span class="metric-label">GITHUB PAGES</span><strong id="metricPages">—</strong><small>situs statis yang terdeteksi aktif</small></article>
+        <article class="metric-card metric-card-dark"><span class="metric-label">INDEKS SHA-256</span><strong class="hash-value" id="metricHash">—</strong><small>sidik data snapshot saat ini</small></article>
+      </section>
 
-          <section class="browser-plugin" aria-label="Plugin Browser">
-            <div class="browser-plugin-head"><div><span class="eyebrow">PLUGIN SISTEM</span><strong>Browser</strong></div><span class="plugin-state"><i></i> AKTIF</span></div>
-            <form class="browser-form" id="browserForm"><span class="browser-prefix">⌕</span><input id="browserInput" type="search" autocomplete="url" placeholder="Cari atau masukkan URL..." aria-label="Cari atau masukkan URL" /><button type="submit">Buka</button></form>
-            <div class="browser-plugin-foot"><span>Data browsing lokal</span><button type="button" id="browserActivityButton">Aktivitas & pengaturan ↗</button></div>
-          </section>
+      <section class="settings-panel panel" id="settingsPanel" hidden aria-labelledby="settingsTitle">
+        <div class="section-heading compact"><div><p class="eyebrow">KONFIGURASI LOKAL</p><h2 id="settingsTitle">Pengaturan dashboard</h2></div><button class="text-button" id="closeSettings" type="button">Tutup</button></div>
+        <div class="settings-grid">
+          <div class="setting-item"><span><b>Root sistem</b><small>Alias simbolik `.` → owner `planetbintang`</small></span><code>.</code></div>
+          <div class="setting-item"><span><b>Konektor data</b><small>GitHub REST API → snapshot statis</small></span><code id="connectorState">—</code></div>
+          <div class="setting-item"><span><b>Mode tampilan</b><small>Preferensi hanya tersimpan di browser ini</small></span><button class="text-button" id="themeButton" type="button">Ganti tema</button></div>
+          <div class="setting-item"><span><b>Privasi anggota</b><small>Nama, email, ID anggota dan identitas pengunjung tidak dikumpulkan.</small></span><code>TERSEMBUNYI</code></div>
+          <div class="setting-item"><span><b>Sinkronisasi</b><small>Snapshot harian melalui GitHub Actions; perlu secret read-only untuk semua repo.</small></span><code id="syncState">—</code></div>
+          <div class="setting-item"><span><b>Refresh snapshot</b><small>Memuat ulang snapshot yang telah dipublikasikan, tanpa mengirim data pengguna.</small></span><button class="text-button" id="reloadButton" type="button">Muat ulang</button></div>
+        </div>
+      </section>
 
-          <nav class="side-app-dock" aria-label="Aplikasi cepat">
-            <button class="app-icon blue" data-open-app="browser" aria-label="Browser"><span>⌕</span><small>Browser</small></button>
-            <button class="app-icon blue" data-open-app="explorer" aria-label="File Explorer"><span>▤</span><small>Files</small></button>
-            <button class="app-icon violet" data-open-app="index" aria-label="Workspace Index"><span>⌁</span><small>Index</small></button>
-            <button class="app-icon mint" data-open-app="access" aria-label="Repo Access"><span>⌘</span><small>GitHub</small></button>
-            <button class="app-icon amber" data-open-app="settings" aria-label="Pengaturan"><span>⚙</span><small>Setelan</small></button>
-          </nav>
+      <section class="section-block" id="repositories" aria-labelledby="repoTitle">
+        <div class="section-heading">
+          <div><p class="eyebrow">SYSTEM INDEX <span>/</span> 01</p><h2 id="repoTitle">Repositori & aplikasi</h2><p class="section-description">Nama dan tautan privat terlihat di dashboard publik sesuai instruksi pemilik. Isi kode tetap berada di GitHub dan memerlukan login.</p></div>
+          <a class="text-link" href="https://github.com/planetbintang" target="_blank" rel="noopener noreferrer">Buka profil GitHub <span>↗</span></a>
+        </div>
+        <div class="toolbar panel">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Cari nama, bahasa, sistem…" autocomplete="off" aria-label="Cari repositori" /></label>
+          <label class="select-wrap"><span class="visually-hidden">Filter visibilitas</span><select id="visibilityFilter"><option value="all">Semua visibilitas</option><option value="public">Publik</option><option value="private">Privat</option></select></label>
+          <label class="select-wrap"><span class="visually-hidden">Filter jenis aplikasi</span><select id="appFilter"><option value="all">Semua tipe aplikasi</option></select></label>
+          <button class="text-button" id="clearFilters" type="button">Reset</button>
+        </div>
+        <div class="results-line"><span id="resultCount">Memuat repositori…</span><span class="readonly-pill"><i></i> READ ONLY · TIDAK MENJALANKAN KODE</span></div>
+        <div class="repo-grid" id="repoGrid" aria-live="polite"><div class="loading-card">Memuat indeks sistem…</div></div>
+      </section>
 
-          <div class="system-glance"><div><span>STATUS SISTEM</span><strong><i class="status-dot"></i> Semua normal</strong></div><div><span>WORKSPACE</span><strong id="glanceFiles">-- file</strong></div><div><span>MODE</span><strong>Read-only</strong></div></div>
-          <div class="repo-mini-card"><div class="repo-mark">.L</div><div><span>REPOSITORI AKTIF</span><strong id="repoName">planetbintang/.L</strong><small id="repoBranch">branch: --</small></div><button id="indexNowButton" aria-label="Segarkan repositori">↻</button></div>
-          <div class="home-actions"><button class="home-action primary" data-open-app="explorer"><span>▤</span><b>Buka Files</b><small>Jelajahi workspace</small></button><button class="home-action" data-open-app="access"><span>⌘</span><b>GitHub Repo</b><small>Lihat koneksi repo</small></button></div>
-        </section>
+      <section class="section-block host-section" id="hosts" aria-labelledby="hostTitle">
+        <div class="section-heading">
+          <div><p class="eyebrow">NETWORK MAP <span>/</span> 02</p><h2 id="hostTitle">Domain, host & DNS publik</h2><p class="section-description">Pemetaan memakai domain publik dari metadata repositori dan alamat DNS publik saat snapshot dibuat. IP bersama GitHub dapat berubah.</p></div>
+          <span class="snapshot-date" id="dnsUpdated">DNS snapshot: —</span>
+        </div>
+        <div class="host-grid" id="hostGrid"><div class="loading-card">Menyiapkan peta host…</div></div>
+      </section>
 
-        <footer class="bottom-nav"><button class="bottom-nav-item active"><span>⌂</span><small>Beranda</small></button><button class="bottom-nav-item" id="bottomMenu"><span>☷</span><small>Menu</small></button><button class="bottom-nav-item" data-open-app="index"><span>◈</span><small>Status</small></button><button class="bottom-nav-item" data-open-app="settings"><span>⚙</span><small>Setelan</small></button></footer>
-        <div class="gesture-bar"></div>
-
-        <aside class="menu-drawer" id="menuDrawer" aria-hidden="true"><div class="drawer-backdrop" id="drawerBackdrop"></div><div class="drawer-panel"><div class="drawer-head"><div><span class="eyebrow">PLANETBINTANG / .L</span><h2>Menu sistem</h2></div><button id="menuClose" aria-label="Tutup menu">×</button></div><p class="drawer-intro">Pilih konten menu untuk membuka alat workspace mobile.</p><nav class="menu-list" aria-label="Konten menu"><button data-open-app="browser"><span class="menu-symbol cyan">⌕</span><div><b>Browser Plugin</b><small>Cari URL dan aktivitas browsing</small></div><i>›</i></button><button data-open-app="explorer"><span class="menu-symbol blue">▤</span><div><b>File Explorer</b><small>Semua file di workspace</small></div><i>›</i></button><button data-open-app="index"><span class="menu-symbol violet">⌁</span><div><b>Workspace Index</b><small>Statistik dan metadata sistem</small></div><i>›</i></button><button data-open-app="access"><span class="menu-symbol mint">⌘</span><div><b>Repo Access</b><small>GitHub, remote, dan branch</small></div><i>›</i></button><button data-open-app="settings"><span class="menu-symbol amber">⚙</span><div><b>Bahasa & Input</b><small>Preferensi aplikasi</small></div><i>›</i></button></nav><div class="drawer-status"><span class="status-dot"></span><div><b id="drawerStatus">Workspace siap digunakan</b><small>Mode read-only · mobile shell aktif</small></div></div></div></aside>
+      <section class="privacy-note panel" aria-label="Batasan data publik">
+        <span class="privacy-symbol" aria-hidden="true">i</span>
+        <div><strong>Metadata publik, bukan salinan sistem</strong><p>Dashboard menampilkan nama/tautan repo, status Pages, branch, SHA commit, tipe aplikasi, peta root tingkat atas yang difilter, DNS publik, serta angka trafik repo agregat 14 hari jika GitHub menyediakannya. Tidak ada isi file, rahasia, daftar anggota, alamat IP pengunjung, atau data trafik individual. GitHub Pages hanya menyajikan aset statis; PHP, server Python, shell, Terraform, database, dan kode backend tidak dieksekusi di sini.</p></div>
       </section>
     </main>
 
-    <div class="app-modal" id="appModal" aria-hidden="true"><div class="modal-window"><header class="modal-bar"><div class="modal-title"><span class="modal-app-icon" id="modalIcon">▤</span><strong id="modalTitle">File Explorer</strong><small id="modalSubtitle">Filesystem seluruh workspace</small></div><div class="modal-controls"><button id="modalRefresh" title="Muat ulang">↻</button><button id="modalClose" title="Tutup">×</button></div></header><div class="modal-body" id="modalBody"></div></div></div>
-    <div class="toast" id="toast" role="status"><span>✓</span><div><strong>Pengaturan tersimpan</strong><small>Konfigurasi workspace telah diperbarui.</small></div></div>
-    <script src="./app.js"></script>
+    <footer class="footer"><a class="footer-brand" href="#top"><img src="./system-icon.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber GitHub</span><a href="https://github.com/planetbintang/.L" target="_blank" rel="noopener noreferrer">Source dashboard ↗</a></footer>
+    <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
+    <script src="./dashboard.js" defer></script>
   </body>
 </html>
