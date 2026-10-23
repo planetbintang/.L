@@ -389,3 +389,46 @@ body {
 @media (min-width:901px) { .topbar { grid-template-columns:minmax(235px,auto) minmax(0,1fr) minmax(290px,auto); gap:clamp(14px,2.4vw,34px); } .main-nav { justify-content:space-evenly; gap:clamp(10px,1.8vw,26px); } .main-nav .nav-dropdown { flex:1 1 0; justify-content:center; } .main-nav .nav-dropdown > summary { justify-content:center; } }
 @media (max-width:650px) { .main-nav { display:flex; align-items:center; } .provider-card { min-height:240px; } }
 @media (prefers-reduced-motion: reduce) { .provider-card::after,.provider-orb,.provider-orb::before,.provider-orb::after,.provider-orb i,.provider-orb b,.provider-galaxy-art,.provider-galaxy-art::before,.provider-galaxy-art::after,.provider-galaxy-art i,.provider-galaxy-art b,.provider-galaxy-art em,.provider-universe-art,.provider-universe-art::before,.provider-universe-art::after,.provider-universe-art i,.provider-universe-art b,.provider-universe-art em,.provider-universe-art strong,.provider-magnet-art,.provider-magnet-art::before,.provider-magnet-art::after,.provider-magnet-art i,.provider-magnet-art b,.provider-magnet-art em,.provider-magnet-art strong { animation:none!important; } }
+
+/* Header final: brand, five menus, and actions share one centered horizontal row. */
+@media (min-width:651px) {
+  .topbar {
+    display:grid;
+    grid-template-columns:minmax(220px,auto) minmax(0,1fr) minmax(280px,auto);
+    grid-template-areas:none;
+    align-items:center;
+    height:78px;
+    min-height:78px;
+    gap:clamp(12px,2.2vw,32px);
+    overflow:visible;
+  }
+  .topbar .brand,
+  .topbar .main-nav,
+  .topbar .topbar-actions { grid-area:auto; }
+  .main-nav {
+    width:100%;
+    min-width:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    gap:clamp(8px,1.4vw,24px);
+    overflow-x:auto;
+    overflow-y:visible;
+    scrollbar-width:none;
+  }
+  .main-nav::-webkit-scrollbar { display:none; }
+  .main-nav .nav-dropdown { flex:1 1 0; min-width:max-content; justify-content:center; }
+  .main-nav .nav-dropdown > summary { justify-content:center; white-space:nowrap; }
+  .topbar-actions { justify-self:end; min-width:0; gap:clamp(6px,1vw,18px); }
+}
+@media (min-width:651px) and (max-width:900px) {
+  .topbar { padding:0 20px; }
+  .brand-wordmark strong { font-size:10px; }
+  .brand-wordmark small { font-size:8px; }
+  .main-nav .nav-dropdown > summary { font-size:10px; }
+  .topbar-actions .connection-state { display:none; }
+  .topbar-actions .icon-button { padding:8px 9px; font-size:9px; }
+}
+/* The four cards deliberately contain animation layers only; no legacy provider copy is shown. */
+.provider-card { color:transparent; text-indent:-9999px; }
+.provider-card > div { text-indent:0; }
