@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Create a safe, static metadata snapshot for the public Planetbintang dashboard.
+"""Create a safe, static metadata and Git-tree snapshot for the public dashboard.
 
-Only repository metadata, a filtered top-level file map, current branch SHA,
-public host DNS and aggregate GitHub repository traffic are included. File
-contents, credentials, collaborator identities and visitor-level data are never
-requested or published.
+Repository paths and Git object metadata are indexed recursively, with sensitive
+path segments omitted. Blob contents, credentials, collaborator identities and
+visitor-level data are never requested or published; repository code is not run.
 """
 from __future__ import annotations
 
@@ -22,6 +21,8 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode, urlparse
 from urllib.request import Request, urlopen
+from tree_index import scan_tree, static_assessment
+from tree_publish import publish_tree_shards
 
 ROOT = Path(__file__).resolve().parents[1]
 SCOPE_PATH = ROOT / "data" / "repository-scope.json"
@@ -30,12 +31,11 @@ API = "https://api.github.com"
 TOKEN = os.environ.get("PLANETBINTANG_READ_TOKEN") or os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
 OWNER = "planetbintang"
 
-# Hide names that could expose secrets, credentials, private key material or
-# user-level records in the public root-file map. No file contents are fetched.
+# Hide paths that could expose secrets, credentials, private key material or
+# environment files. No file contents are fetched.
 SENSITIVE_NAME = re.compile(
     r"(^|[._-])(secret|secrets|credential|credentials|token|tokens|password|passwd|private|"
-    r"key|keys|pem|cert|certificate|ssl|ssh|id_rsa|env|dotenv|backup|dump|member|user|"
-    r"traffic|analytics)([._/-]|$)", re.IGNORECASE,
+    r"key|keys|pem|cert|certificate|ssl|ssh|id_rsa|env|dotenv|backup|dump)([._/-]|$)", re.IGNORECASE,
 )
 
 
@@ -136,6 +136,8 @@ def inspect_repo(full_name: str) -> dict:
             "pagesUrl": "", "domain": "", "host": "github.com", "ipAddresses": [],
             "headSha": "", "lastCommitAt": "", "appType": "Metadata tidak tersedia",
             "languages": [], "rootItems": [], "rootItemCount": 0,
+            "tree": {"state": "unavailable", "treeSha": "", "entries": [], "entryCount": 0, "fileCount": 0, "directoryCount": 0, "submoduleCount": 0, "totalBytes": 0, "executableFileCount": 0, "sizeUnknownCount": 0, "redactedCount": 0, "fallbackUsed": False, "gitFallbackUsed": False},
+            "staticAssessment": {"mode": "static-metadata-only", "integrityCoverage": "tree-unavailable", "codeExecution": "not-executed", "runnableCandidates": [], "note": "Struktur saja; bukan audit keamanan."},
             "traffic14d": None, "metadataStatus": status,
         }
 
@@ -179,6 +181,14 @@ def inspect_repo(full_name: str) -> dict:
         [{"name": key, "bytes": int(value)} for key, value in languages.items()],
         key=lambda item: (-item["bytes"], item["name"].casefold()),
     )[:5]
+    root_tree_sha = str((commit_body.get("tree") or {}).get("sha") or "")
+    tree_snapshot = scan_tree(full_name, root_tree_sha, branch, head_sha) if root_tree_sha else {
+        "state": "empty" if is_empty else "unavailable", "treeSha": "", "entries": [],
+        "entryCount": 0, "fileCount": 0, "directoryCount": 0, "submoduleCount": 0,
+        "totalBytes": 0, "executableFileCount": 0, "sizeUnknownCount": 0, "redactedCount": 0,
+        "fallbackUsed": False, "gitFallbackUsed": False,
+    }
+    static_review = static_assessment(tree_snapshot, language_items)
     state = "empty" if is_empty else "available"
     return {
         "name": meta.get("name", full_name.rsplit("/", 1)[-1]),
@@ -200,6 +210,8 @@ def inspect_repo(full_name: str) -> dict:
         "rootPath": ".",
         "rootItems": root_items,
         "rootItemCount": len(root_items),
+        "tree": tree_snapshot,
+        "staticAssessment": static_review,
         "traffic14d": traffic_data,
         "members": {"published": False, "note": "Identitas anggota hanya tersedia setelah login ke GitHub."},
     }
@@ -251,6 +263,8 @@ def main() -> int:
                     "ipAddresses": [], "headSha": "", "lastCommitAt": "",
                     "appType": "Metadata sementara gagal dimuat", "languages": [],
                     "rootPath": ".", "rootItems": [], "rootItemCount": 0,
+                    "tree": {"state": "unavailable", "treeSha": "", "entries": [], "entryCount": 0, "fileCount": 0, "directoryCount": 0, "submoduleCount": 0, "totalBytes": 0, "executableFileCount": 0, "sizeUnknownCount": 0, "redactedCount": 0, "fallbackUsed": False, "gitFallbackUsed": False},
+                    "staticAssessment": {"mode": "static-metadata-only", "integrityCoverage": "tree-unavailable", "codeExecution": "not-executed", "runnableCandidates": [], "note": "Struktur saja; bukan audit keamanan."},
                     "traffic14d": None, "members": {"published": False},
                     "errorType": type(exc).__name__,
                 }
@@ -269,11 +283,12 @@ def main() -> int:
     for item in repositories:
         item["ipAddresses"] = domain_map.get(item.get("host", ""), {}).get("addresses", [])
 
+    tree_stats = publish_tree_shards(repositories, ROOT / "data" / "trees")
     now = utc_now()
     public_count = sum(item.get("visibility") == "public" for item in repositories)
     private_count = sum(item.get("visibility") == "private" for item in repositories)
     payload = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "root": ".",
         "connector": {
             "label": ".",
@@ -286,11 +301,20 @@ def main() -> int:
         "publicCount": public_count,
         "privateCount": private_count,
         "pagesEnabledCount": sum(bool(item.get("pagesEnabled")) for item in repositories),
+        "fileTreeIndex": {
+            "repositoryCount": tree_stats["repositories"],
+            "visiblePathCount": tree_stats["entries"],
+            "directoryPageCount": tree_stats["pages"],
+            "pageSize": 500,
+            "loading": "lazy per directory; path, Git SHA, mode and size only",
+        },
         "dnsCheckedAt": dns_checked_at,
         "domainMap": domain_map,
         "privacy": {
             "repositoryNamesPublic": True,
-            "rootMap": "Filtered top-level names only; no file contents or secret paths.",
+            "fileTree": "Recursive Git paths, modes, object SHAs and sizes; sensitive path segments filtered; no blob contents.",
+            "codeExecution": False,
+            "assessment": "Static structural metadata only; not a security audit and not proof code is safe to run.",
             "memberIdentitiesPublished": False,
             "visitorLevelTracking": False,
             "traffic": "Aggregate GitHub repository views/clones only; 14-day window when available.",
@@ -302,8 +326,9 @@ def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Updated public snapshot: {len(repositories)} repositories; {public_count} public; {private_count} private; {payload['pagesEnabledCount']} Pages-enabled.")
+    print(f"Git tree index: {tree_stats['entries']} visible paths in {tree_stats['pages']} lazy directory pages; main snapshot excludes file entries.")
     print(f"Snapshot SHA-256: {payload['dataSha256']}")
-    print("No repository file contents, collaborator names, credentials, or visitor-level data were requested.")
+    print("Git tree paths/SHA/modes/sizes indexed where accessible; no repository blob contents or code execution.")
     return 0
 
 

@@ -4,20 +4,20 @@ Dashboard publik berada di `https://planetbintang.github.io/.L/` (GitHub Pages d
 
 ## Data yang diterbitkan
 
-Snapshot memuat nama dan URL repositori, visibility, branch utama, SHA commit terakhir, bahasa utama, tipe aplikasi perkiraan, status/domain Pages, DNS A/AAAA publik untuk host terkait, serta nama item tingkat atas yang sudah difilter. Angka views/clones adalah agregat GitHub repository traffic untuk jendela sampai 14 hari; angka ini bukan analytics kunjungan website Pages. SHA-256 snapshot ditampilkan untuk pemeriksaan integritas.
+Snapshot utama memuat nama/URL repo, visibility, branch, SHA commit, bahasa, tipe sistem, Pages/domain, DNS publik dan trafik agregat hingga 14 hari. File Manager menambahkan seluruh path yang dapat diindeks beserta tipe, mode, Git object SHA dan ukuran jika tersedia. Daftar path dipecah menjadi halaman gzip paling banyak 500 item, diambil hanya saat folder dibuka; manifest tiap repo mencatat cakupan dan SHA. File blob tidak diunduh. SHA-256 snapshot, manifest dan halaman shard dapat diperiksa.
 
-Nama dan tautan repo privat akan terlihat publik sesuai permintaan pemilik. Dashboard tidak mengambil atau menerbitkan isi file, jalur yang terdeteksi sensitif, rahasia/kredensial, daftar anggota, nama/email/ID pengguna, alamat IP pengunjung, cookie, atau trafik individual. Peta filesystem hanya daftar tingkat atas yang difilter dan tidak mengeksekusi kode.
+Nama, tautan dan jalur repo privat terlihat publik sesuai permintaan pemilik. Jalur yang cocok dengan penanda secret/credential/token/password/private key/certificate/SSH/env/backup/dump disaring. Dashboard tidak mengambil atau menerbitkan isi file, rahasia/kredensial, daftar anggota, nama/email/ID pengguna, alamat IP pengunjung, cookie, atau trafik individual. Git tree fallback memakai partial clone `--filter=blob:none --no-checkout` dan memeriksa HEAD/tree SHA; tidak ada checkout atau eksekusi kode.
 
 ## Batas runtime
 
-GitHub Pages hanya menyajikan HTML/CSS/JavaScript statis. Dashboard tidak menjalankan PHP, Python server, shell, Terraform, database, binary, atau backend dari repositori yang dipetakan. Tautan aplikasi hanya dibuka jika metadata mencantumkan URL HTTPS; selain itu pengguna diarahkan ke halaman GitHub repo.
+GitHub Pages hanya menyajikan HTML/CSS/JavaScript statis. Penilaian browser hanya metadata struktural: cakupan tree, object SHA/mode/ukuran, bahasa, file executable bit, commit terakhir dan kandidat entry point/manifest dari nama file. Itu bukan audit keamanan/kerentanan dan bukan bukti bahwa kode aman. Dashboard tidak menjalankan PHP, Python server, shell, Terraform, database, binary, atau backend repo. Tautan aplikasi hanya dibuka jika metadata mencantumkan URL HTTPS.
 
 ## Sinkronisasi harian
 
-Workflow `.github/workflows/sync-dashboard.yml` berjalan setiap hari pada 04:17 UTC dan dapat dijalankan manual. Agar workflow dapat membaca metadata repo privat dan endpoint trafik, pemilik perlu menambahkan secret Actions `PLANETBINTANG_READ_TOKEN` di pengaturan repo `.L`. Token harus read-only, pemiliknya harus memiliki akses ke seluruh 45 repo pada `data/repository-scope.json`, dan izinnya harus mengizinkan pembacaan metadata, contents tingkat atas, serta repository traffic. Workflow memakai `GITHUB_TOKEN` repo-scoped hanya untuk menulis snapshot baru ke branch `io`.
+Workflow `.github/workflows/sync-dashboard.yml` berjalan setiap hari pada 04:17 UTC dan dapat dijalankan manual. Agar workflow dapat membaca metadata, Git tree repo privat dan endpoint trafik, pemilik perlu menambahkan secret Actions `PLANETBINTANG_READ_TOKEN`. Token harus read-only, memiliki akses ke seluruh 45 repo pada `data/repository-scope.json`, dan mengizinkan pembacaan metadata, contents/tree serta repository traffic. Token hanya digunakan di proses sinkronisasi; `GITHUB_TOKEN` repo-scoped dashboard digunakan untuk commit snapshot/shard ke branch `io`.
 
 Jika secret belum ada, workflow berhenti aman tanpa mengubah snapshot. Token tidak pernah ditempatkan di HTML, JavaScript, manifest, atau hasil dashboard. Jangan memakai token dengan izin write pada repo sumber.
 
 ## Shell dashboard
 
-Header dashboard menyediakan browser shell untuk tugas allowlist baca-saja (`status`, `list`, pencarian, buka repo, peta host, ringkasan, dan root-map). Input pengguna tidak dievaluasi sebagai JavaScript atau perintah OS. Ini sengaja dibatasi karena halaman publik tidak boleh mengeksekusi kode repo atau menyediakan remote shell.
+Header dashboard menyediakan browser shell untuk tugas allowlist baca-saja (`status`, `list`, pencarian, buka repo, peta host, ringkasan, dan root-map). File Manager membuka path `/`, menelusuri hierarki folder, dan memuat halaman item secara bertahap. Input pengguna tidak dievaluasi sebagai JavaScript/perintah OS dan tidak ada kode repo yang dijalankan; ini sengaja dibatasi karena halaman publik tidak boleh menyediakan remote shell.

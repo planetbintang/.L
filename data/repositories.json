@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "root": ".",
   "connector": {
     "label": ".",
@@ -7,12 +7,19 @@
     "source": "GitHub REST API snapshot",
     "sync": "GitHub Actions; daily when PLANETBINTANG_READ_TOKEN is configured"
   },
-  "updatedAt": "2026-10-23T01:50:46Z",
+  "updatedAt": "2026-10-23T02:42:39Z",
   "repositoryCount": 45,
   "publicCount": 6,
   "privateCount": 39,
   "pagesEnabledCount": 4,
-  "dnsCheckedAt": "2026-10-23T01:50:45Z",
+  "fileTreeIndex": {
+    "repositoryCount": 45,
+    "visiblePathCount": 1865322,
+    "directoryPageCount": 7036,
+    "pageSize": 500,
+    "loading": "lazy per directory; path, Git SHA, mode and size only"
+  },
+  "dnsCheckedAt": "2026-10-23T02:42:17Z",
   "domainMap": {
     "0123456789pay.github.io": {
       "addresses": [
@@ -25,13 +32,13 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "api.github.com": {
       "addresses": [
         "20.205.243.168"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "digitalmediaindonesia.github.io": {
       "addresses": [
@@ -44,13 +51,13 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "github.com": {
       "addresses": [
         "20.205.243.166"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "planetbintang.github.io": {
       "addresses": [
@@ -63,7 +70,7 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "southeastapp.github.io": {
       "addresses": [
@@ -76,7 +83,7 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     },
     "southeasthigerware.github.io": {
       "addresses": [
@@ -89,12 +96,14 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "checkedAt": "2026-10-23T01:50:45Z"
+      "checkedAt": "2026-10-23T02:42:17Z"
     }
   },
   "privacy": {
     "repositoryNamesPublic": true,
-    "rootMap": "Filtered top-level names only; no file contents or secret paths.",
+    "fileTree": "Recursive Git paths, modes, object SHAs and sizes; sensitive path segments filtered; no blob contents.",
+    "codeExecution": false,
+    "assessment": "Static structural metadata only; not a security audit and not proof code is safe to run.",
     "memberIdentitiesPublished": false,
     "visitorLevelTracking": false,
     "traffic": "Aggregate GitHub repository views/clones only; 14-day window when available."
@@ -150,6 +159,39 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "e93f723ffdc39cdd5fa3483ef73199c54a8e05c4",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 90,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/7b237f88bd29ab40/index.json",
+        "indexSha256": "5c48e313d1298720613a9a7c590aea7467cd4ed240ae84ba0c8ecd5092e7c17e",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "e93f723ffdc39cdd5fa3483ef73199c54a8e05c4",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -189,8 +231,8 @@
         "2606:50c0:8002::153",
         "2606:50c0:8003::153"
       ],
-      "headSha": "9671100c7bc4246e0a903d54ec6b9127abcac8f2",
-      "lastCommitAt": "2026-10-23T01:50:25Z",
+      "headSha": "f2b1bac0901df4bb47825d963855ca188686877c",
+      "lastCommitAt": "2026-10-23T01:50:46Z",
       "appType": "Workspace web · HTML + Python",
       "languages": [
         {
@@ -203,7 +245,7 @@
         },
         {
           "name": "HTML",
-          "bytes": 16863
+          "bytes": 16950
         }
       ],
       "rootPath": ".",
@@ -300,6 +342,52 @@
         }
       ],
       "rootItemCount": 18,
+      "tree": {
+        "state": "complete",
+        "treeSha": "ec6681635d4dfb1476e800fce43106ca9f03368d",
+        "entryCount": 23,
+        "fileCount": 19,
+        "directoryCount": 4,
+        "submoduleCount": 0,
+        "totalBytes": 244063,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/3cf0c9cf3dddc379/index.json",
+        "indexSha256": "f5ed94bd6c7ab4735b81e2a1183cbb2bef79d31ede6ad4bf223a00aeb6de86ad",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 19,
+        "treeSha": "ec6681635d4dfb1476e800fce43106ca9f03368d",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "83296abad22145658e202490dd3f47327d254aa8"
+          },
+          {
+            "path": "server.py",
+            "label": "Python server candidate",
+            "sha": "57979d58669b1e5eaa8a296bc4bd00412c9ca28b"
+          }
+        ],
+        "languages": [
+          "JavaScript",
+          "Python",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -392,6 +480,42 @@
         }
       ],
       "rootItemCount": 7,
+      "tree": {
+        "state": "complete",
+        "treeSha": "167c636e4bb843d859916a35f26a36cdd208f3f7",
+        "entryCount": 22,
+        "fileCount": 17,
+        "directoryCount": 5,
+        "submoduleCount": 0,
+        "totalBytes": 85890,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/cac6075f39c6e2bd/index.json",
+        "indexSha256": "054a5ab61487844d3a757c12d1c32416522f243e30bf8e50baf8eb2627984c1c",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 17,
+        "treeSha": "167c636e4bb843d859916a35f26a36cdd208f3f7",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [
+          "JavaScript",
+          "CSS",
+          "PLpgSQL",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -444,6 +568,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "7d5179162906ed7414efa516aa44ea7e71648227",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 11,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c05cbbe828aa5c40/index.json",
+        "indexSha256": "87f15f82e11e532c448870e8cef5fb58e128dfe02c04b857bff35cc9dfa0b711",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "7d5179162906ed7414efa516aa44ea7e71648227",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 2,
@@ -508,6 +663,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "a61adc158e8f33de0c982de2845d5350599d358d",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 22876,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/f53a7c12b5f34308/index.json",
+        "indexSha256": "2f368928ab6cca3764e3a699367d4c126b2789c7c560cc03bc1bcdb1d49ecf90",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "a61adc158e8f33de0c982de2845d5350599d358d",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "cd4d10efd51dacc1e7ffc6c298c88313739ff510"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -572,6 +767,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "e0396d81fadc72f5e68b86708e7c4c3f5b851bbe",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 23883,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/7677010fd34ef5d2/index.json",
+        "indexSha256": "7351c468e3f461ae09176b5c636c835cc2e85248fb54fd8b9c3222466c4585da",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "e0396d81fadc72f5e68b86708e7c4c3f5b851bbe",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "9423b944bb1b9f7734dc0eb2621b367a8ccf6c8d"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -636,6 +871,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "b460f4fa8e4ddfd5ef699b809fd4b908dab3eaee",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 17761,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/d2c5d628e302c57f/index.json",
+        "indexSha256": "5d4c604f8a92342c75c6798572ef789c55c5a256c71f41168b68c42ed3c51b8e",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "b460f4fa8e4ddfd5ef699b809fd4b908dab3eaee",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "a67ac39ed710bc0b3214e214a3b9e134dbcae488"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -705,6 +980,61 @@
         }
       ],
       "rootItemCount": 4,
+      "tree": {
+        "state": "complete",
+        "treeSha": "7eb6d432df5bd2c86b62c2a1cd0fbc2bb6f2f514",
+        "entryCount": 11,
+        "fileCount": 6,
+        "directoryCount": 5,
+        "submoduleCount": 0,
+        "totalBytes": 17792,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/2f40b96c2cc0dd7c/index.json",
+        "indexSha256": "a811d33d4ee1ac165b32f48e3f96a68c47dcd290b3deee250fae4d8911ff6403",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 6,
+        "treeSha": "7eb6d432df5bd2c86b62c2a1cd0fbc2bb6f2f514",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "c576e05628292662b349eee241b7a1a65f198c8c"
+          },
+          {
+            "path": "kamus/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "738988683505321494c3612f54b858a8f460125e"
+          },
+          {
+            "path": "kamus/indonesia/m/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "10fa20006897f4ea5377bf1be90db6b452ec0d24"
+          },
+          {
+            "path": "kamus/inggris/e/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "56c6fa2fd0ee74d53e43f0dc4c0a1ade6c2342d6"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -769,6 +1099,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "8e4407de67574b411de170882b537032226f6010",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 15852,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/6c3c6f07d7bfefc8/index.json",
+        "indexSha256": "c5eb2f00c537304ad72b85bbd061d567458608ef38b10d8d79ec1a2b232cb1e8",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "8e4407de67574b411de170882b537032226f6010",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "62508e784ba796833e578fa562df3a696bac661b"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -838,6 +1208,56 @@
         }
       ],
       "rootItemCount": 4,
+      "tree": {
+        "state": "complete",
+        "treeSha": "871c5436322270f056760508efafb6b5c4b0c91f",
+        "entryCount": 12,
+        "fileCount": 5,
+        "directoryCount": 7,
+        "submoduleCount": 0,
+        "totalBytes": 31436,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/107faff7c9293edb/index.json",
+        "indexSha256": "fc678b88798bc22136ff4fb9e9b40e84c3b02376cb16a6c77f6208ea80f4794c",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 5,
+        "treeSha": "871c5436322270f056760508efafb6b5c4b0c91f",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "d65dc3798b964249abd03b848ac12b1b11a265db"
+          },
+          {
+            "path": "kamus/indonesia/a/example/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "ce6371b383b610549bbab66df24f456f8c464863"
+          },
+          {
+            "path": "kamus/inggris/e/example/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "ef8ddc4cbdf8ea3150ccd8db2fb09faf81b32d10"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -902,6 +1322,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "68d5658924df813c98e65af02d95e821422088ee",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 34973,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c771bf2884e6d522/index.json",
+        "indexSha256": "3f50fcd7ab873c4360b36169ae43ac8541886472ad0e688d33c5e22cc97a4646",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "68d5658924df813c98e65af02d95e821422088ee",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "0c2876e9d28f0b9eb99a57c416797c8015443a13"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -976,6 +1436,56 @@
         }
       ],
       "rootItemCount": 5,
+      "tree": {
+        "state": "complete",
+        "treeSha": "52eb23c9d4387870aa4e35f866253593ca32647b",
+        "entryCount": 11,
+        "fileCount": 5,
+        "directoryCount": 6,
+        "submoduleCount": 0,
+        "totalBytes": 26632,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/9e2e10b612805ae4/index.json",
+        "indexSha256": "677ef3c6c7cbdd832bdf9eea2108ac5275ca2389ffd93df0a481e1658d33ded0",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 5,
+        "treeSha": "52eb23c9d4387870aa4e35f866253593ca32647b",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "en/nouns/folder-1/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "809b53683fb13179c9a438618765dfe9eb23025a"
+          },
+          {
+            "path": "id/kata-benda/folder-1/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "2aac177c62833a53b6623b85488c0cc7018d8f27"
+          },
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "b9578a6a09bd807bb38d2edd52191e2ede5b7042"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1040,6 +1550,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "4551b34c57fe02b00169725b26b4a4891520bd92",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 12527,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/6d3b884a39d9fb46/index.json",
+        "indexSha256": "d44419e69842019d15257e57d5fd9e07d58f6054f266ae77d96fa30c5a084919",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "4551b34c57fe02b00169725b26b4a4891520bd92",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "34f5d48714a10abee8528ac46c992bc3aebd3af6"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1104,6 +1654,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "eef871d69eed97a90e5eacfcf48d27428e133640",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 19374,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/eb1ce853a2e5f24c/index.json",
+        "indexSha256": "a14afdd48069ae6da5464d39fa580bb6c070fe3128b7baa029154c1f12f79b81",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "eef871d69eed97a90e5eacfcf48d27428e133640",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "327b20cfb70d3ea145094b23a18a6b994e04c934"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1196,6 +1786,50 @@
         }
       ],
       "rootItemCount": 7,
+      "tree": {
+        "state": "complete",
+        "treeSha": "ad89996d019a1b112284835c361fffc7944751be",
+        "entryCount": 17,
+        "fileCount": 12,
+        "directoryCount": 5,
+        "submoduleCount": 0,
+        "totalBytes": 71891,
+        "executableFileCount": 1,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/989d389b86a3dccc/index.json",
+        "indexSha256": "421a3e11f10d6348656b0b48edf40b98b9fe480c8ce675e4e7bf622619acfd00",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 12,
+        "treeSha": "ad89996d019a1b112284835c361fffc7944751be",
+        "executableFileCount": 1,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          "create_components.sh"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "d685af222150808930b83d80bf887f89479fc92e"
+          }
+        ],
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1301,6 +1935,43 @@
         }
       ],
       "rootItemCount": 13,
+      "tree": {
+        "state": "complete",
+        "treeSha": "66a161970a3568b16aa36ad270ce0849c974bfb4",
+        "entryCount": 750028,
+        "fileCount": 750019,
+        "directoryCount": 9,
+        "submoduleCount": 0,
+        "totalBytes": 914960609,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 450000,
+        "redactedCount": 0,
+        "fallbackUsed": true,
+        "gitFallbackUsed": true,
+        "indexUrl": "data/trees/6c0201431ae84561/index.json",
+        "indexSha256": "f3dc2f34c87972d871143ed148a0311a09764c431e0e3d9ee6612060e3f1c7ef",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 750019,
+        "treeSha": "66a161970a3568b16aa36ad270ce0849c974bfb4",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 450000,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "f5c7ba946edc0e597b1eea1bcc8c8acebad2a248"
+          }
+        ],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1340,6 +2011,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/f4aaf30ff85ef700/index.json",
+        "indexSha256": "76c256e085acff81d27bbb095d329522b942a31736d0f2bf8a255397f7ac3dd1",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1379,6 +2081,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/85b5f8f4503ca1aa/index.json",
+        "indexSha256": "db94ad81c2dd0a2ddd2582ad362f9f83b842cc81cddf202a09d860372a697deb",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 1,
@@ -1451,6 +2184,45 @@
         }
       ],
       "rootItemCount": 4,
+      "tree": {
+        "state": "complete",
+        "treeSha": "707b9c3079954011d3fddb1b4e573ea8eaa078d3",
+        "entryCount": 6,
+        "fileCount": 4,
+        "directoryCount": 2,
+        "submoduleCount": 0,
+        "totalBytes": 5849,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/9b2952568c33f257/index.json",
+        "indexSha256": "9eabe36e8501a3b83992db27ea712c34d2260966833eb18cf2ac306ddc652292",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 4,
+        "treeSha": "707b9c3079954011d3fddb1b4e573ea8eaa078d3",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "bf11f526ff6ebde2888fe339792ebe76437c7f29"
+          }
+        ],
+        "languages": [
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 1,
@@ -1496,6 +2268,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "34e470607b984842f5a7a21066659a5640d0b324",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 11,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/9d9ad34c680d3b8e/index.json",
+        "indexSha256": "8b14abf8210eef87d7955c13deb375becf09977587852f2834923783a33b8f95",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "34e470607b984842f5a7a21066659a5640d0b324",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1551,6 +2354,37 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "b708b353594065ebbf00408dfa7f17780f2366c4",
+        "entryCount": 94,
+        "fileCount": 93,
+        "directoryCount": 1,
+        "submoduleCount": 0,
+        "totalBytes": 578470,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/e73196547c25cd02/index.json",
+        "indexSha256": "a5d70f8502afaed1a949fb8bd56a326be3035a2c14ea2b35c8f5d256e061f6e2",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 93,
+        "treeSha": "b708b353594065ebbf00408dfa7f17780f2366c4",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1590,6 +2424,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c3739761111173cb/index.json",
+        "indexSha256": "dfe5773f5570fbe7df7022add363e917d06bf810e971044e71844bfe9eccb679",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1657,6 +2522,50 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "5cdaad818140ead96c3872922b2c5e3970d810e4",
+        "entryCount": 6,
+        "fileCount": 4,
+        "directoryCount": 2,
+        "submoduleCount": 0,
+        "totalBytes": 49683,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/4e083e41774da813/index.json",
+        "indexSha256": "f370f90ae7e0b5c71372d9fdbf9c2dd3ed0948081d27ca6191c02936bf46db0f",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 4,
+        "treeSha": "5cdaad818140ead96c3872922b2c5e3970d810e4",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": ".github/workflows/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "cc5181cc5902562f86a63e776ca01a8bc83f0aeb"
+          },
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "cc5181cc5902562f86a63e776ca01a8bc83f0aeb"
+          }
+        ],
+        "languages": [
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1754,6 +2663,53 @@
         }
       ],
       "rootItemCount": 8,
+      "tree": {
+        "state": "complete",
+        "treeSha": "f0fc822722f8aa8b700374288cfd8b576558d89e",
+        "entryCount": 28,
+        "fileCount": 27,
+        "directoryCount": 1,
+        "submoduleCount": 0,
+        "totalBytes": 26384,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/74084c4a6175fd1e/index.json",
+        "indexSha256": "cc1c17963fa7762c7b7fa181bf49f417f98ccc007fe01b48d670cba63ae7aa42",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 27,
+        "treeSha": "f0fc822722f8aa8b700374288cfd8b576558d89e",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "bcf66120e873f51e9bf8055249d9e6ca21628360"
+          },
+          {
+            "path": "public/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "bcf66120e873f51e9bf8055249d9e6ca21628360"
+          }
+        ],
+        "languages": [
+          "PHP",
+          "HTML",
+          "JavaScript",
+          "CSS"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -1828,6 +2784,46 @@
         }
       ],
       "rootItemCount": 5,
+      "tree": {
+        "state": "complete",
+        "treeSha": "087dcbe05ee7c140fe9830d9cd5a8a339df6e119",
+        "entryCount": 7,
+        "fileCount": 5,
+        "directoryCount": 2,
+        "submoduleCount": 0,
+        "totalBytes": 5330,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/a56ef748e0068320/index.json",
+        "indexSha256": "eb9e27b7f7aae1b5308e8c6b4885e780519778be66daecc79cfb13920709a7a5",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 5,
+        "treeSha": "087dcbe05ee7c140fe9830d9cd5a8a339df6e119",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "main.tf",
+            "label": "Terraform configuration candidate",
+            "sha": "8e14faa356d41f4af0d831f9d5e850fb6d9d41e2"
+          }
+        ],
+        "languages": [
+          "HCL",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -2090,6 +3086,95 @@
         }
       ],
       "rootItemCount": 43,
+      "tree": {
+        "state": "complete",
+        "treeSha": "95648fb7c8be42f1911bc114e2dd7da214f5ba62",
+        "entryCount": 1101096,
+        "fileCount": 1100608,
+        "directoryCount": 488,
+        "submoduleCount": 0,
+        "totalBytes": 559947649,
+        "executableFileCount": 41,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": true,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/78503e0a0f1a9fdb/index.json",
+        "indexSha256": "992f26b68ed7191dc9c032809919c43390039113efaaaab9ce2c66c67f97476a",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1100608,
+        "treeSha": "95648fb7c8be42f1911bc114e2dd7da214f5ba62",
+        "executableFileCount": 41,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          ".io/konfigurasi-astronomi.nz",
+          ".io/konfigurasi-bahasa.nz",
+          ".io/konfigurasi-biologi.nz",
+          ".io/konfigurasi-ekonomi.nz",
+          ".io/konfigurasi-energi.nz",
+          ".io/konfigurasi-fisika.nz",
+          ".io/konfigurasi-geografi.nz",
+          ".io/konfigurasi-ilmu-umum.nz",
+          ".io/konfigurasi-kecerdasan-buatan.nz",
+          ".io/konfigurasi-kesehatan.nz",
+          ".io/konfigurasi-kimia.nz",
+          ".io/konfigurasi-komputer.nz",
+          ".io/konfigurasi-lingkungan.nz",
+          ".io/konfigurasi-matematika.nz",
+          ".io/konfigurasi-media-pembelajaran.nz",
+          ".io/konfigurasi-pendidikan.nz",
+          ".io/konfigurasi-pertanian.nz",
+          ".io/konfigurasi-rekayasa.nz",
+          ".io/konfigurasi-sastra.nz",
+          ".io/konfigurasi-sejarah.nz",
+          ".io/router.nz",
+          "datanz/datanz+/konfigurasi-astronomi.nz",
+          "datanz/datanz+/konfigurasi-bahasa.nz",
+          "datanz/datanz+/konfigurasi-biologi.nz",
+          "datanz/datanz+/konfigurasi-ekonomi.nz",
+          "datanz/datanz+/konfigurasi-energi.nz",
+          "datanz/datanz+/konfigurasi-fisika.nz",
+          "datanz/datanz+/konfigurasi-geografi.nz",
+          "datanz/datanz+/konfigurasi-ilmu-umum.nz",
+          "datanz/datanz+/konfigurasi-kecerdasan-buatan.nz",
+          "datanz/datanz+/konfigurasi-kesehatan.nz",
+          "datanz/datanz+/konfigurasi-kimia.nz",
+          "datanz/datanz+/konfigurasi-komputer.nz",
+          "datanz/datanz+/konfigurasi-lingkungan.nz",
+          "datanz/datanz+/konfigurasi-matematika.nz",
+          "datanz/datanz+/konfigurasi-media-pembelajaran.nz",
+          "datanz/datanz+/konfigurasi-pendidikan.nz",
+          "datanz/datanz+/konfigurasi-pertanian.nz",
+          "datanz/datanz+/konfigurasi-rekayasa.nz",
+          "datanz/datanz+/konfigurasi-sastra.nz",
+          "datanz/datanz+/konfigurasi-sejarah.nz"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "app.nz/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "17a98de5a9c2d87bbe2396b1d2701b0210aae499"
+          },
+          {
+            "path": "datanz/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "34a01f99d1df573d4c673f73ac9a83e42618ba41"
+          },
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "a0f7a4fd5fc0b4304319a8684400859e0658628c"
+          }
+        ],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 39,
@@ -2454,6 +3539,50 @@
         }
       ],
       "rootItemCount": 60,
+      "tree": {
+        "state": "complete",
+        "treeSha": "f2df8e4a168770cda8cc146c110aa9dc5c800690",
+        "entryCount": 168,
+        "fileCount": 163,
+        "directoryCount": 5,
+        "submoduleCount": 0,
+        "totalBytes": 621378,
+        "executableFileCount": 1,
+        "sizeUnknownCount": 0,
+        "redactedCount": 1,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c1bae652e1848a8c/index.json",
+        "indexSha256": "935e064c200e23b91bcc2934241777adca5806076e3828fd24bc9a5d73ee9938",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 163,
+        "treeSha": "f2df8e4a168770cda8cc146c110aa9dc5c800690",
+        "executableFileCount": 1,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          "create_components.sh"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "22483970923c14b9322b18a3a6b2ddb9f6e3e6ce"
+          }
+        ],
+        "languages": [
+          "JavaScript",
+          "Shell",
+          "CSS",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -2695,6 +3824,450 @@
         }
       ],
       "rootItemCount": 36,
+      "tree": {
+        "state": "complete",
+        "treeSha": "1864900f54b2d356822071c848fda8bc4ed1c3c8",
+        "entryCount": 2439,
+        "fileCount": 1828,
+        "directoryCount": 611,
+        "submoduleCount": 0,
+        "totalBytes": 1568894,
+        "executableFileCount": 5,
+        "sizeUnknownCount": 0,
+        "redactedCount": 48,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/fae6d08b3b41a816/index.json",
+        "indexSha256": "9c8cfe69111cf493dc2b9668093a0472b7fa1a9f3a2d114c637900824b5893f9",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1828,
+        "treeSha": "1864900f54b2d356822071c848fda8bc4ed1c3c8",
+        "executableFileCount": 5,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          "custom_os_builder.sh",
+          "jenis/bin/init.sh",
+          "jenis/usr/bin/filemanager.sh",
+          "launcher.py",
+          "server_jenis.py"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "65538bc3-f41d-46a8-b8ff-403ac3d7df8b/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "36675a91a8fbb12b5b19eba5cc7ffad9842ac929"
+          },
+          {
+            "path": "65538bc3-f41d-46a8-b8ff-403ac3d7df8b/server.py",
+            "label": "Python server candidate",
+            "sha": "8e2a6fe31f662034356d25ac87d549e7c7ebe04f"
+          },
+          {
+            "path": "custom_os/core/main.py",
+            "label": "Python entry candidate",
+            "sha": "ba61d904fcec382284b286559a8a4132443e70b8"
+          },
+          {
+            "path": "custom_os/features/Access_Control/main.py",
+            "label": "Python entry candidate",
+            "sha": "6bd656a5c2fefeab248467cac90729800ae6057c"
+          },
+          {
+            "path": "custom_os/features/Accessibility_Tools/main.py",
+            "label": "Python entry candidate",
+            "sha": "1f1614cf78b0fa0749a8f10a98b9977a28bb8f6f"
+          },
+          {
+            "path": "custom_os/features/Advanced_Encryption/main.py",
+            "label": "Python entry candidate",
+            "sha": "20736bc76daefaf7eba31b0f62da1d59824df6a7"
+          },
+          {
+            "path": "custom_os/features/Alert_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "55514f5f068cf55adca0bf99c9b8315b2eba02eb"
+          },
+          {
+            "path": "custom_os/features/Antivirus_Engine/main.py",
+            "label": "Python entry candidate",
+            "sha": "f05b730af091191ff136db6f9b14aa6671ac8b71"
+          },
+          {
+            "path": "custom_os/features/Audio_Editor/main.py",
+            "label": "Python entry candidate",
+            "sha": "d5e2efce5f6ad4c59b8a2732cfb229432bfeabf4"
+          },
+          {
+            "path": "custom_os/features/Audio_Mixer/main.py",
+            "label": "Python entry candidate",
+            "sha": "ba3a7aa02ca197101183abcefeeae2c830f0d715"
+          },
+          {
+            "path": "custom_os/features/Battery_Saver/main.py",
+            "label": "Python entry candidate",
+            "sha": "84108f37e2893326f28c417255fa819efbb89f10"
+          },
+          {
+            "path": "custom_os/features/Bluetooth_Stack/main.py",
+            "label": "Python entry candidate",
+            "sha": "b044bbb9969352f4762ef859be4e0a19d3b90a0d"
+          },
+          {
+            "path": "custom_os/features/Buffer_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "7f5859a9b3529431b36f9816f393edf89d87b6e8"
+          },
+          {
+            "path": "custom_os/features/Cache_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "9a0ea39aa8f552fe8e4850d3843823c7e33e48d8"
+          },
+          {
+            "path": "custom_os/features/Chatbot_Framework/main.py",
+            "label": "Python entry candidate",
+            "sha": "99538861a3599577ab24bd2e9013589df876c73c"
+          },
+          {
+            "path": "custom_os/features/CI_CD_Pipeline/main.py",
+            "label": "Python entry candidate",
+            "sha": "28834ffca8ec89d9a7024cdcd6b344c9c5281ae1"
+          },
+          {
+            "path": "custom_os/features/Clipboard_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "3ae96f209a06793ec86f894d694903ea8c2408bf"
+          },
+          {
+            "path": "custom_os/features/Cloud_Sync/main.py",
+            "label": "Python entry candidate",
+            "sha": "19aa0d4b15689a7a976d25d136d937bf8f0e14a2"
+          },
+          {
+            "path": "custom_os/features/Codec_Pack/main.py",
+            "label": "Python entry candidate",
+            "sha": "ab4aa65207922d1c0a43cca2ed4f1a46af2da222"
+          },
+          {
+            "path": "custom_os/features/Compression_Engine/main.py",
+            "label": "Python entry candidate",
+            "sha": "2ace42a62913c20f8424cbec86612f366d49c52b"
+          },
+          {
+            "path": "custom_os/features/Config_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "e8d17b0b62e2c464049cb64f311ec3b02cc5e988"
+          },
+          {
+            "path": "custom_os/features/Container_Runtime/main.py",
+            "label": "Python entry candidate",
+            "sha": "eb767550c50a6ed35feed6c38b36318f9ff0bbfa"
+          },
+          {
+            "path": "custom_os/features/CPU_Governor/main.py",
+            "label": "Python entry candidate",
+            "sha": "2319d0a918d0bcddcc25908dc248e02115e822c4"
+          },
+          {
+            "path": "custom_os/features/Data_Loss_Prevention/main.py",
+            "label": "Python entry candidate",
+            "sha": "535d95ae12021f1d09ea04042cf447312a96bb69"
+          },
+          {
+            "path": "custom_os/features/Deduplication/main.py",
+            "label": "Python entry candidate",
+            "sha": "f282c716f7dd5ea6b0d3a8c24d6603e74c6beadc"
+          },
+          {
+            "path": "custom_os/features/Deep_Learning/main.py",
+            "label": "Python entry candidate",
+            "sha": "4d0f23cb93c52e7233c0e891799dff84be90320b"
+          },
+          {
+            "path": "custom_os/features/Deployment_Tool/main.py",
+            "label": "Python entry candidate",
+            "sha": "b79ad091409101d8a2a700221794dbaaf98bd52a"
+          },
+          {
+            "path": "custom_os/features/Desktop_Environment/main.py",
+            "label": "Python entry candidate",
+            "sha": "b820607865268e00a67f972a9488cd91ce4af292"
+          },
+          {
+            "path": "custom_os/features/DHCP_Server/main.py",
+            "label": "Python entry candidate",
+            "sha": "126ef32e26c318a2c9149800e39dbef6b6a4b2fa"
+          },
+          {
+            "path": "custom_os/features/Disk_Cleaner/main.py",
+            "label": "Python entry candidate",
+            "sha": "eb6884389cf84afe584f809738d21e97f5668071"
+          },
+          {
+            "path": "custom_os/features/DNS_Resolver/main.py",
+            "label": "Python entry candidate",
+            "sha": "4e9a249abc6f6e65668a2a7e585c4591e08ed583"
+          },
+          {
+            "path": "custom_os/features/Driver_Loader/main.py",
+            "label": "Python entry candidate",
+            "sha": "03405a7e9e3464f4b99525c58943270c896af53f"
+          },
+          {
+            "path": "custom_os/features/Energy_Monitor/main.py",
+            "label": "Python entry candidate",
+            "sha": "8f4d0ce3d6cdb3bf15e5c27bb0f8240d2f0371b6"
+          },
+          {
+            "path": "custom_os/features/Event_Loop/main.py",
+            "label": "Python entry candidate",
+            "sha": "3c9b91e1705a533b6b3d3e88c115a9fb35088f78"
+          },
+          {
+            "path": "custom_os/features/File_Indexer/main.py",
+            "label": "Python entry candidate",
+            "sha": "5d044ea2b7b063287fc170577b0e1920f411e295"
+          },
+          {
+            "path": "custom_os/features/File_Recovery/main.py",
+            "label": "Python entry candidate",
+            "sha": "13a2e7cffd00fce4bd8764f9e89260e9b88ade29"
+          },
+          {
+            "path": "custom_os/features/Firewall_Pro/main.py",
+            "label": "Python entry candidate",
+            "sha": "da0c0d112a01e3a3ad3318093929d36ebc5ab075"
+          },
+          {
+            "path": "custom_os/features/Garbage_Collector/main.py",
+            "label": "Python entry candidate",
+            "sha": "9cebf71fe73ead5da1c8f52875919cc6ebbbfbda"
+          },
+          {
+            "path": "custom_os/features/Gesture_Control/main.py",
+            "label": "Python entry candidate",
+            "sha": "29699a6eff367bcfedcd1fc01ca08c76275b6008"
+          },
+          {
+            "path": "custom_os/features/Hardware_Abstraction/main.py",
+            "label": "Python entry candidate",
+            "sha": "577906dbaad55b327958ea927437926cf5604ce9"
+          },
+          {
+            "path": "custom_os/features/Heap_Analyzer/main.py",
+            "label": "Python entry candidate",
+            "sha": "4215f1dc2881bf911feb107396d8d1d0d084a984"
+          },
+          {
+            "path": "custom_os/features/Hibernate_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "9cc4ecbe115242cce75e6d5d48e962f231bd1294"
+          },
+          {
+            "path": "custom_os/features/Image_Processor/main.py",
+            "label": "Python entry candidate",
+            "sha": "def56c805d6d933cd62dbc49c7d9464e57d886aa"
+          },
+          {
+            "path": "custom_os/features/Image_Recognizer/main.py",
+            "label": "Python entry candidate",
+            "sha": "3152807ebb13196c7d4a4284c9cb454bbaed2227"
+          },
+          {
+            "path": "custom_os/features/Intrusion_Detection/main.py",
+            "label": "Python entry candidate",
+            "sha": "e0834133e288a29d72300e432dbad3dcab661473"
+          },
+          {
+            "path": "custom_os/features/Journaling_FS/main.py",
+            "label": "Python entry candidate",
+            "sha": "afab74343f2ae3bd3661be8f52aca8cd3d43f906"
+          },
+          {
+            "path": "custom_os/features/Kernel_Module/main.py",
+            "label": "Python entry candidate",
+            "sha": "5d62e2b8171351c6a3ea6fb8a6bbb0b23e323629"
+          },
+          {
+            "path": "custom_os/features/Load_Balancer/main.py",
+            "label": "Python entry candidate",
+            "sha": "517f402939c98867139a08e8818888dfd76fe983"
+          },
+          {
+            "path": "custom_os/features/Log_Aggregator/main.py",
+            "label": "Python entry candidate",
+            "sha": "a390ab7c917a7fa3f09ed123e33e53122b79efa1"
+          },
+          {
+            "path": "custom_os/features/Malware_Scanner/main.py",
+            "label": "Python entry candidate",
+            "sha": "d01e551de12a56ca1dd301dc4f24a39c816e7a2b"
+          },
+          {
+            "path": "custom_os/features/Media_Library/main.py",
+            "label": "Python entry candidate",
+            "sha": "808f5d8bd9e99a581a27dfec53f0f71e43e0f08d"
+          },
+          {
+            "path": "custom_os/features/Memory_Leak_Detector/main.py",
+            "label": "Python entry candidate",
+            "sha": "73dc7df260028a0b16f66a7fc7127dd8aadc4953"
+          },
+          {
+            "path": "custom_os/features/Memory_Profiler/main.py",
+            "label": "Python entry candidate",
+            "sha": "dd1a7e12ab2a06c1b35665326e4741f84d1ef0f1"
+          },
+          {
+            "path": "custom_os/features/ML_Engine/main.py",
+            "label": "Python entry candidate",
+            "sha": "39a2bb8871225592e654b80bc20b2a50b5594c24"
+          },
+          {
+            "path": "custom_os/features/Monitoring_Stack/main.py",
+            "label": "Python entry candidate",
+            "sha": "2e23a283631928b30a81fac25d5c196455929997"
+          },
+          {
+            "path": "custom_os/features/Multi-Monitor_Support/main.py",
+            "label": "Python entry candidate",
+            "sha": "30c1035dccac6bd7ccf9002238672c87587f8dd3"
+          },
+          {
+            "path": "custom_os/features/Network_Mapper/main.py",
+            "label": "Python entry candidate",
+            "sha": "0720d1b245727b6f0e5b2111a8df1ac89b287ab9"
+          },
+          {
+            "path": "custom_os/features/Network_Monitor/main.py",
+            "label": "Python entry candidate",
+            "sha": "5e433ee74273f36e19da4f4ccfe25c99e60471d0"
+          },
+          {
+            "path": "custom_os/features/Neural_Network/main.py",
+            "label": "Python entry candidate",
+            "sha": "582b1ef6c9c1343df3cd777fd1c4c7bc9bbf022a"
+          },
+          {
+            "path": "custom_os/features/NLP_Processor/main.py",
+            "label": "Python entry candidate",
+            "sha": "85238ffeff46b84bc7604d827721a24913ed0c86"
+          },
+          {
+            "path": "custom_os/features/Notification_Center/main.py",
+            "label": "Python entry candidate",
+            "sha": "df515b45aa8ccebe1f75be6e8e403557584ec2ed"
+          },
+          {
+            "path": "custom_os/features/Packet_Sniffer/main.py",
+            "label": "Python entry candidate",
+            "sha": "04c53ff3da3fa90a226211139a75af2ce7b93860"
+          },
+          {
+            "path": "custom_os/features/Performance_Tuner/main.py",
+            "label": "Python entry candidate",
+            "sha": "5e940a441933ec975f262b544a03cc3e635bba3c"
+          },
+          {
+            "path": "custom_os/features/Power_Profiler/main.py",
+            "label": "Python entry candidate",
+            "sha": "e3bbf70e9b92d94ea03ccd261a1406d3e1ad08b0"
+          },
+          {
+            "path": "custom_os/features/Power_Schedule/main.py",
+            "label": "Python entry candidate",
+            "sha": "c95534535bfd1ef101fa50ccaf4570dcb11cc5f5"
+          },
+          {
+            "path": "custom_os/features/Predictive_Analytics/main.py",
+            "label": "Python entry candidate",
+            "sha": "4ed5b398b2bc809dcc13ebe8752a1381fabc1ef5"
+          },
+          {
+            "path": "custom_os/features/Process_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "2bff3a817bc7ae3b5f2742112fb9b6e4341304ac"
+          },
+          {
+            "path": "custom_os/features/Proxy_Server/main.py",
+            "label": "Python entry candidate",
+            "sha": "da0a9eed6f76c61703176eda8559f8720372752c"
+          },
+          {
+            "path": "custom_os/features/RAM_Optimizer/main.py",
+            "label": "Python entry candidate",
+            "sha": "b67dbb038733abdb5893464c54ef67822afe5cf6"
+          },
+          {
+            "path": "custom_os/features/Recommendation_Engine/main.py",
+            "label": "Python entry candidate",
+            "sha": "8faf4b4329411fa24a81019b971160576f335d10"
+          },
+          {
+            "path": "custom_os/features/Resource_Scheduler/main.py",
+            "label": "Python entry candidate",
+            "sha": "49dea7c0317de11e493a9dc6a321a169a9ac7a5e"
+          },
+          {
+            "path": "custom_os/features/Screen_Recorder/main.py",
+            "label": "Python entry candidate",
+            "sha": "6324e2e2b697c0198e69f981e265e78406819436"
+          },
+          {
+            "path": "custom_os/features/Search_Engine/main.py",
+            "label": "Python entry candidate",
+            "sha": "565b7aa42ff0e1e8c87c91a73fa30fbde462ca10"
+          },
+          {
+            "path": "custom_os/features/Security_Audit/main.py",
+            "label": "Python entry candidate",
+            "sha": "fdba91213096d759784cc0506b6350121f792bb0"
+          },
+          {
+            "path": "custom_os/features/Service_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "edf94fdad55e527ec4b740ed40e6a739f0181482"
+          },
+          {
+            "path": "custom_os/features/Service_Mesh/main.py",
+            "label": "Python entry candidate",
+            "sha": "6cc7160863cf806ded1690353396282b11e1dddf"
+          },
+          {
+            "path": "custom_os/features/Sleep_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "d632f37911e314069a77a5e4fdf766a9fe537a59"
+          },
+          {
+            "path": "custom_os/features/Snapshot_Manager/main.py",
+            "label": "Python entry candidate",
+            "sha": "00a3a0bcae163cae83689ab8e27acfbdc04e3c4e"
+          },
+          {
+            "path": "custom_os/features/Speech_Recognition/main.py",
+            "label": "Python entry candidate",
+            "sha": "44efe59e30ddd2d51caeae5b41043f139a3c8727"
+          },
+          {
+            "path": "custom_os/features/Stack_Optimizer/main.py",
+            "label": "Python entry candidate",
+            "sha": "f5a5cd58ef74961df6e6260f2b1190ce7375dff4"
+          }
+        ],
+        "languages": [
+          "Python",
+          "JavaScript",
+          "PHP",
+          "CSS",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -2770,6 +4343,45 @@
         }
       ],
       "rootItemCount": 6,
+      "tree": {
+        "state": "complete",
+        "treeSha": "25a1d3ccee16c01353b1ed398fd61d92d743dbc7",
+        "entryCount": 13,
+        "fileCount": 10,
+        "directoryCount": 3,
+        "submoduleCount": 0,
+        "totalBytes": 62007,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/7d323e06758c783c/index.json",
+        "indexSha256": "58528bf04a42c53b26cfff8145456516aa5e89d5dee28608f7ecf53c9e2cf1f0",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 10,
+        "treeSha": "25a1d3ccee16c01353b1ed398fd61d92d743dbc7",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "5c795ebfaf2a019fb51a1228e2ff80cae8995aad"
+          }
+        ],
+        "languages": [
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -2884,6 +4496,101 @@
         }
       ],
       "rootItemCount": 13,
+      "tree": {
+        "state": "complete",
+        "treeSha": "7c3b6dee1690067fa3414c5f9f6c57ca0c452d81",
+        "entryCount": 25,
+        "fileCount": 14,
+        "directoryCount": 11,
+        "submoduleCount": 0,
+        "totalBytes": 142337,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/6a17b2a367da7469/index.json",
+        "indexSha256": "2d858642ad7cdcb82be3a8f3bc475327c915055a93bdf6cf875fee0c3405f5cd",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 14,
+        "treeSha": "7c3b6dee1690067fa3414c5f9f6c57ca0c452d81",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "0/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "cb4e2f1958e85a7c795ead4b01552bc2dc925311"
+          },
+          {
+            "path": "1/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "b2780e78a218fdbc0f08047edcec4290b0f8a15c"
+          },
+          {
+            "path": "1/tag/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "70770e067193a8ccc792e9e5bcd4b2e71a2dd55b"
+          },
+          {
+            "path": "2/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "3c24268d808a55f746a0d5387a318f54a2fc530e"
+          },
+          {
+            "path": "3/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "30b30db13f1557da846179ec23b998214b36840c"
+          },
+          {
+            "path": "4/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "0eddab103c2b1fc4fe177f2b128a45b22819e29b"
+          },
+          {
+            "path": "5/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "2e89bd465274b871cf969da3dc0bcbd179ed6dfe"
+          },
+          {
+            "path": "6/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "420924d7b67601c723c74bf9fe29648052313bb5"
+          },
+          {
+            "path": "7/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "dc7942436589cfd592fdd1220db7c4295fdcc410"
+          },
+          {
+            "path": "8/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "3f3d6568ea6a4f9966a0165c04ecf6bc691cc8a4"
+          },
+          {
+            "path": "9/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "a737591d6cc81d8c49cb68b9b6d852eadc52e627"
+          },
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "a60e5514c3a3189cb76375b252e2daea9f0bb728"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Python"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -2923,6 +4630,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/82113b8982f81df8/index.json",
+        "indexSha256": "9251f8ca65c55c0280c6bfc6ac262af66dedcc0fe3e17f8a60b8d78b2e69664f",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3011,6 +4749,47 @@
         }
       ],
       "rootItemCount": 7,
+      "tree": {
+        "state": "complete",
+        "treeSha": "ff058088933ee6988b0ecd323adedf6415b79785",
+        "entryCount": 8,
+        "fileCount": 7,
+        "directoryCount": 1,
+        "submoduleCount": 0,
+        "totalBytes": 24826,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/61437218029ae325/index.json",
+        "indexSha256": "5bc85179f8570cec245d13a98bd42a4852c0e2a70062f962a8c27ddff1507939",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 7,
+        "treeSha": "ff058088933ee6988b0ecd323adedf6415b79785",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "d66228df39ec94616728def44c28775768082fce"
+          }
+        ],
+        "languages": [
+          "Python",
+          "CSS",
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3143,6 +4922,37 @@
         }
       ],
       "rootItemCount": 17,
+      "tree": {
+        "state": "complete",
+        "treeSha": "133c4e4c1d27477395a5823a3db5d4e0cba5a656",
+        "entryCount": 17,
+        "fileCount": 2,
+        "directoryCount": 0,
+        "submoduleCount": 15,
+        "totalBytes": 532,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/b696cc0ad464f32c/index.json",
+        "indexSha256": "e54743049c1fba5d856e6f583b2eb8641623b94ef798deb8a2be03c1d9e4f6d0",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 2,
+        "treeSha": "133c4e4c1d27477395a5823a3db5d4e0cba5a656",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3203,6 +5013,50 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "8299eaee69d92e4918f428e4bbb0fec06f8527cb",
+        "entryCount": 4,
+        "fileCount": 3,
+        "directoryCount": 1,
+        "submoduleCount": 0,
+        "totalBytes": 48353,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/76a08c58c285d437/index.json",
+        "indexSha256": "76430b4b33fa40a9de0727cc2a094f018262e8aa5a5502615e629a3183c65511",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "8299eaee69d92e4918f428e4bbb0fec06f8527cb",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "bcaa1340da81a7009be807901c6e818688174fcf"
+          },
+          {
+            "path": "myapp/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "72e7c32b5c43418155fab2177d0ae613f05b6a8f"
+          }
+        ],
+        "languages": [
+          "HTML"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3248,6 +5102,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "799833ab5935b5af840f3b52930717812122b57d",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 7,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/b4828b1bdf2ba2ee/index.json",
+        "indexSha256": "663edda06b6ded934af478670c0967eadf945a26f1c55a445d8ee437f498666f",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "799833ab5935b5af840f3b52930717812122b57d",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3287,6 +5172,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/2369cb359714e96c/index.json",
+        "indexSha256": "a9b9ab20a3e97b325ce63904fc9b29a1f3a402e7867dd641028b05935b3adeb5",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3398,6 +5314,66 @@
         }
       ],
       "rootItemCount": 10,
+      "tree": {
+        "state": "complete",
+        "treeSha": "4c816c707a52daf61817c7d2ad8924d401c5cc55",
+        "entryCount": 45,
+        "fileCount": 30,
+        "directoryCount": 15,
+        "submoduleCount": 0,
+        "totalBytes": 172348,
+        "executableFileCount": 6,
+        "sizeUnknownCount": 0,
+        "redactedCount": 3,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c87a98028b9d9d81/index.json",
+        "indexSha256": "ff6879f2b98d5678f1fe818ab454384a26a118b44991fe4362d1595d7c9bb8a4",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 30,
+        "treeSha": "4c816c707a52daf61817c7d2ad8924d401c5cc55",
+        "executableFileCount": 6,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          "kernel-launcher/scripts/https-server.py",
+          "kernel-launcher/scripts/setup-complete.sh",
+          "kernel-launcher/scripts/start-server.sh",
+          "scripts/launcher-daemon.sh",
+          "scripts/setup-kernel-launcher.sh",
+          "setup-kernel-launcher.sh"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "kernel-launcher/www/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "1a74f4a7112d7a3716b837335fb8e1e8a9242ae8"
+          },
+          {
+            "path": "pencarianutama/admin/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "8d0c51410a4216c987943fc01cbdce3a603649f3"
+          },
+          {
+            "path": "pencarianutama/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "b22ba54529f613fb2c63964594a1b062e67c7b30"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "CSS",
+          "Shell",
+          "Python"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3443,6 +5419,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "7f21b8e4e0db548433d03b3d1222533f77fa303e",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 194,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/50f335f08844c80d/index.json",
+        "indexSha256": "d8647f8783b4cf58b92da0a3ec5784d64d8dcc6705f2b91ac60651855f35d230",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "7f21b8e4e0db548433d03b3d1222533f77fa303e",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3482,6 +5489,37 @@
       "rootPath": ".",
       "rootItems": [],
       "rootItemCount": 0,
+      "tree": {
+        "state": "empty",
+        "treeSha": "",
+        "entryCount": 0,
+        "fileCount": 0,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 0,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c69df95925ae3e18/index.json",
+        "indexSha256": "8d9befa363ef0bf7e1148345b64ed92bb9976c21493174868d1b7eaffb720933",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-empty",
+        "codeExecution": "not-executed",
+        "fileCount": 0,
+        "treeSha": "",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3590,6 +5628,462 @@
         }
       ],
       "rootItemCount": 8,
+      "tree": {
+        "state": "complete",
+        "treeSha": "f0928a1da81b67aae87778cf35a699b3a37efb91",
+        "entryCount": 11200,
+        "fileCount": 8742,
+        "directoryCount": 2458,
+        "submoduleCount": 0,
+        "totalBytes": 371270731,
+        "executableFileCount": 17,
+        "sizeUnknownCount": 0,
+        "redactedCount": 81,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/5793971e16907578/index.json",
+        "indexSha256": "06903e7f889980f273f5bc6bbc92358ee1821729220599285838e2231ab93a72",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 8742,
+        "treeSha": "f0928a1da81b67aae87778cf35a699b3a37efb91",
+        "executableFileCount": 17,
+        "sizeUnknownCount": 0,
+        "executablePaths": [
+          "mediadigital/sistem-protokol-pipa/23_skrip-instal.sh",
+          "mediadigital/UIREBER/aireber.digital/auto_content/scheduler.php",
+          "mediadigital/UIREBER/create_digital_structure.sh",
+          "mediadigital/UIREBER/desainkreatif.digital/designdigital.digital/generate_pages.sh",
+          "mediadigital/UIREBER/generate_nav_for_folders.sh",
+          "mediadigital/UIREBER/identitasakses.digital/PusatDigital.digital/fitur/create_features.sh",
+          "mediadigital/UIREBER/implementasi_menus_digital.sh",
+          "mediadigital/UIREBER/kapasitasramrom.digital/init_storage_system.sh",
+          "mediadigital/UIREBER/kapasitasramrom.digital/rumus_bermutu_tinggi.sh",
+          "mediadigital/UIREBER/kapasitasramrom.digital/scripts/init_storage_system.sh",
+          "mediadigital/UIREBER/mediakonten.digital/mediadigitalpusatiklan.digital/manajemen_iklan/generate_files.sh",
+          "mediadigital/UIREBER/mediakonten.digital/videolife.digital/generate_files.sh",
+          "mediadigital/UIREBER/pengembangansoftware.digital/editorkode.digital/generate_menus.sh",
+          "mediadigital/UIREBER/reconstruct_all.sh",
+          "mediadigital/UIREBER/rename_folders.sh",
+          "mediadigital/UIREBER/update_imports.py",
+          "mediadigital/UIREBER/update_index.sh"
+        ],
+        "runnableCandidates": [
+          {
+            "path": "elite/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "a5de03cf7bb0c817b1af7c4a7ba62733137efedf"
+          },
+          {
+            "path": "elite/package.json",
+            "label": "Node.js package/entry metadata",
+            "sha": "72bffe18b10a9197268c8b8d560a9dcda9120437"
+          },
+          {
+            "path": "mediadigital/dashboard/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "0d4a92b67c03ab8e8452b09c04fa9e59637fd6d0"
+          },
+          {
+            "path": "mediadigital/I/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "5fcb32d75dded87405e53e1fce5f0fdb358c98fb"
+          },
+          {
+            "path": "mediadigital/I/l/e/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "f47ba8d47f225bfe1ed9fdf68072e95ccb828688"
+          },
+          {
+            "path": "mediadigital/index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "69a0ff53ac34272c56d1326b1f5e6c29e2ba382b"
+          },
+          {
+            "path": "mediadigital/server/ai-proxy/package.json",
+            "label": "Node.js package/entry metadata",
+            "sha": "d429d7c1cb903f249113df997fe80ba886fbe085"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/AgenRAG.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "0603eb953915b7761e1083be131afb3587162bb4"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/ai.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "58857e0316e72dbb38e360acf04b4fa56ac4f2aa"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/aichatreber.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "b333988cdde4393b6d2392a40b721a1a2015b7be"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/aistudiodigital.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "adfeac0e90cdf86f1e5639395eead3aeeea935a0"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/AITepi.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "a174fb646ae4f8b9119a564ea108f341fc692fc7"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/automind.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "9e561a8a8fed9819dc9d36e16cc13a1e3924c215"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/botwise.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "0ee71cc4dad41332deddec5111f97c1f1f6f7823"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainAplikasi.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "fa3977b49e91c75a1f2cb433385f92f87b8e1621"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainArsitektur.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c3241c7601bd5d2512c790c4df215fcbfc21ad2b"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainFesyen.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c73dfb95be92fceffb0b3082f0a3e32f1730d508"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainGrafis.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "8748942d94135c85460caf18f17c93bc59ed4b11"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainIndustri.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "99fac0cfb9f53793a1b0e2e5a7e722cbaa2de80a"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainInterior.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "21a1bd350a6086663b91241742263d76b2cc462b"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainKarakter.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "52e4ba8f5635d577daece19513f21dec7d694c01"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainLingkungan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "710b9e314728a40ac6717f3c177f3a138eb7aa38"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/DesainMakanan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "d9692f38a5fa3803c045e736f65ce20884865602"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/digital.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "a47bfcadf9604a0b138225c565a315d21f4341de"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/EmbeddingVektor.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "20f240f24db22b75ef9fa06a9c65b2f97dc2f15b"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/GenerasiGambar.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "be371230cb9779712ae3c8bc2a3e97d58320e5ea"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/InferensiKausal.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "ef5966ba746b0ebf75bb8adeb09eef0a5e87f92d"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/InvestorMalaikat.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "48069840cdf40fe89104eec6855f520c4abda62e"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/JaringanBayes.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "a59e08ed5a672b75d4ad1f31d3fa7aaab6950cae"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/JaringanGeneratif.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "787bc4030b3624621d39191c0240c275456875f6"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/JaringanSaraf.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "fc19b4989ca95a54fb9407add4220d463137aa38"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/KeanekaragamanHayati.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67addf3550b04b662a072754261241a0ceda3474"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/LintasRantai.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "cb7fc816db6182bdde13799c85491e056862cca7"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/ListrikTenagaAir.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "5272319500da8d54e53c71b6d87ef158568ba71c"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/nexchat-ai.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "79eee7c2f59e9f3c3f50b7e7ceb311b70c2ce3de"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PembelajaranFederasi.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c538046d424f9f5c44acbd62a07d8d51fa51e918"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PemindaianDep.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "3c8e62abff896c65a734e80c0fb0b5c94ac1e61c"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PenilaianDarurat.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "2574a4addbb792c46af4c262f11899e1f5779a5c"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PenjelasanAI.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c312510c6d296b3ea8baf9824bc8d3a714f55934"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PenyesuaiKlaim.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "5d97bedecd9b1554102e08840d627c882e794405"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PenyimpananBaterai.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "9c37d61ade60c48e355fb62023df60873349adee"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/PerbaikiOtentikasi.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "dfadf937d7fb46682efcb1c2c181b66f0288b596"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/ProyekAI.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "3b22d2e99baf2e07ab724ce294bfe74b8543043d"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/ragreber.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "41dcff7e5f268c9cc63e193b884a2c80d0714495"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/RantaiBlok.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "93580bbce9578fbb209bce91097f8835965d3f44"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/ReduksiDimensi.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "417dc9bef1fa56609baa13ddcac222c7b735bf51"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/RekayasaFitur.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "28b8be167ac094c47a001def0103b36403602880"
+          },
+          {
+            "path": "mediadigital/UIREBER/ai_machinelearning.digital/VendorEmail.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "b1b89f09cd4c9a8339ce5d513a8fa8e8e6ecacc1"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisBinari.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "ca739dc58a97fb4aabb7ba728ecd876b59236a50"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisBisnis.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "2c65188e11163bf397f122b94150d1faccd95341"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisGIS.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "daa9b3c5ca4976e94b54a7fb79352c37d7fb24f5"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisKegagalan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "1e2a511f10b8379ff9a2d4d13518f0e53f5fd681"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisKlaster.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "3c1587d6520a09255ba6920b6881d35ed1de411f"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisKontras.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "fde1328bf5dd891f267cb092bdb7de69a712fedb"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/AnalisisSpasial.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "695c862b04cbe375fc8f809a84458ce36f429e25"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/analitik_laporan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "74642ecf354e39fc1fb8a2409b5fcafce465de62"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/Benchmarking.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "7b1965f042623f89b570ef7a8a4346525847f057"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/DeteksiAnomali.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "8c4194fdf5668da3dad9db922839e4a3b8bb5916"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/DeteksiPenipuan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "b1965b2d7261583fb7b05c757796587de3b9ca93"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/DeteksiPerubahan.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "7e9b788b528cd70d69f576614f75e7dcb046ce4b"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/FabrikasiData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "70d223c590d55b6723ca0568ddb81b7148dc1180"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/FokusGrup.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "a0b81991aaca829e1f7b8460c0415b8675463a1e"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/KlasterBasisData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "5dd9a4c5bbd8bf88a86b8ee5ceb4c1d33a3def60"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/ObservasiData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "bdd495f23f25882a9a1b7a654e2e3a501b162399"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PelabelanData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "83dcdff9d653358b209d2a080268b8008702ee71"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PemetaanGeospasial.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "bf0e0e9f3d732ec0270b8d5a229b19c5d230de6c"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PengolahanData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "9532f9610faba8804fa3d335a1a34f6a253b5f9b"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PengujianData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "6cc6e51a6f0e5d8bd75ad96d6df4f89318ec3d53"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PeramalanData.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "94f106e311dbaf1eb3b49f7a2ea68e1a88fb86c3"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/PermintaanRealtime.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c120a68ee4950efb53e142fd926de762af083abf"
+          },
+          {
+            "path": "mediadigital/UIREBER/analisisdata.digital/UjiAB.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "8da75bb87d997bbdb483534536eae2fc3c32c760"
+          },
+          {
+            "path": "mediadigital/UIREBER/analytics.digital/api/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "c9bf5971ea06aead5acc2be91c773030ee11d4bd"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_analitik_v1.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67590ee8484362b32572c35f51735992a18a9cd8"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_analitik_v2.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67590ee8484362b32572c35f51735992a18a9cd8"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_analitik_v3.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67590ee8484362b32572c35f51735992a18a9cd8"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_analitik_v4.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67590ee8484362b32572c35f51735992a18a9cd8"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_analitik_v5.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "67590ee8484362b32572c35f51735992a18a9cd8"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_eksperimen_v1.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "006f65e5568116a0c4a42f157dc408f3b257f07b"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_eksperimen_v2.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "006f65e5568116a0c4a42f157dc408f3b257f07b"
+          },
+          {
+            "path": "mediadigital/UIREBER/arsipversi.digital/Analitik_eksperimen_v3.digital/php/index.php",
+            "label": "PHP web entry candidate",
+            "sha": "006f65e5568116a0c4a42f157dc408f3b257f07b"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "JavaScript",
+          "PHP",
+          "CSS",
+          "Hack"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3635,6 +6129,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "c8be8b685d26f8e74a1470ad2f64b4cd7f0d7f06",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 489,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/3778f207169b4693/index.json",
+        "indexSha256": "d1737776d3398d8568e97274a781a7ece726d722b5236c82be92695c6620b537",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "c8be8b685d26f8e74a1470ad2f64b4cd7f0d7f06",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3680,6 +6205,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "7561a88995d93ffaa5f0d01ed746715a4ecb8d28",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 13,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/84b2a250028daf43/index.json",
+        "indexSha256": "6e8260daac8c9691b2677021337a0fbbd6a8eaf04798028a1b1bb17afc1de60d",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "7561a88995d93ffaa5f0d01ed746715a4ecb8d28",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3725,6 +6281,37 @@
         }
       ],
       "rootItemCount": 1,
+      "tree": {
+        "state": "complete",
+        "treeSha": "40672ab49c089f3d863315cc320b52ae042a41d9",
+        "entryCount": 1,
+        "fileCount": 1,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 7,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/2cfab7a113baab38/index.json",
+        "indexSha256": "a0928cf40fa90f74b3c6171752f3036099811a07a08a2ceea5f49f9df1d2863c",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 1,
+        "treeSha": "40672ab49c089f3d863315cc320b52ae042a41d9",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [],
+        "languages": [],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3801,6 +6388,46 @@
         }
       ],
       "rootItemCount": 4,
+      "tree": {
+        "state": "complete",
+        "treeSha": "0749cc77af9c749e7deacf6f2f9c1e5845bb24d4",
+        "entryCount": 8,
+        "fileCount": 6,
+        "directoryCount": 2,
+        "submoduleCount": 0,
+        "totalBytes": 15160,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/c015275827bdad14/index.json",
+        "indexSha256": "e41de50be80176eb676795610e0373f17faebad38c4b95e7bdaf3b53fda8d084",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 6,
+        "treeSha": "0749cc77af9c749e7deacf6f2f9c1e5845bb24d4",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "e9afe1ada8f2007c696f897e14429adee593f9a2"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "JavaScript"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3865,6 +6492,46 @@
         }
       ],
       "rootItemCount": 3,
+      "tree": {
+        "state": "complete",
+        "treeSha": "c12e530b03a1f35077d5b6fcb5aad37b9a7a9d07",
+        "entryCount": 3,
+        "fileCount": 3,
+        "directoryCount": 0,
+        "submoduleCount": 0,
+        "totalBytes": 25376,
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "redactedCount": 0,
+        "fallbackUsed": false,
+        "gitFallbackUsed": false,
+        "indexUrl": "data/trees/ccc05d5971f71837/index.json",
+        "indexSha256": "8e06032d4b6d41e7bb867a39bb1d7c88457025f15d85dcff3f5072aaca34f519",
+        "pageSize": 500,
+        "entries": []
+      },
+      "staticAssessment": {
+        "mode": "static-metadata-only",
+        "integrityCoverage": "tree-complete",
+        "codeExecution": "not-executed",
+        "fileCount": 3,
+        "treeSha": "c12e530b03a1f35077d5b6fcb5aad37b9a7a9d07",
+        "executableFileCount": 0,
+        "sizeUnknownCount": 0,
+        "executablePaths": [],
+        "runnableCandidates": [
+          {
+            "path": "index.html",
+            "label": "Browser HTML entry candidate",
+            "sha": "aa94afa7d6cd0df2b8b79d1f2d11d3b3d6da4032"
+          }
+        ],
+        "languages": [
+          "HTML",
+          "Io"
+        ],
+        "note": "Struktur dan hash Git saja; bukan audit keamanan atau bukti bahwa kode aman dijalankan."
+      },
       "traffic14d": {
         "views": {
           "count": 0,
@@ -3883,5 +6550,5 @@
       }
     }
   ],
-  "dataSha256": "7e0bbcd6eeedfaebd9178fe6206400477901e83c909d249e843f54b1d65cc4ee"
+  "dataSha256": "ea5554c85b9a986c0d6a2861a56b889b89e4186e9dcff819907d00ebb111a283"
 }

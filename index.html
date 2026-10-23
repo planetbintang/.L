@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#ffffff" />
-    <meta name="description" content="Planetbintang Root System — dashboard publik untuk peta repositori, domain, host, SHA, aplikasi, dan trafik agregat." />
+    <meta name="description" content="Planetbintang Root System — file manager path / untuk indeks Git, peta repositori, integritas struktur, host, dan trafik agregat." />
     <link rel="icon" href="./system-icon.png" type="image/png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./dashboard.css?v=20261023-system-shell-blue" />
+    <link rel="stylesheet" href="./dashboard.css?v=20261023-file-tree-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -18,7 +18,7 @@
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Navigasi sistem">
-        <a href="#overview">Sistem</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
+        <a href="#overview">Sistem</a><a href="#fileManager">File Manager</a><a href="#repositories">Repositori</a><a href="#hosts">Domain & host</a>
       </nav>
       <div class="topbar-actions">
         <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
@@ -54,6 +54,36 @@
         <article class="metric-card"><span class="metric-label">PUBLIK / PRIVAT</span><strong><span id="metricPublic">—</span><i>/</i><span id="metricPrivate">—</span></strong><small>nama & tautan ditampilkan atas permintaan pemilik</small></article>
         <article class="metric-card"><span class="metric-label">GITHUB PAGES</span><strong id="metricPages">—</strong><small>situs statis yang terdeteksi aktif</small></article>
         <article class="metric-card metric-card-dark"><span class="metric-label">INDEKS SHA-256</span><strong class="hash-value" id="metricHash">—</strong><small>sidik data snapshot saat ini</small></article>
+      </section>
+
+      <section class="section-block file-manager-section" id="fileManager" aria-labelledby="fileManagerTitle">
+        <div class="section-heading">
+          <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
+          <div class="file-manager-brand"><img src="./file-manager-icon.png" alt="Ikon folder sistem Planetbintang" /><span>ROOT PATH <b>/</b></span></div>
+        </div>
+        <div class="fm-toolbar panel">
+          <label class="fm-repo-label"><span>REPOSITORY</span><select id="fileRepoSelect" aria-label="Pilih repositori"></select></label>
+          <button class="text-button" id="fileUpButton" type="button" disabled>↑ Folder atas</button>
+          <form class="fm-path-form" id="filePathForm"><label><span>PATH</span><input id="filePathInput" value="/" autocomplete="off" spellcheck="false" aria-label="Path folder" /></label><button class="text-button" type="submit">Buka</button></form>
+          <label class="fm-search"><span aria-hidden="true">⌕</span><input id="fileSearchInput" type="search" placeholder="Cari pada item folder termuat" autocomplete="off" aria-label="Cari di daftar folder yang dimuat" /></label>
+        </div>
+        <div class="fm-status" aria-live="polite"><span id="fileTreeStatus">Memuat peta pohon…</span><span id="fileIntegrityStatus">Integritas struktur: —</span><span id="fileActivityStatus">Aktivitas: —</span></div>
+        <div class="fm-layout">
+          <aside class="fm-sidebar" aria-label="Folder pada tingkat ini"><div class="fm-pane-heading">FOLDER / PATH</div><button class="fm-root-button" id="fileRootButton" type="button">/ root</button><div id="fileFolderShortcuts" class="fm-folder-shortcuts"></div></aside>
+          <section class="fm-browser" aria-label="Isi folder">
+            <nav id="fileBreadcrumbs" class="fm-breadcrumbs" aria-label="Breadcrumb path"></nav>
+            <div id="fileTiles" class="file-tiles" role="list" aria-label="Kartu folder dan file"></div>
+            <button id="fileLoadMoreButton" class="text-button fm-load-more" type="button" hidden>Muat halaman berikutnya</button>
+            <div id="fileEmpty" class="fm-empty" hidden>Tidak ada item di path ini.</div>
+          </section>
+          <aside class="fm-inspector" aria-label="Informasi item dan penilaian statis">
+            <div class="fm-pane-heading">STATIC ASSESSMENT</div>
+            <h3 id="fileSelectionTitle">Pilih file atau folder</h3>
+            <div id="fileSelectionData" class="fm-selection-data">Isi file tidak dimuat. Penilaian memakai metadata tree, Git SHA, mode, ukuran, bahasa dan nama entry point.</div>
+            <a id="fileOpenGitHub" class="repo-action primary fm-open-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Buka path di GitHub ↗</a>
+            <div class="fm-assessment-note">Tidak menjalankan kode repo dan bukan audit kerentanan. Jalur rahasia/credential terdeteksi disaring.</div>
+          </aside>
+        </div>
       </section>
 
       <section class="settings-panel panel" id="settingsPanel" hidden aria-labelledby="settingsTitle">
@@ -93,7 +123,7 @@
 
       <section class="privacy-note panel" aria-label="Batasan data publik">
         <span class="privacy-symbol" aria-hidden="true">i</span>
-        <div><strong>Metadata publik, bukan salinan sistem</strong><p>Dashboard menampilkan nama/tautan repo, status Pages, branch, SHA commit, tipe aplikasi, peta root tingkat atas yang difilter, DNS publik, serta angka trafik repo agregat 14 hari jika GitHub menyediakannya. Tidak ada isi file, rahasia, daftar anggota, alamat IP pengunjung, atau data trafik individual. GitHub Pages hanya menyajikan aset statis; PHP, server Python, shell, Terraform, database, dan kode backend tidak dieksekusi di sini.</p></div>
+        <div><strong>Metadata publik, bukan salinan isi kode</strong><p>File Manager menampilkan nama path seluruh pohon repo terpilih dan hash/ukuran metadata Git; beberapa path sensitif disaring. Nama serta path repo privat terlihat publik sesuai instruksi pemilik, tetapi isi blob file, kredensial, anggota, alamat IP pengunjung, dan trafik individual tidak diterbitkan. Pemeriksaan hanya membaca struktur dan tidak menjalankan kode. GitHub Pages statis; PHP, Python server, shell, Terraform, database, dan backend repo tidak dieksekusi di sini.</p></div>
       </section>
     </main>
 
@@ -101,5 +131,6 @@
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
     <script src="./dashboard.js?v=20261023-system-shell-blue" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
+    <script src="./file-manager.js?v=20261023-file-tree-v1" defer></script>
   </body>
 </html>

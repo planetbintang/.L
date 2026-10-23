@@ -5,15 +5,26 @@ Dashboard publik utama untuk workspace repositori Planetbintang: **https://plane
 ## Dashboard utama
 
 - Mengindeks daftar 45 repo yang dipilih di `data/repository-scope.json`, dengan nama dan tautan repo privat ditampilkan publik sesuai instruksi pemilik.
+
 - Menyediakan pencarian dan filter visibilitas/jenis aplikasi.
-- Memetakan branch, SHA commit, status Pages/domain, host dan DNS IP publik, tipe aplikasi, serta item filesystem tingkat atas yang difilter.
+
+- Memetakan branch, SHA commit, status Pages/domain, host dan DNS IP publik, tipe aplikasi, dan pohon file Git bertingkat pada scope repo tetap.
+
+- File Manager membuka path `/` untuk tiap repo, menavigasi breadcrumb folder, mencari item yang sedang dimuat, dan menampilkan kartu item tepat 40×60 px. Folder besar dimuat per halaman hingga 500 item.
+
+- Penilaian statis menampilkan status cakupan pohon, Git tree SHA, mode executable, ukuran jika tersedia, bahasa, commit terakhir, serta kandidat entry point/manifest. Ini pemeriksaan struktur saja, bukan audit keamanan.
+
 - Menampilkan trafik repo agregat GitHub untuk jendela hingga 14 hari jika tersedia; bukan analytics pengunjung situs.
+
 - Panel Pengaturan menampilkan alias root, status sumber GitHub, status snapshot, opsi tema lokal, dan kebijakan privasi.
-- Tidak mengeksekusi kode repo. GitHub Pages hanya menyajikan aset statis; backend PHP/Python, shell, Terraform, database dan binary harus dijalankan pada runtime asal yang sesuai.
+
+- Tidak mengeksekusi kode repo. Snapshot hanya menyimpan path dan metadata Git (SHA, mode, ukuran bila tersedia); isi blob tidak diunduh. Path yang menyerupai secret, credential, token, password, key, env, backup, atau dump disaring. Nama/path repo privat tampil publik atas permintaan pemilik.
+
+- GitHub Pages hanya menyajikan aset statis; backend PHP/Python, shell, Terraform, database dan binary harus dijalankan pada runtime asal yang sesuai. File Manager tidak menyediakan sandbox eksekusi.
 
 ## Sinkronisasi data
 
-Snapshot awal berada di `data/repositories.json`. Workflow `.github/workflows/sync-dashboard.yml` dirancang berjalan setiap hari pukul 04:17 UTC atau secara manual. Untuk memperbarui data repo privat, tambahkan secret Actions bernama `PLANETBINTANG_READ_TOKEN` pada repo ini. Gunakan token read-only yang dapat membaca metadata, daftar isi tingkat atas, dan trafik untuk repo dalam scope; token tidak masuk ke frontend. Tanpa secret itu workflow berhenti aman dan mempertahankan snapshot saat ini.
+Snapshot metadata berada di `data/repositories.json`; pohon direktori per repo disimpan sebagai `data/trees/<id>/index.json` dan shard gzip per folder, maksimal 500 item per halaman. Workflow `.github/workflows/sync-dashboard.yml` dirancang berjalan setiap hari pukul 04:17 UTC atau secara manual. Untuk memperbarui repo privat, tambahkan secret Actions bernama `PLANETBINTANG_READ_TOKEN` pada repo ini. Gunakan token read-only yang dapat membaca metadata/tree serta trafik untuk repo dalam scope; fallback Git hanya memakai `--filter=blob:none --no-checkout`. Token tidak masuk ke frontend. Tanpa secret itu workflow berhenti aman dan mempertahankan snapshot saat ini.
 
 Rincian publikasi dan privasi: [DASHBOARD-DATA.md](./DASHBOARD-DATA.md).
 
@@ -31,7 +42,7 @@ Lalu buka `http://localhost:4173/`. Untuk menjalankan API shell lama, ikuti petu
 
 ## Root Shell dan fitur sistem
 
-Tombol **Shell** pada header menyediakan konsol perintah browser: `help`, `status`, `list`, `search <teks>`, `open <nama-repo>`, `hosts`, dan skrip allowlist `run repo-summary`, `run pages-audit`, `run dns-map`, `run traffic-summary`, serta `run root-map <nama-repo>`. Setiap repo tampil sebagai kartu fitur dengan tipe aplikasi perkiraan, SHA, deployment, traffic agregat dan root map yang difilter.
+Tombol **Shell** pada header menyediakan konsol perintah browser allowlist baca-saja: `help`, `status`, `list`, `search <teks>`, `open <nama-repo>`, `hosts`, serta ringkasan repo, Pages, DNS, trafik dan root map. File Manager menampilkan pohon lengkap sesuai status setiap repo; folder besar diminta secara bertahap.
 
 Shell publik ini hanya melakukan operasi baca-saja pada snapshot dan navigasi ke host yang sudah terdaftar. Ia sengaja tidak mempunyai `eval`, akses shell OS, write, atau kemampuan menjalankan skrip arbitrer/kode repo. Eksekusi proses sungguhan membutuhkan backend terautentikasi dan runtime terisolasi; GitHub Pages tidak menyediakan fungsi itu.
 
