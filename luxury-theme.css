@@ -428,6 +428,81 @@ body {
   .repo-card { display: grid; grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Workspace menu layout follows the supplied dashboard reference while retaining the dark luxury theme. */
+.workspace-section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background: linear-gradient(145deg, rgba(13, 22, 36, .98), rgba(7, 12, 21, .98));
+}
+.workspace-heading {
+  align-items: center;
+  padding: 0 0 18px;
+  border-bottom: 1px solid rgba(99, 141, 211, .22);
+}
+.workspace-heading h2 { font-family: "Manrope", sans-serif; font-size: clamp(22px, 3vw, 34px); letter-spacing: -.045em; }
+.workspace-identity {
+  border: 1px solid rgba(91, 137, 211, .32);
+  background: rgba(24, 42, 68, .7);
+}
+.workspace-nav {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(91, 137, 211, .3);
+  background: rgba(5, 10, 18, .55);
+}
+.workspace-nav button {
+  min-height: 38px;
+  border: 1px solid rgba(78, 120, 190, .2);
+  background: rgba(18, 31, 51, .75);
+  color: #9eb0c9;
+  font-family: var(--lux-mono);
+  font-size: 9px;
+  letter-spacing: .02em;
+}
+.workspace-nav button:hover { background: rgba(31, 85, 185, .32); color: #eff5ff; }
+.workspace-nav button[aria-selected="true"] { background: linear-gradient(135deg, #2367df, #123b95); color: #fff; border-color: #397eff; box-shadow: 0 8px 20px rgba(21, 84, 203, .22); }
+.workspace-nav .workspace-ai-tab { margin-left: 0; border-color: rgba(155, 120, 255, .38); color: #bca8ff; }
+.workspace-panel { min-height: 300px; }
+.workspace-panel-heading { align-items: center; padding-bottom: 15px; border-bottom: 1px solid rgba(99, 141, 211, .18); }
+.workspace-panel-heading h3 { font-family: "Manrope", sans-serif; font-size: clamp(18px, 2.2vw, 26px); }
+.workspace-kpis, .analytics-kpis { gap: 8px; }
+.workspace-kpis article, .analytics-kpis article {
+  min-height: 82px;
+  border: 1px solid rgba(91, 137, 211, .3);
+  background: linear-gradient(145deg, rgba(27, 53, 84, .8), rgba(13, 25, 43, .9));
+}
+.workspace-create-form, .code-toolbar, .platform-toolbar {
+  border-color: rgba(91, 137, 211, .25);
+  background: rgba(10, 20, 34, .82);
+}
+.kanban-board { gap: 8px; }
+.kanban-column { border-color: rgba(91, 137, 211, .28); background: rgba(16, 30, 49, .76); }
+.kanban-column > header { border-bottom-color: rgba(91, 137, 211, .24); color: #d5e3f8; }
+.task-card { border-color: rgba(91, 137, 211, .25); background: rgba(23, 42, 68, .85); }
+.issue-workspace, .account-layout { border-color: rgba(91, 137, 211, .3); background: rgba(12, 23, 39, .9); }
+.issue-filters, .account-menu { border-color: rgba(91, 137, 211, .25); background: rgba(15, 31, 51, .88); }
+.issue-list-pane { border-color: rgba(91, 137, 211, .25); }
+.issue-row { border-bottom-color: rgba(91, 137, 211, .18); background: rgba(12, 23, 39, .72); }
+.issue-row:hover, .issue-row.is-selected { background: rgba(30, 79, 165, .3); }
+.issue-detail, .account-form, .analytics-card, .ai-compose { background: rgba(10, 20, 34, .68); }
+.help-cards { gap: 8px; }
+.help-cards > a, .help-cards > article { min-height: 126px; border-color: rgba(91, 137, 211, .28); background: linear-gradient(145deg, rgba(24, 45, 72, .82), rgba(11, 21, 36, .9)); }
+.help-cards > a:hover { border-color: #397eff; background: rgba(29, 78, 168, .35); }
+.workspace-primary { box-shadow: 0 8px 18px rgba(20, 87, 218, .2); }
+@media (max-width: 900px) {
+  .workspace-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .workspace-heading { align-items: flex-start; }
+  .workspace-nav { display: flex; overflow-x: auto; grid-template-columns: none; }
+  .workspace-nav button { flex: 0 0 auto; min-width: 116px; }
+  .workspace-panel-heading { align-items: flex-start; flex-direction: column; }
+  .workspace-kpis, .analytics-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
 :root { --body-gutter: max(50px, 5vw); }
 .shell {
