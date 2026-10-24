@@ -338,3 +338,37 @@ body {
   .provider-matrix, .workspace-section, .platform-page, .settings-panel, .privacy-note { border-left: 0; border-right: 0; }
   .footer { padding-left: 14px; padding-right: 14px; }
 }
+
+/* Header rail aligned with the full-width surfaces below it. */
+@media (min-width: 1101px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(235px, 1fr) minmax(0, 2fr) minmax(300px, 1fr);
+    align-items: center;
+    column-gap: clamp(18px, 3vw, 48px);
+    padding-left: clamp(24px, 4.5vw, 70px);
+    padding-right: clamp(24px, 4.5vw, 70px);
+  }
+  .brand { justify-self: start; }
+  .main-nav { width: 100%; justify-content: center; gap: clamp(4px, 1.1vw, 18px); }
+  .topbar-actions { justify-self: end; }
+}
+@media (min-width: 651px) and (max-width: 1100px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(190px, auto) minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .brand { justify-self: start; }
+  .main-nav { justify-content: center; min-width: 0; }
+  .topbar-actions { justify-self: end; }
+}
+@media (max-width: 650px) {
+  .topbar { display: flex; align-items: center; justify-content: flex-start; }
+  .topbar .brand { margin-right: auto; }
+  .topbar .main-nav { flex: 0 0 auto; }
+  .topbar .topbar-actions { flex: 0 0 auto; margin-left: auto; }
+}
