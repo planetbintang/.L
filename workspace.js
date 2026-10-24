@@ -125,27 +125,15 @@
     finally { try { reader.releaseLock(); } catch {} }
     const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}return new TextDecoder('utf-8').decode(bytes);
   }
-  function rawFileUrl(file) {
-    const [owner,repo]=file.fullName.split('/');
-    if(!owner||!repo||!file.branch||!file.path)return '';
-    return `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${file.branch.split('/').map(encodeURIComponent).join('/')}/${file.path.split('/').map(encodeURIComponent).join('/')}`;
-  }
   async function loadSelectedFile(file) {
-    selectedFile=file; sourceText='';sourceAvailable=false;
-    $('#codeRepoSelect').value=file.fullName;$('#codePathInput').value=`/${file.path}`;$('#codeGithubLink').href=file.url||'https://github.com/planetbintang';
-    const editor=$('#codeEditor');const draft=read(STORE.drafts,{});const saved=draft[draftKey(file)];
-    if(file.visibility!=='public') { editor.value=saved?.content||'';setCodeStatus(saved?'Draft lokal repo privat dimuat. Isi sumber tidak diambil oleh Pages. Buka GitHub dengan autentikasi untuk memeriksa sumber.':'Repo privat: browser Pages tidak dapat mengambil isi. Buka GitHub dengan autentikasi, lalu tempel ke editor jika ingin menyimpan draft lokal.','warn');$('#codeDirtyState').textContent=saved?'Draft lokal tersedia':'Belum ada perubahan';return; }
-    setCodeStatus('Memuat file publik dari raw.githubusercontent.com…');
-    try {
-      const response=await fetch(rawFileUrl(file),{credentials:'omit',cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);
-      const length=Number(response.headers.get('content-length')||0);if(length>1_048_576)throw new Error('File lebih besar dari batas preview 1 MiB');
-      const content=await readLimited(response,1_048_576);
-      if(selectedFile!==file)return;
-      sourceText=content;sourceAvailable=true;editor.value=saved?.content??content;
-      setCodeStatus(saved?'Isi publik dan draft lokal dimuat.':'Isi file publik dimuat hanya ke browser; tidak disimpan ke server.');$('#codeDirtyState').textContent=saved?'Draft lokal tersedia':'Sumber GitHub';
-    }catch(error){if(selectedFile!==file)return;editor.value=saved?.content||'';setCodeStatus(`Isi tidak dapat dimuat: ${error.message}. Anda dapat membuka GitHub atau menempelkan kode secara manual untuk draft lokal.`,'warn');}
+    selectedFile = file; sourceText = String(file.codeContent || ''); sourceAvailable = Boolean(sourceText);
+    $('#codeRepoSelect').value = file.fullName; $('#codePathInput').value = `/${file.path}`;
+    const editor = $('#codeEditor'); const draft = read(STORE.drafts, {}); const saved = draft[draftKey(file)];
+    editor.value = saved?.content ?? sourceText;
+    setCodeStatus(saved ? 'Draft lokal dimuat dari penyimpanan browser.' : sourceAvailable ? 'Isi file dimuat dari snapshot lokal.' : 'Isi file tidak tersedia pada snapshot lokal.', sourceAvailable || saved ? '' : 'warn');
+    $('#codeDirtyState').textContent = saved ? 'Draft lokal tersedia' : sourceAvailable ? 'Snapshot lokal' : 'Belum ada isi';
   }
-  document.addEventListener('planetbintang:file-selected',(event)=>{selectedFile=event.detail;$('#codeRepoSelect').value=selectedFile.fullName;$('#codePathInput').value=`/${selectedFile.path}`;$('#codeGithubLink').href=selectedFile.url||'https://github.com/planetbintang';loadSelectedFile(selectedFile);});
+  document.addEventListener('planetbintang:file-selected',(event)=>{selectedFile=event.detail;$('#codeRepoSelect').value=selectedFile.fullName;$('#codePathInput').value=`/${selectedFile.path}`;loadSelectedFile(selectedFile);});
   $('#fileOpenEditorButton').addEventListener('click',()=>{if(!selectedFile)return;showView('code',true);});
   $('#codePickFile').addEventListener('click',()=>{if(window.PBSystemNavigation?.navigate)window.PBSystemNavigation.navigate('file-manager');else $('#fileManager').scrollIntoView({behavior:'smooth',block:'start'});});
   $('#codeRepoSelect').addEventListener('change',()=>{const r=repos.find(x=>x.fullName===$('#codeRepoSelect').value);if(r){setCodeStatus(r.visibility==='private'?'Repo privat; pilih file melalui GitHub setelah autentikasi.':'Pilih file pada File Manager untuk memuat sumber publik.','warn');$('#fileRepoSelect').value=r.fullName;$('#fileRepoSelect').dispatchEvent(new Event('change'));}});

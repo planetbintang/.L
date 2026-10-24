@@ -176,8 +176,8 @@
     target.innerHTML = repos.map((repo, index) => {
       const name = String(repo.name || repo.fullName.split('/').pop()) || 'root';
       const slug = encodeURIComponent(name).replace(/%2F/g, '/');
-      const url = `https://planetbintang.github.io/.L/${slug}/`;
-      return `<a class="hub-url-item" href="${url}" target="_blank" rel="noopener noreferrer"><b>${String(index + 1).padStart(2, '0')}</b><span>${url}</span><i aria-hidden="true">↗</i></a>`;
+      const url = `#fileManager/${slug}`;
+      return `<a class="hub-url-item" href="${url}"><b>${String(index + 1).padStart(2, '0')}</b><span>Snapshot lokal · ${url}</span><i aria-hidden="true">↗</i></a>`;
     }).join('');
   }
   function openHub() {

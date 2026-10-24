@@ -21,21 +21,14 @@
       || snapshot.repositories.find((repo) => (repo.name || '').toLocaleLowerCase('id') === key)
       || null;
   };
-  const safeUrl = (value) => {
-    try {
-      const url = new URL(value);
-      if (url.protocol !== 'https:') return '';
-      if (url.hostname !== 'github.com' && !Object.prototype.hasOwnProperty.call(snapshot?.domainMap || {}, url.hostname)) return '';
-      return url.href;
-    } catch { return ''; }
-  };
+  const safeUrl = () => '';
   const showHelp = () => [
     'Perintah aman yang tersedia:',
     '  help                       daftar perintah',
     '  status                     ringkasan root dan sinkronisasi',
     '  list                       daftar nama repo dan visibility',
     '  search <teks>              filter kartu repositori',
-    '  open <nama-repo>           buka Pages atau repo GitHub',
+    '  open <nama-repo>           buka repositori dari snapshot lokal',
     '  hosts                      daftar host dan DNS publik',
     '  run repo-summary           ringkasan 45 repo',
     '  run pages-audit            repo dengan Pages aktif',
@@ -114,11 +107,8 @@
     if (verb === 'open') {
       const repo = repoByName(rest);
       if (!repo) { writeLine(`Repo tidak ditemukan: ${rest || '(nama belum diisi)'}`, 'error'); return; }
-      const url = safeUrl(repo.pagesUrl || repo.homepage) || safeUrl(repo.url);
-      if (!url) { writeLine('URL aman untuk repo ini tidak tersedia.', 'error'); return; }
-      const opened = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!opened) writeLine(`Popup diblokir. Buka tautan repo dari kartu: ${url}`, 'error');
-      else writeLine(`Membuka ${repo.fullName}; login GitHub mungkin diperlukan untuk repo privat.`);
+      window.PBSystemNavigation?.navigate('file-manager');
+      writeLine(`Membuka ${repo.fullName} dari snapshot lokal.`);
       return;
     }
     if (verb === 'hosts') {

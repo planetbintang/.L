@@ -13,7 +13,7 @@
     return Number.isNaN(date.getTime()) ? '—' : new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(date) + ' UTC';
   };
   const safeHttps = (value) => {
-    try { const url = new URL(value); return url.protocol === 'https:' ? url.href : ''; } catch { return ''; }
+    try { const url = new URL(value); return url.protocol === 'https:' && !/github/i.test(url.hostname) ? url.href : ''; } catch { return ''; }
   };
   const text = (tag, value, className) => {
     const node = document.createElement(tag);
@@ -115,7 +115,7 @@
     details.append(detail('Bahasa utama', (repo.languages || []).length ? repo.languages.slice(0, 3).map((language) => language.name).join(' · ') : '—'));
     details.append(detail('Domain deployment', repo.pagesUrl || repo.homepage ? anchor(repo.pagesUrl || repo.homepage, repo.domain || 'Buka domain') : 'Belum ada domain Pages'));
     const hostValue = document.createElement('div'); hostValue.className = 'detail-value';
-    hostValue.append(text('span', repo.host || 'github.com'));
+    hostValue.append(text('span', repo.host || 'snapshot-local'));
     hostValue.append(document.createElement('br'));
     hostValue.append(text('code', (repo.ipAddresses || []).join(' · ') || 'DNS IP tidak tersedia'));
     details.append(detail('Host / IP DNS publik', hostValue));
@@ -123,7 +123,7 @@
     shaValue.append(repo.headSha ? anchor(`${repo.url}/commit/${repo.headSha}`, repo.headSha.slice(0, 12)) : text('span', '—'));
     if (repo.lastCommitAt) { shaValue.append(document.createElement('br')); shaValue.append(text('small', fmtDate(repo.lastCommitAt))); }
     details.append(detail('SHA commit terakhir', shaValue));
-    details.append(detail('Anggota', 'Tidak dipublikasikan · login GitHub diperlukan'));
+    details.append(detail('Anggota', 'Tidak dipublikasikan · tersimpan pada snapshot'));
     details.append(trafficBadges(repo));
     card.append(details);
 
@@ -175,7 +175,7 @@
     entries.forEach(([host, info]) => {
       const card = document.createElement('article'); card.className = 'host-card';
       const top = document.createElement('div'); top.className = 'host-card-top';
-      top.append(text('h3', host), text('span', host.endsWith('github.io') ? 'GITHUB PAGES' : host === 'github.com' || host === 'api.github.com' ? 'GITHUB API' : 'DOMAIN PUBLIK', 'host-type'));
+      top.append(text('h3', host), text('span', 'SNAPSHOT HOST', 'host-type'));
       card.append(top);
       const addresses = document.createElement('ul'); addresses.className = 'host-addresses';
       const ips = info?.addresses || [];

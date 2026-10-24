@@ -1,6 +1,6 @@
 # Planetbintang Root System
 
-Dashboard publik utama untuk workspace repositori Planetbintang: **https://planetbintang.github.io/.L/**. Ikon brand dipakai sebagai ikon PWA; klik logo header/hero mengembalikan pengguna ke beranda. Snapshot Hub adalah tombol terpisah. Alias root yang ditampilkan adalah `.` → `planetbintang/`.
+Dashboard publik utama untuk workspace repositori Planetbintang: **./**. Ikon brand dipakai sebagai ikon PWA; klik logo header/hero mengembalikan pengguna ke beranda. Snapshot Hub adalah tombol terpisah. Alias root yang ditampilkan adalah `.` → `planetbintang/`.
 
 ## Dashboard utama
 

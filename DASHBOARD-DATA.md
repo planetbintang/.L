@@ -1,6 +1,6 @@
 # Planetbintang Root System — Data & Sync
 
-Dashboard publik berada di `https://planetbintang.github.io/.L/` (GitHub Pages dari branch `io`). Simbol `.` adalah alias root yang terlihat di UI; cakupan repo yang disinkronkan dibatasi pada `data/repository-scope.json` agar workflow tidak menyisir repo lain.
+Dashboard publik berada di `./` (GitHub Pages dari branch `io`). Simbol `.` adalah alias root yang terlihat di UI; cakupan repo yang disinkronkan dibatasi pada `data/repository-scope.json` agar workflow tidak menyisir repo lain.
 
 ## Data yang diterbitkan
 

@@ -351,3 +351,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* Keep header navigation strictly square across responsive breakpoints. */
+.nav-dropdown > summary, .nav-dropdown-menu, .nav-dropdown-menu a, .nav-dropdown-menu button, .icon-button { border-radius: 0 !important; }

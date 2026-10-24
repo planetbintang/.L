@@ -718,3 +718,6 @@ body {
 .provider-universe .provider-universe-art { animation-duration: 16s; }
 .provider-magnet .provider-magnet-art { animation-duration: 6s; }
 @keyframes light-lens { from { opacity: .24; transform: translate3d(-8px, 7px, 0) rotate(-8deg); } to { opacity: .78; transform: translate3d(10px, -8px, 0) rotate(12deg); } }
+
+/* Independent snapshot UI: square header controls. */
+.nav-dropdown > summary, .nav-dropdown-menu, .nav-dropdown-menu a, .nav-dropdown-menu button, .icon-button { border-radius: 0 !important; }

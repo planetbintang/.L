@@ -32,12 +32,7 @@
     return el;
   };
   const escapePath = (value) => String(value || '').split('/').map(encodeURIComponent).join('/');
-  const safeRepoUrl = (repo) => {
-    try {
-      const url = new URL(repo.url);
-      return url.protocol === 'https:' && url.hostname === 'github.com' ? url.href.replace(/\/$/, '') : '';
-    } catch { return ''; }
-  };
+  const safeRepoUrl = () => '';
   const saveLocal = (key, value) => {
     try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; }
   };
@@ -56,9 +51,9 @@
   function makeProviderCards(data) {
     const wrap = node('div', 'platform-connectors');
     const cards = [
-      ['GitHub', 'Snapshot aktif · read-only', 'Pull Requests · Actions · ekosistem kolaborasi', 'github', 'https://github.com/planetbintang'],
-      ['GitLab', 'Belum terhubung', 'DevSecOps terpadu · CI/CD · security workflows', 'gitlab', 'https://gitlab.com'],
-      ['Bitbucket', 'Belum terhubung', 'Atlassian/Jira · pull request · Pipelines', 'bitbucket', 'https://bitbucket.org'],
+      ['Snapshot source', 'Snapshot aktif · read-only', 'Pull Requests, jobs, dan metadata tersimpan lokal', 'snapshot', ''],
+      ['Provider adapter A', 'Belum terhubung', 'Adapter eksternal tidak dibuka dari sistem ini', 'gitlab', ''],
+      ['Provider adapter B', 'Belum terhubung', 'Adapter eksternal tidak dibuka dari sistem ini', 'bitbucket', ''],
       ['Planetbintang `.L`', 'Root workspace aktif', `${fmt.format(data?.repositoryCount || data?.repositories?.length || 0)} repo · ${fmt.format(data?.fileTreeIndex?.visiblePathCount || 0)} path · hash snapshot`, 'root', '#fileManager'],
     ];
     cards.forEach(([name, state, detail, type, href]) => {
@@ -66,10 +61,8 @@
       const top = node('div', 'platform-connector-top');
       top.append(node('span', 'platform-connector-kicker', type === 'root' ? 'CROSS-REPO ROOT' : `${type.toUpperCase()} ADAPTER`), node('b', type === 'gitlab' || type === 'bitbucket' ? 'provider-offline' : 'provider-live', state));
       card.append(top, node('h3', '', name), node('p', '', detail));
-      const link = node('a', 'workspace-secondary', type === 'root' ? 'Telusuri root /' : type === 'github' ? 'Buka GitHub ↗' : 'Buka platform ↗');
-      link.href = href;
-      if (href.startsWith('https:')) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
-      else link.addEventListener('click', (event) => { event.preventDefault(); window.PBSystemNavigation?.navigate('file-manager'); });
+      const link = node(type === 'root' ? 'button' : 'span', 'workspace-secondary', type === 'root' ? 'Telusuri root /' : 'Tersimpan lokal');
+      if (type === 'root') { link.type = 'button'; link.addEventListener('click', () => window.PBSystemNavigation?.navigate('file-manager')); }
       card.append(link); wrap.append(card);
     });
     return wrap;
@@ -216,9 +209,9 @@
 
   function renderIntegrations(route, config) {
     const view = basePage(route, config); if (!view) return;
-    const intro = node('div', 'platform-integration-intro'); intro.append(node('span', 'platform-live-indicator', '●'), node('p', '', 'Snapshot GitHub aktif sebagai sumber metadata. Autentikasi provider tidak pernah disimpan dalam browser Pages.'));
+    const intro = node('div', 'platform-integration-intro'); intro.append(node('span', 'platform-live-indicator', '●'), node('p', '', 'Snapshot lokal aktif sebagai sumber metadata. Tidak ada autentikasi atau navigasi provider dari browser.'));
     view.body.append(intro, makeProviderCards(snapshot));
-    const diff = node('section', 'platform-differentiators'); diff.append(node('h2', '', 'Pembeda yang dipertahankan'), node('p', '', 'GitHub menonjol pada ekosistem kolaborasi dan Actions; GitLab menyatukan lifecycle DevSecOps; Bitbucket dekat dengan Jira/Atlassian. `.L` menambahkan root lintas repositori, File Manager `/`, dan indeks path/hash bersama. Provider selain GitHub memerlukan konektor dan izin terpisah.'));
+    const diff = node('section', 'platform-differentiators'); diff.append(node('h2', '', 'Pembeda yang dipertahankan'), node('p', '', 'Paket snapshot lokal mempertahankan metadata lintas repositori, File Manager `/`, dan indeks path/hash bersama tanpa membuka provider eksternal.'));
     view.body.append(diff); view.page.append(view.body);
   }
 

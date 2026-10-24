@@ -41,9 +41,8 @@ const api = async (url, options) => { const response = await fetch(url, options)
 function browserTarget(value) {
   const query = value.trim();
   if (!query) return '';
-  if (/^(https?:\/\/|mailto:|tel:)/i.test(query)) return query;
-  if (/^[\w.-]+\.[a-z]{2,}(\/.*)?$/i.test(query)) return `https://${query}`;
-  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  if (/^(https?:\/\/|mailto:|tel:)/i.test(query)) return '';
+  return `#workspace/analytics?query=${encodeURIComponent(query)}`;
 }
 function rememberBrowserVisit(value, target) {
   browserState.history = [{ label: value, target, visitedAt: new Date().toISOString() }, ...browserState.history.filter((item) => item.target !== target)].slice(0, 5);
@@ -74,12 +73,12 @@ $('#indexNowButton').addEventListener('click', refreshIndex);
 
 const modal = $('#appModal');
 function setModal(app, body) {
-  const meta = { browser: ['⌕', 'Browser Plugin', 'Pencarian URL dan aktivitas browsing'], explorer: ['▤', 'File Explorer', 'Filesystem seluruh workspace'], index: ['⌁', 'Workspace Index', 'Data sistem & metadata'], access: ['⌘', 'Repo Access', 'GitHub, remote, dan branch'], settings: ['⚙', 'Bahasa & Input', 'Preferensi aplikasi'] }[app];
+  const meta = { browser: ['⌕', 'Browser Plugin', 'Pencarian snapshot dan aktivitas lokal'], explorer: ['▤', 'File Explorer', 'Filesystem seluruh workspace'], index: ['⌁', 'Workspace Index', 'Data sistem & metadata'], access: ['⌘', 'Repo Access', 'Snapshot, branch, dan metadata'], settings: ['⚙', 'Bahasa & Input', 'Preferensi aplikasi'] }[app];
   $('#modalIcon').textContent = meta[0]; $('#modalTitle').textContent = meta[1]; $('#modalSubtitle').textContent = meta[2]; $('#modalBody').innerHTML = body;
   modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); desktopState.app = app; setDrawer(false);
 }
 function openBrowserView(target, label = target) {
-  setModal('browser', `<div class="browser-view"><form class="browser-modal-form" id="browserModalForm"><span>⌕</span><input id="browserModalInput" value="${label.replace(/"/g, '&quot;')}" aria-label="URL browser" /><button type="submit">Buka</button></form><div class="browser-view-note"><span>Webview internal · alamat utama tetap planetbintang.github.io/.L/</span><button type="button" id="browserBack">Aktivitas</button></div><iframe class="browser-frame" title="Browser internal" src="${target.replace(/"/g, '&quot;')}" loading="lazy" referrerpolicy="no-referrer"></iframe></div>`);
+  setModal('browser', `<div class="browser-view"><form class="browser-modal-form" id="browserModalForm"><span>⌕</span><input id="browserModalInput" value="${label.replace(/"/g, '&quot;')}" aria-label="URL browser" /><button type="submit">Buka</button></form><div class="browser-view-note"><span>Snapshot view internal · sistem tidak membuka URL eksternal</span><button type="button" id="browserBack">Aktivitas</button></div><iframe class="browser-frame" title="Browser internal" src="${target.replace(/"/g, '&quot;')}" loading="lazy" referrerpolicy="no-referrer"></iframe></div>`);
   $('#browserModalForm').addEventListener('submit', (event) => { event.preventDefault(); launchBrowser($('#browserModalInput').value); });
   $('#browserBack').addEventListener('click', openBrowser);
 }

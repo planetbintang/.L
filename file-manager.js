@@ -4,7 +4,7 @@
   const fmt = new Intl.NumberFormat('id-ID');
   const state = { data: null, repo: '', path: '', query: '', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
 
-  // Root virtual sistem pada repository `.L` (sub URL planetbintang.github.io/.L/):
+  // Root virtual sistem pada repository `.L` (sub URL planetbintang.snapshot lokal `.L`/):
   // folder /data /proc /sys /media /acct /pro /config /cache — masing-masing adalah
   // sub-URL File Manager (`#fileManager/<folder>`), berisi sub-folder khas sistem,
   // file dengan nama/ekstensi/fungsi serta isi kode contoh, dan tampilan+pengaturan
@@ -228,12 +228,9 @@
     row.append(el('span', label, 'fm-info-label'), el('span', value || '—', mono ? 'fm-info-value mono' : 'fm-info-value'));
     parent.append(row);
   }
-  function githubPathUrl(repo, entry) {
-    if (!repo?.url || !repo.branch) return '';
-    const type = entry.type === 'directory' ? 'tree' : 'blob';
-    const branch = repo.branch.split('/').map(encodeURIComponent).join('/');
-    const path = entry.path.split('/').map(encodeURIComponent).join('/');
-    return `${repo.url}/${type}/${branch}/${path}`;
+  function githubPathUrl() {
+    // File Manager hanya memakai metadata snapshot lokal; tidak membuat URL provider.
+    return '';
   }
 
   function renderAssessment(repo) {
@@ -247,7 +244,7 @@
       $('#fileSelectionTitle').textContent = 'Pusat Manajemen Folder Sistem (.L)';
       const panel = $('#fileSelectionData'); panel.replaceChildren();
       addInfo(panel, 'Jenis sistem', 'Sub URL repository `.L` — root virtual File Manager');
-      addInfo(panel, 'Basis sub URL', 'planetbintang.github.io/.L/ → path `/`');
+      addInfo(panel, 'Basis sub URL', 'planetbintang.snapshot lokal `.L`/ → path `/`');
       addInfo(panel, 'Folder tingkat root', VIRTUAL_SHORTCUTS.map((name) => `/${name}`).join(' · '));
       const managedDirs = new Set(Object.keys(manifest.directories || {}));
       lRootVirtualNames().forEach((name) => managedDirs.add(name));
@@ -594,7 +591,7 @@
   let handlersBound = false;
   function virtualRepoEntry() {
     return {
-      name: '.L', fullName: L_REPO, url: 'https://github.com/planetbintang/.L', branch: 'io', visibility: 'public',
+      name: '.L', fullName: L_REPO, url: '', branch: 'io', visibility: 'public',
       appType: 'Repositori .L — folder & file pohon nyata di File Manager menu utama', lastCommitAt: null,
       tree: { state: 'complete', indexUrl: 'data/trees/3cf0c9cf3dddc379/index.json', entryCount: 0, fileCount: 0, directoryCount: 0, totalBytes: 0 },
       staticAssessment: {},
