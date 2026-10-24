@@ -613,6 +613,26 @@ body {
   .repo-card:hover { transform: none; }
 }
 
+/* Header is a full-bleed chrome rail; body content remains inside its 50px minimum gutter. */
+.topbar {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: clamp(14px, 2.5vw, 32px);
+  padding-right: clamp(14px, 2.5vw, 32px);
+  border-radius: 0;
+}
+.topbar .brand { justify-self: start; }
+.topbar .topbar-actions { justify-self: end; }
+@media (max-width: 650px) {
+  .topbar {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
 :root { --body-gutter: max(50px, 5vw); }
 .shell {
