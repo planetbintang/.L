@@ -706,3 +706,15 @@ body {
 @media (min-width:651px) and (max-width:1100px) { .topbar .main-nav { grid-template-columns:repeat(7,minmax(52px,1fr)); } .nav-dropdown > summary { min-width:0; padding-inline:3px!important; } }
 @media (max-width:650px) { .tools-heading { align-items:flex-start; flex-direction:column; } .tools-grid, .tools-grid-three { grid-template-columns:1fr; } .tools-file-row, .tools-log-list > div { align-items:flex-start; flex-direction:column; } .tools-row-actions { justify-content:flex-start; } .nav-dropdown > summary { min-width:66px; } }
 @media (prefers-reduced-motion:reduce) { .tools-view { animation:none; } }
+
+/* Brand reference + four living light blocks: visual-only surface, no captions. */
+.brand-icon-frame img, .logo-outline img, .footer-brand img, .repo-glyph img { object-fit: contain; }
+.provider-matrix > header { display: none; }
+.provider-grid { margin-top: 0; gap: 12px; }
+.provider-card { min-height: 260px; overflow: hidden; }
+.provider-card::after { animation: light-lens 7s ease-in-out infinite alternate; }
+.provider-planet .provider-orb { animation-duration: 8s; }
+.provider-galaxy .provider-galaxy-art { animation-duration: 13s; }
+.provider-universe .provider-universe-art { animation-duration: 16s; }
+.provider-magnet .provider-magnet-art { animation-duration: 6s; }
+@keyframes light-lens { from { opacity: .24; transform: translate3d(-8px, 7px, 0) rotate(-8deg); } to { opacity: .78; transform: translate3d(10px, -8px, 0) rotate(12deg); } }
