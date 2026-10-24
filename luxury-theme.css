@@ -675,6 +675,52 @@ body {
   .shell::after { right: var(--body-gutter); }
 }
 
+/* Repository cards are square tiles with compact, scroll-safe internal content. */
+.repo-card {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+.repo-head {
+  min-width: 0;
+  padding: 12px 12px 9px;
+  gap: 7px;
+}
+.repo-title-row { gap: 7px; min-width: 0; }
+.repo-glyph { width: 25px; height: 25px; }
+.repo-glyph img { width: 19px; height: 19px; }
+.repo-name h3 { font-size: 10px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.repo-name small { margin-top: 3px; font-size: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.visibility-badge { padding: 4px 5px; font-size: 7px; }
+.repo-details {
+  min-height: 0;
+  overflow: auto;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  padding: 10px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 142, 222, .55) transparent;
+}
+.detail-label { margin-bottom: 3px; font-size: 7px; }
+.detail-value { font-size: 8px; line-height: 1.3; }
+.detail-value code { font-size: 7px; }
+.app-tag { padding: 3px 5px; font-size: 7px; }
+.traffic-line { gap: 4px; padding-top: 6px; }
+.traffic-pill { padding: 4px 5px; font-size: 7px; }
+.repo-actions { min-width: 0; flex-wrap: wrap; gap: 5px; padding: 8px 12px; }
+.repo-action { min-height: 25px; padding: 5px 6px; font-size: 7px; }
+.root-details { margin: 0 12px 10px; padding-top: 7px; }
+.root-details summary { font-size: 7px; }
+.root-list { gap: 3px; margin-top: 6px; max-height: 44px; overflow: auto; }
+.root-list li { padding: 3px 4px; font-size: 7px; }
+@media (max-width: 650px) {
+  .repo-head { padding: 13px 14px 10px; }
+  .repo-details { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 11px 14px; }
+  .repo-actions { padding-left: 14px; padding-right: 14px; }
+  .root-details { margin-left: 14px; margin-right: 14px; }
+}
+
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
 :root { --body-gutter: max(50px, 5vw); }
 .shell {
