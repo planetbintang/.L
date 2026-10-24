@@ -621,16 +621,21 @@ body {
   margin-right: 0;
   padding-left: clamp(14px, 2.5vw, 32px);
   padding-right: clamp(14px, 2.5vw, 32px);
+  border-bottom: 1px solid rgba(91, 143, 231, .48);
+  box-shadow: 0 1px 0 rgba(112, 169, 255, .12), 0 14px 32px rgba(0, 0, 0, .18);
   border-radius: 0;
 }
 .topbar .brand { justify-self: start; }
 .topbar .topbar-actions { justify-self: end; }
+.shell { padding-top: clamp(28px, 4vw, 48px); }
 @media (max-width: 650px) {
   .topbar {
     width: 100%;
     padding-left: 12px;
     padding-right: 12px;
+    border-bottom-color: rgba(91, 143, 231, .4);
   }
+  .shell { padding-top: 24px; }
 }
 
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
