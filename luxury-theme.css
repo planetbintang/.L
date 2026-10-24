@@ -34,6 +34,11 @@ body {
   box-shadow: 0 16px 45px rgba(0,0,0,.28);
   backdrop-filter: blur(22px) saturate(130%);
 }
+.topbar::before, .topbar::after, .main-nav::before, .main-nav::after,
+.main-nav a::before, .main-nav a::after { display: none !important; content: none !important; }
+.topbar, .main-nav, .main-nav a, .main-nav a[aria-current="page"],
+.nav-dropdown > summary { border-top: 0 !important; border-bottom: 0 !important; }
+.main-nav a[aria-current="page"] { color: #b9c2d0; font-weight: 400; }
 .brand-icon-frame {
   width: 42px; height: 42px; border: 0; border-radius: 0;
   background: transparent; box-shadow: none;
