@@ -28,11 +28,10 @@ body {
 .topbar {
   height: 76px;
   padding: 0 clamp(18px, 4vw, 68px);
-  border: 1px solid rgba(88, 112, 154, .22);
-  border-top-color: rgba(255,255,255,.08);
+  border: 0;
   border-radius: 0 0 12px 12px;
   background: rgba(8, 12, 19, .86);
-  box-shadow: 0 16px 45px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.04);
+  box-shadow: 0 16px 45px rgba(0,0,0,.28);
   backdrop-filter: blur(22px) saturate(130%);
 }
 .brand-icon-frame {
