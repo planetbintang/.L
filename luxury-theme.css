@@ -167,3 +167,39 @@ body {
   .hero-logo { min-height: 215px; }
   .metrics { margin-bottom: 46px; }
 }
+
+/* Four living light blocks: each block keeps its own moving visual language. */
+.provider-card { position: relative; min-height: 260px; overflow: hidden; }
+.provider-card::before { opacity: .7; }
+.provider-planet {
+  background: radial-gradient(circle at 51% 52%, rgba(107,214,255,.34), transparent 18%),
+    radial-gradient(circle at 50% 50%, #164aa8 0 22%, #081735 48%, #030711 78%);
+}
+.provider-galaxy {
+  background: radial-gradient(ellipse at 50% 52%, rgba(125,112,255,.5), transparent 28%),
+    radial-gradient(circle at 18% 12%, rgba(69,48,176,.35), transparent 38%), #050719;
+}
+.provider-universe {
+  background: radial-gradient(ellipse at 72% 36%, rgba(132,75,255,.34), transparent 26%),
+    linear-gradient(145deg, #02040d, #0b1c4a 56%, #030616);
+}
+.provider-magnet {
+  background: radial-gradient(circle at 50% 50%, rgba(65,155,255,.26), transparent 31%),
+    linear-gradient(145deg, #07142d, #0a1e49 52%, #020611);
+}
+.provider-planet .provider-orb { animation: pb-planet-breathe 4.8s ease-in-out infinite; }
+.provider-galaxy .provider-galaxy-art { animation: pb-galaxy-orbit 12s linear infinite; }
+.provider-universe .provider-universe-art { animation: pb-universe-drift 15s ease-in-out infinite alternate; }
+.provider-magnet .provider-magnet-art { animation: pb-magnet-field 5.5s ease-in-out infinite; }
+.provider-magnet .provider-magnet-art::before { animation: pb-magnetic-wave 2.8s ease-in-out infinite; }
+.provider-magnet .provider-magnet-art::after { animation: pb-magnetic-wave 3.4s ease-in-out infinite reverse; }
+@keyframes pb-planet-breathe { 0%,100% { transform: translateZ(26px) scale(.96) rotate(-2deg); filter: brightness(.92); } 50% { transform: translateZ(42px) scale(1.06) rotate(3deg); filter: brightness(1.22); } }
+@keyframes pb-galaxy-orbit { 0% { transform: translateZ(26px) rotate(-18deg) scale(.96); } 50% { transform: translateZ(38px) rotate(4deg) scale(1.05); } 100% { transform: translateZ(26px) rotate(18deg) scale(.96); } }
+@keyframes pb-universe-drift { 0% { transform: translateZ(26px) translate3d(-3%, 2%, 0) scale(.98); filter: hue-rotate(0deg); } 100% { transform: translateZ(44px) translate3d(3%, -3%, 0) scale(1.06); filter: hue-rotate(18deg) brightness(1.15); } }
+@keyframes pb-magnet-field { 0%,100% { transform: translateZ(26px) rotate(-2deg) scale(.97); } 50% { transform: translateZ(42px) rotate(3deg) scale(1.06); } }
+@keyframes pb-magnetic-wave { 0%,100% { opacity: .42; transform: rotate(22deg) scale(.92); } 50% { opacity: 1; transform: rotate(30deg) scale(1.08); } }
+@media (prefers-reduced-motion: reduce) {
+  .provider-planet .provider-orb, .provider-galaxy .provider-galaxy-art,
+  .provider-universe .provider-universe-art, .provider-magnet .provider-magnet-art,
+  .provider-magnet .provider-magnet-art::before, .provider-magnet .provider-magnet-art::after { animation: none !important; }
+}
