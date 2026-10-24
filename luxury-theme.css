@@ -427,3 +427,10 @@ body {
   .repo-grid { grid-template-columns: 1fr; gap: 9px; }
   .repo-card { display: grid; grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Body content stays clear of both viewport edges with a minimum 50px gutter. */
+:root { --body-gutter: max(50px, 5vw); }
+.shell {
+  padding-left: var(--body-gutter);
+  padding-right: var(--body-gutter);
+}
