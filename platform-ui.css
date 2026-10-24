@@ -70,6 +70,28 @@ body {
   transform: translateY(-1px);
 }
 .main-nav-link small { color: #7188a3; font-size: 8px; line-height: 1.3; font-weight: 500; }
+.reber-embedded { padding: 0; overflow: hidden; }
+.reber-embedded-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 18px; border-bottom: 1px solid rgba(127,177,226,.35); background: linear-gradient(120deg, rgba(242,249,255,.96), rgba(255,255,255,.9)); }
+.reber-embedded-brand { display: flex; align-items: center; gap: 10px; }
+.reber-embedded-brand > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: #fff; background: linear-gradient(145deg, #0877e8, #123e9a); font-weight: 800; box-shadow: 0 8px 18px rgba(22,94,184,.2); }
+.reber-embedded-brand div { display: grid; gap: 3px; }
+.reber-embedded-brand small { color: #7188a3; font-size: 10px; }
+.reber-embedded-layout { display: grid; grid-template-columns: minmax(170px, 220px) minmax(0, 1fr); min-height: 390px; }
+.reber-embedded-context { padding: 18px; border-right: 1px solid rgba(127,177,226,.3); background: #f7fbff; color: #315477; }
+.reber-embedded-context p { margin: 8px 0; font-size: 12px; color: #075ec6; }
+.reber-embedded-context small { display: block; color: #7188a3; font-size: 10px; line-height: 1.5; }
+.reber-embedded-chat { display: flex; min-width: 0; flex-direction: column; padding: 16px; }
+.reber-embedded-messages { flex: 1; min-height: 220px; max-height: 360px; overflow: auto; display: grid; align-content: start; gap: 10px; padding: 4px; }
+.reber-embedded-message { max-width: min(720px, 92%); padding: 10px 12px; border: 1px solid #d6e6f7; border-radius: 12px; background: #fff; color: #244766; box-shadow: 0 4px 12px rgba(25,80,130,.06); }
+.reber-embedded-message.user { justify-self: end; border-color: #b7d7f6; background: #eef7ff; }
+.reber-embedded-message b { display: block; margin-bottom: 4px; color: #075ec6; font-size: 11px; }
+.reber-embedded-message p { margin: 0; white-space: normal; font-size: 13px; line-height: 1.5; }
+.reber-embedded-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; margin-top: 12px; }
+.reber-embedded-form textarea { width: 100%; min-height: 48px; resize: vertical; padding: 10px 12px; border: 1px solid #bcd5ee; border-radius: 10px; color: #183a5b; background: #fff; font: inherit; }
+.reber-embedded-quick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.reber-embedded-quick button { padding: 6px 9px; border: 1px solid #c7ddef; border-radius: 999px; color: #315477; background: #f6fbff; cursor: pointer; font-size: 10px; }
+.reber-embedded-quick button:hover { border-color: #6da8df; color: #075ec6; }
+@media (max-width: 700px) { .reber-embedded-layout { grid-template-columns: 1fr; } .reber-embedded-context { border-right: 0; border-bottom: 1px solid rgba(127,177,226,.3); } .reber-embedded-header { align-items: flex-start; flex-direction: column; } }
 .nav-dropdown > summary {
   list-style: none;
   display: inline-flex;
