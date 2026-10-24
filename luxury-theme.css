@@ -613,6 +613,39 @@ body {
   .repo-card:hover { transform: none; }
 }
 
+/* Feature Registry body menu: dense table + inspector, driven by the virtual filesystem manifest. */
+.workspace-nav { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.feature-toolbar { display: grid; grid-template-columns: minmax(150px, .7fr) minmax(130px, .55fr) minmax(220px, 1.4fr) auto; gap: 10px; align-items: end; margin: 18px 0 12px; padding: 12px; border: 1px solid rgba(91,137,211,.28); background: rgba(10,20,34,.82); }
+.feature-toolbar label { display: grid; gap: 5px; color: #91a5c3; font: 8px var(--lux-mono); letter-spacing: .1em; text-transform: uppercase; }
+.feature-toolbar select, .feature-toolbar input { min-height: 36px; padding: 0 10px; border: 1px solid rgba(101,146,219,.34); background: rgba(6,14,25,.78); color: #dbe8fb; font: 9px var(--lux-mono); }
+.feature-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+.feature-kpis article { display: grid; gap: 5px; min-height: 76px; padding: 13px; border: 1px solid rgba(91,137,211,.3); background: linear-gradient(145deg, rgba(27,53,84,.8), rgba(13,25,43,.9)); }
+.feature-kpis small { color: #87a2c9; font: 8px var(--lux-mono); letter-spacing: .1em; }
+.feature-kpis b { color: #f1f6ff; font: 22px "Manrope", sans-serif; }
+.feature-kpis span { color: #8498b5; font-size: 9px; }
+.feature-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 10px; }
+.feature-table-wrap, .feature-inspector { min-width: 0; border: 1px solid rgba(91,137,211,.28); background: rgba(10,20,34,.82); }
+.feature-table-heading { display: flex; justify-content: space-between; gap: 10px; padding: 12px 14px; border-bottom: 1px solid rgba(91,137,211,.22); color: #e5efff; }
+.feature-table-heading span { color: #7892b8; font: 8px var(--lux-mono); }
+.feature-list { display: grid; max-height: 520px; overflow: auto; }
+.feature-row { display: grid; grid-template-columns: 55px minmax(0,1fr) 42px; gap: 10px; align-items: center; width: 100%; min-height: 52px; padding: 8px 12px; border: 0; border-bottom: 1px solid rgba(91,137,211,.14); background: transparent; color: #dbe8fb; text-align: left; cursor: pointer; }
+.feature-row:hover, .feature-row:focus-visible { background: rgba(30,79,165,.3); }
+.feature-row-index, .feature-row-ext { color: #6f9de1; font: 8px var(--lux-mono); }
+.feature-row-main { display: grid; gap: 4px; min-width: 0; }
+.feature-row-main b { overflow: hidden; color: #e9f2ff; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.feature-row-main small { color: #8298b8; font: 8px var(--lux-mono); }
+.feature-row-ext { justify-self: end; }
+.feature-inspector { padding: 16px; }
+.feature-inspector h4 { margin: 5px 0 14px; color: #f2f6ff; font: 18px "Manrope", sans-serif; overflow-wrap: anywhere; }
+.feature-inspector-data { display: grid; gap: 7px; }
+.feature-inspector-data div { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 8px; padding-bottom: 7px; border-bottom: 1px solid rgba(91,137,211,.14); }
+.feature-inspector-data b { color: #7892b8; font: 8px var(--lux-mono); text-transform: uppercase; }
+.feature-inspector-data span { color: #d6e4f8; font-size: 9px; overflow-wrap: anywhere; }
+.feature-preview { max-height: 220px; margin: 14px 0; padding: 12px; overflow: auto; border: 1px solid rgba(91,137,211,.24); background: #07101d; color: #a8caff; font: 8px/1.6 var(--lux-mono); white-space: pre-wrap; }
+.feature-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+@media (max-width: 900px) { .workspace-nav { grid-template-columns: repeat(4, minmax(0,1fr)); } .feature-layout { grid-template-columns: 1fr; } .feature-toolbar { grid-template-columns: repeat(2, minmax(0,1fr)); } .feature-toolbar .feature-query { grid-column: 1 / -1; } }
+@media (max-width: 650px) { .feature-kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } .feature-toolbar { grid-template-columns: 1fr; } .feature-toolbar .feature-query { grid-column: auto; } .feature-list { max-height: 430px; } }
+
 /* Header is a full-bleed chrome rail; body content remains inside its 50px minimum gutter. */
 .topbar {
   width: 100%;

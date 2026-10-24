@@ -7,6 +7,7 @@
     projects: { group: 'workspace', view: 'projects', menu: 'plan', hash: '#workspace/projects' },
     issues: { group: 'workspace', view: 'issues', menu: 'plan', hash: '#workspace/issues' },
     code: { group: 'workspace', view: 'code', menu: 'code', hash: '#workspace/code' },
+    features: { group: 'workspace', view: 'features', menu: 'code', hash: '#workspace/features' },
     analytics: { group: 'workspace', view: 'analytics', menu: 'insights', hash: '#workspace/analytics' },
     ai: { group: 'workspace', view: 'ai', menu: 'insights', hash: '#workspace/ai' },
     'workspace-account': { group: 'workspace', view: 'account', menu: 'insights', hash: '#workspace/account' },
