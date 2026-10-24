@@ -638,6 +638,43 @@ body {
   .shell { padding-top: 24px; }
 }
 
+/* Header/body junction: the full-width divider drops into the body's two 50px rails. */
+.shell {
+  position: relative;
+}
+.shell::before, .shell::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(91,143,231,.48), rgba(91,143,231,.08) 48%, transparent);
+  pointer-events: none;
+}
+.shell::before { left: var(--body-gutter); }
+.shell::after { right: var(--body-gutter); }
+.shell > * { position: relative; z-index: 1; }
+@media (min-width: 651px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(235px, auto) minmax(0, 1fr) minmax(300px, auto);
+    grid-template-areas: "brand nav actions";
+    align-items: center;
+    height: 76px;
+    min-height: 76px;
+    white-space: nowrap;
+  }
+  .topbar .brand { grid-area: brand; min-width: max-content; }
+  .topbar .main-nav { grid-area: nav; min-width: 0; width: 100%; justify-content: center; flex-wrap: nowrap; }
+  .topbar .topbar-actions { grid-area: actions; min-width: max-content; }
+}
+@media (max-width: 650px) {
+  .topbar { flex-wrap: nowrap; white-space: nowrap; }
+  .shell::before { left: var(--body-gutter); }
+  .shell::after { right: var(--body-gutter); }
+}
+
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
 :root { --body-gutter: max(50px, 5vw); }
 .shell {
