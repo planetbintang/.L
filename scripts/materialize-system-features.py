@@ -16,6 +16,7 @@ DOMAINS = [
     "integration", "management", "monitoring", "pipeline", "security", "workspace",
 ]
 EXTENSIONS = ("html", "css", "js", "nz")
+ADVANCED_FEATURES = ("charts", "diagrams", "documents", "design", "editor", "pipelines", "crud", "ai", "codeblocks", "documentation", "integrations", "management", "branding", "icons", "live-preview", "device-console")
 DEFAULT_BUCKETS = 384
 DEFAULT_PER_BUCKET = 32
 
@@ -72,13 +73,20 @@ def main() -> int:
         parser.error("--buckets dan --per-bucket harus lebih besar dari nol")
     total = args.buckets * args.per_bucket
     if args.dry_run:
-        print(f"would materialize {total} feature files under {args.output}")
+        print(f"would materialize {total + len(ADVANCED_FEATURES)} feature files under {args.output}")
         return 0
     written = 0
     for bucket, name, content in iter_features(args.buckets, args.per_bucket):
         target = args.output / bucket / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(content, encoding="utf-8")
+        written += 1
+    for index, feature in enumerate(ADVANCED_FEATURES):
+        extension = EXTENSIONS[index % len(EXTENSIONS)]
+        name = f"{feature}-system-{index + 1:02d}.{extension}"
+        target = args.output / "advanced" / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(feature_body(feature, extension, 20000 + index), encoding="utf-8")
         written += 1
     print(f"materialized {written} feature files under {args.output}")
     return 0

@@ -34,6 +34,7 @@
   const FEATURE_DOMAINS = ['access', 'analytics', 'api', 'app', 'automation', 'backup', 'brand', 'code', 'community', 'content', 'data', 'design', 'device', 'docs', 'execute', 'files', 'forms', 'graph', 'integration', 'management', 'monitoring', 'pipeline', 'security', 'workspace'];
   const FEATURE_BUCKETS = 384;
   const FEATURES_PER_BUCKET = 32;
+  const ADVANCED_FEATURES = ['charts', 'diagrams', 'documents', 'design', 'editor', 'pipelines', 'crud', 'ai', 'codeblocks', 'documentation', 'integrations', 'management', 'branding', 'icons', 'live-preview', 'device-console'];
   function generatedCode(path, extension, index) {
     const name = basename(path);
     if (extension === 'html') return `<!-- Planetbintang virtual system file ${index} -->\n<section data-system-file="${name}">\n  <h1>${name}</h1>\n  <p>Generated interface contract for the Planetbintang filesystem.</p>\n</section>`;
@@ -49,6 +50,22 @@
     return `# Planetbintang feature ${feature}\ndomain = ${domain}\nfeature_id = ${feature}\nstatus = ready\nexecution = disabled-by-default`;
   }
   function generatedSystemEntries(path) {
+    if (path === 'sys/system_ext' || path.startsWith('sys/system_ext/')) {
+      const sourcePath = path.replace(/^sys\/system_ext/, 'system_ext');
+      return generatedSystemEntries(sourcePath).map((entry) => ({
+        ...entry,
+        path: `sys/system_ext${entry.path.slice('system_ext'.length)}`,
+        function: `${entry.function || 'system_ext entry'} · mirror /sys`,
+      }));
+    }
+    if (path === 'sys/planetbintang') return [
+      { path: 'sys/planetbintang/advanced', type: 'directory', mode: '040755', items: ADVANCED_FEATURES.length, function: 'Advanced system feature registry · setiap fitur memiliki filesystem sendiri' },
+    ];
+    if (path === 'sys/planetbintang/advanced') return ADVANCED_FEATURES.map((feature, index) => {
+      const extension = GENERATED_EXTENSIONS[index % GENERATED_EXTENSIONS.length];
+      const file = `${feature}-system-${String(index + 1).padStart(2, '0')}.${extension}`;
+      return { path: `sys/planetbintang/advanced/${file}`, type: 'file', mode: '0100644', size: generatedFeatureCode(feature, extension, 20000 + index).length, sizeKnown: true, function: `Advanced feature ${index + 1}: ${feature}`, codeContent: generatedFeatureCode(feature, extension, 20000 + index) };
+    });
     if (path === 'system_ext') return [
       { path: 'system_ext/catalog', type: 'directory', mode: '040755', function: '4.096 file kode virtual dalam 256 bucket lazy-load' },
       { path: 'system_ext/features', type: 'directory', mode: '040755', function: '12.288 fitur virtual · satu fitur = satu file · 24 domain sistem' },
@@ -124,6 +141,8 @@
         { path: 'sys/class', type: 'directory', mode: '040755', function: 'Kelas perangkat (net, power_supply, usb)' },
         { path: 'sys/bus', type: 'directory', mode: '040755', function: 'Bus perangkat (platform, i2c, usb)' },
         { path: 'sys/kernel', type: 'directory', mode: '040755', function: 'Parameter kernel (mm, sched)' },
+        { path: 'sys/system_ext', type: 'directory', mode: '040755', function: 'Mirror system_ext Planetbintang: catalog, features, modules, etc' },
+        { path: 'sys/planetbintang', type: 'directory', mode: '040755', function: 'Registry fitur lanjutan Planetbintang' },
       ],
       media: [
         { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Storage emulated pengguna (0..N)' },
