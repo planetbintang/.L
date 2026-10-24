@@ -8,6 +8,7 @@ import {
   OPENSOURCE_REFS,
 } from "@/lib/reber-system";
 import { PERPUSNAS_REF, KATA_CATEGORIES, getTotalKataCount } from "@/lib/kata-data";
+import { executePlanetbintangFileCommand } from "@/lib/planetbintang-files";
 
 // ── Messages Component ─────────────────────────────────────────────────────
 function Messages({ messages }: { messages: ChatMessages }) {
@@ -351,7 +352,8 @@ function ReberStudio() {
   const handleSend = (text: string) => {
     const msg = text || input.trim();
     if (!msg) return;
-    sendMessage(msg);
+    const fileCommandResult = executePlanetbintangFileCommand(msg);
+    sendMessage(fileCommandResult ? `File Manager Planetbintang menjalankan perintah ini:\n${fileCommandResult}` : msg);
     setInput("");
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
