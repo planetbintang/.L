@@ -314,3 +314,27 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .magnet-icon, .magnet-icon::before, .magnet-icon::after, .magnet-icon em { animation: none !important; }
 }
+
+/* Full-bleed layout: every major surface runs edge-to-edge on desktop and mobile. */
+.shell {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.topbar, .hero.panel, .metrics, .provider-matrix, .workspace-section,
+.platform-page, .section-block, .file-manager-section, .settings-panel,
+.privacy-note, .footer { width: 100%; max-width: none; }
+.topbar { border-radius: 0; }
+.platform-page { margin-left: 0; margin-right: 0; }
+.footer { padding-left: clamp(18px, 4vw, 68px); padding-right: clamp(18px, 4vw, 68px); }
+@media (max-width: 650px) {
+  .shell { padding-left: 0; padding-right: 0; }
+  .topbar { padding-left: 12px; padding-right: 12px; }
+  .hero.panel { border-left: 0; border-right: 0; }
+  .metrics { padding-left: 12px; padding-right: 12px; }
+  .provider-matrix, .workspace-section, .platform-page, .settings-panel, .privacy-note { border-left: 0; border-right: 0; }
+  .footer { padding-left: 14px; padding-right: 14px; }
+}
