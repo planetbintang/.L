@@ -1,0 +1,940 @@
+@import "tailwindcss" source("../");
+@import "highlight.js/styles/github.css";
+@source "../../../node_modules/streamdown/dist/*.js";
+
+/* ── Reber AI — White-Blue Design System ─────────────────────────────────── */
+:root {
+  --reber-bg: #f0f7ff;
+  --reber-bg-deep: #e0efff;
+  --reber-surface: #ffffff;
+  --reber-surface-alt: #f8fbff;
+  --reber-primary: #0066cc;
+  --reber-primary-hover: #0052a3;
+  --reber-primary-light: #4da3ff;
+  --reber-primary-pale: #cce5ff;
+  --reber-accent: #0099ff;
+  --reber-text: #001a33;
+  --reber-text-secondary: #334d66;
+  --reber-text-muted: #6699cc;
+  --reber-border: #99ccff;
+  --reber-border-light: #cce5ff;
+  --reber-shadow: 0 2px 8px rgba(0, 102, 204, 0.12);
+  --reber-shadow-lg: 0 8px 24px rgba(0, 102, 204, 0.18);
+  --sidebar-w: 240px;
+  --header-h: 52px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--reber-bg);
+  color: var(--reber-text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+code, pre {
+  font-family: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 13px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--reber-bg); }
+::-webkit-scrollbar-thumb { background: var(--reber-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--reber-primary-light); }
+
+/* ── Reber Header ────────────────────────────────────────────────────────── */
+.reber-header {
+  height: var(--header-h);
+  background: var(--reber-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
+.reber-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+.reber-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: white;
+  color: var(--reber-primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.reber-nav {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+.reber-nav-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reber-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.reber-nav-btn.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.reber-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.reber-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.reber-layout {
+  display: flex;
+  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
+  overflow: hidden;
+}
+
+.reber-sidebar {
+  width: var(--sidebar-w);
+  background: var(--reber-surface);
+  border-right: 1px solid var(--reber-border-light);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.reber-sidebar-header {
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--reber-text-muted);
+  border-bottom: 1px solid var(--reber-border-light);
+  background: var(--reber-surface-alt);
+}
+
+.reber-sidebar-scroll {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.reber-tree-item {
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--reber-text-secondary);
+  font-size: 13px;
+  transition: all 0.1s;
+  border-left: 2px solid transparent;
+}
+
+.reber-tree-item:hover {
+  background: var(--reber-bg);
+  color: var(--reber-primary);
+}
+
+.reber-tree-item.selected {
+  background: var(--reber-primary-pale);
+  color: var(--reber-primary);
+  border-left-color: var(--reber-primary);
+  font-weight: 500;
+}
+
+/* ── Main Content ─────────────────────────────────────────────────────────── */
+.reber-main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────────── */
+.reber-panel-row {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.reber-panel {
+  background: var(--reber-surface);
+  border: 1px solid var(--reber-border-light);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reber-panel-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--reber-border-light);
+  background: var(--reber-surface-alt);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--reber-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.reber-panel-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+/* ── Chat ────────────────────────────────────────────────────────────────── */
+.reber-chat-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.reber-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reber-message {
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+  flex-shrink: 0;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reber-message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.reber-message-avatar.ai {
+  background: var(--reber-primary);
+  color: white;
+}
+
+.reber-message-avatar.user {
+  background: var(--reber-bg-deep);
+  color: var(--reber-primary);
+  border: 1px solid var(--reber-border);
+}
+
+.reber-message-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.reber-message-role {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--reber-text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reber-message-text {
+  background: var(--reber-surface-alt);
+  border: 1px solid var(--reber-border-light);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--reber-text);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Keep long code blocks and tables inside the bubble so the full answer stays visible */
+.reber-message-text pre,
+.reber-message-text table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.reber-message-text pre {
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.reber-message-text img {
+  max-width: 100%;
+  height: auto;
+}
+
+.reber-message.user .reber-message-text {
+  background: var(--reber-primary-pale);
+  border-color: var(--reber-border);
+}
+
+.reber-message-text .prose {
+  max-width: none;
+}
+
+/* ── Chat Input ───────────────────────────────────────────────────────────── */
+.reber-chat-input-area {
+  border-top: 1px solid var(--reber-border-light);
+  padding: 12px 16px;
+  background: var(--reber-surface);
+  flex-shrink: 0;
+}
+
+.reber-chat-form {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.reber-chat-input {
+  flex: 1;
+  border: 1.5px solid var(--reber-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  background: var(--reber-bg);
+  color: var(--reber-text);
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s;
+  font-family: inherit;
+  min-height: 42px;
+  max-height: 120px;
+}
+
+.reber-chat-input:focus {
+  border-color: var(--reber-primary);
+  background: var(--reber-surface);
+}
+
+.reber-chat-input::placeholder {
+  color: var(--reber-text-muted);
+}
+
+.reber-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reber-btn-primary {
+  background: var(--reber-primary);
+  color: white;
+}
+
+.reber-btn-primary:hover:not(:disabled) {
+  background: var(--reber-primary-hover);
+}
+
+.reber-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reber-btn-ghost {
+  background: transparent;
+  color: var(--reber-text-secondary);
+  border: 1px solid var(--reber-border);
+}
+
+.reber-btn-ghost:hover {
+  background: var(--reber-bg);
+  color: var(--reber-primary);
+  border-color: var(--reber-primary);
+}
+
+.reber-btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.reber-btn-danger:hover {
+  background: #fecaca;
+}
+
+/* ── File Manager ─────────────────────────────────────────────────────────── */
+.reber-fm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--reber-surface);
+  border-bottom: 1px solid var(--reber-border-light);
+  flex-shrink: 0;
+}
+
+.reber-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  font-size: 13px;
+  color: var(--reber-text-secondary);
+  overflow: hidden;
+}
+
+.reber-breadcrumb-item {
+  cursor: pointer;
+  color: var(--reber-primary);
+  white-space: nowrap;
+}
+
+.reber-breadcrumb-item:hover {
+  text-decoration: underline;
+}
+
+.reber-breadcrumb-sep {
+  color: var(--reber-text-muted);
+}
+
+.reber-breadcrumb-current {
+  color: var(--reber-text);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reber-fm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  padding: 16px;
+}
+
+.reber-fm-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.reber-fm-item:hover {
+  background: var(--reber-bg);
+  border-color: var(--reber-border);
+}
+
+.reber-fm-item.selected {
+  background: var(--reber-primary-pale);
+  border-color: var(--reber-primary);
+}
+
+.reber-fm-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.reber-fm-name {
+  font-size: 11px;
+  color: var(--reber-text);
+  word-break: break-all;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.reber-fm-ext {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+/* ── File List View ───────────────────────────────────────────────────────── */
+.reber-fm-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reber-fm-list th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--reber-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--reber-border-light);
+  background: var(--reber-surface-alt);
+  position: sticky;
+  top: 0;
+}
+
+.reber-fm-list td {
+  padding: 7px 12px;
+  font-size: 13px;
+  color: var(--reber-text-secondary);
+  border-bottom: 1px solid var(--reber-border-light);
+  cursor: pointer;
+}
+
+.reber-fm-list tr:hover td {
+  background: var(--reber-bg);
+  color: var(--reber-primary);
+}
+
+.reber-fm-list tr.selected td {
+  background: var(--reber-primary-pale);
+  color: var(--reber-primary);
+}
+
+/* ── Code/File Viewer ─────────────────────────────────────────────────────── */
+.reber-code-viewer {
+  font-family: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  background: #f8fbff;
+  border: 1px solid var(--reber-border-light);
+  border-radius: 8px;
+  padding: 16px;
+  overflow: auto;
+  white-space: pre;
+  color: var(--reber-text);
+  flex: 1;
+}
+
+.reber-code-line {
+  display: flex;
+  gap: 16px;
+}
+
+.reber-code-num {
+  color: var(--reber-text-muted);
+  user-select: none;
+  min-width: 24px;
+  text-align: right;
+}
+
+/* ── Search ───────────────────────────────────────────────────────────────── */
+.reber-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--reber-bg);
+  border: 1.5px solid var(--reber-border);
+  border-radius: 8px;
+  transition: border-color 0.15s;
+}
+
+.reber-search:focus-within {
+  border-color: var(--reber-primary);
+  background: var(--reber-surface);
+}
+
+.reber-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  color: var(--reber-text);
+  width: 100%;
+}
+
+.reber-search input::placeholder {
+  color: var(--reber-text-muted);
+}
+
+/* ── Stats Bar ───────────────────────────────────────────────────────────── */
+.reber-stats {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 16px;
+  background: var(--reber-surface-alt);
+  border-bottom: 1px solid var(--reber-border-light);
+  font-size: 11px;
+  color: var(--reber-text-muted);
+  flex-shrink: 0;
+}
+
+.reber-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reber-stat-value {
+  font-weight: 700;
+  color: var(--reber-primary);
+}
+
+/* ── Reference Panel ──────────────────────────────────────────────────────── */
+.reber-ref-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  background: var(--reber-surface-alt);
+  border: 1px solid var(--reber-border-light);
+}
+
+.reber-ref-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.reber-ref-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.reber-ref-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--reber-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reber-ref-desc {
+  font-size: 11px;
+  color: var(--reber-text-muted);
+  margin-top: 1px;
+}
+
+/* ── Welcome Screen ──────────────────────────────────────────────────────── */
+.reber-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: safe center;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 32px;
+  text-align: center;
+  gap: 16px;
+}
+
+.reber-welcome-logo {
+  width: 72px;
+  height: 72px;
+  background: var(--reber-primary);
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+  box-shadow: var(--reber-shadow-lg);
+  margin-bottom: 8px;
+}
+
+.reber-welcome h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--reber-text);
+  margin: 0;
+}
+
+.reber-welcome-tagline {
+  font-size: 15px;
+  color: var(--reber-text-secondary);
+  max-width: 400px;
+}
+
+.reber-welcome-philosophy {
+  background: var(--reber-surface);
+  border: 1px solid var(--reber-border-light);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: left;
+  max-width: 360px;
+  width: 100%;
+}
+
+.reber-welcome-philosophy h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--reber-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 10px 0;
+}
+
+.reber-phil-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.reber-phil-key {
+  font-weight: 700;
+  color: var(--reber-primary);
+  min-width: 40px;
+  font-family: monospace;
+}
+
+.reber-phil-val {
+  color: var(--reber-text-secondary);
+}
+
+.reber-welcome-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.reber-chip {
+  padding: 6px 14px;
+  background: var(--reber-primary-pale);
+  color: var(--reber-primary);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--reber-border);
+  transition: all 0.15s;
+}
+
+.reber-chip:hover {
+  background: var(--reber-primary);
+  color: white;
+  border-color: var(--reber-primary);
+}
+
+/* ── Kata Category Tabs ───────────────────────────────────────────────────── */
+.reber-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 8px 16px;
+  background: var(--reber-surface);
+  border-bottom: 1px solid var(--reber-border-light);
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.reber-tab {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--reber-text-secondary);
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.reber-tab:hover {
+  background: var(--reber-bg);
+  color: var(--reber-primary);
+}
+
+.reber-tab.active {
+  background: var(--reber-primary);
+  color: white;
+  border-color: var(--reber-primary-hover);
+}
+
+/* ── Spinner ──────────────────────────────────────────────────────────────── */
+.reber-spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--reber-text-muted);
+  font-size: 13px;
+}
+
+.reber-spinner::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--reber-border);
+  border-top-color: var(--reber-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Loading dots ─────────────────────────────────────────────────────────── */
+.reber-dots::after {
+  content: "...";
+  animation: dots 1.2s infinite;
+}
+
+@keyframes dots {
+  0%   { content: "."; }
+  33%  { content: ".."; }
+  66%  { content: "..."; }
+}
+
+/* ── Utility ──────────────────────────────────────────────────────────────── */
+.reber-divider {
+  height: 1px;
+  background: var(--reber-border-light);
+  margin: 8px 0;
+}
+
+.reber-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reber-tag-ieje { background: #dbeafe; color: #1d4ed8; }
+.reber-tag-aeea { background: #ede9fe; color: #6d28d9; }
+.reber-tag-nz   { background: #d1fae5; color: #065f46; }
+.reber-tag-ck   { background: #fef3c7; color: #92400e; }
+.reber-tag-regs { background: #fce7f3; color: #9d174d; }
+.reber-tag-log  { background: #f3f4f6; color: #374151; }
+
+.reber-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+  color: var(--reber-text-muted);
+  font-size: 14px;
+  gap: 8px;
+}
+
+.reber-empty-icon { font-size: 48px; }
+
+/* ── Project Cards ─────────────────────────────────────────────────────────── */
+.reber-project-card {
+  background: var(--reber-surface);
+  border: 1.5px solid var(--reber-border-light);
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.reber-project-card:hover {
+  border-color: var(--reber-primary);
+  box-shadow: var(--reber-shadow);
+}
+
+.reber-project-domain {
+  font-size: 11px;
+  color: var(--reber-primary);
+  font-weight: 600;
+  font-family: monospace;
+  background: var(--reber-primary-pale);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ── Status indicator ─────────────────────────────────────────────────────── */
+.reber-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.reber-status-dot.offline { background: #ef4444; }
+.reber-status-dot.idle    { background: #f59e0b; }
