@@ -15,7 +15,7 @@
   // Folder tingkat root yang dikelola pada ROOT .L — termasuk folder sistem
   // virtual (/proc /sys /media /acct /pro /config /cache /system_ext) yang
   // selalu ditampilkan di samping folder nyata repositori (.github data scripts).
-  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext'];
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext', 'workspace'];
   const VIRTUAL_ROOT_META = {
     proc: { desc: 'Virtual filesystem proses (pid, stat, cmdline)', items: 3 },
     sys: { desc: 'Sysfs perangkat & kernel (class, bus, devices)', items: 3 },
@@ -25,6 +25,7 @@
     config: { desc: 'Konfigurasi terpusat sistem & layanan', items: 2 },
     cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
     system_ext: { desc: 'Partisi system_ext (produk & ODM)', items: 2 },
+    workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
   };
   function isVirtualRootName(name) { return VIRTUAL_SHORTCUTS.includes(name) && name !== 'data'; }
   function virtualRootEntry(name) {
@@ -35,6 +36,15 @@
       function: `Folder virtual root /${name} — sub URL File Manager dengan pengaturan terpusat`,
       subUrl: `#fileManager/${name}`, virtualRoot: true,
     };
+  }
+  function localWorkspaceEntries() {
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem('planetbintang.file-manager.workspace.v1') || '[]'); } catch { items = []; }
+    return Array.isArray(items) ? items.filter((item) => item?.name).map((item) => ({
+      path: `workspace/${String(item.name).replaceAll('/', '-')}`, type: 'file', mode: '0100644',
+      size: String(item.content || '').length, sizeKnown: true, function: 'File workspace lokal — dapat dibaca, ditulis, diedit, dan dihapus melalui Manage / Files',
+      localWorkspace: true, codeContent: String(item.content || ''),
+    })) : [];
   }
   function virtualChildren(path) {
     const children = {
@@ -73,6 +83,7 @@
         { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
       ],
     };
+    if (path === 'workspace') return localWorkspaceEntries();
     return children[path] || [];
   }
   const EXT_FUNCTION = {
@@ -447,7 +458,7 @@
     folders.forEach((item) => {
       const button = el('button', undefined, 'fm-shortcut'); button.type = 'button'; button.title = `Buka /${item.path}`;
       if (item.type === 'directory') {
-        const img = document.createElement('img'); img.src = './folder-3d-icon.png'; img.alt = ''; img.className = 'fm-shortcut-icon';
+        const img = document.createElement('img'); img.src = './folder-3d-icon.jpg'; img.alt = ''; img.className = 'fm-shortcut-icon';
         button.append(img, el('span', basename(item.path)));
       } else button.textContent = basename(item.path);
       button.addEventListener('click', () => goTo(item.path)); list.append(button);
@@ -472,7 +483,7 @@
       tile.setAttribute('aria-label', `${item.type === 'directory' ? 'Folder' : 'File'} ${item.path}`);
       const icon = el('span', undefined, 'file-tile-icon');
       if (item.type === 'directory') {
-        if (viewSettings.folderIcon !== false) { const img = document.createElement('img'); img.src = './folder-3d-icon.png'; img.alt = ''; icon.append(img); }
+        if (viewSettings.folderIcon !== false) { const img = document.createElement('img'); img.src = './folder-3d-icon.jpg'; img.alt = ''; icon.append(img); }
         else icon.append(el('span', 'DIR', 'file-type-mark'));
       }
       else icon.append(el('span', kind(item), 'file-type-mark'));
@@ -632,7 +643,10 @@
     }
   }
 
-  window.PBFileManager = { applySnapshot: (data) => init(data, true) };
+  window.PBFileManager = { applySnapshot: (data) => init(data, true), refreshWorkspace: () => {
+    if (isLRepo() && (state.path === '' || state.path === 'workspace')) void loadDirectory(state.path);
+  } };
+  window.addEventListener('planetbintang:workspace-files-changed', () => window.PBFileManager?.refreshWorkspace());
   if (window.PBSystemSnapshot?.subscribe) window.PBSystemSnapshot.subscribe('file-manager', (data) => init(data, true));
   else loadTreeIndex();
 })();

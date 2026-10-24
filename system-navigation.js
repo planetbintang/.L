@@ -15,6 +15,12 @@
     repositories: { group: 'repositories', menu: 'code', hash: '#repositories' },
     hosts: { group: 'hosts', menu: 'insights', hash: '#hosts' },
   };
+  const toolRoutes = [
+    ['manage-files', 'manage'], ['manage-storage', 'manage'], ['manage-settings', 'manage'], ['manage-access', 'manage'], ['manage-activity', 'manage'],
+    ['execute-run', 'execute'], ['execute-console', 'execute'], ['execute-jobs', 'execute'], ['execute-deploy', 'execute'], ['execute-logs', 'execute'],
+  ];
+  toolRoutes.forEach(([name, menu]) => { routes[name] = { group: 'tools', menu, hash: `#${menu}/${name.replace(`${menu}-`, '')}` }; });
+
   const platformRoutes = [
     ['branches', 'code'], ['commits', 'code'], ['tags', 'code'],
     ['milestones', 'plan'], ['roadmap', 'plan'],
@@ -39,6 +45,11 @@
     if (!hash || hash === 'top' || hash === 'overview') return 'system';
     if (hash === 'workspace') return 'projects';
     if (hash.startsWith('workspace/')) return workspaceRoutes.get(hash.slice('workspace/'.length)) || 'projects';
+    if (hash.startsWith('manage/') || hash.startsWith('execute/')) {
+      const [group, page] = hash.split('/');
+      const route = `${group}-${page}`;
+      return routes[route]?.group === 'tools' ? route : null;
+    }
     if (hash.startsWith('platform/')) {
       const route = hash.slice('platform/'.length);
       return routes[route]?.group === 'platform' ? route : null;
@@ -106,6 +117,7 @@
 
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
+    if (route.group === 'tools') window.PBSystemTools?.render(routeName);
     const settings = $('#settingsPanel');
     if (changed && settings && !settings.hidden) {
       settings.hidden = true;

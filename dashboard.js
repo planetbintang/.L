@@ -102,7 +102,7 @@
     const head = document.createElement('header'); head.className = 'repo-head';
     const titleRow = document.createElement('div'); titleRow.className = 'repo-title-row';
     const glyph = document.createElement('span'); glyph.className = 'repo-glyph';
-    const logo = document.createElement('img'); logo.src = './system-icon.png'; logo.alt = ''; glyph.append(logo);
+    const logo = document.createElement('img'); logo.src = './folder-3d-icon-browser.png'; logo.alt = ''; glyph.append(logo);
     const nameWrap = document.createElement('div'); nameWrap.className = 'repo-name';
     const title = document.createElement('h3'); title.append(anchor(repo.url, repo.fullName || repo.name));
     nameWrap.append(title, text('small', `branch: ${repo.branch || '—'} · ${repo.state === 'empty' ? 'repo kosong' : repo.state === 'unavailable' ? 'akses tidak tersedia' : 'metadata publik'}`));
