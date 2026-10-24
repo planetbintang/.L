@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "system": "planetbintang",
+  "root": "system_ext/features",
+  "featureCount": 12288,
+  "bucketCount": 384,
+  "featuresPerBucket": 32,
+  "domains": [
+    "access", "analytics", "api", "app", "automation", "backup",
+    "brand", "code", "community", "content", "data", "design",
+    "device", "docs", "execute", "files", "forms", "graph",
+    "integration", "management", "monitoring", "pipeline", "security", "workspace"
+  ],
+  "extensions": [".html", ".css", ".js", ".nz"],
+  "execution": "disabled-by-default",
+  "loading": "lazy-by-bucket",
+  "source": "file-manager.js generated virtual filesystem"
+}
