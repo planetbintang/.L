@@ -4,6 +4,20 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const state = { data: null, query: '', visibility: 'all', appType: 'all' };
+  // Binary visibility mask: bit 0..9 hides repositories named exactly 0..9.
+  const HIDDEN_REPOSITORY_MASK = 0b1111111111;
+  const isHiddenRepository = (repo) => {
+    const name = String(repo?.name ?? '').trim();
+    if (!/^[0-9]$/.test(name)) return false;
+    return (HIDDEN_REPOSITORY_MASK & (1 << Number(name))) !== 0;
+  };
+  const visibleSnapshot = (data) => {
+    const repositories = (data.repositories || []).filter((repo) => !isHiddenRepository(repo));
+    const publicCount = repositories.filter((repo) => repo.visibility === 'public').length;
+    const privateCount = repositories.filter((repo) => repo.visibility === 'private').length;
+    const pagesEnabledCount = repositories.filter((repo) => Boolean(repo.pagesUrl || repo.homepage)).length;
+    return { ...data, repositories, repositoryCount: repositories.length, publicCount, privateCount, pagesEnabledCount };
+  };
   const snapshotConsumers = new Map();
   const consumerStates = new Map();
   const fmt = new Intl.NumberFormat('id-ID');
@@ -198,13 +212,14 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (!Array.isArray(data.repositories)) throw new Error('Format snapshot tidak valid');
-      state.data = data;
-      renderSummary(data);
-      buildAppFilter(data.repositories);
+      const filteredData = visibleSnapshot(data);
+      state.data = filteredData;
+      renderSummary(filteredData);
+      buildAppFilter(filteredData.repositories);
       renderRepositories();
-      renderHosts(data);
-      const results = await Promise.all([...snapshotConsumers].map(([name, handler]) => runSnapshotConsumer(name, handler, data)));
-      announceSync(results.every(Boolean) ? 'ready' : 'partial', { updatedAt: data.updatedAt, repositoryCount: data.repositoryCount || data.repositories.length, dataSha256: data.dataSha256 || '' });
+      renderHosts(filteredData);
+      const results = await Promise.all([...snapshotConsumers].map(([name, handler]) => runSnapshotConsumer(name, handler, filteredData)));
+      announceSync(results.every(Boolean) ? 'ready' : 'partial', { updatedAt: filteredData.updatedAt, repositoryCount: filteredData.repositoryCount, dataSha256: filteredData.dataSha256 || '' });
       return true;
     } catch (error) {
       setConnection('Snapshot gagal', false);
