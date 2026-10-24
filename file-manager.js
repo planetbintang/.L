@@ -24,9 +24,51 @@
     pro: { desc: 'Folder konfigurasi profil sistem', items: 2 },
     config: { desc: 'Konfigurasi terpusat sistem & layanan', items: 2 },
     cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
-    system_ext: { desc: 'Partisi system_ext (produk & ODM)', items: 2 },
+    system_ext: { desc: 'Filesystem kode virtual Planetbintang: katalog 4.096 file + modul sistem', items: 4104 },
     workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
   };
+  const GENERATED_EXTENSIONS = ['html', 'css', 'js', 'nz'];
+  const GENERATED_MODULES = ['core', 'ui', 'data', 'api', 'device', 'app', 'docs', 'brand', 'pipeline', 'ai', 'integration', 'security', 'storage'];
+  const GENERATED_BUCKETS = 256;
+  const GENERATED_FILES_PER_BUCKET = 16;
+  function generatedCode(path, extension, index) {
+    const name = basename(path);
+    if (extension === 'html') return `<!-- Planetbintang virtual system file ${index} -->\n<section data-system-file="${name}">\n  <h1>${name}</h1>\n  <p>Generated interface contract for the Planetbintang filesystem.</p>\n</section>`;
+    if (extension === 'css') return `/* Planetbintang virtual style ${index} */\n[data-system-file="${name}"] {\n  display: grid;\n  min-height: 40px;\n  color: var(--lux-blue-bright);\n}`;
+    if (extension === 'js') return `// Planetbintang virtual module ${index}\nexport function ${name.replace(/[^a-z0-9]/gi, '_')} (context = {}) {\n  return { ok: true, module: '${name}', context };\n}`;
+    return `# Planetbintang .nz module ${index}\nmodule = ${name}\nstatus = synchronized\nmode = virtual-filesystem`;
+  }
+  function generatedSystemEntries(path) {
+    if (path === 'system_ext') return [
+      { path: 'system_ext/catalog', type: 'directory', mode: '040755', function: '4.096 file kode virtual dalam 256 bucket lazy-load' },
+      { path: 'system_ext/modules', type: 'directory', mode: '040755', function: 'Modul fitur: core, UI, data, API, AI, pipeline, dan integrasi' },
+      { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext' },
+      { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
+    ];
+    if (path === 'system_ext/catalog') return Array.from({ length: GENERATED_BUCKETS }, (_, bucket) => ({
+      path: `system_ext/catalog/b${String(bucket).padStart(3, '0')}`, type: 'directory', mode: '040755', items: GENERATED_FILES_PER_BUCKET,
+      function: `Bucket ${bucket}: ${GENERATED_FILES_PER_BUCKET} file HTML/CSS/JS/NZ`,
+    }));
+    const bucketMatch = path.match(/^system_ext\/catalog\/b(\d{3})$/);
+    if (bucketMatch) return Array.from({ length: GENERATED_FILES_PER_BUCKET }, (_, offset) => {
+      const index = Number(bucketMatch[1]) * GENERATED_FILES_PER_BUCKET + offset;
+      const extension = GENERATED_EXTENSIONS[index % GENERATED_EXTENSIONS.length];
+      const file = `pb-${String(index).padStart(4, '0')}.${extension}`;
+      return { path: `${path}/${file}`, type: 'file', mode: '0100644', size: generatedCode(file, extension, index).length, sizeKnown: true, function: `Generated ${extension.toUpperCase()} system contract`, codeContent: generatedCode(file, extension, index) };
+    });
+    if (path === 'system_ext/modules') return GENERATED_MODULES.map((module) => ({
+      path: `system_ext/modules/${module}`, type: 'directory', mode: '040755', items: GENERATED_FILES_PER_BUCKET,
+      function: `Submenu modul ${module}: kode, dokumentasi, pipeline, CRUD, AI dan preview`,
+    }));
+    const moduleMatch = path.match(/^system_ext\/modules\/([a-z]+)$/);
+    if (moduleMatch && GENERATED_MODULES.includes(moduleMatch[1])) return Array.from({ length: GENERATED_FILES_PER_BUCKET }, (_, offset) => {
+      const module = moduleMatch[1]; const index = GENERATED_MODULES.indexOf(module) * GENERATED_FILES_PER_BUCKET + offset;
+      const extension = GENERATED_EXTENSIONS[offset % GENERATED_EXTENSIONS.length];
+      const file = `${module}-${String(offset).padStart(2, '0')}.${extension}`;
+      return { path: `${path}/${file}`, type: 'file', mode: '0100644', size: generatedCode(file, extension, index).length, sizeKnown: true, function: `${module} ${extension.toUpperCase()} feature module`, codeContent: generatedCode(file, extension, index) };
+    });
+    return [];
+  }
   function isVirtualRootName(name) { return VIRTUAL_SHORTCUTS.includes(name) && name !== 'data'; }
   function virtualRootEntry(name) {
     const meta = VIRTUAL_ROOT_META[name] || { desc: 'Folder virtual root — manajemen terpusat struktur sistem', items: 0 };
@@ -47,6 +89,8 @@
     })) : [];
   }
   function virtualChildren(path) {
+    const generated = generatedSystemEntries(path);
+    if (generated.length) return generated;
     const children = {
       proc: [
         { path: 'proc/self', type: 'directory', mode: '041777', function: 'Symlink proses saat ini' },
@@ -195,6 +239,8 @@
     if (!top) return VIRTUAL_SHORTCUTS.filter((name) => isVirtualRootName(name)).map(virtualRootEntry);
     if (!isVirtualRootName(top)) return [];
     if (!prefix || prefix === top) return [];
+    const generated = generatedSystemEntries(prefix);
+    if (generated.length) return generated;
     return virtualChildren(top).filter((item) => item.path.startsWith(`${prefix}/`) && !item.path.slice(prefix.length + 1).includes('/'));
   }
 
