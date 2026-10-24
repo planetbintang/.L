@@ -372,3 +372,25 @@ body {
   .topbar .main-nav { flex: 0 0 auto; }
   .topbar .topbar-actions { flex: 0 0 auto; margin-left: auto; }
 }
+
+/* One shared gutter keeps header, body content and footer on the same vertical rails. */
+:root { --page-gutter: clamp(24px, 4.5vw, 70px); }
+.topbar,
+.hero.panel,
+.metrics,
+.provider-matrix,
+.workspace-section,
+.platform-page,
+.settings-panel,
+.privacy-note,
+.footer { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+.hero.panel { padding-top: clamp(30px, 5vw, 70px); padding-bottom: clamp(30px, 5vw, 70px); }
+.metrics { margin-left: 0; margin-right: 0; }
+.footer { min-height: 68px; }
+@media (max-width: 650px) {
+  :root { --page-gutter: 16px; }
+  .topbar, .footer { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .hero.panel { padding: 32px var(--page-gutter); }
+  .metrics { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .provider-matrix, .workspace-section, .platform-page, .settings-panel, .privacy-note { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+}
