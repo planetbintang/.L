@@ -2,7 +2,7 @@
   'use strict';
   const $ = (selector, root = document) => root.querySelector(selector);
   const fmt = new Intl.NumberFormat('id-ID');
-  const state = { data: null, repo: '', path: '', query: '', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
+  const state = { data: null, repo: '', path: '', query: '', extension: 'all', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
 
   // Root virtual sistem pada repository `.L` (sub URL planetbintang.snapshot lokal `.L`/):
   // folder /data /proc /sys /media /acct /pro /config /cache — masing-masing adalah
@@ -88,7 +88,7 @@
   }
   const EXT_FUNCTION = {
     APK: 'Paket aplikasi Android (Java/Kotlin terdex)', SO: 'Pustaka bersama native ELF (C/C++)', JAR: 'Pustaka/framework Java',
-    XML: 'Konfigurasi/manifest berbasis teks', RC: 'Skrip init service (Android init language)', PROP: 'Pasangan kunci=nilai properti',
+    XML: 'Konfigurasi/manifest berbasis teks', HTML: 'Dokumen struktur halaman web', CSS: 'Style sheet antarmuka web', JS: 'Kode JavaScript dan perilaku antarmuka', NZ: 'Format kode Planetbintang (.nz)', RC: 'Skrip init service (Android init language)', PROP: 'Pasangan kunci=nilai properti',
     TXT: 'Teks biasa (log/laporan)', DB: 'Database SQLite', CONF: 'File konfigurasi teks', BIN: 'Data biner mentah',
     IMG: 'Image partisi/filesystem', ODEX: 'Hasil AOT dex teroptimasi', VDEX: 'Verifikasi dex compact', MP4: 'Video (H.264/HEVC)',
     MKV: 'Kontainer video Matroska', JPG: 'Foto terkompresi', PNG: 'Gambar lossless', WEBP: 'Gambar web modern', MP3: 'Audio terkompresi',
@@ -173,6 +173,13 @@
   function ext(path) {
     const name = basename(path); const dot = name.lastIndexOf('.');
     return dot > 0 ? name.slice(dot + 1).toUpperCase().slice(0, 4) : '';
+  }
+  function isHiddenRepository(repo) {
+    const name = String(repo?.name ?? '').trim();
+    return /^[0-9]$/.test(name);
+  }
+  function matchesExtension(item) {
+    return item.type === 'directory' || state.extension === 'all' || ext(item.path).toLowerCase() === state.extension;
   }
   function kind(entry) { return entry.type === 'directory' ? 'DIR' : entry.type === 'submodule' ? 'SUB' : ext(entry.path) || 'FILE'; }
   function treeStateLabel(tree) { return tree?.state === 'complete' ? 'LENGKAP' : tree?.state === 'partial' ? 'PARSIAL' : tree?.state === 'empty' ? 'KOSONG' : 'TIDAK TERSEDIA'; }
@@ -470,10 +477,10 @@
     // Root .L: sisipkan folder sistem virtual di samping entri pohon nyata.
     const lRootVirtual = (isLRepo() && !state.path) ? lVirtualEntriesFor('') : [];
     const allItems = [...state.entries, ...lRootVirtual];
-    const items = sortItems(allItems.filter((item) => !query || item.path.toLocaleLowerCase('id').includes(query)));
+    const items = sortItems(allItems.filter((item) => matchesExtension(item) && (!query || item.path.toLocaleLowerCase('id').includes(query))));
     renderShortcuts(allItems);
     $('#fileEmpty').hidden = items.length > 0;
-    $('#fileEmpty').textContent = state.query ? 'Tidak ada kecocokan pada halaman folder yang sudah dimuat.' : 'Folder ini kosong atau semua nama sensitif disaring.';
+    $('#fileEmpty').textContent = state.extension !== 'all' ? `Tidak ada file .${state.extension} pada folder ini.` : state.query ? 'Tidak ada kecocokan pada halaman folder yang sudah dimuat.' : 'Folder ini kosong atau semua nama sensitif disaring.';
     for (const item of items) {
       const tile = el('button', undefined, `file-tile${state.selected === item.path ? ' is-selected' : ''}${item.type === 'directory' ? ' is-directory' : ''}${viewSettings.dense ? ' is-dense' : ''}`);
       tile.type = 'button'; tile.setAttribute('role', 'listitem'); tile.title = `/${item.path}${item.type === 'directory' ? '/' : ''}`;
@@ -600,7 +607,7 @@
 
   async function init(data, preserveLocation = true) {
     const previousRepo = state.repo; const previousPath = state.path;
-    const list = [...(data.repositories || [])];
+    const list = [...(data.repositories || [])].filter((repo) => !isHiddenRepository(repo));
     const virtualEntry = virtualRepoEntry();
     const existingIndex = list.findIndex((repo) => repo.fullName === L_REPO);
     if (existingIndex >= 0) {
@@ -621,6 +628,7 @@
       $('#fileUpButton').addEventListener('click', () => goTo(state.path.split('/').slice(0, -1).join('/')));
       $('#filePathForm').addEventListener('submit', (event) => { event.preventDefault(); goTo($('#filePathInput').value); });
       $('#fileSearchInput').addEventListener('input', (event) => { state.query = event.target.value.trim(); renderTiles(); });
+      $('#fileExtensionFilter').addEventListener('change', (event) => { state.extension = event.target.value; state.selected = null; renderTiles(); });
       $('#fileLoadMoreButton').addEventListener('click', () => void loadNextPage());
       handlersBound = true;
     }

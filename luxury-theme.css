@@ -721,6 +721,23 @@ body {
   .root-details { margin-left: 14px; margin-right: 14px; }
 }
 
+/* Dynamic code-extension submenu for the complete Planetbintang content index. */
+.fm-extension-label { display: flex; flex-direction: column; gap: 5px; min-width: 126px; }
+.fm-extension-label > span { color: #8298b8; font: 8px var(--lux-mono); letter-spacing: .11em; }
+.fm-extension-label select {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid rgba(101, 146, 219, .34);
+  background: rgba(6, 14, 25, .78);
+  color: #dbe8fb;
+  font: 9px var(--lux-mono);
+}
+.fm-extension-label select:focus { border-color: #4b8bff; box-shadow: 0 0 0 3px rgba(75,139,255,.14); }
+@media (max-width: 650px) {
+  .fm-extension-label { min-width: 0; }
+  .fm-extension-label select { min-height: 38px; }
+}
+
 /* Body content stays clear of both viewport edges with a minimum 50px gutter. */
 :root { --body-gutter: max(50px, 5vw); }
 .shell {
