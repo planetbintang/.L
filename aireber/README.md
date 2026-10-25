@@ -1,57 +1,16 @@
-# Reber AI — AlluniverS_OS
+# AI Reber — GitHub Pages static adapter
 
-**Re:Bersama**
+This directory preserves the upstream `planetbintang/aireber` source and adds a browser-only adapter for the Planetbintang `.L` GitHub Pages site at `/.L/aireber/`.
 
-Reber AI is a comprehensive AI management system built on the AlluniverS_OS virtual filesystem, featuring a dual-view interface (AI Studio + File Manager), a 1.45M+ kata node system, and white-blue design theme.
+## Page and source layout
 
-## Reber Philosophy
+- `index.html`, `reber.css`, and `reber-app.js` provide the standalone static interface. All page assets and navigation use paths relative to this project subdirectory, so the app works under GitHub Pages project-site prefixes.
+- `assets/kata-data.js` and `assets/virtual-fs.js` are browser ES-module output transpiled from the matching TypeScript libraries in the archived source commit. They provide bounded, paginated virtual filesystem and word-catalog behavior without a server.
+- `source/` contains the approved 33-file source snapshot from commit `b678639e87472214169740513108c85eb183cc39`; text/code/config/SQL/SVG files use a `.source.txt` suffix and are never imported by the adapter. `source-index.json` records original paths, sizes, and SHA-256 hashes.
+- The original project material is also preserved in `src/`, `db/`, and other upstream paths. The upstream project used TanStack Start, Netlify AI Gateway, and Netlify Database; those services are not deployed or invoked by the Pages adapter.
 
-| Symbol | Meaning |
-|--------|---------|
-| **Re:** | Bertindak — Act with Purpose |
-| **Be:** | Berdua · Bersama — Together & Collaborative |
-| **Ber:** | Bener · Mener — True, Correct, Guide |
-| **Be_r:** | Bener + Mener — Lead Correctly with Integrity |
+## Static runtime boundaries
 
-## Key Technologies
+AI/model/API/server/database/deployment execution is inactive on GitHub Pages. The app does not execute archived source. Prompts, drafts, uploads, and project metadata are stored in browser IndexedDB under the `aireber/` namespace and can be browsed under File Manager → `/workspace/aireber`. This is local to the browser/device, can be removed by browser storage policies, is limited by device/browser quota, and does not sync across devices. The three visual themes are stored in local browser preferences. Project-domain labels are drafts only and are not registered domains.
 
-- **Framework**: TanStack Start (React + Vite)
-- **AI**: Netlify AI Gateway
-- **Database**: Netlify Database (Postgres + Drizzle ORM)
-- **Styling**: Tailwind CSS v4 + Custom CSS (white-blue theme)
-- **Deployment**: Netlify
-
-## Custom File Extensions
-
-| Extension | Layer | Description |
-|-----------|-------|-------------|
-| `.ieje` | View | Interface/Index/Element |
-| `.aeea` | Style | Aesthetic/Element/Expression/Architecture |
-| `.nz` | Logic | Neuron/Zone — logic & function (min 15 lines) |
-| `.ck` | Component | Component Knowledge |
-| `.regs` | Registry | System registries and rules |
-| `.log` | Logs | System activity logs |
-
-## Features
-
-- 🤖 **Reber AI Studio** — Chat interface powered by AI Reber with full AlluniverS_OS context
-- 📁 **Virtual File Manager** — Browse 1,450,000+ kata nodes with search, pagination, and file preview
-- 🌐 **Project Manager** — Create derivative systems with `.allunivers.digital` custom domains
-- 📚 **Kata System** — 10K English + 135K Indonesian words + numbers + symbols + components
-- 🏛️ **Perpusnas.go.id** — Integrated reference to Indonesian National Library
-- 🔗 **100+ Open Source refs** — GitHub, npm, React, Vue, PostgreSQL, and more
-
-## How to Run Locally
-
-```bash
-npm install
-netlify dev
-```
-
-App runs at `http://localhost:8888`
-
-## Views
-
-1. **AI Studio** (`/`) — Reber AI chat with sidebar showing system tree, philosophy, kata stats, and references
-2. **File Manager** (`/manager`) — Virtual filesystem browser with kata browsing and file editor
-3. **Projects** (`/projects`) — Derivative system manager with `.allunivers.digital` domain assignment
+The root `.nojekyll` marker preserves the static source and asset files during branch-based Pages publishing. No server activation or external AI request is part of this adapter.

@@ -122,11 +122,13 @@
   function localWorkspaceEntries() {
     let items = [];
     try { items = JSON.parse(localStorage.getItem('planetbintang.file-manager.workspace.v1') || '[]'); } catch { items = []; }
-    return Array.isArray(items) ? items.filter((item) => item?.name).map((item) => ({
+    const local = Array.isArray(items) ? items.filter((item) => item?.name).map((item) => ({
       path: `workspace/${String(item.name).replaceAll('/', '-')}`, type: 'file', mode: '0100644',
-      size: String(item.content || '').length, sizeKnown: true, function: 'File workspace lokal — dapat dibaca, ditulis, diedit, dan dihapus melalui Manage / Files',
+      size: String(item.content || '').length, sizeKnown: true, function: 'File workspace lokal — tersimpan di browser ini',
       localWorkspace: true, codeContent: String(item.content || ''),
     })) : [];
+    local.push({ path: 'workspace/aireber', type: 'directory', mode: '040700', size: 0, sizeKnown: true, function: 'IndexedDB lokal AI Reber · prompts, projects, dan workspace' });
+    return local;
   }
   function virtualChildren(path) {
     const generated = generatedSystemEntries(path);
@@ -329,6 +331,23 @@
   }
 
   function renderAssessment(repo) {
+    if (isLRepo() && (state.path === 'workspace/aireber' || state.path.startsWith('workspace/aireber/'))) {
+      const files = state.entries.filter((item) => item.type === 'file').length;
+      const folders = state.entries.filter((item) => item.type === 'directory').length;
+      $('#fileTreeStatus').textContent = `WORKSPACE REBER · ${fmt.format(files)} file · ${fmt.format(folders)} folder · IndexedDB perangkat ini`;
+      $('#fileIntegrityStatus').textContent = 'Penyimpanan lokal browser · bukan isi source GitHub';
+      $('#fileActivityStatus').textContent = 'Dapat dibaca dan diedit dari AI Reber · tidak tersinkron antarperangkat';
+      $('#fileSelectionTitle').textContent = 'Workspace lokal AI Reber';
+      const panel = $('#fileSelectionData'); panel.replaceChildren();
+      addInfo(panel, 'Namespace', '/aireber/', true);
+      addInfo(panel, 'Path aktif', `/${state.path}`, true);
+      addInfo(panel, 'Isi langsung', `${fmt.format(files)} file · ${fmt.format(folders)} folder`);
+      addInfo(panel, 'Runtime', 'GitHub Pages statis · file tidak dieksekusi');
+      panel.append(el('p', 'Data berasal dari IndexedDB browser pada perangkat ini. Kuota dan persistensi mengikuti kebijakan browser.', 'fm-inspector-disclaimer'));
+      $('#fileOpenGitHub').hidden = true;
+      $('#fileOpenEditorButton').hidden = true;
+      return;
+    }
     if (isVirtualRepo()) {
       const manifest = state.manifest || {};
       const directory = currentDirectory();
@@ -626,7 +645,19 @@
       state.requestId += 1; state.loading = false;
       state.path = path; state.query = ''; state.selected = null;
       const top = String(path).split('/')[0];
-      state.entries = path === top ? virtualChildren(top) : lVirtualEntriesFor(path);
+      if ((path === 'workspace/aireber' || path.startsWith('workspace/aireber/')) && window.PBLocalFiles) {
+        const localPath = path.slice('workspace/'.length);
+        try {
+          const rows = await window.PBLocalFiles.list(localPath);
+          state.entries = await Promise.all(rows.map(async (row) => {
+            const entry = { path: `workspace/${row.path}`, type: row.type === 'directory' ? 'directory' : 'file', mode: row.type === 'directory' ? '040700' : '0100600', size: Number(row.size) || 0, sizeKnown: true, function: 'File Reber lokal · IndexedDB perangkat ini', localWorkspace: true };
+            if (row.type !== 'directory' && Number(row.size) <= 1_000_000) {
+              try { entry.codeContent = (await window.PBLocalFiles.readFile(row.path)).text; } catch { entry.codeContent = '[Tidak dapat membaca isi file lokal]'; }
+            }
+            return entry;
+          }));
+        } catch (error) { state.entries = []; $('#fileTreeStatus').textContent = `Workspace Reber tidak dapat dibaca: ${error.message}`; }
+      } else state.entries = path === top ? virtualChildren(top) : lVirtualEntriesFor(path);
       state.pageIndex = 0; state.pageCount = 0;
       $('#fileSearchInput').value = '';
       renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles();
@@ -693,8 +724,16 @@
     };
   }
 
+  function pathFromLocationHash() {
+    try {
+      const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+      if (!hash.startsWith('fileManager/')) return '';
+      return normalizePath(hash.slice('fileManager/'.length)) || '';
+    } catch { return ''; }
+  }
   async function init(data, preserveLocation = true) {
     const previousRepo = state.repo; const previousPath = state.path;
+    const initialPath = previousRepo ? previousPath : pathFromLocationHash();
     const list = [...(data.repositories || [])].filter((repo) => !isHiddenRepository(repo));
     const virtualEntry = virtualRepoEntry();
     const existingIndex = list.findIndex((repo) => repo.fullName === L_REPO);
@@ -720,7 +759,8 @@
       $('#fileLoadMoreButton').addEventListener('click', () => void loadNextPage());
       handlersBound = true;
     }
-    await loadManifest(preserveLocation && state.repo === previousRepo ? previousPath : '');
+    const targetPath = preserveLocation && previousRepo === L_REPO ? previousPath : initialPath;
+    await loadManifest(targetPath);
   }
 
   async function loadTreeIndex() {
@@ -736,8 +776,8 @@
     }
   }
 
-  window.PBFileManager = { applySnapshot: (data) => init(data, true), refreshWorkspace: () => {
-    if (isLRepo() && (state.path === '' || state.path === 'workspace')) void loadDirectory(state.path);
+  window.PBFileManager = { applySnapshot: (data) => init(data, true), setPath: (path) => goTo(path), refreshWorkspace: () => {
+    if (isLRepo() && (state.path === '' || state.path === 'workspace' || state.path.startsWith('workspace/aireber'))) void loadDirectory(state.path);
   } };
   window.addEventListener('planetbintang:workspace-files-changed', () => window.PBFileManager?.refreshWorkspace());
   if (window.PBSystemSnapshot?.subscribe) window.PBSystemSnapshot.subscribe('file-manager', (data) => init(data, true));
