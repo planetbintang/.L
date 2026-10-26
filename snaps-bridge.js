@@ -240,7 +240,7 @@
 
   /* ---------- Input otomatis kode ke File Manager (/workspace) ---------- */
   async function writeToWorkspace(name, content) {
-    const cleanName = String(name).replaceAll('\\\\', '/').split('/').pop().replace(/[^a-zA-Z0-9._ -]/g, '-').slice(0, 120) || 'generated-app.txt';
+    const cleanName = String(name).replaceAll('\\', '/').split('/').pop().replace(/[^a-zA-Z0-9._ -]/g, '-').slice(0, 120) || 'generated-app.txt';
     const body = String(content);
     // Use the same IndexedDB-backed store that the .L File Manager reads.
     // localStorage remains a compatibility fallback only for older builds.
