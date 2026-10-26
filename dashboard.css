@@ -68,6 +68,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,su
 .fm-sidebar,.fm-inspector{min-width:0;padding:12px;border-right:1px solid var(--line);background:#fbfcff}
 .fm-inspector{border-right:0;border-left:1px solid var(--line);background:#f8faff}
 .fm-pane-heading{font:8px var(--mono);letter-spacing:.13em;color:#6b6b6b;margin:0 0 10px}
+.fm-pane-heading-sub{margin-top:14px}
+.fm-repo-shortcuts{max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:2px;margin-bottom:4px}
+.fm-repo-shortcut.is-active{border-color:var(--blue);background:var(--blue-soft);color:#124cb4;font-weight:700}
 .fm-root-button,.fm-shortcut{width:100%;text-align:left;border:1px solid transparent;background:transparent;padding:6px 5px;font:9px var(--mono);color:#333;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fm-root-button{border-color:#b9ccf5;background:var(--blue-soft);color:#124cb4;margin-bottom:6px}
 .fm-root-button:hover,.fm-shortcut:hover{border-color:var(--blue);background:#fff}

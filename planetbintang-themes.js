@@ -7,7 +7,7 @@
   //     ke level header/root index.html sehingga berlaku pada SELURUH halaman.
   //   * Satu preferensi localStorage dipakai bersama: ganti tema di homepage
   //     otomatis mengikuti di AI Reber studio, dan sebaliknya.
-  //   * Tanpa atribut data-pb-theme → tampilan luxury gelap standar tetap utuh.
+  //   * Tanpa atribut data-pb-theme → tampilan gelap abstrak standar tetap utuh.
   // ==========================================================================
   const THEME_KEY = 'planetbintang.aireber.theme.v1'; // kunci sama dengan AI Reber
   const THEMES = ['cahaya', 'air', 'berlian'];
@@ -36,7 +36,7 @@
     label.className = 'pb-theme-picker';
     label.title = 'Tema Planetbintang — sinkron dengan tiga tema AI Reber (Cahaya · Air · Berlian)';
     label.innerHTML = '<span>TEMA</span><select id="pbThemeSelect" aria-label="Tema tampilan Planetbintang">'
-      + '<option value="default">Luxury Gelap</option>'
+      + '<option value="default">Gelap Abstrak</option>'
       + '<option value="cahaya">Cahaya</option>'
       + '<option value="air">Air</option>'
       + '<option value="berlian">Berlian Kaca</option></select>';

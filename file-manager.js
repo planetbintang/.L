@@ -634,8 +634,32 @@
     });
   }
 
+  // Sidebar File Manager menampilkan SELURUH repositori pada snapshot sebagai
+  // pintasan; klik sebuah repositori memuat root-nya (sama seperti pemilih repo).
+  function renderRepoShortcuts() {
+    const list = $('#fileRepoShortcuts'); if (!list) return;
+    list.replaceChildren();
+    const repositories = state.data?.repositories || [];
+    if (!repositories.length) { list.append(el('p', 'Tidak ada repositori pada snapshot.', 'fm-shortcuts-empty')); return; }
+    for (const repo of repositories) {
+      const button = el('button', undefined, `fm-shortcut fm-repo-shortcut${repo.fullName === state.repo ? ' is-active' : ''}`);
+      button.type = 'button';
+      button.title = `Buka ${repo.fullName === L_REPO ? '.L · root system' : repo.fullName} — / root`;
+      const icon = document.createElement('img'); icon.src = './folder-3d-icon.jpg'; icon.alt = ''; icon.className = 'fm-shortcut-icon';
+      button.append(icon, el('span', repo.fullName === L_REPO ? '.L · root system' : repo.name || repo.fullName));
+      button.addEventListener('click', () => {
+        if (repo.fullName === state.repo) { goTo(''); return; }
+        state.repo = repo.fullName; state.query = ''; $('#fileSearchInput').value = '';
+        const select = $('#fileRepoSelect'); if (select) select.value = repo.fullName;
+        void loadManifest('');
+      });
+      list.append(button);
+    }
+  }
+
   function renderTiles() {
     const pane = $('#fileTiles'); pane.replaceChildren();
+    renderRepoShortcuts();
     const viewSettings = isVirtualRepo() ? readFolderSettings(state.path) : { dense: false, folderIcon: true };
     pane.classList.toggle('is-dense', Boolean(viewSettings.dense));
     const query = state.query.toLocaleLowerCase('id');
