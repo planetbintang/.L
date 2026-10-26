@@ -298,16 +298,23 @@
       : featureItems;
     const featureGroup = document.createElement('section');
     featureGroup.className = 'ac-nav-group ac-nav-feature-group';
-    featureGroup.innerHTML = `<div class="ac-nav-feature-head"><span>🗂️ Fitur nyata airz/</span><b>${fmt.format(matchingFeatures.length)}</b></div>`;
+    featureGroup.innerHTML = `<div class="ac-nav-feature-head"><span>🗂️ Katalog fungsi berkas airz/</span><b>${fmt.format(matchingFeatures.length)}</b></div><p class="ac-nav-feature-help">Setiap berkas mempunyai tindakan: buka lokasi, lihat detail, simpan snapshot, dan salin jalur.</p>`;
     const featureList = document.createElement('div');
     featureList.className = 'ac-nav-feature-list';
     const visibleFeatures = matchingFeatures.slice(0, state.airzMenuLimit);
     featureList.innerHTML = visibleFeatures.map((item) => {
       const path = String(item.path || '').replace(/^airz\\//, '');
-      return `<button type="button" class="ac-nav-feature" data-airz-fm="${esc(item.path)}" title="${esc(item.function || item.path)}">
-        <span class="ac-nav-feature-name">${esc(item.name || path.split('/').pop() || 'Berkas sistem')}</span>
-        <small>${esc(item.domain || 'sistem')} · ${esc(path)}</small>
-      </button>`;
+      return `<article class="ac-nav-feature-card">
+        <button type="button" class="ac-nav-feature" data-airz-fm="${esc(item.path)}" title="Buka lokasi berkas di File Manager">
+          <span class="ac-nav-feature-name">${esc(item.name || path.split('/').pop() || 'Berkas sistem')}</span>
+          <small>${esc(item.domain || 'sistem')} · ${esc(path)}</small>
+        </button>
+        <div class="ac-nav-feature-actions">
+          <button type="button" data-airz-view="${esc(item.id)}" title="Lihat detail dan pratinjau">Detail</button>
+          <button type="button" data-airz-save="${esc(item.id)}" title="Simpan snapshot lokal">Simpan</button>
+          <button type="button" data-airz-copy-path="${esc(item.path)}" title="Salin jalur berkas">Salin jalur</button>
+        </div>
+      </article>`;
     }).join('');
     if (matchingFeatures.length > visibleFeatures.length) {
       const more = document.createElement('button');
