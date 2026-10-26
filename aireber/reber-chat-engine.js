@@ -3,8 +3,8 @@
    Re:Bersama — Re = Bertindak · Be = Bersama · Ber = Bener/Mener · Be_r = Integritas
 
    Mesin ini adalah "otak lokal" chatbot AI Reber yang berjalan realtime di
-   browser TANPA token API, TANPA kuota kredit, dan TANPA batas panjang jawaban:
-   setiap percakapan diproses penuh oleh mesin kata/mesin sistem Reber.
+   browser tanpa layanan model cloud. Kemampuan jawabannya terbatas pada basis pengetahuan lokal,
+   aturan perangkaian dan cuplikan kode yang tersedia; bukan pengganti LLM umum.
 
    Cara kerja (pipeline 5 tahap, meniru RAG — Retrieval Augmented Generation):
      1. TOKENIZE      → memecah pertanyaan menjadi kata-kata kunci
@@ -246,7 +246,7 @@
     const retrieved = retrieve(question, kataList);
     const parts = [];
 
-    parts.push(`🟦 **AI Reber · Re:Bersama** — jawaban diproses realtime oleh mesin sistem AI Reber (tokinisasi → retrieval mesin kata → ranking → perangkaian → sitasi). Tanpa token API, tanpa kredit, tanpa batas panjang jawaban.`);
+    parts.push(`🟦 **AI Reber · Re:Bersama** — mesin chat lokal yang memproses teks dengan tokenisasi, pencarian kata/dokumen, pemeringkatan, dan perangkaian jawaban. Ini bukan model bahasa besar yang terhubung ke internet: jawaban bergantung pada basis pengetahuan lokal dan dapat keliru. Periksa sumber sebelum menggunakan informasi penting.`);
 
     if (intent === 'kode') {
       const snippet = generateCodeSnippet(question);
@@ -262,7 +262,7 @@
       if (retrieved.length) {
         parts.push(retrieved.map((r) => `**${r.judul}** *(kemiripan ${(r.skor * 100).toFixed(0)}%)* — ${r.isi}`).join('\n\n'));
       } else {
-        parts.push(`Saya menerima pertanyaan Anda: *“${question.trim().slice(0, 160)}”*. Mesin kata tidak menemukan node dengan kemiripan tinggi, namun jawaban tetap dapat disusun: uraikan konteks (tujuan, kendala, format hasil yang diinginkan) dan saya akan memprosesnya menjadi langkah konkret, kode, atau analisis — semuanya tanpa batas token/kredit karena berjalan di mesin lokal Reber.`);
+        parts.push(`Saya menerima pertanyaan Anda: *“${question.trim().slice(0, 160)}”*. Basis pengetahuan lokal belum menemukan materi yang cukup relevan untuk menjawabnya dengan yakin. Saya tidak akan mengarang fakta. Tambahkan dokumen yang relevan ke workspace, persempit pertanyaan, atau hubungkan layanan model AI melalui backend tepercaya untuk jawaban umum yang lebih luas. Untuk pertanyaan terkini, periksa sumber primer.`);
       }
       if (intent === 'kode' || /buat\s|buatkan|coba\s+bikin/i.test(question)) {
         const snippet = generateCodeSnippet(question);
