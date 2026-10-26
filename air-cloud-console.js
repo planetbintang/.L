@@ -294,6 +294,16 @@
       ? `Filter "${state.query}" · ${fmt.format(nav.querySelectorAll('[data-aircloud-menu]').length)} menu cocok`
       : `${fmt.format(MENUS.length)} menu utama · ${fmt.format(SUBS.length)} submenu · ${fmt.format(LEAFS.length)} sub-sub menu` +
         (AIRZ ? ` · ${fmt.format((AIRZ.totals && AIRZ.totals.files) || 0)} fitur airz/ siap` : '');
+    // Shortcut dan kontrol sidebar ditambahkan secara idempoten agar mudah dipakai
+    // pada dashboard dengan hierarki ribuan entri.
+    const head = $('.ac-sidebar-head');
+    if (head && !$('#airCloudSidebarControls')) {
+      const controls = document.createElement('div');
+      controls.id = 'airCloudSidebarControls';
+      controls.className = 'ac-sidebar-controls';
+      controls.innerHTML = '<button type="button" id="airCloudExpandAll" aria-label="Buka semua kelompok menu">Buka semua</button><button type="button" id="airCloudCollapseAll" aria-label="Tutup semua kelompok menu">Tutup semua</button>';
+      head.append(controls);
+    }
   }
 
   // --------------------------------------------------------------------------
@@ -520,6 +530,18 @@
     if (!shell || shell.dataset.bound === '1') return;
     shell.dataset.bound = '1';
     shell.addEventListener('click', (event) => {
+      if (event.target.closest('#airCloudExpandAll')) {
+        state.openMenus = new Set(MENUS.map((item) => item.id));
+        state.openSubs = new Set(SUBS.map((item) => item.id));
+        renderSidebar();
+        return;
+      }
+      if (event.target.closest('#airCloudCollapseAll')) {
+        state.openMenus.clear();
+        state.openSubs.clear();
+        renderSidebar();
+        return;
+      }
       const toggle = event.target.closest('[data-ac-toggle]');
       if (toggle) {
         const id = toggle.getAttribute('data-ac-toggle');
@@ -640,7 +662,19 @@
       }
     });
     const search = $('#airCloudSearch');
-    if (search) search.addEventListener('input', (event) => { state.query = event.target.value || ''; renderSidebar(); });
+    if (search && search.dataset.shortcutBound !== '1') {
+      search.dataset.shortcutBound = '1';
+      search.addEventListener('input', (event) => { state.query = event.target.value || ''; renderSidebar(); });
+      document.addEventListener('keydown', (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault(); search.focus(); search.select();
+        } else if (event.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '') && !event.ctrlKey && !event.metaKey && !event.altKey) {
+          event.preventDefault(); search.focus();
+        } else if (event.key === 'Escape' && document.activeElement === search && search.value) {
+          search.value = ''; state.query = ''; renderSidebar();
+        }
+      });
+    }
     const content = $('#airCloudContent');
     if (content && content.dataset.airzBound !== '1') {
       content.dataset.airzBound = '1';
