@@ -140,3 +140,28 @@
 .aircloud-page .ac-nav-feature-actions button:hover{border-color:#8bb8ef;background:#eaf3ff;color:#0f62fe}
 .aircloud-page .ac-nav-feature-more{width:100%;min-height:32px;margin-top:5px;padding:7px;border:1px dashed #aac3df;border-radius:7px;background:#f6faff;color:#1754a0;font-size:9px;font-weight:700}
 @media(max-width:760px){.aircloud-page .ac-layout{grid-template-columns:minmax(0,1fr)}.aircloud-page .ac-sidebar{position:relative;top:auto;max-height:55vh}.aircloud-page .ac-nav-feature-actions button{min-height:30px;font-size:9px}}
+
+
+/* Utility actions for large Air Cloud catalogs */
+.aircloud-page .ac-hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.aircloud-page .ac-favorite-toggle,.aircloud-page .ac-favorite-export{min-height:34px;padding:8px 11px;border:1px solid #cbd9e8;border-radius:8px;background:#fff;color:#294663;font:600 10px/1.3 inherit;cursor:pointer}
+.aircloud-page .ac-favorite-toggle.is-favorite{border-color:#e5c66b;background:#fff8db;color:#805a00}
+.aircloud-page .ac-favorite-toggle:hover,.aircloud-page .ac-favorite-export:hover{border-color:#80aee8;background:#f0f6ff}
+.aircloud-page .ac-sidebar-controls{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.aircloud-page .ac-sidebar-controls button{min-height:30px;padding:6px 8px;border:1px solid #d1deeb;border-radius:7px;background:#fff;color:#315477;font-size:9px;font-weight:650;cursor:pointer}
+.aircloud-page .ac-sidebar-controls button:hover{background:#eaf3ff;border-color:#b4cde9}
+.aircloud-page .ac-nav-favorites{padding:8px;margin-bottom:7px;border:1px solid #eadcae;border-radius:9px;background:#fffdf5}
+.aircloud-page .ac-nav-favorite-list{display:grid;gap:3px;margin-top:6px}
+.aircloud-page .ac-nav-favorite{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;padding:7px 8px;border:1px solid transparent;border-radius:6px;background:transparent;text-align:left;color:#574c2b;cursor:pointer}
+.aircloud-page .ac-nav-favorite span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
+.aircloud-page .ac-nav-favorite small{flex:none;color:#9b864d;font:9px ui-monospace,monospace}
+.aircloud-page .ac-nav-favorite:hover,.aircloud-page .ac-nav-favorite.active{background:#fff1bf;border-color:#eadcae}
+@media(max-width:760px){
+  .aircloud-page .ac-layout{grid-template-columns:minmax(0,1fr)}
+  .aircloud-page .ac-sidebar{position:relative;top:auto;max-height:52vh;min-height:0}
+  .aircloud-page .ac-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aircloud-page .ac-hero{padding:17px}
+  .aircloud-page .ac-hero-meta{overflow-wrap:anywhere}
+  .aircloud-page .ac-sidebar-controls button{flex:1 1 calc(50% - 6px)}
+}
+@media(prefers-reduced-motion:reduce){.aircloud-page .ac-shell{animation:none}}
