@@ -16,13 +16,14 @@
       </a>
       <nav class="tabs" role="tablist" aria-label="Menu AI Reber">
         <button type="button" id="tab-studio" role="tab" aria-controls="view-studio" aria-selected="true" tabindex="0" data-view-tab="studio" class="active">Studio</button>
+        <button type="button" id="tab-chat" role="tab" aria-controls="view-chat" aria-selected="false" tabindex="-1" data-view-tab="chat">Chat Reber</button>
         <button type="button" id="tab-filesystem" role="tab" aria-controls="view-filesystem" aria-selected="false" tabindex="-1" data-view-tab="filesystem">File System</button>
         <button type="button" id="tab-projects" role="tab" aria-controls="view-projects" aria-selected="false" tabindex="-1" data-view-tab="projects">Projects</button>
         <button type="button" id="tab-source" role="tab" aria-controls="view-source" aria-selected="false" tabindex="-1" data-view-tab="source">Source Archive</button>
       </nav>
       <div class="appbar-actions">
         <label class="theme-picker"><span>TEMA</span><select id="reberTheme" aria-label="Tema AI Reber"><option value="cahaya">Cahaya</option><option value="air">Air</option><option value="berlian">Berlian Kaca</option></select></label>
-        <span class="runtime-pill"><i></i> AI / API OFFLINE</span>
+        <span class="runtime-pill" title="Chat Reber realtime aktif (mesin lokal); model cloud/API tetap offline"><i style="background:#2fa36b"></i> CHAT REBER AKTIF · ∞</span>
         <a href="../#overview" target="_top" class="back-link">Root System ↗</a>
       </div>
     </header>
@@ -47,7 +48,7 @@
         <div class="philosophy"><b>Be_r:</b> Integritas</div>
         <div class="side-rule"></div>
         <div class="side-label">STATUS RUNTIME</div>
-        <div class="side-note"><b>Client-only</b><span>Model, API, database, dan deploy tidak aktif pada Pages.</span></div>
+        <div class="side-note"><b>Client-only + Chat Reber</b><span>Chatbot realtime aktif memakai mesin sistem AI Reber lokal (RAG kata-data). Model cloud/API tetap nonaktif pada Pages.</span></div>
         <button type="button" class="side-open-fm" data-open-file-manager>Buka di File Manager →</button>
       </aside>
 
@@ -67,6 +68,31 @@
             </form>
           </div>
           <div class="notice"><b>Privasi:</b> prompt yang disimpan masuk ke IndexedDB browser pada path <code>aireber/prompts/</code>. Isinya tidak diunggah ke GitHub. GitHub Pages tidak menjalankan endpoint API/AI dari source arsip.</div>
+        </section>
+
+        <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag">MESIN LOKAL AKTIF · ∞ TOKEN · 0 KREDIT</span></div>
+          <div class="chat-shell surface">
+            <div id="reberChatMessages" class="chat-log" role="log" aria-live="polite"></div>
+            <form id="reberChatForm" class="chat-compose">
+              <label for="reberChatInput" hidden>Pesan chat ke AI Reber</label>
+              <textarea id="reberChatInput" rows="2" placeholder="Tanya apa pun… contoh: jelaskan cara kerja RAG, buat komponen React, atau analisis masalah server sering crash. Perintah berkas juga jalan: daftar file / tulis file catatan.txt: isi"></textarea>
+              <button class="primary-button" type="submit">Kirim ↗</button>
+            </form>
+            <div class="chat-quick">
+              <button type="button" data-reber-chat-prompt="Buatkan komponen React dengan state dan event handler.">Buat kode React</button>
+              <button type="button" data-reber-chat-prompt="Analisis mendalam: kenapa website saya tiba-tiba lambat dan sering error 502?">Analisis masalah</button>
+              <button type="button" data-reber-chat-prompt="Apa itu RAG dan bagaimana referensi link menjadi acuan jawaban AI?">Penjelasan + referensi</button>
+              <button type="button" data-reber-chat-prompt="Buat skema database PostgreSQL untuk log kejadian beserta query analitiknya.">Buat SQL</button>
+              <button type="button" data-reber-chat-prompt="daftar file">Daftar file workspace</button>
+            </div>
+            <div class="chat-foot">
+              <span id="reberChatStatus" aria-live="polite">Siap. Tanyakan apa pun — tanpa batas token atau kredit.</span>
+              <span id="reberChatMeta">mesin: reber-chat-engine · kata: <b id="reberKataBadge">memuat…</b></span>
+              <button type="button" class="quiet-button" id="reberChatClear">Bersihkan riwayat</button>
+            </div>
+          </div>
+          <div class="notice"><b>Cara kerja:</b> setiap pertanyaan diproses oleh mesin sistem AI Reber di perangkat Anda (kata-data AlluniverS_OS + dokumen sistem), lalu jawaban dilengkapi <b>sumber acuan</b> seperti Perpustakaan Nasional RI (perpusnas.go.id), MDN, GitHub Docs, dan Stack Overflow. Riwayat tersimpan lokal; tidak ada biaya token/kredit.</div>
         </section>
 
         <section class="view-panel" id="view-filesystem" data-view="filesystem" role="tabpanel" aria-labelledby="tab-filesystem" hidden tabindex="0">
@@ -105,6 +131,8 @@
     <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client · no API calls · local persistence only</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
   </div>
   <script src="../local-file-store.js?v=20261026-aireber-store-v1"></script>
+  <script src="./reber-chat-engine.js?v=20261026-chatbot-v1"></script>
+  <script src="./reber-chat.js?v=20261026-chatbot-v1"></script>
   <script type="module" src="./reber-app.js?v=20261026-pages-v2"></script>
 </body>
 </html>
