@@ -6,7 +6,7 @@ const $=s=>document.querySelector(s);
 const allFeatures=MODULES.flatMap((m,mi)=>m.features.map((name,fi)=>({id:mi*25+fi+1,name,module:m.name,moduleIndex:mi,category:(CATEGORIES.find(c=>c.names.includes(m.name))||{id:'system'}).id,groupPosition:fi+1})));
 const icons=['▦','◎','⌘','◈','⌁','✎','▤','⬡','↗','♧','✦','▣','▧','⌕','▥','♙','＄','⬢','⚙','⌘'];
 const $all=(sel,root=document)=>[...root.querySelectorAll(sel)];
-let filtered=[...allFeatures],page=0,pageSize=60,expanded=new Set([0]),selectedFeature=null;
+let filtered=[...allFeatures],page=0,pageSize=500,expanded=new Set([0]),selectedFeature=null;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function showToast(message){const node=$('#toast');node.textContent=message;node.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>node.classList.remove('show'),2800)}
 function initHeader(){
