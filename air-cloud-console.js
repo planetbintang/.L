@@ -51,6 +51,7 @@
     airzLimit: {},           // slug → jumlah baris fitur airz/ yang ditampilkan
     airzQuery: '',           // filter teks pada katalog fitur airz/
     airzModal: null,         // { title, body } untuk modal pratinjau fitur
+    airzMenuLimit: 120,       // render menu fitur secara bertahap agar sidebar tetap cepat
   };
 
   const AIRZ_PAGE_STEP = 48;
@@ -288,11 +289,44 @@
       group.append(subWrap);
       frag.append(group);
     }
+    // Ribuan menu tambahan berasal dari berkas nyata airz/, bukan nama placeholder.
+    // Rendering dibatasi per batch supaya sidebar tidak membuat puluhan ribu node DOM sekaligus.
+    const featureItems = (AIRZ?.items || []);
+    const featureNeedle = needle;
+    const matchingFeatures = featureNeedle
+      ? featureItems.filter((item) => `${item.id} ${item.name} ${item.path} ${item.function} ${item.domain}`.toLowerCase().includes(featureNeedle))
+      : featureItems;
+    const featureGroup = document.createElement('section');
+    featureGroup.className = 'ac-nav-group ac-nav-feature-group';
+    featureGroup.innerHTML = `<div class="ac-nav-feature-head"><span>🗂️ Fitur nyata airz/</span><b>${fmt.format(matchingFeatures.length)}</b></div>`;
+    const featureList = document.createElement('div');
+    featureList.className = 'ac-nav-feature-list';
+    const visibleFeatures = matchingFeatures.slice(0, state.airzMenuLimit);
+    featureList.innerHTML = visibleFeatures.map((item) => {
+      const path = String(item.path || '').replace(/^airz\\//, '');
+      return `<button type="button" class="ac-nav-feature" data-airz-fm="${esc(item.path)}" title="${esc(item.function || item.path)}">
+        <span class="ac-nav-feature-name">${esc(item.name || path.split('/').pop() || 'Berkas sistem')}</span>
+        <small>${esc(item.domain || 'sistem')} · ${esc(path)}</small>
+      </button>`;
+    }).join('');
+    if (matchingFeatures.length > visibleFeatures.length) {
+      const more = document.createElement('button');
+      more.type = 'button';
+      more.className = 'ac-nav-feature-more';
+      more.textContent = `Muat ${fmt.format(Math.min(120, matchingFeatures.length - visibleFeatures.length))} menu lagi · ${fmt.format(matchingFeatures.length - visibleFeatures.length)} tersisa`;
+      more.addEventListener('click', () => {
+        state.airzMenuLimit += 120;
+        renderSidebar();
+      });
+      featureList.append(more);
+    }
+    featureGroup.append(featureList);
+    frag.append(featureGroup);
     nav.replaceChildren(frag);
     const status = $('#airCloudSidebarStatus');
     if (status) status.textContent = needle
       ? `Filter "${state.query}" · ${fmt.format(nav.querySelectorAll('[data-aircloud-menu]').length)} menu cocok`
-      : `${fmt.format(MENUS.length)} menu utama · ${fmt.format(SUBS.length)} submenu · ${fmt.format(LEAFS.length)} sub-sub menu` +
+      : `${fmt.format(MENUS.length)} menu utama · ${fmt.format(SUBS.length)} submenu · ${fmt.format(LEAFS.length)} sub-sub menu · ${fmt.format((AIRZ && AIRZ.items || []).length)} menu berkas airz/` +
         (AIRZ ? ` · ${fmt.format((AIRZ.totals && AIRZ.totals.files) || 0)} fitur airz/ siap` : '');
     // Shortcut dan kontrol sidebar ditambahkan secara idempoten agar mudah dipakai
     // pada dashboard dengan hierarki ribuan entri.
