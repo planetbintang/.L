@@ -70,17 +70,21 @@
   const safe = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
-  const repoEntries = () => readRepos().map((repo, index) => ({
-    id: 'REPO-' + String(index + 1).padStart(5, '0'),
-    name: repo.fullName || repo.name || 'Repository',
-    description: [repo.description, repo.language, repo.branch ? 'branch ' + repo.branch : ''].filter(Boolean).join(' · ') || 'Metadata repository dari snapshot',
-    category: 'Repositori',
-    details: 'Repository metadata · branch · visibility · sumber snapshot',
-    source: 'repository-index',
-    path: '#repositories',
-    repoPath: '',
-    real: true
-  }));
+  const repoEntries = () => readRepos().map((repo, index) => {
+    const fullName = String(repo.fullName || repo.name || 'repository');
+    return {
+      id: 'REPO-' + String(index + 1).padStart(5, '0'),
+      name: fullName,
+      description: [repo.description, repo.language, repo.branch ? 'branch ' + repo.branch : ''].filter(Boolean).join(' · ') || 'Metadata repository dari snapshot',
+      category: 'Repositori',
+      details: 'Repository metadata · branch · visibility · sumber snapshot. Pilih untuk membuka folder root repository di File Manager.',
+      source: 'repository-index',
+      path: '#fileManager/' + encodePath(fullName.replace(/^.*\\//, '')),
+      repoFullName: fullName,
+      repoPath: '',
+      real: true
+    };
+  });
   const actualFileEntries = () => readFiles().map((f, index) => {
     const path = String(f.path || f.name || '');
     return {
