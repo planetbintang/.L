@@ -14,6 +14,7 @@
     'workspace-help': { group: 'workspace', view: 'help', menu: 'insights', hash: '#workspace/help' },
     'file-manager': { group: 'file-manager', menu: 'code', hash: '#fileManager' },
     'media-library': { group: 'media-library', menu: 'manage', hash: '#media' },
+    'menu-registry': { group: 'menu-registry', menu: 'manage', hash: '#manage/menu-registry' },
     repositories: { group: 'repositories', menu: 'code', hash: '#repositories' },
     hosts: { group: 'hosts', menu: 'insights', hash: '#hosts' },
   };
@@ -50,7 +51,7 @@
     if (hash.startsWith('manage/') || hash.startsWith('execute/')) {
       const [group, page] = hash.split('/');
       const route = `${group}-${page}`;
-      return routes[route]?.group === 'tools' ? route : null;
+      return ['tools', 'menu-registry'].includes(routes[route]?.group) ? route : null;
     }
     if (hash.startsWith('platform/')) {
       const route = hash.slice('platform/'.length);
