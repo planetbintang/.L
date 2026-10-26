@@ -136,6 +136,21 @@
   const MENUS_PER_ARCH = 500;
   const SUBMODULE_SUFFIXES = ['Console', 'Matrix', 'Ledger', 'Scheduler', 'Policy Engine', 'Dashboard', 'API Bridge', 'Audit Trail', 'Health Probe', 'Config Drift Guard', 'Replication Mesh'];
 
+  // Slugify identik dengan scripts/rename_and_compact_menus.py (kontrak penamaan file batch-rename).
+  function slugifyMenu(text) {
+    let t = String(text).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    t = t.replace(/&/g, ' and ');
+    t = t.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
+    return t;
+  }
+
+  // Nama file hasil batch rename: <slug nama menu>-<MENU_CODE>.json
+  function menuFileName(menu) {
+    const indexed = window.PB_ENTERPRISE_MENU_INDEX && window.PB_ENTERPRISE_MENU_INDEX[String(menu.id).padStart(5, '0')];
+    if (indexed) return indexed;
+    return `${slugifyMenu(menu.menu_name)}-${menu.menu_code}.json`;
+  }
+
   // ---- Deterministic registry mirror of scripts/generate_enterprise_map.py ----
   function menuAt(index) {
     const archIndex = Math.floor(index / MENUS_PER_ARCH);
@@ -278,7 +293,7 @@
     state.selected = menu;
     const inspector = $('#emapInspector');
     if (!inspector) return;
-    const fsPath = `sys/enterprise/${menu.architecture_slug}/menu-${String(menu.id).padStart(5, '0')}.json`;
+    const fsPath = `sys/enterprise/${menu.architecture_slug}/${menuFileName(menu)}`;
     inspector.innerHTML = `
       <h4>${menu.menu_code}</h4>
       <b class="emap-inspect-name">${menu.menu_name}</b>
@@ -290,7 +305,9 @@
         <div><b>Route Path</b><span>${menu.route_path}</span></div>
         <div><b>Status</b><span>${menu.is_active ? 'AKTIF' : 'NONAKTIF'}</span></div>
         <div><b>Bahasa</b><span>${menu.language_code}</span></div>
-        <div><b>Registry file</b><span>./data/enterprise-menus/menu-${String(menu.id).padStart(5, '0')}.json</span></div>
+        <div><b>Nama file registry</b><span>${menuFileName(menu)}</span></div>
+        <div><b>Registry file</b><span>./data/enterprise-menus/${menuFileName(menu)}</span></div>
+        <div><b>Isi padat fitur</b><span>≥150 baris · config/ui/api/events/sql/pipeline/guards/tests</span></div>
         <div><b>Virtual FS</b><span>/${fsPath}</span></div>
       </div>
       <p><strong>Fungsi komponen UI:</strong> ${menu.short_description}</p>
@@ -298,6 +315,7 @@
       <div class="emap-inspect-actions">
         <button type="button" class="workspace-secondary" id="emapOpenFs">Lihat di File Manager</button>
         <button type="button" class="workspace-secondary" id="emapSimulate">Simulasikan Handler Aman</button>
+        <button type="button" class="workspace-secondary" id="emapSyncFile">Sinkronkan File Ini ke Reber</button>
       </div>
       <output id="emapInspectStatus" class="emap-status"></output>`;
     $('#emapOpenFs').addEventListener('click', () => {
@@ -306,6 +324,20 @@
     });
     $('#emapSimulate').addEventListener('click', () => {
       $('#emapInspectStatus').textContent = `✓ Simulasi aman berjalan · handler '${menu.menu_code}' status ready · tidak ada kode yang dieksekusi terhadap provider nyata.`;
+    });
+    $('#emapSyncFile').addEventListener('click', async () => {
+      const status = $('#emapInspectStatus');
+      status.textContent = 'Mengambil file padat (≥150 baris fitur)…';
+      try {
+        const response = await fetch(`./data/enterprise-menus/${encodeURIComponent(menuFileName(menu))}`, { cache: 'no-cache', credentials: 'omit' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const text = await response.text();
+        const lines = text.split('\n').length;
+        await window.PBLocalFiles.saveFile(`enterprise-menus/${menuFileName(menu)}`, text, 'application/json;charset=utf-8');
+        status.textContent = `✓ Tersimpan di Reber /enterprise-menus/${menuFileName(menu)} · ${lines} baris fitur.`;
+      } catch (error) {
+        status.textContent = `✗ Gagal sinkron: ${error.message}`;
+      }
     });
   }
 

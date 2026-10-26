@@ -1,0 +1,733 @@
+{
+ "id": 3750,
+ "menu_code": "DEVOPS-3749",
+ "architecture_group": "System Settings & Integrations",
+ "architecture_slug": "settings-integrations",
+ "architecture_index": 8,
+ "parent_id": 3500,
+ "menu_name": "Settings > Interaction Limits · Policy Engine #05",
+ "route_path": "/enterprise/settings-integrations/250",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Pembatasan sementara aktivitas komentar pengguna luar anti-spam.",
+ "system_instruction": "Sub-modul 'Policy Engine' turunan dari 'Settings > Interaction Limits'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "settings-interaction-limits-policy-engine-05-DEVOPS-3749.json",
+ "feature": {
+  "fileName": "settings-interaction-limits-policy-engine-05-DEVOPS-3749.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "managed",
+  "primaryRegion": "ap-southeast-1",
+  "failoverRegion": "ap-south-1",
+  "ownerTeam": "team-settings-1",
+  "slaTier": "gold",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-settings-integrations-7"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 3
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 90
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 60
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1100
+   },
+   {
+    "key": "burst.capacity",
+    "value": 50
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.15
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/settings-interaction-limits-policy-engine-05"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "ap-southeast-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 18
+   },
+   {
+    "key": "retention.days",
+    "value": 150
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3500
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 5120
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://settings-interaction-limits-policy-engine-05/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-3749/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-3749/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-3749/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-3749/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-3749/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-3749/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-3749/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-3749/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-3749/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-3749/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-3749/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-3749/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-3749/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-3749/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-3749/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-3749/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-3749/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-3749/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "settings.interaction.limits.policy.engine.05.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_settings_interaction_limits_policy_engine_05 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_settings_interaction_limits_policy_engine_05_ts ON feat_settings_interaction_limits_policy_engine_05 (updated_at DESC);",
+   "INSERT INTO feat_settings_interaction_limits_policy_engine_05 (id, payload) VALUES (3750, '{\"menu_code\":\"DEVOPS-3749\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 3750; COMMIT;",
+   "SELECT count(*) FROM feat_settings_interaction_limits_policy_engine_05 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_settings_interaction_limits_policy_engine_05_staging WHERE created_at < now() - interval '60 days';",
+   "GRANT SELECT ON feat_settings_interaction_limits_policy_engine_05 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_settings_interaction_limits_policy_engine_05 TO role_worker;",
+   "COPY feat_settings_interaction_limits_policy_engine_05 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_settings_interaction_limits_policy_engine_05 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_settings_interaction_limits_policy_engine_05 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_settings_interaction_limits_policy_engine_05;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 2,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 3,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 4,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 5,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 6,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 7,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 8,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 9,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 10,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 11,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 12,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 13,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 14,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 15,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 16,
+    "action": "Jadwalkan probe berikutnya"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/settings-interaction-limits--on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/settings-interaction-limits--before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/settings-interaction-limits--after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/settings-interaction-limits--on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/settings-interaction-limits--before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/settings-interaction-limits--after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/settings-interaction-limits--on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/settings-interaction-limits--on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/settings-integrations/250/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/settings-integrations/250/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-03750-01",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-03750-02",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-03750-03",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-03750-04",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-03750-05",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-03750-06",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-03750-07",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-03750-08",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-03750-09",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-03750-10",
+    "expect": "Kuota tidak terlampaui"
+   }
+  ]
+ }
+}

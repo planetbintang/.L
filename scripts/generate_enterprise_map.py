@@ -16,7 +16,17 @@ Skema mengikuti kontrak SQL `system_menus` + `system_menu_descriptions`.
 from __future__ import annotations
 
 import json
+import re
+import unicodedata
 from pathlib import Path
+
+
+def slugify(text: str) -> str:
+    """Identik dengan scripts/rename_and_compact_menus.py — kontrak penamaan file batch-rename."""
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    text = text.lower().replace("&", " and ")
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")[:80]
 
 TOTAL_MENUS = 10000
 MENUS_PER_ARCH = 500
@@ -256,6 +266,7 @@ def build_registry() -> list[dict]:
                 "language_code": "id",
                 "short_description": short_desc,
                 "system_instruction": instruction,
+                "fileName": f"{slugify(menu_name)}-{code}.json",
             })
     return menus
 
@@ -267,9 +278,17 @@ def main() -> None:
 
     out_dir = root / "data" / "enterprise-menus"
     out_dir.mkdir(parents=True, exist_ok=True)
+    index_map = {}
     for menu in menus:
-        path = out_dir / f"menu-{menu['id']:05d}.json"
+        # Batch rename sesuai nama menu; jalankan rename_and_compact_menus.py
+        # setelahnya untuk memadatkan isi tiap file hingga >=150 baris fitur.
+        path = out_dir / menu["fileName"]
         path.write_text(json.dumps(menu, ensure_ascii=False, indent=1), encoding="utf-8")
+        index_map[f"{menu['id']:05d}"] = menu["fileName"]
+    index_body = ("// Dihasilkan scripts/generate_enterprise_map.py - peta ID menu -> nama file.\n"
+                  "// Padatkan ulang dengan scripts/rename_and_compact_menus.py untuk isi >=150 baris.\n"
+                  "window.PB_ENTERPRISE_MENU_INDEX = " + json.dumps(index_map, separators=(",", ":")) + ";\n")
+    (root / "data" / "enterprise-menus-index.js").write_text(index_body, encoding="utf-8")
 
     architectures = []
     for arch_index in range(ARCH_COUNT):
@@ -301,6 +320,10 @@ def main() -> None:
         "execution": "disabled-by-default",
         "fileStoreRoot": "data/enterprise-menus",
         "virtualFsRoot": "sys/enterprise",
+        "fileNamePattern": "<slugified-menu-name>-<MENU-CODE>.json",
+        "indexFile": "data/enterprise-menus-index.js",
+        "compactionScript": "scripts/rename_and_compact_menus.py",
+        "minFileLines": 150,
         "architectures": architectures,
     }
     (root / "data" / "enterprise-map-manifest.json").write_text(

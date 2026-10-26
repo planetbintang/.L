@@ -1,0 +1,733 @@
+{
+ "id": 9935,
+ "menu_code": "HYPER-A10-435",
+ "architecture_group": "Extension Marketplace & Developer Ecosystem",
+ "architecture_slug": "developer-marketplace",
+ "architecture_index": 20,
+ "parent_id": 9500,
+ "menu_name": "Marketplace > Plugin Management · Console #14",
+ "route_path": "/hyper/developer-marketplace/plugin-management-435",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Portal instalasi ekstensi pihak ketiga modul CMS/alat optimasi gambar.",
+ "system_instruction": "Sub-modul 'Console' turunan dari 'Marketplace > Plugin Management'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "marketplace-plugin-management-console-14-HYPER-A10-435.json",
+ "feature": {
+  "fileName": "marketplace-plugin-management-console-14-HYPER-A10-435.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "on-demand",
+  "primaryRegion": "global-anycast",
+  "failoverRegion": "eu-central-1",
+  "ownerTeam": "team-developer-6",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-developer-marketplace-8"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 5
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 65
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 360
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1600
+   },
+   {
+    "key": "burst.capacity",
+    "value": 300
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.2
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/marketplace-plugin-management-console-14"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "global-anycast"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 23
+   },
+   {
+    "key": "retention.days",
+    "value": 65
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3750
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 5632
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://marketplace-plugin-management-console-14/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://marketplace-plugin-management-console-14/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://marketplace-plugin-management-console-14/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://marketplace-plugin-management-console-14/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://marketplace-plugin-management-console-14/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://marketplace-plugin-management-console-14/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://marketplace-plugin-management-console-14/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://marketplace-plugin-management-console-14/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://marketplace-plugin-management-console-14/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://marketplace-plugin-management-console-14/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://marketplace-plugin-management-console-14/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://marketplace-plugin-management-console-14/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://marketplace-plugin-management-console-14/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://marketplace-plugin-management-console-14/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://marketplace-plugin-management-console-14/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://marketplace-plugin-management-console-14/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-435/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-435/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-435/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-435/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-435/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-435/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-435/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-435/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-435/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-435/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-435/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-435/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-435/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-435/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-435/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-435/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-435/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-435/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "marketplace.plugin.management.console.14.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "marketplace.plugin.management.console.14.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_marketplace_plugin_management_console_14 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_marketplace_plugin_management_console_14_ts ON feat_marketplace_plugin_management_console_14 (updated_at DESC);",
+   "INSERT INTO feat_marketplace_plugin_management_console_14 (id, payload) VALUES (9935, '{\"menu_code\":\"HYPER-A10-435\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 9935; COMMIT;",
+   "SELECT count(*) FROM feat_marketplace_plugin_management_console_14 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_marketplace_plugin_management_console_14_staging WHERE created_at < now() - interval '65 days';",
+   "GRANT SELECT ON feat_marketplace_plugin_management_console_14 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_marketplace_plugin_management_console_14 TO role_worker;",
+   "COPY feat_marketplace_plugin_management_console_14 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_marketplace_plugin_management_console_14 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_marketplace_plugin_management_console_14 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_marketplace_plugin_management_console_14;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 2,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 3,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 4,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 5,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 6,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 7,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 8,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 9,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 10,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 11,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 12,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 13,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 14,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 15,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 16,
+    "action": "Kompres artefak log"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/marketplace-plugin-managemen-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/marketplace-plugin-managemen-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/marketplace-plugin-managemen-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/marketplace-plugin-managemen-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/marketplace-plugin-managemen-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/marketplace-plugin-managemen-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/marketplace-plugin-managemen-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/marketplace-plugin-managemen-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/developer-marketplace/plugin-management-435/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-09935-01",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-09935-02",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-09935-03",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-09935-04",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-09935-05",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-09935-06",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-09935-07",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-09935-08",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-09935-09",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-09935-10",
+    "expect": "Idempoten pada retry"
+   }
+  ]
+ }
+}

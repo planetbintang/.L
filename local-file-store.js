@@ -133,6 +133,36 @@
     return putRecord(path, asBlob(content, mime), mime, 'file');
   }
 
+  // ---- Enterprise Menu Sync: salin 10.000 file registry bernama-menu (hasil
+  // batch rename scripts/rename_and_compact_menus.py) ke workspace Reber lokal
+  // sehingga dapat dijelajahi & dibaca dari root /enterprise-menus secara offline.
+  async function syncEnterpriseMenus(options = {}) {
+    const onProgress = typeof options.onProgress === 'function' ? options.onProgress : () => {};
+    const response = await fetch('./data/enterprise-map-manifest.json', { cache: 'no-cache', credentials: 'omit' });
+    if (!response.ok) throw new Error('Manifest enterprise tidak ditemukan.');
+    const manifest = await response.json();
+    const index = window.PB_ENTERPRISE_MENU_INDEX || {};
+    const total = Number(manifest.totalMenuCount || Object.keys(index).length);
+    let synced = 0; let skipped = 0;
+    for (let id = 1; id <= total; id += 1) {
+      const fileName = index[String(id).padStart(5, '0')];
+      if (!fileName) continue;
+      const key = normalizePath(`enterprise-menus/${fileName}`);
+      if (!options.force) {
+        const existing = await getRecord(key);
+        if (existing && existing.type === 'file' && Number(existing.size) > 0) { skipped += 1; continue; }
+      }
+      const fileResponse = await fetch(`./data/enterprise-menus/${encodeURIComponent(fileName)}`, { cache: 'no-cache', credentials: 'omit' });
+      if (!fileResponse.ok) continue;
+      const text = await fileResponse.text();
+      await saveFile(key, text, 'application/json;charset=utf-8');
+      synced += 1;
+      if (synced % 250 === 0 || synced === total) onProgress({ synced, skipped, total, percent: Math.round((id / total) * 100) });
+    }
+    await addAudit('sync', 'enterprise-menus', { synced, skipped, total, note: 'batch rename + padat >=150 baris' });
+    return { synced, skipped, total };
+  }
+
   async function makeDirectory(path) {
     return putRecord(path, new Blob([]), '', 'directory');
   }
@@ -316,6 +346,7 @@
     readFile,
     downloadFile,
     saveFile,
+    syncEnterpriseMenus,
     mkdir: makeDirectory,
     isDirectory,
     remove,

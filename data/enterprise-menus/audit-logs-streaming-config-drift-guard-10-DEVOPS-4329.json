@@ -1,0 +1,733 @@
+{
+ "id": 4330,
+ "menu_code": "DEVOPS-4329",
+ "architecture_group": "Auditing, Logging & Monitoring",
+ "architecture_slug": "audit-monitoring",
+ "architecture_index": 9,
+ "parent_id": 4000,
+ "menu_name": "Audit Logs > Streaming · Config Drift Guard #10",
+ "route_path": "/enterprise/audit-monitoring/330",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Pengiriman log aktivitas langsung ke SIEM (Splunk, Datadog).",
+ "system_instruction": "Sub-modul 'Config Drift Guard' turunan dari 'Audit Logs > Streaming'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "audit-logs-streaming-config-drift-guard-10-DEVOPS-4329.json",
+ "feature": {
+  "fileName": "audit-logs-streaming-config-drift-guard-10-DEVOPS-4329.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "scheduled",
+  "primaryRegion": "sa-east-1",
+  "failoverRegion": "us-east-1",
+  "ownerTeam": "team-audit-5",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-audit-monitoring-3"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 4
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 40
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 60
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1100
+   },
+   {
+    "key": "burst.capacity",
+    "value": 250
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.15
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/audit-logs-streaming-config-drift-guard-10"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "sa-east-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 22
+   },
+   {
+    "key": "retention.days",
+    "value": 70
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2500
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 3072
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://audit-logs-streaming-config-drift-guard-10/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4329/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4329/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4329/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4329/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4329/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4329/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4329/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4329/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4329/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4329/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4329/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4329/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4329/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4329/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4329/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4329/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4329/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4329/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.streaming.config.drift.guard.10.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_audit_logs_streaming_config_drift_guard_10 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_audit_logs_streaming_config_drift_guard_10_ts ON feat_audit_logs_streaming_config_drift_guard_10 (updated_at DESC);",
+   "INSERT INTO feat_audit_logs_streaming_config_drift_guard_10 (id, payload) VALUES (4330, '{\"menu_code\":\"DEVOPS-4329\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 4330; COMMIT;",
+   "SELECT count(*) FROM feat_audit_logs_streaming_config_drift_guard_10 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_audit_logs_streaming_config_drift_guard_10_staging WHERE created_at < now() - interval '40 days';",
+   "GRANT SELECT ON feat_audit_logs_streaming_config_drift_guard_10 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_audit_logs_streaming_config_drift_guard_10 TO role_worker;",
+   "COPY feat_audit_logs_streaming_config_drift_guard_10 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_audit_logs_streaming_config_drift_guard_10 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_audit_logs_streaming_config_drift_guard_10 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_audit_logs_streaming_config_drift_guard_10;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 2,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 3,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 4,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 5,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 6,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 7,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 8,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 9,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 10,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 11,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 12,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 13,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 14,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 15,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 16,
+    "action": "Terbitkan peristiwa audit"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/audit-logs-streaming-config--on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/audit-logs-streaming-config--before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/audit-logs-streaming-config--after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/audit-logs-streaming-config--on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/audit-logs-streaming-config--before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/audit-logs-streaming-config--after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/audit-logs-streaming-config--on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/audit-logs-streaming-config--on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/audit-monitoring/330/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/330/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-04330-01",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-04330-02",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-04330-03",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-04330-04",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-04330-05",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-04330-06",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-04330-07",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-04330-08",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-04330-09",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-04330-10",
+    "expect": "Kuota tidak terlampaui"
+   }
+  ]
+ }
+}

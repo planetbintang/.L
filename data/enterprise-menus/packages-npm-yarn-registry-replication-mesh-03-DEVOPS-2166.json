@@ -1,0 +1,733 @@
+{
+ "id": 2167,
+ "menu_code": "DEVOPS-2166",
+ "architecture_group": "Artifacts & Package Registry",
+ "architecture_slug": "artifacts-packages",
+ "architecture_index": 5,
+ "parent_id": 2000,
+ "menu_name": "Packages > npm/Yarn Registry · Replication Mesh #03",
+ "route_path": "/enterprise/artifacts-packages/167",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Registri internal distribusi pustaka JavaScript/TypeScript organisasi.",
+ "system_instruction": "Sub-modul 'Replication Mesh' turunan dari 'Packages > npm/Yarn Registry'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "packages-npm-yarn-registry-replication-mesh-03-DEVOPS-2166.json",
+ "feature": {
+  "fileName": "packages-npm-yarn-registry-replication-mesh-03-DEVOPS-2166.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "sandbox",
+  "primaryRegion": "us-east-1",
+  "failoverRegion": "sa-east-1",
+  "ownerTeam": "team-artifacts-2",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-artifacts-packages-8"
+   },
+   {
+    "key": "queue.priority",
+    "value": 3
+   },
+   {
+    "key": "retry.max",
+    "value": 4
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 600
+   },
+   {
+    "key": "timeout.sec",
+    "value": 37
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 480
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 800
+   },
+   {
+    "key": "burst.capacity",
+    "value": 100
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.12
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/packages-npm-yarn-registry-replication-mesh-03"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.4
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "us-east-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 19
+   },
+   {
+    "key": "retention.days",
+    "value": 217
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3750
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 5632
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://packages-npm-yarn-registry-replication-mesh-03/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-2166/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-2166/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-2166/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-2166/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-2166/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-2166/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-2166/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-2166/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-2166/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-2166/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-2166/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-2166/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-2166/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-2166/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-2166/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-2166/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-2166/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-2166/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "packages.npm.yarn.registry.replication.mesh..audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_packages_npm_yarn_registry_replication_mesh_03 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_packages_npm_yarn_registry_replication_mesh_03_ts ON feat_packages_npm_yarn_registry_replication_mesh_03 (updated_at DESC);",
+   "INSERT INTO feat_packages_npm_yarn_registry_replication_mesh_03 (id, payload) VALUES (2167, '{\"menu_code\":\"DEVOPS-2166\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 2167; COMMIT;",
+   "SELECT count(*) FROM feat_packages_npm_yarn_registry_replication_mesh_03 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_packages_npm_yarn_registry_replication_mesh_03_staging WHERE created_at < now() - interval '37 days';",
+   "GRANT SELECT ON feat_packages_npm_yarn_registry_replication_mesh_03 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_packages_npm_yarn_registry_replication_mesh_03 TO role_worker;",
+   "COPY feat_packages_npm_yarn_registry_replication_mesh_03 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_packages_npm_yarn_registry_replication_mesh_03 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_packages_npm_yarn_registry_replication_mesh_03 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_packages_npm_yarn_registry_replication_mesh_03;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 2,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 3,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 4,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 5,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 6,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 7,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 8,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 9,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 10,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 11,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 12,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 13,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 14,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 15,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 16,
+    "action": "Alokasikan worker regional"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/packages-npm-yarn-registry-r-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/packages-npm-yarn-registry-r-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/packages-npm-yarn-registry-r-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/packages-npm-yarn-registry-r-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/packages-npm-yarn-registry-r-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/packages-npm-yarn-registry-r-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/packages-npm-yarn-registry-r-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/packages-npm-yarn-registry-r-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/artifacts-packages/167/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/artifacts-packages/167/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-02167-01",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-02167-02",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-02167-03",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-02167-04",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-02167-05",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-02167-06",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-02167-07",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-02167-08",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-02167-09",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-02167-10",
+    "expect": "RBAC menolak tanpa izin"
+   }
+  ]
+ }
+}
