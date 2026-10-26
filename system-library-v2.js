@@ -67,6 +67,33 @@
     ];
     return candidates.find(Array.isArray) || [];
   };
+  const fallbackFileEntries = () => {
+    // Root manifest is a real, published Git-tree snapshot. Directory contents
+    // are lazy-loaded by File Manager, so the catalog also indexes root filenames.
+    const rootEntries = [
+      '.github', 'assets', 'aireber', 'airz', 'data', 'datadokumen', 'datapro',
+      'documentation', 'dokumen', 'scripts', 'index.html', 'README.md',
+      'app.js', 'dashboard.js', 'dashboard.css', 'file-manager.js',
+      'workspace.js', 'workspace.css', 'system-navigation.js',
+      'system-library.js', 'system-library-v2.js', 'navigation-fix.js',
+      'navigation-fix.css', 'system-tools.js', 'local-file-store.js',
+      'platform-view.js', 'enterprise-map.js', 'air-cloud-console.js',
+      'snaps-bridge.js', 'aireber-bridge.js', 'data/repositories.json',
+      'data/enterprise-menus-index.js', 'data/air-cloud-menus-index.js',
+      'data/trees/3cf0c9cf3dddc379/index.json'
+    ];
+    return rootEntries.map((path, index) => ({
+      id: 'FILE-' + String(index + 1).padStart(5, '0'),
+      name: path.split('/').pop(),
+      description: path + ' · indeks path terbit; isi file tidak disalin ke katalog',
+      category: 'File Manager',
+      details: 'Path dari snapshot Git-tree .L. Buka untuk melihat metadata dan konten yang diizinkan File Manager.',
+      source: 'repository-tree-index',
+      path: '#fileManager/' + encodePath(path),
+      repoPath: path,
+      real: true
+    }));
+  };
   const safe = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[c]));
