@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud monitoring_observability service (monitoring-observability)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/monitoring_observabilityd --config /etc/airz/monitoring_observability.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

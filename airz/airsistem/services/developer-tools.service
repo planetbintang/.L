@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud developer_tools service (developer-tools)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/developer_toolsd --config /etc/airz/developer_tools.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

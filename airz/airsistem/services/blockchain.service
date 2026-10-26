@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud blockchain service (blockchain)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/blockchaind --config /etc/airz/blockchain.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

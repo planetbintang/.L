@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud migration_hybrid service (migration-hybrid)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/migration_hybridd --config /etc/airz/migration_hybrid.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

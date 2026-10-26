@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud network_edge_cdn service (network-edge-cdn)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/network_edge_cdnd --config /etc/airz/network_edge_cdn.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud vpc_infrastructure service (vpc-infrastructure)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/vpc_infrastructured --config /etc/airz/vpc_infrastructure.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

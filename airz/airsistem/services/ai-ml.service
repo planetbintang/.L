@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud ai_ml service (ai-ml)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/ai_mld --config /etc/airz/ai_ml.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud iam_access service (iam-access)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/iam_accessd --config /etc/airz/iam_access.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

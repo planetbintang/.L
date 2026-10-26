@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud billing_account service (billing-account)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/billing_accountd --config /etc/airz/billing_account.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

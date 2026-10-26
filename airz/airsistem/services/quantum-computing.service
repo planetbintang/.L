@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud quantum_computing service (quantum-computing)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/quantum_computingd --config /etc/airz/quantum_computing.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target
