@@ -1,0 +1,97 @@
+/* ==========================================================================
+   ENTERPRISE MAP LIST · Hyper-Enterprise Master Registry UI
+   Halaman #enterprise/map — 20 arsitektur, 10.000 menu hierarkis.
+   Mengikuti bahasa visual dashboard (ice/luxury theme) milik Planetbintang.
+   ========================================================================== */
+:root {
+  --emap-blue: #0d5cf2;
+  --emap-violet: #7c3aed;
+  --emap-ink: #0b1437;
+  --emap-muted: #5a6a8c;
+  --emap-line: rgba(13, 92, 242, .16);
+  --emap-card: #ffffff;
+  --emap-hyper: linear-gradient(135deg, #0d5cf2, #7c3aed);
+}
+
+.enterprise-map-shell { max-width: 1280px; margin: 0 auto; padding: clamp(18px, 3vw, 34px) clamp(14px, 3vw, 30px) 60px; display: grid; gap: 22px; }
+
+.emap-head .eyebrow { letter-spacing: .22em; font-size: .68rem; font-weight: 800; color: var(--emap-blue); text-transform: uppercase; margin: 0 0 6px; }
+.emap-head h2 { margin: 0 0 8px; font-size: clamp(1.4rem, 3vw, 2.1rem); color: var(--emap-ink); }
+.emap-head .section-description { margin: 0; color: var(--emap-muted); max-width: 88ch; line-height: 1.55; }
+
+.emap-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.emap-stats div { background: var(--emap-card); border: 1px solid var(--emap-line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; box-shadow: 0 10px 24px -18px rgba(11, 20, 55, .35); }
+.emap-stats b { font-size: 1.35rem; color: var(--emap-blue); font-variant-numeric: tabular-nums; }
+.emap-stats small { color: var(--emap-muted); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
+
+.emap-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; }
+.emap-controls .search-box { flex: 1 1 260px; }
+.emap-controls select { border: 1px solid var(--emap-line); border-radius: 10px; padding: 9px 12px; font: inherit; background: #fff; color: var(--emap-ink); }
+.emap-count { font-size: .78rem; font-weight: 700; color: var(--emap-muted); white-space: nowrap; }
+
+.emap-arch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.emap-arch-card { background: var(--emap-card); border: 1px solid var(--emap-line); border-radius: 18px; padding: 16px 18px; display: grid; gap: 10px; transition: transform .18s ease, box-shadow .18s ease; }
+.emap-arch-card:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -26px rgba(13, 92, 242, .5); }
+.emap-arch-card header { display: grid; gap: 3px; }
+.emap-arch-index { font-size: .68rem; font-weight: 900; letter-spacing: .14em; color: #fff; background: var(--emap-blue); width: max-content; padding: 3px 9px; border-radius: 999px; }
+.emap-arch-hyper .emap-arch-index { background: var(--emap-hyper); }
+.emap-arch-card header b { color: var(--emap-ink); font-size: .98rem; line-height: 1.35; }
+.emap-arch-card header small { color: var(--emap-muted); font-size: .74rem; }
+.emap-arch-card > p { margin: 0; color: var(--emap-muted); font-size: .82rem; line-height: 1.5; }
+.emap-arch-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.emap-arch-card li { border-left: 3px solid var(--emap-line); padding: 3px 0 3px 10px; display: grid; }
+.emap-arch-card li b { font-size: .8rem; color: var(--emap-ink); }
+.emap-arch-card li small { font-size: .72rem; color: var(--emap-muted); }
+.emap-arch-card li.emap-more b { color: var(--emap-violet); }
+.emap-arch-card button { justify-self: start; border: 1px solid var(--emap-line); background: rgba(13, 92, 242, .06); color: var(--emap-blue); font-weight: 800; font-size: .78rem; border-radius: 10px; padding: 8px 14px; cursor: pointer; transition: background .16s ease; }
+.emap-arch-card button:hover { background: rgba(13, 92, 242, .14); }
+
+.emap-results { border-radius: 18px; padding: 16px 18px; }
+.emap-results h3 { margin: 0 0 12px; color: var(--emap-ink); font-size: 1.05rem; }
+.emap-results h3 small { font-weight: 600; color: var(--emap-muted); font-size: .72rem; margin-left: 8px; }
+.emap-list { display: grid; gap: 8px; max-height: 620px; overflow: auto; padding-right: 4px; }
+.emap-row { display: grid; grid-template-columns: 130px 1fr auto; align-items: center; gap: 12px; text-align: left; background: #fbfcff; border: 1px solid var(--emap-line); border-radius: 12px; padding: 10px 14px; cursor: pointer; font: inherit; transition: border-color .15s ease, background .15s ease; }
+.emap-row:hover { border-color: var(--emap-blue); background: #f2f6ff; }
+.emap-row-code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .72rem; font-weight: 800; color: var(--emap-blue); }
+.emap-row-hyper .emap-row-code { color: var(--emap-violet); }
+.emap-row-main { display: grid; gap: 2px; min-width: 0; }
+.emap-row-main b { font-size: .86rem; color: var(--emap-ink); }
+.emap-row-main small { font-size: .72rem; color: var(--emap-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.emap-row-tier { font-size: .62rem; font-weight: 900; letter-spacing: .1em; padding: 4px 8px; border-radius: 999px; background: rgba(13, 92, 242, .1); color: var(--emap-blue); }
+.emap-row-hyper .emap-row-tier { background: rgba(124, 58, 237, .12); color: var(--emap-violet); }
+
+.emap-inspector { background: var(--emap-card); border: 1px solid var(--emap-line); border-radius: 18px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; }
+.emap-inspector h4 { margin: 0; font-family: ui-monospace, Menlo, monospace; color: var(--emap-violet); font-size: .8rem; letter-spacing: .08em; }
+.emap-inspect-name { color: var(--emap-ink); font-size: 1.05rem; line-height: 1.4; }
+.emap-inspector p { margin: 0; color: var(--emap-muted); font-size: .84rem; line-height: 1.55; }
+.emap-inspect-data { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; }
+.emap-inspect-data div { background: #f7f9ff; border-radius: 10px; padding: 8px 12px; display: grid; gap: 2px; }
+.emap-inspect-data b { font-size: .62rem; letter-spacing: .12em; color: var(--emap-muted); text-transform: uppercase; }
+.emap-inspect-data span { font-size: .78rem; color: var(--emap-ink); word-break: break-all; }
+.emap-inspect-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.emap-status { color: var(--emap-blue); font-size: .8rem; font-weight: 700; }
+
+.emap-palette { border: none; padding: 0; background: transparent; max-width: min(680px, 94vw); width: 100%; }
+.emap-palette::backdrop { background: rgba(11, 20, 55, .55); backdrop-filter: blur(4px); }
+.emap-palette-inner { background: #fff; border-radius: 18px; box-shadow: 0 40px 90px -30px rgba(11, 20, 55, .6); padding: 16px; display: grid; gap: 12px; }
+.emap-palette input { width: 100%; border: 1px solid var(--emap-line); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: 1rem; }
+.emap-palette-list { display: grid; gap: 6px; max-height: 380px; overflow: auto; }
+.emap-palette-list button { text-align: left; border: 1px solid transparent; background: #f7f9ff; border-radius: 10px; padding: 9px 12px; cursor: pointer; font: inherit; display: grid; gap: 2px; }
+.emap-palette-list button:hover { border-color: var(--emap-blue); }
+.emap-palette-list b { font-size: .85rem; color: var(--emap-ink); }
+.emap-palette-list small { font-size: .72rem; color: var(--emap-muted); font-family: ui-monospace, Menlo, monospace; }
+.emap-palette footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--emap-muted); font-size: .72rem; }
+.emap-palette footer button { border: 1px solid var(--emap-line); background: #fff; border-radius: 10px; padding: 7px 14px; font-weight: 800; cursor: pointer; color: var(--emap-ink); }
+
+@media (max-width: 720px) {
+  .emap-row { grid-template-columns: 1fr auto; }
+  .emap-row-code { grid-column: 1 / -1; }
+}
+
+body[data-system-route="enterprise-map"] .enterprise-page { animation: emap-rise .45s cubic-bezier(.22, .8, .3, 1) both; }
+@keyframes emap-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-system-route="enterprise-map"] .enterprise-page { animation: none; }
+  .emap-arch-card, .emap-row { transition: none; }
+}

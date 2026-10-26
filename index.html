@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./platform-ui.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./luxury-theme.css?v=20261024-luxury-home-v1" />
+    <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-map-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -30,6 +31,14 @@
         <details class="nav-dropdown" data-menu="insights"><summary>Insights <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu insights"><a href="#workspace/analytics" data-system-route="analytics"><b>Analytics</b><small>Metrik snapshot agregat</small></a><a href="#platform/integrations" data-system-route="integrations"><b>Integrations</b><small>GitHub, GitLab, Bitbucket</small></a><a href="#hosts" data-system-route="hosts"><b>Domains & hosts</b><small>Domain publik terpetakan</small></a><a href="#workspace/ai" data-system-route="ai"><b>AI Assistant</b><small>Ruang kerja AI lokal</small></a><button type="button" data-sync-hub-trigger><b>Snapshot Hub</b><small>Refresh snapshot bersama</small></button><a href="./aireber/" class="nav-aireber-link"><b>AI Reber</b><small>Studio statis · simpan lokal</small></a></div></details>
         <details class="nav-dropdown" data-menu="manage"><summary>Manage <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu pengelolaan"><a href="#manage/files" data-system-route="manage-files"><b>Files</b><small>Baca, tulis, tambah, edit, hapus</small></a><a href="#manage/storage" data-system-route="manage-storage"><b>Storage</b><small>Cadangan dan katalog workspace</small></a><a href="#manage/settings" data-system-route="manage-settings"><b>Settings</b><small>Preferensi penyimpanan lokal</small></a><a href="#manage/access" data-system-route="manage-access"><b>Access</b><small>Kebijakan baca dan tulis</small></a><a href="#manage/activity" data-system-route="manage-activity"><b>Activity</b><small>Riwayat perubahan File Manager</small></a></div></details>
         <details class="nav-dropdown" data-menu="execute"><summary>Execute <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu eksekusi"><a href="#execute/run" data-system-route="execute-run"><b>Run</b><small>Jalankan aksi terkontrol</small></a><a href="#execute/console" data-system-route="execute-console"><b>Console</b><small>Perintah allowlist sistem</small></a><a href="#execute/jobs" data-system-route="execute-jobs"><b>Jobs</b><small>Antrean pekerjaan lokal</small></a><a href="#execute/deploy" data-system-route="execute-deploy"><b>Deploy</b><small>Checklist publikasi provider</small></a><a href="#execute/logs" data-system-route="execute-logs"><b>Logs</b><small>Jejak eksekusi dan hasil</small></a></div></details>
+        <details class="nav-dropdown" data-menu="enterprise"><summary>Enterprise <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu enterprise map list">
+          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Enterprise Map List</b><small>Master registry · 10.000 menu hierarkis</small></a>
+          <a href="#enterprise/map" data-system-route="enterprise-map"><b>DevOps &amp; Git Platform</b><small>10 arsitektur inti · repositori, CI/CD, keamanan</small></a>
+          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Domain &amp; DNS Engine</b><small>Registrasi domain, GeoDNS, DNSSEC, failover</small></a>
+          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Hosting &amp; IP Infrastructure</b><small>VM, bare metal, IPAM, BGP anycast</small></a>
+          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Hyper-Monitoring &amp; WAF/CDN</b><small>Observability, edge security, DDoS</small></a>
+          <a href="#fileManager/sys/enterprise" data-system-route="file-manager"><b>Registry Filesystem</b><small>/sys/enterprise · shard JSON per menu</small></a>
+        </div></details>
       </nav>
       <div class="topbar-actions">
         <span class="connection-state"><i aria-hidden="true"></i><span id="connectionLabel">Memuat indeks</span></span>
@@ -183,6 +192,7 @@
   </section>
 
     <section class="platform-page" id="platformPage" data-system-page="platform" hidden aria-label="Halaman fitur platform"><div id="platformContent"></div></section>
+    <section class="enterprise-page" id="enterpriseMapPage" data-system-page="enterprise" hidden aria-label="Enterprise Map List — Hyper-Enterprise Master Registry"><div id="enterpriseMapContent" class="enterprise-map-shell"></div></section>
     <section class="tools-page" id="toolsPage" data-system-page="tools" hidden aria-label="Halaman Manage dan Execute"><div id="toolsContent"></div></section>
 
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
@@ -268,6 +278,7 @@
     <script src="./feature-catalog.js?v=20261025-feature-registry-v1" defer></script>
     <script src="./ai-chat.js?v=20261026-ai-reber-local-v1" defer></script>
     <script src="./platform-view.js?v=20261023-platform-view-v1" defer></script>
+    <script src="./enterprise-map.js?v=20261026-enterprise-map-v1" defer></script>
     <script src="./system-tools.js?v=20261024-manage-execute-v1" defer></script>
     <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>

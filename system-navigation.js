@@ -31,6 +31,9 @@
   ];
   platformRoutes.forEach(([name, menu]) => { routes[name] = { group: 'platform', menu, hash: `#platform/${name}` }; });
 
+  // Enterprise Map List · Hyper-Enterprise Master Registry — halaman baru grup 'enterprise'
+  routes['enterprise-map'] = { group: 'enterprise', menu: 'enterprise', hash: '#enterprise/map' };
+
   const workspaceRoutes = new Map(Object.entries(routes).filter(([, route]) => route.view).map(([name, route]) => [route.view, name]));
   const pages = [...document.querySelectorAll('[data-system-page]')];
   const navLinks = [...document.querySelectorAll('.main-nav a[data-system-route]')];
@@ -55,6 +58,8 @@
       const route = hash.slice('platform/'.length);
       return routes[route]?.group === 'platform' ? route : null;
     }
+    // Enterprise Map List: #enterprise/map → halaman registry hyper-enterprise.
+    if (hash === 'enterprise/map') return 'enterprise-map';
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
     return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;

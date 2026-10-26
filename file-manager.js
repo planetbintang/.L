@@ -64,6 +64,32 @@
     if (path === 'sys/planetbintang') return [
       { path: 'sys/planetbintang/advanced', type: 'directory', mode: '040755', items: ADVANCED_FEATURES.length, function: 'Advanced system feature registry · setiap fitur memiliki filesystem sendiri' },
     ];
+    // Enterprise Map List · Hyper-Enterprise Master Registry (10.000 menu JSON nyata di /data/enterprise-menus)
+    const ENTERPRISE_MAP_ARCHITECTURES = ['core-code', 'project-management', 'cicd-deployment', 'security-compliance', 'artifacts-packages', 'data-insights', 'organization-access', 'settings-integrations', 'audit-monitoring', 'billing-quotas', 'domain-dns-engine', 'hosting-ip-infra', 'hyper-monitoring', 'edge-security-waf', 'content-moderation-cms', 'alerting-incident', 'iam-enterprise', 'storage-compliance', 'billing-metering', 'developer-marketplace'];
+    if (path === 'sys/enterprise') return ENTERPRISE_MAP_ARCHITECTURES.map((slug, archIndex) => ({
+      path: `sys/enterprise/${slug}`, type: 'directory', mode: '040755', items: 500,
+      function: `Arsitektur A${String(archIndex + 1).padStart(2, '0')} · ${500} menu registry · rentang ${archIndex * 500 + 1}–${(archIndex + 1) * 500}${archIndex >= 10 ? ' · Hyper-Enterprise tier' : ' · DevOps Core tier'}`,
+    })).concat([{ path: 'sys/enterprise/manifest.json', type: 'file', mode: '0100644', size: 4200, sizeKnown: true, function: 'Master registry manifest · schema system_menus', codeContent: '{\n "schemaVersion": 1,\n "totalMenuCount": 10000,\n "architectureCount": 20,\n "menusPerArchitecture": 500,\n "registryTable": "system_menus + system_menu_descriptions",\n "source": "scripts/generate_enterprise_map.py deterministic registry"\n}' }]);
+    const enterpriseArchMatch = path.match(/^sys\/enterprise\/([a-z-]+)$/);
+    if (enterpriseArchMatch && ENTERPRISE_MAP_ARCHITECTURES.includes(enterpriseArchMatch[1])) {
+      const archIndex = ENTERPRISE_MAP_ARCHITECTURES.indexOf(enterpriseArchMatch[1]);
+      return Array.from({ length: 500 }, (_, slot) => {
+        const id = archIndex * 500 + slot + 1;
+        return { path: `${path}/menu-${String(id).padStart(5, '0')}.json`, type: 'file', mode: '0100644', size: 640, sizeKnown: true, function: `system_menus row #${id} · arsitektur ${enterpriseArchMatch[1]}`, fetchPath: `data/enterprise-menus/menu-${String(id).padStart(5, '0')}.json` };
+      });
+    }
+    // Mirror path lama: /system_ext/hyper-menus/<arsitektur> → shard yang sama.
+    if (path === 'system_ext/hyper-menus') return generatedSystemEntries('sys/enterprise').map((entry) => ({
+      ...entry,
+      path: `system_ext/hyper-menus${entry.path.slice('sys/enterprise'.length)}`,
+      function: `${entry.function} · mirror system_ext`,
+    }));
+    const hyperMirrorMatch = path.match(/^system_ext\/hyper-menus\/([a-z-]+)$/);
+    if (hyperMirrorMatch) return generatedSystemEntries(`sys/enterprise/${hyperMirrorMatch[1]}`).map((entry) => ({
+      ...entry,
+      path: `system_ext/hyper-menus/${hyperMirrorMatch[1]}${entry.path.slice(`sys/enterprise/${hyperMirrorMatch[1]}`.length)}`,
+      function: `${entry.function} · mirror system_ext`,
+    }));
     if (path === 'sys/planetbintang/advanced') return ADVANCED_FEATURES.map((feature, index) => {
       const extension = GENERATED_EXTENSIONS[index % GENERATED_EXTENSIONS.length];
       const file = `${feature}-system-${String(index + 1).padStart(2, '0')}.${extension}`;
@@ -73,6 +99,7 @@
       { path: 'system_ext/catalog', type: 'directory', mode: '040755', function: '4.096 file kode virtual dalam 256 bucket lazy-load' },
       { path: 'system_ext/features', type: 'directory', mode: '040755', function: '12.288 fitur virtual · satu fitur = satu file · 24 domain sistem' },
       { path: 'system_ext/enterprise', type: 'directory', mode: '040755', function: '4.096 enterprise-map feature files · 10 domain platform' },
+      { path: 'system_ext/hyper-menus', type: 'directory', mode: '040755', function: 'Enterprise Map List · 10.000 menu registry hierarkis · 20 arsitektur × 500 shard mirror /sys/enterprise' },
       { path: 'system_ext/modules', type: 'directory', mode: '040755', function: 'Modul fitur: core, UI, data, API, AI, pipeline, dan integrasi' },
       { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext' },
       { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
@@ -161,6 +188,7 @@
         { path: 'sys/kernel', type: 'directory', mode: '040755', function: 'Parameter kernel (mm, sched)' },
         { path: 'sys/system_ext', type: 'directory', mode: '040755', function: 'Mirror system_ext Planetbintang: catalog, features, modules, etc' },
         { path: 'sys/planetbintang', type: 'directory', mode: '040755', function: 'Registry fitur lanjutan Planetbintang' },
+        { path: 'sys/enterprise', type: 'directory', mode: '040755', items: 10020, function: 'Enterprise Map List · Hyper-Enterprise Master Registry — 20 arsitektur × 500 menu (system_menus)' },
       ],
       media: [
         { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Storage emulated pengguna (0..N)' },
@@ -481,6 +509,16 @@
         controls.append(sortLabel, iconRow, denseRow, openButton);
         heading.append(controls);
         panel.append(heading);
+      } else if (entry.fetchPath && !entry.codeContent) {
+        const block = el('div', undefined, 'fm-candidate-list');
+        block.append(el('span', 'REGISTRY ROW · dimuat dari shard JSON statis', 'fm-info-label'));
+        const pre = el('pre', 'Memuat isi registry…', 'fm-code-preview');
+        block.append(pre);
+        panel.append(block);
+        fetch(`./${entry.fetchPath}`, { cache: 'no-cache', credentials: 'omit' })
+          .then((response) => (response.ok ? response.text() : Promise.reject(new Error(`HTTP ${response.status}`))))
+          .then((text) => { entry.codeContent = text; pre.textContent = text; })
+          .catch(() => { pre.textContent = '[Registry shard belum termaterialisasi di perangkat ini — jalankan scripts/generate_enterprise_map.py]'; });
       } else if (entry.codeContent) {
         const block = el('div', undefined, 'fm-candidate-list');
         block.append(el('span', 'ISI KODE CONTOH (sesuai nama/fungsi file)', 'fm-info-label'));

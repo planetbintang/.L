@@ -1,0 +1,14 @@
+{
+ "id": 6302,
+ "menu_code": "HYPER-A03-302",
+ "architecture_group": "Hyper-Monitoring & Observability Engine",
+ "architecture_slug": "hyper-monitoring",
+ "architecture_index": 13,
+ "parent_id": 6000,
+ "menu_name": "Monitoring > HTTP/HTTPS Status · Audit Trail #03",
+ "route_path": "/hyper/hyper-monitoring/http-https-status-302",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Deteksi kode respons 200/4xx/5xx dan validasi string teks konten.",
+ "system_instruction": "Sub-modul 'Audit Trail' turunan dari 'Monitoring > HTTP/HTTPS Status'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization."
+}
