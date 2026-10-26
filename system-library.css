@@ -1,0 +1,19 @@
+/* Repository-driven component and menu explorer */
+#system-library{padding:clamp(20px,4vw,48px);border:1px solid var(--line);border-radius:20px;margin:24px 0;background:linear-gradient(135deg,#fff,#f6f8fc)}
+#system-library .library-head{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+#system-library h2{margin:.2rem 0 .5rem;font-size:clamp(24px,3vw,38px);letter-spacing:-.04em}
+#system-library .library-tools{display:grid;grid-template-columns:minmax(180px,1fr) repeat(2,minmax(140px,auto));gap:10px;margin:22px 0}
+#system-library input,#system-library select{width:100%;min-height:44px;border:1px solid #cbd2dd;border-radius:10px;padding:10px 12px;background:#fff;color:#111}
+#system-library .library-stats{display:flex;gap:10px;flex-wrap:wrap}
+#system-library .library-stat{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff}
+#system-library .library-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#system-library .library-card{min-width:0;border:1px solid #dfe3ea;border-radius:14px;padding:15px;background:#fff;display:flex;flex-direction:column;gap:9px;transition:transform .16s,border-color .16s,box-shadow .16s}
+#system-library .library-card:hover{transform:translateY(-2px);border-color:#7b9cf4;box-shadow:0 10px 24px #14264d12}
+#system-library .library-card small{color:#606a7b;line-height:1.45}
+#system-library .library-card button{align-self:flex-start;border:0;border-radius:8px;background:#edf2ff;color:#183e9d;padding:8px 10px;cursor:pointer}
+#system-library .library-empty{padding:32px;text-align:center;color:#667085;border:1px dashed #cbd2dd;border-radius:12px}
+#system-library .library-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:16px}
+#system-library .library-foot button{border:1px solid #cbd2dd;border-radius:9px;background:white;padding:9px 13px;cursor:pointer}
+@media(max-width:1000px){#system-library .library-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){#system-library .library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#system-library .library-tools{grid-template-columns:1fr}}
+@media(max-width:420px){#system-library .library-grid{grid-template-columns:1fr}}
