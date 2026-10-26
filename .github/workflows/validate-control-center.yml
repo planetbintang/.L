@@ -1,0 +1,47 @@
+name: Validate root control center
+
+on:
+  pull_request:
+    branches: [io]
+    paths:
+      - 'index.html'
+      - 'control-center.js'
+      - 'control-center.css'
+      - 'CONTROL-CENTER.md'
+      - '.github/workflows/validate-control-center.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check JavaScript syntax
+        run: node --check control-center.js
+      - name: Verify HTML integration hooks
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          html = Path('index.html').read_text(encoding='utf-8')
+          checks = {
+              'control stylesheet': 'control-center.css' in html,
+              'control script': 'control-center.js' in html,
+              'control page container': 'data-system-page="control-center"' in html,
+              'repository hub route': '#control/repository-hub' in html,
+              'media center route': '#control/media-center' in html,
+              'integration route': '#control/system-integration' in html,
+              'sync and deployment route': '#control/sync-deploy' in html,
+              'insights route': '#control/insights-growth' in html,
+          }
+          for name, passed in checks.items():
+              print(('PASS' if passed else 'FAIL') + ': ' + name)
+          if not all(checks.values()):
+              raise SystemExit(1)
+          PY
