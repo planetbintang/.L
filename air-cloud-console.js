@@ -40,7 +40,18 @@
   const fmt = new Intl.NumberFormat('id-ID');
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
+  const FAVORITES_KEY = 'pb-aircloud-favorites-v1';
+  function loadFavorites() {
+    try { const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]'); return new Set(Array.isArray(saved) ? saved.filter((id) => BY_ID.has(id)) : []); }
+    catch { return new Set(); }
+  }
+  function persistFavorites() {
+    try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...state.favorites])); return true; }
+    catch { return false; }
+  }
+
   const state = {
+    favorites: loadFavorites(),
     openMenus: new Set(MENUS.slice(0, 3).map((m) => m.id)),
     openSubs: new Set(),
     selectedId: MENUS[0]?.id || '',
@@ -77,6 +88,7 @@
       <h3>${icon} ${esc(row.menu_name)}</h3>
       <p>${esc(row.desc)}</p>
       <div class="ac-hero-meta"><span>Rute halaman <code>${esc(row.route_path)}</code></span><span>Jejak <em>${esc(row.path_label)}</em></span></div>
+      <div class="ac-hero-actions"><button type="button" class="ac-favorite-toggle ${state.favorites.has(row.id) ? 'is-favorite' : ''}" data-ac-favorite="${esc(row.id)}" aria-pressed="${state.favorites.has(row.id)}">${state.favorites.has(row.id) ? '★ Hapus dari favorit' : '☆ Simpan ke favorit'}</button><button type="button" class="ac-favorite-export" data-ac-export-menu="${esc(row.id)}">Ekspor menu ini JSON</button></div>
     </section>`;
   }
 
@@ -250,6 +262,17 @@
     if (!nav) return;
     const needle = state.query.trim().toLowerCase();
     const frag = document.createDocumentFragment();
+    if (state.favorites.size) {
+      const favoriteGroup = document.createElement('section');
+      favoriteGroup.className = 'ac-nav-group ac-nav-favorites';
+      const favoriteRows = [...state.favorites].map((id) => BY_ID.get(id)).filter(Boolean);
+      favoriteGroup.innerHTML = '<div class="ac-nav-feature-head"><span>★ Menu favorit</span><b>' + fmt.format(favoriteRows.length) + '</b></div>';
+      const favoriteList = document.createElement('div');
+      favoriteList.className = 'ac-nav-favorite-list';
+      favoriteList.innerHTML = favoriteRows.map((row) => '<button type="button" class="ac-nav-favorite' + (state.selectedId === row.id ? ' active' : '') + '" data-aircloud-menu="' + esc(row.id) + '"><span>' + esc(row.menu_name) + '</span><small>' + esc(row.menu_code) + '</small></button>').join('');
+      favoriteGroup.append(favoriteList);
+      frag.append(favoriteGroup);
+    }
     for (const menu of MENUS) {
       const subs = CHILDREN.get(menu.id) || [];
       const menuHit = !needle || matchesQuery(menu, needle);
@@ -342,7 +365,7 @@
       const controls = document.createElement('div');
       controls.id = 'airCloudSidebarControls';
       controls.className = 'ac-sidebar-controls';
-      controls.innerHTML = '<button type="button" id="airCloudExpandAll" aria-label="Buka semua kelompok menu">Buka semua</button><button type="button" id="airCloudCollapseAll" aria-label="Tutup semua kelompok menu">Tutup semua</button>';
+      controls.innerHTML = '<button type="button" id="airCloudExpandAll" aria-label="Buka semua kelompok menu">Buka semua</button><button type="button" id="airCloudCollapseAll" aria-label="Tutup semua kelompok menu">Tutup semua</button><button type="button" id="airCloudExportRegistry" aria-label="Ekspor seluruh katalog menu">Ekspor katalog</button><button type="button" id="airCloudOpenAirz" aria-label="Buka folder airz di File Manager">Buka folder airz</button>';
       head.append(controls);
     }
   }
@@ -599,6 +622,33 @@
       }
       const link = event.target.closest('[data-aircloud-menu]');
       if (link) { selectMenu(link.getAttribute('data-aircloud-menu')); return; }
+      const favorite = event.target.closest('[data-ac-favorite]');
+      if (favorite) {
+        const id = favorite.getAttribute('data-ac-favorite');
+        if (state.favorites.has(id)) state.favorites.delete(id); else state.favorites.add(id);
+        const saved = persistFavorites();
+        renderSidebar();
+        renderPage();
+        airzNote(saved ? 'Favorit menu disimpan di browser ini.' : 'Favorit hanya aktif sampai halaman ditutup karena penyimpanan browser tidak tersedia.');
+        return;
+      }
+      const exportMenu = event.target.closest('[data-ac-export-menu]');
+      if (exportMenu) {
+        const row = BY_ID.get(exportMenu.getAttribute('data-ac-export-menu'));
+        if (row) downloadText('air-cloud-' + row.id.toLowerCase() + '.json', JSON.stringify({ exportedAt: new Date().toISOString(), menu: row, children: CHILDREN.get(row.id) || [], page: pagePayload(row) }, null, 2));
+        return;
+      }
+      if (event.target.closest('#airCloudExportRegistry')) {
+        downloadText('air-cloud-katalog-menu.json', JSON.stringify({ exportedAt: new Date().toISOString(), totals: { main: MENUS.length, submenu: SUBS.length, leaf: LEAFS.length, total: REGISTRY.total || BY_ID.size }, menus: MENUS, subs: SUBS, leafs: LEAFS }, null, 2));
+        airzNote('Katalog menu Air Cloud diunduh sebagai JSON.');
+        return;
+      }
+      if (event.target.closest('#airCloudOpenAirz')) {
+        window.PBFileManager?.applySnapshot?.(window.PBSystemSnapshot?.data);
+        window.PBSystemNavigation?.navigate('file-manager');
+        window.setTimeout(() => window.PBFileManager?.setPath?.('airz'), 120);
+        return;
+      }
       const save = event.target.closest('[data-ac-save]');
       if (save) { void saveRowToAirz(BY_ID.get(save.getAttribute('data-ac-save'))); return; }
       const dl = event.target.closest('[data-ac-download]');
