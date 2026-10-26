@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="./luxury-theme.css?v=20261026-header-harmony-v2" />
     <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-pages-v1" />
     <link rel="stylesheet" href="./modern-layout.css?v=20261026-modern-2026-v1" />
-    <link rel="stylesheet" href="./snaps.css?v=20261026-snaps-mcp-hub-v1" />
+    <link rel="stylesheet" href="./snaps.css?v=20261026-snaps-content-fix-v2" />
+    <link rel="stylesheet" href="./air-cloud.css?v=20261026-aircloud-console-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -26,6 +27,16 @@
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
         <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#snaps" data-system-route="snaps"><b>SNAPS Hub</b><small>MCP · git · token kustom · RAG</small></a><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
+        <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
+          <a href="#aircloud" data-system-route="aircloud"><b>Air Cloud Console</b><small>Konsol cloud · registry 4.394 halaman menu</small></a>
+          <a href="#aircloud/compute" data-system-route="aircloud-compute"><b>Compute</b><small>AC-M001 · virtual server &amp; instance</small></a>
+          <a href="#aircloud/vpc-infrastructure" data-system-route="aircloud-vpc-infrastructure"><b>VPC Infrastructure</b><small>AC-M002 · jaringan &amp; subnet</small></a>
+          <a href="#aircloud/storage" data-system-route="aircloud-storage"><b>Storage</b><small>AC-M003 · data &amp; volume</small></a>
+          <a href="#aircloud/database" data-system-route="aircloud-database"><b>Database</b><small>AC-M004 · basis data terola</small></a>
+          <a href="#aircloud/ai-ml" data-system-route="aircloud-ai-ml"><b>AI &amp; Machine Learning</b><small>AC-M006 · model, kluster GPU</small></a>
+          <a href="#aircloud/devops-toolchain" data-system-route="aircloud-devops-toolchain"><b>DevOps Toolchain</b><small>AC-M011 · CI/CD &amp; pipeline</small></a>
+          <a href="#fileManager/airz" data-system-route="file-manager"><b>Root /airz</b><small>Repo .AIRZ · mirror folder airz/</small></a>
+        </div></details>
         <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI Reber</a>
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         <details class="nav-dropdown" data-menu="review"><summary>Review</summary><div class="nav-dropdown-menu" aria-label="Menu review dan kolaborasi"><a href="#platform/pull-requests" data-system-route="pull-requests"><b>Pull Requests</b><small>Review dari GitHub</small></a><a href="#platform/merge-requests" data-system-route="merge-requests"><b>Merge Requests</b><small>Alur lintas provider</small></a><a href="#platform/review-queue" data-system-route="review-queue"><b>Review queue</b><small>Antrian review per repo</small></a><a href="#platform/discussions" data-system-route="discussions"><b>Discussions</b><small>Diskusi provider</small></a><a href="#platform/activity" data-system-route="activity"><b>Activity</b><small>Aktivitas commit snapshot</small></a></div></details>
@@ -205,6 +216,23 @@
     <section class="tools-page" id="toolsPage" data-system-page="tools" hidden aria-label="Halaman Manage dan Execute"><div id="toolsContent"></div></section>
     <section class="snaps-page" id="snapsPage" data-system-page="snaps" hidden aria-label="SNAPS — hub konektor MCP, sumber kode, AI Studio, dan RAG pustaka"><div id="snapsContent"></div></section>
 
+    <section class="aircloud-page" id="airCloudPage" data-system-page="aircloud" hidden aria-label="Air Cloud — konsol cloud dengan registry menu hierarkis">
+      <div class="ac-shell" id="airCloudShell">
+        <header class="ac-top">
+          <div class="ac-top-brand"><span class="ac-top-icon" aria-hidden="true">☁️</span><div><p class="eyebrow">AIR CLOUD <span>/</span> PLANETBINTANG CONSOLE</p><h2 id="airCloudPageTitle">Konsol Air Cloud</h2></div></div>
+          <div class="ac-top-actions"><span class="tools-badge" id="airCloudStorageBadge">PENYIMPANAN LOKAL · SIAP</span><button class="workspace-secondary" type="button" id="airCloudSyncAll">Sinkron semua menu utama ke airz/</button></div>
+        </header>
+        <div class="ac-stats" id="airCloudStats"></div>
+        <div class="ac-layout">
+          <aside class="ac-sidebar" aria-label="Navigasi hierarkis Air Cloud">
+            <div class="ac-sidebar-head"><h3>Navigasi Layanan</h3><input id="airCloudSearch" type="search" placeholder="Cari menu, kode AC-M…, atau rute…" aria-label="Cari menu Air Cloud" /><p class="ac-sidebar-status" id="airCloudSidebarStatus">Memuat registry…</p></div>
+            <nav class="ac-nav" id="airCloudSidebarNav"></nav>
+          </aside>
+          <div class="ac-content" id="airCloudContent"><div id="airCloudPage"><!-- halaman menu dirender di sini --></div></div>
+        </div>
+      </div>
+    </section>
+
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
         <div class="section-heading">
           <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
@@ -291,9 +319,12 @@
     <script src="./data/enterprise-menus-index.js?v=20261026-menu-rename-index-v1" defer></script>
     <script src="./enterprise-map.js?v=20261026-enterprise-map-v2-renamed" defer></script>
     <script src="./system-tools.js?v=20261024-manage-execute-v1" defer></script>
-    <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
+    <script src="./system-navigation.js?v=20261026-aircloud-nav-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
-    <script src="./snaps-bridge.js?v=20261026-snaps-mcp-hub-v1" defer></script>
+    <script src="./snaps-bridge.js?v=20261026-snaps-content-fix-v2" defer></script>
+    <script src="./data/air-cloud-menus-index.js?v=20261026-aircloud-console-v1" defer></script>
+    <script src="./data/air-cloud-registry.js?v=20261026-aircloud-console-v1" defer></script>
+    <script src="./air-cloud-console.js?v=20261026-aircloud-console-v1" defer></script>
   </body>
 </html>
