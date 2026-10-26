@@ -6,7 +6,7 @@ const $=s=>document.querySelector(s);
 const allFeatures=MODULES.flatMap((m,mi)=>m.features.map((name,fi)=>({id:mi*25+fi+1,name,module:m.name,moduleIndex:mi,category:(CATEGORIES.find(c=>c.names.includes(m.name))||{id:'system'}).id,groupPosition:fi+1})));
 const icons=['▦','◎','⌘','◈','⌁','✎','▤','⬡','↗','♧','✦','▣','▧','⌕','▥','♙','＄','⬢','⚙','⌘'];
 const $all=(sel,root=document)=>[...root.querySelectorAll(sel)];
-let filtered=[...allFeatures],page=0,pageSize=500,expanded=new Set([0]),selectedFeature=null;
+let filtered=[...allFeatures],page=0,pageSize=500,expanded=new Set(MODULES.map((_,i)=>i)),selectedFeature=null;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function showToast(message){const node=$('#toast');node.textContent=message;node.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>node.classList.remove('show'),2800)}
 function initHeader(){
@@ -42,7 +42,7 @@ function renderBlocks(){
  $all('[data-feature]').forEach(b=>b.addEventListener('click',()=>openFeature(Number(b.dataset.feature))));
  $all('[data-open-module]').forEach(b=>b.addEventListener('click',()=>openModule(Number(b.dataset.openModule))));
 }
-function openModule(i){if(!MODULES[i])return;$('#featureSearch').value='';$('#moduleFilter').value=String(i);$('#statusFilter').value='all';applyFilters();expanded.add(i);renderBlocks();$('#features').scrollIntoView({behavior:'smooth'});$all('.side-module').forEach(b=>b.classList.toggle('selected',Number(b.dataset.module)===i));$('.nav-dropdown.open')?.classList.remove('open')}
+function openModule(i){if(!MODULES[i])return;$('#featureSearch').value='';$('#moduleFilter').value=String(i);$('#statusFilter').value='all';expanded.add(i);applyFilters();$('#features').scrollIntoView({behavior:'smooth'});$all('.side-module').forEach(b=>b.classList.toggle('selected',Number(b.dataset.module)===i));$('.nav-dropdown.open')?.classList.remove('open')}
 function openFeature(id){const f=allFeatures.find(x=>x.id===id);if(!f)return;selectedFeature=f;$('#dialogModule').textContent='MODUL '+String(f.moduleIndex+1).padStart(2,'0')+' · FITUR '+String(f.id).padStart(3,'0');$('#dialogTitle').textContent=f.name;$('#dialogDescription').textContent=descriptionFor(f);$('#dialogMeta').innerHTML='<span>'+esc(f.module)+'</span><span>ID fitur: '+String(f.id).padStart(3,'0')+'</span><span>Kategori: '+esc(f.category)+'</span>';$('#dialogAction').textContent=actionFor(f);const d=$('#featureDialog');if(!d.open)d.showModal()}
 function descriptionFor(f){return 'Panel '+f.name.toLocaleLowerCase('id-ID')+' menjadi bagian modul '+f.module+'. Blok ini menyediakan titik masuk antarmuka, informasi konteks, dan ruang untuk integrasi layanan yang sesuai.'}
 function actionFor(f){const k=f.name.toLowerCase();if(k.includes('teks')||k.includes('artikel')||k.includes('halaman'))return 'Buka Studio Penerbitan untuk memasukkan teks dan menghasilkan pratinjau HTML yang bisa diunduh.';if(k.includes('dns')||k.includes('nameserver')||k.includes('record'))return 'Panel demo dapat digunakan untuk memeriksa contoh konfigurasi. Perubahan DNS produksi membutuhkan penyedia DNS dan kredensial yang benar.';if(k.includes('vendor')||k.includes('api')||k.includes('registrar'))return 'Tambahkan koneksi penyedia yang sah melalui backend aman. Jangan menempatkan token rahasia di JavaScript frontend.';return 'Panel demonstrasi telah dipilih. Implementasi operasi produksi perlu backend, validasi, izin, dan integrasi layanan yang sesuai.'}
@@ -64,12 +64,13 @@ function initControls(){
  $('#nextPage').addEventListener('click',()=>{if((page+1)*pageSize<filtered.length){page++;renderBlocks();$('#features').scrollIntoView({behavior:'smooth',block:'start'})}});
  $('#browseFeatures').addEventListener('click',()=>$('#features').scrollIntoView({behavior:'smooth'}));
  $('#exportFeatures').addEventListener('click',()=>{const csv=['ID,Nama Fitur,Modul,Kategori',...allFeatures.map(f=>[f.id,'"'+f.name.replace(/"/g,'""')+'"','"'+f.module.replace(/"/g,'""')+'"',f.category].join(','))].join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='katalog-500-fitur-vendordomain.csv';a.click();URL.revokeObjectURL(url);showToast('Katalog 500 fitur diekspor sebagai CSV.')});
- $('#themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');localStorage.setItem('vendordomain-theme',document.body.classList.contains('dark')?'dark':'light')});
- if(localStorage.getItem('vendordomain-theme')==='dark')document.body.classList.add('dark');
+ $('#themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');try{localStorage.setItem('vendordomain-theme',document.body.classList.contains('dark')?'dark':'light')}catch(e){}});
+ try{if(localStorage.getItem('vendordomain-theme')==='dark')document.body.classList.add('dark')}catch(e){}
  $('#collapseSidebar').addEventListener('click',()=>document.body.classList.toggle('collapse-sidebar'));
- $('#mobileToggle').addEventListener('click',()=>$('#sidebar').classList.toggle('mobile-open'));
+ $('#mobileToggle').addEventListener('click',()=>{const sidebar=$('#sidebar'),opened=sidebar.classList.toggle('mobile-open');$('#mobileToggle').setAttribute('aria-expanded',String(opened));});
  $('#dialogTry').addEventListener('click',()=>{if(!selectedFeature)return;const f=selectedFeature;if(f.name.toLowerCase().includes('teks')||f.name.toLowerCase().includes('halaman')){$('#featureDialog').close();$('#publisher').scrollIntoView({behavior:'smooth'});showToast('Studio Penerbitan siap digunakan.')}else{showToast('Mode demo: '+f.name+'. Integrasi produksi belum dikonfigurasi.')}});
- document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('#featureSearch').focus()}if(e.key==='Escape')$('#sidebar').classList.remove('mobile-open')});
+ document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('#featureSearch').focus()}if(e.key==='Escape'){$('#sidebar').classList.remove('mobile-open');$('#mobileToggle').setAttribute('aria-expanded','false')}});
 }
 initHeader();initSidebar();initPublisher();initControls();applyFilters();
+ document.querySelectorAll('.side-module').forEach(button=>button.setAttribute('aria-label','Buka modul '+button.querySelector('.module-name').textContent));
 })();
