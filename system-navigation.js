@@ -119,6 +119,7 @@
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     if (route.group === 'tools') window.PBSystemTools?.render(routeName);
+    document.dispatchEvent(new CustomEvent('planetbintang:route-change', { detail: { name: routeName, group: route.group, menu: route.menu || '', view: route.view || '', changed } }));
     const settings = $('#settingsPanel');
     if (changed && settings && !settings.hidden) {
       settings.hidden = true;

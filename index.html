@@ -86,6 +86,20 @@
         </div>
       </section>
 
+      <section class="system-flow-block" data-system-page="system" aria-labelledby="systemFlowTitle">
+        <header class="system-flow-heading"><div><p class="eyebrow">SYSTEM FLOW <span>/</span> ROUTE MATRIX</p><h2 id="systemFlowTitle">Blok perpindahan sistem</h2><p>Setiap blok membuka menu kerja terkait dengan transisi terarah, status route, dan fokus panel aktif.</p></div><span class="flow-status" id="viewTransitionStatus">ROUTE / OVERVIEW</span></header>
+        <div class="system-flow-grid" role="list" aria-label="Alur menu sistem">
+          <button class="system-flow-card flow-code" type="button" data-flow-route="repositories" role="listitem"><span class="flow-icon">⌘</span><span><b>Code</b><small>Repositori · Files · Branches · Commits</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-plan" type="button" data-flow-route="projects" role="listitem"><span class="flow-icon">▦</span><span><b>Plan</b><small>Projects · Issues · Milestones · Roadmaps</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-review" type="button" data-flow-route="pull-requests" role="listitem"><span class="flow-icon">◎</span><span><b>Review</b><small>Pull requests · Discussions · Queue</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-delivery" type="button" data-flow-route="pipelines" role="listitem"><span class="flow-icon">▷</span><span><b>Delivery</b><small>Pipelines · Deployments · Environments</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-insights" type="button" data-flow-route="analytics" role="listitem"><span class="flow-icon">▥</span><span><b>Insights</b><small>Analytics · AI · Hosts · Integrations</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-manage" type="button" data-flow-route="manage-files" role="listitem"><span class="flow-icon">▤</span><span><b>Manage</b><small>Files · Storage · Access · Activity</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-execute" type="button" data-flow-route="execute-console" role="listitem"><span class="flow-icon">›_</span><span><b>Execute</b><small>Console · Jobs · Logs · Deploy</small></span><i>↗</i></button>
+          <button class="system-flow-card flow-features" type="button" data-flow-route="features" role="listitem"><span class="flow-icon">✦</span><span><b>Features</b><small>16.384 file fitur · inspector · preview</small></span><i>↗</i></button>
+        </div>
+      </section>
+
     <section id="workspace" class="workspace-section" data-system-page="workspace" hidden aria-label="Workspace Planetbintang">
     <header class="workspace-heading">
       <div><p class="eyebrow">WORKSPACE <span>/</span> PLANETBINTANG</p><h2>Ruang kerja sistem</h2><p class="section-description">Kelola tugas lokal, telusuri kode, dan pantau metadata repo. Perubahan lokal tetap berada di sistem snapshot ini.</p></div>
@@ -256,6 +270,7 @@
     <script src="./platform-view.js?v=20261023-platform-view-v1" defer></script>
     <script src="./system-tools.js?v=20261024-manage-execute-v1" defer></script>
     <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
+    <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
   </body>
 </html>
