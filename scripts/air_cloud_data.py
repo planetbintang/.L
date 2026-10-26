@@ -13,6 +13,7 @@ Skema mengikuti kontrak tabel SQL: air_cloud_menus + air_cloud_menu_descriptions
 """
 from __future__ import annotations
 
+import json
 import re
 
 # ---------------------------------------------------------------------------
@@ -123,8 +124,98 @@ def menu_slug_title(slug: str) -> str:
     return slug.replace("-", " ").title()
 
 
+# ---------------------------------------------------------------------------
+# POLA KONTEN MENYELURUH — satuan teks · angka · simbol · komponen
+# Setiap baris registry memperoleh pola deterministik yang sama di seluruh
+# pipeline (registry JS, halaman JSON, VFS airz/, konsol browser).
+# ---------------------------------------------------------------------------
+STATUS_CYCLE = ["OPERASIONAL", "OPERASIONAL", "MENJAGA BEBAN", "PROVISIONING", "SINKRON"]
+SYMBOL_CYCLE = ["◆", "◇", "●", "○", "▲", "△", "■", "□", "✦", "❖", "✚", "➤", "∎", "◈", "✳"]
+UNIT_CYCLE = ["unit", "GB", "detik", "req/dtk", "vCPU", "mencitan", "kanal", "zona", "kunci", "peristiwa"]
+COMPONENT_KINDS = [
+    "kernel-module", "api-gateway", "scheduler", "replicator", "meter-collector",
+    "log-shipper", "cert-manager", "policy-engine", "cache-layer", "event-bus",
+]
+
+
+def _fingerprint(*parts: object) -> str:
+    """Fingerprint heksadesimal deterministik 8 karakter dari komponen identitas."""
+    value = 1469598103934665603
+    for char in "\u0001".join(str(p) for p in parts):
+        value ^= ord(char)
+        value = (value * 1099511628211) & 0xFFFFFFFFFFFFFFFF
+    return f"{value & 0xFFFFFFFFFF:010X}"[:8].lower()
+
+
+def content_pattern(row: dict) -> dict:
+    """Pola konten lengkap satu baris menu (teks·angka·simbol·komponen)."""
+    level = row["level"]
+    seed = int(_fingerprint(row["id"], row["menu_code"]), 16)
+    text_units = 24 + (seed % 72) * level              # panjang uraian (satuan kata)
+    numeric_value = 128 + (seed % 8192)                # besaran resource dasar
+    symbol = SYMBOL_CYCLE[seed % len(SYMBOL_CYCLE)]
+    unit = UNIT_CYCLE[(seed >> 3) % len(UNIT_CYCLE)]
+    components = COMPONENT_KINDS[(seed >> 5) % len(COMPONENT_KINDS)]
+    instances = 1 + (seed >> 7) % 48
+    replicas = 1 + (seed >> 9) % 3
+    status = STATUS_CYCLE[seed % len(STATUS_CYCLE)]
+    region = REGIONS[(seed >> 11) % len(REGIONS)] if "REGIONS" in globals() else "id-jkt-1"
+    checksum = _fingerprint(row["id"], row["path_label"])
+    pattern_text = (
+        f"{symbol} {row['menu_name']} · kode {row['menu_code']} · tingkat L{level} · "
+        f"uraian {text_units} kata · {numeric_value} {unit} × {instances} instance "
+        f"({replicas} replika) pada {components} @ {region} · status {status} · "
+        f"checksum sha256:{checksum}"
+    )
+    return {
+        "patternId": f"PAT-{row['id']}",
+        "fingerprint": _fingerprint(row["id"]),
+        "symbol": symbol,
+        "textUnits": text_units,
+        "numericValue": numeric_value,
+        "unit": unit,
+        "instances": instances,
+        "replicas": replicas,
+        "component": components,
+        "status": status,
+        "region": region,
+        "checksum": f"sha256:{checksum}",
+        "patternText": pattern_text,
+    }
+
+
+def long_instruction(row: dict) -> str:
+    """Uraian instruksi panjang unik per menu (ratusan kata, deterministik)."""
+    pat = content_pattern(row)
+    chain = row["path_label"].split(" > ")
+    domain_title = chain[0]
+    steps = [
+        f"Buka panel '{row['menu_name']}' ({row['menu_code']}) melalui sidebar Air Cloud atau rute `{row['route_path']}`.",
+        f"Periksa metrik {pat['numericValue']} {pat['unit']} dan {pat['instances']} instance pada komponen {pat['component']} sebelum mengubah konfigurasi.",
+        f"Simpan perubahan halaman langsung ke filemanajer folder `airz/` — salinan sistem berada di `airz/airsistem/console/menus/{row['group_slug']}`.",
+        f"Verifikasi integritas berkas dengan checksum {pat['checksum']} (SHA-256) lalu jalankan sinkronisasi shard File Manager.",
+        f" pantau status layanan '{pat['status']}' melalui dasbor Monitoring & Observability selama 15 menit pasca-perubahan.",
+        f"Untuk rollback, pulihkan titik pemulihan otomatis bertanda {pat['symbol']} dari partisi `airz/airsistem/backup`.",
+    ]
+    context = (
+        f"Modul ini adalah bagian dari domain {domain_title} dengan jejak navigasi "
+        f"'{' › '.join(chain)}'. Konsol menerapkan pola konten seragam: {pat['textUnits']} satuan kata uraian, "
+        f"{pat['replicas']} replika aktif, wilayah utama {pat['region']}, serta gema simbol {pat['symbol']} "
+        f"pada setiap komponen UI (kartu, tabel, badge, toolbar). Seluruh angka dihasilkan deterministik "
+        f"dari fingerprint {pat['fingerprint']} sehingga tampilan konsisten di perangkat mana pun."
+    )
+    normalized = [s.strip()[:1].upper() + s.strip()[1:] for s in steps]
+    body = "\n".join(f"{i + 1}. {s}" for i, s in enumerate(normalized))
+    return f"{context}\n\nProsedur operasional:\n{body}"
+
+
 def build_master_registry() -> list[dict]:
-    """Susun hierarki lengkap: 26 menu utama → 312 submenu → 4.056 leaf."""
+    """Susun hierarki lengkap: 26 menu utama → 312 submenu → 4.056 leaf.
+
+    Setiap baris diperkaya field pola konten (long_description, instruction,
+    component, symbol, pattern) agar satuan teks·angka·simbol·komponen berlaku
+    menyeluruh di registry, halaman JSON, filesystem airz/, dan konsol browser.
+    """
     rows: list[dict] = []
     mid = 0
     for m_idx, (slug, icon, title, desc, accent) in enumerate(AIR_CLOUD_MENUS):
@@ -156,6 +247,17 @@ def build_master_registry() -> list[dict]:
                     "path_label": f"{full_sub} > {leaf_title}", "short_description": leaf_desc,
                     "route_path": f"/aircloud/{slug}/{s_idx + 1:02d}/{leaf_title.lower().replace(' ', '-')}",
                 })
+    # Perkaya seluruh baris dengan pola konten (deterministik, tanpa RNG global)
+    for row in rows:
+        pat = content_pattern(row)
+        row["pattern"] = pat
+        row["symbol"] = pat["symbol"]
+        row["component"] = pat["component"]
+        row["status"] = pat["status"]
+        row["region"] = pat["region"]
+        row["checksum"] = pat["checksum"]
+        row["long_description"] = pat["patternText"]
+        row["instruction"] = long_instruction(row)
     return rows
 
 
@@ -471,6 +573,8 @@ def airsystem_tree() -> dict[str, list[tuple]]:
     # ---- Konsol Air Cloud: mirror hierarki menu sebagai pohon sistem ----
     # 26 menu utama → 12 submenu → leaf; setiap node adalah folder nyata berisi
     # file manifest/menu/page sehingga jumlah file mengikuti ribuan menu.
+    # Setiap berkas membawa pola konten lengkap (teks·angka·simbol·komponen).
+    row_by_id = {row["id"]: row for row in MASTER_ROWS}
     menu_dir: dict[str, str] = {}    # menu_id → path folder
     sub_dir: dict[str, str] = {}     # submenu id → path folder
     console_menus: dict[str, list[tuple]] = {}
@@ -478,6 +582,7 @@ def airsystem_tree() -> dict[str, list[tuple]]:
         if row["level"] == 1:
             path = "console/menus/" + row["group_slug"]
             menu_dir[row["id"]] = path
+            pat = row["pattern"]
             children = []
             for s_idx, (sub_title, _sd) in enumerate(SUB_TEMPLATES):
                 sub_id = row['id'].replace('M', 'S') + f"{s_idx + 1:02d}"
@@ -486,12 +591,19 @@ def airsystem_tree() -> dict[str, list[tuple]]:
                 children.append((norm_sub, "DIR",
                                 f"Submenu '{sub_title}' · {row['menu_name']}", None))
                 children.append((f"{norm_sub}.link", "FILE",
-                                f"Tautan registry ke {sub_id}", f"target={sub_dir[sub_id]}\ntitle={sub_title}\n"))
+                                f"Tautan registry ke {sub_id}",
+                                f"target={sub_dir[sub_id]}\ntitle={sub_title}\n"
+                                f"symbol={row_by_id[sub_id]['symbol']}\ncomponent={row_by_id[sub_id]['component']}\n"))
             children.append(("overview.md", "FILE", f"Ringkasan halaman {row['menu_name']}",
-                             f"# {row['icon']} {row['menu_name']}\n\n{row['short_description']}\n\nRoute: `{row['route_path']}`\n"))
+                             f"# {row['icon']} {row['menu_name']}\n\n{row['short_description']}\n\n"
+                             f"Pola konten: {pat['patternText']}\n\nRoute: `{row['route_path']}`\n\n"
+                             f"{row['instruction']}\n"))
+            children.append(("menu.pattern", "FILE", f"Pola konten menu {row['menu_name']}",
+                             "".join(f"{k}={v}\n" for k, v in pat.items() if k != "patternText")))
             console_menus[path] = children
         elif row["level"] == 2:
             path = sub_dir[row["id"]]
+            pat = row["pattern"]
             leaf_children = []
             for l_idx, (leaf_title, _ld) in enumerate(LEAF_TEMPLATES[:LEAF_PER_SUB]):
                 norm_leaf = re.sub(r"[^a-z0-9]+", "-", leaf_title.lower()).strip("-")
@@ -499,24 +611,54 @@ def airsystem_tree() -> dict[str, list[tuple]]:
                                       f"Sub-sub menu '{leaf_title}' · {row['menu_name']}", None))
                 leaf_children.append((f"{norm_leaf}.page.json", "FILE",
                                       f"Dokumen halaman {row['path_label']} > {leaf_title}",
-                                      '{"menuId":"%s","title":"%s","route":"%s"}\n' % (row["id"], leaf_title, row["route_path"])))
+                                      json.dumps({
+                                          "menuId": row["id"], "title": leaf_title,
+                                          "route": row["route_path"],
+                                          "pattern": {"symbol": row["symbol"], "component": row["component"],
+                                                      "status": row["status"], "checksum": row["checksum"]},
+                                      }, ensure_ascii=False) + "\n"))
             leaf_children.append(("submenu.conf", "FILE", f"Manifest submenu {row['menu_name']}",
-                                  CONF_TEMPLATE.format(comp=row["id"].lower())))
+                                  CONF_TEMPLATE.format(comp=row["id"].lower())
+                                  + f"symbol      = {pat['symbol']}\ncomponent   = {pat['component']}\n"
+                                    f"instances   = {pat['instances']}\nreplicas    = {pat['replicas']}\n"
+                                    f"numeric     = {pat['numericValue']} {pat['unit']}\n"
+                                    f"checksum    = {pat['checksum']}\n"))
             console_menus[path] = leaf_children
     tree.update(console_menus)
-    # Folder leaf tingkat-3: masing-masing berisi 4 file konfigurasi halaman
+    # Folder leaf tingkat-3: masing-masing berisi 5 file konfigurasi halaman
     for row in MASTER_ROWS:
         if row["level"] != 3:
             continue
+        pat = row["pattern"]
         base = sub_dir[row["parent_id"]]
         parts = row["path_label"].split(" > ")
         leaf_dir = f"{base}/" + re.sub(r"[^a-z0-9]+", "-", parts[-1].lower()).strip("-")
         tree[leaf_dir] = [
-            ("page.conf", "FILE", f"Konfigurasi halaman {row['path_label']}", CONF_TEMPLATE.format(comp=row["id"].lower())),
+            ("page.conf", "FILE", f"Konfigurasi halaman {row['path_label']}",
+             CONF_TEMPLATE.format(comp=row["id"].lower())
+             + f"symbol    = {pat['symbol']}\ncomponent = {pat['component']}\nstatus    = {pat['status']}\n"
+               f"region    = {pat['region']}\nunits     = {pat['numericValue']} {pat['unit']}\n"
+               f"instances = {pat['instances']}\nreplicas  = {pat['replicas']}\nchecksum  = {pat['checksum']}\n"),
             ("content.json", "FILE", "Blok konten halaman (schema air-cloud page)",
-             '{"blocks":[{"type":"hero"},{"type":"metrics"},{"type":"table"},{"type":"docs"}]}\n'),
-            ("actions.yaml", "FILE", "Aksi toolbar halaman", "actions:\n  - create\n  - refresh\n  - export\n  - delete\n"),
-            ("breadcrumbs.txt", "FILE", "Jejak navigasi sidebar", " > ".join(parts) + "\n"),
+             json.dumps({
+                 "blocks": [{"type": "hero"}, {"type": "metrics"}, {"type": "children"},
+                            {"type": "table"}, {"type": "pattern"}, {"type": "docs"}],
+                 "pattern": pat,
+                 "description": row["long_description"],
+             }, ensure_ascii=False) + "\n"),
+            ("actions.yaml", "FILE", "Aksi toolbar halaman",
+             f"actions:\n  - create\n  - refresh\n  - export\n  - delete\n"
+             f"pattern:\n  symbol: \"{pat['symbol']}\"\n  component: {pat['component']}\n"
+             f"  status: {pat['status']}\n  checksum: \"{pat['checksum']}\"\n"),
+            ("breadcrumbs.txt", "FILE", "Jejak navigasi sidebar", " › ".join(parts) +
+             f"\nsimbol={pat['symbol']} komponen={pat['component']} sidik={pat['fingerprint']}\n"),
+            ("pattern.md", "FILE", f"Pola konten satuan teks·angka·simbol·komponen {row['id']}",
+             f"# {pat['symbol']} Pola {row['id']} ({pat['patternId']})\n\n"
+             f"- Teks: {pat['textUnits']} satuan kata\n- Angka: {pat['numericValue']} {pat['unit']} × "
+             f"{pat['instances']} instance, {pat['replicas']} replika\n"
+             f"- Simbol: {pat['symbol']} · Komponen: {pat['component']}\n"
+             f"- Status: {pat['status']} @ {pat['region']} · Integritas: {pat['checksum']}\n\n"
+             f"> {pat['patternText']}\n"),
         ]
     return tree
 
