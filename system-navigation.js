@@ -61,7 +61,8 @@
   const SYSTEM_ROOTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache'];
   function routeFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
-    if (!hash || hash === 'top' || hash === 'overview') return 'system';
+    if (!hash || hash === 'top' || hash === 'overview') return 'file-manager';
+    if (hash.toLowerCase() === 'filemanajer/appp') return 'file-manager';
     if (hash === 'workspace') return 'projects';
     if (hash.startsWith('workspace/')) return workspaceRoutes.get(hash.slice('workspace/'.length)) || 'projects';
     if (hash.startsWith('manage/') || hash.startsWith('execute/')) {
@@ -89,6 +90,7 @@
 
   function filePathFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (hash.toLowerCase() === 'filemanajer/appp') return 'appp';
     if (!hash.startsWith('fileManager/')) return '';
     return hash.slice('fileManager/'.length).split('/').filter((part) => part && part !== '.' && part !== '..').join('/');
   }
@@ -295,5 +297,8 @@
     const ready = statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' && statuses['platform-view'] === 'ready';
     setHubState(ready ? 'Snapshot dan menu tersinkron' : 'Snapshot tersedia; menyelaraskan menu', ready ? 'ready' : 'loading');
   }
-  applyRoute(routeFromHash() || 'system', { updateUrl: false, scroll: false });
+  if (!window.location.hash || ['#top', '#overview'].includes(window.location.hash)) {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#filemanajer/appp`);
+  }
+  applyRoute(routeFromHash() || 'file-manager', { updateUrl: false, scroll: false });
 })();
