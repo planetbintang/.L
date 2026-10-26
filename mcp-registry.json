@@ -1,0 +1,155 @@
+{
+  "$schema": "./documentation/mcp-registry.schema.md",
+  "name": "planetbintang-mcp-registry",
+  "version": "2026.10.26-snaps-v1",
+  "description": "Registry permanen SNAP (System Nexus for Automated Programming & Storage) Planetbintang — konektor MCP, sumber kode/git, provider AI, dan pustaka data RAG. Identitas sistem: Logo brand + nama PLANETBINTANG + ikon folder adalah anchor tetap untuk seluruh operasi input/output.",
+  "brandAnchor": {
+    "logo": "./brand-logo-browser.png",
+    "logoSource": "./brand-logo.jpg",
+    "folderIcon": "./file-manager-icon.png",
+    "folderIcon3d": "./folder-3d-icon-browser.png",
+    "systemIcon": "./system-icon-512.png",
+    "wordmark": "PLANETBINTANG",
+    "tagline": "ROOT SYSTEM · SNAPS I/O + MCP HUB",
+    "pwaManifest": "./manifest.webmanifest"
+  },
+  "tokenPolicy": {
+    "storage": "localStorage browser per perangkat (prefix planetbintang.snaps.token.*), atau environment variable pada runtime lokal/server-side",
+    "neverCommit": true,
+    "redactionInLogs": true,
+    "environmentVariablePrefix": "PLANETBINTANG_SNAPS_",
+    "githubWorkflowSecret": "PLANETBINTANG_READ_TOKEN",
+    "guidance": "Gunakan token read-only scoped minimal. Token hanya dipakai oleh peminta (browser/runtime pemilik); frontend statis tidak pernah mengirim token ke pihak ketiga selain endpoint resmi provider terkait."
+  },
+  "connectors": [
+    {
+      "id": "git-github",
+      "kind": "mcp-source",
+      "title": "GitHub · Model Context Protocol",
+      "provider": "GitHub Official MCP Server",
+      "endpoint": "https://api.githubcopilot.com/mcp/",
+      "transport": "streamable-http",
+      "authType": "custom-token",
+      "headerName": "Authorization",
+      "headerScheme": "Bearer",
+      "scopes": ["repo:read", "metadata:read"],
+      "urls": {
+        "api": "https://api.github.com",
+        "raw": "https://raw.githubusercontent.com",
+        "installDocs": "https://github.com/github/github-mcp-server",
+        "marketplace": "https://github.com/marketplace/typescript-mcp-server"
+      },
+      "capabilities": ["list-repos", "read-tree", "read-blob", "search-code", "commit-metadata"],
+      "snapRole": "sumber kode utama; snapshot pohon file disimpan di data/trees/<id>/index.json",
+      "writeAccess": false,
+      "note": "Penulisan/commit memerlukan backend terautentikasi terpisah; registry ini default read-only."
+    },
+    {
+      "id": "git-gitlab",
+      "kind": "mcp-source",
+      "title": "GitLab · MCP & API sumber kode",
+      "provider": "GitLab",
+      "endpoint": "https://gitlab.com/api/v4",
+      "transport": "rest",
+      "authType": "custom-token",
+      "headerName": "PRIVATE-TOKEN",
+      "headerScheme": null,
+      "scopes": ["read_api", "read_repository"],
+      "urls": { "mcpDocs": "https://docs.gitlab.com/user/model_context_protocol/" },
+      "capabilities": ["list-projects", "read-tree", "merge-requests"],
+      "snapRole": "sumber kode alternatif lintas provider",
+      "writeAccess": false
+    },
+    {
+      "id": "git-bitbucket",
+      "kind": "mcp-source",
+      "title": "Bitbucket · API sumber kode",
+      "provider": "Atlassian Bitbucket",
+      "endpoint": "https://api.bitbucket.org/2.0",
+      "transport": "rest",
+      "authType": "custom-token",
+      "headerName": "Authorization",
+      "headerScheme": "Bearer",
+      "scopes": ["repository:read"],
+      "urls": {},
+      "capabilities": ["list-repositories", "read-tree"],
+      "snapRole": "sumber kode pola Atlassian/Jira",
+      "writeAccess": false
+    },
+    {
+      "id": "ai-google-aistudio",
+      "kind": "mcp-ai",
+      "title": "Google AI Studio · Gemini generateContent",
+      "provider": "Google AI (aistudio.google.com)",
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+      "defaultModel": "gemini-2.0-flash",
+      "transport": "rest-json",
+      "authType": "custom-token",
+      "queryParamName": "key",
+      "headerName": "x-goog-api-key",
+      "urls": {
+        "console": "https://aistudio.google.com/",
+        "apiKeys": "https://aistudio.google.com/apikey",
+        "mcpAdk": "https://google.github.io/adk-docs/mcp/",
+        "docs": "https://ai.google.dev/gemini-api/docs"
+      },
+      "capabilities": ["generate-code", "chat", "context-from-rag", "structured-output"],
+      "snapRole": "penginput otomatis kode aplikasi: hasil generateContent dialirkan ke File Manager /workspace sebagai draft",
+      "writeAccess": "local-draft-only"
+    },
+    {
+      "id": "rag-perpusnas",
+      "kind": "mcp-data",
+      "title": "Perpustakaan Nasional RI · katalog MARC21 XML",
+      "provider": "Perpusnas (perpusnas.go.id)",
+      "endpoint": "https://catalog.perpusnas.go.id/Command/search.php?op=Search&IndexMode=Keyword&LocalBranchCodes=INLIS_NEW&PageOffset=0&searchTerm={query}&outputFormat=marc21xml",
+      "transport": "xml-over-http",
+      "authType": "none-public",
+      "urls": { "catalog": "https://catalog.perpusnas.go.id/", "site": "https://www.perpusnas.go.id/" },
+      "capabilities": ["book-search", "metadata-harvest", "citation-seed"],
+      "snapRole": "sumber data RAG kepustakaan; korpus dibaca publik tanpa token",
+      "corsNote": "Endpoint Perpusnas tidak mengirim header CORS; dari browser gunakan jembatan server-side/proxy yang disetujui owner.",
+      "writeAccess": false
+    },
+    {
+      "id": "rag-archive-org",
+      "kind": "mcp-data",
+      "title": "Internet Archive · metadata & fulltext RAG",
+      "provider": "archive.org",
+      "endpoint": "https://archive.org/metadata/{identifier}",
+      "searchEndpoint": "https://archive.org/advancedsearch.php?q={query}&fl[]=identifier&fl[]=title&rows=20&output=json",
+      "transport": "rest-json",
+      "authType": "none-public",
+      "urls": { "details": "https://archive.org/details/{identifier}", "ia-api": "https://archive.org/services/docs/api/" },
+      "capabilities": ["item-search", "metadata-harvest", "fulltext-chunks", "embedding-seed"],
+      "snapRole": "arsip pusat data AI; chunk teks siap diimpor ke korpus RAG lokal",
+      "corsNote": "Endpoint archive.org mengizinkan CORS sehingga tes koneksi dapat berjalan langsung dari browser.",
+      "writeAccess": false
+    },
+    {
+      "id": "rag-libraryofcongress",
+      "kind": "mcp-data",
+      "title": "Library of Congress · catalog.linkeddata & search",
+      "provider": "loc.gov",
+      "endpoint": "https://www.loc.gov/search/?q={query}&fo=json",
+      "transport": "rest-json",
+      "authType": "none-public",
+      "urls": { "lcLinkedData": "https://id.loc.gov/authorities/" },
+      "capabilities": ["authority-search", "metadata-harvest"],
+      "snapRole": "otoritas bibliografis pelengkap korpus RAG",
+      "writeAccess": false
+    }
+  ],
+  "snapsRuntime": {
+    "bridgeLocal": "http://127.0.0.1:4173/snaps/status",
+    "bridgeDescription": "server.py menyediakan jembatan filesystem lokal read-only untuk runtime desktop; endpoint /snaps/* ditambahkan untuk mode terhubung penuh.",
+    "clientModule": "./snaps-bridge.js",
+    "uiRoute": "#snaps",
+    "storageKeys": {
+      "tokens": "planetbintang.snaps.tokens.v1",
+      "connections": "planetbintang.snaps.connections.v1",
+      "ragCorpus": "planetbintang.snaps.rag-corpus.v1",
+      "activity": "planetbintang.snaps.activity.v1"
+    }
+  }
+}

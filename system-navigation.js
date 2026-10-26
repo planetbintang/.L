@@ -21,6 +21,8 @@
     ['execute-run', 'execute'], ['execute-console', 'execute'], ['execute-jobs', 'execute'], ['execute-deploy', 'execute'], ['execute-logs', 'execute'],
   ];
   toolRoutes.forEach(([name, menu]) => { routes[name] = { group: 'tools', menu, hash: `#${menu}/${name.replace(`${menu}-`, '')}` }; });
+  // SNAPS — snap permanen sistem I/O (Logo + PLANETBINTANG + ikon folder) sebagai hub MCP/git/AI/RAG.
+  routes.snaps = { group: 'snaps', menu: 'code', hash: '#snaps' };
 
   const platformRoutes = [
     ['branches', 'code'], ['commits', 'code'], ['tags', 'code'],
@@ -67,6 +69,7 @@
     if (hash === 'enterprise/arch') return 'enterprise-arch';
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
+    if (hash === 'snaps') return 'snaps';
     return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;
   }
 
@@ -138,6 +141,7 @@
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     if (route.group === 'tools') window.PBSystemTools?.render(routeName);
+    if (route.group === 'snaps') window.PBSnaps?.render(routeName);
     // Sinkronkan halaman enterprise setelah URL final terpasang (mendukung hash & deep link).
     if (route.group === 'enterprise') window.PBEnterpriseMap?.applyHash?.(route.hash || window.location.hash || '');
     document.dispatchEvent(new CustomEvent('planetbintang:route-change', { detail: { name: routeName, group: route.group, menu: route.menu || '', view: route.view || '', changed } }));
