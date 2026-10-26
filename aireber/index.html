@@ -131,6 +131,16 @@
     </div>
     <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client · no API calls · local persistence only</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
   </div>
+  <script>
+    document.querySelectorAll('.reber-open-chat').forEach(function(button){
+      button.addEventListener('click',function(){
+        var tab=document.querySelector('[data-view-tab="chat"]');
+        if(tab) tab.click();
+        var input=document.querySelector('#reberChatInput, textarea[placeholder*="Tanyakan"]');
+        if(input){input.focus({preventScroll:false});}
+      });
+    });
+  </script>
   <script src="../local-file-store.js?v=20261026-aireber-store-v1"></script>
   <script src="./reber-chat-engine.js?v=20261026-chatbot-v1"></script>
   <script src="./reber-chat.js?v=20261026-chatbot-v1"></script>
