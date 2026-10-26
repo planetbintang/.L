@@ -128,6 +128,44 @@
       <div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>ID Resource</th><th>Wilayah</th><th>Status</th><th>Tag Biaya</th><th>Pembaruan</th></tr></thead><tbody>${rows}</tbody></table></div></section>`;
   }
 
+  // Lima blok fitur operasional minimum pada SETIAP halaman menu/submenu.
+  // Setiap kartu mengambil komponen airz/ bila tersedia dan menyediakan tindakan nyata.
+  function featureOperationsBlock(row) {
+    const source = airzItemsFor(row);
+    const chosen = source.slice(0, 5);
+    const fallbacks = [
+      { name: 'Validasi konfigurasi', function: 'Periksa struktur konfigurasi dan kesiapan modul.', kind: 'config' },
+      { name: 'Status dan kesehatan layanan', function: 'Tinjau status operasional modul yang sedang dibuka.', kind: 'health' },
+      { name: 'Audit aktivitas', function: 'Siapkan snapshot halaman untuk jejak pemeriksaan.', kind: 'audit' },
+      { name: 'Sinkronisasi sistem', function: 'Simpan representasi halaman ke penyimpanan airz/.', kind: 'sync' },
+      { name: 'Pemulihan dan cadangan', function: 'Buat salinan konfigurasi halaman sebelum perubahan.', kind: 'backup' },
+    ];
+    const cards = Array.from({ length: 5 }, (_, i) => {
+      const item = chosen[i];
+      const fallback = fallbacks[i];
+      const title = item ? item.name : fallback.name;
+      const description = item ? (item.function || ('Komponen airz/ · ' + item.path)) : fallback.function;
+      const meta = item ? item.path : ('Menu ' + row.menu_code + ' · ' + fallback.kind);
+      const actions = item
+        ? `<button type="button" class="ac-mini-btn" data-airz-view="${esc(item.id)}">Detail fitur</button>
+           <button type="button" class="ac-mini-btn" data-airz-save="${esc(item.id)}">Simpan fitur</button>
+           <button type="button" class="ac-mini-btn" data-airz-fm="${esc(item.path)}">Buka lokasi</button>`
+        : `<button type="button" class="ac-mini-btn" data-ac-save="${esc(row.id)}">Simpan halaman</button>
+           <button type="button" class="ac-mini-btn" data-ac-download="${esc(row.id)}">Unduh konfigurasi</button>
+           <button type="button" class="ac-mini-btn" data-ac-openfs="${esc(row.id)}">Buka File Manager</button>`;
+      return `<article class="ac-feature-row">
+        <div class="ac-feature-number">${String(i + 1).padStart(2, '0')}</div>
+        <div class="ac-feature-copy"><b>${esc(title)}</b><p>${esc(description)}</p><small>${esc(meta)}</small></div>
+        <div class="ac-feature-actions">${actions}</div>
+      </article>`;
+    }).join('');
+    return `<section class="ac-card ac-feature-stack-block">
+      <div class="ac-card-head"><h4>Fitur Operasional Menu Ini</h4>
+      <small>5 blok fitur minimum · disesuaikan dengan komponen airz/ dan ${esc(row.menu_name)}</small></div>
+      <div class="ac-feature-stack">${cards}</div>
+    </section>`;
+  }
+
   function docsBlock(row) {
     return `<section class="ac-card ac-docs"><div class="ac-card-head"><h4>Instruksi Sistem & Penyimpanan</h4><small>Kontrak halaman sesuai skema air_cloud_menu_descriptions</small></div>
       <p>${esc(row.instruction || `Modul '${row.menu_name}' termasuk registry Air Cloud ${fmt.format(REGISTRY.total || 0)} menu.`)}</p>
@@ -246,7 +284,7 @@
   }
 
   function pageHtml(row) {
-    return heroBlock(row) + metricsBlock(row) + childrenBlock(row)
+    return heroBlock(row) + metricsBlock(row) + featureOperationsBlock(row) + childrenBlock(row)
       + airzDomainBlock(row) + airzCatalogBlock(row) + tableBlock(row) + airzToolbarBlock(row) + docsBlock(row) + airzModalBlock();
   }
 
