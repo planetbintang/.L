@@ -102,6 +102,11 @@
   function encodePath(path) {
     return String(path).split('/').map(encodeURIComponent).join('/');
   }
+  function decodeRoutePath(path) {
+    return String(path || '').split('/').map(part => {
+      try { return decodeURIComponent(part); } catch { return part; }
+    }).join('/');
+  }
 
   const navEntries = [...document.querySelectorAll('.main-nav a, .nav-dropdown-menu a, .nav-dropdown-menu button')]
     .map((el, index) => ({
