@@ -124,3 +124,19 @@
 .aircloud-page .ac-nav-feature small{font-size:8px;line-height:1.45;color:#6c8099;overflow-wrap:anywhere}
 .aircloud-page .ac-nav-feature-more{position:sticky;bottom:0;padding:10px;border:1px solid #bfd4eb;border-radius:8px;background:#edf5ff;color:#175a9f;font-size:10px;font-weight:800;text-align:center;cursor:pointer}
 @media(max-width:760px){.aircloud-page .ac-nav-feature-list{max-height:360px}.aircloud-page .ac-nav-feature{padding:10px}}
+
+
+/* Katalog tindakan berkas airz/ — puluhan ribu entri dimuat bertahap. */
+.aircloud-page .ac-nav-feature-help{margin:0 0 8px;padding:0 4px;color:#71839a;font-size:9px;line-height:1.55}
+.aircloud-page .ac-nav-feature-list{display:grid;gap:7px;min-width:0}
+.aircloud-page .ac-nav-feature-card{display:grid;gap:5px;min-width:0;padding:7px;border:1px solid #dbe5ef;border-radius:8px;background:#fff}
+.aircloud-page .ac-nav-feature-card:hover{border-color:#9dbfe8;background:#fbfdff}
+.aircloud-page .ac-nav-feature-card .ac-nav-feature{display:grid;width:100%;min-width:0;gap:4px;padding:3px;border:0;border-radius:5px;background:transparent;text-align:left;color:#234361}
+.aircloud-page .ac-nav-feature-card .ac-nav-feature:hover{background:#f0f6fd}
+.aircloud-page .ac-nav-feature-name{font-size:10px;font-weight:750;line-height:1.4;overflow-wrap:anywhere}
+.aircloud-page .ac-nav-feature-card .ac-nav-feature small{color:#71849a;font-size:8px;line-height:1.5;overflow-wrap:anywhere}
+.aircloud-page .ac-nav-feature-actions{display:flex;gap:4px;flex-wrap:wrap}
+.aircloud-page .ac-nav-feature-actions button{min-height:25px;padding:4px 7px;border:1px solid #d4e0ed;border-radius:5px;background:#f6f9fd;color:#315678;font-size:8px;font-weight:700}
+.aircloud-page .ac-nav-feature-actions button:hover{border-color:#8bb8ef;background:#eaf3ff;color:#0f62fe}
+.aircloud-page .ac-nav-feature-more{width:100%;min-height:32px;margin-top:5px;padding:7px;border:1px dashed #aac3df;border-radius:7px;background:#f6faff;color:#1754a0;font-size:9px;font-weight:700}
+@media(max-width:760px){.aircloud-page .ac-layout{grid-template-columns:minmax(0,1fr)}.aircloud-page .ac-sidebar{position:relative;top:auto;max-height:55vh}.aircloud-page .ac-nav-feature-actions button{min-height:30px;font-size:9px}}
