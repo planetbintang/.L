@@ -815,3 +815,65 @@ body {
   padding-left: var(--body-gutter);
   padding-right: var(--body-gutter);
 }
+
+/* ============================================================
+   Final header harmonization (Oct 2026): clean, icon-free nav
+   aligned with mainstream site patterns — brand left, single
+   centered menu rail of equal-size text items, actions right.
+   ============================================================ */
+.topbar { height: 72px; }
+.main-nav { display: flex !important; grid-template-columns: none !important; align-items: center; justify-content: center; gap: clamp(4px, 1vw, 18px); width: 100%; min-width: 0; overflow: visible; }
+.main-nav .nav-dropdown,
+.main-nav > .main-nav-link { flex: 0 1 auto; min-width: 0; height: auto; }
+.main-nav .nav-dropdown > summary,
+.main-nav > .main-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  color: #b9c2d0;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color .16s ease, background-color .16s ease, border-color .16s ease;
+}
+.main-nav .nav-dropdown > summary:hover,
+.main-nav .nav-dropdown:hover > summary,
+.main-nav .nav-dropdown[open] > summary,
+.main-nav .nav-dropdown.has-active-route > summary,
+.main-nav > .main-nav-link:hover,
+.main-nav > .main-nav-link:focus-visible {
+  color: #fff;
+  background: rgba(30, 78, 180, .18);
+  border-color: rgba(61, 124, 255, .42);
+  box-shadow: none;
+  transform: none;
+}
+.main-nav .nav-dropdown > summary span { display: none !important; content: none !important; }
+.main-nav .nav-dropdown > summary::before,
+.main-nav .nav-dropdown > summary::after,
+.main-nav > .main-nav-link::before,
+.main-nav > .main-nav-link::after { display: none !important; content: none !important; }
+.main-nav > .main-nav-link b, .main-nav > .main-nav-link small { display: none; }
+.nav-dropdown-menu { top: calc(100% + 8px); }
+@media (max-width: 1100px) {
+  .main-nav { gap: 2px; }
+  .main-nav .nav-dropdown > summary,
+  .main-nav > .main-nav-link { font-size: 11px; padding: 0 9px; height: 32px; min-height: 32px; }
+}
+@media (max-width: 650px) {
+  .topbar { height: 64px; }
+  .main-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav .nav-dropdown > summary,
+  .main-nav > .main-nav-link { font-size: 10px; padding: 0 8px; height: 30px; min-height: 30px; }
+}
