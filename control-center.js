@@ -17,18 +17,18 @@
     ]},
     'system-integration': {title:'System Integration', eyebrow:'CONNECTORS / INTEGRATION MAP', description:'Peta integrasi untuk sumber kode, snapshot, workspace, File Manager, Air Cloud, dan Enterprise registry. Konektor eksternal ditampilkan sebagai pintasan sampai API terautentikasi disediakan.', cards:[
       ['GitHub repository','Repositori, branch, file, dan pull request dikelola melalui GitHub.', 'https://github.com/planetbintang/.L','Buka GitHub'],
-      ['Snapshot Hub','Lihat status data yang telah dipublikasikan; refresh tidak memicu workflow server.', '#hub','Buka Snapshot Hub'],
+      ['Snapshot Hub','Lihat status data yang telah dipublikasikan; refresh tidak memicu workflow server.', '#control/sync-deploy','Buka Sync & Deploy'],
       ['Air Cloud','Buka konsol layanan dan registry menu hierarkis.', '#aircloud','Buka Air Cloud'],
       ['Enterprise map','Katalog arsitektur dan submenu enterprise.', '#enterprise/map','Buka Enterprise']
     ]},
     'sync-deploy': {title:'Sync & Deployment Center', eyebrow:'DELIVERY / RELEASE CONTROL', description:'Pemeriksaan konsistensi sisi browser dan checklist publikasi. Dashboard statis tidak dapat menjalankan workflow GitHub atau menulis branch tanpa backend/token yang aman.', cards:[
-      ['Status snapshot','Memeriksa apakah snapshot tersedia pada sesi ini.', '#sync-status','Periksa status'],
+      ['Status snapshot','Memeriksa apakah snapshot tersedia pada sesi ini.', '#release-checklist','Periksa status & checklist'],
       ['GitHub Actions','Buka workflow repository untuk menjalankan atau memantau pipeline dengan izin GitHub.', 'https://github.com/planetbintang/.L/actions','Buka Actions'],
       ['GitHub Pages','Buka pengaturan deployment situs; publikasi tetap dikendalikan GitHub.', 'https://github.com/planetbintang/.L/deployments','Lihat deployments'],
       ['Checklist rilis','Validasi link aset, menu, route, privasi, dan perubahan sebelum merge.', '#release-checklist','Buka checklist']
     ]},
     'insights-growth': {title:'Insights & Growth', eyebrow:'ANALYTICS / PRODUCT GROWTH', description:'Ringkasan berbasis metadata snapshot dan catatan lokal untuk mengarahkan prioritas pengembangan tanpa mengarang metrik pengunjung.', cards:[
-      ['Ringkasan repositori','Hitung jumlah repositori yang tersedia pada snapshot saat ini.', '#insight-repos','Lihat ringkasan'],
+      ['Ringkasan repositori','Hitung jumlah repositori yang tersedia pada snapshot saat ini.', '#insight-notes','Lihat ringkasan'],
       ['Catatan prioritas','Simpan ide dan pekerjaan berikutnya pada browser ini.', '#insight-notes','Catatan lokal'],
       ['Katalog fitur','Jelajahi Feature Registry yang sudah terhubung ke sistem.', '#workspace/features','Buka Feature Registry'],
       ['Daftar domain','Lihat domain dan host yang terpetakan dari snapshot.', '#hosts','Buka peta domain']
@@ -146,7 +146,7 @@
   async function findMedia(id){const db=await openMediaDb();return await new Promise((resolve,reject)=>{const tx=db.transaction([MEDIA_STORE,MEDIA_BLOBS],'readonly');const metaReq=tx.objectStore(MEDIA_STORE).get(id);const blobReq=tx.objectStore(MEDIA_BLOBS).get(id);tx.oncomplete=()=>resolve(metaReq.result?{...metaReq.result,blob:blobReq.result?.blob}:null);tx.onerror=tx.onabort=()=>reject(tx.error||new Error('Gagal membaca berkas media'));});}
   async function showMediaPreview(id){
     const target=$('#controlMediaPreview');if(!target)return;
-    try{const item=await findMedia(id);if(!item)return;const url=URL.createObjectURL(item.blob);target.hidden=false;target.dataset.objectUrl=url;
+    try{const item=await findMedia(id);if(!item)return;if(target.dataset.objectUrl)URL.revokeObjectURL(target.dataset.objectUrl);const url=URL.createObjectURL(item.blob);target.hidden=false;target.dataset.objectUrl=url;
       let preview='<p><b>'+esc(item.name)+'</b> · '+esc(formatBytes(item.size))+'</p>';
       if(item.type.startsWith('image/'))preview+='<img alt="'+esc(item.name)+'" src="'+url+'">';
       else if(item.type.startsWith('video/'))preview+='<video controls preload="metadata" src="'+url+'"></video>';
