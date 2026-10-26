@@ -41,6 +41,7 @@
     const route = i%4===0 ? '#fileManager' : i%4===1 ? '#repositories' : i%4===2 ? '#workspace/features' : '#platform/overview';
     return {id:'SYS-'+String(i+1).padStart(5,'0'),name:category+' · Menu '+String(i+1).padStart(4,'0'),description:'Entri katalog sistem; buka sumber terkait untuk menelusuri data nyata.',category:'Menu sistem',path:route,source:'virtual-catalog'};
   });
+  const repositoryEntries = () => actualFiles().map((f,i)=>({id:'FILE-'+String(i+1).padStart(5,'0'),name:f.name||f.path||('File '+(i+1)),description:f.path||f.type||'Item dari indeks File Manager',category:'File Manager',path:'#fileManager',source:'repository-index',filePath:f.path||f.name||''}));
   const entries = [...navItems, ...blocks.map(b=>({...b,source:'layout-library'})), ...virtualMenus];
   const categories = ['Semua','Blok layout','Navigasi','Menu sistem',...new Set(blocks.map(b=>b.category))];
   let page=0, pageSize=24, query='', category='Semua';
@@ -48,8 +49,9 @@
   const actualFiles = () => window.PB_REPOSITORY_INDEX?.files || [];
   const getVisible = () => {
     const q=query.toLocaleLowerCase();
-    return entries.filter(x=>{
-      const type = x.source==='layout-library'?'Blok layout':x.source==='virtual-catalog'?'Menu sistem':'Navigasi';
+    const liveEntries = [...entries, ...repositoryEntries()];
+    return liveEntries.filter(x=>{
+      const type = x.source==='layout-library'?'Blok layout':x.source==='virtual-catalog'?'Menu sistem':x.source==='repository-index'?'File Manager':'Navigasi';
       const catMatch = category==='Semua'||category===type||category===x.category;
       return catMatch && (!q || [x.id,x.name,x.description,x.category,x.path].join(' ').toLocaleLowerCase().includes(q));
     });
@@ -59,9 +61,9 @@
     page=Math.min(page,maxPage);
     const slice=all.slice(page*pageSize,(page+1)*pageSize);
     $('#libraryCount').textContent=all.length.toLocaleString('id-ID');
-    $('#libraryTotal').textContent=entries.length.toLocaleString('id-ID');
+    $('#libraryTotal').textContent=(entries.length+actualFiles().length).toLocaleString('id-ID');
     $('#libraryFiles').textContent=actualFiles().length ? actualFiles().length.toLocaleString('id-ID') : 'Hubungkan';
-    $('#libraryGrid').innerHTML=slice.map(x=>'<article class="library-card"><small>'+esc(x.id)+' · '+esc(x.category)+'</small><strong>'+esc(x.name)+'</strong><small>'+esc(x.description)+'</small><small>Sumber: '+esc(x.source)+'</small><button type="button" data-open-path="'+esc(x.path)+'" data-menu-id="'+esc(x.id)+'">Buka / telusuri ↗</button></article>').join('')||'<div class="library-empty">Tidak ada item yang cocok. Ubah kata pencarian atau kategori.</div>';
+    $('#libraryGrid').innerHTML=slice.map(x=>'<article class="library-card"><small>'+esc(x.id)+' · '+esc(x.category)+'</small><strong>'+esc(x.name)+'</strong><small>'+esc(x.description)+'</small><small>Sumber: '+esc(x.source)+'</small><button type="button" data-open-path="'+esc(x.path)+'" data-menu-id="'+esc(x.id)+'"'+(x.filePath?' data-file-path="'+esc(x.filePath)+'"':'')+'>Buka / telusuri ↗</button></article>').join('')||'<div class="library-empty">Tidak ada item yang cocok. Ubah kata pencarian atau kategori.</div>';
     $('#libraryPage').textContent='Halaman '+(page+1)+' dari '+(maxPage+1);
     $('#libraryPrev').disabled=page===0; $('#libraryNext').disabled=page>=maxPage;
   }
@@ -75,6 +77,7 @@
   $('#libraryGrid').addEventListener('click',e=>{
     const btn=e.target.closest('[data-open-path]'); if(!btn)return;
     const target=btn.dataset.openPath;
+    if(btn.dataset.filePath) { window.dispatchEvent(new CustomEvent('pb:file-manager-navigate',{detail:{path:btn.dataset.filePath,source:'system-library',id:btn.dataset.menuId}})); }
     if(target.startsWith('#')) { location.hash=target.slice(1); }
     else location.hash='fileManager';
     const toast=$('#toast');
