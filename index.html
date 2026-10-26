@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="./air-cloud.css?v=20261026-aircloud-console-v1" />
     <link rel="stylesheet" href="./planetbintang-themes.css?v=20261026-header-fix-v3" />
     <link rel="stylesheet" href="./navigation-fix.css?v=20261026-dropdown-fix-v1" />
+    <link rel="stylesheet" href="./system-library.css?v=20261026-library-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -320,6 +321,8 @@
         <div class="host-grid" id="hostGrid"><div class="loading-card">Menyiapkan peta host…</div></div>
       </section>
 
+      <section class="section-block" id="system-library" data-system-page="system" aria-label="Blok layout dan katalog menu sistem"></section>
+
       <section class="privacy-note panel" id="systemPrivacy" data-system-page="system" aria-label="Deskripsi sistem dan penyimpanan">
         <span class="privacy-symbol" aria-hidden="true">i</span>
         <div><strong>Deskripsi sistem dan penyimpanan lokal</strong><p>Sistem terintegrasi untuk mengelola kode, workspace, repositori, review, delivery, insight, File Manager, dan aktivitas proyek dalam satu root Planetbintang. Data File Manager tersimpan pada IndexedDB dan preferensi/workspace tertentu pada localStorage browser ini. Kapasitas mengikuti kuota browser/perangkat, dan data lokal tidak otomatis tersinkron antarperangkat.</p></div>
@@ -341,6 +344,7 @@
     <script src="./system-tools.js?v=20261024-manage-execute-v1" defer></script>
     <script src="./system-navigation.js?v=20261026-aircloud-nav-v1" defer></script>
     <script src="./navigation-fix.js?v=20261026-dropdown-fix-v1" defer></script>
+    <script src="./system-library.js?v=20261026-library-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
     <script src="./snaps-bridge.js?v=20261026-snaps-storage-import-v3" defer></script>
