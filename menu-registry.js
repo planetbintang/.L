@@ -119,7 +119,6 @@
   }
   function setupGroups() {
     GROUPS.forEach(group => els.group.append(createOption(group, group)));
-    els.filter.append(createOption('Core Code Management & Repositories', 'Core Code Management & Repositories'));
     GROUPS.forEach(group => els.filter.append(createOption(group, group)));
   }
   function updateStats(filtered) {
