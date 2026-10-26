@@ -107,7 +107,28 @@
   }
   function formatBytes(n){if(!Number.isFinite(n))return 'ukuran tidak diketahui';if(n<1024)return n+' B';const units=['KB','MB','GB','TB'];let x=n/1024,i=0;while(x>=1024&&i<units.length-1){x/=1024;i++;}return x.toFixed(1)+' '+units[i];}
   function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-  window.PBControlCenter={render};
+  function activateRoute(key, push = false) {
+    const route = 'control-' + key;
+    if (!pages[key]) return;
+    if (push && location.hash !== '#control/' + key) history.pushState({ systemRoute: route }, '', '#control/' + key);
+    document.body.dataset.systemRoute = route;
+    document.querySelectorAll('[data-system-page]').forEach((node) => { node.hidden = node.dataset.systemPage !== 'control-center'; });
+    render(route);
+    document.dispatchEvent(new CustomEvent('planetbintang:route-change', {detail:{name:route,group:'control-center',menu:'control',changed:true}}));
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  document.querySelectorAll('a[href^="#control/"]').forEach((a) => a.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    activateRoute(a.getAttribute('href').slice('#control/'.length).split('/')[0], true);
+  }));
+  function syncDeepLink() {
+    const hash = location.hash.replace(/^#control\//, '').split('/')[0];
+    if (pages[hash]) activateRoute(hash, false);
+  }
+  window.addEventListener('hashchange', syncDeepLink);
+  window.addEventListener('popstate', syncDeepLink);
+  window.PBControlCenter={render,activateRoute};
   document.addEventListener('planetbintang:route-change',(e)=>{if(e.detail?.group==='control-center')render(e.detail.name);});
   document.addEventListener('planetbintang:snapshot-state',()=>{if(document.body.dataset.systemRoute?.startsWith('control-'))render(document.body.dataset.systemRoute);});
 })();
