@@ -63,7 +63,6 @@ function initControls(){
  $('#prevPage').addEventListener('click',()=>{if(page>0){page--;renderBlocks();$('#features').scrollIntoView({behavior:'smooth',block:'start'})}});
  $('#nextPage').addEventListener('click',()=>{if((page+1)*pageSize<filtered.length){page++;renderBlocks();$('#features').scrollIntoView({behavior:'smooth',block:'start'})}});
  $('#browseFeatures').addEventListener('click',()=>$('#features').scrollIntoView({behavior:'smooth'}));
- $('#exportFeatures').addEventListener('click',()=>{const csv=['ID,Nama Fitur,Modul,Kategori',...allFeatures.map(f=>[f.id,'"'+f.name.replace(/"/g,'""')+'"','"'+f.module.replace(/"/g,'""')+'"',f.category].join(','))].join('\r\n');const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='katalog-500-fitur-vendordomain.csv';a.click();URL.revokeObjectURL(url);showToast('Katalog 500 fitur diekspor sebagai CSV.')});
  $('#themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');try{localStorage.setItem('vendordomain-theme',document.body.classList.contains('dark')?'dark':'light')}catch(e){}});
  try{if(localStorage.getItem('vendordomain-theme')==='dark')document.body.classList.add('dark')}catch(e){}
  $('#collapseSidebar').addEventListener('click',()=>document.body.classList.toggle('collapse-sidebar'));
