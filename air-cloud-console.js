@@ -371,6 +371,17 @@
     void ensureStorageMirror();
   }
 
+  // Pilih menu utama berdasarkan slug sub URL (#aircloud/<slug>).
+  function selectSlug(slug) {
+    const wanted = String(slug || '').toLowerCase();
+    if (!wanted) return false;
+    const row = MENUS.find((menu) => String(menu.group_slug || '').toLowerCase() === wanted)
+      || [...BY_ID.values()].find((item) => String(item.group_slug || '').toLowerCase() === wanted);
+    if (!row || row.id === state.selectedId) return Boolean(row);
+    selectMenu(row.id);
+    return true;
+  }
+
   document.addEventListener('planetbintang:route-change', (event) => {
     if (event.detail?.group === 'aircloud') render();
   });
@@ -378,6 +389,7 @@
   window.PBAirCloud = {
     render,
     select: selectMenu,
+    selectSlug,
     registry: REGISTRY,
     saveCurrent: () => saveRowToAirz(BY_ID.get(state.selectedId)),
   };

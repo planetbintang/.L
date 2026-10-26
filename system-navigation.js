@@ -24,6 +24,17 @@
   // SNAPS — snap permanen sistem I/O (Logo + PLANETBINTANG + ikon folder) sebagai hub MCP/git/AI/RAG.
   routes.snaps = { group: 'snaps', menu: 'code', hash: '#snaps' };
 
+  // AIR CLOUD — konsol cloud berbasis registry menu hierarkis (air-cloud-console.js).
+  routes.aircloud = { group: 'aircloud', menu: 'aircloud', hash: '#aircloud' };
+  const airCloudMenuRoutes = [
+    'compute', 'vpc-infrastructure', 'storage', 'database', 'containers-kubernetes', 'ai-ml',
+    'analytics-data', 'security-compliance', 'iam-access', 'serverless-functions', 'devops-toolchain',
+    'monitoring-observability', 'network-edge-cdn', 'migration-hybrid', 'iot-device', 'quantum-computing',
+    'blockchain', 'billing-account', 'support-tickets', 'marketplace-partners', 'developer-tools',
+    'media-content', 'game-cloud', 'disaster-recovery', 'sustainability', 'datacenter-regions',
+  ];
+  airCloudMenuRoutes.forEach((slug) => { routes[`aircloud-${slug}`] = { group: 'aircloud', menu: 'aircloud', hash: `#aircloud/${slug}` }; });
+
   const platformRoutes = [
     ['branches', 'code'], ['commits', 'code'], ['tags', 'code'],
     ['milestones', 'plan'], ['roadmap', 'plan'],
@@ -70,6 +81,9 @@
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
     if (hash === 'snaps') return 'snaps';
+    // Air Cloud: #aircloud → konsol; #aircloud/<slug> → menu utama terkait.
+    if (hash === 'aircloud') return 'aircloud';
+    if (hash.startsWith('aircloud/')) return routes[`aircloud-${airCloudSlugFromHash()}`]?.group === 'aircloud' ? `aircloud-${airCloudSlugFromHash()}` : 'aircloud';
     return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;
   }
 
@@ -77,6 +91,13 @@
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
     if (!hash.startsWith('fileManager/')) return '';
     return hash.slice('fileManager/'.length).split('/').filter((part) => part && part !== '.' && part !== '..').join('/');
+  }
+
+  // Slug menu Air Cloud pada sub URL: #aircloud/<slug> (mis. #aircloud/compute).
+  function airCloudSlugFromHash() {
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (!hash.startsWith('aircloud/')) return '';
+    return hash.slice('aircloud/'.length).split('/')[0] || '';
   }
 
   function routeForWorkspaceView(view) { return workspaceRoutes.get(view) || 'projects'; }
@@ -119,6 +140,8 @@
     if (name === 'file-manager') route = { ...route, hash: `#fileManager${filePathFromHash() ? `/${filePathFromHash()}` : ''}` };
     // Sub URL arsitektur enterprise: #enterprise/arch/<slug> tetap pada rute enterprise-arch.
     if (name === 'enterprise-arch') route = { ...route, hash: `#enterprise/arch${archFromHash() ? `/${archFromHash()}` : ''}` };
+    // Sub URL Air Cloud: #aircloud/<slug> tetap pada grup aircloud dengan slug menu terpelihara.
+    if (routeName === 'aircloud') route = { ...route, hash: `#aircloud${airCloudSlugFromHash() ? `/${airCloudSlugFromHash()}` : ''}` };
     const changed = currentRoute !== routeName;
     currentRoute = routeName;
     document.body.dataset.systemRoute = routeName;
@@ -142,6 +165,12 @@
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     if (route.group === 'tools') window.PBSystemTools?.render(routeName);
     if (route.group === 'snaps') window.PBSnaps?.render(routeName);
+    // Air Cloud: render konsol lalu pilih menu sesuai slug sub URL (#aircloud/<slug>).
+    if (route.group === 'aircloud') {
+      window.PBAirCloud?.render?.();
+      const slug = airCloudSlugFromHash();
+      if (slug) window.PBAirCloud?.selectSlug?.(slug);
+    }
     // Sinkronkan halaman enterprise setelah URL final terpasang (mendukung hash & deep link).
     if (route.group === 'enterprise') window.PBEnterpriseMap?.applyHash?.(route.hash || window.location.hash || '');
     document.dispatchEvent(new CustomEvent('planetbintang:route-change', { detail: { name: routeName, group: route.group, menu: route.menu || '', view: route.view || '', changed } }));
