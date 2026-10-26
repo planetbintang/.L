@@ -201,7 +201,8 @@
   $category.innerHTML = categoryNames.map(c => '<option value="' + safe(c) + '">' + safe(c) + '</option>').join('');
 
   function getEntries() {
-    return [...navEntries, ...layoutEntries, ...systemMenus, ...repoEntries(), ...actualFileEntries()];
+    const files = actualFileEntries();
+    return [...navEntries, ...layoutEntries, ...systemMenus, ...repoEntries(), ...(files.length ? files : fallbackFileEntries())];
   }
   function entryType(x) {
     if (x.source === 'layout-library') return 'Blok layout';
