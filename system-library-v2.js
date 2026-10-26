@@ -267,9 +267,9 @@
     const slice = all.slice(page * pageSize, (page + 1) * pageSize);
     $('#libraryTotal', root).textContent = getEntries().length.toLocaleString('id-ID');
     $('#libraryCount', root).textContent = all.length.toLocaleString('id-ID');
-    $('#libraryFiles', root).textContent = actualFileEntries().length.toLocaleString('id-ID');
+    $('#libraryFiles', root).textContent = (actualFileEntries().length || fallbackFileEntries().length).toLocaleString('id-ID');
     $('#libraryRepos', root).textContent = repoEntries().length.toLocaleString('id-ID');
-    $('#librarySummary', root).textContent = 'Menampilkan ' + slice.length.toLocaleString('id-ID') + ' dari ' + all.length.toLocaleString('id-ID') + ' item · 600 blok UI · 2.400 menu virtual + rute & indeks repositori.';
+    $('#librarySummary', root).textContent = 'Menampilkan ' + slice.length.toLocaleString('id-ID') + ' dari ' + all.length.toLocaleString('id-ID') + ' item · 600 blok layout · 2.400 menu virtual · ' + repoEntries().length.toLocaleString('id-ID') + ' repo · jalur file dari snapshot indeks.';
     $('#libraryGrid', root).innerHTML = slice.map(item => '<article class="library-card' + (selected?.id === item.id ? ' is-selected' : '') + '">' +
       '<small>' + safe(item.id) + ' · ' + safe(item.category) + '</small><strong>' + safe(item.name) + '</strong>' +
       '<p>' + safe(item.description) + '</p><small class="library-source">' + safe(item.source) + (item.real ? ' · indeks nyata' : ' · pola katalog') + '</small>' +
