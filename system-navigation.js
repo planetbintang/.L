@@ -101,10 +101,34 @@
   }
 
   function routeForWorkspaceView(view) { return workspaceRoutes.get(view) || 'projects'; }
+  function positionDropdown(menu) {
+    if (!menu?.open) return;
+    const summary = menu.querySelector(':scope > summary');
+    const panel = menu.querySelector(':scope > .nav-dropdown-menu');
+    if (!summary || !panel) return;
+    const rect = summary.getBoundingClientRect();
+    const margin = 10;
+    const width = Math.min(360, window.innerWidth - margin * 2);
+    const panelHeight = Math.min(panel.scrollHeight || 420, window.innerHeight - 24);
+    let left = Math.min(Math.max(margin, rect.left), window.innerWidth - width - margin);
+    let top = rect.bottom + 8;
+    if (top + panelHeight > window.innerHeight - margin) {
+      const above = rect.top - panelHeight - 8;
+      if (above >= margin) top = above;
+      else top = Math.max(margin, window.innerHeight - panelHeight - margin);
+    }
+    panel.style.setProperty('--pb-menu-left', `${left}px`);
+    panel.style.setProperty('--pb-menu-top', `${top}px`);
+    panel.style.setProperty('--pb-menu-width', `${width}px`);
+    panel.classList.add('pb-dropdown-positioned');
+  }
   function setMenuOpen(menu, open) {
     if (!menu) return;
     menu.open = Boolean(open);
     menu.querySelector(':scope > summary')?.setAttribute('aria-expanded', String(Boolean(open)));
+    const panel = menu.querySelector(':scope > .nav-dropdown-menu');
+    if (open) requestAnimationFrame(() => positionDropdown(menu));
+    else panel?.classList.remove('pb-dropdown-positioned');
   }
   function closeMenus(except = null) {
     menuDetails.forEach((menu) => { if (menu !== except) setMenuOpen(menu, false); });
@@ -199,6 +223,8 @@
   document.addEventListener('click', (event) => {
     if (!event.target.closest('.nav-dropdown')) closeMenus();
   });
+  window.addEventListener('resize', () => menuDetails.forEach(positionDropdown), { passive: true });
+  window.addEventListener('scroll', () => menuDetails.forEach(positionDropdown), { passive: true, capture: true });
   document.addEventListener('planetbintang:workspace-view', (event) => {
     const next = routeForWorkspaceView(event.detail?.view);
     if (next !== currentRoute) applyRoute(next, { scroll: false });
