@@ -9,3 +9,35 @@
 
 /* GitHub Pages project-path and narrow-screen refinements. */
 .app-shell{width:min(100%,1680px);padding:clamp(8px,1.35vw,18px) clamp(8px,1.8vw,22px) 24px}.appbar{isolation:isolate}.theme-picker{display:inline-flex;align-items:center;gap:6px;padding:4px 7px;border:1px solid #fff;border-radius:6px;background:var(--soft);font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--muted)}.theme-picker select{max-width:125px;border:0;border-radius:4px;padding:4px 5px;background:rgba(255,255,255,.75);color:var(--ink);font-size:10px}.tree-link:focus-visible,.tabs button:focus-visible,.quiet-button:focus-visible,.primary-button:focus-visible,.theme-picker select:focus-visible,.back-link:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}.surface,.sidebar,.system-banner,.project-card{border-color:rgba(255,255,255,.96)}.side-open-fm{min-height:40px}.view-panel[hidden]{display:none!important}.fs-toolbar>*{min-height:36px}.fs-toolbar button:hover,.tree-link:hover{transform:translateY(-1px)}@media(max-width:1120px){.appbar{grid-template-columns:minmax(0,1fr) auto}.tabs{grid-column:1/-1;grid-row:2;order:3;justify-content:flex-start;overflow-x:auto;padding:2px 1px}.appbar-actions{grid-column:2;grid-row:1;flex-wrap:wrap}.sidebar{top:82px}.workbench{grid-template-columns:190px minmax(0,1fr)}}@media(max-width:780px){.appbar{grid-template-columns:1fr;gap:8px;position:relative;top:auto}.brand{grid-row:1}.appbar-actions{grid-column:1;grid-row:2;justify-content:space-between}.tabs{grid-column:1;grid-row:3}.tabs button{flex:0 0 auto}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.sidebar .side-label,.sidebar .side-rule,.sidebar .side-note{grid-column:1/-1}.system-banner{gap:10px}.fs-toolbar{align-items:stretch}.path-form{flex:1 1 100%}}@media(max-width:480px){.app-shell{padding:6px}.appbar-actions{gap:5px}.theme-picker{padding:3px 5px}.theme-picker select{max-width:105px}.back-link{height:32px}.system-banner h1{font-size:18px}.sidebar{grid-template-columns:1fr 1fr}.app-footer{line-height:1.45}.fs-layout{gap:8px}}
+
+/* ═══ AI REBER · CHAT REALTIME (tab Chat Reber) ═══════════════════════════ */
+.chat-shell{display:grid;gap:10px}
+.chat-log{height:min(62vh,560px);overflow:auto;display:flex;flex-direction:column;gap:10px;padding:12px;border:1px solid #e7f0fa;border-radius:10px;background:rgba(242,248,255,.7)}
+.reber-chat-message{max-width:min(860px,96%);border:1px solid #fff;border-radius:12px;background:var(--surface);box-shadow:0 6px 18px rgba(29,90,154,.08);padding:10px 13px}
+.reber-chat-message.user{align-self:flex-end;background:linear-gradient(135deg,#eaf4ff,#dcebff);border-color:#cfe4fb}
+.reber-chat-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.reber-chat-head b{font-size:11px;color:var(--accent)}
+.reber-chat-head small{margin-left:auto;color:var(--muted);font-size:9px}
+.reber-chat-avatar{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:linear-gradient(145deg,#246fe4,#59a8ff);color:#fff;font-size:10px;font-weight:900}
+.reber-chat-body{font-size:12.5px;line-height:1.6;color:var(--ink);overflow-wrap:anywhere}
+.reber-chat-body p{margin:0 0 8px}.reber-chat-body p:last-child{margin-bottom:0}
+.reber-chat-body h4{margin:10px 0 6px;font-size:13px;color:var(--accent)}
+.reber-chat-body ul{margin:4px 0 10px;padding-left:18px}
+.reber-chat-body li{margin:3px 0}
+.reber-chat-body a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.reber-chat-body code{background:var(--soft);border:1px solid #dcebfa;border-radius:4px;padding:1px 5px;font-size:11px}
+.reber-code{position:relative;margin:8px 0;border:1px solid #d5e6f8;border-radius:9px;background:#0d1b2e;overflow:hidden}
+.reber-code-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1)}
+.reber-code-head span{color:#8fc3ff;font:9px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase}
+.reber-copy{border:1px solid rgba(143,195,255,.4);background:rgba(23,110,232,.18);color:#bcdcff;border-radius:5px;padding:3px 9px;font-size:9px;font-weight:800}
+.reber-copy:hover{background:rgba(23,110,232,.35)}
+.reber-code code{display:block;padding:11px 12px;color:#dce8fa;font:11px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre;overflow-x:auto;background:none;border:0}
+.chat-compose{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.chat-compose textarea{width:100%;min-height:64px;resize:vertical;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.9);padding:11px 12px;font-size:12.5px;outline:none}
+.chat-compose textarea:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(60,145,240,.12)}
+.chat-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.chat-foot span{font-size:10px;color:var(--muted)}
+.chat-quick{display:flex;flex-wrap:wrap;gap:6px}
+.chat-quick button{border:1px solid #fff;border-radius:999px;background:var(--soft);padding:6px 11px;font-size:10px;font-weight:700;color:var(--muted)}
+.chat-quick button:hover{border-color:var(--accent2);color:var(--accent);transform:translateY(-1px)}
+@media(max-width:480px){.chat-log{height:52vh}.chat-compose{grid-template-columns:1fr}.chat-compose .primary-button{width:100%}}
