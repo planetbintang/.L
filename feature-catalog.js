@@ -6,8 +6,18 @@
   const state = { manifest: null, query: '', domain: 'all', extension: 'all', selected: null, visibleLimit: 120 };
   const fmt = new Intl.NumberFormat('id-ID');
   const domains = () => state.manifest?.domains || FALLBACK_DOMAINS;
-  const total = () => Number(state.manifest?.featureCount || 12288);
+  const enterpriseDomains = () => ['core-code', 'project-management', 'cicd-deployment', 'security-compliance', 'artifacts-packages', 'data-insights', 'organization-access', 'settings-integrations', 'audit-monitoring', 'billing-quotas'];
+  const allDomains = () => [...domains(), ...enterpriseDomains()];
+  const total = () => Number(state.manifest?.totalFeatureCount || ((state.manifest?.featureCount || 12288) + (state.manifest?.enterpriseFeatureCount || 4096)));
   const featureAt = (index) => {
+    if (index >= Number(state.manifest?.featureCount || 12288)) {
+      const enterpriseIndex = index - Number(state.manifest?.featureCount || 12288);
+      const domain = enterpriseDomains()[enterpriseIndex % enterpriseDomains().length];
+      const extension = EXTENSIONS[enterpriseIndex % EXTENSIONS.length];
+      const bucket = Math.floor(enterpriseIndex / 32);
+      const file = `${domain}-menu-${String(enterpriseIndex).padStart(4, '0')}.${extension}`;
+      return { index, id: `enterprise_${String(enterpriseIndex).padStart(4, '0')}`, domain, extension, bucket, file, path: `system_ext/enterprise/e${String(bucket).padStart(3, '0')}/${file}`, source: 'enterprise' };
+    }
     const domain = domains()[index % domains().length];
     const extension = EXTENSIONS[index % EXTENSIONS.length];
     const bucket = Math.floor(index / 32);
@@ -55,9 +65,9 @@
   }
   function setOptions() {
     const select = $('#featureDomainFilter'); if (!select) return;
-    domains().forEach((domain) => select.add(new Option(domain, domain)));
+    allDomains().forEach((domain) => select.add(new Option(domain, domain)));
     $('#featureTotal').textContent = fmt.format(total());
-    $('#featureDomainCount').textContent = fmt.format(domains().length);
+    $('#featureDomainCount').textContent = fmt.format(allDomains().length);
     $('#featureBucketCount').textContent = fmt.format(state.manifest?.bucketCount || 384);
   }
   async function init() {

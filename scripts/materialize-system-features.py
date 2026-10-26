@@ -17,6 +17,9 @@ DOMAINS = [
 ]
 EXTENSIONS = ("html", "css", "js", "nz")
 ADVANCED_FEATURES = ("charts", "diagrams", "documents", "design", "editor", "pipelines", "crud", "ai", "codeblocks", "documentation", "integrations", "management", "branding", "icons", "live-preview", "device-console")
+ENTERPRISE_DOMAINS = ("core-code", "project-management", "cicd-deployment", "security-compliance", "artifacts-packages", "data-insights", "organization-access", "settings-integrations", "audit-monitoring", "billing-quotas")
+ENTERPRISE_BUCKETS = 128
+ENTERPRISE_PER_BUCKET = 32
 DEFAULT_BUCKETS = 384
 DEFAULT_PER_BUCKET = 32
 
@@ -73,7 +76,7 @@ def main() -> int:
         parser.error("--buckets dan --per-bucket harus lebih besar dari nol")
     total = args.buckets * args.per_bucket
     if args.dry_run:
-        print(f"would materialize {total + len(ADVANCED_FEATURES)} feature files under {args.output}")
+        print(f"would materialize {total + len(ADVANCED_FEATURES) + ENTERPRISE_BUCKETS * ENTERPRISE_PER_BUCKET} feature files under {args.output}")
         return 0
     written = 0
     for bucket, name, content in iter_features(args.buckets, args.per_bucket):
@@ -88,6 +91,16 @@ def main() -> int:
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(feature_body(feature, extension, 20000 + index), encoding="utf-8")
         written += 1
+    for bucket in range(ENTERPRISE_BUCKETS):
+        for offset in range(ENTERPRISE_PER_BUCKET):
+            index = bucket * ENTERPRISE_PER_BUCKET + offset
+            domain = ENTERPRISE_DOMAINS[index % len(ENTERPRISE_DOMAINS)]
+            extension = EXTENSIONS[index % len(EXTENSIONS)]
+            name = f"{domain}-menu-{index:04d}.{extension}"
+            target = args.output / "enterprise" / f"e{bucket:03d}" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(feature_body(domain, extension, 30000 + index), encoding="utf-8")
+            written += 1
     print(f"materialized {written} feature files under {args.output}")
     return 0
 

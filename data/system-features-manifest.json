@@ -3,6 +3,8 @@
   "system": "planetbintang",
   "root": "system_ext/features",
   "featureCount": 12288,
+  "enterpriseFeatureCount": 4096,
+  "totalFeatureCount": 16384,
   "bucketCount": 384,
   "featuresPerBucket": 32,
   "domains": [
@@ -15,6 +17,7 @@
   "execution": "disabled-by-default",
   "loading": "lazy-by-bucket",
   "advancedFeatureCount": 16,
+  "enterpriseRoot": "system_ext/enterprise",
   "advancedFeaturesRoot": "sys/planetbintang/advanced",
   "systemExtMirror": "sys/system_ext",
   "source": "file-manager.js generated virtual filesystem"

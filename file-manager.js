@@ -24,7 +24,7 @@
     pro: { desc: 'Folder konfigurasi profil sistem', items: 2 },
     config: { desc: 'Konfigurasi terpusat sistem & layanan', items: 2 },
     cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
-    system_ext: { desc: 'Filesystem kode virtual Planetbintang: katalog 12.288 fitur + modul sistem', items: 16596 },
+    system_ext: { desc: 'Filesystem kode virtual Planetbintang: katalog fitur + enterprise map', items: 20692 },
     workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
   };
   const GENERATED_EXTENSIONS = ['html', 'css', 'js', 'nz'];
@@ -35,6 +35,9 @@
   const FEATURE_BUCKETS = 384;
   const FEATURES_PER_BUCKET = 32;
   const ADVANCED_FEATURES = ['charts', 'diagrams', 'documents', 'design', 'editor', 'pipelines', 'crud', 'ai', 'codeblocks', 'documentation', 'integrations', 'management', 'branding', 'icons', 'live-preview', 'device-console'];
+  const ENTERPRISE_DOMAINS = ['core-code', 'project-management', 'cicd-deployment', 'security-compliance', 'artifacts-packages', 'data-insights', 'organization-access', 'settings-integrations', 'audit-monitoring', 'billing-quotas'];
+  const ENTERPRISE_BUCKETS = 128;
+  const ENTERPRISE_FILES_PER_BUCKET = 32;
   function generatedCode(path, extension, index) {
     const name = basename(path);
     if (extension === 'html') return `<!-- Planetbintang virtual system file ${index} -->\n<section data-system-file="${name}">\n  <h1>${name}</h1>\n  <p>Generated interface contract for the Planetbintang filesystem.</p>\n</section>`;
@@ -69,6 +72,7 @@
     if (path === 'system_ext') return [
       { path: 'system_ext/catalog', type: 'directory', mode: '040755', function: '4.096 file kode virtual dalam 256 bucket lazy-load' },
       { path: 'system_ext/features', type: 'directory', mode: '040755', function: '12.288 fitur virtual · satu fitur = satu file · 24 domain sistem' },
+      { path: 'system_ext/enterprise', type: 'directory', mode: '040755', function: '4.096 enterprise-map feature files · 10 domain platform' },
       { path: 'system_ext/modules', type: 'directory', mode: '040755', function: 'Modul fitur: core, UI, data, API, AI, pipeline, dan integrasi' },
       { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext' },
       { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
@@ -95,6 +99,18 @@
       const extension = GENERATED_EXTENSIONS[index % GENERATED_EXTENSIONS.length];
       const file = `${domain}-feature-${String(index).padStart(5, '0')}.${extension}`;
       return { path: `${path}/${file}`, type: 'file', mode: '0100644', size: generatedFeatureCode(domain, extension, index).length, sizeKnown: true, function: `Feature ${index}: ${domain} · ${extension.toUpperCase()}`, codeContent: generatedFeatureCode(domain, extension, index) };
+    });
+    if (path === 'system_ext/enterprise') return Array.from({ length: ENTERPRISE_BUCKETS }, (_, bucket) => ({
+      path: `system_ext/enterprise/e${String(bucket).padStart(3, '0')}`, type: 'directory', mode: '040755', items: ENTERPRISE_FILES_PER_BUCKET,
+      function: `Enterprise bucket ${bucket}: ${ENTERPRISE_FILES_PER_BUCKET} menu feature files`,
+    }));
+    const enterpriseBucketMatch = path.match(/^system_ext\/enterprise\/e(\d{3})$/);
+    if (enterpriseBucketMatch) return Array.from({ length: ENTERPRISE_FILES_PER_BUCKET }, (_, offset) => {
+      const index = Number(enterpriseBucketMatch[1]) * ENTERPRISE_FILES_PER_BUCKET + offset;
+      const domain = ENTERPRISE_DOMAINS[index % ENTERPRISE_DOMAINS.length];
+      const extension = GENERATED_EXTENSIONS[index % GENERATED_EXTENSIONS.length];
+      const file = `${domain}-menu-${String(index).padStart(4, '0')}.${extension}`;
+      return { path: `${path}/${file}`, type: 'file', mode: '0100644', size: generatedFeatureCode(domain, extension, 30000 + index).length, sizeKnown: true, function: `Enterprise menu feature ${index}: ${domain}`, codeContent: generatedFeatureCode(domain, extension, 30000 + index) };
     });
     if (path === 'system_ext/modules') return GENERATED_MODULES.map((module) => ({
       path: `system_ext/modules/${module}`, type: 'directory', mode: '040755', items: GENERATED_FILES_PER_BUCKET,
