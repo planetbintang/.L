@@ -50,7 +50,7 @@
     if (hash.startsWith('workspace/')) return workspaceRoutes.get(hash.slice('workspace/'.length)) || 'projects';
     if (hash.startsWith('manage/') || hash.startsWith('execute/')) {
       const [group, page] = hash.split('/');
-      const route = `${group}-${page}`;
+      const route = group === 'manage' && page === 'menu-registry' ? 'menu-registry' : `${group}-${page}`;
       return ['tools', 'menu-registry'].includes(routes[route]?.group) ? route : null;
     }
     if (hash.startsWith('platform/')) {
