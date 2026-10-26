@@ -221,7 +221,7 @@
     } else {
       const path = String(item.path || '#overview');
       if (path.startsWith('#fileManager/')) {
-        const folder = decodeURIComponent(path.slice('#fileManager/'.length).split('/').map(part => part.replace(/%2F/gi, '/')).join('/'));
+        const folder = decodeRoutePath(path.slice('#fileManager/'.length));
         window.PBSystemNavigation?.navigate?.('file-manager');
         location.hash = 'fileManager/' + encodePath(folder);
         window.PBFileManager?.setPath?.(folder);
