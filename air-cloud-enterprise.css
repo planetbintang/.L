@@ -165,3 +165,16 @@
   .aircloud-page .ac-sidebar-controls button{flex:1 1 calc(50% - 6px)}
 }
 @media(prefers-reduced-motion:reduce){.aircloud-page .ac-shell{animation:none}}
+
+
+/* Lima blok fitur vertikal pada setiap halaman Air Cloud, mengikuti pola kartu Vendor Domain. */
+.aircloud-page .ac-feature-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}
+.aircloud-page .ac-feature-row{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(150px,auto);align-items:center;gap:12px;padding:13px;border:1px solid #dbe4ee;border-radius:10px;background:#fff;transition:border-color .15s,background .15s}
+.aircloud-page .ac-feature-row:hover{border-color:#8bb9f4;background:#f8fbff}
+.aircloud-page .ac-feature-number{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:#eaf2ff;color:#0f62fe;font:700 11px ui-monospace,monospace}
+.aircloud-page .ac-feature-copy{min-width:0}
+.aircloud-page .ac-feature-copy b{display:block;color:#254363;font-size:12px;line-height:1.5}
+.aircloud-page .ac-feature-copy p{margin:3px 0;color:#5c7088;font-size:11px;line-height:1.55}
+.aircloud-page .ac-feature-copy small{display:block;overflow-wrap:anywhere;color:#71859a;font-size:9px}
+.aircloud-page .ac-feature-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:5px}
+@media(max-width:760px){.aircloud-page .ac-feature-row{grid-template-columns:30px minmax(0,1fr)}.aircloud-page .ac-feature-actions{grid-column:2;justify-content:flex-start}}
