@@ -1,0 +1,39 @@
+/* Enterprise Menu Registry — responsive, local-first UI */
+.menu-registry-page{max-width:1480px;margin:0 auto;padding:28px clamp(16px,4vw,64px) 60px}
+.menu-registry-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}
+.menu-registry-stats article{border:1px solid var(--ink);padding:16px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.menu-registry-stats small{font:9px var(--mono);letter-spacing:.1em;color:#707070}
+.menu-registry-stats b{font-size:28px;letter-spacing:-.05em}
+.menu-registry-stats span{font-size:10px;color:#737373}
+.menu-registry-form{padding:22px;margin:14px 0}
+.menu-registry-form-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
+.menu-registry-form-heading .eyebrow{margin-bottom:6px}
+.menu-registry-form-heading h3{font-size:22px;letter-spacing:-.04em;margin:0}
+.menu-registry-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.menu-registry-form-heading,.menu-registry-actions,.menu-registry-form>.workspace-note{grid-column:1/-1}
+.menu-registry-form label,.menu-registry-toolbar label{display:flex;flex-direction:column;gap:7px;font-size:10px;color:#555}
+.menu-registry-form input:not([type=checkbox]),.menu-registry-form select,.menu-registry-toolbar input,.menu-registry-toolbar select{width:100%;min-width:0;min-height:40px;border:1px solid var(--line);border-radius:0;background:#fff;padding:9px 10px;color:#111;font-size:11px}
+.menu-registry-form .menu-registry-check{flex-direction:row;align-items:center;gap:8px;align-self:center;color:#111}
+.menu-registry-form .menu-registry-check input{width:16px;height:16px}
+.menu-registry-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.menu-registry-toolbar{padding:14px;display:grid;grid-template-columns:minmax(180px,1.5fr) minmax(170px,1fr) minmax(140px,.7fr) auto;gap:12px;align-items:end}
+.menu-registry-toolbar .menu-registry-actions{grid-column:auto;justify-content:flex-end}
+.menu-registry-import{position:relative;display:inline-flex!important;justify-content:center;align-items:center;min-height:38px;border:1px solid var(--line);padding:9px 12px;background:#fff;color:#222!important;cursor:pointer;white-space:nowrap}
+.menu-registry-import input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.menu-registry-results{display:flex;justify-content:space-between;gap:12px;margin:16px 1px 10px;font:10px var(--mono);color:#696969}
+.menu-registry-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.menu-registry-card{border:1px solid var(--line);padding:16px;min-width:0;background:#fff;display:flex;flex-direction:column;gap:10px}
+.menu-registry-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.menu-registry-card h3{font-size:14px;line-height:1.4;margin:0;overflow-wrap:anywhere}
+.menu-registry-card p{font-size:11px;line-height:1.6;color:#666;margin:0;overflow-wrap:anywhere}
+.menu-registry-card code{font:10px var(--mono);overflow-wrap:anywhere;color:#555}
+.menu-registry-meta{display:flex;flex-wrap:wrap;gap:5px}
+.menu-registry-tag{display:inline-flex;padding:5px 7px;background:#f3f3f0;border:1px solid #e2e2df;font:9px var(--mono);color:#555;max-width:100%;overflow-wrap:anywhere}
+.menu-registry-tag.inactive{background:#fff0ed;border-color:#f0c6bd;color:#8a2f20}
+.menu-registry-card-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+.menu-registry-card-actions button{border:1px solid var(--line);background:#fff;padding:7px 9px;font-size:10px;cursor:pointer}
+.menu-registry-card-actions button:hover{border-color:#111;background:var(--soft)}
+.menu-registry-card-actions button.danger{color:#8a2f20}
+.menu-registry-empty{grid-column:1/-1;padding:35px 15px;border:1px dashed #b8b8b8;text-align:center;color:#666;font-size:12px}
+@media(max-width:850px){.menu-registry-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.menu-registry-toolbar .menu-registry-actions{grid-column:1/-1;justify-content:flex-start}.menu-registry-form{grid-template-columns:repeat(2,minmax(0,1fr))}.menu-registry-list{grid-template-columns:1fr}}
+@media(max-width:560px){.menu-registry-page{padding:18px 12px 42px}.menu-registry-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.menu-registry-stats article{padding:12px}.menu-registry-stats b{font-size:24px}.menu-registry-form{padding:14px;grid-template-columns:1fr}.menu-registry-toolbar{grid-template-columns:1fr}.menu-registry-toolbar .menu-registry-actions{grid-column:auto}.menu-registry-results{flex-direction:column;font-size:9px}.menu-registry-card{padding:13px}}

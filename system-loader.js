@@ -1,0 +1,12 @@
+(function(){"use strict";var root=document.getElementById("pb-system-loader"),bar=root&&root.querySelector(".pb-loader-progress"),status=root&&root.querySelector("[data-pb-loader-status]"),percent=root&&root.querySelector("[data-pb-loader-percent]"),nav=document.getElementById("pb-navigation-progress"),progress=8,finished=false,started=Date.now(),timer;
+function setProgress(n,label){progress=Math.max(progress,Math.min(100,Math.max(0,Number(n)||0)));if(bar)bar.style.width=progress+"%";if(percent)percent.textContent=Math.round(progress)+"%";if(status&&label)status.textContent=String(label)}
+function hide(){if(finished)return;finished=true;setProgress(100,"Siap");clearInterval(timer);setTimeout(function(){if(root){root.classList.add("pb-loader-leaving");setTimeout(function(){root.hidden=true;root.setAttribute("aria-hidden","true")},360)}},120)}
+function show(label){if(!root)return;finished=false;root.hidden=false;root.removeAttribute("aria-hidden");root.classList.remove("pb-loader-leaving");setProgress(8,label||"Memuat sistem")}
+function loadModule(url){return import(url).catch(function(e){console.error("[PBLoader] Module gagal dimuat",url,e);throw e})}
+window.PBLoader={hide:hide,show:show,setProgress:setProgress,loadModule:loadModule};
+timer=setInterval(function(){if(finished)return;var elapsed=Date.now()-started;if(progress<88)setProgress(Math.min(88,progress+(elapsed<900?7:elapsed<2400?3:1)),"Menyiapkan sistem")},180);
+window.addEventListener("load",function(){setProgress(96,"Menyiapkan antarmuka");setTimeout(hide,220)},{once:true});setTimeout(function(){if(!finished)hide()},9000);
+if(nav){var nt;function start(){nav.hidden=false;nav.style.opacity="1";nav.style.width="70%";clearTimeout(nt)}function done(){nav.style.width="100%";nav.style.opacity="0";nt=setTimeout(function(){nav.hidden=true;nav.style.width="0";nav.style.opacity="1"},260)}
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target==="_blank"||a.hasAttribute("download"))return;try{var u=new URL(a.href,location.href);if(u.origin===location.origin&&u.href!==location.href&&!u.hash)start()}catch(_){}});
+addEventListener("pagehide",done);addEventListener("pageshow",done);document.addEventListener("submit",function(e){if(e.target.tagName==="FORM"&&!e.target.hasAttribute("data-pb-no-progress"))start()})}
+})();

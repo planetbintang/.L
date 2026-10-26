@@ -12,9 +12,15 @@
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./platform-ui.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./luxury-theme.css?v=20261024-luxury-home-v1" />
+    <link rel="stylesheet" href="./system-loader.css?v=20261026-system-loader-v1" />
+    <link rel="stylesheet" href="./media-library.css?v=20261026-media-library-v1" />
+    <link rel="stylesheet" href="./menu-registry.css?v=20261026-menu-registry-v1" />
+    <link rel="stylesheet" href="./github-push.css?v=20261026-github-push-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
+    <div id="pb-system-loader" role="status" aria-live="polite" aria-label="Memuat sistem Planetbintang"><div class="pb-loader-card"><div class="pb-loader-mark" aria-hidden="true">PB</div><h1 class="pb-loader-title">PLANETBINTANG</h1><p class="pb-loader-subtitle">Menyiapkan ruang sistem Anda</p><div class="pb-loader-track" aria-hidden="true"><div class="pb-loader-progress"></div></div><div class="pb-loader-status"><span><i class="pb-loader-pulse" aria-hidden="true"></i><span data-pb-loader-status>Memulai sistem</span></span><span data-pb-loader-percent>8%</span></div></div></div>
+    <div id="pb-navigation-progress" hidden aria-hidden="true"></div>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
     <header class="topbar" id="top">
       <a class="brand" href="#overview" aria-label="Kembali ke halaman utama Planetbintang" data-system-route="system">
@@ -28,7 +34,7 @@
         <details class="nav-dropdown" data-menu="review"><summary>Review <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu review dan kolaborasi"><a href="#platform/pull-requests" data-system-route="pull-requests"><b>Pull Requests</b><small>Review dari GitHub</small></a><a href="#platform/merge-requests" data-system-route="merge-requests"><b>Merge Requests</b><small>Alur lintas provider</small></a><a href="#platform/review-queue" data-system-route="review-queue"><b>Review queue</b><small>Antrian review per repo</small></a><a href="#platform/discussions" data-system-route="discussions"><b>Discussions</b><small>Diskusi provider</small></a><a href="#platform/activity" data-system-route="activity"><b>Activity</b><small>Aktivitas commit snapshot</small></a></div></details>
         <details class="nav-dropdown" data-menu="delivery"><summary>Delivery <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu delivery"><a href="#platform/pipelines" data-system-route="pipelines"><b>Pipelines</b><small>GitHub Actions dan CI</small></a><a href="#platform/deployments" data-system-route="deployments"><b>Deployments</b><small>Pages dan deployment</small></a><a href="#platform/environments" data-system-route="environments"><b>Environments</b><small>Target deployment provider</small></a><a href="#platform/packages" data-system-route="packages"><b>Packages</b><small>Registry source</small></a><a href="#platform/security" data-system-route="security"><b>Security</b><small>Status pemindaian sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="insights"><summary>Insights <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu insights"><a href="#workspace/analytics" data-system-route="analytics"><b>Analytics</b><small>Metrik snapshot agregat</small></a><a href="#platform/integrations" data-system-route="integrations"><b>Integrations</b><small>GitHub, GitLab, Bitbucket</small></a><a href="#hosts" data-system-route="hosts"><b>Domains & hosts</b><small>Domain publik terpetakan</small></a><a href="#workspace/ai" data-system-route="ai"><b>AI Assistant</b><small>Ruang kerja AI lokal</small></a><button type="button" data-sync-hub-trigger><b>Snapshot Hub</b><small>Refresh snapshot bersama</small></button><a href="./aireber/" class="nav-aireber-link"><b>AI Reber</b><small>Studio statis · simpan lokal</small></a></div></details>
-        <details class="nav-dropdown" data-menu="manage"><summary>Manage <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu pengelolaan"><a href="#manage/files" data-system-route="manage-files"><b>Files</b><small>Baca, tulis, tambah, edit, hapus</small></a><a href="#manage/storage" data-system-route="manage-storage"><b>Storage</b><small>Cadangan dan katalog workspace</small></a><a href="#manage/settings" data-system-route="manage-settings"><b>Settings</b><small>Preferensi penyimpanan lokal</small></a><a href="#manage/access" data-system-route="manage-access"><b>Access</b><small>Kebijakan baca dan tulis</small></a><a href="#manage/activity" data-system-route="manage-activity"><b>Activity</b><small>Riwayat perubahan File Manager</small></a></div></details>
+        <details class="nav-dropdown" data-menu="manage"><summary>Manage <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu pengelolaan"><a href="#manage/files" data-system-route="manage-files"><b>Files</b><small>Baca, tulis, tambah, edit, hapus</small></a><a href="#manage/storage" data-system-route="manage-storage"><b>Storage</b><small>Cadangan dan katalog workspace</small></a><a href="#manage/settings" data-system-route="manage-settings"><b>Settings</b><small>Preferensi penyimpanan lokal</small></a><a href="#manage/access" data-system-route="manage-access"><b>Access</b><small>Kebijakan baca dan tulis</small></a><a href="#manage/activity" data-system-route="manage-activity"><b>Activity</b><small>Riwayat perubahan File Manager</small></a><a href="#media" data-system-route="media-library"><b>Media Library</b><small>Gambar, film, video & dokumen besar</small></a><a href="#manage/menu-registry" data-system-route="menu-registry"><b>Menu Registry</b><small>Katalog enterprise, tambah & kelola menu</small></a></div></details>
         <details class="nav-dropdown" data-menu="execute"><summary>Execute <span>⌄</span></summary><div class="nav-dropdown-menu" aria-label="Menu eksekusi"><a href="#execute/run" data-system-route="execute-run"><b>Run</b><small>Jalankan aksi terkontrol</small></a><a href="#execute/console" data-system-route="execute-console"><b>Console</b><small>Perintah allowlist sistem</small></a><a href="#execute/jobs" data-system-route="execute-jobs"><b>Jobs</b><small>Antrean pekerjaan lokal</small></a><a href="#execute/deploy" data-system-route="execute-deploy"><b>Deploy</b><small>Checklist publikasi provider</small></a><a href="#execute/logs" data-system-route="execute-logs"><b>Logs</b><small>Jejak eksekusi dan hasil</small></a></div></details>
       </nav>
       <div class="topbar-actions">
@@ -215,8 +221,41 @@
             <div class="fm-assessment-note">Tidak menjalankan kode repo dan bukan audit kerentanan. Jalur rahasia/credential terdeteksi disaring.</div>
           </aside>
         </div>
+        <section class="github-push-panel" aria-labelledby="githubPushTitle">
+          <div class="github-push-heading"><div><p class="eyebrow">GITHUB CONTENTS API <span>/</span> WRITE</p><h3 id="githubPushTitle">GitHub Push · Commit kode</h3><p>Muat isi file dari GitHub, edit, lalu kirim commit ke branch pilihan. Auto-push opsional dan nonaktif secara default.</p></div><span class="github-push-badge">TOKEN SESI BROWSER</span></div>
+          <div class="github-push-grid">
+            <label>GitHub Personal Access Token<input id="githubPushToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" aria-label="GitHub Personal Access Token" /></label>
+            <label>Repositori (owner/repo)<input id="githubPushRepo" type="text" autocomplete="off" spellcheck="false" value="planetbintang/.L" placeholder="owner/repo" /></label>
+            <label>Branch tujuan<input id="githubPushBranch" type="text" autocomplete="off" spellcheck="false" value="io" placeholder="io" /></label>
+            <label>Path file di repo<input id="githubPushPath" type="text" autocomplete="off" spellcheck="false" placeholder="src/app.js" /></label>
+            <label>Pesan commit<input id="githubPushMessage" type="text" maxlength="180" value="Update source via File Manager" /></label>
+          </div>
+          <p class="github-push-token-note">Token hanya dipakai dari browser ini dan disimpan di sessionStorage tab, bukan di repo. Gunakan token dengan izin Contents: Read and write hanya pada repo yang diperlukan.</p>
+          <div class="github-push-actions"><button class="github-push-secondary" id="githubPushLoad" type="button">Muat dari GitHub</button><button class="github-push-primary" id="githubPushButton" type="button">Push ke GitHub</button></div>
+          <label class="github-push-editor-label" for="githubPushEditor">Isi kode / teks file<textarea class="github-push-editor" id="githubPushEditor" spellcheck="false" placeholder="Klik “Muat dari GitHub” atau tempel isi file baru di sini…"></textarea></label>
+          <label class="github-push-toggle"><input id="githubPushAuto" type="checkbox" /><span><b>Aktifkan auto-push</b><br />Setelah file dimuat dan konten berubah, commit otomatis dilakukan setelah 4 detik tanpa perubahan. Mengaktifkannya memerlukan konfirmasi.</span></label>
+          <div id="githubPushStatus" class="github-push-status" role="status" aria-live="polite" data-state="ready">GitHub Push siap. Pilih file dan muat isi dari GitHub terlebih dahulu.</div>
+          <p class="github-push-note">Perhatian: ini membuat commit nyata. File Manager biasa hanya membaca metadata tree; panel ini menggunakan GitHub API saat Anda meminta muat/push. GitHub Pages tidak menyimpan token di server.</p>
+        </section>
       </section>
 
+      <section class="section-block media-library" id="mediaLibrary" data-system-page="media-library" hidden aria-labelledby="mediaLibraryTitle">
+        <div class="media-library-intro"><div><p class="eyebrow">ASSET WORKSPACE <span>/</span> MEDIA</p><h2 id="mediaLibraryTitle">Media Library</h2><p class="section-description">Impor dan kelola gambar, video/film, audio, PDF, subtitle, serta dokumen besar. Pratinjau menggunakan kemampuan browser; file lokal disimpan pada perangkat ini.</p></div><span class="media-library-badge">LOCAL-FIRST · INDEXEDDB</span></div>
+        <div class="media-warning" id="mediaQuotaWarning" hidden>Penggunaan penyimpanan mendekati kuota browser. Ekspor aset penting atau hapus file yang tidak diperlukan sebelum mengimpor berkas besar lainnya.</div>
+        <div class="media-toolbar panel">
+          <button class="media-upload-label" id="mediaUploadButton" type="button">＋ Impor file besar</button><input id="mediaFileInput" type="file" multiple hidden accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.odt,.rtf,.xls,.xlsx,.ods,.ppt,.pptx,.odp,.txt,.md,.csv,.json,.xml,.srt,.vtt,.log,.mkv,.avi,.mov,.mp4,.webm,.heic,.heif" />
+          <label class="media-search" aria-label="Cari media"><input id="mediaSearch" type="search" placeholder="Cari nama, tipe, URL…" autocomplete="off" /></label>
+          <select class="media-select" id="mediaTypeFilter" aria-label="Filter tipe media"><option value="all">Semua tipe</option><option value="image">Gambar</option><option value="video">Video / film</option><option value="audio">Audio</option><option value="document">PDF</option><option value="office">Dokumen Office</option><option value="text">Teks / subtitle</option><option value="remote">URL eksternal</option><option value="file">Berkas lain</option></select>
+          <input class="media-url-input" id="mediaRemoteName" type="text" placeholder="Nama untuk URL (opsional)" aria-label="Nama media eksternal" />
+          <input class="media-url-input" id="mediaUrlInput" type="url" placeholder="https://… URL media" aria-label="URL media HTTPS" />
+          <button class="text-button" id="mediaAddUrlButton" type="button">Tambah URL</button>
+        </div>
+        <div class="media-dropzone" id="mediaDropzone" tabindex="0"><strong>Seret dan lepas file ke sini</strong>Untuk file sangat besar, pastikan kuota penyimpanan browser mencukupi. Jangan tutup tab hingga proses impor selesai.</div>
+        <div class="media-progress" id="mediaProgressWrap" hidden><i id="mediaProgressBar"></i></div><div class="media-status"><span id="mediaStatusText" role="status" aria-live="polite">Menyiapkan katalog media…</span><span id="mediaCount">0 item ditampilkan</span></div>
+        <div class="media-kpis" aria-label="Ringkasan penyimpanan media"><div><small>SEMUA ASET</small><strong id="mediaTotalCount">0</strong></div><div><small>FILE LOKAL</small><strong id="mediaLocalCount">0</strong></div><div><small>URL EKSTERNAL</small><strong id="mediaRemoteCount">0</strong></div><div><small>UKURAN KATALOG</small><strong id="mediaTotalBytes">0 B</strong></div></div>
+        <div class="media-status"><span id="mediaStorageText">Memeriksa kuota browser…</span><span>Media lokal tidak tersinkron otomatis antarperangkat.</span></div>
+        <div class="media-layout"><div class="media-grid" id="mediaGrid" aria-label="Daftar aset media"></div><aside class="media-inspector" aria-label="Pratinjau aset terpilih"><div class="media-inspector-head"><small id="mediaInspectorKind">LIBRARY</small><h3 id="mediaInspectorTitle">Pilih aset</h3></div><div class="media-preview" id="mediaPreview"><div class="media-preview-empty">Pilih gambar, film, audio, PDF, atau dokumen untuk melihat pratinjau.</div></div><div class="media-inspector-details" id="mediaInspectorDetails"></div><div class="media-inspector-actions" id="mediaInspectorActions"></div></aside></div>
+      </section>
       <section class="settings-panel panel" id="settingsPanel" hidden aria-labelledby="settingsTitle">
         <div class="section-heading compact"><div><p class="eyebrow">KONFIGURASI LOKAL</p><h2 id="settingsTitle">Pengaturan dashboard</h2></div><button class="text-button" id="closeSettings" type="button">Tutup</button></div>
         <div class="settings-grid">
@@ -252,6 +291,39 @@
         <div class="host-grid" id="hostGrid"><div class="loading-card">Menyiapkan peta host…</div></div>
       </section>
 
+      <section class="section-block menu-registry-page" id="menuRegistry" data-system-page="menu-registry" hidden aria-labelledby="menuRegistryTitle">
+        <div class="section-heading">
+          <div><p class="eyebrow">ENTERPRISE MENU REGISTRY <span>/</span> 10 ARCHITECTURES</p><h2 id="menuRegistryTitle">Pusat katalog menu</h2><p class="section-description">Kelola hierarki menu DevOps, domain/DNS, hosting/IP, monitoring, keamanan konten, IAM, storage, billing, dan integrasi. Katalog awal mengikuti fitur yang benar-benar tercantum pada dokumen spesifikasi; bukan klaim bahwa 5.000 modul sudah terimplementasi.</p></div>
+          <span class="text-link" id="menuRegistryStorageState">LOCAL · BROWSER</span>
+        </div>
+        <div class="menu-registry-stats" aria-live="polite">
+          <article><small>TOTAL ITEM</small><b id="menuRegistryTotal">—</b><span>menu & submenu</span></article>
+          <article><small>AKTIF</small><b id="menuRegistryActive">—</b><span>siap untuk katalog</span></article>
+          <article><small>ARSITEKTUR</small><b id="menuRegistryGroups">—</b><span>kelompok terdaftar</span></article>
+          <article><small>KUSTOM</small><b id="menuRegistryCustom">—</b><span>dibuat di browser ini</span></article>
+        </div>
+        <form id="menuRegistryForm" class="menu-registry-form panel">
+          <div class="menu-registry-form-heading"><div><p class="eyebrow">MENU BUILDER</p><h3 id="menuRegistryFormTitle">Tambah item menu</h3></div><span class="local-badge">LOCAL FIRST</span></div>
+          <input type="hidden" id="menuRegistryEditId" />
+          <label>Nama menu<input id="menuRegistryName" maxlength="120" required placeholder="Contoh: DNS Failover Engine" /></label>
+          <label>Arsitektur / kelompok<select id="menuRegistryGroup" required></select></label>
+          <label>Menu induk<input id="menuRegistryParent" maxlength="120" placeholder="Opsional, mis. DNS" /></label>
+          <label>Route / path<input id="menuRegistryRoute" maxlength="180" placeholder="/dns/failover" pattern="[/#a-zA-Z0-9._?=&-]*" /></label>
+          <label>Deskripsi singkat<input id="menuRegistryDescription" maxlength="240" placeholder="Fungsi dan tujuan item menu" /></label>
+          <label class="menu-registry-check"><input id="menuRegistryEnabled" type="checkbox" checked /> Aktif</label>
+          <div class="menu-registry-actions"><button class="workspace-primary" type="submit" id="menuRegistrySave">+ Tambah menu</button><button class="workspace-secondary" type="button" id="menuRegistryCancel" hidden>Batal edit</button><button class="workspace-secondary" type="button" id="menuRegistryReset">Pulihkan katalog awal</button></div>
+          <p class="workspace-note">Perubahan menu tersimpan di localStorage browser ini. Menu kustom belum otomatis membuat route/backend di server dan belum tersinkron ke GitHub.</p>
+        </form>
+        <div class="menu-registry-toolbar panel">
+          <label>Cari menu<input id="menuRegistrySearch" type="search" placeholder="Nama, route, deskripsi, induk…" /></label>
+          <label>Arsitektur<select id="menuRegistryFilter"><option value="all">Semua arsitektur</option></select></label>
+          <label>Status<select id="menuRegistryStatus"><option value="all">Semua status</option><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select></label>
+          <div class="menu-registry-actions"><button type="button" class="workspace-secondary" id="menuRegistryExport">Ekspor JSON</button><label class="menu-registry-import">Impor JSON<input id="menuRegistryImport" type="file" accept="application/json,.json" /></label></div>
+        </div>
+        <div class="menu-registry-results"><span id="menuRegistryResultCount">Memuat katalog…</span><span>Perubahan lokal · ekspor untuk cadangan</span></div>
+        <div id="menuRegistryList" class="menu-registry-list" aria-live="polite"><div class="workspace-empty">Menyiapkan katalog menu…</div></div>
+      </section>
+
       <section class="privacy-note panel" id="systemPrivacy" data-system-page="system" aria-label="Deskripsi sistem dan penyimpanan">
         <span class="privacy-symbol" aria-hidden="true">i</span>
         <div><strong>Deskripsi sistem dan penyimpanan lokal</strong><p>Sistem terintegrasi untuk mengelola kode, workspace, repositori, review, delivery, insight, File Manager, dan aktivitas proyek dalam satu root Planetbintang. Data File Manager tersimpan pada IndexedDB dan preferensi/workspace tertentu pada localStorage browser ini. Kapasitas mengikuti kuota browser/perangkat, dan data lokal tidak otomatis tersinkron antarperangkat.</p></div>
@@ -260,6 +332,7 @@
 
     <footer class="footer"><a class="footer-brand" href="#top" data-system-route="system"><img src="./brand-logo-browser.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber snapshot lokal</span><span class="footer-source">Source dashboard · snapshot lokal</span></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
+    <script src="./system-loader.js?v=20261026-system-loader-v1" defer></script>
     <script src="./dashboard.js?v=20261023-system-vfs-v1" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
@@ -270,6 +343,9 @@
     <script src="./platform-view.js?v=20261023-platform-view-v1" defer></script>
     <script src="./system-tools.js?v=20261024-manage-execute-v1" defer></script>
     <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
+    <script src="./media-library.js?v=20261026-media-library-v1" defer></script>
+    <script src="./menu-registry.js?v=20261026-menu-registry-v1" defer></script>
+    <script src="./github-push.js?v=20261026-github-push-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
   </body>
