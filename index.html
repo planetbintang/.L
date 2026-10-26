@@ -8,11 +8,12 @@
     <link rel="icon" href="./brand-logo-browser.png" type="image/png" />
     <link rel="apple-touch-icon" href="./brand-logo-browser.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./dashboard.css?v=20261026-header-harmony-v1" />
+    <link rel="stylesheet" href="./dashboard.css?v=20261026-header-harmony-v2" />
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
-    <link rel="stylesheet" href="./platform-ui.css?v=20261026-header-harmony-v1" />
-    <link rel="stylesheet" href="./luxury-theme.css?v=20261026-header-harmony-v1" />
-    <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-map-v1" />
+    <link rel="stylesheet" href="./platform-ui.css?v=20261026-header-harmony-v2" />
+    <link rel="stylesheet" href="./luxury-theme.css?v=20261026-header-harmony-v2" />
+    <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-pages-v1" />
+    <link rel="stylesheet" href="./modern-layout.css?v=20261026-modern-2026-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -33,10 +34,17 @@
         <details class="nav-dropdown" data-menu="execute"><summary>Execute</summary><div class="nav-dropdown-menu" aria-label="Menu eksekusi"><a href="#execute/run" data-system-route="execute-run"><b>Run</b><small>Jalankan aksi terkontrol</small></a><a href="#execute/console" data-system-route="execute-console"><b>Console</b><small>Perintah allowlist sistem</small></a><a href="#execute/jobs" data-system-route="execute-jobs"><b>Jobs</b><small>Antrean pekerjaan lokal</small></a><a href="#execute/deploy" data-system-route="execute-deploy"><b>Deploy</b><small>Checklist publikasi provider</small></a><a href="#execute/logs" data-system-route="execute-logs"><b>Logs</b><small>Jejak eksekusi dan hasil</small></a></div></details>
         <details class="nav-dropdown" data-menu="enterprise"><summary>Enterprise</summary><div class="nav-dropdown-menu" aria-label="Menu enterprise map list">
           <a href="#enterprise/map" data-system-route="enterprise-map"><b>Enterprise Map List</b><small>Master registry · 10.000 menu hierarkis</small></a>
-          <a href="#enterprise/map" data-system-route="enterprise-map"><b>DevOps &amp; Git Platform</b><small>10 arsitektur inti · repositori, CI/CD, keamanan</small></a>
-          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Domain &amp; DNS Engine</b><small>Registrasi domain, GeoDNS, DNSSEC, failover</small></a>
-          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Hosting &amp; IP Infrastructure</b><small>VM, bare metal, IPAM, BGP anycast</small></a>
-          <a href="#enterprise/map" data-system-route="enterprise-map"><b>Hyper-Monitoring &amp; WAF/CDN</b><small>Observability, edge security, DDoS</small></a>
+          <a href="#enterprise/arch/core-code" data-enterprise-arch="core-code"><b>DevOps &amp; Git Platform</b><small>A01–A10 · repositori, CI/CD, keamanan</small></a>
+          <a href="#enterprise/arch/domain-dns-engine" data-enterprise-arch="domain-dns-engine"><b>Domain &amp; DNS Engine</b><small>A11 · registrasi, GeoDNS, DNSSEC, failover</small></a>
+          <a href="#enterprise/arch/hosting-ip-infra" data-enterprise-arch="hosting-ip-infra"><b>Hosting &amp; IP Infrastructure</b><small>A12 · VM, bare metal, IPAM, BGP anycast</small></a>
+          <a href="#enterprise/arch/hyper-monitoring" data-enterprise-arch="hyper-monitoring"><b>Hyper-Monitoring &amp; Observability</b><small>A13 · uptime, metrik agen, APM</small></a>
+          <a href="#enterprise/arch/edge-security-waf" data-enterprise-arch="edge-security-waf"><b>Edge Security WAF/CDN</b><small>A14 · edge cache, OWASP, DDoS scrubbing</small></a>
+          <a href="#enterprise/arch/content-moderation-cms" data-enterprise-arch="content-moderation-cms"><b>Content Moderation &amp; CMS</b><small>A15 · filter UGC, SEO, sitemap</small></a>
+          <a href="#enterprise/arch/alerting-incident" data-enterprise-arch="alerting-incident"><b>Alerting &amp; Incident Response</b><small>A16 · eskalasi, on-call, war room</small></a>
+          <a href="#enterprise/arch/iam-enterprise" data-enterprise-arch="iam-enterprise"><b>Identity &amp; Access Management</b><small>A17 · RBAC multi-tenant, SSO, MFA</small></a>
+          <a href="#enterprise/arch/storage-compliance" data-enterprise-arch="storage-compliance"><b>Data Storage &amp; Compliance</b><small>A18 · object storage, WORM audit</small></a>
+          <a href="#enterprise/arch/billing-metering" data-enterprise-arch="billing-metering"><b>Billing, Metering &amp; Provisioning</b><small>A19 · pay-per-use, budget alert</small></a>
+          <a href="#enterprise/arch/developer-marketplace" data-enterprise-arch="developer-marketplace"><b>Marketplace &amp; Dev Ecosystem</b><small>A20 · API engine, portal plugin</small></a>
           <a href="#fileManager/sys/enterprise" data-system-route="file-manager"><b>Registry Filesystem</b><small>/sys/enterprise · shard JSON per menu</small></a>
         </div></details>
       </nav>

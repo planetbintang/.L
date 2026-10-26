@@ -33,6 +33,8 @@
 
   // Enterprise Map List · Hyper-Enterprise Master Registry — halaman baru grup 'enterprise'
   routes['enterprise-map'] = { group: 'enterprise', menu: 'enterprise', hash: '#enterprise/map' };
+  // Halaman arsitektur enterprise individual — #enterprise/arch/<slug>
+  routes['enterprise-arch'] = { group: 'enterprise', menu: 'enterprise', hash: '#enterprise/arch' };
 
   const workspaceRoutes = new Map(Object.entries(routes).filter(([, route]) => route.view).map(([name, route]) => [route.view, name]));
   const pages = [...document.querySelectorAll('[data-system-page]')];
@@ -60,6 +62,9 @@
     }
     // Enterprise Map List: #enterprise/map → halaman registry hyper-enterprise.
     if (hash === 'enterprise/map') return 'enterprise-map';
+    // Halaman arsitektur enterprise individual: #enterprise/arch/<slug>
+    if (hash.startsWith('enterprise/arch/')) return 'enterprise-arch';
+    if (hash === 'enterprise/arch') return 'enterprise-arch';
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
     return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;
@@ -97,17 +102,26 @@
     });
   });
 
+  function archFromHash() {
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (!hash.startsWith('enterprise/arch/')) return '';
+    return hash.slice('enterprise/arch/'.length).split('/')[0] || '';
+  }
+
   function applyRoute(name, options = {}) {
     const routeName = routes[name] ? name : 'system';
     let route = routes[routeName];
     const { updateUrl = true, scroll = true } = options;
     // Sub URL folder sistem: #fileManager/<path> tetap berada pada rute file-manager.
     if (name === 'file-manager') route = { ...route, hash: `#fileManager${filePathFromHash() ? `/${filePathFromHash()}` : ''}` };
+    // Sub URL arsitektur enterprise: #enterprise/arch/<slug> tetap pada rute enterprise-arch.
+    if (name === 'enterprise-arch') route = { ...route, hash: `#enterprise/arch${archFromHash() ? `/${archFromHash()}` : ''}` };
     const changed = currentRoute !== routeName;
     currentRoute = routeName;
     document.body.dataset.systemRoute = routeName;
     pages.forEach((page) => { page.hidden = page.dataset.systemPage !== route.group; });
     if (route.group === 'file-manager') window.PBFileManager?.setPath(filePathFromHash());
+    if (route.group === 'enterprise') window.PBEnterpriseMap?.applyHash?.(window.location.hash || '');
     navLinks.forEach((link) => {
       if (link.dataset.systemRoute === routeName) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
@@ -124,6 +138,8 @@
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     if (route.group === 'tools') window.PBSystemTools?.render(routeName);
+    // Sinkronkan halaman enterprise setelah URL final terpasang (mendukung hash & deep link).
+    if (route.group === 'enterprise') window.PBEnterpriseMap?.applyHash?.(route.hash || window.location.hash || '');
     document.dispatchEvent(new CustomEvent('planetbintang:route-change', { detail: { name: routeName, group: route.group, menu: route.menu || '', view: route.view || '', changed } }));
     const settings = $('#settingsPanel');
     if (changed && settings && !settings.hidden) {
@@ -131,12 +147,21 @@
       $('#settingsButton')?.setAttribute('aria-expanded', 'false');
     }
     if (updateUrl && window.location.hash !== route.hash) window.history.pushState({ systemRoute: routeName }, '', route.hash);
-    if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Beranda selalu mengembalikan pengguna ke halaman utama.
+    if (changed && routeName === 'system') window.scrollTo({ top: 0, behavior: 'smooth' });
+    else if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   routeLinks.forEach((link) => link.addEventListener('click', (event) => {
     event.preventDefault();
     applyRoute(link.dataset.systemRoute, { scroll: true });
+  }));
+  // Tautan submenu Enterprise per arsitektur → halaman individual #enterprise/arch/<slug>.
+  document.querySelectorAll('[data-enterprise-arch]').forEach((link) => link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const slug = link.dataset.enterpriseArch;
+    closeMenus();
+    window.PBEnterpriseMap?.openArchitecture?.(slug);
   }));
   document.addEventListener('click', (event) => {
     if (!event.target.closest('.nav-dropdown')) closeMenus();
