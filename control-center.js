@@ -112,6 +112,7 @@
     if (!pages[key]) return;
     if (push && location.hash !== '#control/' + key) history.pushState({ systemRoute: route }, '', '#control/' + key);
     document.body.dataset.systemRoute = route;
+    document.querySelectorAll('.nav-dropdown').forEach((menu) => { menu.open = false; });
     document.querySelectorAll('[data-system-page]').forEach((node) => { node.hidden = node.dataset.systemPage !== 'control-center'; });
     render(route);
     document.dispatchEvent(new CustomEvent('planetbintang:route-change', {detail:{name:route,group:'control-center',menu:'control',changed:true}}));
@@ -128,6 +129,7 @@
   }
   window.addEventListener('hashchange', syncDeepLink);
   window.addEventListener('popstate', syncDeepLink);
+  if (location.hash.startsWith('#control/')) syncDeepLink();
   window.PBControlCenter={render,activateRoute};
   document.addEventListener('planetbintang:route-change',(e)=>{if(e.detail?.group==='control-center')render(e.detail.name);});
   document.addEventListener('planetbintang:snapshot-state',()=>{if(document.body.dataset.systemRoute?.startsWith('control-'))render(document.body.dataset.systemRoute);});
