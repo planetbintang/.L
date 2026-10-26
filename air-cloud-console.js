@@ -364,7 +364,7 @@
     featureList.className = 'ac-nav-feature-list';
     const visibleFeatures = matchingFeatures.slice(0, state.airzMenuLimit);
     featureList.innerHTML = visibleFeatures.map((item) => {
-      const path = String(item.path || '').replace(/^airz\\//, '');
+      const path = String(item.path || '').replace(/^airz\//, '');
       return `<article class="ac-nav-feature-card">
         <button type="button" class="ac-nav-feature" data-airz-fm="${esc(item.path)}" title="Buka lokasi berkas di File Manager">
           <span class="ac-nav-feature-name">${esc(item.name || path.split('/').pop() || 'Berkas sistem')}</span>
