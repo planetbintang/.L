@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./platform-ui.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./luxury-theme.css?v=20261024-luxury-home-v1" />
+    <link rel="stylesheet" href="./system-loader.css?v=20261026-system-loader-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
+    <div id="pb-system-loader" role="status" aria-live="polite" aria-label="Memuat sistem Planetbintang"><div class="pb-loader-card"><div class="pb-loader-mark" aria-hidden="true">PB</div><h1 class="pb-loader-title">PLANETBINTANG</h1><p class="pb-loader-subtitle">Menyiapkan ruang sistem Anda</p><div class="pb-loader-track" aria-hidden="true"><div class="pb-loader-progress"></div></div><div class="pb-loader-status"><span><i class="pb-loader-pulse" aria-hidden="true"></i><span data-pb-loader-status>Memulai sistem</span></span><span data-pb-loader-percent>8%</span></div></div></div>
+    <div id="pb-navigation-progress" hidden aria-hidden="true"></div>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
     <header class="topbar" id="top">
       <a class="brand" href="#overview" aria-label="Kembali ke halaman utama Planetbintang" data-system-route="system">
@@ -260,6 +263,7 @@
 
     <footer class="footer"><a class="footer-brand" href="#top" data-system-route="system"><img src="./brand-logo-browser.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber snapshot lokal</span><span class="footer-source">Source dashboard · snapshot lokal</span></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
+    <script src="./system-loader.js?v=20261026-system-loader-v1" defer></script>
     <script src="./dashboard.js?v=20261023-system-vfs-v1" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
