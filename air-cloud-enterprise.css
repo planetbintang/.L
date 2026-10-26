@@ -59,3 +59,13 @@
 @media(max-width:900px){.aircloud-page .ac-layout{grid-template-columns:1fr}.aircloud-page .ac-sidebar{position:static;max-height:52vh}.aircloud-page .ac-sidebar-head{top:-12px}.aircloud-page .ac-nav-subs{display:block}}
 @media(max-width:600px){.aircloud-page .ac-top{padding:16px}.aircloud-page .ac-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.aircloud-page .ac-hero{padding:17px}.aircloud-page .ac-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.aircloud-page .ac-sidebar{padding:9px}.aircloud-page .ac-nav-count{display:none}}
 @media(prefers-reduced-motion:reduce){.aircloud-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Air Cloud large-registry navigation controls */
+.aircloud-page .ac-sidebar-controls{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.aircloud-page .ac-sidebar-controls button{min-height:29px;padding:6px 9px;border:1px solid #d4dfeb;border-radius:7px;background:#fff;color:#385675;font-size:10px;font-weight:650;cursor:pointer}
+.aircloud-page .ac-sidebar-controls button:hover{border-color:#8bb9f4;background:#edf5ff;color:#0f4da8}
+.aircloud-page .ac-sidebar-controls button:focus-visible{outline:3px solid #8bb9f4;outline-offset:2px}
+@media(max-width:900px){.aircloud-page .ac-layout{grid-template-columns:minmax(0,1fr)}.aircloud-page .ac-sidebar{position:relative;top:auto;max-height:62vh}.aircloud-page .ac-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.aircloud-page .ac-top{padding:14px}.aircloud-page .ac-top-actions{width:100%}.aircloud-page .ac-top-actions button{white-space:normal}.aircloud-page .ac-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.aircloud-page .ac-sidebar{max-height:55vh;padding:9px}}
+@media(prefers-reduced-motion:reduce){.aircloud-page .ac-shell{animation:none}}
