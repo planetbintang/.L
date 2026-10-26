@@ -112,3 +112,15 @@
  #airCloudPage .ac-actions button{max-width:100%;white-space:normal}
 }
 @media(prefers-reduced-motion:reduce){#airCloudPage *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Air Cloud file-backed feature navigation */
+.aircloud-page .ac-nav-feature-group{margin-top:12px;padding-top:10px;border-top:1px solid #d8e2ee}
+.aircloud-page .ac-nav-feature-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 8px;color:#183a60;font-size:11px;font-weight:800}
+.aircloud-page .ac-nav-feature-head b{padding:3px 7px;border:1px solid #c6d9ef;border-radius:999px;background:#eaf3ff;color:#175ba8;font-size:9px}
+.aircloud-page .ac-nav-feature-list{display:grid;gap:4px;max-height:480px;overflow:auto;overscroll-behavior:contain}
+.aircloud-page .ac-nav-feature{display:grid;gap:3px;width:100%;min-width:0;padding:8px 9px;border:1px solid transparent;border-radius:7px;background:transparent;text-align:left;color:#2b496a;cursor:pointer}
+.aircloud-page .ac-nav-feature:hover,.aircloud-page .ac-nav-feature:focus-visible{border-color:#b9d4f1;background:#e8f2ff}
+.aircloud-page .ac-nav-feature-name{font-size:10px;font-weight:750;overflow-wrap:anywhere}
+.aircloud-page .ac-nav-feature small{font-size:8px;line-height:1.45;color:#6c8099;overflow-wrap:anywhere}
+.aircloud-page .ac-nav-feature-more{position:sticky;bottom:0;padding:10px;border:1px solid #bfd4eb;border-radius:8px;background:#edf5ff;color:#175a9f;font-size:10px;font-weight:800;text-align:center;cursor:pointer}
+@media(max-width:760px){.aircloud-page .ac-nav-feature-list{max-height:360px}.aircloud-page .ac-nav-feature{padding:10px}}
