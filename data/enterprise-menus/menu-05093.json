@@ -1,0 +1,14 @@
+{
+ "id": 5093,
+ "menu_code": "HYPER-A01-093",
+ "architecture_group": "Domain Lifecycle & DNS Engine",
+ "architecture_slug": "domain-dns-engine",
+ "architecture_index": 11,
+ "parent_id": 5000,
+ "menu_name": "DNS > Failover · API Bridge #01",
+ "route_path": "/hyper/domain-dns-engine/failover-093",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Pengalihan DNS otomatis jika IP host utama mengalami downtime.",
+ "system_instruction": "Sub-modul 'API Bridge' turunan dari 'DNS > Failover'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization."
+}

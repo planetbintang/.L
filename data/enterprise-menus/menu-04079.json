@@ -1,0 +1,14 @@
+{
+ "id": 4079,
+ "menu_code": "DEVOPS-4078",
+ "architecture_group": "Auditing, Logging & Monitoring",
+ "architecture_slug": "audit-monitoring",
+ "architecture_index": 9,
+ "parent_id": 4000,
+ "menu_name": "Audit Logs > Security Events · Scheduler #03",
+ "route_path": "/enterprise/audit-monitoring/079",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Catatan riwayat login, perubahan kata sandi, eskalasi hak akses admin.",
+ "system_instruction": "Sub-modul 'Scheduler' turunan dari 'Audit Logs > Security Events'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization."
+}
