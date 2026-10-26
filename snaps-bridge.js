@@ -239,16 +239,26 @@
   }
 
   /* ---------- Input otomatis kode ke File Manager (/workspace) ---------- */
-  function writeToWorkspace(name, content) {
+  async function writeToWorkspace(name, content) {
+    const cleanName = String(name).replaceAll('\\\\', '/').split('/').pop().replace(/[^a-zA-Z0-9._ -]/g, '-').slice(0, 120) || 'generated-app.txt';
+    const body = String(content);
+    // Use the same IndexedDB-backed store that the .L File Manager reads.
+    // localStorage remains a compatibility fallback only for older builds.
+    if (window.PBLocalFiles?.saveFile) {
+      const path = `workspace/snaps/${cleanName}`;
+      await window.PBLocalFiles.saveFile(path, body, 'text/plain;charset=utf-8');
+      document.dispatchEvent(new CustomEvent('planetbintang:workspace-files-changed', { detail: { path } }));
+      log('code-input-file-manager', `/${path} · ${body.length} karakter`);
+      return { name: cleanName, path, content: body, updatedAt: nowIso(), storage: 'indexeddb-file-manager' };
+    }
     const KEY = 'planetbintang.file-manager.workspace.v1';
     const filesList = read(KEY, []).filter((f) => f && f.name);
-    const cleanName = String(name).replaceAll('/', '-').slice(0, 120) || 'generated-app.txt';
     const existing = filesList.find((f) => f.name === cleanName);
-    const record = { id: existing?.id || `file-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`, name: cleanName, content: String(content), createdAt: existing?.createdAt || nowIso(), updatedAt: nowIso() };
+    const record = { id: existing?.id || `file-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`, name: cleanName, content: body, createdAt: existing?.createdAt || nowIso(), updatedAt: nowIso() };
     const next = existing ? filesList.map((f) => (f.id === existing.id ? record : f)) : [record, ...filesList];
     if (!write(KEY, next)) throw new Error('Penyimpanan browser penuh; hapus sebagian file workspace lalu coba lagi.');
     document.dispatchEvent(new CustomEvent('planetbintang:workspace-files-changed'));
-    log('code-input-workspace', `/workspace/${cleanName} · ${record.content.length} karakter`);
+    log('code-input-workspace-fallback', `/workspace/${cleanName} · ${body.length} karakter`);
     return record;
   }
 
@@ -392,10 +402,10 @@
         const contexts = $('#snapsUseRag').checked ? ragItems().slice(0, 6).map((item) => `${item.title}: ${item.excerpt.slice(0, 400)}`) : [];
         const code = await generateWithAiStudio(prompt, contexts);
         const fileName = $('#snapsCodeFile').value.trim() || `snaps-app-${new Date().toISOString().slice(0, 10)}.txt`;
-        writeToWorkspace(fileName, code);
+        const stored = await writeToWorkspace(fileName, code);
         preview.hidden = false;
         preview.textContent = code.slice(0, 6000);
-        status.textContent = `Selesai. Kode (${code.length} karakter) telah diinput otomatis ke File Manager /workspace/${fileName}.`;
+        status.textContent = `Selesai. Kode (${code.length} karakter) disimpan ke ${stored.path ? `File Manager /${stored.path}` : `workspace lokal /${fileName}`}.`;
         renderRagCorpus();
       } catch (error) {
         status.textContent = `Gagal: ${error.message}`;
