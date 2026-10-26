@@ -276,6 +276,16 @@
         <span class="tools-badge" id="snapsBridgeBadge">MEMERIKSA JEMBATAN LOKAL…</span>
       </header>
       <div class="tools-grid" id="snapsConnectors"></div>
+      <section class="tools-card" id="snapsDataStorage">
+        <div class="tools-card-head"><div><h3>Penyimpanan Data Snaps → File Manager</h3><p>Impor file dari perangkat langsung ke penyimpanan lokal File Manager pada folder <code>/workspace/snaps/</code>. File tetap berada di browser/perangkat ini.</p></div><span class="local-badge">INDEXEDDB · FILE MANAGER</span></div>
+        <form id="snapsDataUploadForm" class="tools-form-inline">
+          <label>Pilih file perangkat<input id="snapsDataFiles" type="file" multiple required /></label>
+          <label>Folder tujuan<input id="snapsDataFolder" value="workspace/snaps" maxlength="160" required /></label>
+          <button class="workspace-primary" type="submit">Simpan ke File Manager</button>
+          <span id="snapsDataUploadStatus" aria-live="polite" class="tools-note"></span>
+        </form>
+        <p class="tools-note">Mendukung file gambar, video, audio, dokumen, arsip, dan file lain selama kuota browser mencukupi. Tidak ada unggahan ke server/cloud dari halaman statis ini.</p>
+      </section>
       <section class="tools-card" id="snapsCodegen">
         <div class="tools-card-head"><div><h3>Penginput Otomatis Kode Aplikasi · Google AI Studio</h3><p>Buat kode dari prompt (opsional diperkaya konteks RAG), lalu kirim langsung ke File Manager <code>/workspace</code>.</p></div><span class="local-badge">TOKEN KUSTOM · X-GOOG-API-KEY</span></div>
         <form id="snapsCodegenForm" class="tools-form-inline">
@@ -390,6 +400,40 @@
 
     const badge = $('#snapsBridgeBadge');
     checkLocalBridge().then((up) => { if (badge) { badge.textContent = up ? 'JEMBATAN LOKAL AKTIF · server.py' : 'MODE STATIS · BROWSER (token lokal)'; badge.classList.toggle('is-active', up); } });
+
+    $('#snapsDataUploadForm')?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = $('#snapsDataUploadStatus');
+      const files = Array.from($('#snapsDataFiles')?.files || []);
+      const folderInput = $('#snapsDataFolder');
+      const folder = String(folderInput?.value || 'workspace/snaps').replaceAll('\\\\', '/').split('/').filter(Boolean).join('/');
+      if (!files.length) { status.textContent = 'Pilih setidaknya satu file.'; return; }
+      if (!window.PBLocalFiles?.saveFile || !window.PBLocalFiles?.get) {
+        status.textContent = 'Penyimpanan File Manager belum siap. Muat ulang halaman dan coba lagi.';
+        return;
+      }
+      let saved = 0;
+      let skipped = 0;
+      const errors = [];
+      status.textContent = 'Memeriksa file dan kuota penyimpanan…';
+      for (const file of files) {
+        const name = file.name.replaceAll('\\\\', '/').split('/').pop().replace(/[\\u0000-\\u001f\\u007f]/g, '').slice(0, 180);
+        if (!name || name === '.' || name === '..') { skipped += 1; continue; }
+        const path = `${folder}/${name}`;
+        try {
+          const existing = await window.PBLocalFiles.get(path);
+          if (existing && !window.confirm(`File /${path} sudah ada. Timpa file tersebut?`)) { skipped += 1; continue; }
+          await window.PBLocalFiles.saveFile(path, file, file.type || 'application/octet-stream');
+          saved += 1;
+        } catch (error) {
+          errors.push(`${name}: ${error?.message || 'gagal disimpan'}`);
+        }
+      }
+      document.dispatchEvent(new CustomEvent('planetbintang:workspace-files-changed'));
+      if (window.PBFileManager?.refreshWorkspace) window.PBFileManager.refreshWorkspace();
+      status.textContent = `Selesai: ${saved} file disimpan ke /${folder}; ${skipped} dilewati; ${errors.length} gagal.${errors.length ? ' ' + errors.slice(0, 3).join(' · ') : ''}`;
+      if (saved) log('snaps-data-import', `/${folder} · ${saved} file`);
+    });
 
     $('#snapsCodegenForm')?.addEventListener('submit', async (event) => {
       event.preventDefault();
