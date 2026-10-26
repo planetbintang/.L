@@ -48,14 +48,13 @@ function descriptionFor(f){return 'Panel '+f.name.toLocaleLowerCase('id-ID')+' m
 function actionFor(f){const k=f.name.toLowerCase();if(k.includes('teks')||k.includes('artikel')||k.includes('halaman'))return 'Buka Studio Penerbitan untuk memasukkan teks dan menghasilkan pratinjau HTML yang bisa diunduh.';if(k.includes('dns')||k.includes('nameserver')||k.includes('record'))return 'Panel demo dapat digunakan untuk memeriksa contoh konfigurasi. Perubahan DNS produksi membutuhkan penyedia DNS dan kredensial yang benar.';if(k.includes('vendor')||k.includes('api')||k.includes('registrar'))return 'Tambahkan koneksi penyedia yang sah melalui backend aman. Jangan menempatkan token rahasia di JavaScript frontend.';return 'Panel demonstrasi telah dipilih. Implementasi operasi produksi perlu backend, validasi, izin, dan integrasi layanan yang sesuai.'}
 function initPublisher(){
  const title=$('#pageTitle'),slug=$('#pageSlug'),textArea=$('#pageText');title.addEventListener('input',()=>{if(!slug.dataset.edited)slug.value=slugify(title.value)});slug.addEventListener('input',()=>{slug.dataset.edited='true';slug.value=slugify(slug.value)});textArea.value='Selamat datang di halaman baru Anda.\n\nTulis informasi layanan, produk, artikel, atau dokumentasi di sini. Konten ini akan ditampilkan dalam format situs HTML sederhana.';
- $('#previewPage').addEventListener('click',updatePreview);$('#previewPage').addEventListener('load',()=>{});$('#previewPage').dataset.ready='false';
+$('#previewPage').addEventListener('load',()=>{});$('#previewPage').dataset.ready='false';
  $('#previewPage');$('#pageText').addEventListener('input',()=>{});
- $('#previewPage').srcdoc=renderPage(title.value,textArea.value);
+ $('#pagePreview').srcdoc=renderPage(title.value,textArea.value);
  $('#previewPage').title='Pratinjau halaman teks';
- $('#previewPage');$('#previewPage');
+
  $('#previewPage').setAttribute('sandbox','');
  $('#openPublisher').addEventListener('click',()=>$('#publisher').scrollIntoView({behavior:'smooth'}));
- $('#previewPage');
  $('#previewPage');
  $('#downloadPage').addEventListener('click',()=>{const html=renderPage(title.value,textArea.value);const blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=(slugify(slug.value)||'halaman')+'.html';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);showToast('File HTML statis diunduh. Unggah ke hosting untuk membuatnya publik.')});
 }
