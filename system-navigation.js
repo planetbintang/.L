@@ -13,6 +13,7 @@
     'workspace-account': { group: 'workspace', view: 'account', menu: 'insights', hash: '#workspace/account' },
     'workspace-help': { group: 'workspace', view: 'help', menu: 'insights', hash: '#workspace/help' },
     'file-manager': { group: 'file-manager', menu: 'code', hash: '#fileManager' },
+    'media-library': { group: 'media-library', menu: 'manage', hash: '#media' },
     repositories: { group: 'repositories', menu: 'code', hash: '#repositories' },
     hosts: { group: 'hosts', menu: 'insights', hash: '#hosts' },
   };
@@ -57,7 +58,7 @@
     }
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
-    return ({ repositories: 'repositories', hosts: 'hosts' })[hash] || null;
+    return ({ repositories: 'repositories', hosts: 'hosts', media: 'media-library' })[hash] || null;
   }
 
   function filePathFromHash() {
