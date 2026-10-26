@@ -642,6 +642,17 @@
         if (item) void saveAirzItemToStorage(item).then((ok) => { if (ok) airzNote(`Fitur "${item.name}" disimpan ke airz/cloudsistem/ (IndexedDB).`); });
         return;
       }
+      const airzCopyPath = event.target.closest('[data-airz-copy-path]');
+      if (airzCopyPath) {
+        const path = airzCopyPath.getAttribute('data-airz-copy-path') || '';
+        const copied = () => airzNote(`Jalur berkas disalin: ${path}`);
+        if (navigator.clipboard?.writeText) {
+          void navigator.clipboard.writeText(path).then(copied, () => openAirzModal('Jalur berkas', path));
+        } else {
+          openAirzModal('Jalur berkas', path);
+        }
+        return;
+      }
       const airzFm = event.target.closest('[data-airz-fm]');
       if (airzFm) {
         const path = airzFm.getAttribute('data-airz-fm') || 'airz';
