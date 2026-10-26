@@ -1,0 +1,147 @@
+/* ==========================================================================
+   PLANETBINTANG · TEMA UTAMA CAHAYA / AIR / BERLIAN
+   Sinkron penuh dengan tiga tema AI Reber (aireber/reber.css + reber-app.js):
+     * cahaya  → biru terang klasik (default Reber)
+     * air     → sian laut (Reber data-theme="air")
+     * berlian → biru kaca reflektif (Reber data-theme="berlian")
+   Key CSS dipetakan dari variabel --bg/--surface/--ink/--accent/--accent2/
+   --line/--soft/--shadow milik Reber ke token luxury Planetbintang sehingga
+   satu preferensi localStorage (planetbintang.aireber.theme.v1) berlaku di
+   kedua sistem — tampilan utama planetbintang DAN menu aireber serasi.
+   ========================================================================== */
+
+/* ── Tema CAHAYA — default terang seperti Reber root ─────────────────────── */
+:root[data-pb-theme="cahaya"] {
+  --lux-bg: #eef7ff;
+  --lux-surface: rgba(255, 255, 255, .88);
+  --lux-surface-2: #e5f2ff;
+  --lux-line: #c9dcf1;
+  --lux-line-strong: #9fc4e8;
+  --lux-text: #102b4d;
+  --lux-muted: #627891;
+  --lux-blue: #176ee8;
+  --lux-blue-bright: #59a8ff;
+  color-scheme: light;
+}
+:root[data-pb-theme="cahaya"] body {
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(255, 255, 255, .98), transparent 43%),
+    radial-gradient(ellipse at 95% 4%, rgba(131, 197, 255, .24), transparent 32%),
+    var(--lux-bg);
+  background-attachment: fixed;
+}
+
+/* ── Tema AIR — sian laut (identik :root[data-theme="air"] Reber) ────────── */
+:root[data-pb-theme="air"] {
+  --lux-bg: #eafaff;
+  --lux-surface: rgba(255, 255, 255, .86);
+  --lux-surface-2: #def6fa;
+  --lux-line: #b9e0e7;
+  --lux-line-strong: #8fcfdd;
+  --lux-text: #103954;
+  --lux-muted: #50778b;
+  --lux-blue: #087f9b;
+  --lux-blue-bright: #48bed0;
+  color-scheme: light;
+}
+:root[data-pb-theme="air"] body {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(255, 255, 255, .96), transparent 42%),
+    radial-gradient(ellipse at 92% 6%, rgba(72, 190, 208, .22), transparent 34%),
+    var(--lux-bg);
+  background-attachment: fixed;
+}
+
+/* ── Tema BERLIAN — biru kaca reflektif (:root[data-theme="berlian"]) ────── */
+:root[data-pb-theme="berlian"] {
+  --lux-bg: #f2f6ff;
+  --lux-surface: rgba(255, 255, 255, .78);
+  --lux-surface-2: rgba(215, 230, 255, .8);
+  --lux-line: rgba(151, 179, 222, .62);
+  --lux-line-strong: rgba(120, 152, 205, .8);
+  --lux-text: #172b53;
+  --lux-muted: #667695;
+  --lux-blue: #2858c8;
+  --lux-blue-bright: #9fc5ff;
+  color-scheme: light;
+}
+:root[data-pb-theme="berlian"] body {
+  background:
+    radial-gradient(ellipse at 8% 2%, rgba(255, 255, 255, .95), transparent 40%),
+    radial-gradient(ellipse at 96% 10%, rgba(159, 197, 255, .3), transparent 36%),
+    linear-gradient(160deg, rgba(215, 230, 255, .5), transparent 55%),
+    var(--lux-bg);
+  background-attachment: fixed;
+}
+
+/* ── Adaptasi chrome header & dropdown pada ketiga tema utama ────────────── */
+:root[data-pb-theme="cahaya"] .topbar,
+:root[data-pb-theme="air"] .topbar,
+:root[data-pb-theme="berlian"] .topbar {
+  background: rgba(252, 254, 255, .9);
+  border-bottom-color: var(--lux-line);
+  box-shadow: 0 10px 30px rgba(23, 90, 160, .08);
+}
+:root[data-pb-theme="cahaya"] .brand-wordmark strong,
+:root[data-pb-theme="air"] .brand-wordmark strong,
+:root[data-pb-theme="berlian"] .brand-wordmark strong { color: var(--lux-text); }
+:root[data-pb-theme="cahaya"] .brand-icon-frame img,
+:root[data-pb-theme="air"] .brand-icon-frame img,
+:root[data-pb-theme="berlian"] .brand-icon-frame img { filter: none; }
+:root[data-pb-theme="cahaya"] .main-nav .nav-dropdown > summary,
+:root[data-pb-theme="cahaya"] .main-nav > .main-nav-link,
+:root[data-pb-theme="air"] .main-nav .nav-dropdown > summary,
+:root[data-pb-theme="air"] .main-nav > .main-nav-link,
+:root[data-pb-theme="berlian"] .main-nav .nav-dropdown > summary,
+:root[data-pb-theme="berlian"] .main-nav > .main-nav-link { color: var(--lux-muted); }
+:root[data-pb-theme="cahaya"] .main-nav .nav-dropdown:hover > summary,
+:root[data-pb-theme="cahaya"] .main-nav .nav-dropdown[open] > summary,
+:root[data-pb-theme="cahaya"] .main-nav .nav-dropdown.has-active-route > summary,
+:root[data-pb-theme="air"] .main-nav .nav-dropdown:hover > summary,
+:root[data-pb-theme="air"] .main-nav .nav-dropdown[open] > summary,
+:root[data-pb-theme="air"] .main-nav .nav-dropdown.has-active-route > summary,
+:root[data-pb-theme="berlian"] .main-nav .nav-dropdown:hover > summary,
+:root[data-pb-theme="berlian"] .main-nav .nav-dropdown[open] > summary,
+:root[data-pb-theme="berlian"] .main-nav .nav-dropdown.has-active-route > summary {
+  color: var(--lux-blue);
+  background: var(--lux-surface-2);
+  border-color: var(--lux-line-strong);
+}
+:root[data-pb-theme="cahaya"] .nav-dropdown-menu,
+:root[data-pb-theme="air"] .nav-dropdown-menu,
+:root[data-pb-theme="berlian"] .nav-dropdown-menu {
+  background: rgba(255, 255, 255, .96);
+  border-color: var(--lux-line-strong);
+  box-shadow: 0 24px 55px rgba(23, 90, 160, .16);
+}
+:root[data-pb-theme="cahaya"] .nav-dropdown-menu a,
+:root[data-pb-theme="cahaya"] .nav-dropdown-menu button,
+:root[data-pb-theme="air"] .nav-dropdown-menu a,
+:root[data-pb-theme="air"] .nav-dropdown-menu button,
+:root[data-pb-theme="berlian"] .nav-dropdown-menu a,
+:root[data-pb-theme="berlian"] .nav-dropdown-menu button { color: var(--lux-text); }
+:root[data-pb-theme="cahaya"] .nav-dropdown-menu small,
+:root[data-pb-theme="air"] .nav-dropdown-menu small,
+:root[data-pb-theme="berlian"] .nav-dropdown-menu small { color: var(--lux-muted); }
+:root[data-pb-theme="cahaya"] .icon-button,
+:root[data-pb-theme="air"] .icon-button,
+:root[data-pb-theme="berlian"] .icon-button {
+  border-color: var(--lux-line-strong); color: var(--lux-text); background: rgba(255, 255, 255, .7);
+}
+:root[data-pb-theme="cahaya"] .connection-state,
+:root[data-pb-theme="air"] .connection-state,
+:root[data-pb-theme="berlian"] .connection-state { color: var(--lux-muted); }
+
+/* ── Pemilih tema pada bar aksi header (tampil di semua halaman) ─────────── */
+.pb-theme-picker {
+  display: inline-flex; align-items: center; gap: 5px; height: 30px;
+  padding: 0 8px; border: 1px solid var(--lux-line-strong); border-radius: 8px;
+  background: rgba(255, 255, 255, .55); color: var(--lux-muted);
+  font-size: 9px; font-weight: 800; letter-spacing: .08em; white-space: nowrap;
+}
+:root:not([data-pb-theme]) .pb-theme-picker { background: rgba(20, 32, 55, .5); border-color: rgba(94, 125, 184, .4); color: #9db1cc; }
+.pb-theme-picker select {
+  border: 0; outline: none; background: transparent; color: inherit;
+  font: inherit; font-size: 10px; font-weight: 700; cursor: pointer; max-width: 96px;
+}
+.pb-theme-picker option { color: #102b4d; background: #fff; }

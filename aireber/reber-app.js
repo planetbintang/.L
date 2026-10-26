@@ -105,6 +105,15 @@ function applyTheme(theme) {
 }
 try { applyTheme(localStorage.getItem(THEME_KEY) || 'cahaya'); } catch { applyTheme('cahaya'); }
 $('#reberTheme')?.addEventListener('change', (event) => applyTheme(event.target.value));
+// Sinkron dua arah dengan tampilan utama Planetbintang (planetbintang-themes.js
+// memakai THEME_KEY yang sama) — mis. saat kembali dari navigasi lintas halaman.
+window.addEventListener('storage', (event) => { if (event.key === THEME_KEY) applyTheme(event.newValue); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) { try { applyTheme(localStorage.getItem(THEME_KEY) || 'cahaya'); } catch { /* abaikan */ } } });
+// Kabari pemilih tema pada tampilan utama Planetbintang agar ikut tersinkron.
+document.addEventListener('planetbintang:theme-change', (event) => {
+  const picker = $('#reberTheme');
+  if (picker && ['cahaya', 'air', 'berlian'].includes(event.detail?.theme)) picker.value = event.detail.theme;
+});
 
 function setView(view) {
   currentView = view;

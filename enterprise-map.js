@@ -300,8 +300,7 @@
         ${features.length > 5 ? `<li class="emap-more">+${features.length - 5} sub-menu lain…</li>` : ''}</ul>
         <button type="button" data-arch="${slug}">Telusuri arsitektur →</button>`;
       card.querySelector('button').addEventListener('click', () => {
-        state.architecture = slug; archSelect.value = slug; renderResults();
-        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        openArchitecture(slug);
       });
       grid.append(card);
     });
@@ -436,8 +435,94 @@
     if (!list.children.length) list.append(Object.assign(document.createElement('p'), { textContent: 'Tidak ditemukan.' }));
   }
 
-  function render() {
-    renderPage();
+  // ---- Halaman arsitektur individual — #enterprise/arch/<slug> ----
+  // Dirakit dari data yang sama dengan master registry (ALL_ARCHITECTURES +
+  // menuAt) sehingga setiap arsitektur A01–A20 punya halaman detail sendiri.
+  function renderArchPage(meta) {
+    const root = $('#enterpriseMapContent');
+    if (!root || !meta) return;
+    root.replaceChildren();
+
+    const head = el('div', 'emap-head');
+    head.append(
+      el('p', 'eyebrow', `ARSITEKTUR ${String(meta.index + 1).padStart(2, '0')} · ${meta.isHyper ? 'HYPER-ENTERPRISE' : 'DEVOPS & GIT PLATFORM'}`),
+      el('h2', null, `${meta.name} · ${fmt.format(MENUS_PER_ARCH)} Menu`),
+      el('p', 'section-description', `${meta.description} — rentang registry menu ${fmt.format(meta.rangeStart)}–${fmt.format(meta.rangeEnd)} (system_menus), shard JSON di /sys/enterprise/${meta.slug}/.`),
+    );
+    root.append(head);
+
+    const backRow = el('div', 'emap-controls panel');
+    const backBtn = el('button', 'workspace-primary', '← Kembali ke Enterprise Map List');
+    backBtn.type = 'button';
+    backBtn.addEventListener('click', () => goToHash('#enterprise/map'));
+    backRow.append(backBtn);
+    root.append(backRow);
+
+    const stats = el('div', 'emap-stats');
+    [
+      [fmt.format(MENUS_PER_ARCH), 'Menu dalam arsitektur ini'],
+      [`A${String(meta.index + 1).padStart(2, '0')}`, meta.isHyper ? 'Tier Hyper-Enterprise' : 'Tier DevOps Core'],
+      [`${meta.features.length}`, 'Sub-menu fungsional terdokumentasi'],
+      [`${fmt.format(meta.rangeStart)}–${fmt.format(meta.rangeEnd)}`, 'Rentang ID registry'],
+    ].forEach(([value, label]) => {
+      const card = el('div');
+      card.append(el('b', null, value), el('small', null, label));
+      stats.append(card);
+    });
+    root.append(stats);
+
+    const subHead = el('div', 'emap-head');
+    subHead.append(el('p', 'eyebrow', 'SUB-MENU UTAMA'), el('h2', null, 'Struktur navigasi arsitektur'));
+    root.append(subHead);
+    const grid = el('div', 'emap-arch-grid');
+    meta.features.forEach(([fn, fd], featureIndex) => {
+      const card = el('article', `emap-arch-card ${meta.isHyper ? 'emap-arch-hyper' : 'emap-arch-devops'}`);
+      card.innerHTML = `<header><span class="emap-arch-index">S${String(featureIndex + 1).padStart(2, '0')}</span><b>${escapeHtml(fn)}</b><small>sub-menu arsitektur ${escapeHtml(meta.slug)}</small></header><p>${escapeHtml(fd)}</p>`;
+      grid.append(card);
+    });
+    root.append(grid);
+
+    const results = el('section', 'emap-results panel');
+    results.id = 'emapResults';
+    const resultsTitle = el('h3');
+    resultsTitle.append(document.createTextNode('Registry Menu Arsitektur '), el('small', null, `filter otomatis · architecture_slug = ${meta.slug}`));
+    const listWrap = el('div', 'emap-list');
+    listWrap.id = 'emapList';
+    listWrap.setAttribute('role', 'list');
+    results.append(resultsTitle, listWrap);
+    root.append(results);
+
+    const inspector = el('aside', 'emap-inspector');
+    inspector.id = 'emapInspector';
+    inspector.append(el('p', 'workspace-empty', `Pilih satu menu arsitektur '${meta.slug}' untuk membuka baris system_menus + deskripsi, rute URL, dan jalur filesystem virtualnya.`));
+    root.append(inspector);
+
+    // Daftar 500 menu arsitektur ini (lazy scan deterministik via menuAt).
+    state.architecture = meta.slug;
+    state.tier = 'all';
+    renderResults();
+  }
+
+  const renderMapPage = renderPage;
+  function renderPage() {
+    if (state.page === 'arch') {
+      const parsedSlug = parseHash(window.location.hash || '').slug;
+      const meta = (state.selected && state.selected.slug === parsedSlug ? state.selected : null) || archMeta(parsedSlug);
+      if (meta) { state.selected = meta; renderArchPage(meta); return; }
+    }
+    renderMapPage();
+  }
+
+  // Buka halaman arsitektur individual dari submenu header / kartu registry.
+  function openArchitecture(slug) {
+    const meta = archMeta(slug);
+    if (!meta) return false;
+    state.selected = meta;
+    state.page = 'arch';
+    window.PBSystemNavigation?.navigate?.('enterprise-arch');
+    goToHash(`#enterprise/arch/${meta.slug}`);
+    applyHash(`#enterprise/arch/${meta.slug}`);
+    return true;
   }
 
   async function init() {
@@ -445,7 +530,7 @@
     if ($('#enterpriseMapContent')) render();
   }
 
-  window.PBEnterpriseMap = { render, menuAt, architectures: ALL_ARCHITECTURES, openPalette };
+  window.PBEnterpriseMap = { render, menuAt, architectures: ALL_ARCHITECTURES, openPalette, openArchitecture, applyHash };
   document.addEventListener('DOMContentLoaded', init);
   if (document.readyState !== 'loading') init();
 })();

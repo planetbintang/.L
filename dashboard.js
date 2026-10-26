@@ -263,8 +263,14 @@
     $('#reloadButton').textContent = 'Muat ulang';
   });
   $('#themeButton').addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    try { localStorage.setItem('planetbintang-dashboard-theme', document.body.classList.contains('light-mode') ? 'soft' : 'white'); } catch {}
+    // Siklus tema Planetbintang — sinkron dengan tiga tema AI Reber via
+    // planetbintang-themes.js (key localStorage yang sama: planetbintang.aireber.theme.v1).
+    const cycle = ['luxury', 'cahaya', 'air', 'berlian'];
+    const pb = document.documentElement.dataset.pbTheme || '';
+    const next = cycle[(cycle.indexOf(pb || 'luxury') + 1) % cycle.length];
+    if (window.PBThemes) window.PBThemes.applyTheme(next === 'luxury' ? '' : next);
+    else { if (next === 'luxury') delete document.documentElement.dataset.pbTheme; else document.documentElement.dataset.pbTheme = next; }
+    try { localStorage.setItem('planetbintang-dashboard-theme', next === 'luxury' ? 'white' : 'soft'); } catch {}
   });
   try { if (localStorage.getItem('planetbintang-dashboard-theme') === 'soft') document.body.classList.add('light-mode'); } catch {}
 
