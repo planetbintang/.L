@@ -1,0 +1,1 @@
+export function makeSummary(input){const text=input.trim().replace(/\s+/g,' ');if(!text)return'Masukkan teks berita terlebih dahulu.';return'RINGKASAN LOKAL — bukan model AI eksternal\n'+(text.match(/[^.!?]+[.!?]*/g)||[text]).slice(0,3).map(s=>s.trim()).join(' ')+'\n\nVerifikasi klaim dan sumber asli.'}
