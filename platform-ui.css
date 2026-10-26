@@ -403,3 +403,78 @@ body {
 
 /* Keep header navigation strictly square across responsive breakpoints. */
 .nav-dropdown > summary, .nav-dropdown-menu, .nav-dropdown-menu a, .nav-dropdown-menu button, .icon-button { border-radius: 0 !important; }
+
+
+/* Reliable dropdown layer: escape sticky-header overflow clipping and preserve usable menus. */
+.nav-dropdown-menu.pb-dropdown-positioned {
+  position: fixed !important;
+  top: var(--pb-menu-top) !important;
+  left: var(--pb-menu-left) !important;
+  right: auto !important;
+  width: var(--pb-menu-width) !important;
+  max-width: calc(100vw - 20px) !important;
+  max-height: calc(100dvh - 20px) !important;
+  overflow: auto !important;
+  overscroll-behavior: contain;
+  z-index: 10050 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  box-shadow: 0 22px 58px rgba(8, 24, 46, .28), 0 3px 12px rgba(8, 24, 46, .12);
+  scrollbar-width: thin;
+}
+.nav-dropdown[open] { z-index: 10051; }
+.nav-dropdown > summary { cursor: pointer; user-select: none; }
+.nav-dropdown > summary:focus-visible {
+  outline: 3px solid #64a9ff;
+  outline-offset: 3px;
+}
+.nav-dropdown-menu a, .nav-dropdown-menu button {
+  min-height: 42px;
+  transition: background-color .16s ease, color .16s ease;
+}
+@media (max-width: 650px) {
+  .nav-dropdown-menu.pb-dropdown-positioned {
+    border-radius: 14px !important;
+    padding: 8px !important;
+  }
+  .nav-dropdown-menu.pb-dropdown-positioned a,
+  .nav-dropdown-menu.pb-dropdown-positioned button {
+    min-height: 46px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-menu a, .nav-dropdown-menu button { transition: none !important; }
+}
+
+/* Legibility and spacing polish for the full navigation system. */
+.nav-dropdown-menu.pb-dropdown-positioned a,
+.nav-dropdown-menu.pb-dropdown-positioned button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 13px !important;
+  text-align: left;
+}
+.nav-dropdown-menu.pb-dropdown-positioned b {
+  display: block;
+  font-size: 13px !important;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+}
+.nav-dropdown-menu.pb-dropdown-positioned small {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px !important;
+  line-height: 1.45;
+}
+.nav-dropdown-menu.pb-dropdown-positioned a:hover,
+.nav-dropdown-menu.pb-dropdown-positioned button:hover {
+  background: rgba(69, 145, 229, .12);
+}
+.nav-dropdown-menu.pb-dropdown-positioned a:focus-visible,
+.nav-dropdown-menu.pb-dropdown-positioned button:focus-visible {
+  outline: 2px solid #3187e8;
+  outline-offset: -2px;
+}
