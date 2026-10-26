@@ -101,7 +101,7 @@
           const db=await openMediaDb();
           for (const file of selectedFiles) {
             const record={id:mediaId(),name:file.name,type:file.type||'application/octet-stream',size:file.size,lastModified:file.lastModified||0,createdAt:new Date().toISOString(),blob:file};
-            await mediaRequest(db,'readwrite',(store)=>store.put(record));
+            await saveMediaRecord(db,record);
           }
           setMediaStatus(selectedFiles.length+' berkas disimpan di IndexedDB browser ini.');
           selectedFiles=[]; input.value=''; $('#controlMediaList').innerHTML='<p>Impor selesai. Pilih berkas lain jika diperlukan.</p>';
@@ -127,9 +127,11 @@
   }
   const MEDIA_DB_NAME='planetbintang-media-library';
   const MEDIA_STORE='assets';
+  const MEDIA_BLOBS='blobs';
   function mediaId(){return (globalThis.crypto?.randomUUID?.() || ('media-'+Date.now()+'-'+Math.random().toString(36).slice(2)));}
-  function openMediaDb(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('IndexedDB tidak didukung browser'));return;}const req=indexedDB.open(MEDIA_DB_NAME,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(MEDIA_STORE)){const store=db.createObjectStore(MEDIA_STORE,{keyPath:'id'});store.createIndex('createdAt','createdAt');}};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Gagal membuka IndexedDB'));});}
-  function mediaRequest(db,mode,operation){return new Promise((resolve,reject)=>{const tx=db.transaction(MEDIA_STORE,mode);const store=tx.objectStore(MEDIA_STORE);let result;try{result=operation(store);}catch(e){reject(e);return;}tx.oncomplete=()=>resolve(result?.result);tx.onerror=()=>reject(tx.error||result?.error||new Error('Transaksi IndexedDB gagal'));tx.onabort=()=>reject(tx.error||new Error('Transaksi dibatalkan'));});}
+  function openMediaDb(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('IndexedDB tidak didukung browser'));return;}const req=indexedDB.open(MEDIA_DB_NAME,2);req.onupgradeneeded=(event)=>{const db=req.result;const tx=req.transaction;const existed=db.objectStoreNames.contains(MEDIA_STORE);const assets=existed?tx.objectStore(MEDIA_STORE):db.createObjectStore(MEDIA_STORE,{keyPath:'id'});if(!assets.indexNames.contains('createdAt'))assets.createIndex('createdAt','createdAt');if(!db.objectStoreNames.contains(MEDIA_BLOBS))db.createObjectStore(MEDIA_BLOBS,{keyPath:'id'});if(event.oldVersion<2&&existed){const cursor=assets.openCursor();cursor.onsuccess=()=>{const c=cursor.result;if(!c)return;const record=c.value;if(record.blob){tx.objectStore(MEDIA_BLOBS).put({id:record.id,blob:record.blob});delete record.blob;c.update(record);}c.continue();};}};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error||new Error('Gagal membuka IndexedDB'));});}
+  function saveMediaRecord(db,record){return new Promise((resolve,reject)=>{const tx=db.transaction([MEDIA_STORE,MEDIA_BLOBS],'readwrite');const meta={...record};delete meta.blob;tx.objectStore(MEDIA_STORE).put(meta);tx.objectStore(MEDIA_BLOBS).put({id:record.id,blob:record.blob});tx.oncomplete=()=>resolve();tx.onerror=tx.onabort=()=>reject(tx.error||new Error('Transaksi media gagal'));});}
+  function deleteMediaRecord(db,id){return new Promise((resolve,reject)=>{const tx=db.transaction([MEDIA_STORE,MEDIA_BLOBS],'readwrite');tx.objectStore(MEDIA_STORE).delete(id);tx.objectStore(MEDIA_BLOBS).delete(id);tx.oncomplete=()=>resolve();tx.onerror=tx.onabort=()=>reject(tx.error||new Error('Transaksi penghapusan gagal'));});}
   function setMediaStatus(message){const el=$('#controlMediaStatus');if(el)el.textContent=message;}
   async function getMediaRecords(){const db=await openMediaDb();return await new Promise((resolve,reject)=>{const req=db.transaction(MEDIA_STORE,'readonly').objectStore(MEDIA_STORE).getAll();req.onsuccess=()=>resolve((req.result||[]).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt))));req.onerror=()=>reject(req.error||new Error('Gagal membaca Media Library'));});}
   async function renderMediaLibrary(){
@@ -141,7 +143,7 @@
       target.querySelectorAll('[data-media-delete]').forEach(b=>b.addEventListener('click',()=>deleteMedia(b.dataset.mediaDelete)));
     }catch(error){target.innerHTML='<p>Media Library tidak tersedia: '+esc(error.message||'IndexedDB gagal')+'.</p>';}
   }
-  async function findMedia(id){const db=await openMediaDb();return await new Promise((resolve,reject)=>{const req=db.transaction(MEDIA_STORE,'readonly').objectStore(MEDIA_STORE).get(id);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});}
+  async function findMedia(id){const db=await openMediaDb();return await new Promise((resolve,reject)=>{const tx=db.transaction([MEDIA_STORE,MEDIA_BLOBS],'readonly');const metaReq=tx.objectStore(MEDIA_STORE).get(id);const blobReq=tx.objectStore(MEDIA_BLOBS).get(id);tx.oncomplete=()=>resolve(metaReq.result?{...metaReq.result,blob:blobReq.result?.blob}:null);tx.onerror=tx.onabort=()=>reject(tx.error||new Error('Gagal membaca berkas media'));});}
   async function showMediaPreview(id){
     const target=$('#controlMediaPreview');if(!target)return;
     try{const item=await findMedia(id);if(!item)return;const url=URL.createObjectURL(item.blob);target.hidden=false;target.dataset.objectUrl=url;
@@ -155,7 +157,7 @@
     }catch(error){target.textContent='Gagal membuka pratinjau: '+(error.message||'kesalahan penyimpanan');}
   }
   async function downloadMedia(id){try{const item=await findMedia(id);if(!item)return;const url=URL.createObjectURL(item.blob);const a=document.createElement('a');a.href=url;a.download=item.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}catch(error){setMediaStatus('Gagal mengunduh berkas: '+(error.message||'kesalahan penyimpanan'));}}
-  async function deleteMedia(id){if(!window.confirm('Hapus salinan lokal ini dari Media Library?'))return;try{const db=await openMediaDb();await mediaRequest(db,'readwrite',(store)=>store.delete(id));const preview=$('#controlMediaPreview');if(preview?.dataset.objectUrl)URL.revokeObjectURL(preview.dataset.objectUrl);if(preview){preview.hidden=true;preview.innerHTML='';}await renderMediaLibrary();setMediaStatus('Salinan lokal dihapus. Berkas sumber pada perangkat/GitHub tidak berubah.');}catch(error){setMediaStatus('Gagal menghapus: '+(error.message||'kesalahan penyimpanan'));}}
+  async function deleteMedia(id){if(!window.confirm('Hapus salinan lokal ini dari Media Library?'))return;try{const db=await openMediaDb();await deleteMediaRecord(db,id);const preview=$('#controlMediaPreview');if(preview?.dataset.objectUrl)URL.revokeObjectURL(preview.dataset.objectUrl);if(preview){preview.hidden=true;preview.innerHTML='';}await renderMediaLibrary();setMediaStatus('Salinan lokal dihapus. Berkas sumber pada perangkat/GitHub tidak berubah.');}catch(error){setMediaStatus('Gagal menghapus: '+(error.message||'kesalahan penyimpanan'));}}
   function formatBytes(n){if(!Number.isFinite(n))return 'ukuran tidak diketahui';if(n<1024)return n+' B';const units=['KB','MB','GB','TB'];let x=n/1024,i=0;while(x>=1024&&i<units.length-1){x/=1024;i++;}return x.toFixed(1)+' '+units[i];}
   function downloadJson(name,data){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function activateRoute(key, push = false) {
@@ -166,8 +168,7 @@
     document.querySelectorAll('.nav-dropdown').forEach((menu) => { menu.open = false; });
     document.querySelectorAll('[data-system-page]').forEach((node) => { node.hidden = node.dataset.systemPage !== 'control-center'; });
     render(route);
-    document.dispatchEvent(new CustomEvent('planetbintang:route-change', {detail:{name:route,group:'control-center',menu:'control',changed:true}}));
-    window.scrollTo({top:0,behavior:'smooth'});
+      window.scrollTo({top:0,behavior:'smooth'});
   }
   document.querySelectorAll('a[href^="#control/"]').forEach((a) => a.addEventListener('click', (event) => {
     event.preventDefault();
@@ -182,6 +183,5 @@
   window.addEventListener('popstate', syncDeepLink);
   if (location.hash.startsWith('#control/')) syncDeepLink();
   window.PBControlCenter={render,activateRoute};
-  document.addEventListener('planetbintang:route-change',(e)=>{if(e.detail?.group==='control-center')render(e.detail.name);});
   document.addEventListener('planetbintang:snapshot-state',()=>{if(document.body.dataset.systemRoute?.startsWith('control-'))render(document.body.dataset.systemRoute);});
 })();
