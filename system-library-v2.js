@@ -58,8 +58,26 @@
 
   const readRepos = () => {
     const snap = window.PBSystemSnapshot?.data;
-    return Array.isArray(snap?.repositories) ? snap.repositories : [];
+    if (Array.isArray(snap?.repositories)) return snap.repositories;
+    // The public snapshot is also published as a static JSON file; read it when
+    // the repository snapshot module has not finished initializing yet.
+    return cachedRepos;
   };
+  let cachedRepos = [];
+  async function loadPublishedSnapshot() {
+    try {
+      const response = await fetch('./data/repositories.json', {cache:'no-cache', credentials:'omit'});
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      const data = await response.json();
+      if (Array.isArray(data.repositories)) {
+        cachedRepos = data.repositories;
+        render();
+      }
+    } catch (error) {
+      const status = $('#librarySummary', root);
+      if (status && !cachedRepos.length) status.textContent = 'Snapshot repo belum tersedia: ' + error.message + '. Katalog layout dan menu virtual tetap dapat digunakan.';
+    }
+  }
   const readFiles = () => {
     const candidates = [
       window.PB_REPOSITORY_INDEX?.files,
