@@ -1,14 +1,28 @@
 # Vendor Domain Dashboard
 
-A static GitHub Pages dashboard at `/vendordomain/` for a 500-feature vendor/domain management catalogue.
+Dashboard statis berbahasa Indonesia untuk ekosistem vendor domain, diterbitkan dari repositori `planetbintang/.L` pada folder `vendordomain/`.
 
-## Files
-- `index.html`: dashboard, top navigation, four dropdown menus, module sidebar, searchable feature blocks, and text-to-HTML studio.
-- `vendor.css`: responsive layout and light/dark themes.
-- `vendor.js`: 20 modules with exactly 25 named features each, interactive filtering, pagination, feature detail dialog, CSV export and HTML download preview.
+## URL situs
 
-## Published URL
-https://planetbintang.github.io/.L/vendordomain/
+- GitHub Pages: https://planetbintang.github.io/.L/vendordomain/
+- Source: https://github.com/planetbintang/.L/tree/io/vendordomain
 
-## Integration status
-The catalogue and front-end interactions work as a static prototype. Live domain registration, registrar account changes, DNS updates, TLS issuance, billing, hosting deployment and other privileged actions require secure server-side API integrations. Do not put registrar tokens, API secrets or private keys in client-side JavaScript. The text studio exports HTML; a public site requires uploading the generated HTML to hosting and pointing a domain to that service.
+## Isi dan navigasi
+
+- Satu tautan utama **Ikhtisar** dan empat dropdown header: **Domain & DNS**, **Vendor & Ekstensi**, **Situs & Deployment**, dan **Sistem & Administrasi**.
+- Sidebar berisi 20 blok modul.
+- Katalog berisi tepat 500 entri: 20 modul × 25 fitur; seluruh katalog ditampilkan pada halaman katalog dan bisa dicari/filter.
+- Panel detail untuk setiap fitur, ekspor katalog ke CSV, tema terang/gelap, navigasi responsif, serta studio teks-ke-HTML dengan pratinjau dan unduhan file.
+- Studio teks-ke-situs menampilkan pratinjau saat tombol **Perbarui pratinjau** ditekan; tombol **Unduh HTML** menghasilkan file HTML statis.
+
+## Berkas
+
+- `index.html`: kerangka dashboard, header, empat dropdown, sidebar, katalog, studio penerbitan, dan dialog detail.
+- `vendor.css`: tata letak responsif, blok fitur, tema gelap, navigasi seluler, dan fokus keyboard.
+- `vendor.js`: data 500 fitur, pencarian/filter, panel detail, ekspor CSV, dan generator HTML.
+
+## Batas integrasi
+
+Katalog dan interaksi frontend adalah prototipe statis. Pendaftaran/transfer domain, perubahan DNS, penerbitan TLS, penagihan, dan deployment hosting yang sesungguhnya memerlukan backend serta API penyedia dengan kredensial yang aman. Jangan menyimpan token registrar, API secret, atau private key dalam JavaScript frontend. File HTML yang diunduh baru menjadi publik setelah diunggah ke hosting dan domain diarahkan dengan DNS/HTTPS yang benar.
+
+GitHub Pages akan memperbarui situs setelah commit pada branch yang dikonfigurasi sebagai sumber Pages selesai diproses.
