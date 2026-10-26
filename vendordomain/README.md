@@ -26,3 +26,8 @@ Dashboard statis berbahasa Indonesia untuk ekosistem vendor domain, diterbitkan 
 Katalog dan interaksi frontend adalah prototipe statis. Pendaftaran/transfer domain, perubahan DNS, penerbitan TLS, penagihan, dan deployment hosting yang sesungguhnya memerlukan backend serta API penyedia dengan kredensial yang aman. Jangan menyimpan token registrar, API secret, atau private key dalam JavaScript frontend. File HTML yang diunduh baru menjadi publik setelah diunggah ke hosting dan domain diarahkan dengan DNS/HTTPS yang benar.
 
 GitHub Pages akan memperbarui situs setelah commit pada branch yang dikonfigurasi sebagai sumber Pages selesai diproses.
+## Menu utama dan verifikasi
+
+Satu menu utama pada header adalah **Vendor Domain** dengan empat dropdown: **Domain & DNS**, **Vendor & Ekstensi**, **Situs & Deployment**, dan **Sistem & Administrasi**. Sidebar dan blok fitur menampilkan 20 modul × 25 entri = 500 fitur. Panel detail, filter, pencarian, ekspor CSV, tema, navigasi seluler, serta pratinjau dan unduhan HTML berjalan sebagai fitur frontend statis.
+
+Perubahan ini tidak menambahkan backend registrar, DNS, pembayaran, atau hosting. Operasi produksi tetap memerlukan server/API layanan yang terautentikasi. GitHub Pages menyajikan frontend statis; publikasi situs yang dibuat dari teks mengharuskan file HTML hasil unduhan diterapkan ke hosting.
