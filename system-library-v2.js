@@ -318,4 +318,5 @@
   window.addEventListener('planetbintang:repository-index-ready', () => render());
   window.addEventListener('planetbintang:file-index-ready', () => render());
   render();
+  void loadPublishedSnapshot();
 })();
