@@ -406,7 +406,7 @@
       const status = $('#snapsDataUploadStatus');
       const files = Array.from($('#snapsDataFiles')?.files || []);
       const folderInput = $('#snapsDataFolder');
-      const folder = String(folderInput?.value || 'workspace/snaps').replaceAll('\\\\', '/').split('/').filter(Boolean).join('/');
+      const folder = String(folderInput?.value || 'workspace/snaps').replaceAll('\\', '/').split('/').filter(Boolean).join('/');
       if (!files.length) { status.textContent = 'Pilih setidaknya satu file.'; return; }
       if (!window.PBLocalFiles?.saveFile || !window.PBLocalFiles?.get) {
         status.textContent = 'Penyimpanan File Manager belum siap. Muat ulang halaman dan coba lagi.';
@@ -417,7 +417,7 @@
       const errors = [];
       status.textContent = 'Memeriksa file dan kuota penyimpanan…';
       for (const file of files) {
-        const name = file.name.replaceAll('\\\\', '/').split('/').pop().replace(/[\\u0000-\\u001f\\u007f]/g, '').slice(0, 180);
+        const name = file.name.replaceAll('\\', '/').split('/').pop().replace(/[\u0000-\u001f\u007f]/g, '').slice(0, 180);
         if (!name || name === '.' || name === '..') { skipped += 1; continue; }
         const path = `${folder}/${name}`;
         try {
