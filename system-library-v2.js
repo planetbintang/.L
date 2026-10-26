@@ -204,16 +204,28 @@
     });
   }
   function openItem(item) {
-    if (item.repoPath) {
+    if (item.repoFullName) {
+      const name = item.repoFullName.split('/').pop();
+      location.hash = 'fileManager/' + encodePath(name);
+      window.PBFileManager?.setPath?.(name);
+    } else if (item.repoPath) {
       location.hash = 'fileManager/' + encodePath(item.repoPath);
       window.PBFileManager?.setPath?.(item.repoPath);
     } else if (item.route && window.PBSystemNavigation?.navigate) {
       window.PBSystemNavigation.navigate(item.route);
     } else {
-      location.hash = String(item.path || '#overview').replace(/^#/, '');
+      const path = String(item.path || '#overview');
+      if (path.startsWith('#fileManager/')) {
+        const folder = decodeURIComponent(path.slice('#fileManager/'.length).split('/').map(part => part.replace(/%2F/gi, '/')).join('/'));
+        window.PBSystemNavigation?.navigate?.('file-manager');
+        location.hash = 'fileManager/' + encodePath(folder);
+        window.PBFileManager?.setPath?.(folder);
+      } else {
+        location.hash = path.replace(/^#/, '');
+      }
     }
     const alert = $('#librarySummary', root);
-    alert.textContent = 'Dipilih ' + item.id + ' · ' + item.path;
+    alert.textContent = 'Dipilih ' + item.id + ' · ' + item.path + ' · ' + (item.real ? 'sumber indeks nyata' : 'katalog virtual');
   }
   function render() {
     const all = visibleEntries();
