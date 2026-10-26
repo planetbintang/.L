@@ -1,0 +1,733 @@
+{
+ "id": 7742,
+ "menu_code": "HYPER-A06-242",
+ "architecture_group": "Alerting, Incident Response & Notifications",
+ "architecture_slug": "alerting-incident",
+ "architecture_index": 16,
+ "parent_id": 7500,
+ "menu_name": "Alerts > Escalation Policies · Scheduler #05",
+ "route_path": "/hyper/alerting-incident/escalation-policies-242",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Eskalasi jika tim tingkat pertama tidak merespons insiden dalam 15 menit.",
+ "system_instruction": "Sub-modul 'Scheduler' turunan dari 'Alerts > Escalation Policies'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "alerts-escalation-policies-scheduler-05-HYPER-A06-242.json",
+ "feature": {
+  "fileName": "alerts-escalation-policies-scheduler-05-HYPER-A06-242.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "read-only",
+  "primaryRegion": "eu-central-1",
+  "failoverRegion": "global-anycast",
+  "ownerTeam": "team-alerting-3",
+  "slaTier": "platinum",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-alerting-incident-7"
+   },
+   {
+    "key": "queue.priority",
+    "value": 3
+   },
+   {
+    "key": "retry.max",
+    "value": 5
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 600
+   },
+   {
+    "key": "timeout.sec",
+    "value": 32
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 180
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 300
+   },
+   {
+    "key": "burst.capacity",
+    "value": 150
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.07
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/alerts-escalation-policies-scheduler-05"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.4
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "eu-central-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 14
+   },
+   {
+    "key": "retention.days",
+    "value": 182
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3500
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 5120
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://alerts-escalation-policies-scheduler-05/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a06-242/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a06-242/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a06-242/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a06-242/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a06-242/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a06-242/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a06-242/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a06-242/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a06-242/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a06-242/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a06-242/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a06-242/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a06-242/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a06-242/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a06-242/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a06-242/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a06-242/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a06-242/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "alerts.escalation.policies.scheduler.05.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_alerts_escalation_policies_scheduler_05 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_alerts_escalation_policies_scheduler_05_ts ON feat_alerts_escalation_policies_scheduler_05 (updated_at DESC);",
+   "INSERT INTO feat_alerts_escalation_policies_scheduler_05 (id, payload) VALUES (7742, '{\"menu_code\":\"HYPER-A06-242\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 7742; COMMIT;",
+   "SELECT count(*) FROM feat_alerts_escalation_policies_scheduler_05 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_alerts_escalation_policies_scheduler_05_staging WHERE created_at < now() - interval '32 days';",
+   "GRANT SELECT ON feat_alerts_escalation_policies_scheduler_05 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_alerts_escalation_policies_scheduler_05 TO role_worker;",
+   "COPY feat_alerts_escalation_policies_scheduler_05 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_alerts_escalation_policies_scheduler_05 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_alerts_escalation_policies_scheduler_05 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_alerts_escalation_policies_scheduler_05;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 2,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 3,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 4,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 5,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 6,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 7,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 8,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 9,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 10,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 11,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 12,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 13,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 14,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 15,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 16,
+    "action": "Terapkan perubahan bertahap 10%"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/alerts-escalation-policies-s-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/alerts-escalation-policies-s-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/alerts-escalation-policies-s-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/alerts-escalation-policies-s-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/alerts-escalation-policies-s-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/alerts-escalation-policies-s-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/alerts-escalation-policies-s-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/alerts-escalation-policies-s-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/alerting-incident/escalation-policies-242/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-07742-01",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-07742-02",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-07742-03",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-07742-04",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-07742-05",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-07742-06",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-07742-07",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-07742-08",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-07742-09",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-07742-10",
+    "expect": "Payload lolos skema"
+   }
+  ]
+ }
+}

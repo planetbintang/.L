@@ -1,0 +1,733 @@
+{
+ "id": 2,
+ "menu_code": "DEVOPS-0001",
+ "architecture_group": "Core Code Management & Repositories",
+ "architecture_slug": "core-code",
+ "architecture_index": 1,
+ "parent_id": null,
+ "menu_name": "Core Code Management · Code > Commits",
+ "route_path": "/enterprise/core-code/002",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Registri riwayat perubahan, tanda tangan kriptografi GPG, peninjauan diferensial.",
+ "system_instruction": "Mengaktifkan modul 'Code > Commits' pada arsitektur Core Code Management & Repositories; pipeline pemrosesan berjalan pada worker cluster regional.",
+ "fileName": "core-code-management-code-commits-DEVOPS-0001.json",
+ "feature": {
+  "fileName": "core-code-management-code-commits-DEVOPS-0001.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "read-only",
+  "primaryRegion": "eu-central-1",
+  "failoverRegion": "global-anycast",
+  "ownerTeam": "team-core-3",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-core-code-3"
+   },
+   {
+    "key": "queue.priority",
+    "value": 3
+   },
+   {
+    "key": "retry.max",
+    "value": 5
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 600
+   },
+   {
+    "key": "timeout.sec",
+    "value": 32
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 180
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 300
+   },
+   {
+    "key": "burst.capacity",
+    "value": 150
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.07
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/core-code-management-code-commits"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.4
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "eu-central-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 14
+   },
+   {
+    "key": "retention.days",
+    "value": 32
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2500
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 3072
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://core-code-management-code-commits/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://core-code-management-code-commits/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://core-code-management-code-commits/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://core-code-management-code-commits/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://core-code-management-code-commits/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://core-code-management-code-commits/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://core-code-management-code-commits/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://core-code-management-code-commits/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://core-code-management-code-commits/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://core-code-management-code-commits/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://core-code-management-code-commits/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://core-code-management-code-commits/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://core-code-management-code-commits/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://core-code-management-code-commits/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://core-code-management-code-commits/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://core-code-management-code-commits/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0001/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0001/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0001/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0001/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0001/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0001/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0001/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0001/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0001/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0001/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0001/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0001/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "core.code.management.code.commits.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "core.code.management.code.commits.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_core_code_management_code_commits (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_core_code_management_code_commits_ts ON feat_core_code_management_code_commits (updated_at DESC);",
+   "INSERT INTO feat_core_code_management_code_commits (id, payload) VALUES (2, '{\"menu_code\":\"DEVOPS-0001\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 2; COMMIT;",
+   "SELECT count(*) FROM feat_core_code_management_code_commits WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_core_code_management_code_commits_staging WHERE created_at < now() - interval '32 days';",
+   "GRANT SELECT ON feat_core_code_management_code_commits TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_core_code_management_code_commits TO role_worker;",
+   "COPY feat_core_code_management_code_commits TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_core_code_management_code_commits ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_core_code_management_code_commits ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_core_code_management_code_commits;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 2,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 3,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 4,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 5,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 6,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 7,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 8,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 9,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 10,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 11,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 12,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 13,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 14,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 15,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 16,
+    "action": "Validasi terhadap policy organization"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/core-code-management-code-co-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/core-code-management-code-co-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/core-code-management-code-co-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/core-code-management-code-co-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/core-code-management-code-co-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/core-code-management-code-co-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/core-code-management-code-co-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/core-code-management-code-co-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/core-code/002/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/core-code/002/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/core-code/002/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/core-code/002/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/core-code/002/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/core-code/002/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/core-code/002/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/core-code/002/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-00002-01",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-00002-02",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-00002-03",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-00002-04",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-00002-05",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-00002-06",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-00002-07",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-00002-08",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-00002-09",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-00002-10",
+    "expect": "Payload lolos skema"
+   }
+  ]
+ }
+}

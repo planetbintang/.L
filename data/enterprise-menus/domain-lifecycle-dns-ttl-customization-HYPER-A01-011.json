@@ -1,0 +1,733 @@
+{
+ "id": 5011,
+ "menu_code": "HYPER-A01-011",
+ "architecture_group": "Domain Lifecycle & DNS Engine",
+ "architecture_slug": "domain-dns-engine",
+ "architecture_index": 11,
+ "parent_id": null,
+ "menu_name": "Domain Lifecycle · DNS > TTL Customization",
+ "route_path": "/hyper/domain-dns-engine/ttl-customization-011",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Waktu propagasi dari ultra-cepat 30 detik hingga standar.",
+ "system_instruction": "Mengaktifkan modul 'DNS > TTL Customization' pada arsitektur Domain Lifecycle & DNS Engine; pipeline pemrosesan berjalan pada worker cluster regional.",
+ "fileName": "domain-lifecycle-dns-ttl-customization-HYPER-A01-011.json",
+ "feature": {
+  "fileName": "domain-lifecycle-dns-ttl-customization-HYPER-A01-011.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "sandbox",
+  "primaryRegion": "us-east-1",
+  "failoverRegion": "sa-east-1",
+  "ownerTeam": "team-domain-2",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-domain-dns-engine-4"
+   },
+   {
+    "key": "queue.priority",
+    "value": 2
+   },
+   {
+    "key": "retry.max",
+    "value": 4
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 400
+   },
+   {
+    "key": "timeout.sec",
+    "value": 91
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 120
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1200
+   },
+   {
+    "key": "burst.capacity",
+    "value": 100
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.16
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/domain-lifecycle-dns-ttl-customization"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.3
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "us-east-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 19
+   },
+   {
+    "key": "retention.days",
+    "value": 91
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2750
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 3584
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://domain-lifecycle-dns-ttl-customization/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a01-011/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a01-011/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a01-011/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a01-011/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a01-011/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a01-011/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a01-011/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a01-011/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a01-011/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a01-011/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a01-011/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a01-011/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a01-011/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a01-011/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a01-011/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a01-011/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a01-011/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a01-011/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "domain.lifecycle.dns.ttl.customization.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_domain_lifecycle_dns_ttl_customization (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_domain_lifecycle_dns_ttl_customization_ts ON feat_domain_lifecycle_dns_ttl_customization (updated_at DESC);",
+   "INSERT INTO feat_domain_lifecycle_dns_ttl_customization (id, payload) VALUES (5011, '{\"menu_code\":\"HYPER-A01-011\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 5011; COMMIT;",
+   "SELECT count(*) FROM feat_domain_lifecycle_dns_ttl_customization WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_domain_lifecycle_dns_ttl_customization_staging WHERE created_at < now() - interval '61 days';",
+   "GRANT SELECT ON feat_domain_lifecycle_dns_ttl_customization TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_domain_lifecycle_dns_ttl_customization TO role_worker;",
+   "COPY feat_domain_lifecycle_dns_ttl_customization TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_domain_lifecycle_dns_ttl_customization ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_domain_lifecycle_dns_ttl_customization ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_domain_lifecycle_dns_ttl_customization;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 2,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 3,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 4,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 5,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 6,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 7,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 8,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 9,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 10,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 11,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 12,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 13,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 14,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 15,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 16,
+    "action": "Auto-rollback bila anomali"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/domain-lifecycle-dns-ttl-cus-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/domain-dns-engine/ttl-customization-011/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-05011-01",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-05011-02",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-05011-03",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-05011-04",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-05011-05",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-05011-06",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-05011-07",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-05011-08",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-05011-09",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-05011-10",
+    "expect": "Audit event terbit"
+   }
+  ]
+ }
+}

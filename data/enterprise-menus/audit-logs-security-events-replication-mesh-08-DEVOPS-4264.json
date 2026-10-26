@@ -1,0 +1,733 @@
+{
+ "id": 4265,
+ "menu_code": "DEVOPS-4264",
+ "architecture_group": "Auditing, Logging & Monitoring",
+ "architecture_slug": "audit-monitoring",
+ "architecture_index": 9,
+ "parent_id": 4000,
+ "menu_name": "Audit Logs > Security Events · Replication Mesh #08",
+ "route_path": "/enterprise/audit-monitoring/265",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Catatan riwayat login, perubahan kata sandi, eskalasi hak akses admin.",
+ "system_instruction": "Sub-modul 'Replication Mesh' turunan dari 'Audit Logs > Security Events'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "audit-logs-security-events-replication-mesh-08-DEVOPS-4264.json",
+ "feature": {
+  "fileName": "audit-logs-security-events-replication-mesh-08-DEVOPS-4264.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "on-demand",
+  "primaryRegion": "global-anycast",
+  "failoverRegion": "eu-central-1",
+  "ownerTeam": "team-audit-6",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-audit-monitoring-2"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 5
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 65
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 360
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 600
+   },
+   {
+    "key": "burst.capacity",
+    "value": 300
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.1
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/audit-logs-security-events-replication-mesh-08"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "global-anycast"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 17
+   },
+   {
+    "key": "retention.days",
+    "value": 335
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2250
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 2560
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://audit-logs-security-events-replication-mesh-08/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4264/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4264/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4264/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4264/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4264/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4264/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4264/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4264/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4264/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4264/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4264/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4264/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4264/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4264/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-4264/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-4264/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-4264/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-4264/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "audit.logs.security.events.replication.mesh..activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "audit.logs.security.events.replication.mesh..audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_audit_logs_security_events_replication_mesh_08 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_audit_logs_security_events_replication_mesh_08_ts ON feat_audit_logs_security_events_replication_mesh_08 (updated_at DESC);",
+   "INSERT INTO feat_audit_logs_security_events_replication_mesh_08 (id, payload) VALUES (4265, '{\"menu_code\":\"DEVOPS-4264\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 4265; COMMIT;",
+   "SELECT count(*) FROM feat_audit_logs_security_events_replication_mesh_08 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_audit_logs_security_events_replication_mesh_08_staging WHERE created_at < now() - interval '35 days';",
+   "GRANT SELECT ON feat_audit_logs_security_events_replication_mesh_08 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_audit_logs_security_events_replication_mesh_08 TO role_worker;",
+   "COPY feat_audit_logs_security_events_replication_mesh_08 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_audit_logs_security_events_replication_mesh_08 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_audit_logs_security_events_replication_mesh_08 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_audit_logs_security_events_replication_mesh_08;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 2,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 3,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 4,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 5,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 6,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 7,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 8,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 9,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 10,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 11,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 12,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 13,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 14,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 15,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 16,
+    "action": "Proyeksi diff rencana perubahan"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/audit-logs-security-events-r-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/audit-logs-security-events-r-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/audit-logs-security-events-r-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/audit-logs-security-events-r-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/audit-logs-security-events-r-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/audit-logs-security-events-r-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/audit-logs-security-events-r-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/audit-logs-security-events-r-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/audit-monitoring/265/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/audit-monitoring/265/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-04265-01",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-04265-02",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-04265-03",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-04265-04",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-04265-05",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-04265-06",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-04265-07",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-04265-08",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-04265-09",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-04265-10",
+    "expect": "Idempoten pada retry"
+   }
+  ]
+ }
+}

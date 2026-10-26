@@ -1,0 +1,733 @@
+{
+ "id": 6501,
+ "menu_code": "HYPER-A04-001",
+ "architecture_group": "Content Control & Edge Security WAF/CDN",
+ "architecture_slug": "edge-security-waf",
+ "architecture_index": 14,
+ "parent_id": null,
+ "menu_name": "Content Control · CDN > Edge Caching",
+ "route_path": "/hyper/edge-security-waf/edge-caching-001",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Aturan cache berdasarkan ekstensi berkas, header HTTP, atau cookie.",
+ "system_instruction": "Mengaktifkan modul 'CDN > Edge Caching' pada arsitektur Content Control & Edge Security WAF/CDN; pipeline pemrosesan berjalan pada worker cluster regional.",
+ "fileName": "content-control-cdn-edge-caching-HYPER-A04-001.json",
+ "feature": {
+  "fileName": "content-control-cdn-edge-caching-HYPER-A04-001.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "event-driven",
+  "primaryRegion": "ap-south-1",
+  "failoverRegion": "ap-southeast-1",
+  "ownerTeam": "team-edge-4",
+  "slaTier": "gold",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-edge-security-waf-6"
+   },
+   {
+    "key": "queue.priority",
+    "value": 2
+   },
+   {
+    "key": "retry.max",
+    "value": 3
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 400
+   },
+   {
+    "key": "timeout.sec",
+    "value": 51
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 120
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 200
+   },
+   {
+    "key": "burst.capacity",
+    "value": 200
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.06
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/content-control-cdn-edge-caching"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.3
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "ap-south-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 21
+   },
+   {
+    "key": "retention.days",
+    "value": 261
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3250
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 4608
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://content-control-cdn-edge-caching/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://content-control-cdn-edge-caching/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://content-control-cdn-edge-caching/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://content-control-cdn-edge-caching/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://content-control-cdn-edge-caching/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://content-control-cdn-edge-caching/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://content-control-cdn-edge-caching/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://content-control-cdn-edge-caching/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://content-control-cdn-edge-caching/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://content-control-cdn-edge-caching/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://content-control-cdn-edge-caching/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://content-control-cdn-edge-caching/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://content-control-cdn-edge-caching/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://content-control-cdn-edge-caching/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://content-control-cdn-edge-caching/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://content-control-cdn-edge-caching/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a04-001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a04-001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a04-001/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a04-001/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a04-001/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a04-001/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a04-001/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a04-001/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a04-001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a04-001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a04-001/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a04-001/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a04-001/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a04-001/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a04-001/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a04-001/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a04-001/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a04-001/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "content.control.cdn.edge.caching.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "content.control.cdn.edge.caching.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_content_control_cdn_edge_caching (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_content_control_cdn_edge_caching_ts ON feat_content_control_cdn_edge_caching (updated_at DESC);",
+   "INSERT INTO feat_content_control_cdn_edge_caching (id, payload) VALUES (6501, '{\"menu_code\":\"HYPER-A04-001\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 6501; COMMIT;",
+   "SELECT count(*) FROM feat_content_control_cdn_edge_caching WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_content_control_cdn_edge_caching_staging WHERE created_at < now() - interval '51 days';",
+   "GRANT SELECT ON feat_content_control_cdn_edge_caching TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_content_control_cdn_edge_caching TO role_worker;",
+   "COPY feat_content_control_cdn_edge_caching TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_content_control_cdn_edge_caching ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_content_control_cdn_edge_caching ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_content_control_cdn_edge_caching;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 2,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 3,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 4,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 5,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 6,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 7,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 8,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 9,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 10,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 11,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 12,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 13,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 14,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 15,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 16,
+    "action": "Pantau metrik kesehatan 5 menit"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/content-control-cdn-edge-cac-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/content-control-cdn-edge-cac-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/content-control-cdn-edge-cac-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/content-control-cdn-edge-cac-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/content-control-cdn-edge-cac-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/content-control-cdn-edge-cac-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/content-control-cdn-edge-cac-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/content-control-cdn-edge-cac-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/edge-security-waf/edge-caching-001/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-06501-01",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-06501-02",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-06501-03",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-06501-04",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-06501-05",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-06501-06",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-06501-07",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-06501-08",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-06501-09",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-06501-10",
+    "expect": "Audit event terbit"
+   }
+  ]
+ }
+}

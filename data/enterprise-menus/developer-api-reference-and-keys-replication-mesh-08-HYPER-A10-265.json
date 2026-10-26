@@ -1,0 +1,733 @@
+{
+ "id": 9765,
+ "menu_code": "HYPER-A10-265",
+ "architecture_group": "Extension Marketplace & Developer Ecosystem",
+ "architecture_slug": "developer-marketplace",
+ "architecture_index": 20,
+ "parent_id": 9500,
+ "menu_name": "Developer > API Reference & Keys · Replication Mesh #08",
+ "route_path": "/hyper/developer-marketplace/api-reference-&-keys-265",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Generator API token dengan read/write scopes dan throttling rate.",
+ "system_instruction": "Sub-modul 'Replication Mesh' turunan dari 'Developer > API Reference & Keys'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "developer-api-reference-and-keys-replication-mesh-08-HYPER-A10-265.json",
+ "feature": {
+  "fileName": "developer-api-reference-and-keys-replication-mesh-08-HYPER-A10-265.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "event-driven",
+  "primaryRegion": "ap-south-1",
+  "failoverRegion": "ap-southeast-1",
+  "ownerTeam": "team-developer-4",
+  "slaTier": "platinum",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-developer-marketplace-6"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 3
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 75
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 360
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 600
+   },
+   {
+    "key": "burst.capacity",
+    "value": 200
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.1
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/developer-api-reference-and-keys-replication-mesh-08"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "ap-south-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 21
+   },
+   {
+    "key": "retention.days",
+    "value": 225
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3250
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 4608
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://developer-api-reference-and-keys-replication-mesh-08/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-265/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-265/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-265/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-265/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-265/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-265/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-265/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-265/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-265/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-265/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-265/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-265/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-265/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-265/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a10-265/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a10-265/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a10-265/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a10-265/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "developer.api.reference.and.keys.replication.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "developer.api.reference.and.keys.replication.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_developer_api_reference_and_keys_replication_mesh_08 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_developer_api_reference_and_keys_replication_mesh_08_ts ON feat_developer_api_reference_and_keys_replication_mesh_08 (updated_at DESC);",
+   "INSERT INTO feat_developer_api_reference_and_keys_replication_mesh_08 (id, payload) VALUES (9765, '{\"menu_code\":\"HYPER-A10-265\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 9765; COMMIT;",
+   "SELECT count(*) FROM feat_developer_api_reference_and_keys_replication_mesh_08 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_developer_api_reference_and_keys_replication_mesh_08_staging WHERE created_at < now() - interval '75 days';",
+   "GRANT SELECT ON feat_developer_api_reference_and_keys_replication_mesh_08 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_developer_api_reference_and_keys_replication_mesh_08 TO role_worker;",
+   "COPY feat_developer_api_reference_and_keys_replication_mesh_08 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_developer_api_reference_and_keys_replication_mesh_08 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_developer_api_reference_and_keys_replication_mesh_08 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_developer_api_reference_and_keys_replication_mesh_08;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 2,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 3,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 4,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 5,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 6,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 7,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 8,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 9,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 10,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 11,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 12,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 13,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 14,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 15,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 16,
+    "action": "Pantau metrik kesehatan 5 menit"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/developer-api-reference-and--on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/developer-api-reference-and--before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/developer-api-reference-and--after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/developer-api-reference-and--on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/developer-api-reference-and--before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/developer-api-reference-and--after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/developer-api-reference-and--on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/developer-api-reference-and--on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/developer-marketplace/api-reference-&-keys-265/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-09765-01",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-09765-02",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-09765-03",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-09765-04",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-09765-05",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-09765-06",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-09765-07",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-09765-08",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-09765-09",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-09765-10",
+    "expect": "Idempoten pada retry"
+   }
+  ]
+ }
+}

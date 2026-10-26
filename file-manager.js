@@ -73,9 +73,13 @@
     const enterpriseArchMatch = path.match(/^sys\/enterprise\/([a-z-]+)$/);
     if (enterpriseArchMatch && ENTERPRISE_MAP_ARCHITECTURES.includes(enterpriseArchMatch[1])) {
       const archIndex = ENTERPRISE_MAP_ARCHITECTURES.indexOf(enterpriseArchMatch[1]);
+      // Batch rename: nama file mengikuti nama menu (<slug-menu>-<MENU-CODE>.json),
+      // dipetakan dari window.PB_ENTERPRISE_MENU_INDEX (data/enterprise-menus-index.js).
+      const emapIndex = window.PB_ENTERPRISE_MENU_INDEX || {};
       return Array.from({ length: 500 }, (_, slot) => {
         const id = archIndex * 500 + slot + 1;
-        return { path: `${path}/menu-${String(id).padStart(5, '0')}.json`, type: 'file', mode: '0100644', size: 640, sizeKnown: true, function: `system_menus row #${id} · arsitektur ${enterpriseArchMatch[1]}`, fetchPath: `data/enterprise-menus/menu-${String(id).padStart(5, '0')}.json` };
+        const fileName = emapIndex[String(id).padStart(5, '0')] || `menu-${String(id).padStart(5, '0')}.json`;
+        return { path: `${path}/${fileName}`, type: 'file', mode: '0100644', size: 24576, sizeKnown: true, function: `system_menus row #${id} · arsitektur ${enterpriseArchMatch[1]} · ≥150 baris fitur padat`, fetchPath: `data/enterprise-menus/${fileName}` };
       });
     }
     // Mirror path lama: /system_ext/hyper-menus/<arsitektur> → shard yang sama.

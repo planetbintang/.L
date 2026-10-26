@@ -1,0 +1,733 @@
+{
+ "id": 6217,
+ "menu_code": "HYPER-A03-217",
+ "architecture_group": "Hyper-Monitoring & Observability Engine",
+ "architecture_slug": "hyper-monitoring",
+ "architecture_index": 13,
+ "parent_id": 6000,
+ "menu_name": "Metrics > Network Throughput · Config Drift Guard #02",
+ "route_path": "/hyper/hyper-monitoring/network-throughput-217",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Analisis bandwidth ingress/egress dan deteksi lonjakan paket.",
+ "system_instruction": "Sub-modul 'Config Drift Guard' turunan dari 'Metrics > Network Throughput'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "metrics-network-throughput-config-drift-guard-02-HYPER-A03-217.json",
+ "feature": {
+  "fileName": "metrics-network-throughput-config-drift-guard-02-HYPER-A03-217.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "sandbox",
+  "primaryRegion": "us-east-1",
+  "failoverRegion": "sa-east-1",
+  "ownerTeam": "team-hyper-2",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-hyper-monitoring-2"
+   },
+   {
+    "key": "queue.priority",
+    "value": 3
+   },
+   {
+    "key": "retry.max",
+    "value": 4
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 600
+   },
+   {
+    "key": "timeout.sec",
+    "value": 37
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 480
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1800
+   },
+   {
+    "key": "burst.capacity",
+    "value": 100
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "strong"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.22
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/metrics-network-throughput-config-drift-guard-02"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.hyper-enterprise"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.4
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "us-east-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 13
+   },
+   {
+    "key": "retention.days",
+    "value": 307
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2250
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 2560
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://metrics-network-throughput-config-drift-guard-02/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a03-217/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a03-217/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a03-217/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a03-217/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a03-217/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a03-217/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a03-217/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a03-217/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a03-217/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a03-217/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a03-217/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a03-217/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a03-217/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a03-217/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/hyper-a03-217/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/hyper-a03-217/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/hyper-a03-217/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/hyper-a03-217/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "metrics.network.throughput.config.drift.guar.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_metrics_network_throughput_config_drift_guard_02 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_metrics_network_throughput_config_drift_guard_02_ts ON feat_metrics_network_throughput_config_drift_guard_02 (updated_at DESC);",
+   "INSERT INTO feat_metrics_network_throughput_config_drift_guard_02 (id, payload) VALUES (6217, '{\"menu_code\":\"HYPER-A03-217\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 6217; COMMIT;",
+   "SELECT count(*) FROM feat_metrics_network_throughput_config_drift_guard_02 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_metrics_network_throughput_config_drift_guard_02_staging WHERE created_at < now() - interval '67 days';",
+   "GRANT SELECT ON feat_metrics_network_throughput_config_drift_guard_02 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_metrics_network_throughput_config_drift_guard_02 TO role_worker;",
+   "COPY feat_metrics_network_throughput_config_drift_guard_02 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_metrics_network_throughput_config_drift_guard_02 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_metrics_network_throughput_config_drift_guard_02 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_metrics_network_throughput_config_drift_guard_02;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 2,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 3,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 4,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 5,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 6,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 7,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 8,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 9,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 10,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 11,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 12,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 13,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 14,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 15,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 16,
+    "action": "Proyeksi diff rencana perubahan"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/metrics-network-throughput-c-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/metrics-network-throughput-c-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/metrics-network-throughput-c-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/metrics-network-throughput-c-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/metrics-network-throughput-c-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/metrics-network-throughput-c-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/metrics-network-throughput-c-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/metrics-network-throughput-c-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/hyper/hyper-monitoring/network-throughput-217/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-06217-01",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-06217-02",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-06217-03",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-06217-04",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-06217-05",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-06217-06",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-06217-07",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-06217-08",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-06217-09",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-06217-10",
+    "expect": "RBAC menolak tanpa izin"
+   }
+  ]
+ }
+}

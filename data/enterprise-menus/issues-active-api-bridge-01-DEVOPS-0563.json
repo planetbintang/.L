@@ -1,0 +1,733 @@
+{
+ "id": 564,
+ "menu_code": "DEVOPS-0563",
+ "architecture_group": "Project Management & Issue Tracking",
+ "architecture_slug": "project-management",
+ "architecture_index": 2,
+ "parent_id": 500,
+ "menu_name": "Issues > Active · API Bridge #01",
+ "route_path": "/enterprise/project-management/064",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Pelacakan bug terbuka, permintaan fitur, penugasan kolaborator, label prioritas tinggi.",
+ "system_instruction": "Sub-modul 'API Bridge' turunan dari 'Issues > Active'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "issues-active-api-bridge-01-DEVOPS-0563.json",
+ "feature": {
+  "fileName": "issues-active-api-bridge-01-DEVOPS-0563.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "managed",
+  "primaryRegion": "ap-southeast-1",
+  "failoverRegion": "ap-south-1",
+  "ownerTeam": "team-project-1",
+  "slaTier": "gold",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-project-management-5"
+   },
+   {
+    "key": "queue.priority",
+    "value": 5
+   },
+   {
+    "key": "retry.max",
+    "value": 3
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 1000
+   },
+   {
+    "key": "timeout.sec",
+    "value": 54
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 300
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 500
+   },
+   {
+    "key": "burst.capacity",
+    "value": 50
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.09
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/issues-active-api-bridge-01"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.6
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "ap-southeast-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 12
+   },
+   {
+    "key": "retention.days",
+    "value": 264
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 3000
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 4096
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://issues-active-api-bridge-01/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://issues-active-api-bridge-01/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://issues-active-api-bridge-01/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://issues-active-api-bridge-01/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://issues-active-api-bridge-01/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://issues-active-api-bridge-01/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://issues-active-api-bridge-01/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://issues-active-api-bridge-01/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://issues-active-api-bridge-01/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://issues-active-api-bridge-01/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://issues-active-api-bridge-01/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://issues-active-api-bridge-01/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://issues-active-api-bridge-01/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://issues-active-api-bridge-01/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://issues-active-api-bridge-01/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://issues-active-api-bridge-01/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0563/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0563/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0563/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0563/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0563/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0563/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0563/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0563/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0563/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0563/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0563/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0563/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0563/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0563/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-0563/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-0563/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-0563/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-0563/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "issues.active.api.bridge.01.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "issues.active.api.bridge.01.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_issues_active_api_bridge_01 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_issues_active_api_bridge_01_ts ON feat_issues_active_api_bridge_01 (updated_at DESC);",
+   "INSERT INTO feat_issues_active_api_bridge_01 (id, payload) VALUES (564, '{\"menu_code\":\"DEVOPS-0563\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 564; COMMIT;",
+   "SELECT count(*) FROM feat_issues_active_api_bridge_01 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_issues_active_api_bridge_01_staging WHERE created_at < now() - interval '54 days';",
+   "GRANT SELECT ON feat_issues_active_api_bridge_01 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_issues_active_api_bridge_01 TO role_worker;",
+   "COPY feat_issues_active_api_bridge_01 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_issues_active_api_bridge_01 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_issues_active_api_bridge_01 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_issues_active_api_bridge_01;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 2,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 3,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 4,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 5,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 6,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 7,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 8,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 9,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 10,
+    "action": "Validasi terhadap policy organization"
+   },
+   {
+    "no": 11,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 12,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 13,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 14,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 15,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 16,
+    "action": "Tandai siklus selesai"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/issues-active-api-bridge-01-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/issues-active-api-bridge-01-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/issues-active-api-bridge-01-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/issues-active-api-bridge-01-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/issues-active-api-bridge-01-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/issues-active-api-bridge-01-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/issues-active-api-bridge-01-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/issues-active-api-bridge-01-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/project-management/064/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/project-management/064/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/project-management/064/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/project-management/064/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/project-management/064/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/project-management/064/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/project-management/064/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/project-management/064/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-00564-01",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-00564-02",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-00564-03",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-00564-04",
+    "expect": "Kuota tidak terlampaui"
+   },
+   {
+    "case": "TC-00564-05",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-00564-06",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-00564-07",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-00564-08",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-00564-09",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-00564-10",
+    "expect": "Cache invalidation benar"
+   }
+  ]
+ }
+}

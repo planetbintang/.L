@@ -1,0 +1,733 @@
+{
+ "id": 1090,
+ "menu_code": "DEVOPS-1089",
+ "architecture_group": "CI/CD Automation & Deployment Pipelines",
+ "architecture_slug": "cicd-deployment",
+ "architecture_index": 3,
+ "parent_id": 1000,
+ "menu_name": "Environments > Deployments History · Health Probe #01",
+ "route_path": "/enterprise/cicd-deployment/090",
+ "is_active": true,
+ "language_code": "id",
+ "short_description": "Registri pelacakan versi aplikasi terpasang lengkap dengan one-click rollback.",
+ "system_instruction": "Sub-modul 'Health Probe' turunan dari 'Environments > Deployments History'. Instruksi: sinkronkan state melalui event bus internal dan validasi terhadap policy organization.",
+ "fileName": "environments-deployments-history-health-probe-01-DEVOPS-1089.json",
+ "feature": {
+  "fileName": "environments-deployments-history-health-probe-01-DEVOPS-1089.json",
+  "generatedBy": "scripts/rename_and_compact_menus.py",
+  "compact": {
+   "minLines": 150,
+   "linesGuaranteed": true,
+   "featureRich": true
+  },
+  "executionMode": "scheduled",
+  "primaryRegion": "sa-east-1",
+  "failoverRegion": "us-east-1",
+  "ownerTeam": "team-cicd-5",
+  "slaTier": "silver",
+  "config": [
+   {
+    "key": "worker.cluster",
+    "value": "cluster-cicd-deployment-3"
+   },
+   {
+    "key": "queue.priority",
+    "value": 1
+   },
+   {
+    "key": "retry.max",
+    "value": 4
+   },
+   {
+    "key": "retry.backoff.ms",
+    "value": 200
+   },
+   {
+    "key": "timeout.sec",
+    "value": 40
+   },
+   {
+    "key": "cache.ttl.sec",
+    "value": 60
+   },
+   {
+    "key": "rate.limit.rpm",
+    "value": 1100
+   },
+   {
+    "key": "burst.capacity",
+    "value": 250
+   },
+   {
+    "key": "replication.factor",
+    "value": 3
+   },
+   {
+    "key": "consistency.level",
+    "value": "eventual"
+   },
+   {
+    "key": "log.level",
+    "value": "info"
+   },
+   {
+    "key": "trace.sample",
+    "value": 0.15
+   },
+   {
+    "key": "encryption",
+    "value": "AES-256-GCM"
+   },
+   {
+    "key": "secret.provider",
+    "value": "vault://sys/enterprise/environments-deployments-history-health-probe-01"
+   },
+   {
+    "key": "feature.flag.namespace",
+    "value": "ff.devops-core"
+   },
+   {
+    "key": "circuit.breaker.threshold",
+    "value": 0.2
+   },
+   {
+    "key": "healthcheck.path",
+    "value": "/_health"
+   },
+   {
+    "key": "dr.region",
+    "value": "sa-east-1"
+   },
+   {
+    "key": "autoscale.min",
+    "value": 1
+   },
+   {
+    "key": "autoscale.max",
+    "value": 22
+   },
+   {
+    "key": "retention.days",
+    "value": 130
+   },
+   {
+    "key": "audit.stream",
+    "value": "siem.audit-v1"
+   },
+   {
+    "key": "quota.cpu",
+    "value": 2500
+   },
+   {
+    "key": "quota.mem.mb",
+    "value": 3072
+   }
+  ],
+  "ui": [
+   {
+    "id": "toolbar",
+    "label": "Bar alat aksi cepat",
+    "mount": "panel://environments-deployments-history-health-probe-01/toolbar"
+   },
+   {
+    "id": "filter.chips",
+    "label": "Filter cangkupan",
+    "mount": "panel://environments-deployments-history-health-probe-01/filter.chips"
+   },
+   {
+    "id": "status.banner",
+    "label": "Spanduk status layanan",
+    "mount": "panel://environments-deployments-history-health-probe-01/status.banner"
+   },
+   {
+    "id": "summary.cards",
+    "label": "Kartu ringkasan metrik",
+    "mount": "panel://environments-deployments-history-health-probe-01/summary.cards"
+   },
+   {
+    "id": "data.table",
+    "label": "Tabel data paginasi",
+    "mount": "panel://environments-deployments-history-health-probe-01/data.table"
+   },
+   {
+    "id": "detail.drawer",
+    "label": "Laci detail rekaman",
+    "mount": "panel://environments-deployments-history-health-probe-01/detail.drawer"
+   },
+   {
+    "id": "line.chart",
+    "label": "Bagan garis waktu",
+    "mount": "panel://environments-deployments-history-health-probe-01/line.chart"
+   },
+   {
+    "id": "bar.chart",
+    "label": "Bagan batang agregasi",
+    "mount": "panel://environments-deployments-history-health-probe-01/bar.chart"
+   },
+   {
+    "id": "heat.map",
+    "label": "Peta panas intensitas",
+    "mount": "panel://environments-deployments-history-health-probe-01/heat.map"
+   },
+   {
+    "id": "gantt.view",
+    "label": "Tampilan Gantt lintas tim",
+    "mount": "panel://environments-deployments-history-health-probe-01/gantt.view"
+   },
+   {
+    "id": "log.console",
+    "label": "Konsol log langsung",
+    "mount": "panel://environments-deployments-history-health-probe-01/log.console"
+   },
+   {
+    "id": "yaml.editor",
+    "label": "Editor YAML aman",
+    "mount": "panel://environments-deployments-history-health-probe-01/yaml.editor"
+   },
+   {
+    "id": "diff.viewer",
+    "label": "Peninjau diferensial",
+    "mount": "panel://environments-deployments-history-health-probe-01/diff.viewer"
+   },
+   {
+    "id": "approval.gate",
+    "label": "Gerbang persetujuan",
+    "mount": "panel://environments-deployments-history-health-probe-01/approval.gate"
+   },
+   {
+    "id": "pagination",
+    "label": "Navigasi halaman",
+    "mount": "panel://environments-deployments-history-health-probe-01/pagination"
+   },
+   {
+    "id": "empty.state",
+    "label": "Keadaan kosong informatif",
+    "mount": "panel://environments-deployments-history-health-probe-01/empty.state"
+   }
+  ],
+  "api": [
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-1089/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 120
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-1089/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 157
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-1089/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 194
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-1089/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 231
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-1089/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 268
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-1089/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 305
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-1089/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 342
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-1089/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 379
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-1089/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 540,
+    "latency_slo_ms": 416
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-1089/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 600,
+    "latency_slo_ms": 453
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-1089/status",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 60,
+    "latency_slo_ms": 490
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-1089/metrics",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 120,
+    "latency_slo_ms": 527
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-1089/export",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 180,
+    "latency_slo_ms": 564
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-1089/simulate",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 240,
+    "latency_slo_ms": 121
+   },
+   {
+    "method": "PATCH",
+    "path": "/api/v1/devops-1089/approvals",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 300,
+    "latency_slo_ms": 158
+   },
+   {
+    "method": "DELETE",
+    "path": "/api/v1/devops-1089/webhooks",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 360,
+    "latency_slo_ms": 195
+   },
+   {
+    "method": "GET",
+    "path": "/api/v1/devops-1089/records",
+    "auth": "bearer:sys.enterprise.read",
+    "throttle_rpm": 420,
+    "latency_slo_ms": 232
+   },
+   {
+    "method": "POST",
+    "path": "/api/v1/devops-1089/records/{id}",
+    "auth": "bearer:sys.enterprise.write",
+    "throttle_rpm": 480,
+    "latency_slo_ms": 269
+   }
+  ],
+  "events": [
+   {
+    "topic": "environments.deployments.history.health.prob.activated",
+    "schema": "schemas/activated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.deactivated",
+    "schema": "schemas/deactivated.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.config.changed",
+    "schema": "schemas/config.changed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.policy.violation",
+    "schema": "schemas/policy.violation.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.health.degraded",
+    "schema": "schemas/health.degraded.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.health.recovered",
+    "schema": "schemas/health.recovered.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.quota.threshold",
+    "schema": "schemas/quota.threshold.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.job.completed",
+    "schema": "schemas/job.completed.avsc",
+    "delivery": "at-least-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.job.failed",
+    "schema": "schemas/job.failed.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.manual.rollback",
+    "schema": "schemas/manual.rollback.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.scheduled.sync",
+    "schema": "schemas/scheduled.sync.avsc",
+    "delivery": "exactly-once"
+   },
+   {
+    "topic": "environments.deployments.history.health.prob.audit.exported",
+    "schema": "schemas/audit.exported.avsc",
+    "delivery": "exactly-once"
+   }
+  ],
+  "sql": [
+   "CREATE TABLE IF NOT EXISTS feat_environments_deployments_history_health_probe_01 (id BIGINT PRIMARY KEY, payload JSONB, updated_at TIMESTAMPTZ DEFAULT now());",
+   "CREATE INDEX IF NOT EXISTS idx_environments_deployments_history_health_probe_01_ts ON feat_environments_deployments_history_health_probe_01 (updated_at DESC);",
+   "INSERT INTO feat_environments_deployments_history_health_probe_01 (id, payload) VALUES (1090, '{\"menu_code\":\"DEVOPS-1089\"}') ON CONFLICT DO NOTHING;",
+   "BEGIN; UPDATE system_menus SET is_active = TRUE WHERE id = 1090; COMMIT;",
+   "SELECT count(*) FROM feat_environments_deployments_history_health_probe_01 WHERE updated_at > now() - interval '1 hour';",
+   "DELETE FROM feat_environments_deployments_history_health_probe_01_staging WHERE created_at < now() - interval '40 days';",
+   "GRANT SELECT ON feat_environments_deployments_history_health_probe_01 TO role_viewer;",
+   "GRANT USAGE, SELECT ON SEQUENCE seq_environments_deployments_history_health_probe_01 TO role_worker;",
+   "COPY feat_environments_deployments_history_health_probe_01 TO STDOUT WITH (FORMAT csv, HEADER true);",
+   "EXPLAIN ANALYZE SELECT * FROM feat_environments_deployments_history_health_probe_01 ORDER BY updated_at DESC LIMIT 100;",
+   "ALTER TABLE feat_environments_deployments_history_health_probe_01 ADD COLUMN IF NOT EXISTS drift_flag BOOLEAN DEFAULT FALSE;",
+   "VACUUM ANALYZE feat_environments_deployments_history_health_probe_01;"
+  ],
+  "checks": [
+   {
+    "gate": "RBAC izin modul",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Kuota sumber daya",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Ambang anggaran",
+    "enforced_by": "billing-metering"
+   },
+   {
+    "gate": "Validasi schema payload",
+    "enforced_by": "developer-marketplace"
+   },
+   {
+    "gate": "Masa berlaku sertifikat",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Deteksi tabrakan jadwal",
+    "enforced_by": "alerting-incident"
+   },
+   {
+    "gate": "Pratinjau kebijakan",
+    "enforced_by": "iam-enterprise"
+   },
+   {
+    "gate": "Regresi baseline",
+    "enforced_by": "hyper-monitoring"
+   },
+   {
+    "gate": "Rasio sampling audit",
+    "enforced_by": "storage-compliance"
+   },
+   {
+    "gate": "Simulasi dampak",
+    "enforced_by": "edge-security-waf"
+   }
+  ],
+  "pipeline": [
+   {
+    "no": 1,
+    "action": "Kirim ringkasan ke kanal alert"
+   },
+   {
+    "no": 2,
+    "action": "Perbarui indeks pencarian"
+   },
+   {
+    "no": 3,
+    "action": "Auto-rollback bila anomali"
+   },
+   {
+    "no": 4,
+    "action": "Terapkan perubahan bertahap 10%"
+   },
+   {
+    "no": 5,
+    "action": "Proyeksi diff rencana perubahan"
+   },
+   {
+    "no": 6,
+    "action": "Tandai siklus selesai"
+   },
+   {
+    "no": 7,
+    "action": "Kompres artefak log"
+   },
+   {
+    "no": 8,
+    "action": "Terbitkan peristiwa audit"
+   },
+   {
+    "no": 9,
+    "action": "Pantau metrik kesehatan 5 menit"
+   },
+   {
+    "no": 10,
+    "action": "Minta persetujuan gerbang manusia"
+   },
+   {
+    "no": 11,
+    "action": "Tarik konfigurasi tersimpan"
+   },
+   {
+    "no": 12,
+    "action": "Jadwalkan probe berikutnya"
+   },
+   {
+    "no": 13,
+    "action": "Sinkronkan cache edge"
+   },
+   {
+    "no": 14,
+    "action": "Rollout penuh jika SLO terpenuhi"
+   },
+   {
+    "no": 15,
+    "action": "Alokasikan worker regional"
+   },
+   {
+    "no": 16,
+    "action": "Validasi terhadap policy organization"
+   }
+  ],
+  "metrics": [
+   {
+    "name": "requests_total",
+    "unit": "count"
+   },
+   {
+    "name": "request_duration_ms",
+    "unit": "ms"
+   },
+   {
+    "name": "errors_total",
+    "unit": "count"
+   },
+   {
+    "name": "queue_depth",
+    "unit": "jobs"
+   },
+   {
+    "name": "worker_utilization",
+    "unit": "ratio"
+   },
+   {
+    "name": "cache_hit_ratio",
+    "unit": "ratio"
+   },
+   {
+    "name": "rollback_count",
+    "unit": "count"
+   },
+   {
+    "name": "approval_latency_sec",
+    "unit": "sec"
+   },
+   {
+    "name": "drift_events",
+    "unit": "count"
+   },
+   {
+    "name": "cost_usd_hour",
+    "unit": "usd"
+   }
+  ],
+  "guards": [
+   {
+    "rule": "Blokade force-push konfigurasi produksi",
+    "severity": "critical"
+   },
+   {
+    "rule": "Wajib 2 reviewer untuk perubahan destruktif",
+    "severity": "high"
+   },
+   {
+    "rule": "Secret scanning pra-commit",
+    "severity": "high"
+   },
+   {
+    "rule": "Rate-limit API internal",
+    "severity": "medium"
+   },
+   {
+    "rule": "Enkripsi at-rest AES-256",
+    "severity": "critical"
+   },
+   {
+    "rule": "Immutability audit trail",
+    "severity": "critical"
+   },
+   {
+    "rule": "IP allowlist admin",
+    "severity": "medium"
+   },
+   {
+    "rule": "Deteksi sesi mencurigakan",
+    "severity": "high"
+   }
+  ],
+  "lifecycleHooks": [
+   {
+    "point": "on load",
+    "handler": "handlers/environments-deployments-his-on-load.js"
+   },
+   {
+    "point": "before render",
+    "handler": "handlers/environments-deployments-his-before-render.js"
+   },
+   {
+    "point": "after render",
+    "handler": "handlers/environments-deployments-his-after-render.js"
+   },
+   {
+    "point": "on change",
+    "handler": "handlers/environments-deployments-his-on-change.js"
+   },
+   {
+    "point": "before save",
+    "handler": "handlers/environments-deployments-his-before-save.js"
+   },
+   {
+    "point": "after save",
+    "handler": "handlers/environments-deployments-his-after-save.js"
+   },
+   {
+    "point": "on error",
+    "handler": "handlers/environments-deployments-his-on-error.js"
+   },
+   {
+    "point": "on unload",
+    "handler": "handlers/environments-deployments-his-on-unload.js"
+   }
+  ],
+  "routes": [
+   {
+    "path": "/enterprise/cicd-deployment/090/overview",
+    "view": "Ringkasan"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/records",
+    "view": "Data terekam"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/settings",
+    "view": "Konfigurasi"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/history",
+    "view": "Riwayat"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/analytics",
+    "view": "Analitik"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/approvals",
+    "view": "Persetujuan"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/api",
+    "view": "Dokumentasi API"
+   },
+   {
+    "path": "/enterprise/cicd-deployment/090/help",
+    "view": "Bantuan"
+   }
+  ],
+  "jobs": [
+   {
+    "cron": "*/15 * * * *",
+    "task": "sync-state"
+   },
+   {
+    "cron": "0 * * * *",
+    "task": "aggregate-metrics"
+   },
+   {
+    "cron": "0 3 * * *",
+    "task": "purge-stale"
+   },
+   {
+    "cron": "30 4 * * 1",
+    "task": "weekly-report"
+   },
+   {
+    "cron": "0 0 1 * *",
+    "task": "monthly-audit-export"
+   },
+   {
+    "cron": "@daily",
+    "task": "certificate-check"
+   }
+  ],
+  "tests": [
+   {
+    "case": "TC-01090-01",
+    "expect": "HTTP 200 dalam SLO"
+   },
+   {
+    "case": "TC-01090-02",
+    "expect": "Rollback bersih saat gagal"
+   },
+   {
+    "case": "TC-01090-03",
+    "expect": "RBAC menolak tanpa izin"
+   },
+   {
+    "case": "TC-01090-04",
+    "expect": "State konsisten pasca-krisis"
+   },
+   {
+    "case": "TC-01090-05",
+    "expect": "Idempoten pada retry"
+   },
+   {
+    "case": "TC-01090-06",
+    "expect": "Cache invalidation benar"
+   },
+   {
+    "case": "TC-01090-07",
+    "expect": "Notifikasi terkirim"
+   },
+   {
+    "case": "TC-01090-08",
+    "expect": "Payload lolos skema"
+   },
+   {
+    "case": "TC-01090-09",
+    "expect": "Audit event terbit"
+   },
+   {
+    "case": "TC-01090-10",
+    "expect": "Kuota tidak terlampaui"
+   }
+  ]
+ }
+}
