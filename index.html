@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./luxury-theme.css?v=20261026-header-harmony-v2" />
     <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-pages-v1" />
     <link rel="stylesheet" href="./modern-layout.css?v=20261026-modern-2026-v1" />
+    <link rel="stylesheet" href="./snaps.css?v=20261026-snaps-mcp-hub-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -24,7 +25,7 @@
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
-        <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
+        <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#snaps" data-system-route="snaps"><b>SNAPS Hub</b><small>MCP · git · token kustom · RAG</small></a><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI Reber</a>
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         <details class="nav-dropdown" data-menu="review"><summary>Review</summary><div class="nav-dropdown-menu" aria-label="Menu review dan kolaborasi"><a href="#platform/pull-requests" data-system-route="pull-requests"><b>Pull Requests</b><small>Review dari GitHub</small></a><a href="#platform/merge-requests" data-system-route="merge-requests"><b>Merge Requests</b><small>Alur lintas provider</small></a><a href="#platform/review-queue" data-system-route="review-queue"><b>Review queue</b><small>Antrian review per repo</small></a><a href="#platform/discussions" data-system-route="discussions"><b>Discussions</b><small>Diskusi provider</small></a><a href="#platform/activity" data-system-route="activity"><b>Activity</b><small>Aktivitas commit snapshot</small></a></div></details>
@@ -202,6 +203,7 @@
     <section class="platform-page" id="platformPage" data-system-page="platform" hidden aria-label="Halaman fitur platform"><div id="platformContent"></div></section>
     <section class="enterprise-page" id="enterpriseMapPage" data-system-page="enterprise" hidden aria-label="Enterprise Map List — Hyper-Enterprise Master Registry"><div id="enterpriseMapContent" class="enterprise-map-shell"></div></section>
     <section class="tools-page" id="toolsPage" data-system-page="tools" hidden aria-label="Halaman Manage dan Execute"><div id="toolsContent"></div></section>
+    <section class="snaps-page" id="snapsPage" data-system-page="snaps" hidden aria-label="SNAPS — hub konektor MCP, sumber kode, AI Studio, dan RAG pustaka"><div id="snapsContent"></div></section>
 
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
         <div class="section-heading">
@@ -292,5 +294,6 @@
     <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
+    <script src="./snaps-bridge.js?v=20261026-snaps-mcp-hub-v1" defer></script>
   </body>
 </html>

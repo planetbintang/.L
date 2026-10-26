@@ -1,0 +1,39 @@
+/* PLANETBINTANG · SNAPS HUB — halaman #snaps (MCP/git/AI Studio/RAG) */
+.snaps-view{display:grid;gap:18px;padding:6px 0 24px}
+.snaps-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;background:linear-gradient(135deg,#eef6ff,#f9fcff);border:1px solid #d7e6f7;border-radius:18px;padding:20px;box-shadow:0 18px 40px rgba(35,120,190,.10)}
+.snaps-brand-anchor{display:flex;gap:14px;align-items:flex-start;max-width:900px}
+.snaps-logo,.snaps-folder{width:64px;height:64px;border-radius:16px;overflow:hidden;display:grid;place-items:center;background:#fff;border:1px solid #cfe2f5;box-shadow:0 10px 22px rgba(35,120,190,.14);flex:none}
+.snaps-logo img,.snaps-folder img{width:82%;height:82%;object-fit:contain}
+.snaps-heading h2{margin:2px 0 6px;font-size:clamp(19px,2.4vw,27px);color:#0b3a63}
+.snaps-heading .section-description{color:#3c5a78;font-size:13px;line-height:1.6}
+#snapsBridgeBadge.is-active{background:#0b3a63;color:#eaf4ff;border-color:#0b3a63}
+
+.snaps-connector{display:grid;gap:10px;align-content:start}
+.snaps-connector-head{display:flex;gap:10px;align-items:center}
+.snaps-connector-head>div{min-width:0}
+.snaps-connector-head b{display:block;color:#0b3a63;font-size:13px;line-height:1.3}
+.snaps-connector-head small{color:#6a86a3;font-size:10px;letter-spacing:.04em}
+.snaps-mini-icon{position:relative;width:34px;height:34px;flex:none;display:grid;place-items:center;background:#fff;border:1px solid #cfe2f5;border-radius:10px}
+.snaps-mini-icon img{width:24px;height:24px;object-fit:contain}
+.snaps-mini-logo{position:absolute!important;right:-6px;bottom:-6px;width:16px!important;height:16px!important;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(11,58,99,.25)}
+.snaps-chip{margin-left:auto;font-style:normal;font-size:9px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:999px;background:#e6eefb;color:#31577e;border:1px solid #cfdff2;white-space:nowrap}
+.chip-connected{background:#e3f6ea!important;color:#1c6b38!important;border-color:#bfe5cc!important}
+.chip-testing{background:#fff4dd!important;color:#8a5b00!important;border-color:#f0dcb0!important}
+.chip-error{background:#fde4e4!important;color:#9c2a2a!important;border-color:#f3c4c4!important}
+.chip-degraded{background:#efe6fb!important;color:#5b3a8a!important;border-color:#dccbee!important}
+.snaps-endpoint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:#4a688a;word-break:break-all;margin:0}
+.snaps-role{font-size:11.5px;color:#54718f;margin:0;line-height:1.5}
+.snaps-token-field{display:grid;gap:5px;font-size:11px;color:#31577e;font-weight:600}
+.snaps-token-field input{padding:9px 11px;border-radius:10px;border:1px solid #c9dcf0;background:#fff;color:#0b3a63;font-size:12px}
+.snaps-actions{display:flex;gap:8px;flex-wrap:wrap}
+.snaps-probe-detail{color:#6a86a3;font-size:10.5px;line-height:1.5}
+.tools-form-inline{display:grid;gap:12px;grid-template-columns:minmax(220px,2fr) minmax(160px,1fr) auto;align-items:end}
+.tools-form-inline label{display:grid;gap:6px;font-size:11px;font-weight:600;color:#31577e}
+.tools-form-inline textarea,.tools-form-inline input,.tools-form-inline select{padding:9px 11px;border-radius:10px;border:1px solid #c9dcf0;background:#fff;color:#0b3a63;font-size:12px;font-family:inherit}
+.tools-form-inline .tools-switch{align-self:end;grid-template-columns:auto 1fr;align-items:center;display:flex!important;gap:8px}
+.snaps-rag-result{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:9px 11px;border:1px solid #dbe8f6;border-radius:12px;background:#fbfdff;margin-bottom:8px}
+.snaps-rag-result b{display:block;font-size:12px;color:#0b3a63}
+.snaps-rag-result span{font-size:10.5px;color:#6a86a3}
+.snaps-rag-result button{flex:none}
+.snaps-anchor-badge{margin-left:8px;align-self:center;font-size:8.5px;font-weight:800;letter-spacing:.12em;color:#0b3a63;background:#e6f1fc;border:1px solid #bcd6f0;border-radius:999px;padding:3px 8px}
+@media(max-width:900px){.tools-form-inline{grid-template-columns:1fr}.snaps-brand-anchor{flex-direction:column}}
