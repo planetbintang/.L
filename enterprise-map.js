@@ -179,7 +179,45 @@
     };
   }
 
-  const state = { manifest: null, query: '', architecture: 'all', tier: 'all', selected: null, visibleLimit: 150, totalMenuCount: 10000 };
+  const state = { manifest: null, query: '', architecture: 'all', tier: 'all', selected: null, visibleLimit: 150, totalMenuCount: 10000, page: 'map', detailTab: 'overview', detailQuery: '', pageSize: 24, pageIndex: 0, registryCache: new Map() };
+
+  // ---- Util DOM aman (plain text, tanpa innerHTML dinamis) ----
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined && text !== null) node.textContent = String(text);
+    return node;
+  }
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  }
+  function archMeta(slug) {
+    const index = ALL_ARCHITECTURES.findIndex(([s]) => s === slug);
+    if (index < 0) return null;
+    const [archSlug, name, description, features] = ALL_ARCHITECTURES[index];
+    return { index, slug: archSlug, name, description, features, isHyper: index >= 10, rangeStart: index * MENUS_PER_ARCH + 1, rangeEnd: (index + 1) * MENUS_PER_ARCH };
+  }
+  function parseHash(hash) {
+    const clean = decodeURIComponent(String(hash || '')).replace(/^#/, '');
+    if (clean.startsWith('enterprise/arch/')) {
+      const slug = clean.slice('enterprise/arch/'.length).split('/')[0];
+      return slug && archMeta(slug) ? { page: 'arch', slug } : { page: 'arch', slug: '' };
+    }
+    return { page: 'map' };
+  }
+  function goToHash(hash) {
+    if (window.location.hash === hash) applyHash(hash);
+    else window.location.hash = hash; // memicu hashchange → sistem navigasi menyinkronkan rute
+  }
+  function applyHash(hash) {
+    const parsed = parseHash(hash || window.location.hash);
+    const wasArch = state.page === 'arch';
+    const sameArch = parsed.page === 'arch' && wasArch && state.selected?.slug === parsed.slug;
+    state.page = parsed.page;
+    if (parsed.page === 'map') { state.architecture = 'all'; state.selected = null; }
+    render();
+    if (!sameArch) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   async function loadManifest() {
     try {
