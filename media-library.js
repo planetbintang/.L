@@ -4,7 +4,7 @@
   const DB_VERSION = 1;
   const STORE = 'assets';
   const $ = (s, r = document) => r.querySelector(s);
-  const state = { db: null, items: [], selectedId: null, query: '', kind: 'all', busy: false, objectUrl: null };
+  const state = { db: null, items: [], selectedId: null, query: '', kind: 'all', busy: false, objectUrl: null, thumbUrls: [] };
   const ui = {};
   const bytes = n => { n = Math.max(0, Number(n) || 0); if (n < 1024) return n + ' B'; const units = ['KB','MB','GB','TB']; let i=-1; do { n/=1024; i++; } while(n>=1024&&i<units.length-1); return n.toLocaleString('id-ID',{maximumFractionDigits:1})+' '+units[i]; };
   const safeText = v => String(v ?? '');
@@ -45,12 +45,13 @@
   function iconFor(kind){return ({image:'IMAGE',video:'FILM',audio:'AUDIO',document:'PDF',office:'DOC',text:'TEXT',remote:'LINK',file:'FILE'})[kind]||'FILE'}
   function thumb(item){
     const box=document.createElement('div');box.className='media-thumb';
-    if(item.kind==='image'&&item.url){const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=item.url;box.append(img)}
+    if(item.kind==='image'&&(item.url||item.blob)){const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=item.remote?item.url:(item.blob?(state.thumbUrls.push(URL.createObjectURL(item.blob)),state.thumbUrls[state.thumbUrls.length-1]):'');box.append(img)}
     else {box.textContent=iconFor(item.kind)}
     return box;
   }
   function render(){
     if(!ui.grid)return;
+    state.thumbUrls.forEach(url=>URL.revokeObjectURL(url));state.thumbUrls=[];
     const items=filtered();ui.grid.replaceChildren();
     if(!items.length){const empty=document.createElement('div');empty.className='media-empty';empty.textContent=state.items.length?'Tidak ada media yang cocok dengan filter.':'Belum ada aset. Unggah file lokal atau tambahkan URL HTTPS untuk memulai.';ui.grid.append(empty)}
     items.forEach(item=>{
