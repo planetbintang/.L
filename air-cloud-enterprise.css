@@ -1,0 +1,61 @@
+/* Air Cloud Enterprise Console — visual system, Bahasa Indonesia, responsive navigation. */
+#airCloudPage,.aircloud-page{color:#152b45}
+.aircloud-page .ac-shell{gap:18px}
+.aircloud-page .ac-top{align-items:center;border:1px solid #d2deeb;border-radius:12px;background:linear-gradient(120deg,#f4f8fc 0%,#fff 58%,#edf5ff 100%);box-shadow:0 5px 18px rgba(17,46,82,.05)}
+.aircloud-page .ac-top h2{color:#172f4b;letter-spacing:-.035em}
+.aircloud-page .ac-top-icon{border-radius:12px;background:#edf5ff;border-color:#c9ddf3}
+.aircloud-page .ac-stats{gap:12px}
+.aircloud-page .ac-stat{border:1px solid #d9e2ed;border-radius:10px;background:#fff;box-shadow:0 2px 5px rgba(23,52,83,.025);min-height:104px}
+.aircloud-page .ac-stat b{color:#0f62fe}
+.aircloud-page .ac-layout{grid-template-columns:minmax(250px,290px) minmax(0,1fr);gap:18px}
+.aircloud-page .ac-sidebar{top:82px;max-height:calc(100vh - 100px);padding:12px;border:1px solid #d5dfeb;border-radius:12px;background:#f7f9fc;box-shadow:0 3px 12px rgba(22,47,77,.04)}
+.aircloud-page .ac-sidebar-head{position:sticky;top:-12px;z-index:3;padding:8px 4px 12px;background:#f7f9fc;border-bottom:1px solid #e1e8f0}
+.aircloud-page .ac-sidebar-head h3{color:#1b3554;font-size:14px}
+.aircloud-page .ac-nav-group{margin:3px 0}
+.aircloud-page .ac-nav-main{min-height:40px;border:1px solid transparent;border-radius:8px;gap:8px;padding:8px 9px;color:#2a415c;transition:background .14s,border-color .14s}
+.aircloud-page .ac-nav-main:hover{background:#eaf2fb;border-color:#d4e3f3}
+.aircloud-page .ac-nav-main.active,.aircloud-page .ac-nav-main[aria-current=page]{background:#e3efff;border-color:#c3dcff;color:#0f4da8}
+.aircloud-page .ac-nav-icon{width:25px;height:25px;display:grid;place-items:center;border-radius:7px;background:#e8eef6;font-size:13px}
+.aircloud-page .ac-nav-label{font-size:11px;line-height:1.35}
+.aircloud-page .ac-nav-count{font-size:9px;color:#607792}
+.aircloud-page .ac-nav-count i{color:#0f62fe;font-style:normal}
+.aircloud-page .ac-nav-subs{padding-left:9px;margin:3px 0 6px 12px;border-left:1px solid #d4dfec}
+.aircloud-page .ac-nav-sub,.aircloud-page .ac-nav-leaf{min-height:32px;border-radius:7px;color:#526780;font-size:10.5px;text-align:left}
+.aircloud-page .ac-nav-sub:hover,.aircloud-page .ac-nav-leaf:hover{background:#edf3fa;color:#153e72}
+.aircloud-page .ac-nav-sub.active,.aircloud-page .ac-nav-leaf.active{background:#dceaff;color:#0d4fa8;font-weight:700}
+.aircloud-page .ac-nav-expander{width:27px;height:27px;border-radius:6px;color:#536b86}
+.aircloud-page .ac-nav-expander:hover{background:#e5eef9}
+.aircloud-page .ac-page{min-width:0;display:grid;gap:14px}
+.aircloud-page .ac-crumbs{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:2px 0 8px;color:#60758e;font-size:10px}
+.aircloud-page .ac-crumbs button{padding:4px 7px;border:1px solid transparent;border-radius:5px;background:transparent;color:#486581}
+.aircloud-page .ac-crumbs button:hover{border-color:#d5e3f3;background:#f0f6fd}
+.aircloud-page .ac-crumbs button.current{color:#0f62fe;font-weight:700}
+.aircloud-page .ac-hero{padding:24px;border:1px solid #d6e1ed;border-radius:12px;background:linear-gradient(120deg,#fff,#f6f9fd);box-shadow:0 3px 10px rgba(23,52,83,.025)}
+.aircloud-page .ac-hero h3{margin:8px 0;color:#152e4a;font-size:clamp(22px,2vw,30px);letter-spacing:-.035em}
+.aircloud-page .ac-hero p{max-width:850px;color:#5c7088;font-size:12px;line-height:1.7}
+.aircloud-page .ac-metrics{gap:10px}
+.aircloud-page .ac-metrics article{padding:14px;border:1px solid #dce5ef;border-radius:10px;background:#fff}
+.aircloud-page .ac-metrics article b{color:#0f62fe;font-size:21px}
+.aircloud-page .ac-card{border:1px solid #d8e2ed;border-radius:12px;background:#fff;box-shadow:0 3px 12px rgba(22,47,77,.025);overflow:hidden}
+.aircloud-page .ac-card-head{padding:15px 17px;border-bottom:1px solid #e3eaf2;background:#f9fbfd}
+.aircloud-page .ac-card-head h4{color:#1c3553;font-size:13px}
+.aircloud-page .ac-card-head small{color:#6b7f95;font-size:10px;line-height:1.6}
+.aircloud-page .ac-child-grid{gap:9px;padding:14px}
+.aircloud-page .ac-child-tile{min-height:90px;padding:12px;border:1px solid #dbe4ee;border-radius:9px;background:#fff;text-align:left;transition:border-color .14s,background .14s,transform .14s}
+.aircloud-page .ac-child-tile:hover{border-color:#8bb9f4;background:#f5f9ff;transform:translateY(-1px)}
+.aircloud-page .ac-child-tile b{color:#254363;font-size:11px;line-height:1.45}
+.aircloud-page .ac-child-tile small{color:#71859a;font-size:9px}
+.aircloud-page .ac-table-wrap{max-width:100%;overflow:auto}
+.aircloud-page .ac-table{min-width:650px;width:100%;border-collapse:separate;border-spacing:0}
+.aircloud-page .ac-table th{position:sticky;top:0;background:#f5f8fc;color:#526982;font-size:9px;letter-spacing:.055em}
+.aircloud-page .ac-table td{border-top:1px solid #e7edf4;color:#405873;font-size:10px;vertical-align:top}
+.aircloud-page .ac-table tbody tr:hover td{background:#f8fbff}
+.aircloud-page .ac-mini-btn{min-height:28px;border-radius:6px}
+.aircloud-page .ac-status{font-size:9px}
+.aircloud-page .ac-airz-filter{min-height:34px;border-radius:7px}
+.aircloud-page .ac-modal{border-radius:14px}
+.aircloud-page button:focus-visible,.aircloud-page input:focus-visible,.aircloud-page select:focus-visible{outline:3px solid #78aef8;outline-offset:2px}
+@media(max-width:1120px){.aircloud-page .ac-layout{grid-template-columns:minmax(220px,250px) minmax(0,1fr)}}
+@media(max-width:900px){.aircloud-page .ac-layout{grid-template-columns:1fr}.aircloud-page .ac-sidebar{position:static;max-height:52vh}.aircloud-page .ac-sidebar-head{top:-12px}.aircloud-page .ac-nav-subs{display:block}}
+@media(max-width:600px){.aircloud-page .ac-top{padding:16px}.aircloud-page .ac-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.aircloud-page .ac-hero{padding:17px}.aircloud-page .ac-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.aircloud-page .ac-sidebar{padding:9px}.aircloud-page .ac-nav-count{display:none}}
+@media(prefers-reduced-motion:reduce){.aircloud-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
