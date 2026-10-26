@@ -7,9 +7,13 @@
   //   * Ratusan halaman berbeda per menu/submenu (blok hero/metrics/tabel/docs).
   //   * Penyimpanan langsung ke filemanajer folder airz/ (PBLocalFiles) dan
   //     browser mengindeks pohon nyata airz/airsistem sebagai repo .AIRZ.
+  //   * Katalog fitur nyata airz/ (window.PB_AIRZ_FEATURES — dibangun oleh
+  //     scripts/build_airz_features.py): domain, puluhan ribu berkas sistem,
+  //     bin, dokumen, dan API di bawah setiap menu/submenu/sub-sub menu.
   // ==========================================================================
   const $ = (selector, root = document) => root.querySelector(selector);
   const REGISTRY = window.PB_AIR_CLOUD_REGISTRY || { menus: [], subs: [], leafs: [] };
+  const AIRZ = window.PB_AIRZ_FEATURES || null;
   const MENUS = REGISTRY.menus || [];
   const SUBS = REGISTRY.subs || [];
   const LEAFS = REGISTRY.leafs || [];
@@ -19,6 +23,20 @@
     if (!CHILDREN.has(row.parent_id)) CHILDREN.set(row.parent_id, []);
     CHILDREN.get(row.parent_id).push(row);
   }
+  // Indeks cepat fitur airz/ per group_slug menu Air Cloud
+  const AIRZ_BY_SLUG = new Map();
+  if (AIRZ) {
+    for (const item of AIRZ.items || []) {
+      const slug = item.menu_slug || '';
+      if (!slug) continue;
+      if (!AIRZ_BY_SLUG.has(slug)) AIRZ_BY_SLUG.set(slug, []);
+      AIRZ_BY_SLUG.get(slug).push(item);
+    }
+  }
+  function slugOfRow(row) {
+    return String(row.group_slug || BY_ID.get(row.parent_id)?.group_slug || '').toLowerCase();
+  }
+  function airzCountFor(slug) { return ((AIRZ && AIRZ_BY_SLUG.get(slug)) || []).length; }
   const fmt = new Intl.NumberFormat('id-ID');
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
@@ -30,7 +48,12 @@
     storageReady: false,
     storageInfo: null,
     pageMode: 'registry',
+    airzLimit: {},           // slug → jumlah baris fitur airz/ yang ditampilkan
+    airzQuery: '',           // filter teks pada katalog fitur airz/
+    airzModal: null,         // { title, body } untuk modal pratinjau fitur
   };
+
+  const AIRZ_PAGE_STEP = 48;
 
   const STORAGE_PREFIX = 'aircloud/pages';
   const FILE_MANAGER_PATH = 'airz/airsistem/console/menus';
@@ -108,8 +131,110 @@
       <p class="ac-action-note" id="acActionNote" aria-live="polite"></p></section>`;
   }
 
+  // --------------------------------------------------------------------------
+  // FITUR NYATA airz/ — katalog window.PB_AIRZ_FEATURES per menu Air Cloud
+  // --------------------------------------------------------------------------
+  function airzItemsFor(row) {
+    if (!AIRZ) return [];
+    const slug = slugOfRow(row);
+    let pool = AIRZ_BY_SLUG.get(slug) || [];
+    if (!pool.length && row.level === 1) pool = [];
+    const needle = state.airzQuery.trim().toLowerCase();
+    if (needle) pool = pool.filter((item) => `${item.name} ${item.path} ${item.function}`.toLowerCase().includes(needle));
+    return pool;
+  }
+
+  function airzDomainBlock(row) {
+    if (!AIRZ) return '';
+    const slug = slugOfRow(row);
+    const domains = (AIRZ.domains || []).filter((d) => d.menu_slug === slug);
+    if (!domains.length && !(AIRZ_BY_SLUG.get(slug) || []).length) return '';
+    const totalFiles = domains.reduce((sum, d) => sum + d.files, 0);
+    const totalFolders = domains.reduce((sum, d) => sum + d.folders, 0);
+    const tiles = domains.map((d) => `<button type="button" class="ac-airz-domain" data-aircloud-menu="${esc(row.id)}" title="Domain folder airz/airsistem/${esc(d.title)}">
+        <b>${esc(d.title)}</b><small>${fmt.format(d.files)} berkas · ${fmt.format(d.folders)} folder</small></button>`).join('');
+    return `<section class="ac-card ac-airz-domains"><div class="ac-card-head">
+      <h4>🗂️ Fitur Sistem airz/ — Domain Layanan</h4>
+      <small>${fmt.format(totalFiles)} berkas sistem · ${fmt.format(totalFolders)} folder nyata di bawah menu ini (pohon airz/airsistem)</small></div>
+      <div class="ac-child-grid">${tiles}</div></section>`;
+  }
+
+  function airzCatalogBlock(row) {
+    if (!AIRZ) return '';
+    const items = airzItemsFor(row);
+    if (!items.length) return '';
+    const slug = slugOfRow(row);
+    const limit = Math.min(state.airzLimit[slug] || AIRZ_PAGE_STEP, items.length);
+    const docsForSlug = Object.keys(AIRZ.docs || {}).filter((key) => key.includes(slug.split('-')[0])).slice(0, 6);
+    const rows = items.slice(0, limit).map((item) => {
+      const seed = hashOf(item.id);
+      const status = ['ok', 'ok', 'busy', 'warn', 'ok'][seed % 5];
+      const label = ['AKTIF', 'AKTIF', 'SIAGA', 'Sinkron', 'AKTIF'][seed % 5];
+      return `<tr>
+        <td><code>${esc(item.name)}</code></td>
+        <td class="ac-airz-path" title="${esc(item.path)}">${esc(item.path.replace('airz/airsistem/', ''))}</td>
+        <td><span class="ac-status ac-status-${status}">${esc(label)}</span></td>
+        <td>${esc(item.size ? `${fmt.format(item.size)} B` : '—')}</td>
+        <td class="ac-airz-actions">
+          <button type="button" class="ac-mini-btn" data-airz-view="${esc(item.id)}" title="Pratinjau isi berkas">👁 Lihat</button>
+          <button type="button" class="ac-mini-btn" data-airz-save="${esc(item.id)}" title="Salin berkas ke penyimpanan browser (airz/)">💾 Simpan</button>
+          <button type="button" class="ac-mini-btn" data-airz-fm="${esc(item.path)}" title="Buka path di File Manager">📁 FM</button>
+        </td></tr>`;
+    }).join('');
+    const more = limit < items.length
+      ? `<button type="button" class="workspace-secondary ac-airz-more" data-airz-more="${esc(slug)}">Muat ${fmt.format(Math.min(AIRZ_PAGE_STEP, items.length - limit))} fitur berikutnya (${fmt.format(items.length - limit)} tersisa)</button>`
+      : `<p class="ac-airz-end">✓ Seluruh ${fmt.format(items.length)} fitur airz/ pada domain menu ini ditampilkan.</p>`;
+    const docLinks = docsForSlug.length
+      ? `<div class="ac-airz-docs">${docsForSlug.map((key) => `<button type="button" class="ac-pill" data-airz-doc="${esc(key)}">📄 ${esc(key)}</button>`).join('')}</div>`
+      : '';
+    return `<section class="ac-card ac-airz-catalog"><div class="ac-card-head">
+        <h4>⚙️ Katalog Fitur airz/ — ${fmt.format(items.length)} Komponen Sistem</h4>
+        <small>Sumber: jendela nyata folder <code>airz/airsistem</code> (repo .AIRZ) · filter aktif: ${esc(state.airzQuery || '—')}
+          <input id="airzFilterInput" class="ac-airz-filter" type="search" placeholder="Filter fitur airz/ pada halaman ini…" value="${esc(state.airzQuery)}" aria-label="Filter katalog fitur airz" /></small></div>
+      ${docLinks}
+      <div class="ac-table-wrap"><table class="ac-table ac-airz-table"><thead><tr>
+        <th>KOMPONEN</th><th>PATH SISTEM</th><th>STATUS</th><th>UKURAN</th><th>FUNGSI TOMBOL</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>${more}</section>`;
+  }
+
+  function airzToolbarBlock(row) {
+    if (!AIRZ) return '';
+    const slug = slugOfRow(row);
+    const items = AIRZ_BY_SLUG.get(slug) || [];
+    const bins = (AIRZ.bins || []).slice(0, 12);
+    const endpoints = ((AIRZ.api && AIRZ.api.endpoints) || []).slice(0, 10);
+    const stats = AIRZ.totals || {};
+    return `<section class="ac-card ac-airz-tools"><div class="ac-card-head">
+      <h4>🚀 Pusat Kendali Sistem airz/</h4>
+      <small>${fmt.format(stats.files || 0)} berkas · ${fmt.format(stats.folders || 0)} folder · ${fmt.format(stats.domains || 0)} domain · ${fmt.format(stats.apiEndpoints || 0)} endpoint API — seluruhnya dari pohon airz/ nyata</small></div>
+      <div class="ac-actions ac-airz-toolbar">
+        <button class="workspace-primary" type="button" data-airz-export="${esc(slug)}">Ekspor ${fmt.format(items.length)} fitur domain ini (JSON)</button>
+        <button class="workspace-secondary" type="button" data-airz-export-all="1">Ekspor SELURUH ${fmt.format(stats.files || 0)} fitur airz/</button>
+        <button class="workspace-secondary" type="button" data-airz-sync-tree="1">Sinkron Pohon Sistem → airz/cloudsistem/tree.json</button>
+        <button class="workspace-secondary" type="button" data-airz-open-root="1">Buka root /airz di File Manager</button>
+      </div>
+      <div class="ac-airz-bins">${bins.map((bin) => `<button type="button" class="ac-bin-chip" data-airz-bin="${esc(bin.name)}" title="${esc(bin.function)}">▸ ${esc(bin.name)}</button>`).join('')}</div>
+      ${endpoints.length ? `<div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>METODE</th><th>ENDPOINT AIR CLOUD API</th><th>RUJUKAN</th></tr></thead><tbody>${endpoints.map((e) => `<tr><td><span class="ac-status ac-status-busy">${esc(e.method)}</span></td><td><code>${esc(e.path)}</code></td><td>${esc(e.summary || '')}</td></tr>`).join('')}</tbody></table></div>` : ''}
+      </section>`;
+  }
+
+  function airzModalBlock() {
+    const modal = state.airzModal;
+    if (!modal) return '';
+    return `<div class="ac-modal-backdrop" role="dialog" aria-modal="true" aria-label="${esc(modal.title)}">
+      <div class="ac-modal">
+        <header><h4>${esc(modal.title)}</h4><button type="button" class="ac-mini-btn" data-airz-modal-close="1">✕ Tutup</button></header>
+        <pre class="ac-modal-body">${esc(modal.body)}</pre>
+        <footer class="ac-actions">
+          <button type="button" class="workspace-secondary" data-airz-modal-copy="1">Salin ke clipboard</button>
+          <button type="button" class="workspace-secondary" data-airz-modal-download="1">Unduh berkas</button>
+        </footer>
+      </div></div>`;
+  }
+
   function pageHtml(row) {
-    return heroBlock(row) + metricsBlock(row) + childrenBlock(row) + tableBlock(row) + docsBlock(row);
+    return heroBlock(row) + metricsBlock(row) + childrenBlock(row)
+      + airzDomainBlock(row) + airzCatalogBlock(row) + tableBlock(row) + airzToolbarBlock(row) + docsBlock(row) + airzModalBlock();
   }
 
   // --------------------------------------------------------------------------
@@ -139,7 +264,7 @@
       const leafTotal = subs.reduce((sum, s) => sum + (CHILDREN.get(s.id) || []).length, 0);
       group.innerHTML = `<button type="button" class="ac-nav-main ${state.selectedId === menu.id ? 'active' : ''}" data-aircloud-menu="${esc(menu.id)}" data-ac-toggle="${esc(menu.id)}">
           <span class="ac-nav-icon">${menu.icon || '☁️'}</span><span class="ac-nav-label">${esc(menu.menu_name)}</span>
-          <span class="ac-nav-count">${fmt.format(subs.length + leafTotal)}</span></button>`;
+          <span class="ac-nav-count" title="${fmt.format(airzCountFor(menu.group_slug))} fitur sistem airz/ · ${fmt.format(subs.length + leafTotal)} submenu">${fmt.format(subs.length + leafTotal)}<i>+${fmt.format(airzCountFor(menu.group_slug))}</i></span></button>`;
       const subWrap = document.createElement('div');
       subWrap.className = `ac-nav-subs${isOpen ? ' open' : ''}`;
       for (const sub of visibleSubs) {
@@ -167,7 +292,8 @@
     const status = $('#airCloudSidebarStatus');
     if (status) status.textContent = needle
       ? `Filter "${state.query}" · ${fmt.format(nav.querySelectorAll('[data-aircloud-menu]').length)} menu cocok`
-      : `${fmt.format(MENUS.length)} menu utama · ${fmt.format(SUBS.length)} submenu · ${fmt.format(LEAFS.length)} sub-sub menu`;
+      : `${fmt.format(MENUS.length)} menu utama · ${fmt.format(SUBS.length)} submenu · ${fmt.format(LEAFS.length)} sub-sub menu` +
+        (AIRZ ? ` · ${fmt.format((AIRZ.totals && AIRZ.totals.files) || 0)} fitur airz/ siap` : '');
   }
 
   // --------------------------------------------------------------------------
@@ -284,12 +410,14 @@
   function renderStats() {
     const host = $('#airCloudStats');
     if (!host) return;
+    const airzTotals = (AIRZ && AIRZ.totals) || {};
     const cards = [
       ['Menu Utama', MENUS.length, 'layanan cloud inti'],
       ['Submenu', SUBS.length, 'halaman fungsional'],
       ['Sub Sub Menu', LEAFS.length, 'halaman operasional'],
-      ['Folder Sistem', fmt.format(REGISTRY.folders || 0), 'di airz/airsistem'],
-      ['File Sistem', fmt.format(REGISTRY.files || 0), 'konfigurasi & log'],
+      ['Folder Sistem', fmt.format(REGISTRY.folders || airzTotals.folders || 0), 'di airz/airsistem'],
+      ['File Sistem', fmt.format(REGISTRY.files || airzTotals.files || 0), 'konfigurasi & log'],
+      ['Fitur airz/', fmt.format(airzTotals.files || 0), `${fmt.format(airzTotals.domains || 0)} domain · ${fmt.format(airzTotals.docs || 0)} dokumen · ${fmt.format(airzTotals.apiEndpoints || 0)} API`],
       ['Halaman Registry', fmt.format(REGISTRY.pages || 338), 'JSON per menu (data/air-cloud-menus)'],
     ];
     host.innerHTML = cards.map(([label, value, foot]) => `<article class="ac-stat"><small>${esc(String(label).toUpperCase())}</small><b>${esc(String(value))}</b><span>${esc(foot)}</span></article>`).join('');
@@ -302,6 +430,8 @@
     const row = BY_ID.get(id);
     if (!row) return;
     state.selectedId = id;
+    state.airzQuery = '';
+    state.airzModal = null;
     for (const item of ancestors(row)) {
       if (item.level === 1) state.openMenus.add(item.id);
       if (item.level === 2) state.openSubs.add(item.id);
@@ -309,6 +439,80 @@
     renderSidebar();
     renderPage();
     $('#airCloudContent')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // --------------------------------------------------------------------------
+  // Aksi katalog fitur airz/ (tombol fungsional per berkas & toolbar sistem)
+  // --------------------------------------------------------------------------
+  const AIRZ_INDEX = new Map(((AIRZ && AIRZ.items) || []).map((item) => [item.id, item]));
+
+  function airzNote(text) {
+    const note = $('#acActionNote');
+    if (note) note.textContent = text;
+  }
+
+  function openAirzModal(title, body) {
+    state.airzModal = { title, body: String(body ?? '').slice(0, 24000) };
+    renderPage();
+  }
+
+  function closeAirzModal() {
+    state.airzModal = null;
+    renderPage();
+  }
+
+  async function saveAirzItemToStorage(item) {
+    if (!window.PBLocalFiles?.saveFile) { airzNote('Penyimpanan lokal tidak tersedia di browser ini.'); return false; }
+    const rel = String(item.path).replace(/^airz\//, '');
+    const snippet = (AIRZ.snippets && AIRZ.snippets[rel.replace(/^airsistem\//, 'airsistem/').split('/').slice(1).join('/')]) || '';
+    try {
+      await window.PBLocalFiles.mkdir('airz');
+      await window.PBLocalFiles.mkdir('airz/cloudsistem');
+      const payload = JSON.stringify({
+        schemaVersion: 1, savedAt: new Date().toISOString(), source: item.path,
+        component: item.name, domain: item.domain, size: item.size,
+        function: item.function, preview: snippet,
+      }, null, 1);
+      await window.PBLocalFiles.saveFile(`airz/cloudsistem/${item.name}.snapshot.json`, payload, 'application/json;charset=utf-8');
+      document.dispatchEvent(new CustomEvent('planetbintang:workspace-files-changed'));
+      return true;
+    } catch (error) { airzNote(`Gagal menyimpan fitur: ${error.message}`); return false; }
+  }
+
+  function downloadText(name, text, mime = 'application/json;charset=utf-8') {
+    const blob = new Blob([text], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url; anchor.download = name;
+    document.body.append(anchor); anchor.click(); anchor.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  function exportAirzDomain(slug) {
+    const items = AIRZ_BY_SLUG.get(slug) || [];
+    downloadText(`airz-fitur-${slug || 'semua'}.json`, JSON.stringify({ exportedAt: new Date().toISOString(), slug, count: items.length, items }, null, 1));
+    airzNote(`Mengekspor ${fmt.format(items.length)} fitur airz/ domain "${slug}" sebagai unduhan JSON.`);
+  }
+
+  async function syncAirzTree() {
+    const stats = AIRZ.totals || {};
+    const summary = {
+      syncedAt: new Date().toISOString(), source: 'airz/airsistem (pohon nyata repo .AIRZ)',
+      totals: stats, domains: AIRZ.domains, bins: AIRZ.bins, api: AIRZ.api ? { title: AIRZ.api.title, endpointCount: AIRZ.api.endpointCount } : null,
+      sample: (AIRZ.items || []).slice(0, 500),
+    };
+    if (window.PBLocalFiles?.saveFile) {
+      try {
+        await window.PBLocalFiles.mkdir('airz');
+        await window.PBLocalFiles.mkdir('airz/cloudsistem');
+        await window.PBLocalFiles.saveFile('airz/cloudsistem/tree.json', JSON.stringify(summary), 'application/json;charset=utf-8');
+        updateStorageBadge();
+        airzNote(`Pohon sistem airz/ disinkron → airz/cloudsistem/tree.json (${fmt.format(stats.files)} berkas · ${fmt.format(stats.folders)} folder).`);
+        return;
+      } catch (error) { airzNote(`Sinkronisasi gagal: ${error.message}`); return; }
+    }
+    downloadText('airz-cloudsistem-tree.json', JSON.stringify(summary, null, 1));
+    airzNote('IndexedDB tidak tersedia — pohon sistem diunduh sebagai cadangan.');
   }
 
   function bindEvents() {
@@ -354,10 +558,101 @@
           if (note) note.textContent = `${done}/${MENUS.length} halaman menu utama disalin ke airz/${STORAGE_PREFIX}/`;
           updateStorageBadge();
         })();
+        return;
+      }
+      // ---- Katalog fitur airz/ ----
+      const airzView = event.target.closest('[data-airz-view]');
+      if (airzView) {
+        const item = AIRZ_INDEX.get(airzView.getAttribute('data-airz-view'));
+        if (item) {
+          const rel = String(item.path).replace('airz/airsistem/', '');
+          const snippet = (AIRZ.snippets && AIRZ.snippets[rel]) || '';
+          openAirzModal(`${item.name} — ${item.path}`,
+            `${item.function}\nDomain: ${item.domain} · Ukuran: ${fmt.format(item.size || 0)} byte\n` +
+            (snippet ? `\n----- PRATINJAU ISI -----\n${snippet}` : '\n(Berkas terlalu besar untuk pratinjau inline — gunakan tombol Unduh/Simpan atau buka via File Manager.)'));
+        }
+        return;
+      }
+      const airzSave = event.target.closest('[data-airz-save]');
+      if (airzSave) {
+        const item = AIRZ_INDEX.get(airzSave.getAttribute('data-airz-save'));
+        if (item) void saveAirzItemToStorage(item).then((ok) => { if (ok) airzNote(`Fitur "${item.name}" disimpan ke airz/cloudsistem/ (IndexedDB).`); });
+        return;
+      }
+      const airzFm = event.target.closest('[data-airz-fm]');
+      if (airzFm) {
+        const path = airzFm.getAttribute('data-airz-fm') || 'airz';
+        window.PBFileManager?.applySnapshot?.(window.PBSystemSnapshot?.data);
+        window.PBSystemNavigation?.navigate('file-manager');
+        window.setTimeout(() => window.PBFileManager?.setPath?.(path.replace(/^airz\//, '')), 120);
+        return;
+      }
+      const airzMore = event.target.closest('[data-airz-more]');
+      if (airzMore) {
+        const slug = airzMore.getAttribute('data-airz-more');
+        state.airzLimit[slug] = (state.airzLimit[slug] || AIRZ_PAGE_STEP) + AIRZ_PAGE_STEP;
+        renderPage();
+        return;
+      }
+      const airzDoc = event.target.closest('[data-airz-doc]');
+      if (airzDoc) {
+        const key = airzDoc.getAttribute('data-airz-doc');
+        openAirzModal(`Dokumentasi sistem — airz/airsistem/docs/${key}.md`, (AIRZ.docs && AIRZ.docs[key]) || 'Dokumen tidak tersedia.');
+        return;
+      }
+      const airzBin = event.target.closest('[data-airz-bin]');
+      if (airzBin) {
+        const name = airzBin.getAttribute('data-airz-bin');
+        const bin = (AIRZ.bins || []).find((b) => b.name === name);
+        openAirzModal(`Perintah sistem — ${name}`, `${bin ? bin.function : ''}\n\n----- SKRIPT -----\n${bin ? bin.snippet : ''}\n\nContoh pemakaian:\n  airzctl status --all\n  ${name} --help`);
+        return;
+      }
+      const airzExport = event.target.closest('[data-airz-export]');
+      if (airzExport) { exportAirzDomain(airzExport.getAttribute('data-airz-export')); return; }
+      const airzExportAll = event.target.closest('[data-airz-export-all]');
+      if (airzExportAll) {
+        downloadText('airz-fitur-semua.json', JSON.stringify({ exportedAt: new Date().toISOString(), totals: AIRZ.totals, domains: AIRZ.domains, items: AIRZ.items }, null, 1));
+        airzNote(`Mengekspor SELURUH ${fmt.format((AIRZ.items || []).length)} fitur airz/ sebagai satu berkas JSON.`);
+        return;
+      }
+      const airzSyncTree = event.target.closest('[data-airz-sync-tree]');
+      if (airzSyncTree) { void syncAirzTree(); return; }
+      const airzOpenRoot = event.target.closest('[data-airz-open-root]');
+      if (airzOpenRoot) {
+        window.PBFileManager?.applySnapshot?.(window.PBSystemSnapshot?.data);
+        window.PBSystemNavigation?.navigate('file-manager');
+        window.setTimeout(() => window.PBFileManager?.setPath?.(''), 120);
+        return;
+      }
+      if (event.target.closest('[data-airz-modal-close]')) { closeAirzModal(); return; }
+      const modalCopy = event.target.closest('[data-airz-modal-copy]');
+      if (modalCopy && state.airzModal) {
+        void navigator.clipboard?.writeText(state.airzModal.body).then(
+          () => airzNote('Isi pratinjau disalin ke clipboard.'),
+          () => airzNote('Clipboard ditolak browser — gunakan tombol Unduh.'),
+        );
+        return;
+      }
+      const modalDownload = event.target.closest('[data-airz-modal-download]');
+      if (modalDownload && state.airzModal) {
+        downloadText(`${String(state.airzModal.title).replace(/[^\w.-]+/g, '_').slice(0, 48)}.txt`, state.airzModal.body, 'text/plain;charset=utf-8');
+        return;
       }
     });
     const search = $('#airCloudSearch');
     if (search) search.addEventListener('input', (event) => { state.query = event.target.value || ''; renderSidebar(); });
+    const content = $('#airCloudContent');
+    if (content && content.dataset.airzBound !== '1') {
+      content.dataset.airzBound = '1';
+      content.addEventListener('input', (event) => {
+        if (event.target && event.target.id === 'airzFilterInput') {
+          state.airzQuery = event.target.value || '';
+          renderPage();
+          const input = $('#airzFilterInput');
+          if (input) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+        }
+      });
+    }
   }
 
   function render() {
@@ -391,6 +686,7 @@
     select: selectMenu,
     selectSlug,
     registry: REGISTRY,
+    airzFeatures: AIRZ,
     saveCurrent: () => saveRowToAirz(BY_ID.get(state.selectedId)),
   };
 
