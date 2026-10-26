@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud containers_kubernetes service (containers-kubernetes)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/containers_kubernetesd --config /etc/airz/containers_kubernetes.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

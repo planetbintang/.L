@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud serverless_functions service (serverless-functions)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/serverless_functionsd --config /etc/airz/serverless_functions.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud support_tickets service (support-tickets)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/support_ticketsd --config /etc/airz/support_tickets.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

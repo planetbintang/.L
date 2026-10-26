@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud iot_device service (iot-device)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/iot_deviced --config /etc/airz/iot_device.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

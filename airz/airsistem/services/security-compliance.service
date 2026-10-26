@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud security_compliance service (security-compliance)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/security_complianced --config /etc/airz/security_compliance.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

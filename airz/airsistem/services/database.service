@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud database service (database)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/databased --config /etc/airz/database.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

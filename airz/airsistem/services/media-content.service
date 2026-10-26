@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud media_content service (media-content)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/media_contentd --config /etc/airz/media_content.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

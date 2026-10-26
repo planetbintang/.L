@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud disaster_recovery service (disaster-recovery)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/disaster_recoveryd --config /etc/airz/disaster_recovery.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

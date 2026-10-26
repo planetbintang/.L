@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud analytics_data service (analytics-data)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/analytics_datad --config /etc/airz/analytics_data.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

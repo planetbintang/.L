@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud marketplace_partners service (marketplace-partners)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/marketplace_partnersd --config /etc/airz/marketplace_partners.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

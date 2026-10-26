@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud devops_toolchain service (devops-toolchain)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/devops_toolchaind --config /etc/airz/devops_toolchain.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Air Cloud datacenter_regions service (datacenter-regions)
+After=network.target airz-core.target
+
+[Service]
+Type=simple
+ExecStart=/usr/airz/bin/datacenter_regionsd --config /etc/airz/datacenter_regions.conf
+Restart=on-failure
+MemoryLimit=512M
+
+[Install]
+WantedBy=multi-user.target
