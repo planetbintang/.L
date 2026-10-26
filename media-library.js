@@ -41,7 +41,7 @@
   function status(message){if(ui.status)ui.status.textContent=message}
   function clearObjectUrl(){if(state.objectUrl){URL.revokeObjectURL(state.objectUrl);state.objectUrl=null}}
   function revokePreview(){clearObjectUrl();if(ui.preview)ui.preview.replaceChildren()}
-  function filtered(){return state.items.filter(item=>(state.kind==='all'||item.kind===state.kind)&&(!state.query||(item.name+' '+item.type+' '+item.kind+' '+(item.url||'')).toLowerCase().includes(state.query)))}
+  function filtered(){return state.items.filter(item=>(state.kind==='all'||(state.kind==='remote'?item.remote:item.kind===state.kind))&&(!state.query||(item.name+' '+item.type+' '+item.kind+' '+(item.url||'')).toLowerCase().includes(state.query)))}
   function iconFor(kind){return ({image:'IMAGE',video:'FILM',audio:'AUDIO',document:'PDF',office:'DOC',text:'TEXT',remote:'LINK',file:'FILE'})[kind]||'FILE'}
   function thumb(item){
     const box=document.createElement('div');box.className='media-thumb';
@@ -119,9 +119,10 @@
   async function addRemote(){
     const raw=ui.urlInput.value.trim();if(!raw)return;
     let url;try{url=new URL(raw);if(url.protocol!=='https:')throw new Error('Hanya URL HTTPS yang diizinkan.')}catch(e){status('URL tidak valid: '+e.message);return}
-    const name=ui.remoteName.value.trim()||decodeURIComponent(url.pathname.split('/').pop()||url.hostname);
-    const ext=(name.split('.').pop()||'').toLowerCase();let kind=classify({type:'',name});
-    if(kind==='file')kind='remote';
+    const urlName=decodeURIComponent(url.pathname.split('/').pop()||url.hostname);
+    const name=ui.remoteName.value.trim()||urlName;
+    let kind=classify({type:'',name});
+    if(kind==='file'){const fromUrl=classify({type:'',name:urlName});kind=fromUrl==='file'?'remote':fromUrl;}
     const record={id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2),name,type:'URL eksternal',kind:kind==='remote'?'remote':kind,size:0,createdAt:new Date().toISOString(),remote:true,url:url.href};
     try{await putRecord(record);ui.urlInput.value='';ui.remoteName.value='';await refresh();selectItem(record.id);status('URL HTTPS ditambahkan ke katalog lokal. File tetap di server sumber.')}catch(e){status('Gagal menambahkan URL: '+e.message)}
   }
