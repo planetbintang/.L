@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./system-loader.css?v=20261026-system-loader-v1" />
     <link rel="stylesheet" href="./media-library.css?v=20261026-media-library-v1" />
     <link rel="stylesheet" href="./menu-registry.css?v=20261026-menu-registry-v1" />
+    <link rel="stylesheet" href="./github-push.css?v=20261026-github-push-v1" />
     <title>Planetbintang · Root System</title>
   </head>
   <body>
@@ -220,6 +221,22 @@
             <div class="fm-assessment-note">Tidak menjalankan kode repo dan bukan audit kerentanan. Jalur rahasia/credential terdeteksi disaring.</div>
           </aside>
         </div>
+        <section class="github-push-panel" aria-labelledby="githubPushTitle">
+          <div class="github-push-heading"><div><p class="eyebrow">GITHUB CONTENTS API <span>/</span> WRITE</p><h3 id="githubPushTitle">GitHub Push · Commit kode</h3><p>Muat isi file dari GitHub, edit, lalu kirim commit ke branch pilihan. Auto-push opsional dan nonaktif secara default.</p></div><span class="github-push-badge">TOKEN SESI BROWSER</span></div>
+          <div class="github-push-grid">
+            <label>GitHub Personal Access Token<input id="githubPushToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" aria-label="GitHub Personal Access Token" /></label>
+            <label>Repositori (owner/repo)<input id="githubPushRepo" type="text" autocomplete="off" spellcheck="false" value="planetbintang/.L" placeholder="owner/repo" /></label>
+            <label>Branch tujuan<input id="githubPushBranch" type="text" autocomplete="off" spellcheck="false" value="io" placeholder="io" /></label>
+            <label>Path file di repo<input id="githubPushPath" type="text" autocomplete="off" spellcheck="false" placeholder="src/app.js" /></label>
+            <label>Pesan commit<input id="githubPushMessage" type="text" maxlength="180" value="Update source via File Manager" /></label>
+          </div>
+          <p class="github-push-token-note">Token hanya dipakai dari browser ini dan disimpan di sessionStorage tab, bukan di repo. Gunakan token dengan izin Contents: Read and write hanya pada repo yang diperlukan.</p>
+          <div class="github-push-actions"><button class="github-push-secondary" id="githubPushLoad" type="button">Muat dari GitHub</button><button class="github-push-primary" id="githubPushButton" type="button">Push ke GitHub</button></div>
+          <label class="github-push-editor-label" for="githubPushEditor">Isi kode / teks file<textarea class="github-push-editor" id="githubPushEditor" spellcheck="false" placeholder="Klik “Muat dari GitHub” atau tempel isi file baru di sini…"></textarea></label>
+          <label class="github-push-toggle"><input id="githubPushAuto" type="checkbox" /><span><b>Aktifkan auto-push</b><br />Setelah file dimuat dan konten berubah, commit otomatis dilakukan setelah 4 detik tanpa perubahan. Mengaktifkannya memerlukan konfirmasi.</span></label>
+          <div id="githubPushStatus" class="github-push-status" role="status" aria-live="polite" data-state="ready">GitHub Push siap. Pilih file dan muat isi dari GitHub terlebih dahulu.</div>
+          <p class="github-push-note">Perhatian: ini membuat commit nyata. File Manager biasa hanya membaca metadata tree; panel ini menggunakan GitHub API saat Anda meminta muat/push. GitHub Pages tidak menyimpan token di server.</p>
+        </section>
       </section>
 
       <section class="section-block media-library" id="mediaLibrary" data-system-page="media-library" hidden aria-labelledby="mediaLibraryTitle">
@@ -328,6 +345,7 @@
     <script src="./system-navigation.js?v=20261024-seven-menus-v1" defer></script>
     <script src="./media-library.js?v=20261026-media-library-v1" defer></script>
     <script src="./menu-registry.js?v=20261026-menu-registry-v1" defer></script>
+    <script src="./github-push.js?v=20261026-github-push-v1" defer></script>
     <script src="./view-transition-system.js?v=20261026-route-transitions-v1" defer></script>
     <script src="./aireber-bridge.js?v=20261025-file-manager-chat-v1" defer></script>
   </body>
