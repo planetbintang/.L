@@ -4,6 +4,7 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const routes = {
     system: { group: 'system', hash: '#overview' },
+    search: { group: 'search', hash: '#cari' },
     projects: { group: 'workspace', view: 'projects', menu: 'plan', hash: '#workspace/projects' },
     issues: { group: 'workspace', view: 'issues', menu: 'plan', hash: '#workspace/issues' },
     code: { group: 'workspace', view: 'code', menu: 'code', hash: '#workspace/code' },
@@ -81,6 +82,7 @@
     if (hash === 'enterprise/arch') return 'enterprise-arch';
     // Sub URL folder sistem: #fileManager, #fileManager/data, #fileManager/proc/1, ...
     if (hash === 'fileManager' || hash.startsWith('fileManager/')) return 'file-manager';
+    if (hash === 'cari' || hash === 'search') return 'search';
     if (hash === 'snaps') return 'snaps';
     // Air Cloud: #aircloud → konsol; #aircloud/<slug> → menu utama terkait.
     if (hash === 'aircloud') return 'aircloud';
