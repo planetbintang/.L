@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#050a14" />
-    <meta name="deployment-revision" content="2026-10-27-redeploy-1338" />
+    <meta name="deployment-revision" content="2026-10-27-search-viewer-attempt-1345" />
     <meta name="description" content="Planetbintang Root System — workspace lintas repositori dengan logo brand standar, File Manager, dan empat animasi cahaya." />
     <link rel="icon" href="./brand-logo-browser.png" type="image/png" />
     <link rel="apple-touch-icon" href="./brand-logo-browser.png" />
@@ -482,11 +482,10 @@
           open.href = url;
           const externalInteractive = /(?:google\.com|chatgpt\.com)/i.test(url);
           if (externalInteractive) {
-            status.textContent = title + ' dibuka di tab baru karena situs ini membatasi iframe. Gunakan tombol “Buka situs” jika tab baru diblokir browser.';
-            window.open(url, '_blank', 'noopener,noreferrer');
-            return;
+            status.textContent = 'Mencoba membuka ' + title + ' di area penampil. Jika situs menolak iframe karena kebijakan keamanan, gunakan tombol “Buka situs” untuk membukanya di tab terpisah.';
+          } else {
+            status.textContent = 'Memuat ' + title + '. Jika situs menolak disematkan atau konten kosong, gunakan “Buka situs”.';
           }
-          status.textContent = 'Memuat ' + title + '. Jika situs menolak disematkan atau konten kosong, gunakan “Buka situs”.';
           frame.src = url;
         }));
         frame.addEventListener('load', () => {
