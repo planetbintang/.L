@@ -13,6 +13,7 @@
   const text = value => String(value ?? '');
   const slugify = value => text(value).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
   const normalize = value => text(value).toLocaleLowerCase('id');
+  const cleanQuery = value => normalize(value).replace('.planetbintang.com','').trim();
   function card({title, description, href, label, kind, path = '', repo = null}) {
     const article = document.createElement('article'); article.className = 'repo-card global-search-card';
     const badge = document.createElement('span'); badge.className = 'global-search-result-kind'; badge.textContent = kind;
