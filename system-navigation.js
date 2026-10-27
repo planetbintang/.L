@@ -297,8 +297,9 @@
     const ready = statuses.workspace === 'ready' && statuses['file-manager'] === 'ready' && statuses['platform-view'] === 'ready';
     setHubState(ready ? 'Snapshot dan menu tersinkron' : 'Snapshot tersedia; menyelaraskan menu', ready ? 'ready' : 'loading');
   }
-  if (!window.location.hash || ['#top', '#overview'].includes(window.location.hash)) {
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#filemanajer/appp`);
+  // Logo utama menjadi tombol satu-klik untuk kembali ke halaman utama.
+  if (!window.location.hash || ['#top'].includes(window.location.hash)) {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#overview`);
   }
-  applyRoute(routeFromHash() || 'file-manager', { updateUrl: false, scroll: false });
+  applyRoute(routeFromHash() || 'system', { updateUrl: false, scroll: false });
 })();
