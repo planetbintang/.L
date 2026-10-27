@@ -823,3 +823,13 @@ body {
 .home-ai-gallery-card b{font-size:12px;line-height:1.2}.home-ai-gallery-card small{font-size:10px;line-height:1.4;color:var(--muted,#64748b)}
 @media(max-width:1280px){.topbar{grid-template-columns:auto minmax(0,1fr)}.topbar-actions{grid-column:1/-1;justify-content:flex-end}.main-nav{justify-content:flex-start}}
 @media(max-width:760px){.topbar{grid-template-columns:minmax(0,1fr);gap:10px}.brand{justify-self:start}.main-nav{width:100%;justify-content:flex-start;gap:8px}.topbar-actions{grid-column:auto;justify-content:flex-start;flex-wrap:wrap}.home-ai-gallery{grid-template-columns:1fr;max-width:none}.home-ai-gallery-card{grid-template-columns:76px minmax(0,1fr)}.home-ai-gallery-card img{width:76px;height:62px}}
+
+
+/* Home AI identity gallery: balanced left / center / right layout */
+.home-ai-gallery[data-system-page="system"]{width:100%;max-width:1100px;margin:22px auto 48px;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;justify-content:center;gap:clamp(12px,2vw,22px)}
+.home-ai-gallery[data-system-page="system"] .home-ai-card{height:100%;display:flex;min-width:0}
+.home-ai-gallery[data-system-page="system"] .home-ai-card>a{width:100%;min-width:0}
+.home-ai-gallery[data-system-page="system"] .home-ai-card img{width:100%;height:clamp(190px,24vw,300px);aspect-ratio:auto;object-fit:contain;background:#f8faff;padding:14px}
+.home-ai-gallery[data-system-page="system"] .home-ai-card-featured img{padding:10px}
+.home-ai-gallery[data-system-page="system"] .home-ai-card-label{flex:1;justify-content:center;min-height:76px}
+@media(max-width:760px){.home-ai-gallery[data-system-page="system"]{grid-template-columns:1fr;max-width:520px;margin:18px auto 34px;gap:14px}.home-ai-gallery[data-system-page="system"] .home-ai-card img{height:220px}}
