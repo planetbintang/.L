@@ -65,6 +65,38 @@
 <body><main><h1>planetbintang.com</h1><p>Halaman utama dipublikasikan melalui GitHub Pages.</p><a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a></main></body>
 </html>` },
       { path: 'planetbintang/planetbintang.com/CNAME', type: 'file', mode: '0100644', size: 17, sizeKnown: true, function: 'Nilai custom domain GitHub Pages', codeContent: 'planetbintang.com' },
+      { path: 'planetbintang/planetbintang.com/domain-config.json', type: 'file', mode: '0100644', size: 900, sizeKnown: true, function: 'Konfigurasi domain machine-readable; sinkron dengan deployment/planetbintang.com/domain-config.json', codeContent: `{
+  "schemaVersion": 1,
+  "domain": "planetbintang.com",
+  "www": "www.planetbintang.com",
+  "hosting": "GitHub Pages",
+  "repository": "planetbintang/.L",
+  "publishingBranch": "io",
+  "publishingFolder": "/",
+  "customDomainFile": "/CNAME",
+  "dns": {
+    "apexA": ["185.199.108.153", "185.199.109.153", "185.199.110.153", "185.199.111.153"],
+    "apexAAAA": ["2606:50c0:8000::153", "2606:50c0:8001::153", "2606:50c0:8002::153", "2606:50c0:8003::153"],
+    "wwwCNAME": "planetbintang.github.io"
+  },
+  "https": { "enableEnforceHttpsAfterDnsAndCertificateReady": true, "providerManagedCertificate": true }
+}` },
+      { path: 'planetbintang/planetbintang.com/DOMAIN-SETUP.txt', type: 'file', mode: '0100644', size: 1800, sizeKnown: true, function: 'Panduan aktivasi domain dan pengaturan GitHub Pages', codeContent: `Buka https://github.com/planetbintang/.L/settings/pages
+Pilih Deploy from a branch, branch io, folder / (root).
+Set Custom domain ke planetbintang.com lalu Save.
+
+DNS apex A (@):
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+
+DNS www CNAME -> planetbintang.github.io
+
+Setelah DNS valid dan sertifikat tersedia, aktifkan Enforce HTTPS.
+Workflow pemeriksaan berkala: .github/workflows/domain-dns-check.yml
+
+Catatan: File di repositori tidak mengubah DNS registrar. Pastikan konfigurasi Pages pada Settings secara manual, karena koneksi yang tersedia tidak memiliki aksi untuk mengubah Settings > Pages.` },
       { path: 'planetbintang/planetbintang.com/nginx', type: 'directory', mode: '040755', items: 1, function: 'Template Nginx untuk hosting VPS sendiri; tidak dijalankan oleh GitHub Pages' },
       { path: 'planetbintang/planetbintang.com/dns', type: 'directory', mode: '040755', items: 1, function: 'Catatan DNS/CNAME; record harus diterapkan di registrar/DNS provider' },
       { path: 'planetbintang/planetbintang.com/ssl', type: 'directory', mode: '040755', items: 1, function: 'TLS/SSL untuk GitHub Pages atau hosting sendiri' },
