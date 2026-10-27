@@ -109,6 +109,10 @@ Catatan: File di repositori tidak mengubah DNS registrar. Pastikan konfigurasi P
       { path: 'planetbintang.com/verification', type: 'directory', mode: '040755', items: 2, function: 'Checklist verifikasi setelah perubahan DNS dan Pages' },
       { path: 'planetbintang.com/www', type: 'directory', mode: '040755', items: 1, function: 'Konfigurasi host www.planetbintang.com' },
       { path: 'planetbintang.com/logs', type: 'directory', mode: '040755', items: 1, function: 'Panduan membaca hasil workflow; log tidak disimpan sebagai log server di GitHub Pages' },
+      { path: 'planetbintang.com/automation', type: 'directory', mode: '040755', items: 2, function: 'Workflow nyata di GitHub Actions untuk memeriksa DNS dan HTTPS' },
+      { path: 'planetbintang.com/README.md', type: 'file', mode: '0100644', size: 2400, sizeKnown: true, function: 'Panduan domain operasional yang tersimpan di repository', fetchPath: 'deployment/planetbintang.com/README.md' },
+      { path: 'planetbintang.com/verify-domain.sh', type: 'file', mode: '0100755', size: 1800, sizeKnown: true, function: 'Skrip pemeriksaan DNS dan HTTPS yang dapat dijalankan manual', fetchPath: 'deployment/planetbintang.com/verify-domain.sh' },
+      { path: 'planetbintang.com/activation-status.json', type: 'file', mode: '0100644', size: 600, sizeKnown: true, function: 'Checklist status domain; bukan klaim status live', fetchPath: 'deployment/planetbintang.com/activation-status.json' },
     ];
     if (path === 'planetbintang.com/github-pages') return [
       { path: 'planetbintang.com/github-pages/settings.md', type: 'file', mode: '0100644', size: 850, sizeKnown: true, function: 'Langkah konfigurasi Pages yang harus tersimpan pada GitHub Settings', codeContent: `# GitHub Pages — planetbintang.com\n\nRepository: planetbintang/.L\nBranch: io\nFolder: / (root)\nCustom domain: planetbintang.com\nCustom domain file: /CNAME (root repository, exact content planetbintang.com)\n\n1. Buka https://github.com/planetbintang/.L/settings/pages\n2. Build and deployment: Deploy from a branch → io → / (root) → Save.\n3. Custom domain: planetbintang.com → Save.\n4. Tunggu DNS check dan penerbitan sertifikat.\n5. Aktifkan Enforce HTTPS setelah tersedia.\n\nFile repository tidak dapat menulis ke Settings > Pages; verifikasi status langsung di halaman tersebut.` },
@@ -138,6 +142,10 @@ Catatan: File di repositori tidak mengubah DNS registrar. Pastikan konfigurasi P
     ];
     if (path === 'planetbintang.com/logs') return [
       { path: 'planetbintang.com/logs/where-to-find-results.md', type: 'file', mode: '0100644', size: 260, sizeKnown: true, function: 'Lokasi log workflow dan batas log hosting statis', codeContent: `# Results and logs\nWorkflow logs: repository GitHub → Actions → Domain DNS Check.\nGitHub Pages does not expose server shell or Nginx access logs. Do not create fake runtime logs in the repository. Use an external uptime monitor if continuous HTTP checks are required.` },
+    ];
+    if (path === 'planetbintang.com/automation') return [
+      { path: 'planetbintang.com/automation/domain-dns-check.yml', type: 'file', mode: '0100644', size: 1800, sizeKnown: true, function: 'Workflow terjadwal untuk pemeriksaan DNS', fetchPath: '.github/workflows/domain-dns-check.yml' },
+      { path: 'planetbintang.com/automation/domain-health-check.yml', type: 'file', mode: '0100644', size: 1500, sizeKnown: true, function: 'Workflow terjadwal untuk pemeriksaan respons HTTPS apex dan www', fetchPath: '.github/workflows/domain-health-check.yml' },
     ];
     if (path === 'planetbintang.com/nginx') return [
       { path: 'planetbintang.com/nginx/planetbintang.com.conf', type: 'file', mode: '0100644', size: 620, sizeKnown: true, function: 'Template server block Nginx untuk static site; pasang hanya pada VPS yang dikelola sendiri', codeContent: `server {
