@@ -610,22 +610,6 @@
       "executionState": "browser-static-catalog"
     },
     {
-      "id": "themes",
-      "label": "Tema dan Tampilan",
-      "group": "settings",
-      "route": "#control/system-integration",
-      "sourceFiles": [
-        "planetbintang-themes.js",
-        "control-center.js",
-        "luxury-theme.css"
-      ],
-      "capabilities": [
-        "theme controls",
-        "system integration view"
-      ],
-      "executionState": "browser-local-preferences"
-    },
-    {
       "id": "repository-catalog",
       "label": "Registry Repositori",
       "group": "registry",
@@ -678,6 +662,111 @@
         "activation checklist"
       ],
       "executionState": "documentation-and-static-config-not-live-infrastructure"
+    },
+    {
+      "id": "aircloud-compute",
+      "label": "AIR CLOUD Compute",
+      "group": "cloud",
+      "route": "#aircloud/compute",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "compute catalog",
+        "service navigation"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-vpc-infrastructure",
+      "label": "AIR CLOUD VPC Infrastructure",
+      "group": "cloud",
+      "route": "#aircloud/vpc-infrastructure",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "network infrastructure catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-storage",
+      "label": "AIR CLOUD Storage",
+      "group": "cloud",
+      "route": "#aircloud/storage",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "storage service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-database",
+      "label": "AIR CLOUD Database",
+      "group": "cloud",
+      "route": "#aircloud/database",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "database service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-ai-ml",
+      "label": "AIR CLOUD AI/ML",
+      "group": "cloud",
+      "route": "#aircloud/ai-ml",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js",
+        "data/airz-features.js"
+      ],
+      "capabilities": [
+        "AI/ML service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-devops-toolchain",
+      "label": "AIR CLOUD DevOps Toolchain",
+      "group": "cloud",
+      "route": "#aircloud/devops-toolchain",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "DevOps service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "execute-logs",
+      "label": "Execute Logs",
+      "group": "tools",
+      "route": "#execute/logs",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "execution request logs view"
+      ],
+      "executionState": "browser-local-or-static-no-server-logs"
     }
   ],
   "sourceFiles": [
