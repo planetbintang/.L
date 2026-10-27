@@ -4,15 +4,9 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const state = { data: null, query: '', visibility: 'all', appType: 'all' };
-  // Binary visibility mask: bit 0..9 hides repositories named exactly 0..9.
-  const HIDDEN_REPOSITORY_MASK = 0b1111111111;
-  const isHiddenRepository = (repo) => {
-    const name = String(repo?.name ?? '').trim();
-    if (!/^[0-9]$/.test(name)) return false;
-    return (HIDDEN_REPOSITORY_MASK & (1 << Number(name))) !== 0;
-  };
+  // Tampilkan semua repositori di snapshot, termasuk repositori bernama angka.
   const visibleSnapshot = (data) => {
-    const repositories = (data.repositories || []).filter((repo) => !isHiddenRepository(repo));
+    const repositories = (data.repositories || []);
     const publicCount = repositories.filter((repo) => repo.visibility === 'public').length;
     const privateCount = repositories.filter((repo) => repo.visibility === 'private').length;
     const pagesEnabledCount = repositories.filter((repo) => Boolean(repo.pagesUrl || repo.homepage)).length;
@@ -119,7 +113,7 @@
     const logo = document.createElement('img'); logo.src = './brand-logo-browser.png'; logo.alt = ''; glyph.append(logo);
     const nameWrap = document.createElement('div'); nameWrap.className = 'repo-name';
     const title = document.createElement('h3'); title.append(anchor(repo.url, repo.fullName || repo.name));
-    nameWrap.append(title, text('small', `branch: ${repo.branch || '—'} · ${repo.state === 'empty' ? 'repo kosong' : repo.state === 'unavailable' ? 'akses tidak tersedia' : 'metadata publik'}`));
+    nameWrap.append(title, text('small', `branch: ${repo.branch || '—'} · ${repo.state === 'empty' ? 'repo kosong' : repo.state === 'unavailable' ? 'akses tidak tersedia' : repo.visibility === 'unknown' ? 'metadata dasar' : 'metadata snapshot'}`));
     titleRow.append(glyph, nameWrap);
     const badge = text('span', (repo.visibility || 'unknown').toUpperCase(), `visibility-badge ${repo.visibility || ''}`);
     head.append(titleRow, badge); card.append(head);
@@ -208,10 +202,20 @@
     announceSync('loading');
     try {
       const suffix = cacheBust ? `?t=${Date.now()}` : '';
-      const response = await fetch(`./data/repositories.json${suffix}`, { cache: cacheBust ? 'no-store' : 'no-cache', credentials: 'omit' });
+      const [response, additionsResponse] = await Promise.all([
+        fetch(`./data/repositories.json${suffix}`, { cache: cacheBust ? 'no-store' : 'no-cache', credentials: 'omit' }),
+        fetch(`./data/repository-catalog-additions.json${suffix}`, { cache: cacheBust ? 'no-store' : 'no-cache', credentials: 'omit' })
+      ]);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       if (!Array.isArray(data.repositories)) throw new Error('Format snapshot tidak valid');
+      let additions = [];
+      if (additionsResponse.ok) {
+        const supplemental = await additionsResponse.json();
+        if (Array.isArray(supplemental.repositories)) additions = supplemental.repositories;
+      }
+      const known = new Set(data.repositories.map((repo) => repo.fullName || `planetbintang/${repo.name}`));
+      data.repositories.push(...additions.filter((repo) => !known.has(repo.fullName || `planetbintang/${repo.name}`)));
       const filteredData = visibleSnapshot(data);
       state.data = filteredData;
       renderSummary(filteredData);
