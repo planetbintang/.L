@@ -1,0 +1,131 @@
+/* Common website navigation and quick-service blocks. Kept separate so existing theme files remain untouched. */
+.common-site-menu {
+  position: relative;
+  margin: 1rem 0 1.4rem;
+  padding: clamp(1rem, 2.6vw, 1.6rem);
+  border: 1px solid rgba(119,174,225,.22);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(11,27,48,.96), rgba(5,13,27,.98));
+  color: #eaf4ff;
+}
+.common-site-menu-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.common-site-menu-heading h2 {
+  margin: .35rem 0 .45rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  line-height: 1.2;
+}
+.common-site-menu-heading p:not(.eyebrow) {
+  max-width: 68ch;
+  margin: 0;
+  color: #aec3dc;
+  font-size: .9rem;
+  line-height: 1.65;
+}
+.common-site-search-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  flex: 0 0 auto;
+  padding: .65rem .85rem;
+  border: 1px solid rgba(112,215,255,.32);
+  border-radius: 10px;
+  color: #8ee4ff;
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 750;
+}
+.common-site-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .7rem;
+}
+.common-site-menu-card {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  min-width: 0;
+  min-height: 90px;
+  padding: .85rem;
+  border: 1px solid rgba(131,177,222,.19);
+  border-radius: 13px;
+  background: rgba(10,26,46,.8);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.common-site-menu-card:hover {
+  border-color: rgba(112,215,255,.62);
+  background: rgba(17,49,77,.86);
+  transform: translateY(-1px);
+}
+.common-site-menu-card:focus-visible,
+.common-site-search-link:focus-visible,
+.common-site-menu-footer button:focus-visible {
+  outline: 2px solid #73ddff;
+  outline-offset: 3px;
+}
+.common-site-menu-icon {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid rgba(112,215,255,.25);
+  border-radius: 11px;
+  background: rgba(33,104,145,.2);
+  color: #85e1ff;
+  font-size: 1.2rem;
+}
+.common-site-menu-copy { display: grid; gap: .3rem; min-width: 0; }
+.common-site-menu-copy b { font-size: .91rem; line-height: 1.3; }
+.common-site-menu-copy small { color: #a9bfd7; font-size: .76rem; line-height: 1.45; }
+.common-site-menu-arrow { margin-left: auto; align-self: flex-start; color: #7bdcff; font-size: .9rem; }
+.common-site-menu-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  margin-top: .9rem;
+  padding-top: .85rem;
+  border-top: 1px solid rgba(131,177,222,.15);
+  color: #9bb4ce;
+  font-size: .75rem;
+}
+.common-site-menu-footer > span { display: inline-flex; align-items: center; gap: .45rem; }
+.common-site-menu-footer > span i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #63d6a2;
+  box-shadow: 0 0 0 3px rgba(99,214,162,.12);
+}
+.common-site-menu-footer button {
+  border: 1px solid rgba(131,177,222,.24);
+  border-radius: 9px;
+  padding: .5rem .7rem;
+  background: rgba(13,35,57,.85);
+  color: #ccecff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.common-portal-dropdown > .nav-dropdown-menu { min-width: 270px; }
+@media (max-width: 900px) {
+  .common-site-menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .common-site-menu { padding: 1rem; border-radius: 14px; }
+  .common-site-menu-heading { align-items: flex-start; flex-direction: column; }
+  .common-site-menu-grid { grid-template-columns: minmax(0, 1fr); gap: .55rem; }
+  .common-site-menu-card { min-height: 76px; padding: .75rem; }
+  .common-site-menu-footer { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .common-site-menu-card { transition: none; }
+}
