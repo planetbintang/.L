@@ -22,6 +22,41 @@
     <link rel="stylesheet" href="./navigation-fix.css?v=20261027-dark-abstract-ai-gallery-v1" />
     <style id="vm-home-showcase-styles">
       .vm-home-showcase{margin:1.25rem 0 2rem;padding:clamp(1.2rem,3vw,2rem);border:1px solid rgba(119,174,225,.22);border-radius:1.25rem;background:linear-gradient(135deg,rgba(13,30,53,.92),rgba(5,12,25,.96));color:#eaf4ff;overflow:hidden}.vm-home-heading{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,1fr);gap:1.5rem;align-items:end;margin-bottom:1.3rem}.vm-home-kicker{font-size:.72rem;letter-spacing:.18em;color:#70d7ff;font-weight:800}.vm-home-showcase h2{font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.1;margin:.55rem 0}.vm-home-showcase p{color:#b7cbe0;line-height:1.7;margin:.45rem 0}.vm-home-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}.vm-home-tags span{font-size:.75rem;border:1px solid rgba(130,190,238,.25);padding:.35rem .65rem;border-radius:99px;color:#cce8ff}.vm-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.vm-home-card{min-width:0;overflow:hidden;border:1px solid rgba(139,190,235,.2);border-radius:1rem;background:rgba(7,18,34,.76)}.vm-home-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#091321}.vm-home-card-body{padding:1rem}.vm-home-card h3{margin:0 0 .45rem;font-size:1.05rem}.vm-home-card p{font-size:.9rem;margin:0}.vm-home-card-foot{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-top:.9rem;color:#81dfff;font-size:.76rem}.vm-home-note{font-size:.8rem!important;margin-top:1rem!important;color:#8fa9c5!important}.vm-home-showcase a{color:inherit;text-decoration:none}.vm-home-showcase a:focus-visible{outline:2px solid #73ddff;outline-offset:4px}@media(max-width:960px){.vm-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.vm-home-heading{grid-template-columns:1fr}.vm-home-grid{grid-template-columns:1fr}.vm-home-card img{aspect-ratio:16/9}}
+
+      /* Unified single-entry homepage: consistent spacing, text hierarchy and cards */
+      #overview.hero{margin-bottom:1rem;gap:clamp(1.25rem,3vw,2.5rem);align-items:center}
+      #overview .hero-copy{max-width:760px}
+      #overview .hero-description{max-width:68ch;line-height:1.75;text-wrap:pretty}
+      #overview .hero-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+      #overview .home-ai-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:.75rem;margin-top:1.15rem}
+      .home-ai-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1rem 0 1.25rem;align-items:stretch}
+      .home-ai-gallery .home-ai-card{min-width:0;overflow:hidden;border:1px solid rgba(119,174,225,.22);border-radius:1rem;background:linear-gradient(145deg,rgba(13,30,53,.9),rgba(5,12,25,.96));}
+      .home-ai-gallery .home-ai-card>a{height:100%;display:flex;flex-direction:column}
+      .home-ai-gallery .home-ai-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+      .home-ai-gallery .home-ai-card-label{display:flex;flex-direction:column;gap:.3rem;align-items:flex-start;padding:1rem;min-height:76px}
+      .home-ai-gallery .home-ai-card-label b{letter-spacing:.06em;font-size:.83rem}
+      .home-ai-gallery .home-ai-card-label small{line-height:1.5;color:#b7cbe0}
+      .vm-home-showcase{margin:0 0 1.5rem;padding:clamp(1rem,2.8vw,1.7rem);border-radius:1.15rem}
+      .vm-home-heading{grid-template-columns:minmax(0,1.4fr) minmax(220px,.8fr);gap:clamp(1rem,2.5vw,2rem);align-items:start}
+      .vm-home-heading>div,.vm-home-heading>p{min-width:0}
+      .vm-home-heading>p{padding:1rem;border:1px solid rgba(119,174,225,.16);border-radius:.8rem;background:rgba(7,18,34,.45);font-size:.9rem}
+      .vm-home-showcase h2{max-width:22ch;text-wrap:balance}
+      .vm-home-showcase p{max-width:75ch;text-wrap:pretty}
+      .vm-home-tags{gap:.45rem}
+      .vm-home-tags span{line-height:1.4}
+      .vm-home-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;align-items:stretch}
+      .vm-home-card{height:100%;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+      .vm-home-card:hover{transform:translateY(-3px);border-color:rgba(115,221,255,.55)}
+      .vm-home-card>a{display:flex;height:100%;flex-direction:column}
+      .vm-home-card img{aspect-ratio:16/9;object-fit:cover}
+      .vm-home-card-body{display:flex;flex:1;flex-direction:column;align-items:stretch}
+      .vm-home-card h3{line-height:1.35;text-wrap:balance}
+      .vm-home-card-body>p{font-size:.88rem;line-height:1.65}
+      .vm-home-card-foot{margin-top:auto;padding-top:1rem;flex-wrap:wrap;line-height:1.4}
+      @media(max-width:960px){.home-ai-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.vm-home-heading{grid-template-columns:1fr}.vm-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+      @media(max-width:640px){#overview.hero{margin-bottom:.8rem}.home-ai-gallery{grid-template-columns:1fr;gap:.75rem}.home-ai-gallery .home-ai-card img{aspect-ratio:16/8}.home-ai-gallery .home-ai-card-label{min-height:0;padding:.8rem 1rem}.vm-home-showcase{padding:1rem}.vm-home-grid{grid-template-columns:1fr;gap:.8rem}.vm-home-card-body{padding:.9rem}.vm-home-heading>p{padding:.8rem}}
+      @media(prefers-reduced-motion:reduce){.vm-home-card{transition:none}.vm-home-card:hover{transform:none}}
+
     </style>
     <title>Planetbintang · Root System</title>
 </head>
@@ -124,7 +159,7 @@
       <section class="vm-home-showcase" data-system-page="system" aria-labelledby="vmHomeTitle">
         <div class="vm-home-heading">
           <div><span class="vm-home-kicker">VIRTUAL MACHINE / OPERATING SYSTEMS</span><h2 id="vmHomeTitle">OS Virtual Machine &amp; Sistem Infrastruktur</h2><p>Planetbintang menghadirkan ruang katalog dan pengembangan sistem untuk lingkungan virtual machine (VM), sistem operasi server, serta perangkat pendukung infrastruktur digital. Jelajahi konsep OS VM, pengelolaan instance, penyimpanan, jaringan, keamanan, dan otomasi melalui ekosistem sistem yang tersedia.</p><div class="vm-home-tags"><span>OS &amp; Image VM</span><span>Compute &amp; Instance</span><span>Storage &amp; Network</span><span>Security &amp; Automation</span></div></div>
-          <p>Gunakan dua visual dari Galeri sebagai pintu masuk untuk mengenal konsep sistem VM dan komponen infrastruktur. Katalog ini merupakan tampilan informasi dan pengembangan; penyediaan VM aktif, image yang dapat diunduh, dan layanan hosting perlu dikonfigurasi secara terpisah.</p>
+          <p>Gunakan galeri visual sebagai pintu masuk untuk mengenal konsep sistem VM dan komponen infrastruktur. Katalog ini merupakan tampilan informasi dan pengembangan; penyediaan VM aktif, image yang dapat diunduh, dan layanan hosting perlu dikonfigurasi secara terpisah.</p>
         </div>
         <div class="vm-home-grid">
           <article class="vm-home-card"><a href="./galeri.html" aria-label="Buka Galeri untuk melihat visual sistem OS VM"><img src="./galeri/2610271451244.jpg" alt="Visual konsep sistem operasi virtual machine dari Galeri Planetbintang" loading="lazy" /><div class="vm-home-card-body"><h3>Sistem Operasi &amp; Image VM</h3><p>Katalog konsep image sistem operasi untuk server virtual, lingkungan uji, pengembangan aplikasi, dan workspace terisolasi.</p><div class="vm-home-card-foot"><span>OS CATALOG</span><span>Lihat Galeri ↗</span></div></div></a></article>
