@@ -128,3 +128,48 @@
 @media (prefers-reduced-motion: reduce) {
   .topbar .nav-dropdown-menu { animation: none !important; }
 }
+
+/* Persistent global header: menu pages render only in the body, never over the brand/navigation. */
+.topbar,
+body .topbar,
+body[data-system-route] .topbar {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1200 !important;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: var(--topbar-bg, var(--surface, #fff));
+}
+.topbar > .brand,
+.topbar > .main-nav,
+.topbar > .topbar-actions {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.topbar > .brand {
+  position: relative;
+  z-index: 1202;
+  flex-shrink: 0;
+}
+.topbar > .main-nav {
+  position: relative;
+  z-index: 1201;
+}
+.topbar .nav-dropdown[open] > .nav-dropdown-menu {
+  z-index: 1400 !important;
+}
+/* Route panels stay in the document body below the persistent header. */
+body [data-system-page][hidden] { display: none !important; }
+body [data-system-page]:not([hidden]) {
+  position: relative;
+  z-index: 0;
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .topbar > .brand { min-height: 44px; }
+  .topbar > .main-nav { order: 2; }
+  .topbar > .topbar-actions { order: 3; }
+}
