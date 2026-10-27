@@ -88,6 +88,7 @@
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
+        <a class="main-nav-link" href="#cari" data-system-route="search" aria-label="Cari repositori dan folder">Cari</a>
         <a class="main-nav-link" href="./galeri.html" aria-label="Buka Galeri gambar">Galeri</a>
         <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
@@ -328,6 +329,13 @@
       </div>
     </section>
 
+    <section class="section-block" id="searchPage" data-system-page="search" hidden aria-labelledby="globalSearchTitle">
+      <div class="section-heading"><div><p class="eyebrow">GLOBAL SEARCH <span>/</span> 00</p><h2 id="globalSearchTitle">Cari repositori &amp; folder</h2><p class="section-description">Cari metadata repositori atau masukkan path folder untuk membukanya di File Manager.</p></div></div>
+      <form class="toolbar panel" id="globalSearchForm" role="search"><label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" placeholder="Cari repositori, folder, path, atau kata kunci…" autocomplete="off" aria-label="Cari repositori dan folder" /></label><button class="text-button" type="submit">Cari</button></form>
+      <p class="results-line" id="globalSearchStatus" aria-live="polite">Memuat indeks repositori…</p>
+      <div class="repo-grid" id="globalSearchResults" aria-live="polite"></div>
+    </section>
+
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
         <div class="section-heading">
           <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
@@ -405,6 +413,7 @@
     <footer class="footer"><a class="footer-brand" href="#top" data-system-route="system"><img src="./brand-logo-browser.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber snapshot lokal</span><span class="footer-source">Source dashboard · snapshot lokal</span></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
     <script src="./dashboard.js?v=20261023-system-vfs-v1" defer></script>
+    <script src="./search-page.js?v=20261027-global-search-v1" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
     <script src="./file-manager.js?v=20261024-folder-reference-v1" defer></script>
