@@ -1,0 +1,66 @@
+/* Konten tubuh situs: jarak tepi kiri/kanan 5px dan bentang penuh */
+:root { --content-side-gap: 5px; }
+html, body { width: 100%; max-width: 100%; }
+body { overflow-x: hidden; }
+body > main,
+main,
+body > .footer,
+body > section,
+body > .section-block,
+body > .workspace-panel,
+body > .platform-page,
+body > .enterprise-page,
+body > .tools-page,
+body > .snaps-page,
+body > .aircloud-page {
+  box-sizing: border-box;
+  width: calc(100% - (var(--content-side-gap) * 2));
+  max-width: none;
+  margin-left: var(--content-side-gap) !important;
+  margin-right: var(--content-side-gap) !important;
+}
+main > section,
+main .section-block,
+main .workspace-panel,
+main .platform-page,
+main .enterprise-page,
+main .tools-page,
+main .snaps-page,
+main .aircloud-page {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+main .section-heading,
+main .section-description,
+main .repo-grid,
+main .host-grid,
+main .home-ai-gallery,
+main .vm-home-showcase,
+main .workspace-panel-heading,
+main .feature-layout,
+main .ac-layout {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+main .repo-grid,
+main .host-grid,
+main .home-ai-gallery,
+main .vm-home-grid {
+  justify-items: stretch;
+}
+main img,
+main video,
+main canvas,
+main iframe {
+  max-width: 100%;
+}
+@media (max-width: 640px) {
+  :root { --content-side-gap: 5px; }
+  main > section,
+  main .section-block,
+  main .workspace-panel,
+  main .vm-home-showcase {
+    min-width: 0;
+  }
+}
