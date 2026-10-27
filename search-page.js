@@ -3,7 +3,6 @@
   const $ = (s, r = document) => r.querySelector(s);
   const form = $('#globalSearchForm'), input = $('#globalSearchInput');
   const results = $('#globalSearchResults'), status = $('#globalSearchStatus');
-  const sidebar = $('#globalSearchFilters');
   if (!form || !input || !results || !status) return;
   const stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-columns-v2';
