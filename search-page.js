@@ -13,7 +13,34 @@
   const text = value => String(value ?? '');
   const slugify = value => text(value).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
   const normalize = value => text(value).toLocaleLowerCase('id');
-  const cleanQuery = value => normalize(value).replace('.planetbintang.com','').trim();
+  const cleanQuery = value => normalize(value).trim()
+    .replace(/^https?:\/\//, '').replace(/^www\./, '')
+    .replace(/\.planetbintang\.com(?=\/|$)/, '')
+    .replace(/\/+$/, '').trim();
+  let domainCatalogPromise = null;
+  async function loadDomainCatalog() {
+    if (domainCatalogPromise) return domainCatalogPromise;
+    const base = 'https://raw.githubusercontent.com/planetbintang/al.l/io/data.media/';
+    domainCatalogPromise = Promise.all([
+      fetch(base + 'domain-000001.media', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => ''),
+      fetch(base + 'domain-seeds.txt', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => '')
+    ]).then(([jsonl,seeds]) => {
+      const found = new Map();
+      jsonl.split(/\r?\n/).forEach(line => {
+        try {
+          const record = JSON.parse(line);
+          const domain = text(record.domain).trim().toLowerCase();
+          if (domain && /^[a-z0-9.-]+$/.test(domain)) found.set(domain, {domain, status:text(record.status || 'tercatat'), source:'domain-000001.media'});
+        } catch (_) {}
+      });
+      seeds.split(/\r?\n/).forEach(line => {
+        const domain = line.trim().toLowerCase();
+        if (domain && /^[a-z0-9.-]+$/.test(domain) && !found.has(domain)) found.set(domain, {domain,status:'seed',source:'domain-seeds.txt'});
+      });
+      return [...found.values()];
+    });
+    return domainCatalogPromise;
+  }
   function card({title, description, href, label, kind, path = '', repo = null}) {
     const article = document.createElement('article'); article.className = 'repo-card global-search-card';
     const badge = document.createElement('span'); badge.className = 'global-search-result-kind'; badge.textContent = kind;
@@ -43,7 +70,7 @@
   function renderFilters(counts = {}) {
     if (!filterBox) return;
     filterBox.replaceChildren();
-    [['all','Semua hasil',counts.all || 0],['repository','Repositori',counts.repository || 0],['folder','Folder & path',counts.folder || 0]].forEach(([type,label,count]) => {
+    [['all','Semua hasil',counts.all || 0],['repository','Repositori',counts.repository || 0],['folder','Folder & path',counts.folder || 0],['domain','Domain .media',counts.domain || 0]].forEach(([type,label,count]) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'global-search-filter'; b.setAttribute('aria-pressed', String(activeType === type));
       const name = document.createElement('span'); name.textContent = label; const total = document.createElement('small'); total.textContent = String(count);
       b.append(name,total); b.addEventListener('click', () => { activeType = type; render(input.value); }); filterBox.append(b);
@@ -65,21 +92,22 @@
       for (const {repo,index} of batch) {
         if (!index?.directories) continue;
         Object.keys(index.directories).forEach(path => {
-          if (path && normalize(path).includes(q)) output.push({repo,path});
+          if (path && (normalize(path).includes(q) || normalize((repo.fullName || repo.name) + '/' + path).includes(q))) output.push({repo,path});
         });
       }
     }
     return output.slice(0,150);
   }
   async function render(query) {
-    const token = ++requestToken, q = normalize(query.trim()); results.replaceChildren();
-    if (!q) { status.textContent = 'Indeks siap. Ketik nama repositori atau path folder. Pencarian memakai snapshot struktur repositori yang dipublikasikan.'; renderFilters({all:repositories.length,repository:repositories.length,folder:0}); return; }
-    status.textContent = 'Mencari metadata repositori dan indeks path folder…';
+    const token = ++requestToken, q = cleanQuery(query); results.replaceChildren();
+    if (!q) { status.textContent = 'Indeks siap. Cari repositori, folder, atau domain dari katalog al.l/data.media.'; renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0}); return; }
+    status.textContent = 'Mencari repositori, path folder, dan katalog domain al.l/data.media…';
     const repoMatches = repositories.filter(repo => [repo.name,repo.fullName,repo.description,repo.language,repo.appType,repo.host,repo.homepage,repo.pagesUrl,...(repo.languages||[]).map(x=>x.name)].some(v=>normalize(v).includes(q))).slice(0,100);
-    const folderMatches = await collectFolderResults(q,token);
+    const [folderMatches, allDomains] = await Promise.all([collectFolderResults(q,token), loadDomainCatalog()]);
     if (token !== requestToken) return;
-    const allCount = repoMatches.length + folderMatches.length;
-    renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length});
+    const domainMatches = allDomains.filter(item => normalize(item.domain).includes(q)).slice(0,100);
+    const allCount = repoMatches.length + folderMatches.length + domainMatches.length;
+    renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length,domain:domainMatches.length});
     const items = [];
     if (activeType !== 'folder') repoMatches.forEach(repo => {
       const name = text(repo.name || repo.fullName || 'Repositori');
@@ -93,8 +121,13 @@
       item.querySelector('a').addEventListener('click', () => { try { sessionStorage.setItem('pb-search-repo',text(repo.fullName||repo.name)); sessionStorage.setItem('pb-search-path',path); } catch (_) {} });
       items.push(item);
     });
+    if (activeType === 'all' || activeType === 'domain') domainMatches.forEach(({domain,status:domainStatus,source}) => {
+      const item = card({title:domain,description:'Katalog domain al.l/data.media · status: ' + domainStatus,path:source,href:'https://' + domain,label:'Buka situs',kind:'DOMAIN'});
+      item.querySelector('a').target = '_blank'; item.querySelector('a').rel = 'noopener noreferrer';
+      items.push(item);
+    });
     items.forEach(item=>results.append(item));
-    status.textContent = allCount + ' hasil ditemukan pada snapshot ' + repositories.length + ' repositori. Folder dicari melalui indeks path; isi file tidak diunduh.';
+    status.textContent = allCount + ' hasil ditemukan: ' + repoMatches.length + ' repositori, ' + folderMatches.length + ' folder, ' + domainMatches.length + ' domain dari katalog al.l/data.media. Katalog membaca shard yang tersedia di GitHub; file bulk di storage terpisah tidak diasumsikan tersedia.';
     if (!items.length) { const empty=document.createElement('p'); empty.className='global-search-empty'; empty.textContent='Tidak ada hasil cocok pada jenis pencarian ini.'; results.append(empty); }
   }
   function openGlobalSearch(value) {
