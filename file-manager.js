@@ -478,16 +478,15 @@
     if (!directory) return null;
     const candidates = [];
     for (const page of (directory.pages || [])) {
-      if (!page?.url || !/^(?:data\\/trees\\/[a-f0-9]{16}\\/pages\\/|[a-f0-9]{16}\\/pages\\/)[a-f0-9]{32}\\.json\\.gz$/.test(page.url)) continue;
+      if (!page?.url || !/^(?:data\/trees\/[a-f0-9]{16}\/pages\/|[a-f0-9]{16}\/pages\/)[a-f0-9]{32}\.json\.gz$/.test(page.url)) continue;
       const response = await fetch(`./${page.url}`, { cache: 'force-cache', credentials: 'omit' });
       if (!response.ok) continue;
       const payload = await parseResponse(response);
       if (payload.repository !== state.repo || payload.path !== path || !Array.isArray(payload.entries)) continue;
       candidates.push(...payload.entries.filter((entry) => entry.type === 'file' && SITE_ENTRY_NAMES.includes(basename(entry.path).toLowerCase())));
     }
+    // Prioritas: index.html, index.php, index.ts, index.tsx, index.js, index.jsx.
     candidates.sort((a, b) => SITE_ENTRY_NAMES.indexOf(basename(a.path).toLowerCase()) - SITE_ENTRY_NAMES.indexOf(basename(b.path).toLowerCase()));
-    // Prioritas daftar yang diminta: index.html, index.php, index.ts, index.tsx, index.js, index.jsx.
-    candidates.sort((a, b) => SITE_ENTRY_NAMES.indexOf(basename(b.path).toLowerCase()) - SITE_ENTRY_NAMES.indexOf(basename(a.path).toLowerCase()));
     return candidates[0] || null;
   }
   async function openFolderOrIndex(path) {
@@ -558,24 +557,24 @@
       const baseUrl = sourceUrl.slice(0, sourceUrl.lastIndexOf('/') + 1);
       let html = '';
       if (extension === 'html') {
-        html = source.replace(/<head(\\s[^>]*)?>/i, (tag) => `${tag}<base href="${baseUrl}">`);
-        if (!/<head(?:\\s[^>]*)?>/i.test(source)) html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"></head><body>${source}</body></html>`;
+        html = source.replace(/<head(\s[^>]*)?>/i, (tag) => `${tag}<base href="${baseUrl}">`);
+        if (!/<head(?:\s[^>]*)?>/i.test(source)) html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"></head><body>${source}</body></html>`;
       } else if (extension === 'php') {
         // Tidak ada runtime PHP pada GitHub Pages; keluarkan markup statis di luar blok PHP.
-        source = source.replace(/<\\?(?:php|=)?[\\s\\S]*?\\?>/gi, '');
+        source = source.replace(/<\?(?:php|=)?[\s\S]*?\?>/gi, '');
         html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>${source}</body></html>`;
       } else if (extension === 'js') {
         html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><main id="app"></main><script>try{(new Function(${JSON.stringify(source)}))()}catch(e){document.body.insertAdjacentHTML('beforeend','<pre style="white-space:pre-wrap;color:#a00"></pre>');document.querySelector('pre').textContent=e.stack||e.message}</script></body></html>`;
       } else if (extension === 'jsx' || extension === 'tsx') {
-        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script></head><body><main id="app"></main><script type="text/babel" data-presets="env,react,typescript"> ${source.replace(/<\\/script/gi, '<\\\\/script')} </script></body></html>`;
+        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script></head><body><main id="app"></main><script type="text/babel" data-presets="env,react,typescript"> ${source.replace(/<\/script/gi, '<\\/script')} </script></body></html>`;
       } else {
         // TypeScript tanpa bundler: transpile minimal untuk konstruksi umum, lalu jalankan terisolasi.
-        const js = source.replace(/^\\s*import\\s+type\\b[^;]*;?/gm, '')
-          .replace(/^\\s*export\\s+type\\b[^;]*;?/gm, '')
-          .replace(/^\\s*interface\\s+\\w+[\\s\\S]*?^}\\s*;?/gm, '')
-          .replace(/^\\s*type\\s+\\w+\\s*=.*;?\\s*$/gm, '')
-          .replace(/:\\s*(string|number|boolean|any|unknown|void|never)(\\[\\])?(?=\\s*[,)=;{])/g, '')
-          .replace(/\\s+as\\s+(string|number|boolean|any|unknown|\\w+)(\\[\\])?/g, '');
+        const js = source.replace(/^\s*import\s+type\b[^;]*;?/gm, '')
+          .replace(/^\s*export\s+type\b[^;]*;?/gm, '')
+          .replace(/^\s*interface\s+\w+[\s\S]*?^}\s*;?/gm, '')
+          .replace(/^\s*type\s+\w+\s*=.*;?\s*$/gm, '')
+          .replace(/:\s*(string|number|boolean|any|unknown|void|never)(\[\])?(?=\s*[,)=;{])/g, '')
+          .replace(/\s+as\s+(string|number|boolean|any|unknown|\w+)(\[\])?/g, '');
         html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><main id="app"></main><script>try{(new Function(${JSON.stringify(js)}))()}catch(e){document.body.insertAdjacentHTML('beforeend','<pre style="white-space:pre-wrap;color:#a00"></pre>');document.querySelector('pre').textContent='Pratinjau TS terbatas: '+(e.stack||e.message)}</script></body></html>`;
       }
       frame.srcdoc = html;
