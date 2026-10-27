@@ -24,16 +24,19 @@
     <link rel="stylesheet" href="./content-side-spacing.css?v=20261027-side-5px" />
     <style id="vm-home-showcase-styles">
 
-      .search-source-view{margin:1rem 0 1.25rem;padding:1rem;border:1px solid rgba(119,174,225,.22);background:rgba(7,18,34,.72)}
-      .search-source-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-      .search-source-heading h3{margin:.25rem 0;font-size:1.15rem}
-      .search-source-heading p{margin:.35rem 0}
-      .search-source-actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
-      .search-source-choice.is-active{border-color:#73ddff;background:rgba(40,117,160,.25);color:#eafaff}
-      .search-source-frame-wrap{margin-top:1rem;border:1px solid rgba(119,174,225,.25);background:#fff;min-height:320px}
-      #searchSourceFrame{display:block;width:100%;height:min(72vh,760px);min-height:320px;border:0;background:#fff}
-      .search-source-note{font-size:.82rem;color:var(--muted,#a9bfd6);margin:.65rem 0 0}
-      @media(max-width:640px){.search-source-view{padding:.75rem}.search-source-heading{align-items:stretch}.search-source-actions>*{flex:1 1 auto}#searchSourceFrame{height:65vh;min-height:280px}}
+      /* SOURCE VIEW menjadi ruang kerja layar penuh tepat di bawah menu utama */
+      #searchPage[data-system-page="search"]:not([hidden]){position:fixed;top:78px;right:0;bottom:0;left:0;z-index:8;width:100vw;height:calc(100dvh - 78px);margin:0;padding:0;overflow:hidden;background:#fff;display:block}
+      #searchPage .search-source-view{display:flex;flex-direction:column;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;background:#fff;overflow:hidden}
+      #searchPage .search-source-heading{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-start;gap:0;padding:.4rem .75rem;background:#071222;color:#eaf4ff}
+      #searchPage .search-source-heading>div:first-child{display:none}
+      #searchPage .search-source-actions{display:flex;width:100%;gap:0;flex-wrap:nowrap;align-items:stretch;overflow-x:auto}
+      #searchPage .search-source-choice,#searchPage #searchSourceOpen{flex:1 0 auto;min-height:38px;padding:.55rem .85rem;border:1px solid rgba(119,174,225,.25);color:#dceeff;text-align:center;white-space:nowrap}
+      #searchPage .search-source-choice.is-active{background:#174b6d;border-color:#73ddff;color:#fff}
+      #searchPage .search-source-frame-wrap{flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;border:0;background:#fff}
+      #searchPage #searchSourceFrame{display:block;width:100%;height:100%;min-height:0;border:0;background:#fff}
+      #searchPage .search-source-note{flex:0 0 auto;margin:0;padding:.35rem .75rem;background:#071222;color:#b8cbe0;font-size:.72rem}
+      @media(max-width:650px){#searchPage[data-system-page="search"]:not([hidden]){top:74px;height:calc(100dvh - 74px)}#searchPage .search-source-heading{padding:.25rem}.search-source-actions{overflow-x:auto}#searchPage .search-source-choice,#searchPage #searchSourceOpen{padding:.5rem .65rem;font-size:.75rem}}
+
 
       .vm-home-showcase{margin:1.25rem 0 2rem;padding:clamp(1.2rem,3vw,2rem);border:1px solid rgba(119,174,225,.22);border-radius:1.25rem;background:linear-gradient(135deg,rgba(13,30,53,.92),rgba(5,12,25,.96));color:#eaf4ff;overflow:hidden}.vm-home-heading{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,1fr);gap:1.5rem;align-items:end;margin-bottom:1.3rem}.vm-home-kicker{font-size:.72rem;letter-spacing:.18em;color:#70d7ff;font-weight:800}.vm-home-showcase h2{font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.1;margin:.55rem 0}.vm-home-showcase p{color:#b7cbe0;line-height:1.7;margin:.45rem 0}.vm-home-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}.vm-home-tags span{font-size:.75rem;border:1px solid rgba(130,190,238,.25);padding:.35rem .65rem;border-radius:99px;color:#cce8ff}.vm-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.vm-home-card{min-width:0;overflow:hidden;border:1px solid rgba(139,190,235,.2);border-radius:1rem;background:rgba(7,18,34,.76)}.vm-home-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#091321}.vm-home-card-body{padding:1rem}.vm-home-card h3{margin:0 0 .45rem;font-size:1.05rem}.vm-home-card p{font-size:.9rem;margin:0}.vm-home-card-foot{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-top:.9rem;color:#81dfff;font-size:.76rem}.vm-home-note{font-size:.8rem!important;margin-top:1rem!important;color:#8fa9c5!important}.vm-home-showcase a{color:inherit;text-decoration:none}.vm-home-showcase a:focus-visible{outline:2px solid #73ddff;outline-offset:4px}@media(max-width:960px){.vm-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.vm-home-heading{grid-template-columns:1fr}.vm-home-grid{grid-template-columns:1fr}.vm-home-card img{aspect-ratio:16/9}}
 
@@ -356,11 +359,10 @@
       </div>
     </section>
 
-    <section class="section-block" id="searchPage" data-system-page="search" hidden aria-labelledby="globalSearchTitle">
-      <div class="section-heading"><div><p class="eyebrow">GLOBAL SEARCH <span>/</span> 00</p><h2 id="globalSearchTitle">Cari repositori &amp; folder</h2><p class="section-description">Cari metadata repositori atau masukkan path folder untuk membukanya di File Manager.</p></div></div>
-      <section class="search-source-view panel" aria-label="Tampilan katalog dan repositori eksternal">
+    <section class="section-block" id="searchPage" data-system-page="search" hidden aria-label="SOURCE VIEW / CATALOGS &amp; REPOSITORIES">
+      <section class="search-source-view" aria-label="Katalog dan repositori">
         <div class="search-source-heading">
-          <div><p class="eyebrow">SOURCE VIEW / CATALOGS &amp; REPOSITORIES</p><h3>Tampilan katalog &amp; repositori</h3><p class="section-description">Pilih halaman yang ingin ditampilkan di panel. Pratinjau eksternal dapat dibatasi oleh kebijakan keamanan situs; gunakan “Buka situs” bila halaman tidak dapat disematkan.</p></div>
+          <div><p class="eyebrow">SOURCE VIEW / CATALOGS &amp; REPOSITORIES</p><h3>Tampilan katalog &amp; repositori</h3><p class="section-description">Pilih sumber yang ingin ditampilkan.</p></div>
           <div class="search-source-actions" role="group" aria-label="Pilih sumber tampilan">
             <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/index.html" data-source-title="AL.L · index.html" aria-pressed="true">AL.L · index.html</button>
             <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/vendordomain/index.html" data-source-title="Vendor Domain · index.html" aria-pressed="false">Vendor Domain · index.html</button>
@@ -374,9 +376,6 @@
         </div>
         <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L · index.html. Jika konten kosong atau ditolak, gunakan “Buka situs”.</p>
       </section>
-      <form class="toolbar panel" id="globalSearchForm" role="search"><label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" placeholder="Cari repositori, folder, path, atau kata kunci…" autocomplete="off" aria-label="Cari repositori dan folder" /></label><button class="text-button" type="submit">Cari</button></form>
-      <p class="results-line" id="globalSearchStatus" aria-live="polite">Memuat indeks repositori…</p>
-      <div class="repo-grid" id="globalSearchResults" aria-live="polite"></div>
     </section>
 
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
