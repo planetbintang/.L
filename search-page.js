@@ -7,7 +7,7 @@
   const results = $('#globalSearchResults'), status = $('#globalSearchStatus');
   if (!form || !input || !results || !status) return;
   const stylesheet = document.createElement('link');
-  stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-columns-v2';
+  stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-dual-search-v1';
   document.head.append(stylesheet);
   let repositories = [], treeIndexes = new Map(), activeType = 'all', requestToken = 0;
   const text = value => String(value ?? '');
