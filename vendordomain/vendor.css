@@ -6,3 +6,61 @@
 
 /* Vendor Domain enhancements */
 .nav-dropdown{position:relative}.dropdown-panel{z-index:90}.main-nav{min-width:0}.topbar{gap:clamp(8px,1.5vw,24px)}.main-nav>a,.nav-dropdown>button{white-space:nowrap}.feature-block.expanded .block-body{display:block}.side-module:focus-visible,.quick-card:focus-visible,.primary-btn:focus-visible,.secondary-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}@media(max-width:940px){.main-nav{flex:1;min-width:0}.nav-dropdown{min-width:0}.dropdown-panel{position:fixed;top:64px;right:12px;left:auto;width:min(340px,calc(100vw - 24px));max-height:75vh}.topbar{gap:8px}.top-actions{margin-left:auto}}@media(max-width:640px){.main-nav .nav-dropdown>button{max-width:74px;overflow:hidden;text-overflow:ellipsis}.main-nav .nav-dropdown>button span{display:none}.top-actions .icon-btn{flex:0 0 34px}.toolbar select{max-width:none;flex:1}}
+
+
+/* PlanetBintang header theme: keep the navigation distinct and content below it. */
+.topbar {
+  height: auto;
+  min-height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  isolation: isolate;
+  background: linear-gradient(112deg, #0b1730 0%, #142b55 48%, #111b32 100%);
+  color: #f3f7ff;
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border-bottom: 1px solid #4a80d866;
+  box-shadow: 0 12px 32px #07152f35;
+  gap: clamp(10px, 1.6vw, 28px);
+  padding: 10px clamp(14px, 2vw, 26px);
+  flex-wrap: wrap;
+}
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #4dbbffb3, transparent);
+  pointer-events: none;
+}
+.topbar > * { position: relative; z-index: 1; }
+.topbar .brand strong { color: #f5f8ff; }
+.topbar .brand small { color: #9fb6dc; }
+.topbar .main-nav > a,
+.topbar .nav-dropdown > button { color: #d2def3; }
+.topbar .main-nav > a.active,
+.topbar .main-nav > a:hover,
+.topbar .nav-dropdown > button:hover,
+.topbar .nav-dropdown.open > button { background: #2b4b80; color: #fff; }
+.topbar .dropdown-panel {
+  z-index: 1100;
+  background: #0f2345;
+  border-color: #315486;
+  box-shadow: 0 18px 45px #02081799;
+}
+.topbar .dropdown-panel a { color: #d5e3fa; }
+.topbar .dropdown-panel a:hover { background: #1a3c6d; color: #fff; }
+.topbar .icon-btn { background: #152d54; border-color: #42649a; color: #e5efff; }
+.topbar .status-label { color: #a8f0d6; }
+.app-shell {
+  position: relative;
+  z-index: 0;
+  min-height: calc(100vh - 76px);
+}
+.main-content { position: relative; z-index: 0; scroll-margin-top: 96px; }
+@media (max-width: 900px) {
+  .topbar { gap: 10px; }
+  .topbar .main-nav { order: 3; flex-basis: 100%; height: auto; flex-wrap: wrap; }
+  .topbar .top-actions { margin-left: auto; }
+}
