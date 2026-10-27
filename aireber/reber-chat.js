@@ -131,17 +131,46 @@
       const fm = fileCommand(text);
       if (fm !== null) {
         answerText = fm;
-      } else if (engine) {
-        const kataList = await loadKataList();
-        const result = engine.answer(text, { kataList });
-        answerText = result.text;
-        const meta = $('#reberChatMeta');
-        if (meta) meta.textContent = `intent: ${result.intent} · ${result.retrieved.length} referensi · ${result.ms} ms · tanpa token/kredit`;
       } else {
-        answerText = 'Mesin chat belum termuat (reber-chat-engine.js). Muat ulang halaman untuk mengaktifkan chat realtime.';
+        const endpoint = String(window.REBER_AI_CONFIG?.apiEndpoint || '').trim();
+        if (endpoint) {
+          try {
+            const prior = readLocalHistory().filter((row) => ['user', 'assistant'].includes(row.role)).slice(-21, -1);
+            const messages = [...prior, { role: 'user', text }].map((row) => ({
+              role: row.role === 'assistant' ? 'assistant' : 'user',
+              content: String(row.text || '').slice(0, 12000)
+            }));
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ messages, system: 'Anda adalah AI Reber, asisten AlluniverS_OS. Jadikan filosofi aireber/ dan sistem AI Reber sebagai inti: Re = bertindak dengan tujuan, Be = bersama, Ber = benar dan mengarahkan, Be_r = integritas. Jawab dalam bahasa pengguna, jujur tentang ketidakpastian, bantu penalaran, coding, analisis, penulisan, dan tugas bertahap. Jangan mengaku telah menjalankan tindakan eksternal yang belum dilakukan. Jangan mengungkap rahasia atau meminta API key pengguna.' })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || `Backend AI HTTP ${response.status}`);
+            answerText = String(data.output_text || data.reply || data.text || '').trim();
+            if (!answerText) throw new Error('Backend AI tidak mengembalikan teks jawaban');
+            const meta = $('#reberChatMeta');
+            if (meta) meta.textContent = `mode: AI cloud · ${data.model || 'backend Reber'}`;
+          } catch (cloudError) {
+            if (!engine) throw cloudError;
+            const kataList = await loadKataList();
+            const local = engine.answer(text, { kataList });
+            answerText = `⚠️ Backend AI belum dapat digunakan (${cloudError.message}). Jawaban berikut berasal dari mesin lokal AI Reber, bukan model cloud.\\n\\n${local.text}`;
+            const meta = $('#reberChatMeta');
+            if (meta) meta.textContent = 'mode: fallback mesin lokal Reber';
+          }
+        } else if (engine) {
+          const kataList = await loadKataList();
+          const result = engine.answer(text, { kataList });
+          answerText = result.text;
+          const meta = $('#reberChatMeta');
+          if (meta) meta.textContent = `mode: mesin lokal · intent ${result.intent} · ${result.retrieved.length} referensi · ${result.ms} ms`;
+        } else {
+          answerText = 'Mesin chat belum termuat (reber-chat-engine.js). Muat ulang halaman untuk mengaktifkan chat realtime.';
+        }
       }
     } catch (error) {
-      answerText = `Mesin Reber menemui kendala internal: ${error.message}. Silakan ulangi — pemrosesan lokal tidak memakai kuota apa pun.`;
+      answerText = `Mesin Reber menemui kendala: ${error.message}. Periksa konfigurasi dan coba lagi.`;
     }
     appendMessage('assistant', answerText);
     void persistTurn('assistant', answerText);
