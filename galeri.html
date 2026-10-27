@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d5cf2">
+<title>Galeri · Planetbintang .L</title>
+<style>
+:root{color-scheme:dark;--bg:#07152f;--panel:#10264b;--line:#294b7a;--text:#f2f7ff;--muted:#a9c1e4;--accent:#1da9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#123c80,var(--bg) 65%);color:var(--text);font:15px/1.55 system-ui,sans-serif;min-height:100vh}
+header{padding:22px clamp(16px,4vw,44px);border-bottom:1px solid var(--line);background:#081b39d9;position:sticky;top:0;backdrop-filter:blur(14px);z-index:2}
+.top{max-width:1400px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}a,button{color:inherit}a.back{color:#b7dfff;text-decoration:none}
+main{max-width:1400px;margin:auto;padding:clamp(16px,3vw,36px)}h1{font-size:clamp(28px,4vw,46px);margin:5px 0}.muted{color:var(--muted)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+button,.file-label,input[type=search]{font:inherit;border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:#10264b;color:var(--text)}button,.file-label{cursor:pointer}.primary{background:#0968ed;border-color:#4da2ff}.file-label input{display:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}.card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,#132f5b,#091a36);box-shadow:0 14px 38px #0003}.card img{width:100%;height:250px;object-fit:contain;background:#f8faff;display:block}.card .info{padding:13px 15px}.card h2{font-size:16px;margin:0 0 4px}.card p{margin:0;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.empty{padding:28px;border:1px dashed #5278ac;border-radius:16px;background:#0c2142;margin-top:16px}.status{min-height:1.5em;color:#b8e5ff}.hint{font-size:13px;color:var(--muted);margin-top:14px}
+</style></head>
+<body>
+<header><div class="top"><a class="back" href="./">← Kembali ke Planetbintang .L</a><strong>PLANETBINTANG · GALERI</strong></div></header>
+<main>
+<p class="muted">GALERI MEDIA · LOGO · IDENTITAS · DESAIN SISTEM</p><h1>Galeri Gambar</h1>
+<p class="muted">Ruang visual untuk logo, konsep identitas, papan alfabet, dan referensi antarmuka Planetbintang. Pilih gambar dari perangkat untuk menambahkannya ke galeri pada browser ini.</p>
+<div class="toolbar"><label class="file-label primary">＋ Tambahkan gambar<input id="fileInput" type="file" accept="image/*" multiple></label><input id="search" type="search" placeholder="Cari gambar…" aria-label="Cari gambar"><button id="clearLocal" type="button">Hapus gambar lokal</button></div>
+<p class="status" id="status" role="status" aria-live="polite"></p><section id="grid" class="grid" aria-label="Koleksi gambar"></section>
+<section class="empty" id="empty"><strong>Galeri siap digunakan</strong><p class="muted">Gambar yang dipilih akan tersimpan pada penyimpanan browser di perangkat ini. Agar gambar tersedia untuk semua pengunjung situs, file gambar perlu ikut ditambahkan ke repositori GitHub.</p></section>
+<p class="hint">Catatan: penyimpanan gambar yang diimpor bersifat lokal pada browser/perangkat ini dan tidak otomatis mengunggah file ke GitHub.</p>
+</main>
+<script>
+const KEY='pb-dotl-gallery-v1';const grid=document.querySelector('#grid'),empty=document.querySelector('#empty'),status=document.querySelector('#status'),search=document.querySelector('#search');
+let items=[];try{items=JSON.parse(localStorage.getItem(KEY)||'[]')}catch{}
+function render(){grid.replaceChildren();const q=search.value.trim().toLowerCase();const shown=items.filter(x=>x.name.toLowerCase().includes(q));shown.forEach(item=>{const card=document.createElement('article');card.className='card';const img=document.createElement('img');img.src=item.data;img.alt=item.name;img.loading='lazy';const info=document.createElement('div');info.className='info';const title=document.createElement('h2');title.textContent=item.name;const desc=document.createElement('p');desc.textContent=item.size||'Gambar galeri';info.append(title,desc);card.append(img,info);grid.append(card)});empty.hidden=shown.length>0; if(items.length&&!shown.length)empty.hidden=false;status.textContent=items.length+' gambar tersimpan pada browser ini.'}
+document.querySelector('#fileInput').addEventListener('change',async e=>{const files=[...e.target.files].filter(f=>f.type.startsWith('image/'));if(!files.length)return;let added=0;for(const file of files){if(file.size>2*1024*1024){status.textContent=file.name+' melebihi 2 MB; lewati file ini.';continue}const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)});items.unshift({name:file.name,data,size=Math.round(file.size/1024)+' KB'});added++}try{localStorage.setItem(KEY,JSON.stringify(items));status.textContent=added+' gambar ditambahkan.'}catch{status.textContent='Penyimpanan browser penuh. Hapus sebagian gambar lalu coba lagi.'}render();e.target.value=''});
+search.addEventListener('input',render);document.querySelector('#clearLocal').addEventListener('click',()=>{if(!confirm('Hapus semua gambar yang disimpan lokal pada browser ini?'))return;items=[];localStorage.removeItem(KEY);render()});render();
+</script></body></html>
