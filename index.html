@@ -87,8 +87,12 @@
         <span class="brand-icon-frame"><img src="./brand-logo-browser.png" alt="Logo sistem Planetbintang" /></span>
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
+      <form class="topbar-search" id="topbarSearchForm" role="search" aria-label="Pencarian cepat SNAPS">
+        <label class="topbar-search-label" for="topbarSearchInput">SNAPS</label>
+        <input id="topbarSearchInput" type="search" placeholder="Cari sistem, repo, folder…" autocomplete="off" aria-label="Cari sistem, repositori, dan folder" />
+        <button type="submit" aria-label="Cari" title="Cari">⌕</button>
+      </form>
       <nav class="main-nav" aria-label="Menu utama platform">
-        <a class="main-nav-link" href="#cari" data-system-route="search" aria-label="Cari repositori dan folder">Cari</a>
         <a class="main-nav-link" href="./galeri.html" aria-label="Buka Galeri gambar">Galeri</a>
         <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
@@ -169,6 +173,15 @@
           <span class="logo-entry-label">HALAMAN UTAMA <b>↗</b></span>
         </button>
         <div class="hero-corner" aria-hidden="true">PB <span>001</span></div>
+      </section>
+
+      <section class="home-search-strip" data-system-page="system" aria-label="Pencarian utama Planetbintang">
+        <div class="home-search-copy"><p class="eyebrow">SNAPS / GLOBAL DISCOVERY</p><h2>Temukan dan buka sistem</h2><p>Cari repositori, folder, path, atau aplikasi yang sudah terpetakan.</p></div>
+        <form class="home-search-form" id="homeSearchForm" role="search" aria-label="Cari seluruh sistem Planetbintang">
+          <label class="visually-hidden" for="homeSearchInput">Cari sistem, repositori, atau folder</label>
+          <input id="homeSearchInput" type="search" placeholder="Ketik nama sistem, repositori, folder, atau path…" autocomplete="off" aria-label="Cari sistem, repositori, atau folder" />
+          <button type="submit" class="home-search-submit">Cari</button>
+        </form>
       </section>
 
       <section class="home-ai-gallery" data-system-page="system" aria-label="AI Global dan Reber AI">
