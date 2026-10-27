@@ -109,14 +109,14 @@
     const allCount = repoMatches.length + folderMatches.length + domainMatches.length;
     renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length,domain:domainMatches.length});
     const items = [];
-    if (activeType !== 'folder') repoMatches.forEach(repo => {
+    if (activeType === 'all' || activeType === 'repository') repoMatches.forEach(repo => {
       const name = text(repo.name || repo.fullName || 'Repositori');
       const desc = [repo.fullName || '',repo.appType || '',repo.branch ? 'branch ' + repo.branch : ''].filter(Boolean).join(' · ');
       const item = card({title:name,description:desc,href:'#fileManager',label:'Buka di File Manager',kind:'REPOSITORI',repo});
       item.querySelector('a').addEventListener('click', () => { try { sessionStorage.setItem('pb-search-repo',text(repo.fullName||repo.name)); sessionStorage.setItem('pb-search-path',''); } catch (_) {} });
       items.push(item);
     });
-    if (activeType !== 'repository') folderMatches.forEach(({repo,path}) => {
+    if (activeType === 'all' || activeType === 'folder') folderMatches.forEach(({repo,path}) => {
       const item = card({title:path.split('/').pop() || '/',description:repo.fullName || repo.name || 'Repositori',path:'/' + path,href:'#fileManager/' + path.split('/').map(encodeURIComponent).join('/'),label:'Buka folder',kind:'FOLDER'});
       item.querySelector('a').addEventListener('click', () => { try { sessionStorage.setItem('pb-search-repo',text(repo.fullName||repo.name)); sessionStorage.setItem('pb-search-path',path); } catch (_) {} });
       items.push(item);
