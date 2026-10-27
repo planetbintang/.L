@@ -479,6 +479,12 @@
           });
           frame.title = 'Pratinjau ' + title;
           open.href = url;
+          const externalInteractive = /(?:google\.com|chatgpt\.com)/i.test(url);
+          if (externalInteractive) {
+            status.textContent = title + ' dibuka di tab baru karena situs ini membatasi iframe. Gunakan tombol “Buka situs” jika tab baru diblokir browser.';
+            window.open(url, '_blank', 'noopener,noreferrer');
+            return;
+          }
           status.textContent = 'Memuat ' + title + '. Jika situs menolak disematkan atau konten kosong, gunakan “Buka situs”.';
           frame.src = url;
         }));
@@ -489,7 +495,7 @@
     </script>
 
     <script src="./dashboard.js?v=20261023-system-vfs-v1" defer></script>
-    <script src="./search-page.js?v=20261027-domain-catalog-v1" defer></script>
+    <script src="./search-page.js?v=20261027-search-actions-v2" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
     <script src="./file-manager.js?v=20261027-planetbintang-domain-map-v1" defer></script>
