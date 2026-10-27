@@ -815,7 +815,14 @@
   }
   async function init(data, preserveLocation = true) {
     const previousRepo = state.repo; const previousPath = state.path;
-    const initialPath = previousRepo ? previousPath : pathFromLocationHash();
+    let searchRepo = ''; let searchPath = '';
+    try {
+      searchRepo = sessionStorage.getItem('pb-search-repo') || '';
+      searchPath = sessionStorage.getItem('pb-search-path') || '';
+      sessionStorage.removeItem('pb-search-repo');
+      sessionStorage.removeItem('pb-search-path');
+    } catch {}
+    const initialPath = searchPath || (previousRepo ? previousPath : pathFromLocationHash());
     const list = [...(data.repositories || [])].filter((repo) => !isHiddenRepository(repo));
     const virtualEntry = virtualRepoEntry();
     const existingIndex = list.findIndex((repo) => repo.fullName === L_REPO);
@@ -828,7 +835,7 @@
     state.data = { ...data, repositories };
     const select = $('#fileRepoSelect'); select.replaceChildren();
     repositories.forEach((repo) => select.add(new Option(repo.fullName === L_REPO ? '.L · root system' : repo.fullName, repo.fullName)));
-    const preferredRepo = repositories.some((repo) => repo.fullName === previousRepo) ? previousRepo : L_REPO;
+    const preferredRepo = repositories.some((repo) => repo.fullName === searchRepo) ? searchRepo : (repositories.some((repo) => repo.fullName === previousRepo) ? previousRepo : L_REPO);
     state.repo = repositories.find((repo) => repo.fullName === preferredRepo)?.fullName || repositories[0]?.fullName || '';
     select.value = state.repo;
     if (!handlersBound) {
@@ -841,7 +848,7 @@
       $('#fileLoadMoreButton').addEventListener('click', () => void loadNextPage());
       handlersBound = true;
     }
-    const targetPath = preserveLocation && previousRepo === L_REPO ? previousPath : initialPath;
+    const targetPath = searchPath || (preserveLocation && previousRepo === L_REPO ? previousPath : initialPath);
     await loadManifest(targetPath);
   }
 
