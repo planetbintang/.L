@@ -23,6 +23,21 @@
     <link rel="stylesheet" href="./system-library.css?v=20261026-library-v1" />
     <link rel="stylesheet" href="./system-library-v2.css?v=20261026-library-v2" />
     <title>Planetbintang · Root System</title>
+      <style id="root-gallery-styles">
+      .root-gallery-section{margin:24px 0;padding:clamp(18px,3vw,32px);border:1px solid var(--line,#294b7a);border-radius:22px;background:linear-gradient(145deg,rgba(15,43,83,.94),rgba(5,20,44,.94));}
+      .root-gallery-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:20px}
+      .root-gallery-heading h2{margin:4px 0 8px;font-size:clamp(26px,3vw,38px)}
+      .root-gallery-heading p{max-width:720px;margin:0;color:var(--muted,#a9c1e4)}
+      .root-gallery-more{display:inline-flex;align-items:center;justify-content:center;padding:11px 15px;border:1px solid #3986d9;border-radius:12px;text-decoration:none;background:#0a5dc9;color:#fff;font-weight:700}
+      .root-gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:15px}
+      .root-gallery-card{min-width:0;overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(117,173,237,.3);border-radius:16px;background:rgba(3,15,35,.65);text-decoration:none;color:inherit;transition:transform .18s ease,border-color .18s ease}
+      .root-gallery-card:hover,.root-gallery-card:focus-visible{transform:translateY(-3px);border-color:#52b8ff;outline:none}
+      .root-gallery-card img{display:block;width:100%;height:210px;object-fit:contain;background:#f5f8ff}
+      .root-gallery-card span{display:flex;flex-direction:column;gap:3px;padding:12px 13px}
+      .root-gallery-card small{font-size:12px;color:var(--muted,#a9c1e4);overflow-wrap:anywhere}
+      @media(max-width:560px){.root-gallery-section{padding:14px}.root-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.root-gallery-card img{height:145px}.root-gallery-card span{padding:9px}.root-gallery-heading{align-items:flex-start}}
+    </style>
+
   </head>
   <body>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
@@ -123,6 +138,25 @@
         <article class="home-ai-card home-ai-card-featured"><a href="./aireber/" aria-label="Buka percakapan AI Reber"><img src="./aireber/reber-brand.svg" alt="AI Reber — burung jaringan digital" loading="lazy" /><span class="home-ai-card-label"><b>REBER AI</b><small>Mulai percakapan dengan Reber</small></span></a></article>
         <article class="home-ai-card"><a href="./aireber/" aria-label="Buka AI Reber dari kartu Negara AI"><img src="./assets/negara-ai.svg" alt="Negara AI — identitas digital Indonesia" loading="lazy" /><span class="home-ai-card-label"><b>NEGARA AI</b><small>Identitas AI berorientasi Indonesia</small></span></a></article>
       </section>
+      <section class="root-gallery-section" data-system-page="system" id="galeriUtama" aria-labelledby="rootGalleryTitle">
+        <header class="root-gallery-heading"><div><p class="eyebrow">GALERI VISUAL <span>/</span> REPOSITORI .L</p><h2 id="rootGalleryTitle">Galeri</h2><p>Gambar yang tersimpan di folder <code>galeri/</code> repositori .L ditampilkan langsung di halaman utama.</p></div><a class="root-gallery-more" href="./galeri.html">Buka Galeri lengkap ↗</a></header>
+        <div class="root-gallery-grid" aria-label="Gambar galeri repositori">
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/1782911782.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/1782911782.png" alt="Konsep visual 01" loading="lazy" decoding="async"><span><b>Konsep visual 01</b><small>1782911782.png</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/1782912612.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/1782912612.png" alt="Konsep visual 02" loading="lazy" decoding="async"><span><b>Konsep visual 02</b><small>1782912612.png</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/1783464948.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/1783464948.png" alt="Konsep visual 03" loading="lazy" decoding="async"><span><b>Konsep visual 03</b><small>1783464948.png</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/1783464953.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/1783464953.png" alt="Konsep visual 04" loading="lazy" decoding="async"><span><b>Konsep visual 04</b><small>1783464953.png</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/1792841119.png" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/1792841119.png" alt="Konsep visual 05" loading="lazy" decoding="async"><span><b>Konsep visual 05</b><small>1792841119.png</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2608260135124.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2608260135124.jpg" alt="Referensi visual 06" loading="lazy" decoding="async"><span><b>Referensi visual 06</b><small>2608260135124.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610142012197.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610142012197.jpg" alt="Referensi visual 07" loading="lazy" decoding="async"><span><b>Referensi visual 07</b><small>2610142012197.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610161533016.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610161533016.jpg" alt="Referensi visual 08" loading="lazy" decoding="async"><span><b>Referensi visual 08</b><small>2610161533016.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610161643214.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610161643214.jpg" alt="Referensi visual 09" loading="lazy" decoding="async"><span><b>Referensi visual 09</b><small>2610161643214.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610221551221.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610221551221.jpg" alt="Referensi visual 10" loading="lazy" decoding="async"><span><b>Referensi visual 10</b><small>2610221551221.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610231227446.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610231227446.jpg" alt="Referensi visual 11" loading="lazy" decoding="async"><span><b>Referensi visual 11</b><small>2610231227446.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610271451244.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610271451244.jpg" alt="Referensi visual 12" loading="lazy" decoding="async"><span><b>Referensi visual 12</b><small>2610271451244.jpg</small></span></a>
+          <a class="root-gallery-card" href="https://github.com/planetbintang/.L/blob/io/galeri/2610271456346.jpg" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/planetbintang/.L/io/galeri/2610271456346.jpg" alt="Referensi visual 13" loading="lazy" decoding="async"><span><b>Referensi visual 13</b><small>2610271456346.jpg</small></span></a>
+        </div>
+      </section>
+
       <section class="metrics" id="metricsOverview" data-system-page="system" aria-label="Ringkasan sistem">
         <article class="metric-card"><span class="metric-label">REPOSITORI TERINDEKS</span><strong id="metricTotal">—</strong><small>cakupan tetap: planetbintang</small></article>
         <article class="metric-card"><span class="metric-label">PUBLIK / PRIVAT</span><strong><span id="metricPublic">—</span><i>/</i><span id="metricPrivate">—</span></strong><small>nama & tautan ditampilkan atas permintaan pemilik</small></article>
