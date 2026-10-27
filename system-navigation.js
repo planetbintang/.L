@@ -22,7 +22,7 @@
   ];
   toolRoutes.forEach(([name, menu]) => { routes[name] = { group: 'tools', menu, hash: `#${menu}/${name.replace(`${menu}-`, '')}` }; });
   // SNAPS — snap permanen sistem I/O (Logo + PLANETBINTANG + ikon folder) sebagai hub MCP/git/AI/RAG.
-  routes.snaps = { group: 'snaps', menu: 'code', hash: '#snaps' };
+  routes.snaps = { group: 'snaps', menu: 'integrations', hash: '#snaps' };
 
   // AIR CLOUD — konsol cloud berbasis registry menu hierarkis (air-cloud-console.js).
   routes.aircloud = { group: 'aircloud', menu: 'aircloud', hash: '#aircloud' };
@@ -61,7 +61,7 @@
   const SYSTEM_ROOTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache'];
   function routeFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
-    if (!hash || hash === 'top' || hash === 'overview') return 'file-manager';
+    if (!hash || hash === 'top' || hash === 'overview') return 'system';
     if (hash.toLowerCase() === 'filemanajer/appp') return 'file-manager';
     if (hash === 'workspace') return 'projects';
     if (hash.startsWith('workspace/')) return workspaceRoutes.get(hash.slice('workspace/'.length)) || 'projects';
