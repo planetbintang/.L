@@ -1,0 +1,39 @@
+name: Domain HTTP(S) Health Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  check-public-hosts:
+    name: Check public domain endpoints
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check apex and www over HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed=0
+          for host in planetbintang.com www.planetbintang.com; do
+            echo "Checking https://$host/"
+            if ! curl --silent --show-error --location --max-time 25 --output /dev/null --write-out 'HTTP %{http_code}; final=%{url_effective}; TLS verify=%{ssl_verify_result}\n' "https://$host/"; then
+              echo "::error::HTTPS request failed for $host. Check DNS, GitHub Pages custom domain settings, and certificate."
+              failed=1
+              continue
+            fi
+            code=$(curl --silent --location --max-time 25 --output /dev/null --write-out '%{http_code}' "https://$host/" || true)
+            if [[ ! "$code" =~ ^2[0-9][0-9]$ ]]; then
+              echo "::error::Expected final HTTP 2xx for $host; received $code."
+              failed=1
+            fi
+          done
+          if [[ "$failed" -ne 0 ]]; then
+            echo "::error::One or more domain health checks failed."
+            exit 1
+          fi
+          echo "Both HTTPS endpoints returned a final 2xx response."
