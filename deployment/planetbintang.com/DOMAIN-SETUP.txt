@@ -1,0 +1,47 @@
+PLANETBINTANG.COM — AKTIVASI DOMAIN GITHUB PAGES
+=================================================
+
+Repositori : https://github.com/planetbintang/.L
+Branch     : io
+Domain     : planetbintang.com
+File domain: /CNAME (harus berisi satu baris: planetbintang.com)
+
+A. PENGATURAN GITHUB PAGES
+1. Buka https://github.com/planetbintang/.L/settings/pages
+2. Pada Build and deployment, pilih Deploy from a branch.
+3. Pilih branch io dan folder / (root), lalu Save.
+4. Pada Custom domain, masukkan planetbintang.com lalu Save.
+5. Tunggu validasi DNS dan penerbitan sertifikat HTTPS.
+6. Setelah tersedia, aktifkan Enforce HTTPS.
+
+Catatan: file CNAME sudah ada di root repo, tetapi koneksi GitHub yang tersedia tidak dapat menekan tombol Settings atau mengubah konfigurasi Pages secara langsung. Periksa UI Settings untuk memastikan domain tersimpan.
+
+B. DNS YANG HARUS DITERAPKAN DI PENYEDIA DNS DOMAIN
+Tambahkan empat record A untuk host @:
+A  @  185.199.108.153
+A  @  185.199.109.153
+A  @  185.199.110.153
+A  @  185.199.111.153
+
+Record www:
+CNAME  www  planetbintang.github.io
+
+AAAA IPv6 opsional (tambahkan semua hanya bila memang ingin mengaktifkan IPv6):
+2606:50c0:8000::153
+2606:50c0:8001::153
+2606:50c0:8002::153
+2606:50c0:8003::153
+
+Jangan hapus MX/TXT atau record lain sebelum memastikan tidak dipakai layanan email atau layanan lain. Jangan membuat record MX/SPF/DKIM/DMARC berdasarkan tebakan.
+
+C. PEMERIKSAAN
+- Jalankan workflow "Domain DNS Check" di tab Actions, atau tunggu jadwal otomatis.
+- Pastikan A record apex berisi keempat alamat IPv4 di atas.
+- Pastikan www mengarah ke planetbintang.github.io.
+- Setelah DNS valid dan sertifikat tersedia, uji:
+  https://planetbintang.com/
+  https://www.planetbintang.com/
+  https://planetbintang.github.io/.L/
+
+PENTING
+File di repositori dan workflow GitHub Actions tidak bisa mengubah record DNS pada registrar tanpa integrasi/API dan kredensial yang sah. Jangan menaruh kata sandi, token, private key, atau rahasia akun di file ini atau di repositori.
