@@ -306,3 +306,44 @@ input, textarea, select {
 @media (prefers-reduced-motion: reduce) {
   body::before { display: none; }
 }
+
+
+/* Main navigation: use clean text links instead of boxed buttons.
+   Theme and background controls live outside .main-nav and retain their button styling. */
+.topbar > .main-nav > .main-nav-link,
+.topbar > .main-nav > .nav-dropdown > summary {
+  display: inline-flex !important;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #e6f2ff !important;
+  text-decoration: none !important;
+  font-weight: 600;
+}
+.topbar > .main-nav > .main-nav-link:hover,
+.topbar > .main-nav > .nav-dropdown > summary:hover,
+.topbar > .main-nav > .nav-dropdown[open] > summary {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #75d5ff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 5px;
+}
+.topbar > .main-nav > .nav-dropdown > summary:focus-visible,
+.topbar > .main-nav > .main-nav-link:focus-visible {
+  outline: 2px solid var(--lux-blue, #54b8ff) !important;
+  outline-offset: 2px;
+}
+@media (max-width: 420px) {
+  .topbar > .main-nav > .nav-dropdown > summary,
+  .topbar > .main-nav > .main-nav-link {
+    min-height: 32px !important;
+    padding: 6px 7px !important;
+    font-size: 11px !important;
+  }
+}
