@@ -358,19 +358,21 @@
 
     <section class="section-block" id="searchPage" data-system-page="search" hidden aria-labelledby="globalSearchTitle">
       <div class="section-heading"><div><p class="eyebrow">GLOBAL SEARCH <span>/</span> 00</p><h2 id="globalSearchTitle">Cari repositori &amp; folder</h2><p class="section-description">Cari metadata repositori atau masukkan path folder untuk membukanya di File Manager.</p></div></div>
-      <section class="search-source-view panel" aria-label="Tampilan katalog eksternal">
+      <section class="search-source-view panel" aria-label="Tampilan katalog dan repositori eksternal">
         <div class="search-source-heading">
-          <div><p class="eyebrow">SOURCE VIEW / EXTERNAL CATALOGS</p><h3>Tampilan katalog</h3><p class="section-description">Pilih sumber yang ingin ditampilkan. Jika pratinjau tidak diizinkan oleh situs sumber, gunakan tombol buka situs.</p></div>
-          <div class="search-source-actions">
-            <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/" data-source-title="AL.L · Katalog" aria-pressed="true">AL.L · Katalog</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://0123456789pay.github.io/ptl/" data-source-title="PTL · Index" aria-pressed="false">PTL · Index</button>
-            <a class="text-button" id="searchSourceOpen" href="https://planetbintang.github.io/al.l/" target="_blank" rel="noopener noreferrer">Buka situs ↗</a>
+          <div><p class="eyebrow">SOURCE VIEW / CATALOGS &amp; REPOSITORIES</p><h3>Tampilan katalog &amp; repositori</h3><p class="section-description">Pilih halaman yang ingin ditampilkan di panel. Pratinjau eksternal dapat dibatasi oleh kebijakan keamanan situs; gunakan “Buka situs” bila halaman tidak dapat disematkan.</p></div>
+          <div class="search-source-actions" role="group" aria-label="Pilih sumber tampilan">
+            <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/index.html" data-source-title="AL.L · index.html" aria-pressed="true">AL.L · index.html</button>
+            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/vendordomain/index.html" data-source-title="Vendor Domain · index.html" aria-pressed="false">Vendor Domain · index.html</button>
+            <button type="button" class="text-button search-source-choice" data-source-url="https://github.com" data-source-title="GitHub.com" aria-pressed="false">GitHub.com</button>
+            <button type="button" class="text-button search-source-choice" data-source-url="https://github.planetbintang.com/github.com/planetbintang/.L/index.html" data-source-title="GitHub Planetbintang · mirror path" aria-pressed="false">GitHub Planetbintang · mirror</button>
+            <a class="text-button" id="searchSourceOpen" href="https://planetbintang.github.io/al.l/index.html" target="_blank" rel="noopener noreferrer">Buka situs ↗</a>
           </div>
         </div>
         <div class="search-source-frame-wrap">
-          <iframe id="searchSourceFrame" title="Pratinjau katalog AL.L" src="https://planetbintang.github.io/al.l/" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
+          <iframe id="searchSourceFrame" title="Pratinjau AL.L · index.html" src="https://planetbintang.github.io/al.l/index.html" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
         </div>
-        <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L. Jika kosong atau ditolak oleh situs sumber, pilih Buka situs.</p>
+        <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L · index.html. Jika konten kosong atau ditolak, gunakan “Buka situs”.</p>
       </section>
       <form class="toolbar panel" id="globalSearchForm" role="search"><label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" placeholder="Cari repositori, folder, path, atau kata kunci…" autocomplete="off" aria-label="Cari repositori dan folder" /></label><button class="text-button" type="submit">Cari</button></form>
       <p class="results-line" id="globalSearchStatus" aria-live="polite">Memuat indeks repositori…</p>
@@ -461,9 +463,11 @@
         const status = document.getElementById('searchSourceStatus');
         const choices = [...document.querySelectorAll('.search-source-choice')];
         if (!frame || !open || !status || !choices.length) return;
+        let selectedTitle = 'AL.L · index.html';
         choices.forEach(button => button.addEventListener('click', () => {
           const url = button.dataset.sourceUrl;
-          const title = button.dataset.sourceTitle || 'Katalog eksternal';
+          const title = button.dataset.sourceTitle || 'Sumber eksternal';
+          selectedTitle = title;
           choices.forEach(item => {
             const active = item === button;
             item.classList.toggle('is-active', active);
@@ -471,11 +475,11 @@
           });
           frame.title = 'Pratinjau ' + title;
           open.href = url;
-          status.textContent = 'Memuat pratinjau ' + title + '. Jika situs menolak ditampilkan di dalam panel, gunakan “Buka situs”.';
+          status.textContent = 'Memuat ' + title + '. Jika situs menolak disematkan atau konten kosong, gunakan “Buka situs”.';
           frame.src = url;
         }));
         frame.addEventListener('load', () => {
-          status.textContent = 'Pratinjau telah dimuat. Jika konten kosong atau halaman menolak disematkan, gunakan “Buka situs”.';
+          status.textContent = 'Permintaan pratinjau ' + selectedTitle + ' selesai. Jika konten kosong atau diblokir oleh kebijakan situs, gunakan “Buka situs”.';
         });
       })();
     </script>
