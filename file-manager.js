@@ -15,7 +15,7 @@
   // Folder tingkat root yang dikelola pada ROOT .L — termasuk folder sistem
   // virtual (/proc /sys /media /acct /pro /config /cache /system_ext) yang
   // selalu ditampilkan di samping folder nyata repositori (.github data scripts).
-  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext', 'workspace'];
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext', 'workspace', 'planetbintang'];
   const VIRTUAL_ROOT_META = {
     proc: { desc: 'Virtual filesystem proses (pid, stat, cmdline)', items: 3 },
     sys: { desc: 'Sysfs perangkat & kernel (class, bus, devices)', items: 3 },
@@ -26,6 +26,7 @@
     cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
     system_ext: { desc: 'Filesystem kode virtual Planetbintang: katalog fitur + enterprise map', items: 20692 },
     workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
+    planetbintang: { desc: 'Pemetaan domain planetbintang.com ke halaman utama GitHub Pages .L', items: 1 },
   };
   const GENERATED_EXTENSIONS = ['html', 'css', 'js', 'nz'];
   const GENERATED_MODULES = ['core', 'ui', 'data', 'api', 'device', 'app', 'docs', 'brand', 'pipeline', 'ai', 'integration', 'security', 'storage'];
@@ -53,6 +54,13 @@
     return `# Planetbintang feature ${feature}\ndomain = ${domain}\nfeature_id = ${feature}\nstatus = ready\nexecution = disabled-by-default`;
   }
   function generatedSystemEntries(path) {
+    // Pemetaan folder/file domain: planetbintang.com/index.html -> halaman .L di GitHub Pages.
+    if (path === 'planetbintang') return [
+      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 1, function: 'Folder domain · berisi index.html yang dipetakan ke https://planetbintang.github.io/.L/' },
+    ];
+    if (path === 'planetbintang/planetbintang.com') return [
+      { path: 'planetbintang/planetbintang.com/index.html', type: 'file', mode: '0100644', size: 390, sizeKnown: true, function: 'Entry point domain planetbintang.com · alias halaman utama .L', codeContent: '<!doctype html>\\n<html lang="id">\\n<head>\\n  <meta charset="utf-8">\\n  <meta name="viewport" content="width=device-width, initial-scale=1">\\n  <title>planetbintang.com</title>\\n  <link rel="canonical" href="https://planetbintang.github.io/.L/">\\n</head>\\n<body>\\n  <main>\\n    <h1>planetbintang.com</h1>\\n    <p>Pemetaan halaman utama Planetbintang.</p>\\n    <a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a>\\n  </main>\\n</body>\\n</html>' },
+    ];
     if (path === 'sys/system_ext' || path.startsWith('sys/system_ext/')) {
       const sourcePath = path.replace(/^sys\/system_ext/, 'system_ext');
       return generatedSystemEntries(sourcePath).map((entry) => ({
