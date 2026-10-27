@@ -57,6 +57,24 @@
       @media(max-width:640px){#overview.hero{margin-bottom:.8rem}.home-ai-gallery{grid-template-columns:1fr;gap:.75rem}.home-ai-gallery .home-ai-card img{aspect-ratio:16/8}.home-ai-gallery .home-ai-card-label{min-height:0;padding:.8rem 1rem}.vm-home-showcase{padding:1rem}.vm-home-grid{grid-template-columns:1fr;gap:.8rem}.vm-home-card-body{padding:.9rem}.vm-home-heading>p{padding:.8rem}}
       @media(prefers-reduced-motion:reduce){.vm-home-card{transition:none}.vm-home-card:hover{transform:none}}
 
+
+      /* Tata letak OS VM: judul ringkas, deskripsi mudah dibaca, dan sudut siku di seluruh antarmuka */
+      body *{border-radius:0!important}
+      .vm-home-showcase{padding:clamp(1rem,2.5vw,1.6rem);border-radius:0!important}
+      .vm-home-heading{grid-template-columns:minmax(0,1.35fr) minmax(240px,.8fr);gap:clamp(1rem,2.5vw,2rem);align-items:start}
+      .vm-home-showcase h2{max-width:24ch;font-size:clamp(1.65rem,3.1vw,2.35rem);line-height:1.12;letter-spacing:-.025em;text-wrap:balance;margin:.65rem 0 .8rem}
+      .vm-home-showcase .vm-home-intro{max-width:62ch;font-size:1rem;line-height:1.75;margin:0}
+      .vm-home-heading>p{max-width:48ch;padding:1rem;border:1px solid rgba(119,174,225,.2);background:rgba(7,18,34,.45);font-size:.9rem;line-height:1.7;margin:0}
+      .vm-home-tags span{padding:.4rem .6rem;line-height:1.45}
+      .vm-home-grid{align-items:stretch}
+      .vm-home-card{border-radius:0!important;min-width:0}
+      .vm-home-card-body{padding:1rem}
+      .vm-home-card h3{font-size:1.02rem;line-height:1.4;overflow-wrap:anywhere;text-wrap:pretty}
+      .vm-home-card-body>p{font-size:.9rem;line-height:1.7;overflow-wrap:anywhere}
+      .vm-home-card-foot{gap:.5rem;align-items:flex-start}
+      .home-ai-gallery .home-ai-card{border-radius:0!important}
+      @media(max-width:960px){.vm-home-heading{grid-template-columns:1fr}.vm-home-showcase h2{max-width:30ch}.vm-home-heading>p{max-width:75ch}}
+      @media(max-width:640px){.vm-home-showcase{padding:1rem}.vm-home-showcase h2{font-size:clamp(1.55rem,7vw,2rem);line-height:1.16}.vm-home-showcase .vm-home-intro{font-size:.94rem;line-height:1.7}.vm-home-heading>p{padding:.85rem}.vm-home-card-body{padding:.9rem}}
     </style>
     <title>Planetbintang · Root System</title>
 </head>
@@ -158,7 +176,7 @@
 
       <section class="vm-home-showcase" data-system-page="system" aria-labelledby="vmHomeTitle">
         <div class="vm-home-heading">
-          <div><span class="vm-home-kicker">VIRTUAL MACHINE / OPERATING SYSTEMS</span><h2 id="vmHomeTitle">OS Virtual Machine &amp; Sistem Infrastruktur</h2><p>Planetbintang menghadirkan ruang katalog dan pengembangan sistem untuk lingkungan virtual machine (VM), sistem operasi server, serta perangkat pendukung infrastruktur digital. Jelajahi konsep OS VM, pengelolaan instance, penyimpanan, jaringan, keamanan, dan otomasi melalui ekosistem sistem yang tersedia.</p><div class="vm-home-tags"><span>OS &amp; Image VM</span><span>Compute &amp; Instance</span><span>Storage &amp; Network</span><span>Security &amp; Automation</span></div></div>
+          <div><span class="vm-home-kicker">VIRTUAL MACHINE / OPERATING SYSTEMS</span><h2 id="vmHomeTitle">Sistem Operasi &amp; Virtual Machine</h2><p class="vm-home-intro">Jelajahi katalog visual sistem operasi server, virtual machine (VM), dan infrastruktur digital. Kenali komponen compute, jaringan, penyimpanan, keamanan, serta lingkungan pengembangan melalui delapan kategori visual.</p><div class="vm-home-tags"><span>OS &amp; Image VM</span><span>Compute &amp; Instance</span><span>Storage &amp; Network</span><span>Security &amp; Automation</span></div></div>
           <p>Gunakan galeri visual sebagai pintu masuk untuk mengenal konsep sistem VM dan komponen infrastruktur. Katalog ini merupakan tampilan informasi dan pengembangan; penyediaan VM aktif, image yang dapat diunduh, dan layanan hosting perlu dikonfigurasi secara terpisah.</p>
         </div>
         <div class="vm-home-grid">
