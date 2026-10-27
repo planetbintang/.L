@@ -23,6 +23,18 @@
     <link rel="stylesheet" href="./homepage-text-4px.css?v=20261027-text-10px" />
     <link rel="stylesheet" href="./content-side-spacing.css?v=20261027-side-5px" />
     <style id="vm-home-showcase-styles">
+
+      .search-source-view{margin:1rem 0 1.25rem;padding:1rem;border:1px solid rgba(119,174,225,.22);background:rgba(7,18,34,.72)}
+      .search-source-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+      .search-source-heading h3{margin:.25rem 0;font-size:1.15rem}
+      .search-source-heading p{margin:.35rem 0}
+      .search-source-actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+      .search-source-choice.is-active{border-color:#73ddff;background:rgba(40,117,160,.25);color:#eafaff}
+      .search-source-frame-wrap{margin-top:1rem;border:1px solid rgba(119,174,225,.25);background:#fff;min-height:320px}
+      #searchSourceFrame{display:block;width:100%;height:min(72vh,760px);min-height:320px;border:0;background:#fff}
+      .search-source-note{font-size:.82rem;color:var(--muted,#a9bfd6);margin:.65rem 0 0}
+      @media(max-width:640px){.search-source-view{padding:.75rem}.search-source-heading{align-items:stretch}.search-source-actions>*{flex:1 1 auto}#searchSourceFrame{height:65vh;min-height:280px}}
+
       .vm-home-showcase{margin:1.25rem 0 2rem;padding:clamp(1.2rem,3vw,2rem);border:1px solid rgba(119,174,225,.22);border-radius:1.25rem;background:linear-gradient(135deg,rgba(13,30,53,.92),rgba(5,12,25,.96));color:#eaf4ff;overflow:hidden}.vm-home-heading{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,1fr);gap:1.5rem;align-items:end;margin-bottom:1.3rem}.vm-home-kicker{font-size:.72rem;letter-spacing:.18em;color:#70d7ff;font-weight:800}.vm-home-showcase h2{font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.1;margin:.55rem 0}.vm-home-showcase p{color:#b7cbe0;line-height:1.7;margin:.45rem 0}.vm-home-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}.vm-home-tags span{font-size:.75rem;border:1px solid rgba(130,190,238,.25);padding:.35rem .65rem;border-radius:99px;color:#cce8ff}.vm-home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.vm-home-card{min-width:0;overflow:hidden;border:1px solid rgba(139,190,235,.2);border-radius:1rem;background:rgba(7,18,34,.76)}.vm-home-card img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#091321}.vm-home-card-body{padding:1rem}.vm-home-card h3{margin:0 0 .45rem;font-size:1.05rem}.vm-home-card p{font-size:.9rem;margin:0}.vm-home-card-foot{display:flex;justify-content:space-between;align-items:center;gap:.75rem;margin-top:.9rem;color:#81dfff;font-size:.76rem}.vm-home-note{font-size:.8rem!important;margin-top:1rem!important;color:#8fa9c5!important}.vm-home-showcase a{color:inherit;text-decoration:none}.vm-home-showcase a:focus-visible{outline:2px solid #73ddff;outline-offset:4px}@media(max-width:960px){.vm-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.vm-home-heading{grid-template-columns:1fr}.vm-home-grid{grid-template-columns:1fr}.vm-home-card img{aspect-ratio:16/9}}
 
       /* Unified single-entry homepage: consistent spacing, text hierarchy and cards */
@@ -346,6 +358,20 @@
 
     <section class="section-block" id="searchPage" data-system-page="search" hidden aria-labelledby="globalSearchTitle">
       <div class="section-heading"><div><p class="eyebrow">GLOBAL SEARCH <span>/</span> 00</p><h2 id="globalSearchTitle">Cari repositori &amp; folder</h2><p class="section-description">Cari metadata repositori atau masukkan path folder untuk membukanya di File Manager.</p></div></div>
+      <section class="search-source-view panel" aria-label="Tampilan katalog eksternal">
+        <div class="search-source-heading">
+          <div><p class="eyebrow">SOURCE VIEW / EXTERNAL CATALOGS</p><h3>Tampilan katalog</h3><p class="section-description">Pilih sumber yang ingin ditampilkan. Jika pratinjau tidak diizinkan oleh situs sumber, gunakan tombol buka situs.</p></div>
+          <div class="search-source-actions">
+            <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/" data-source-title="AL.L · Katalog" aria-pressed="true">AL.L · Katalog</button>
+            <button type="button" class="text-button search-source-choice" data-source-url="https://0123456789pay.github.io/ptl/" data-source-title="PTL · Index" aria-pressed="false">PTL · Index</button>
+            <a class="text-button" id="searchSourceOpen" href="https://planetbintang.github.io/al.l/" target="_blank" rel="noopener noreferrer">Buka situs ↗</a>
+          </div>
+        </div>
+        <div class="search-source-frame-wrap">
+          <iframe id="searchSourceFrame" title="Pratinjau katalog AL.L" src="https://planetbintang.github.io/al.l/" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
+        </div>
+        <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L. Jika kosong atau ditolak oleh situs sumber, pilih Buka situs.</p>
+      </section>
       <form class="toolbar panel" id="globalSearchForm" role="search"><label class="search-box"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" placeholder="Cari repositori, folder, path, atau kata kunci…" autocomplete="off" aria-label="Cari repositori dan folder" /></label><button class="text-button" type="submit">Cari</button></form>
       <p class="results-line" id="globalSearchStatus" aria-live="polite">Memuat indeks repositori…</p>
       <div class="repo-grid" id="globalSearchResults" aria-live="polite"></div>
@@ -427,6 +453,33 @@
 
     <footer class="footer"><a class="footer-brand" href="#top" data-system-route="system"><img src="./brand-logo-browser.png" alt="" /> PLANETBINTANG <b>.</b></a><span id="footerSnapshot">Indeks statis · sumber snapshot lokal</span><span class="footer-source">Source dashboard · snapshot lokal</span></footer>
     <noscript><div class="noscript">Aktifkan JavaScript untuk memfilter dan menampilkan indeks dashboard.</div></noscript>
+
+    <script>
+      (() => {
+        const frame = document.getElementById('searchSourceFrame');
+        const open = document.getElementById('searchSourceOpen');
+        const status = document.getElementById('searchSourceStatus');
+        const choices = [...document.querySelectorAll('.search-source-choice')];
+        if (!frame || !open || !status || !choices.length) return;
+        choices.forEach(button => button.addEventListener('click', () => {
+          const url = button.dataset.sourceUrl;
+          const title = button.dataset.sourceTitle || 'Katalog eksternal';
+          choices.forEach(item => {
+            const active = item === button;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-pressed', String(active));
+          });
+          frame.title = 'Pratinjau ' + title;
+          open.href = url;
+          status.textContent = 'Memuat pratinjau ' + title + '. Jika situs menolak ditampilkan di dalam panel, gunakan “Buka situs”.';
+          frame.src = url;
+        }));
+        frame.addEventListener('load', () => {
+          status.textContent = 'Pratinjau telah dimuat. Jika konten kosong atau halaman menolak disematkan, gunakan “Buka situs”.';
+        });
+      })();
+    </script>
+
     <script src="./dashboard.js?v=20261023-system-vfs-v1" defer></script>
     <script src="./search-page.js?v=20261027-domain-catalog-v1" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
