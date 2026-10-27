@@ -43,3 +43,103 @@
 @media(max-width:480px){.chat-log{height:52vh}.chat-compose{grid-template-columns:1fr}.chat-compose .primary-button{width:100%}}
 
 .brand-mark-image{width:74px;height:46px;overflow:hidden;background:#fff;border:1px solid var(--reber-border-light);border-radius:10px}.brand-mark-image img{width:100%;height:100%;object-fit:contain}.reber-banner-copy{min-width:0;max-width:790px}.reber-banner-copy h1{max-width:700px}.reber-banner-copy p{max-width:760px;color:var(--reber-text-secondary);font-size:13px;line-height:1.7}.reber-banner-art{width:min(260px,25vw);flex:0 0 auto}.reber-banner-art img{width:100%;height:auto;display:block}.reber-banner-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}.reber-open-chat{display:inline-flex;align-items:center;gap:18px;border:1px solid var(--reber-primary);background:var(--reber-primary);color:#fff;padding:12px 16px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.reber-open-chat:hover{filter:brightness(1.08)}.reber-banner-actions>a{font-size:12px;color:var(--reber-primary);font-weight:700;text-decoration:none}.system-banner{gap:24px;align-items:center}@media(max-width:760px){.reber-banner-art{width:120px}.reber-banner-copy h1{font-size:24px}.reber-banner-copy p{font-size:12px}}@media(max-width:540px){.reber-banner-art{display:none}.reber-banner-actions{align-items:stretch;flex-direction:column}.reber-open-chat{justify-content:space-between}}
+
+
+/* ── Shared UI contract with SOURCE VIEW / CATALOGS & REPOSITORIES ──────────
+   Keep AI capabilities intact while matching the root search workspace:
+   dark control rail, white canvas, edge-to-edge layout, square controls. */
+:root{
+  color-scheme:light;
+  --bg:#fff;--surface:#fff;--ink:#101820;--muted:#586675;
+  --line:#d5dde5;--accent:#155b7b;--accent2:#6bdcff;--soft:#edf4f8;
+  --shadow:none;
+}
+*{border-radius:0!important;box-shadow:none!important}
+html,body{width:100%;min-width:320px;min-height:100%;margin:0;background:#fff;color:#101820}
+body{font-size:13px;line-height:1.5}
+.app-shell{width:100%;max-width:none;min-height:100dvh;margin:0;padding:0;background:#fff}
+.appbar{position:sticky;top:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;padding:8px 10px;border:0;border-bottom:1px solid #24465d;background:#071222;color:#eaf4ff;backdrop-filter:none;z-index:30}
+.appbar .brand{color:#eaf4ff;flex:0 0 auto}
+.appbar .brand-mark{width:34px;height:34px;border:1px solid #31556d;background:#10253a;color:#eaf4ff}
+.appbar .brand-mark img{max-width:100%;max-height:100%;object-fit:contain}
+.appbar .brand small{color:#a9c3d9}
+.tabs{flex:1 1 440px;justify-content:flex-start;gap:0;overflow-x:auto;scrollbar-width:thin}
+.tabs button,.back-link{height:36px;min-width:max-content;padding:0 12px;border:1px solid rgba(119,174,225,.25);background:#0b1b2e;color:#dceeff;font-size:11px;transform:none;transition:background .15s,border-color .15s}
+.tabs button:hover,.back-link:hover{transform:none;background:#12364d;border-color:#6bdcff}
+.tabs button.active{background:#174b6d;border-color:#73ddff;color:#fff}
+.appbar-actions{flex:0 1 auto;gap:6px;flex-wrap:wrap}
+.runtime-pill,.status-tag{border:1px solid rgba(119,174,225,.25);background:#10253a;color:#9deaff;padding:6px 8px;font-size:9px}
+.theme-picker{color:#b9d3e8}
+.theme-picker select{background:#10253a;color:#eaf4ff;border:1px solid #31556d;padding:5px}
+.back-link{color:#dceeff}
+.system-banner{margin:0;padding:12px 14px;gap:12px;border:0;border-bottom:1px solid #d5dde5;background:#f5f8fa;color:#101820;box-shadow:none}
+.system-banner:after{display:none}
+.reber-banner-copy{min-width:0}
+.system-banner .eyebrow{color:#155b7b}
+.system-banner h1{font-size:clamp(16px,2vw,22px);color:#101820}
+.system-banner p{margin:.35rem 0;color:#586675;font-size:12px;line-height:1.55}
+.reber-banner-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.reber-banner-actions a{font-size:11px;color:#155b7b}
+.reber-banner-art{display:none}
+.banner-meta{min-width:110px;padding:7px 10px;border:1px solid #d5dde5;background:#fff}
+.banner-meta b{font-size:18px;color:#155b7b}
+.banner-meta small{font-size:9px;color:#586675}
+.workbench{grid-template-columns:210px minmax(0,1fr);gap:0;min-height:calc(100dvh - 150px);align-items:stretch}
+.sidebar{position:sticky;top:58px;align-self:start;min-height:calc(100dvh - 58px);padding:12px;border:0;border-right:1px solid #d5dde5;background:#f5f8fa;backdrop-filter:none}
+.side-label{color:#586675}
+.tree-link{border:1px solid transparent;background:transparent;color:#243746}
+.tree-link:hover,.tree-link:focus-visible{background:#e8f1f6;border-color:#b8cedd}
+.philosophy{color:#586675}
+.side-note{border:1px solid #d5dde5;background:#fff;color:#101820}
+.side-note span{color:#586675}
+.side-open-fm{border:1px solid #b9cad6;background:#fff;color:#155b7b}
+.main-area{min-width:0;padding:14px clamp(10px,1.5vw,22px) 18px;background:#fff}
+.view-panel{animation:none}
+.view-heading{margin:0 0 12px;padding:0 0 10px;border-bottom:1px solid #d5dde5}
+.view-heading h2{color:#101820}
+.view-heading p:not(.eyebrow){color:#586675}
+.surface,.sidebar{border-color:#d5dde5;background:#fff;backdrop-filter:none}
+.surface{padding:12px}
+.quiet-button,.primary-button,.danger-button{border:1px solid #b9cad6;background:#fff;color:#17364a;transition:background .15s,border-color .15s}
+.quiet-button:hover{background:#edf4f8;border-color:#7ba6bf}
+.primary-button{border-color:#155b7b;background:#155b7b;color:#fff}
+.primary-button:hover{background:#0d435e;filter:none;transform:none}
+.danger-button{color:#a52d42;border-color:#e7b8c0}
+.notice{border:1px solid #d5dde5;border-left:3px solid #155b7b;background:#f5f8fa;color:#586675}
+.notice b{color:#101820}
+.compose-panel textarea,.project-form input,.project-form textarea,.fs-toolbar input,.fs-toolbar select,.preview-panel textarea{border:1px solid #c7d4de;background:#fff;color:#101820}
+.prompt-history{border:1px solid #d5dde5;background:#f5f8fa}
+.prompt-entry{border:1px solid #d5dde5;background:#fff}
+.quick-prompts button{border:1px solid #d5dde5;background:#edf4f8;color:#314c60}
+.node-row,.project-card,.source-row{border-color:#d5dde5}
+.app-footer{border-top:1px solid #d5dde5;background:#f5f8fa;color:#586675;padding:8px 12px;font-size:10px}
+@media(max-width:1050px){
+  .appbar{align-items:flex-start}
+  .tabs{order:3;flex:1 1 100%;width:100%}
+  .appbar-actions{margin-left:auto}
+  .workbench{grid-template-columns:175px minmax(0,1fr)}
+}
+@media(max-width:720px){
+  .appbar{padding:7px;gap:6px}
+  .appbar .brand{flex:1 1 auto}
+  .appbar-actions{flex:1 1 100%;justify-content:flex-start}
+  .tabs{order:4;flex-wrap:nowrap}
+  .tabs button{flex:0 0 auto;min-width:max-content;padding:0 10px}
+  .runtime-pill{display:none}
+  .system-banner{padding:10px}
+  .banner-meta{min-width:86px;padding:6px}
+  .workbench{display:flex;flex-direction:column;min-height:0}
+  .sidebar{position:static;min-height:0;width:100%;padding:7px;border-right:0;border-bottom:1px solid #d5dde5;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .side-label,.philosophy,.side-rule,.side-note{display:none}
+  .tree-link{width:auto;flex:0 0 auto;padding:6px 8px!important;font-size:11px}
+  .side-open-fm{width:auto;margin:0;padding:6px 8px}
+  .main-area{padding:10px 8px 14px}
+  .studio-grid,.fs-layout{grid-template-columns:minmax(0,1fr)}
+  .fs-list-panel,.preview-panel{min-height:250px}
+  .node-list{max-height:38vh}
+  .view-heading{gap:8px}
+  .view-heading h2{font-size:21px}
+  .view-heading p:not(.eyebrow){font-size:11px}
+  .status-tag{white-space:normal;max-width:125px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
