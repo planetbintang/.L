@@ -1,0 +1,810 @@
+{
+  "schemaVersion": 1,
+  "registryId": "planetbintang.root-system",
+  "title": "Planetbintang Root System — File and Route Registry",
+  "repository": "planetbintang/.L",
+  "branch": "io",
+  "updatedAt": "2026-10-28",
+  "baseUrl": "./",
+  "policy": {
+    "sourceOfTruth": "This file declares main-screen routes, feature ownership, and links to source files.",
+    "linkFormat": "sourceFiles are repository-relative paths; sourceUrl resolves to the matching GitHub file on branch io.",
+    "execution": "GitHub Pages is static hosting. Registry entries do not imply a backend or server process is running.",
+    "secrets": "Never place credentials, private keys, tokens, or secret values in this public registry."
+  },
+  "routes": [
+    {
+      "id": "system",
+      "label": "Beranda / Dashboard",
+      "group": "core",
+      "route": "#overview",
+      "sourceFiles": [
+        "index.html",
+        "dashboard.js",
+        "dashboard.css"
+      ],
+      "capabilities": [
+        "dashboard",
+        "repository snapshot",
+        "overview"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "search",
+      "label": "Pencarian",
+      "group": "core",
+      "route": "#cari",
+      "sourceFiles": [
+        "index.html",
+        "search-page.js"
+      ],
+      "capabilities": [
+        "source viewer",
+        "search navigation"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "file-manager",
+      "label": "File Manager",
+      "group": "filesystem",
+      "route": "#fileManager",
+      "sourceFiles": [
+        "file-manager.js",
+        "data/repositories.json",
+        "data/trees/3cf0c9cf3dddc379/index.json"
+      ],
+      "capabilities": [
+        "repository tree browsing",
+        "file metadata",
+        "local workspace bridge"
+      ],
+      "executionState": "browser-static-read-only"
+    },
+    {
+      "id": "repositories",
+      "label": "Repositori",
+      "group": "data",
+      "route": "#repositories",
+      "sourceFiles": [
+        "dashboard.js",
+        "data/repositories.json",
+        "data/repository-catalog-additions.json"
+      ],
+      "capabilities": [
+        "repository catalog",
+        "search",
+        "visibility filters"
+      ],
+      "executionState": "snapshot-read-only"
+    },
+    {
+      "id": "hosts",
+      "label": "Host dan DNS",
+      "group": "infrastructure",
+      "route": "#hosts",
+      "sourceFiles": [
+        "dashboard.js",
+        "data/repositories.json",
+        "deployment/planetbintang.com/host-dns/README.md"
+      ],
+      "capabilities": [
+        "host metadata",
+        "DNS snapshot"
+      ],
+      "executionState": "snapshot-read-only"
+    },
+    {
+      "id": "projects",
+      "label": "Proyek / Kanban",
+      "group": "workspace",
+      "route": "#workspace/projects",
+      "sourceFiles": [
+        "workspace.js"
+      ],
+      "capabilities": [
+        "local project board"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "issues",
+      "label": "Issues lokal",
+      "group": "workspace",
+      "route": "#workspace/issues",
+      "sourceFiles": [
+        "workspace.js"
+      ],
+      "capabilities": [
+        "local issues",
+        "comments",
+        "status"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "code",
+      "label": "Code Workspace",
+      "group": "workspace",
+      "route": "#workspace/code",
+      "sourceFiles": [
+        "workspace.js"
+      ],
+      "capabilities": [
+        "source review",
+        "local draft",
+        "download"
+      ],
+      "executionState": "browser-read-only-plus-local-draft"
+    },
+    {
+      "id": "features",
+      "label": "Katalog Fitur",
+      "group": "workspace",
+      "route": "#workspace/features",
+      "sourceFiles": [
+        "feature-catalog.js",
+        "data/enterprise-menus-index.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "feature catalog",
+        "menu registry"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "analytics",
+      "label": "Analitik",
+      "group": "workspace",
+      "route": "#workspace/analytics",
+      "sourceFiles": [
+        "workspace.js",
+        "dashboard.js"
+      ],
+      "capabilities": [
+        "snapshot metrics",
+        "repository metadata"
+      ],
+      "executionState": "snapshot-derived"
+    },
+    {
+      "id": "ai",
+      "label": "AI Workspace",
+      "group": "workspace",
+      "route": "#workspace/ai",
+      "sourceFiles": [
+        "ai-chat.js",
+        "aireber-bridge.js"
+      ],
+      "capabilities": [
+        "local prompt workspace",
+        "file bridge"
+      ],
+      "executionState": "local-only-no-provider-backend"
+    },
+    {
+      "id": "workspace-account",
+      "label": "Pengaturan Akun Lokal",
+      "group": "workspace",
+      "route": "#workspace/account",
+      "sourceFiles": [
+        "workspace.js"
+      ],
+      "capabilities": [
+        "local preferences"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "workspace-help",
+      "label": "Bantuan",
+      "group": "workspace",
+      "route": "#workspace/help",
+      "sourceFiles": [
+        "workspace.js"
+      ],
+      "capabilities": [
+        "help"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "manage-files",
+      "label": "Manage Files",
+      "group": "tools",
+      "route": "#manage/files",
+      "sourceFiles": [
+        "system-tools.js",
+        "local-file-store.js"
+      ],
+      "capabilities": [
+        "local file management"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "manage-storage",
+      "label": "Manage Storage",
+      "group": "tools",
+      "route": "#manage/storage",
+      "sourceFiles": [
+        "system-tools.js",
+        "local-file-store.js"
+      ],
+      "capabilities": [
+        "local storage management"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "manage-settings",
+      "label": "Manage Settings",
+      "group": "tools",
+      "route": "#manage/settings",
+      "sourceFiles": [
+        "system-tools.js",
+        "control-center.js"
+      ],
+      "capabilities": [
+        "local system settings"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "manage-access",
+      "label": "Manage Access",
+      "group": "tools",
+      "route": "#manage/access",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "access policy view"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "manage-activity",
+      "label": "Manage Activity",
+      "group": "tools",
+      "route": "#manage/activity",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "local activity view"
+      ],
+      "executionState": "browser-local-storage"
+    },
+    {
+      "id": "execute-run",
+      "label": "Execute Run",
+      "group": "tools",
+      "route": "#execute/run",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "execution request preparation"
+      ],
+      "executionState": "no-server-execution"
+    },
+    {
+      "id": "execute-console",
+      "label": "Execute Console",
+      "group": "tools",
+      "route": "#execute/console",
+      "sourceFiles": [
+        "system-tools.js",
+        "system-shell.js"
+      ],
+      "capabilities": [
+        "allowlisted read-only commands"
+      ],
+      "executionState": "browser-read-only"
+    },
+    {
+      "id": "execute-jobs",
+      "label": "Execute Jobs",
+      "group": "tools",
+      "route": "#execute/jobs",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "job configuration view"
+      ],
+      "executionState": "no-background-worker"
+    },
+    {
+      "id": "execute-deploy",
+      "label": "Execute Deploy",
+      "group": "tools",
+      "route": "#execute/deploy",
+      "sourceFiles": [
+        "system-tools.js",
+        ".github/workflows/sync-dashboard.yml",
+        ".github/workflows/domain-dns-check.yml"
+      ],
+      "capabilities": [
+        "deployment workflow links"
+      ],
+      "executionState": "provider-workflow-required"
+    },
+    {
+      "id": "snaps",
+      "label": "SNAPS / MCP Integrations",
+      "group": "integrations",
+      "route": "#snaps",
+      "sourceFiles": [
+        "snaps-bridge.js",
+        "aireber-bridge.js"
+      ],
+      "capabilities": [
+        "integration overview",
+        "local import/export"
+      ],
+      "executionState": "connector-dependent"
+    },
+    {
+      "id": "integrations",
+      "label": "Platform Connectors",
+      "group": "integrations",
+      "route": "#platform/integrations",
+      "sourceFiles": [
+        "platform-view.js",
+        "system-navigation.js"
+      ],
+      "capabilities": [
+        "provider shortcuts"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "branches",
+      "label": "Branches",
+      "group": "platform",
+      "route": "#platform/branches",
+      "sourceFiles": [
+        "platform-view.js",
+        "data/repositories.json"
+      ],
+      "capabilities": [
+        "branch metadata"
+      ],
+      "executionState": "snapshot-read-only"
+    },
+    {
+      "id": "commits",
+      "label": "Commits",
+      "group": "platform",
+      "route": "#platform/commits",
+      "sourceFiles": [
+        "platform-view.js",
+        "data/repositories.json"
+      ],
+      "capabilities": [
+        "commit metadata"
+      ],
+      "executionState": "snapshot-read-only"
+    },
+    {
+      "id": "tags",
+      "label": "Tags",
+      "group": "platform",
+      "route": "#platform/tags",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "tag navigation"
+      ],
+      "executionState": "provider-link-or-snapshot"
+    },
+    {
+      "id": "milestones",
+      "label": "Milestones",
+      "group": "platform",
+      "route": "#platform/milestones",
+      "sourceFiles": [
+        "platform-view.js",
+        "workspace.js"
+      ],
+      "capabilities": [
+        "milestone planning"
+      ],
+      "executionState": "local-planner"
+    },
+    {
+      "id": "roadmap",
+      "label": "Roadmap",
+      "group": "platform",
+      "route": "#platform/roadmap",
+      "sourceFiles": [
+        "platform-view.js",
+        "workspace.js"
+      ],
+      "capabilities": [
+        "roadmap planning"
+      ],
+      "executionState": "local-planner"
+    },
+    {
+      "id": "pull-requests",
+      "label": "Pull Requests",
+      "group": "platform",
+      "route": "#platform/pull-requests",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "provider navigation"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "merge-requests",
+      "label": "Merge Requests",
+      "group": "platform",
+      "route": "#platform/merge-requests",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "provider navigation"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "review-queue",
+      "label": "Review Queue",
+      "group": "platform",
+      "route": "#platform/review-queue",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "review overview"
+      ],
+      "executionState": "snapshot-or-provider-links"
+    },
+    {
+      "id": "discussions",
+      "label": "Discussions",
+      "group": "platform",
+      "route": "#platform/discussions",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "provider navigation"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "activity",
+      "label": "Activity",
+      "group": "platform",
+      "route": "#platform/activity",
+      "sourceFiles": [
+        "platform-view.js",
+        "dashboard.js"
+      ],
+      "capabilities": [
+        "snapshot activity"
+      ],
+      "executionState": "snapshot-read-only"
+    },
+    {
+      "id": "pipelines",
+      "label": "Pipelines / CI",
+      "group": "delivery",
+      "route": "#platform/pipelines",
+      "sourceFiles": [
+        "platform-view.js",
+        ".github/workflows/sync-dashboard.yml"
+      ],
+      "capabilities": [
+        "workflow navigation"
+      ],
+      "executionState": "provider-workflow-required"
+    },
+    {
+      "id": "deployments",
+      "label": "Deployments",
+      "group": "delivery",
+      "route": "#platform/deployments",
+      "sourceFiles": [
+        "platform-view.js",
+        ".github/workflows/domain-health-check.yml"
+      ],
+      "capabilities": [
+        "deployment metadata"
+      ],
+      "executionState": "provider-workflow-required"
+    },
+    {
+      "id": "environments",
+      "label": "Environments",
+      "group": "delivery",
+      "route": "#platform/environments",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "environment overview"
+      ],
+      "executionState": "provider-link-or-static"
+    },
+    {
+      "id": "packages",
+      "label": "Packages",
+      "group": "delivery",
+      "route": "#platform/packages",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "package registry navigation"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "group": "delivery",
+      "route": "#platform/security",
+      "sourceFiles": [
+        "platform-view.js"
+      ],
+      "capabilities": [
+        "security provider navigation"
+      ],
+      "executionState": "external-provider-links"
+    },
+    {
+      "id": "enterprise-map",
+      "label": "Enterprise Map",
+      "group": "enterprise",
+      "route": "#enterprise/map",
+      "sourceFiles": [
+        "enterprise-map.js",
+        "data/enterprise-menus-index.js",
+        "enterprise-map.css"
+      ],
+      "capabilities": [
+        "enterprise architecture map"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "enterprise-arch",
+      "label": "Enterprise Architecture",
+      "group": "enterprise",
+      "route": "#enterprise/arch",
+      "sourceFiles": [
+        "enterprise-map.js",
+        "data/enterprise-menus-index.js"
+      ],
+      "capabilities": [
+        "architecture views"
+      ],
+      "executionState": "browser-static"
+    },
+    {
+      "id": "aircloud",
+      "label": "AIR CLOUD Console",
+      "group": "cloud",
+      "route": "#aircloud",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js",
+        "data/airz-features.js"
+      ],
+      "capabilities": [
+        "cloud service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "repository-catalog",
+      "label": "Registry Repositori",
+      "group": "registry",
+      "route": "./data/repositories.json",
+      "sourceFiles": [
+        "data/repositories.json",
+        "data/repository-catalog-additions.json",
+        "dashboard.js"
+      ],
+      "capabilities": [
+        "repository inventory",
+        "snapshot catalog"
+      ],
+      "executionState": "published-static-json"
+    },
+    {
+      "id": "system-registry",
+      "label": "Registry Sistem",
+      "group": "registry",
+      "route": "./data/system-registry.json",
+      "sourceFiles": [
+        "data/system-registry.json",
+        "system-registry.js"
+      ],
+      "capabilities": [
+        "route registry",
+        "source file links",
+        "feature ownership",
+        "registry validation"
+      ],
+      "executionState": "published-static-json-plus-browser-loader"
+    },
+    {
+      "id": "domain-runtime",
+      "label": "Runtime / Domain / DNS / Pipeline",
+      "group": "infrastructure",
+      "route": "#fileManager/planetbintang.com",
+      "sourceFiles": [
+        "file-manager.js",
+        "deployment/planetbintang.com/domain-config.json",
+        "deployment/planetbintang.com/runtime/runtime-manifest.json",
+        "deployment/planetbintang.com/data-pipeline/pipeline.json",
+        "deployment/planetbintang.com/host-dns/README.md",
+        "deployment/planetbintang.com/activation-stack/README.md"
+      ],
+      "capabilities": [
+        "domain configuration references",
+        "runtime manifest",
+        "pipeline declaration",
+        "activation checklist"
+      ],
+      "executionState": "documentation-and-static-config-not-live-infrastructure"
+    },
+    {
+      "id": "aircloud-compute",
+      "label": "AIR CLOUD Compute",
+      "group": "cloud",
+      "route": "#aircloud/compute",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "compute catalog",
+        "service navigation"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-vpc-infrastructure",
+      "label": "AIR CLOUD VPC Infrastructure",
+      "group": "cloud",
+      "route": "#aircloud/vpc-infrastructure",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "network infrastructure catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-storage",
+      "label": "AIR CLOUD Storage",
+      "group": "cloud",
+      "route": "#aircloud/storage",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "storage service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-database",
+      "label": "AIR CLOUD Database",
+      "group": "cloud",
+      "route": "#aircloud/database",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "database service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-ai-ml",
+      "label": "AIR CLOUD AI/ML",
+      "group": "cloud",
+      "route": "#aircloud/ai-ml",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js",
+        "data/airz-features.js"
+      ],
+      "capabilities": [
+        "AI/ML service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "aircloud-devops-toolchain",
+      "label": "AIR CLOUD DevOps Toolchain",
+      "group": "cloud",
+      "route": "#aircloud/devops-toolchain",
+      "sourceFiles": [
+        "air-cloud-console.js",
+        "data/air-cloud-registry.js",
+        "data/air-cloud-menus-index.js"
+      ],
+      "capabilities": [
+        "DevOps service catalog"
+      ],
+      "executionState": "browser-static-catalog"
+    },
+    {
+      "id": "execute-logs",
+      "label": "Execute Logs",
+      "group": "tools",
+      "route": "#execute/logs",
+      "sourceFiles": [
+        "system-tools.js"
+      ],
+      "capabilities": [
+        "execution request logs view"
+      ],
+      "executionState": "browser-local-or-static-no-server-logs"
+    }
+  ],
+  "sourceFiles": [
+    ".github/workflows/domain-dns-check.yml",
+    ".github/workflows/domain-health-check.yml",
+    ".github/workflows/sync-dashboard.yml",
+    "ai-chat.js",
+    "air-cloud-console.js",
+    "aireber-bridge.js",
+    "control-center.js",
+    "dashboard.css",
+    "dashboard.js",
+    "data/air-cloud-menus-index.js",
+    "data/air-cloud-registry.js",
+    "data/airz-features.js",
+    "data/enterprise-menus-index.js",
+    "data/repositories.json",
+    "data/repository-catalog-additions.json",
+    "data/system-registry.json",
+    "data/trees/3cf0c9cf3dddc379/index.json",
+    "deployment/planetbintang.com/activation-stack/README.md",
+    "deployment/planetbintang.com/data-pipeline/pipeline.json",
+    "deployment/planetbintang.com/domain-config.json",
+    "deployment/planetbintang.com/host-dns/README.md",
+    "deployment/planetbintang.com/runtime/runtime-manifest.json",
+    "enterprise-map.css",
+    "enterprise-map.js",
+    "feature-catalog.js",
+    "file-manager.js",
+    "index.html",
+    "local-file-store.js",
+    "platform-view.js",
+    "search-page.js",
+    "snaps-bridge.js",
+    "system-navigation.js",
+    "system-registry.js",
+    "system-shell.js",
+    "system-tools.js",
+    "workspace.js"
+  ]
+}
