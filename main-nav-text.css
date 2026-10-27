@@ -1,0 +1,47 @@
+/* Main navigation: plain text links instead of button-shaped pills. */
+.topbar .main-nav-link,
+.topbar .nav-dropdown > summary {
+  appearance: none !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 9px 2px !important;
+  color: #c5d8ef !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  letter-spacing: .015em;
+  text-decoration: none !important;
+  transition: color .18s ease, border-color .18s ease !important;
+}
+.topbar .main-nav-link:hover,
+.topbar .nav-dropdown > summary:hover,
+.topbar .nav-dropdown[open] > summary {
+  color: #78d7ff !important;
+  border-color: transparent transparent rgba(83, 190, 255, .8) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+.topbar .nav-dropdown > summary::after {
+  content: "⌄";
+  display: inline-block;
+  margin-left: 5px;
+  color: #6eafd8;
+  font-size: 11px;
+  transition: transform .18s ease;
+}
+.topbar .nav-dropdown[open] > summary::after { transform: rotate(180deg); }
+.topbar .main-nav-link:focus-visible,
+.topbar .nav-dropdown > summary:focus-visible {
+  outline: 1px solid #54b8ff !important;
+  outline-offset: 5px;
+}
+@media (max-width: 420px) {
+  .topbar .main-nav > .nav-dropdown > summary,
+  .topbar .main-nav > .main-nav-link {
+    min-height: 30px !important;
+    padding: 5px 2px !important;
+    font-size: 11px !important;
+  }
+}
