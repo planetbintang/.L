@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./air-cloud-enterprise.css?v=20261026-aircloud-feature-stack-v4" />
     <link rel="stylesheet" href="./planetbintang-themes.css?v=20261026-header-fix-v3" />
     <link rel="stylesheet" href="./navigation-fix.css?v=20261027-main-nav-text-v2" />
+    <link rel="stylesheet" href="./common-site-menu.css?v=20261028-common-menu-v1" />
     <link rel="stylesheet" href="./homepage-text-4px.css?v=20261027-text-10px" />
     <link rel="stylesheet" href="./content-side-spacing.css?v=20261027-side-5px" />
     <style id="vm-home-showcase-styles">
@@ -113,6 +114,18 @@
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
         <a class="main-nav-link" href="./galeri.html" aria-label="Buka Galeri gambar">Galeri</a>
+        <details class="nav-dropdown common-portal-dropdown" data-menu="portal"><summary>Portal</summary><div class="nav-dropdown-menu" aria-label="Menu umum situs">
+          <a href="#overview" data-system-route="system"><b>Beranda</b><small>Kembali ke dashboard utama</small></a>
+          <a href="#cari" data-system-route="search"><b>Pencarian</b><small>Temukan repositori dan sumber</small></a>
+          <a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Jelajahi indeks proyek</small></a>
+          <a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri folder dan file</small></a>
+          <a href="#workspace/projects" data-system-route="projects"><b>Proyek &amp; Tugas</b><small>Kelola rencana kerja lokal</small></a>
+          <a href="#workspace/analytics" data-system-route="analytics"><b>Analitik</b><small>Lihat ringkasan snapshot</small></a>
+          <a href="#hosts" data-system-route="hosts"><b>Domain &amp; Host</b><small>Jelajahi domain terpetakan</small></a>
+          <a href="#workspace/ai" data-system-route="ai"><b>Asisten AI</b><small>Buka ruang kerja AI</small></a>
+          <a href="#workspace/account" data-system-route="workspace-account"><b>Pengaturan</b><small>Preferensi workspace</small></a>
+          <a href="#workspace/help" data-system-route="workspace-help"><b>Bantuan</b><small>Panduan dan dukungan</small></a>
+        </div></details>
         <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="./domain-catalog.html"><b>Katalog Domain</b><small>Indeks domain dari al.l/data.media</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
           <a href="#aircloud" data-system-route="aircloud"><b>Air Cloud Console</b><small>Konsol cloud · registry 4.394 halaman menu</small></a>
@@ -208,6 +221,25 @@
           <span class="home-search-input-wrap"><input id="homeSearchInput" type="search" placeholder="nama-repo/folder atau path…" autocomplete="off" aria-label="Cari sistem, repositori, atau folder" /><span class="home-search-domain-suffix" aria-hidden="true">.planetbintang.com</span></span>
           <button type="submit" class="home-search-submit">Cari</button>
         </form>
+      </section>
+
+      <section class="common-site-menu" data-system-page="system" aria-labelledby="commonSiteMenuTitle">
+        <div class="common-site-menu-heading">
+          <div><p class="eyebrow">QUICK ACCESS <span>/</span> SITE SERVICES</p><h2 id="commonSiteMenuTitle">Menu &amp; layanan utama</h2><p>Akses langsung ke fungsi penting situs dari satu tempat. Setiap menu membuka modul yang sudah tersedia di sistem.</p></div>
+          <a href="#cari" data-system-route="search" class="common-site-search-link">Cari di sistem <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="common-site-menu-grid">
+          <a class="common-site-menu-card" href="#repositories" data-system-route="repositories"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>Repositori</b><small>Indeks proyek, metadata, dan tautan sumber.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#fileManager" data-system-route="file-manager"><span class="common-site-menu-icon" aria-hidden="true">▣</span><span class="common-site-menu-copy"><b>File Manager</b><small>Jelajahi path, folder, dan berkas yang terindeks.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./aireber/"><span class="common-site-menu-icon" aria-hidden="true">✦</span><span class="common-site-menu-copy"><b>AI Reber</b><small>Studio asisten AI dan alat kerja Reber.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/projects" data-system-route="projects"><span class="common-site-menu-icon" aria-hidden="true">☷</span><span class="common-site-menu-copy"><b>Proyek &amp; tugas</b><small>Kelola papan kerja dan daftar masalah lokal.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/analytics" data-system-route="analytics"><span class="common-site-menu-icon" aria-hidden="true">▥</span><span class="common-site-menu-copy"><b>Analitik</b><small>Ringkasan metrik dan kondisi snapshot.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#hosts" data-system-route="hosts"><span class="common-site-menu-icon" aria-hidden="true">◎</span><span class="common-site-menu-copy"><b>Domain &amp; host</b><small>Telusuri daftar domain dan host terpetakan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>Deploy &amp; rilis</b><small>Akses ringkasan deployment dan lingkungan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/help" data-system-route="workspace-help"><span class="common-site-menu-icon" aria-hidden="true">?</span><span class="common-site-menu-copy"><b>Bantuan</b><small>Panduan penggunaan fitur dan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/account" data-system-route="workspace-account"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>Pengaturan</b><small>Preferensi dan pengaturan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Menu terhubung ke modul situs</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
       </section>
 
       <section class="home-reference-images" data-system-page="system" aria-label="Gambar utama antarmuka Planetbintang">
