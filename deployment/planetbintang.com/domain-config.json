@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "domain": "planetbintang.com",
+  "www": "www.planetbintang.com",
+  "hosting": "GitHub Pages",
+  "repository": "planetbintang/.L",
+  "publishingBranch": "io",
+  "publishingFolder": "/",
+  "customDomainFile": "/CNAME",
+  "expectedCnameFileContent": "planetbintang.com",
+  "dns": {
+    "apexA": [
+      "185.199.108.153",
+      "185.199.109.153",
+      "185.199.110.153",
+      "185.199.111.153"
+    ],
+    "apexAAAA": [
+      "2606:50c0:8000::153",
+      "2606:50c0:8001::153",
+      "2606:50c0:8002::153",
+      "2606:50c0:8003::153"
+    ],
+    "wwwCNAME": "planetbintang.github.io"
+  },
+  "https": {
+    "enableEnforceHttpsAfterDnsAndCertificateReady": true,
+    "providerManagedCertificate": true
+  },
+  "automationLimits": [
+    "Repository files cannot modify registrar DNS records.",
+    "The available GitHub connection cannot change Settings > Pages directly.",
+    "Never store registrar passwords, access tokens, or private keys in this repository."
+  ]
+}
