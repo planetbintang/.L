@@ -56,7 +56,7 @@
   function generatedSystemEntries(path) {
     // Pemetaan domain + template konfigurasi deployment (virtual File Manager; bukan server aktif).
     if (path === 'planetbintang') return [
-      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 7, function: 'Domain utama .L · entry point dan konfigurasi hosting/DNS/SSL/SSH/email/browser' },
+      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 10, function: 'Domain utama .L · CNAME, entry point, hosting/DNS/SSL/sertifikat/SSH/email/browser/HTTP-HTTPS' },
     ];
     if (path === 'planetbintang/planetbintang.com') return [
       { path: 'planetbintang/planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Alias entry point ke halaman utama GitHub Pages .L', codeContent: `<!doctype html>
@@ -64,9 +64,11 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>planetbintang.com</title><link rel="canonical" href="https://planetbintang.github.io/.L/"></head>
 <body><main><h1>planetbintang.com</h1><p>Halaman utama dipublikasikan melalui GitHub Pages.</p><a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a></main></body>
 </html>` },
+      { path: 'planetbintang/planetbintang.com/CNAME', type: 'file', mode: '0100644', size: 17, sizeKnown: true, function: 'Nilai custom domain GitHub Pages', codeContent: 'planetbintang.com' },
       { path: 'planetbintang/planetbintang.com/nginx', type: 'directory', mode: '040755', items: 1, function: 'Template Nginx untuk hosting VPS sendiri; tidak dijalankan oleh GitHub Pages' },
       { path: 'planetbintang/planetbintang.com/dns', type: 'directory', mode: '040755', items: 1, function: 'Catatan DNS/CNAME; record harus diterapkan di registrar/DNS provider' },
       { path: 'planetbintang/planetbintang.com/ssl', type: 'directory', mode: '040755', items: 1, function: 'TLS/SSL untuk GitHub Pages atau hosting sendiri' },
+      { path: 'planetbintang/planetbintang.com/cert', type: 'directory', mode: '040755', items: 1, function: 'Siklus hidup sertifikat TLS dan perlindungan private key' },
       { path: 'planetbintang/planetbintang.com/ssh', type: 'directory', mode: '040755', items: 1, function: 'Panduan SSH aman; jangan simpan private key di repositori' },
       { path: 'planetbintang/planetbintang.com/email', type: 'directory', mode: '040755', items: 1, function: 'Template email DNS; MX/SPF/DKIM/DMARC harus mengikuti penyedia email' },
       { path: 'planetbintang/planetbintang.com/browser', type: 'directory', mode: '040755', items: 1, function: 'Konfigurasi kompatibilitas HTTP/HTTPS dan browser/perangkat' },
@@ -92,16 +94,18 @@
     if (path === 'planetbintang/planetbintang.com/dns') return [
       { path: 'planetbintang/planetbintang.com/dns/records.md', type: 'file', mode: '0100644', size: 650, sizeKnown: true, function: 'DNS checklist untuk GitHub Pages; email records belum diisi karena provider tidak diketahui', codeContent: `# DNS: planetbintang.com
 
-## GitHub Pages
-- Tambahkan custom domain planetbintang.com pada Settings → Pages di repository yang benar-benar menerbitkan situs.
-- Apex domain: buat A records ke alamat GitHub Pages resmi yang tercantum di dokumentasi GitHub Pages saat konfigurasi.
-- www: CNAME ke planetbintang.github.io.
-- Hapus record A/AAAA/CNAME lama yang bertentangan setelah memastikan tidak dipakai layanan lain.
-- Aktifkan Enforce HTTPS setelah sertifikat tersedia.
+## Apex A records (@)
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
 
-## Catatan
-File CNAME di root repo mengatur nama custom domain pada GitHub Pages, tetapi tidak mengubah DNS registrar secara otomatis.
-Periksa DNS melalui provider domain sebelum menyatakan domain aktif.` },
+## www
+CNAME www -> planetbintang.github.io
+
+## Penting
+Tambahkan domain di GitHub Settings -> Pages lebih dahulu, lalu atur DNS di provider domain. CNAME di repo tidak mengubah DNS registrar.
+Jangan hapus record email atau record aktif yang melayani layanan lain. Jangan gunakan wildcard DNS. Aktifkan Enforce HTTPS setelah sertifikat tersedia.` },
     ];
     if (path === 'planetbintang/planetbintang.com/ssl') return [
       { path: 'planetbintang/planetbintang.com/ssl/tls.md', type: 'file', mode: '0100644', size: 540, sizeKnown: true, function: 'Panduan sertifikat TLS; GitHub Pages mengelola sertifikatnya setelah DNS valid', codeContent: `# SSL/TLS
@@ -128,6 +132,21 @@ Isi dari panel provider yang dipilih:
 - DKIM: selector dan TXT/CNAME key dari provider.
 - DMARC: mulai dari kebijakan pemantauan, lalu tingkatkan setelah laporan tervalidasi.
 - Verifikasi mailbox dan alur pemulihan akun sebelum perubahan DNS.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/cert') return [
+      { path: 'planetbintang/planetbintang.com/cert/certificate-lifecycle.md', type: 'file', mode: '0100644', size: 440, sizeKnown: true, function: 'Panduan penerbitan, pembaruan, dan penyimpanan sertifikat', codeContent: `# Certificate lifecycle
+- GitHub Pages menerbitkan dan memperbarui TLS certificate setelah custom domain dan DNS valid.
+- Untuk VPS, gunakan ACME/Certbot dan otomatisasi renewal.
+- Jangan simpan private key (.key), access token, atau certificate private material di Git.
+- Pantau masa berlaku sertifikat dan uji HTTPS setelah setiap perubahan DNS.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/http-https') return [
+      { path: 'planetbintang/planetbintang.com/http-https/redirect-policy.md', type: 'file', mode: '0100644', size: 380, sizeKnown: true, function: 'Kebijakan HTTPS untuk situs publik', codeContent: `# HTTP / HTTPS
+- URL kanonis publik: https://planetbintang.com/
+- HTTP harus dialihkan permanen ke HTTPS pada hosting yang dikelola sendiri.
+- GitHub Pages: aktifkan Enforce HTTPS pada Settings -> Pages setelah certificate ready.
+- Jangan menambahkan redirect Nginx 443 sebelum sertifikat valid.
+- Uji domain apex, www, asset CSS/JS, dan halaman internal di desktop serta perangkat mobile.` },
     ];
     if (path === 'planetbintang/planetbintang.com/browser') return [
       { path: 'planetbintang/planetbintang.com/browser/compatibility.md', type: 'file', mode: '0100644', size: 500, sizeKnown: true, function: 'Checklist kompatibilitas HTTP/HTTPS, responsif, aksesibilitas, dan browser modern', codeContent: `# Browser compatibility
