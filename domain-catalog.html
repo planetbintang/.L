@@ -142,9 +142,10 @@
     list.replaceChildren();
     shown.forEach(item=>{
       const li=document.createElement('li');li.dataset.domain=item.domain;
-      const a=document.createElement('a');a.href='https://'+item.domain;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.domain;
+      const a=document.createElement('a');a.href='./domain.html?domain='+encodeURIComponent(item.domain)+'&view=detail';a.textContent=item.domain;a.title='Buka halaman detail '+item.domain;
+      const external=document.createElement('a');external.href='https://'+item.domain;external.target='_blank';external.rel='noopener noreferrer';external.textContent='↗';external.setAttribute('aria-label','Buka situs eksternal '+item.domain);external.title='Buka situs eksternal';
       const badge=document.createElement('span');badge.textContent=item.status||'tercatat';
-      li.append(a,badge);list.append(li);
+      li.append(a,external,badge);list.append(li);
     });
     status.textContent=shown.length+' domain tampil dari '+domains.length+' domain terindeks.';
   }
