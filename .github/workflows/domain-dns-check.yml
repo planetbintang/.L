@@ -1,0 +1,46 @@
+name: Domain DNS Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-dns:
+    name: Verify planetbintang.com DNS
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check apex A records
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected=$(printf '%s\n' \
+            185.199.108.153 \
+            185.199.109.153 \
+            185.199.110.153 \
+            185.199.111.153 | sort -V)
+          actual=$(dig +short A planetbintang.com | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | sort -V || true)
+          echo "Expected apex A records:"
+          printf '%s\n' "$expected"
+          echo "Observed apex A records:"
+          printf '%s\n' "${actual:-<none>}"
+          missing=$(comm -23 <(printf '%s\n' "$expected") <(printf '%s\n' "$actual"))
+          if [[ -n "$missing" ]]; then
+            echo "::error::Missing GitHub Pages A records. Apply the records in deployment/planetbintang.com/dns-records.md at the authoritative DNS provider."
+            exit 1
+          fi
+
+      - name: Check www CNAME
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual=$(dig +short CNAME www.planetbintang.com | sed 's/\.$//' | tr '[:upper:]' '[:lower:]' | tail -n 1)
+          echo "Observed www CNAME: ${actual:-<none>}"
+          if [[ "$actual" != "planetbintang.github.io" ]]; then
+            echo "::error::www.planetbintang.com must be a CNAME to planetbintang.github.io. See deployment/planetbintang.com/dns-records.md."
+            exit 1
+          fi
