@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "domain": "planetbintang.com",
+  "www": "www.planetbintang.com",
+  "repository": "planetbintang/.L",
+  "branch": "io",
+  "publishDirectory": "/",
+  "status": "awaiting_external_verification",
+  "checks": {
+    "rootCnameFile": true,
+    "dnsARecords": "must_be_checked_live",
+    "wwwCname": "must_be_checked_live",
+    "githubPagesCustomDomainSetting": "must_be_confirmed_in_settings",
+    "httpsCertificate": "must_be_checked_live",
+    "httpsEnforced": "enable_after_certificate_ready"
+  },
+  "note": "This file is a checklist, not a live status source. Do not mark the domain active until DNS, GitHub Pages settings, and HTTPS have been verified."
+}
