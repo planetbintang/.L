@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Halaman detail domain dari katalog AL.L, dengan query parameter untuk domain dan tampilan.">
+<title>Detail Domain · Planetbintang</title>
+<style>
+:root{color-scheme:dark;--bg:#050a14;--panel:#0b1728;--line:#24405d;--text:#eaf4ff;--muted:#a9bfd6;--accent:#78dfff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,sans-serif}main,header,footer{width:min(900px,calc(100% - 2rem));margin:auto}header{padding:2rem 0 1rem}a{color:var(--accent)}.eyebrow{font-size:.75rem;letter-spacing:.14em;color:var(--accent);font-weight:800}h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.1;overflow-wrap:anywhere}p{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem;margin:1rem 0}.actions{display:flex;gap:.7rem;flex-wrap:wrap;margin:1rem 0}.button{display:inline-block;padding:.7rem 1rem;border:1px solid var(--line);border-radius:8px;text-decoration:none;background:#123451;color:var(--text)}label{display:block;margin:.7rem 0 .2rem;color:var(--muted)}input,select{width:100%;padding:.75rem;background:#07101e;color:var(--text);border:1px solid var(--line);font:inherit;border-radius:6px}button{padding:.75rem 1rem;background:#123451;color:var(--text);border:1px solid var(--line);border-radius:6px;font:inherit;margin-top:.8rem}code{overflow-wrap:anywhere}footer{padding:2rem 0;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+<a href="./domain-catalog.html">← Kembali ke Katalog Domain</a>
+<p class="eyebrow">AL.L / CATALOG / DOMAIN DETAIL</p>
+<h1 id="domainTitle">Memuat domain…</h1>
+<p id="summary">Halaman detail domain dengan query yang dapat dibagikan melalui URL.</p>
+</header>
+<main>
+<section class="panel">
+<h2>Domain</h2>
+<p>Nama domain: <strong id="domainName">—</strong></p>
+<p>Sumber data: <a href="https://github.com/planetbintang/al.l/tree/io/data.media">al.l/data.media</a></p>
+<div class="actions"><a class="button" id="visitDomain" href="#" target="_blank" rel="noopener noreferrer">Buka situs eksternal ↗</a><a class="button" href="./domain-catalog.html">Lihat katalog</a></div>
+</section>
+<section class="panel">
+<h2>Pengaturan query tampilan</h2>
+<p>Ubah parameter di bawah ini untuk membagikan tampilan domain tertentu. Parameter yang didukung: <code>domain</code>, <code>q</code>, dan <code>view</code>.</p>
+<form id="querySettings">
+<label for="domainInput">Domain</label><input id="domainInput" name="domain" placeholder="contoh.com" required>
+<label for="queryInput">Query pencarian / catatan</label><input id="queryInput" name="q" placeholder="kata kunci atau catatan opsional">
+<label for="viewInput">Mode tampilan</label><select id="viewInput" name="view"><option value="detail">Detail</option><option value="compact">Ringkas</option><option value="source">Sumber data</option></select>
+<button type="submit">Terapkan pengaturan</button>
+</form>
+<p>URL query aktif: <code id="queryPreview"></code></p>
+</section>
+<section class="panel" id="queryPanel"><h2 id="viewTitle">Informasi katalog</h2><p id="queryInfo">Data ini menampilkan entri katalog dan parameter URL. Halaman ini tidak mem-proxy atau menyalin isi situs domain eksternal.</p><p id="sourceStatus">Status data: menunggu katalog.</p></section>
+</main>
+<footer>Halaman statis GitHub Pages. Domain eksternal dibuka di tab baru; isi situs eksternal tidak ditampilkan di dalam halaman ini.</footer>
+<script>
+(function(){
+ const params=new URLSearchParams(location.search);
+ const domainInput=document.getElementById('domainInput'), queryInput=document.getElementById('queryInput'), viewInput=document.getElementById('viewInput');
+ const title=document.getElementById('domainTitle'), name=document.getElementById('domainName'), visit=document.getElementById('visitDomain');
+ const validDomain=s=>String(s||'').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split(/[/?#]/)[0];
+ function render(){
+   const domain=validDomain(domainInput.value);
+   const q=queryInput.value.trim();
+   const view=viewInput.value;
+   if(!domain || !/^(?=.{1,253}$)[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$/.test(domain)){
+     title.textContent='Domain tidak valid';name.textContent='—';visit.href='#';return;
+   }
+   title.textContent=domain;name.textContent=domain;visit.href='https://'+domain;
+   document.title=domain+' · Detail Domain · Planetbintang';
+   document.getElementById('queryPreview').textContent='?domain='+encodeURIComponent(domain)+(q?'&q='+encodeURIComponent(q):'')+'&view='+encodeURIComponent(view);
+   document.getElementById('viewTitle').textContent=view==='compact'?'Ringkasan domain':view==='source'?'Sumber data katalog':'Informasi katalog';
+   document.getElementById('queryInfo').textContent=q?'Query aktif: “'+q+'”. Domain ini tercatat pada halaman detail katalog.':'Halaman detail untuk '+domain+'. Tambahkan query opsional di atas untuk memberi konteks atau menyaring informasi tampilan.';
+   document.getElementById('sourceStatus').textContent='Sumber katalog: planetbintang/al.l · data.media; tampilan: '+view+'.';
+ }
+ domainInput.value=params.get('domain')||params.get('q')||'';
+ queryInput.value=params.get('q')||'';
+ viewInput.value=['detail','compact','source'].includes(params.get('view'))?params.get('view'):'detail';
+ document.getElementById('querySettings').addEventListener('submit',e=>{e.preventDefault();const d=validDomain(domainInput.value);if(!d)return;const next=new URLSearchParams();next.set('domain',d);if(queryInput.value.trim())next.set('q',queryInput.value.trim());next.set('view',viewInput.value);history.replaceState(null,'','?'+next.toString());render();});
+ [domainInput,queryInput,viewInput].forEach(el=>el.addEventListener('input',render));
+ render();
+})();
+</script>
+</body></html>
