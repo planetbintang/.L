@@ -865,7 +865,20 @@
     }
   }
 
-  window.PBFileManager = { applySnapshot: (data) => init(data, true), setPath: (path) => goTo(path), refreshWorkspace: () => {
+  window.PBFileManager = { applySnapshot: (data) => init(data, true), setPath: (path) => {
+    let searchRepo = ''; let searchPath = '';
+    try {
+      searchRepo = sessionStorage.getItem('pb-search-repo') || '';
+      searchPath = sessionStorage.getItem('pb-search-path') || '';
+      sessionStorage.removeItem('pb-search-repo');
+      sessionStorage.removeItem('pb-search-path');
+    } catch {}
+    if (searchRepo && state.data?.repositories?.some((repo) => repo.fullName === searchRepo)) {
+      state.repo = searchRepo;
+      const select = $('#fileRepoSelect'); if (select) select.value = searchRepo;
+      void loadManifest(searchPath || path || '');
+    } else goTo(searchPath || path || '');
+  }, refreshWorkspace: () => {
     if (isLRepo() && (state.path === '' || state.path === 'workspace' || state.path.startsWith('workspace/aireber'))) void loadDirectory(state.path);
   } };
   window.addEventListener('planetbintang:workspace-files-changed', () => window.PBFileManager?.refreshWorkspace());
