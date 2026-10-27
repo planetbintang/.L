@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "domain": "planetbintang.com",
+  "deployment": {
+    "provider": "GitHub Pages",
+    "repository": "planetbintang/.L",
+    "branch": "io",
+    "directory": "/"
+  },
+  "runtime": {
+    "browser": "JavaScript in visitor browser",
+    "build": "GitHub Actions runners",
+    "serverSide": false,
+    "requiresSeparateHostFor": [
+      "Node.js/PHP/Python application server",
+      "database",
+      "long-running workers",
+      "SSH shell",
+      "Nginx"
+    ]
+  },
+  "activationRequires": [
+    "Pages branch and folder setting",
+    "Pages custom domain setting",
+    "authoritative DNS records",
+    "valid TLS certificate",
+    "live HTTPS checks"
+  ]
+}
