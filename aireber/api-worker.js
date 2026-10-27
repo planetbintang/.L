@@ -17,9 +17,10 @@ export default {
     const headers = corsHeaders(origin, env);
     const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers });
 
+    if (!env.ALLOWED_ORIGIN) return json({ error: "Konfigurasikan ALLOWED_ORIGIN sebelum mengaktifkan backend." }, 503);
+    if (origin !== env.ALLOWED_ORIGIN) return json({ error: "Origin tidak diizinkan." }, 403);
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers });
     if (request.method !== "POST") return json({ error: "Gunakan POST." }, 405);
-    if (env.ALLOWED_ORIGIN && origin !== env.ALLOWED_ORIGIN) return json({ error: "Origin tidak diizinkan." }, 403);
     if (!env.OPENAI_API_KEY) return json({ error: "OPENAI_API_KEY belum dikonfigurasi sebagai secret di server." }, 503);
 
     let body;
