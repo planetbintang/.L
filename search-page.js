@@ -2,6 +2,8 @@
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const form = $('#globalSearchForm'), input = $('#globalSearchInput');
+  const topForm = $('#topbarSearchForm'), topInput = $('#topbarSearchInput');
+  const homeForm = $('#homeSearchForm'), homeInput = $('#homeSearchInput');
   const results = $('#globalSearchResults'), status = $('#globalSearchStatus');
   if (!form || !input || !results || !status) return;
   const stylesheet = document.createElement('link');
@@ -94,8 +96,27 @@
     status.textContent = allCount + ' hasil ditemukan pada snapshot ' + repositories.length + ' repositori. Folder dicari melalui indeks path; isi file tidak diunduh.';
     if (!items.length) { const empty=document.createElement('p'); empty.className='global-search-empty'; empty.textContent='Tidak ada hasil cocok pada jenis pencarian ini.'; results.append(empty); }
   }
+  function openGlobalSearch(value) {
+    const query = text(value).trim();
+    if (input) { input.value = query; }
+    try { sessionStorage.setItem('pb-global-search-query', query); } catch (_) {}
+    if (location.hash !== '#cari') location.hash = '#cari';
+    const run = () => { if (input) { input.value = query; render(query); } };
+    window.setTimeout(run, 80);
+    window.setTimeout(run, 260);
+  }
   form.addEventListener('submit', e => { e.preventDefault(); render(input.value); });
   input.addEventListener('input', () => render(input.value));
+  if (topForm && topInput) topForm.addEventListener('submit', e => { e.preventDefault(); openGlobalSearch(topInput.value); });
+  if (homeForm && homeInput) homeForm.addEventListener('submit', e => { e.preventDefault(); openGlobalSearch(homeInput.value); });
+  if (topInput && homeInput) {
+    topInput.addEventListener('input', () => { if (document.activeElement === topInput) homeInput.value = topInput.value; });
+    homeInput.addEventListener('input', () => { if (document.activeElement === homeInput) topInput.value = homeInput.value; });
+  }
+  try {
+    const savedQuery = sessionStorage.getItem('pb-global-search-query');
+    if (savedQuery && input) { input.value = savedQuery; if (topInput) topInput.value = savedQuery; if (homeInput) homeInput.value = savedQuery; }
+  } catch (_) {}
   fetch('./data/repositories.json',{cache:'no-cache',credentials:'omit'}).then(r=>{if(!r.ok)throw new Error('Snapshot tidak tersedia');return r.json();})
     .then(data=>{repositories=Array.isArray(data.repositories)?data.repositories:[];status.textContent='Indeks siap · '+repositories.length+' entri sumber.';renderFilters({all:repositories.length,repository:repositories.length,folder:0});render(input.value);})
     .catch(()=>{status.textContent='Indeks repositori belum dapat dimuat. Periksa data/repositories.json.';});
