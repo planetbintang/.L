@@ -1,0 +1,16 @@
+/* Kolom pencarian global: sidebar filter + panel hasil responsif */
+.global-search-layout{display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr);gap:1rem;align-items:start}
+.global-search-sidebar,.global-search-main{min-width:0;border:1px solid rgba(119,174,225,.22);background:rgba(7,18,34,.68);padding:1rem}
+.global-search-sidebar{position:sticky;top:1rem}
+.global-search-sidebar h3{font-size:.9rem;margin:0 0 .8rem;letter-spacing:.08em}
+.global-search-filters{display:grid;gap:.5rem}
+.global-search-filter{width:100%;text-align:left;padding:.7rem .75rem;border:1px solid rgba(119,174,225,.2);background:rgba(12,28,49,.7);color:inherit;cursor:pointer;display:flex;justify-content:space-between;gap:.5rem}
+.global-search-filter[aria-pressed=true]{border-color:#72d8ff;background:rgba(33,111,151,.22)}
+.global-search-filter small{color:#9db6cf}
+.global-search-main .toolbar{margin-bottom:.8rem}
+.global-search-main .repo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.global-search-result-kind{font-size:.68rem;letter-spacing:.12em;color:#78dfff;font-weight:800}
+.global-search-result-path{font: .78rem/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere;color:#a9c7e2}
+.global-search-domain{font-size:.78rem;line-height:1.55;color:#9db6cf;overflow-wrap:anywhere}
+.global-search-empty{padding:1rem;border:1px dashed rgba(119,174,225,.3);color:#a9bfd6}
+@media(max-width:760px){.global-search-layout{grid-template-columns:1fr}.global-search-sidebar{position:static}.global-search-filters{grid-template-columns:repeat(2,minmax(0,1fr))}.global-search-main .repo-grid{grid-template-columns:1fr}}
