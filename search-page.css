@@ -54,3 +54,12 @@
 .global-search-result-kind{display:inline-block;margin-bottom:.3rem}
 @media(max-width:1180px){.topbar-actions .topbar-search-wrap{order:0;flex:1 1 250px;min-width:180px;max-width:100%}}
 @media(max-width:680px){.topbar-actions{flex-wrap:wrap}.topbar-actions .topbar-search-wrap{order:0;flex:1 1 100%;min-width:100%;max-width:100%}}
+
+
+/* Search results take over the source viewer while a query is active. */
+#searchPage .global-search-layout{height:100%;min-height:0;box-sizing:border-box;overflow:auto;padding:1rem;background:#050a14;color:#eaf4ff}
+#searchPage .global-search-layout[hidden],#searchPage .search-source-view[hidden]{display:none!important}
+#searchPage #globalSearchForm{display:flex;gap:.6rem;align-items:stretch;margin:0 0 .8rem}
+#searchPage #globalSearchInput{flex:1;min-width:0;padding:.8rem;border:1px solid rgba(119,174,225,.38);background:#030a15;color:#eaf4ff;font:inherit}
+#searchPage #globalSearchStatus{color:#a9bfd6;line-height:1.6}
+#searchPage #globalSearchResults{padding-bottom:1.5rem}
