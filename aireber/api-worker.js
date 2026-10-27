@@ -43,7 +43,7 @@ export default {
     ].filter(Boolean).join("\n");
 
     const payload = {
-      model: env.OPENAI_MODEL || "gpt-6-astra",
+      model: env.OPENAI_MODEL || "gpt-4.1",
       instructions,
       input,
       store: false,
