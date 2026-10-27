@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "planetbintang.com-domain-activation",
+  "stages": [
+    "source_commit",
+    "site_validation",
+    "github_pages_publish",
+    "dns_validation",
+    "pages_settings_validation",
+    "tls_certificate_validation",
+    "https_health_check",
+    "activation_signoff"
+  ],
+  "checks": {
+    "rootCname": "planetbintang.com",
+    "apexA": [
+      "185.199.108.153",
+      "185.199.109.153",
+      "185.199.110.153",
+      "185.199.111.153"
+    ],
+    "wwwCNAME": "planetbintang.github.io"
+  },
+  "statusPolicy": "Do not mark active without live evidence for DNS, Pages settings, and HTTPS"
+}
