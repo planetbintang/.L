@@ -110,9 +110,27 @@ Catatan: File di repositori tidak mengubah DNS registrar. Pastikan konfigurasi P
       { path: 'planetbintang.com/www', type: 'directory', mode: '040755', items: 1, function: 'Konfigurasi host www.planetbintang.com' },
       { path: 'planetbintang.com/logs', type: 'directory', mode: '040755', items: 1, function: 'Panduan membaca hasil workflow; log tidak disimpan sebagai log server di GitHub Pages' },
       { path: 'planetbintang.com/automation', type: 'directory', mode: '040755', items: 2, function: 'Workflow nyata di GitHub Actions untuk memeriksa DNS dan HTTPS' },
+      { path: 'planetbintang.com/runtime', type: 'directory', mode: '040755', items: 2, function: 'Inventaris runtime browser, runner CI, dan batas hosting server-side; terhubung ke dokumentasi runtime nyata' },
+      { path: 'planetbintang.com/data-pipeline', type: 'directory', mode: '040755', items: 2, function: 'Pipeline validasi sumber, publikasi, DNS, TLS, health-check, dan sign-off domain' },
+      { path: 'planetbintang.com/host-dns', type: 'directory', mode: '040755', items: 1, function: 'Konfigurasi host dan DNS untuk apex dan www; membutuhkan panel DNS otoritatif' },
+      { path: 'planetbintang.com/activation-stack', type: 'directory', mode: '040755', items: 1, function: 'Peta seluruh lapisan aktivasi domain: source, deploy, runtime, DNS, TLS, monitoring, security, verification' },
       { path: 'planetbintang.com/README.md', type: 'file', mode: '0100644', size: 2400, sizeKnown: true, function: 'Panduan domain operasional yang tersimpan di repository', fetchPath: 'deployment/planetbintang.com/README.md' },
       { path: 'planetbintang.com/verify-domain.sh', type: 'file', mode: '0100755', size: 1800, sizeKnown: true, function: 'Skrip pemeriksaan DNS dan HTTPS yang dapat dijalankan manual', fetchPath: 'deployment/planetbintang.com/verify-domain.sh' },
       { path: 'planetbintang.com/activation-status.json', type: 'file', mode: '0100644', size: 600, sizeKnown: true, function: 'Checklist status domain; bukan klaim status live', fetchPath: 'deployment/planetbintang.com/activation-status.json' },
+    ];
+    if (path === 'planetbintang.com/runtime') return [
+      { path: 'planetbintang.com/runtime/README.md', type: 'file', mode: '0100644', size: 1800, sizeKnown: true, function: 'Dokumentasi runtime aktual dan batas GitHub Pages', fetchPath: 'deployment/planetbintang.com/runtime/README.md' },
+      { path: 'planetbintang.com/runtime/runtime-manifest.json', type: 'file', mode: '0100644', size: 900, sizeKnown: true, function: 'Manifest runtime yang dapat dibaca mesin', fetchPath: 'deployment/planetbintang.com/runtime/runtime-manifest.json' },
+    ];
+    if (path === 'planetbintang.com/data-pipeline') return [
+      { path: 'planetbintang.com/data-pipeline/README.md', type: 'file', mode: '0100644', size: 1600, sizeKnown: true, function: 'Tahapan pipeline aktivasi domain dan kebijakan kegagalan', fetchPath: 'deployment/planetbintang.com/data-pipeline/README.md' },
+      { path: 'planetbintang.com/data-pipeline/pipeline.json', type: 'file', mode: '0100644', size: 700, sizeKnown: true, function: 'Manifest pipeline validasi dan sign-off', fetchPath: 'deployment/planetbintang.com/data-pipeline/pipeline.json' },
+    ];
+    if (path === 'planetbintang.com/host-dns') return [
+      { path: 'planetbintang.com/host-dns/README.md', type: 'file', mode: '0100644', size: 1500, sizeKnown: true, function: 'Record DNS apex/www dan batas kewenangan konfigurasi', fetchPath: 'deployment/planetbintang.com/host-dns/README.md' },
+    ];
+    if (path === 'planetbintang.com/activation-stack') return [
+      { path: 'planetbintang.com/activation-stack/README.md', type: 'file', mode: '0100644', size: 1900, sizeKnown: true, function: 'Peta lengkap seluruh lapisan aktivasi domain dan checklist', fetchPath: 'deployment/planetbintang.com/activation-stack/README.md' },
     ];
     if (path === 'planetbintang.com/github-pages') return [
       { path: 'planetbintang.com/github-pages/settings.md', type: 'file', mode: '0100644', size: 850, sizeKnown: true, function: 'Langkah konfigurasi Pages yang harus tersimpan pada GitHub Settings', codeContent: `# GitHub Pages — planetbintang.com\n\nRepository: planetbintang/.L\nBranch: io\nFolder: / (root)\nCustom domain: planetbintang.com\nCustom domain file: /CNAME (root repository, exact content planetbintang.com)\n\n1. Buka https://github.com/planetbintang/.L/settings/pages\n2. Build and deployment: Deploy from a branch → io → / (root) → Save.\n3. Custom domain: planetbintang.com → Save.\n4. Tunggu DNS check dan penerbitan sertifikat.\n5. Aktifkan Enforce HTTPS setelah tersedia.\n\nFile repository tidak dapat menulis ke Settings > Pages; verifikasi status langsung di halaman tersebut.` },
