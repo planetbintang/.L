@@ -187,6 +187,16 @@
     else if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Logo/wordmark utama hanya berfungsi sebagai tombol kembali ke beranda.
+  // Tangani pada fase capture agar handler lain tidak mengarahkannya ke SNAPS/MCP.
+  const mainBrand = document.querySelector('.topbar .brand');
+  mainBrand?.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    closeMenus();
+    applyRoute('system', { updateUrl: true, scroll: true });
+  }, true);
+
   routeLinks.forEach((link) => link.addEventListener('click', (event) => {
     event.preventDefault();
     applyRoute(link.dataset.systemRoute, { scroll: true });
