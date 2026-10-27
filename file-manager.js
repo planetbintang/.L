@@ -465,6 +465,125 @@
     $('#fileOpenGitHub').hidden = true;
   }
 
+
+  const SITE_ENTRY_NAMES = ['index.html', 'index.php', 'index.ts', 'index.tsx', 'index.js', 'index.jsx'];
+  function rawFileUrl(path) {
+    const repo = repoNow();
+    if (!repo?.fullName || !repo?.branch || repo.fullName.includes(' ')) return '';
+    const encodedPath = String(path).split('/').map((part) => encodeURIComponent(part)).join('/');
+    return `https://raw.githubusercontent.com/${repo.fullName}/${encodeURIComponent(repo.branch)}/${encodedPath}`;
+  }
+  async function findFolderIndex(path) {
+    const directory = state.manifest?.directories?.[path];
+    if (!directory) return null;
+    const candidates = [];
+    for (const page of (directory.pages || [])) {
+      if (!page?.url || !/^(?:data\\/trees\\/[a-f0-9]{16}\\/pages\\/|[a-f0-9]{16}\\/pages\\/)[a-f0-9]{32}\\.json\\.gz$/.test(page.url)) continue;
+      const response = await fetch(`./${page.url}`, { cache: 'force-cache', credentials: 'omit' });
+      if (!response.ok) continue;
+      const payload = await parseResponse(response);
+      if (payload.repository !== state.repo || payload.path !== path || !Array.isArray(payload.entries)) continue;
+      candidates.push(...payload.entries.filter((entry) => entry.type === 'file' && SITE_ENTRY_NAMES.includes(basename(entry.path).toLowerCase())));
+    }
+    candidates.sort((a, b) => SITE_ENTRY_NAMES.indexOf(basename(a.path).toLowerCase()) - SITE_ENTRY_NAMES.indexOf(basename(b.path).toLowerCase()));
+    // Prioritas daftar yang diminta: index.html, index.php, index.ts, index.tsx, index.js, index.jsx.
+    candidates.sort((a, b) => SITE_ENTRY_NAMES.indexOf(basename(b.path).toLowerCase()) - SITE_ENTRY_NAMES.indexOf(basename(a.path).toLowerCase()));
+    return candidates[0] || null;
+  }
+  async function openFolderOrIndex(path) {
+    const requestRepo = state.repo;
+    try {
+      const entry = await findFolderIndex(path);
+      if (requestRepo !== state.repo) return;
+      if (entry) {
+        state.path = path;
+        state.selected = entry.path;
+        renderBreadcrumbs();
+        renderAssessment(repoNow());
+        renderTiles();
+        renderSelection(entry);
+        $('#fileTreeStatus').textContent = `Membuka tampilan situs dari /${entry.path}`;
+        return;
+      }
+    } catch (error) {
+      $('#fileTreeStatus').textContent = `Index folder tidak dapat diperiksa: ${error.message}`;
+    }
+    goTo(path);
+  }
+  function sitePreviewFrame(parent, title) {
+    const wrap = el('section', undefined, 'fm-static-preview');
+    wrap.style.cssText = 'margin:14px 0;border:1px solid rgba(120,180,230,.35);background:#fff;color:#111;min-width:0;';
+    const bar = el('div', undefined, 'fm-static-preview-bar');
+    bar.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:#10223b;color:#eaf4ff;font:12px/1.4 system-ui,sans-serif;';
+    bar.append(el('strong', `Pratinjau situs · ${title}`));
+    const open = el('button', 'Buka tab baru ↗');
+    open.type = 'button'; open.style.cssText = 'padding:5px 8px;border:1px solid #6b9ac8;background:#173b5f;color:white;cursor:pointer;';
+    bar.append(open);
+    const frame = document.createElement('iframe');
+    frame.title = `Pratinjau statis ${title}`;
+    frame.sandbox = 'allow-scripts allow-forms allow-popups';
+    frame.referrerPolicy = 'no-referrer';
+    frame.style.cssText = 'display:block;width:100%;height:min(70vh,720px);min-height:360px;border:0;background:white;';
+    open.addEventListener('click', () => {
+      const doc = frame.srcdoc;
+      const blob = new Blob([doc], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    });
+    wrap.append(bar, frame);
+    parent.append(wrap);
+    return frame;
+  }
+  async function renderStaticSite(entry, panel) {
+    const extension = ext(entry.path).toLowerCase();
+    if (!['html', 'php', 'ts', 'tsx', 'js', 'jsx'].includes(extension)) return;
+    const sourceUrl = rawFileUrl(entry.path);
+    if (!sourceUrl) return;
+    const block = el('div', undefined, 'fm-candidate-list');
+    block.append(el('span', 'RENDER SITUS STATIS · isi file dan aset relatif dari repositori', 'fm-info-label'));
+    const frame = sitePreviewFrame(block, basename(entry.path));
+    const note = el('p', undefined, 'fm-inspector-disclaimer');
+    note.textContent = extension === 'php'
+      ? 'Mode statis: kode PHP tidak dieksekusi; bagian HTML di luar tag PHP ditampilkan saja.'
+      : (extension === 'ts' || extension === 'tsx')
+        ? 'TypeScript/TSX ditranspilasi di browser untuk pratinjau. Fitur server, API, dan paket yang tidak tersedia di browser tidak dijalankan.'
+        : 'Pratinjau terisolasi di iframe; navigasi dan aset relatif diarahkan ke file pada repositori.';
+    block.append(note);
+    panel.append(block);
+    try {
+      const response = await fetch(sourceUrl, { cache: 'no-cache', credentials: 'omit' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      let source = await response.text();
+      const baseUrl = sourceUrl.slice(0, sourceUrl.lastIndexOf('/') + 1);
+      let html = '';
+      if (extension === 'html') {
+        html = source.replace(/<head(\\s[^>]*)?>/i, (tag) => `${tag}<base href="${baseUrl}">`);
+        if (!/<head(?:\\s[^>]*)?>/i.test(source)) html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"></head><body>${source}</body></html>`;
+      } else if (extension === 'php') {
+        // Tidak ada runtime PHP pada GitHub Pages; keluarkan markup statis di luar blok PHP.
+        source = source.replace(/<\\?(?:php|=)?[\\s\\S]*?\\?>/gi, '');
+        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>${source}</body></html>`;
+      } else if (extension === 'js') {
+        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><main id="app"></main><script>try{(new Function(${JSON.stringify(source)}))()}catch(e){document.body.insertAdjacentHTML('beforeend','<pre style="white-space:pre-wrap;color:#a00"></pre>');document.querySelector('pre').textContent=e.stack||e.message}</script></body></html>`;
+      } else if (extension === 'jsx' || extension === 'tsx') {
+        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script></head><body><main id="app"></main><script type="text/babel" data-presets="env,react,typescript"> ${source.replace(/<\\/script/gi, '<\\\\/script')} </script></body></html>`;
+      } else {
+        // TypeScript tanpa bundler: transpile minimal untuk konstruksi umum, lalu jalankan terisolasi.
+        const js = source.replace(/^\\s*import\\s+type\\b[^;]*;?/gm, '')
+          .replace(/^\\s*export\\s+type\\b[^;]*;?/gm, '')
+          .replace(/^\\s*interface\\s+\\w+[\\s\\S]*?^}\\s*;?/gm, '')
+          .replace(/^\\s*type\\s+\\w+\\s*=.*;?\\s*$/gm, '')
+          .replace(/:\\s*(string|number|boolean|any|unknown|void|never)(\\[\\])?(?=\\s*[,)=;{])/g, '')
+          .replace(/\\s+as\\s+(string|number|boolean|any|unknown|\\w+)(\\[\\])?/g, '');
+        html = `<!doctype html><html><head><meta charset="utf-8"><base href="${baseUrl}"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><main id="app"></main><script>try{(new Function(${JSON.stringify(js)}))()}catch(e){document.body.insertAdjacentHTML('beforeend','<pre style="white-space:pre-wrap;color:#a00"></pre>');document.querySelector('pre').textContent='Pratinjau TS terbatas: '+(e.stack||e.message)}</script></body></html>`;
+      }
+      frame.srcdoc = html;
+    } catch (error) {
+      frame.srcdoc = `<!doctype html><meta charset="utf-8"><body style="font:16px system-ui;padding:24px"><h2>Pratinjau tidak tersedia</h2><p>${String(error.message).replace(/[&<>"]/g, (ch) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))}</p><p>Pastikan file dapat dibaca dari repositori publik.</p></body>`;
+    }
+  }
+
   function renderSelection(entry) {
     const repo = repoNow(); state.selected = entry?.path || null;
     $('#fileSelectionTitle').textContent = entry ? basename(entry.path) : repo?.fullName || 'Pilih file atau folder';
@@ -584,6 +703,7 @@
       $('#fileOpenEditorButton').hidden = true;
       return;
     }
+    if (entry.type === 'file') void renderStaticSite(entry, panel);
     if (entry.type !== 'directory') addInfo(panel, 'Ukuran metadata Git', sizeText(entry));
     addInfo(panel, 'Mode Git', entry.mode || '—', true);
     addInfo(panel, 'Git object SHA', entry.sha || '—', true);
@@ -682,7 +802,7 @@
       else icon.append(el('span', kind(item), 'file-type-mark'));
       tile.append(icon, el('span', basename(item.path), 'file-tile-name'), el('span', item.type === 'directory' ? 'FOLDER' : `${kind(item)} · ${sizeText(item)}`, 'file-tile-meta'));
       tile.addEventListener('click', () => {
-        if (item.type === 'directory') goTo(item.path);
+        if (item.type === 'directory') void openFolderOrIndex(item.path);
         else { state.selected = item.path; renderTiles(); renderSelection(item); }
       });
       pane.append(tile);
