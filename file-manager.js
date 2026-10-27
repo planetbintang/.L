@@ -54,12 +54,88 @@
     return `# Planetbintang feature ${feature}\ndomain = ${domain}\nfeature_id = ${feature}\nstatus = ready\nexecution = disabled-by-default`;
   }
   function generatedSystemEntries(path) {
-    // Pemetaan folder/file domain: planetbintang.com/index.html -> halaman .L di GitHub Pages.
+    // Pemetaan domain + template konfigurasi deployment (virtual File Manager; bukan server aktif).
     if (path === 'planetbintang') return [
-      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 1, function: 'Folder domain · berisi index.html yang dipetakan ke https://planetbintang.github.io/.L/' },
+      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 7, function: 'Domain utama .L · entry point dan konfigurasi hosting/DNS/SSL/SSH/email/browser' },
     ];
     if (path === 'planetbintang/planetbintang.com') return [
-      { path: 'planetbintang/planetbintang.com/index.html', type: 'file', mode: '0100644', size: 390, sizeKnown: true, function: 'Entry point domain planetbintang.com · alias halaman utama .L', codeContent: '<!doctype html>\\n<html lang="id">\\n<head>\\n  <meta charset="utf-8">\\n  <meta name="viewport" content="width=device-width, initial-scale=1">\\n  <title>planetbintang.com</title>\\n  <link rel="canonical" href="https://planetbintang.github.io/.L/">\\n</head>\\n<body>\\n  <main>\\n    <h1>planetbintang.com</h1>\\n    <p>Pemetaan halaman utama Planetbintang.</p>\\n    <a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a>\\n  </main>\\n</body>\\n</html>' },
+      { path: 'planetbintang/planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Alias entry point ke halaman utama GitHub Pages .L', codeContent: `<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>planetbintang.com</title><link rel="canonical" href="https://planetbintang.github.io/.L/"></head>
+<body><main><h1>planetbintang.com</h1><p>Halaman utama dipublikasikan melalui GitHub Pages.</p><a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a></main></body>
+</html>` },
+      { path: 'planetbintang/planetbintang.com/nginx', type: 'directory', mode: '040755', items: 1, function: 'Template Nginx untuk hosting VPS sendiri; tidak dijalankan oleh GitHub Pages' },
+      { path: 'planetbintang/planetbintang.com/dns', type: 'directory', mode: '040755', items: 1, function: 'Catatan DNS/CNAME; record harus diterapkan di registrar/DNS provider' },
+      { path: 'planetbintang/planetbintang.com/ssl', type: 'directory', mode: '040755', items: 1, function: 'TLS/SSL untuk GitHub Pages atau hosting sendiri' },
+      { path: 'planetbintang/planetbintang.com/ssh', type: 'directory', mode: '040755', items: 1, function: 'Panduan SSH aman; jangan simpan private key di repositori' },
+      { path: 'planetbintang/planetbintang.com/email', type: 'directory', mode: '040755', items: 1, function: 'Template email DNS; MX/SPF/DKIM/DMARC harus mengikuti penyedia email' },
+      { path: 'planetbintang/planetbintang.com/browser', type: 'directory', mode: '040755', items: 1, function: 'Konfigurasi kompatibilitas HTTP/HTTPS dan browser/perangkat' },
+    ];
+    if (path === 'planetbintang/planetbintang.com/nginx') return [
+      { path: 'planetbintang/planetbintang.com/nginx/planetbintang.com.conf', type: 'file', mode: '0100644', size: 620, sizeKnown: true, function: 'Template server block Nginx untuk static site; pasang hanya pada VPS yang dikelola sendiri', codeContent: `server {
+    listen 80;
+    listen [::]:80;
+    server_name planetbintang.com www.planetbintang.com;
+    root /var/www/planetbintang.com;
+    index index.html;
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+    location ~* \\.(?:css|js|png|jpg|jpeg|gif|svg|webp|ico|woff2?)$ {
+        expires 7d;
+        add_header Cache-Control "public";
+        try_files $uri =404;
+    }
+    # HTTPS listener dan redirect 80->443 ditambahkan setelah sertifikat terpasang.
+}` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/dns') return [
+      { path: 'planetbintang/planetbintang.com/dns/records.md', type: 'file', mode: '0100644', size: 650, sizeKnown: true, function: 'DNS checklist untuk GitHub Pages; email records belum diisi karena provider tidak diketahui', codeContent: `# DNS: planetbintang.com
+
+## GitHub Pages
+- Tambahkan custom domain planetbintang.com pada Settings → Pages di repository yang benar-benar menerbitkan situs.
+- Apex domain: buat A records ke alamat GitHub Pages resmi yang tercantum di dokumentasi GitHub Pages saat konfigurasi.
+- www: CNAME ke planetbintang.github.io.
+- Hapus record A/AAAA/CNAME lama yang bertentangan setelah memastikan tidak dipakai layanan lain.
+- Aktifkan Enforce HTTPS setelah sertifikat tersedia.
+
+## Catatan
+File CNAME di root repo mengatur nama custom domain pada GitHub Pages, tetapi tidak mengubah DNS registrar secara otomatis.
+Periksa DNS melalui provider domain sebelum menyatakan domain aktif.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/ssl') return [
+      { path: 'planetbintang/planetbintang.com/ssl/tls.md', type: 'file', mode: '0100644', size: 540, sizeKnown: true, function: 'Panduan sertifikat TLS; GitHub Pages mengelola sertifikatnya setelah DNS valid', codeContent: `# SSL/TLS
+- GitHub Pages: set custom domain pada Settings → Pages, pastikan DNS benar, tunggu penerbitan sertifikat, lalu aktifkan Enforce HTTPS.
+- VPS/Nginx: gunakan ACME client seperti Certbot untuk memperoleh sertifikat; baru aktifkan listener 443 dan redirect HTTP ke HTTPS.
+- Perpanjangan sertifikat harus otomatis dan dipantau.
+- Jangan commit private key, token, atau file sertifikat privat ke repositori.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/ssh') return [
+      { path: 'planetbintang/planetbintang.com/ssh/README.md', type: 'file', mode: '0100644', size: 420, sizeKnown: true, function: 'Panduan SSH untuk VPS; GitHub Pages sendiri tidak menyediakan akses SSH ke web server', codeContent: `# SSH
+- GitHub Pages adalah hosting statis dan tidak menyediakan shell SSH untuk server situs.
+- Untuk VPS milik sendiri, gunakan kunci ed25519, nonaktifkan password login setelah menguji akses kunci, batasi firewall dan gunakan akun non-root.
+- Private key hanya disimpan di perangkat/secret manager, bukan di Git.
+- Jangan mengaktifkan SSH server publik tanpa kontrol akses dan pembaruan keamanan.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/email') return [
+      { path: 'planetbintang/planetbintang.com/email/records-template.md', type: 'file', mode: '0100644', size: 480, sizeKnown: true, function: 'Template konfigurasi email; nilai MX/SPF/DKIM bergantung pada penyedia email yang dipakai', codeContent: `# Email DNS records
+
+Provider email belum ditentukan. Jangan menambahkan MX atau SPF contoh secara acak karena dapat mengganggu email aktif.
+
+Isi dari panel provider yang dipilih:
+- MX: hostname dan priority resmi provider.
+- SPF: satu TXT record yang menggabungkan seluruh pengirim sah.
+- DKIM: selector dan TXT/CNAME key dari provider.
+- DMARC: mulai dari kebijakan pemantauan, lalu tingkatkan setelah laporan tervalidasi.
+- Verifikasi mailbox dan alur pemulihan akun sebelum perubahan DNS.` },
+    ];
+    if (path === 'planetbintang/planetbintang.com/browser') return [
+      { path: 'planetbintang/planetbintang.com/browser/compatibility.md', type: 'file', mode: '0100644', size: 500, sizeKnown: true, function: 'Checklist kompatibilitas HTTP/HTTPS, responsif, aksesibilitas, dan browser modern', codeContent: `# Browser compatibility
+- Sajikan halaman utama melalui HTTPS; gunakan HTTP hanya untuk redirect permanen ke HTTPS pada hosting yang dikelola sendiri.
+- Gunakan HTML semantik, UTF-8, viewport meta, CSS responsif, dan JavaScript progressive enhancement.
+- Hindari fitur eksperimental tanpa fallback; uji Chrome, Firefox, Safari, Edge, browser Android/iOS, keyboard, zoom, dan koneksi lambat.
+- Pastikan semua asset memakai path relatif yang cocok dengan GitHub Pages project path /.L/ atau custom domain root.
+- Iframe pihak ketiga (misalnya Google/ChatGPT) dapat diblokir oleh kebijakan frame; sediakan tombol buka situs langsung.` },
     ];
     if (path === 'sys/system_ext' || path.startsWith('sys/system_ext/')) {
       const sourcePath = path.replace(/^sys\/system_ext/, 'system_ext');
