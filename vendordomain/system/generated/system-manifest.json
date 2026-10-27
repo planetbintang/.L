@@ -1,0 +1,3070 @@
+{
+  "title": "VendorDomain — Modular System",
+  "folderCount": 510,
+  "filesPerFolder": 3,
+  "moduleFileCount": 1530,
+  "generatedFrom": "generate-system.mjs",
+  "note": "Scaffold only; connect production services through a secured backend.",
+  "modules": [
+    {
+      "folder": "001-dashboard-overview",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — overview",
+      "index": 1
+    },
+    {
+      "folder": "002-admin-overview",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — overview",
+      "index": 2
+    },
+    {
+      "folder": "003-member-overview",
+      "group": "member",
+      "label": "Keanggotaan — overview",
+      "index": 3
+    },
+    {
+      "folder": "004-user-overview",
+      "group": "user",
+      "label": "Pengguna — overview",
+      "index": 4
+    },
+    {
+      "folder": "005-domain-overview",
+      "group": "domain",
+      "label": "Domain dan registrar — overview",
+      "index": 5
+    },
+    {
+      "folder": "006-dns-overview",
+      "group": "dns",
+      "label": "DNS dan nameserver — overview",
+      "index": 6
+    },
+    {
+      "folder": "007-hosting-overview",
+      "group": "hosting",
+      "label": "Hosting dan deployment — overview",
+      "index": 7
+    },
+    {
+      "folder": "008-billing-overview",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — overview",
+      "index": 8
+    },
+    {
+      "folder": "009-security-overview",
+      "group": "security",
+      "label": "Keamanan dan audit — overview",
+      "index": 9
+    },
+    {
+      "folder": "010-configuration-overview",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — overview",
+      "index": 10
+    },
+    {
+      "folder": "011-filemanager-overview",
+      "group": "filemanager",
+      "label": "Manajer file — overview",
+      "index": 11
+    },
+    {
+      "folder": "012-api-overview",
+      "group": "api",
+      "label": "API dan integrasi — overview",
+      "index": 12
+    },
+    {
+      "folder": "013-reports-overview",
+      "group": "reports",
+      "label": "Laporan dan analitik — overview",
+      "index": 13
+    },
+    {
+      "folder": "014-content-overview",
+      "group": "content",
+      "label": "Konten dan halaman — overview",
+      "index": 14
+    },
+    {
+      "folder": "015-support-overview",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — overview",
+      "index": 15
+    },
+    {
+      "folder": "016-monitoring-overview",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — overview",
+      "index": 16
+    },
+    {
+      "folder": "017-backup-overview",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — overview",
+      "index": 17
+    },
+    {
+      "folder": "018-workflow-overview",
+      "group": "workflow",
+      "label": "Alur kerja — overview",
+      "index": 18
+    },
+    {
+      "folder": "019-database-overview",
+      "group": "database",
+      "label": "Skema dan data — overview",
+      "index": 19
+    },
+    {
+      "folder": "020-system-overview",
+      "group": "system",
+      "label": "Sistem dan utilitas — overview",
+      "index": 20
+    },
+    {
+      "folder": "021-dashboard-settings",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — settings",
+      "index": 21
+    },
+    {
+      "folder": "022-admin-settings",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — settings",
+      "index": 22
+    },
+    {
+      "folder": "023-member-settings",
+      "group": "member",
+      "label": "Keanggotaan — settings",
+      "index": 23
+    },
+    {
+      "folder": "024-user-settings",
+      "group": "user",
+      "label": "Pengguna — settings",
+      "index": 24
+    },
+    {
+      "folder": "025-domain-settings",
+      "group": "domain",
+      "label": "Domain dan registrar — settings",
+      "index": 25
+    },
+    {
+      "folder": "026-dns-settings",
+      "group": "dns",
+      "label": "DNS dan nameserver — settings",
+      "index": 26
+    },
+    {
+      "folder": "027-hosting-settings",
+      "group": "hosting",
+      "label": "Hosting dan deployment — settings",
+      "index": 27
+    },
+    {
+      "folder": "028-billing-settings",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — settings",
+      "index": 28
+    },
+    {
+      "folder": "029-security-settings",
+      "group": "security",
+      "label": "Keamanan dan audit — settings",
+      "index": 29
+    },
+    {
+      "folder": "030-configuration-settings",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — settings",
+      "index": 30
+    },
+    {
+      "folder": "031-filemanager-settings",
+      "group": "filemanager",
+      "label": "Manajer file — settings",
+      "index": 31
+    },
+    {
+      "folder": "032-api-settings",
+      "group": "api",
+      "label": "API dan integrasi — settings",
+      "index": 32
+    },
+    {
+      "folder": "033-reports-settings",
+      "group": "reports",
+      "label": "Laporan dan analitik — settings",
+      "index": 33
+    },
+    {
+      "folder": "034-content-settings",
+      "group": "content",
+      "label": "Konten dan halaman — settings",
+      "index": 34
+    },
+    {
+      "folder": "035-support-settings",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — settings",
+      "index": 35
+    },
+    {
+      "folder": "036-monitoring-settings",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — settings",
+      "index": 36
+    },
+    {
+      "folder": "037-backup-settings",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — settings",
+      "index": 37
+    },
+    {
+      "folder": "038-workflow-settings",
+      "group": "workflow",
+      "label": "Alur kerja — settings",
+      "index": 38
+    },
+    {
+      "folder": "039-database-settings",
+      "group": "database",
+      "label": "Skema dan data — settings",
+      "index": 39
+    },
+    {
+      "folder": "040-system-settings",
+      "group": "system",
+      "label": "Sistem dan utilitas — settings",
+      "index": 40
+    },
+    {
+      "folder": "041-dashboard-records",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — records",
+      "index": 41
+    },
+    {
+      "folder": "042-admin-records",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — records",
+      "index": 42
+    },
+    {
+      "folder": "043-member-records",
+      "group": "member",
+      "label": "Keanggotaan — records",
+      "index": 43
+    },
+    {
+      "folder": "044-user-records",
+      "group": "user",
+      "label": "Pengguna — records",
+      "index": 44
+    },
+    {
+      "folder": "045-domain-records",
+      "group": "domain",
+      "label": "Domain dan registrar — records",
+      "index": 45
+    },
+    {
+      "folder": "046-dns-records",
+      "group": "dns",
+      "label": "DNS dan nameserver — records",
+      "index": 46
+    },
+    {
+      "folder": "047-hosting-records",
+      "group": "hosting",
+      "label": "Hosting dan deployment — records",
+      "index": 47
+    },
+    {
+      "folder": "048-billing-records",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — records",
+      "index": 48
+    },
+    {
+      "folder": "049-security-records",
+      "group": "security",
+      "label": "Keamanan dan audit — records",
+      "index": 49
+    },
+    {
+      "folder": "050-configuration-records",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — records",
+      "index": 50
+    },
+    {
+      "folder": "051-filemanager-records",
+      "group": "filemanager",
+      "label": "Manajer file — records",
+      "index": 51
+    },
+    {
+      "folder": "052-api-records",
+      "group": "api",
+      "label": "API dan integrasi — records",
+      "index": 52
+    },
+    {
+      "folder": "053-reports-records",
+      "group": "reports",
+      "label": "Laporan dan analitik — records",
+      "index": 53
+    },
+    {
+      "folder": "054-content-records",
+      "group": "content",
+      "label": "Konten dan halaman — records",
+      "index": 54
+    },
+    {
+      "folder": "055-support-records",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — records",
+      "index": 55
+    },
+    {
+      "folder": "056-monitoring-records",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — records",
+      "index": 56
+    },
+    {
+      "folder": "057-backup-records",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — records",
+      "index": 57
+    },
+    {
+      "folder": "058-workflow-records",
+      "group": "workflow",
+      "label": "Alur kerja — records",
+      "index": 58
+    },
+    {
+      "folder": "059-database-records",
+      "group": "database",
+      "label": "Skema dan data — records",
+      "index": 59
+    },
+    {
+      "folder": "060-system-records",
+      "group": "system",
+      "label": "Sistem dan utilitas — records",
+      "index": 60
+    },
+    {
+      "folder": "061-dashboard-registry",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — registry",
+      "index": 61
+    },
+    {
+      "folder": "062-admin-registry",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — registry",
+      "index": 62
+    },
+    {
+      "folder": "063-member-registry",
+      "group": "member",
+      "label": "Keanggotaan — registry",
+      "index": 63
+    },
+    {
+      "folder": "064-user-registry",
+      "group": "user",
+      "label": "Pengguna — registry",
+      "index": 64
+    },
+    {
+      "folder": "065-domain-registry",
+      "group": "domain",
+      "label": "Domain dan registrar — registry",
+      "index": 65
+    },
+    {
+      "folder": "066-dns-registry",
+      "group": "dns",
+      "label": "DNS dan nameserver — registry",
+      "index": 66
+    },
+    {
+      "folder": "067-hosting-registry",
+      "group": "hosting",
+      "label": "Hosting dan deployment — registry",
+      "index": 67
+    },
+    {
+      "folder": "068-billing-registry",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — registry",
+      "index": 68
+    },
+    {
+      "folder": "069-security-registry",
+      "group": "security",
+      "label": "Keamanan dan audit — registry",
+      "index": 69
+    },
+    {
+      "folder": "070-configuration-registry",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — registry",
+      "index": 70
+    },
+    {
+      "folder": "071-filemanager-registry",
+      "group": "filemanager",
+      "label": "Manajer file — registry",
+      "index": 71
+    },
+    {
+      "folder": "072-api-registry",
+      "group": "api",
+      "label": "API dan integrasi — registry",
+      "index": 72
+    },
+    {
+      "folder": "073-reports-registry",
+      "group": "reports",
+      "label": "Laporan dan analitik — registry",
+      "index": 73
+    },
+    {
+      "folder": "074-content-registry",
+      "group": "content",
+      "label": "Konten dan halaman — registry",
+      "index": 74
+    },
+    {
+      "folder": "075-support-registry",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — registry",
+      "index": 75
+    },
+    {
+      "folder": "076-monitoring-registry",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — registry",
+      "index": 76
+    },
+    {
+      "folder": "077-backup-registry",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — registry",
+      "index": 77
+    },
+    {
+      "folder": "078-workflow-registry",
+      "group": "workflow",
+      "label": "Alur kerja — registry",
+      "index": 78
+    },
+    {
+      "folder": "079-database-registry",
+      "group": "database",
+      "label": "Skema dan data — registry",
+      "index": 79
+    },
+    {
+      "folder": "080-system-registry",
+      "group": "system",
+      "label": "Sistem dan utilitas — registry",
+      "index": 80
+    },
+    {
+      "folder": "081-dashboard-providers",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — providers",
+      "index": 81
+    },
+    {
+      "folder": "082-admin-providers",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — providers",
+      "index": 82
+    },
+    {
+      "folder": "083-member-providers",
+      "group": "member",
+      "label": "Keanggotaan — providers",
+      "index": 83
+    },
+    {
+      "folder": "084-user-providers",
+      "group": "user",
+      "label": "Pengguna — providers",
+      "index": 84
+    },
+    {
+      "folder": "085-domain-providers",
+      "group": "domain",
+      "label": "Domain dan registrar — providers",
+      "index": 85
+    },
+    {
+      "folder": "086-dns-providers",
+      "group": "dns",
+      "label": "DNS dan nameserver — providers",
+      "index": 86
+    },
+    {
+      "folder": "087-hosting-providers",
+      "group": "hosting",
+      "label": "Hosting dan deployment — providers",
+      "index": 87
+    },
+    {
+      "folder": "088-billing-providers",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — providers",
+      "index": 88
+    },
+    {
+      "folder": "089-security-providers",
+      "group": "security",
+      "label": "Keamanan dan audit — providers",
+      "index": 89
+    },
+    {
+      "folder": "090-configuration-providers",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — providers",
+      "index": 90
+    },
+    {
+      "folder": "091-filemanager-providers",
+      "group": "filemanager",
+      "label": "Manajer file — providers",
+      "index": 91
+    },
+    {
+      "folder": "092-api-providers",
+      "group": "api",
+      "label": "API dan integrasi — providers",
+      "index": 92
+    },
+    {
+      "folder": "093-reports-providers",
+      "group": "reports",
+      "label": "Laporan dan analitik — providers",
+      "index": 93
+    },
+    {
+      "folder": "094-content-providers",
+      "group": "content",
+      "label": "Konten dan halaman — providers",
+      "index": 94
+    },
+    {
+      "folder": "095-support-providers",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — providers",
+      "index": 95
+    },
+    {
+      "folder": "096-monitoring-providers",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — providers",
+      "index": 96
+    },
+    {
+      "folder": "097-backup-providers",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — providers",
+      "index": 97
+    },
+    {
+      "folder": "098-workflow-providers",
+      "group": "workflow",
+      "label": "Alur kerja — providers",
+      "index": 98
+    },
+    {
+      "folder": "099-database-providers",
+      "group": "database",
+      "label": "Skema dan data — providers",
+      "index": 99
+    },
+    {
+      "folder": "100-system-providers",
+      "group": "system",
+      "label": "Sistem dan utilitas — providers",
+      "index": 100
+    },
+    {
+      "folder": "101-dashboard-permissions",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — permissions",
+      "index": 101
+    },
+    {
+      "folder": "102-admin-permissions",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — permissions",
+      "index": 102
+    },
+    {
+      "folder": "103-member-permissions",
+      "group": "member",
+      "label": "Keanggotaan — permissions",
+      "index": 103
+    },
+    {
+      "folder": "104-user-permissions",
+      "group": "user",
+      "label": "Pengguna — permissions",
+      "index": 104
+    },
+    {
+      "folder": "105-domain-permissions",
+      "group": "domain",
+      "label": "Domain dan registrar — permissions",
+      "index": 105
+    },
+    {
+      "folder": "106-dns-permissions",
+      "group": "dns",
+      "label": "DNS dan nameserver — permissions",
+      "index": 106
+    },
+    {
+      "folder": "107-hosting-permissions",
+      "group": "hosting",
+      "label": "Hosting dan deployment — permissions",
+      "index": 107
+    },
+    {
+      "folder": "108-billing-permissions",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — permissions",
+      "index": 108
+    },
+    {
+      "folder": "109-security-permissions",
+      "group": "security",
+      "label": "Keamanan dan audit — permissions",
+      "index": 109
+    },
+    {
+      "folder": "110-configuration-permissions",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — permissions",
+      "index": 110
+    },
+    {
+      "folder": "111-filemanager-permissions",
+      "group": "filemanager",
+      "label": "Manajer file — permissions",
+      "index": 111
+    },
+    {
+      "folder": "112-api-permissions",
+      "group": "api",
+      "label": "API dan integrasi — permissions",
+      "index": 112
+    },
+    {
+      "folder": "113-reports-permissions",
+      "group": "reports",
+      "label": "Laporan dan analitik — permissions",
+      "index": 113
+    },
+    {
+      "folder": "114-content-permissions",
+      "group": "content",
+      "label": "Konten dan halaman — permissions",
+      "index": 114
+    },
+    {
+      "folder": "115-support-permissions",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — permissions",
+      "index": 115
+    },
+    {
+      "folder": "116-monitoring-permissions",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — permissions",
+      "index": 116
+    },
+    {
+      "folder": "117-backup-permissions",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — permissions",
+      "index": 117
+    },
+    {
+      "folder": "118-workflow-permissions",
+      "group": "workflow",
+      "label": "Alur kerja — permissions",
+      "index": 118
+    },
+    {
+      "folder": "119-database-permissions",
+      "group": "database",
+      "label": "Skema dan data — permissions",
+      "index": 119
+    },
+    {
+      "folder": "120-system-permissions",
+      "group": "system",
+      "label": "Sistem dan utilitas — permissions",
+      "index": 120
+    },
+    {
+      "folder": "121-dashboard-roles",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — roles",
+      "index": 121
+    },
+    {
+      "folder": "122-admin-roles",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — roles",
+      "index": 122
+    },
+    {
+      "folder": "123-member-roles",
+      "group": "member",
+      "label": "Keanggotaan — roles",
+      "index": 123
+    },
+    {
+      "folder": "124-user-roles",
+      "group": "user",
+      "label": "Pengguna — roles",
+      "index": 124
+    },
+    {
+      "folder": "125-domain-roles",
+      "group": "domain",
+      "label": "Domain dan registrar — roles",
+      "index": 125
+    },
+    {
+      "folder": "126-dns-roles",
+      "group": "dns",
+      "label": "DNS dan nameserver — roles",
+      "index": 126
+    },
+    {
+      "folder": "127-hosting-roles",
+      "group": "hosting",
+      "label": "Hosting dan deployment — roles",
+      "index": 127
+    },
+    {
+      "folder": "128-billing-roles",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — roles",
+      "index": 128
+    },
+    {
+      "folder": "129-security-roles",
+      "group": "security",
+      "label": "Keamanan dan audit — roles",
+      "index": 129
+    },
+    {
+      "folder": "130-configuration-roles",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — roles",
+      "index": 130
+    },
+    {
+      "folder": "131-filemanager-roles",
+      "group": "filemanager",
+      "label": "Manajer file — roles",
+      "index": 131
+    },
+    {
+      "folder": "132-api-roles",
+      "group": "api",
+      "label": "API dan integrasi — roles",
+      "index": 132
+    },
+    {
+      "folder": "133-reports-roles",
+      "group": "reports",
+      "label": "Laporan dan analitik — roles",
+      "index": 133
+    },
+    {
+      "folder": "134-content-roles",
+      "group": "content",
+      "label": "Konten dan halaman — roles",
+      "index": 134
+    },
+    {
+      "folder": "135-support-roles",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — roles",
+      "index": 135
+    },
+    {
+      "folder": "136-monitoring-roles",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — roles",
+      "index": 136
+    },
+    {
+      "folder": "137-backup-roles",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — roles",
+      "index": 137
+    },
+    {
+      "folder": "138-workflow-roles",
+      "group": "workflow",
+      "label": "Alur kerja — roles",
+      "index": 138
+    },
+    {
+      "folder": "139-database-roles",
+      "group": "database",
+      "label": "Skema dan data — roles",
+      "index": 139
+    },
+    {
+      "folder": "140-system-roles",
+      "group": "system",
+      "label": "Sistem dan utilitas — roles",
+      "index": 140
+    },
+    {
+      "folder": "141-dashboard-profiles",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — profiles",
+      "index": 141
+    },
+    {
+      "folder": "142-admin-profiles",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — profiles",
+      "index": 142
+    },
+    {
+      "folder": "143-member-profiles",
+      "group": "member",
+      "label": "Keanggotaan — profiles",
+      "index": 143
+    },
+    {
+      "folder": "144-user-profiles",
+      "group": "user",
+      "label": "Pengguna — profiles",
+      "index": 144
+    },
+    {
+      "folder": "145-domain-profiles",
+      "group": "domain",
+      "label": "Domain dan registrar — profiles",
+      "index": 145
+    },
+    {
+      "folder": "146-dns-profiles",
+      "group": "dns",
+      "label": "DNS dan nameserver — profiles",
+      "index": 146
+    },
+    {
+      "folder": "147-hosting-profiles",
+      "group": "hosting",
+      "label": "Hosting dan deployment — profiles",
+      "index": 147
+    },
+    {
+      "folder": "148-billing-profiles",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — profiles",
+      "index": 148
+    },
+    {
+      "folder": "149-security-profiles",
+      "group": "security",
+      "label": "Keamanan dan audit — profiles",
+      "index": 149
+    },
+    {
+      "folder": "150-configuration-profiles",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — profiles",
+      "index": 150
+    },
+    {
+      "folder": "151-filemanager-profiles",
+      "group": "filemanager",
+      "label": "Manajer file — profiles",
+      "index": 151
+    },
+    {
+      "folder": "152-api-profiles",
+      "group": "api",
+      "label": "API dan integrasi — profiles",
+      "index": 152
+    },
+    {
+      "folder": "153-reports-profiles",
+      "group": "reports",
+      "label": "Laporan dan analitik — profiles",
+      "index": 153
+    },
+    {
+      "folder": "154-content-profiles",
+      "group": "content",
+      "label": "Konten dan halaman — profiles",
+      "index": 154
+    },
+    {
+      "folder": "155-support-profiles",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — profiles",
+      "index": 155
+    },
+    {
+      "folder": "156-monitoring-profiles",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — profiles",
+      "index": 156
+    },
+    {
+      "folder": "157-backup-profiles",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — profiles",
+      "index": 157
+    },
+    {
+      "folder": "158-workflow-profiles",
+      "group": "workflow",
+      "label": "Alur kerja — profiles",
+      "index": 158
+    },
+    {
+      "folder": "159-database-profiles",
+      "group": "database",
+      "label": "Skema dan data — profiles",
+      "index": 159
+    },
+    {
+      "folder": "160-system-profiles",
+      "group": "system",
+      "label": "Sistem dan utilitas — profiles",
+      "index": 160
+    },
+    {
+      "folder": "161-dashboard-sessions",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — sessions",
+      "index": 161
+    },
+    {
+      "folder": "162-admin-sessions",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — sessions",
+      "index": 162
+    },
+    {
+      "folder": "163-member-sessions",
+      "group": "member",
+      "label": "Keanggotaan — sessions",
+      "index": 163
+    },
+    {
+      "folder": "164-user-sessions",
+      "group": "user",
+      "label": "Pengguna — sessions",
+      "index": 164
+    },
+    {
+      "folder": "165-domain-sessions",
+      "group": "domain",
+      "label": "Domain dan registrar — sessions",
+      "index": 165
+    },
+    {
+      "folder": "166-dns-sessions",
+      "group": "dns",
+      "label": "DNS dan nameserver — sessions",
+      "index": 166
+    },
+    {
+      "folder": "167-hosting-sessions",
+      "group": "hosting",
+      "label": "Hosting dan deployment — sessions",
+      "index": 167
+    },
+    {
+      "folder": "168-billing-sessions",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — sessions",
+      "index": 168
+    },
+    {
+      "folder": "169-security-sessions",
+      "group": "security",
+      "label": "Keamanan dan audit — sessions",
+      "index": 169
+    },
+    {
+      "folder": "170-configuration-sessions",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — sessions",
+      "index": 170
+    },
+    {
+      "folder": "171-filemanager-sessions",
+      "group": "filemanager",
+      "label": "Manajer file — sessions",
+      "index": 171
+    },
+    {
+      "folder": "172-api-sessions",
+      "group": "api",
+      "label": "API dan integrasi — sessions",
+      "index": 172
+    },
+    {
+      "folder": "173-reports-sessions",
+      "group": "reports",
+      "label": "Laporan dan analitik — sessions",
+      "index": 173
+    },
+    {
+      "folder": "174-content-sessions",
+      "group": "content",
+      "label": "Konten dan halaman — sessions",
+      "index": 174
+    },
+    {
+      "folder": "175-support-sessions",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — sessions",
+      "index": 175
+    },
+    {
+      "folder": "176-monitoring-sessions",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — sessions",
+      "index": 176
+    },
+    {
+      "folder": "177-backup-sessions",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — sessions",
+      "index": 177
+    },
+    {
+      "folder": "178-workflow-sessions",
+      "group": "workflow",
+      "label": "Alur kerja — sessions",
+      "index": 178
+    },
+    {
+      "folder": "179-database-sessions",
+      "group": "database",
+      "label": "Skema dan data — sessions",
+      "index": 179
+    },
+    {
+      "folder": "180-system-sessions",
+      "group": "system",
+      "label": "Sistem dan utilitas — sessions",
+      "index": 180
+    },
+    {
+      "folder": "181-dashboard-activity",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — activity",
+      "index": 181
+    },
+    {
+      "folder": "182-admin-activity",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — activity",
+      "index": 182
+    },
+    {
+      "folder": "183-member-activity",
+      "group": "member",
+      "label": "Keanggotaan — activity",
+      "index": 183
+    },
+    {
+      "folder": "184-user-activity",
+      "group": "user",
+      "label": "Pengguna — activity",
+      "index": 184
+    },
+    {
+      "folder": "185-domain-activity",
+      "group": "domain",
+      "label": "Domain dan registrar — activity",
+      "index": 185
+    },
+    {
+      "folder": "186-dns-activity",
+      "group": "dns",
+      "label": "DNS dan nameserver — activity",
+      "index": 186
+    },
+    {
+      "folder": "187-hosting-activity",
+      "group": "hosting",
+      "label": "Hosting dan deployment — activity",
+      "index": 187
+    },
+    {
+      "folder": "188-billing-activity",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — activity",
+      "index": 188
+    },
+    {
+      "folder": "189-security-activity",
+      "group": "security",
+      "label": "Keamanan dan audit — activity",
+      "index": 189
+    },
+    {
+      "folder": "190-configuration-activity",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — activity",
+      "index": 190
+    },
+    {
+      "folder": "191-filemanager-activity",
+      "group": "filemanager",
+      "label": "Manajer file — activity",
+      "index": 191
+    },
+    {
+      "folder": "192-api-activity",
+      "group": "api",
+      "label": "API dan integrasi — activity",
+      "index": 192
+    },
+    {
+      "folder": "193-reports-activity",
+      "group": "reports",
+      "label": "Laporan dan analitik — activity",
+      "index": 193
+    },
+    {
+      "folder": "194-content-activity",
+      "group": "content",
+      "label": "Konten dan halaman — activity",
+      "index": 194
+    },
+    {
+      "folder": "195-support-activity",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — activity",
+      "index": 195
+    },
+    {
+      "folder": "196-monitoring-activity",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — activity",
+      "index": 196
+    },
+    {
+      "folder": "197-backup-activity",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — activity",
+      "index": 197
+    },
+    {
+      "folder": "198-workflow-activity",
+      "group": "workflow",
+      "label": "Alur kerja — activity",
+      "index": 198
+    },
+    {
+      "folder": "199-database-activity",
+      "group": "database",
+      "label": "Skema dan data — activity",
+      "index": 199
+    },
+    {
+      "folder": "200-system-activity",
+      "group": "system",
+      "label": "Sistem dan utilitas — activity",
+      "index": 200
+    },
+    {
+      "folder": "201-dashboard-logs",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — logs",
+      "index": 201
+    },
+    {
+      "folder": "202-admin-logs",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — logs",
+      "index": 202
+    },
+    {
+      "folder": "203-member-logs",
+      "group": "member",
+      "label": "Keanggotaan — logs",
+      "index": 203
+    },
+    {
+      "folder": "204-user-logs",
+      "group": "user",
+      "label": "Pengguna — logs",
+      "index": 204
+    },
+    {
+      "folder": "205-domain-logs",
+      "group": "domain",
+      "label": "Domain dan registrar — logs",
+      "index": 205
+    },
+    {
+      "folder": "206-dns-logs",
+      "group": "dns",
+      "label": "DNS dan nameserver — logs",
+      "index": 206
+    },
+    {
+      "folder": "207-hosting-logs",
+      "group": "hosting",
+      "label": "Hosting dan deployment — logs",
+      "index": 207
+    },
+    {
+      "folder": "208-billing-logs",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — logs",
+      "index": 208
+    },
+    {
+      "folder": "209-security-logs",
+      "group": "security",
+      "label": "Keamanan dan audit — logs",
+      "index": 209
+    },
+    {
+      "folder": "210-configuration-logs",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — logs",
+      "index": 210
+    },
+    {
+      "folder": "211-filemanager-logs",
+      "group": "filemanager",
+      "label": "Manajer file — logs",
+      "index": 211
+    },
+    {
+      "folder": "212-api-logs",
+      "group": "api",
+      "label": "API dan integrasi — logs",
+      "index": 212
+    },
+    {
+      "folder": "213-reports-logs",
+      "group": "reports",
+      "label": "Laporan dan analitik — logs",
+      "index": 213
+    },
+    {
+      "folder": "214-content-logs",
+      "group": "content",
+      "label": "Konten dan halaman — logs",
+      "index": 214
+    },
+    {
+      "folder": "215-support-logs",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — logs",
+      "index": 215
+    },
+    {
+      "folder": "216-monitoring-logs",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — logs",
+      "index": 216
+    },
+    {
+      "folder": "217-backup-logs",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — logs",
+      "index": 217
+    },
+    {
+      "folder": "218-workflow-logs",
+      "group": "workflow",
+      "label": "Alur kerja — logs",
+      "index": 218
+    },
+    {
+      "folder": "219-database-logs",
+      "group": "database",
+      "label": "Skema dan data — logs",
+      "index": 219
+    },
+    {
+      "folder": "220-system-logs",
+      "group": "system",
+      "label": "Sistem dan utilitas — logs",
+      "index": 220
+    },
+    {
+      "folder": "221-dashboard-analytics",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — analytics",
+      "index": 221
+    },
+    {
+      "folder": "222-admin-analytics",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — analytics",
+      "index": 222
+    },
+    {
+      "folder": "223-member-analytics",
+      "group": "member",
+      "label": "Keanggotaan — analytics",
+      "index": 223
+    },
+    {
+      "folder": "224-user-analytics",
+      "group": "user",
+      "label": "Pengguna — analytics",
+      "index": 224
+    },
+    {
+      "folder": "225-domain-analytics",
+      "group": "domain",
+      "label": "Domain dan registrar — analytics",
+      "index": 225
+    },
+    {
+      "folder": "226-dns-analytics",
+      "group": "dns",
+      "label": "DNS dan nameserver — analytics",
+      "index": 226
+    },
+    {
+      "folder": "227-hosting-analytics",
+      "group": "hosting",
+      "label": "Hosting dan deployment — analytics",
+      "index": 227
+    },
+    {
+      "folder": "228-billing-analytics",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — analytics",
+      "index": 228
+    },
+    {
+      "folder": "229-security-analytics",
+      "group": "security",
+      "label": "Keamanan dan audit — analytics",
+      "index": 229
+    },
+    {
+      "folder": "230-configuration-analytics",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — analytics",
+      "index": 230
+    },
+    {
+      "folder": "231-filemanager-analytics",
+      "group": "filemanager",
+      "label": "Manajer file — analytics",
+      "index": 231
+    },
+    {
+      "folder": "232-api-analytics",
+      "group": "api",
+      "label": "API dan integrasi — analytics",
+      "index": 232
+    },
+    {
+      "folder": "233-reports-analytics",
+      "group": "reports",
+      "label": "Laporan dan analitik — analytics",
+      "index": 233
+    },
+    {
+      "folder": "234-content-analytics",
+      "group": "content",
+      "label": "Konten dan halaman — analytics",
+      "index": 234
+    },
+    {
+      "folder": "235-support-analytics",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — analytics",
+      "index": 235
+    },
+    {
+      "folder": "236-monitoring-analytics",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — analytics",
+      "index": 236
+    },
+    {
+      "folder": "237-backup-analytics",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — analytics",
+      "index": 237
+    },
+    {
+      "folder": "238-workflow-analytics",
+      "group": "workflow",
+      "label": "Alur kerja — analytics",
+      "index": 238
+    },
+    {
+      "folder": "239-database-analytics",
+      "group": "database",
+      "label": "Skema dan data — analytics",
+      "index": 239
+    },
+    {
+      "folder": "240-system-analytics",
+      "group": "system",
+      "label": "Sistem dan utilitas — analytics",
+      "index": 240
+    },
+    {
+      "folder": "241-dashboard-reports",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — reports",
+      "index": 241
+    },
+    {
+      "folder": "242-admin-reports",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — reports",
+      "index": 242
+    },
+    {
+      "folder": "243-member-reports",
+      "group": "member",
+      "label": "Keanggotaan — reports",
+      "index": 243
+    },
+    {
+      "folder": "244-user-reports",
+      "group": "user",
+      "label": "Pengguna — reports",
+      "index": 244
+    },
+    {
+      "folder": "245-domain-reports",
+      "group": "domain",
+      "label": "Domain dan registrar — reports",
+      "index": 245
+    },
+    {
+      "folder": "246-dns-reports",
+      "group": "dns",
+      "label": "DNS dan nameserver — reports",
+      "index": 246
+    },
+    {
+      "folder": "247-hosting-reports",
+      "group": "hosting",
+      "label": "Hosting dan deployment — reports",
+      "index": 247
+    },
+    {
+      "folder": "248-billing-reports",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — reports",
+      "index": 248
+    },
+    {
+      "folder": "249-security-reports",
+      "group": "security",
+      "label": "Keamanan dan audit — reports",
+      "index": 249
+    },
+    {
+      "folder": "250-configuration-reports",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — reports",
+      "index": 250
+    },
+    {
+      "folder": "251-filemanager-reports",
+      "group": "filemanager",
+      "label": "Manajer file — reports",
+      "index": 251
+    },
+    {
+      "folder": "252-api-reports",
+      "group": "api",
+      "label": "API dan integrasi — reports",
+      "index": 252
+    },
+    {
+      "folder": "253-reports-reports",
+      "group": "reports",
+      "label": "Laporan dan analitik — reports",
+      "index": 253
+    },
+    {
+      "folder": "254-content-reports",
+      "group": "content",
+      "label": "Konten dan halaman — reports",
+      "index": 254
+    },
+    {
+      "folder": "255-support-reports",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — reports",
+      "index": 255
+    },
+    {
+      "folder": "256-monitoring-reports",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — reports",
+      "index": 256
+    },
+    {
+      "folder": "257-backup-reports",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — reports",
+      "index": 257
+    },
+    {
+      "folder": "258-workflow-reports",
+      "group": "workflow",
+      "label": "Alur kerja — reports",
+      "index": 258
+    },
+    {
+      "folder": "259-database-reports",
+      "group": "database",
+      "label": "Skema dan data — reports",
+      "index": 259
+    },
+    {
+      "folder": "260-system-reports",
+      "group": "system",
+      "label": "Sistem dan utilitas — reports",
+      "index": 260
+    },
+    {
+      "folder": "261-dashboard-policies",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — policies",
+      "index": 261
+    },
+    {
+      "folder": "262-admin-policies",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — policies",
+      "index": 262
+    },
+    {
+      "folder": "263-member-policies",
+      "group": "member",
+      "label": "Keanggotaan — policies",
+      "index": 263
+    },
+    {
+      "folder": "264-user-policies",
+      "group": "user",
+      "label": "Pengguna — policies",
+      "index": 264
+    },
+    {
+      "folder": "265-domain-policies",
+      "group": "domain",
+      "label": "Domain dan registrar — policies",
+      "index": 265
+    },
+    {
+      "folder": "266-dns-policies",
+      "group": "dns",
+      "label": "DNS dan nameserver — policies",
+      "index": 266
+    },
+    {
+      "folder": "267-hosting-policies",
+      "group": "hosting",
+      "label": "Hosting dan deployment — policies",
+      "index": 267
+    },
+    {
+      "folder": "268-billing-policies",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — policies",
+      "index": 268
+    },
+    {
+      "folder": "269-security-policies",
+      "group": "security",
+      "label": "Keamanan dan audit — policies",
+      "index": 269
+    },
+    {
+      "folder": "270-configuration-policies",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — policies",
+      "index": 270
+    },
+    {
+      "folder": "271-filemanager-policies",
+      "group": "filemanager",
+      "label": "Manajer file — policies",
+      "index": 271
+    },
+    {
+      "folder": "272-api-policies",
+      "group": "api",
+      "label": "API dan integrasi — policies",
+      "index": 272
+    },
+    {
+      "folder": "273-reports-policies",
+      "group": "reports",
+      "label": "Laporan dan analitik — policies",
+      "index": 273
+    },
+    {
+      "folder": "274-content-policies",
+      "group": "content",
+      "label": "Konten dan halaman — policies",
+      "index": 274
+    },
+    {
+      "folder": "275-support-policies",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — policies",
+      "index": 275
+    },
+    {
+      "folder": "276-monitoring-policies",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — policies",
+      "index": 276
+    },
+    {
+      "folder": "277-backup-policies",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — policies",
+      "index": 277
+    },
+    {
+      "folder": "278-workflow-policies",
+      "group": "workflow",
+      "label": "Alur kerja — policies",
+      "index": 278
+    },
+    {
+      "folder": "279-database-policies",
+      "group": "database",
+      "label": "Skema dan data — policies",
+      "index": 279
+    },
+    {
+      "folder": "280-system-policies",
+      "group": "system",
+      "label": "Sistem dan utilitas — policies",
+      "index": 280
+    },
+    {
+      "folder": "281-dashboard-preferences",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — preferences",
+      "index": 281
+    },
+    {
+      "folder": "282-admin-preferences",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — preferences",
+      "index": 282
+    },
+    {
+      "folder": "283-member-preferences",
+      "group": "member",
+      "label": "Keanggotaan — preferences",
+      "index": 283
+    },
+    {
+      "folder": "284-user-preferences",
+      "group": "user",
+      "label": "Pengguna — preferences",
+      "index": 284
+    },
+    {
+      "folder": "285-domain-preferences",
+      "group": "domain",
+      "label": "Domain dan registrar — preferences",
+      "index": 285
+    },
+    {
+      "folder": "286-dns-preferences",
+      "group": "dns",
+      "label": "DNS dan nameserver — preferences",
+      "index": 286
+    },
+    {
+      "folder": "287-hosting-preferences",
+      "group": "hosting",
+      "label": "Hosting dan deployment — preferences",
+      "index": 287
+    },
+    {
+      "folder": "288-billing-preferences",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — preferences",
+      "index": 288
+    },
+    {
+      "folder": "289-security-preferences",
+      "group": "security",
+      "label": "Keamanan dan audit — preferences",
+      "index": 289
+    },
+    {
+      "folder": "290-configuration-preferences",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — preferences",
+      "index": 290
+    },
+    {
+      "folder": "291-filemanager-preferences",
+      "group": "filemanager",
+      "label": "Manajer file — preferences",
+      "index": 291
+    },
+    {
+      "folder": "292-api-preferences",
+      "group": "api",
+      "label": "API dan integrasi — preferences",
+      "index": 292
+    },
+    {
+      "folder": "293-reports-preferences",
+      "group": "reports",
+      "label": "Laporan dan analitik — preferences",
+      "index": 293
+    },
+    {
+      "folder": "294-content-preferences",
+      "group": "content",
+      "label": "Konten dan halaman — preferences",
+      "index": 294
+    },
+    {
+      "folder": "295-support-preferences",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — preferences",
+      "index": 295
+    },
+    {
+      "folder": "296-monitoring-preferences",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — preferences",
+      "index": 296
+    },
+    {
+      "folder": "297-backup-preferences",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — preferences",
+      "index": 297
+    },
+    {
+      "folder": "298-workflow-preferences",
+      "group": "workflow",
+      "label": "Alur kerja — preferences",
+      "index": 298
+    },
+    {
+      "folder": "299-database-preferences",
+      "group": "database",
+      "label": "Skema dan data — preferences",
+      "index": 299
+    },
+    {
+      "folder": "300-system-preferences",
+      "group": "system",
+      "label": "Sistem dan utilitas — preferences",
+      "index": 300
+    },
+    {
+      "folder": "301-dashboard-integrations",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — integrations",
+      "index": 301
+    },
+    {
+      "folder": "302-admin-integrations",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — integrations",
+      "index": 302
+    },
+    {
+      "folder": "303-member-integrations",
+      "group": "member",
+      "label": "Keanggotaan — integrations",
+      "index": 303
+    },
+    {
+      "folder": "304-user-integrations",
+      "group": "user",
+      "label": "Pengguna — integrations",
+      "index": 304
+    },
+    {
+      "folder": "305-domain-integrations",
+      "group": "domain",
+      "label": "Domain dan registrar — integrations",
+      "index": 305
+    },
+    {
+      "folder": "306-dns-integrations",
+      "group": "dns",
+      "label": "DNS dan nameserver — integrations",
+      "index": 306
+    },
+    {
+      "folder": "307-hosting-integrations",
+      "group": "hosting",
+      "label": "Hosting dan deployment — integrations",
+      "index": 307
+    },
+    {
+      "folder": "308-billing-integrations",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — integrations",
+      "index": 308
+    },
+    {
+      "folder": "309-security-integrations",
+      "group": "security",
+      "label": "Keamanan dan audit — integrations",
+      "index": 309
+    },
+    {
+      "folder": "310-configuration-integrations",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — integrations",
+      "index": 310
+    },
+    {
+      "folder": "311-filemanager-integrations",
+      "group": "filemanager",
+      "label": "Manajer file — integrations",
+      "index": 311
+    },
+    {
+      "folder": "312-api-integrations",
+      "group": "api",
+      "label": "API dan integrasi — integrations",
+      "index": 312
+    },
+    {
+      "folder": "313-reports-integrations",
+      "group": "reports",
+      "label": "Laporan dan analitik — integrations",
+      "index": 313
+    },
+    {
+      "folder": "314-content-integrations",
+      "group": "content",
+      "label": "Konten dan halaman — integrations",
+      "index": 314
+    },
+    {
+      "folder": "315-support-integrations",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — integrations",
+      "index": 315
+    },
+    {
+      "folder": "316-monitoring-integrations",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — integrations",
+      "index": 316
+    },
+    {
+      "folder": "317-backup-integrations",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — integrations",
+      "index": 317
+    },
+    {
+      "folder": "318-workflow-integrations",
+      "group": "workflow",
+      "label": "Alur kerja — integrations",
+      "index": 318
+    },
+    {
+      "folder": "319-database-integrations",
+      "group": "database",
+      "label": "Skema dan data — integrations",
+      "index": 319
+    },
+    {
+      "folder": "320-system-integrations",
+      "group": "system",
+      "label": "Sistem dan utilitas — integrations",
+      "index": 320
+    },
+    {
+      "folder": "321-dashboard-imports",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — imports",
+      "index": 321
+    },
+    {
+      "folder": "322-admin-imports",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — imports",
+      "index": 322
+    },
+    {
+      "folder": "323-member-imports",
+      "group": "member",
+      "label": "Keanggotaan — imports",
+      "index": 323
+    },
+    {
+      "folder": "324-user-imports",
+      "group": "user",
+      "label": "Pengguna — imports",
+      "index": 324
+    },
+    {
+      "folder": "325-domain-imports",
+      "group": "domain",
+      "label": "Domain dan registrar — imports",
+      "index": 325
+    },
+    {
+      "folder": "326-dns-imports",
+      "group": "dns",
+      "label": "DNS dan nameserver — imports",
+      "index": 326
+    },
+    {
+      "folder": "327-hosting-imports",
+      "group": "hosting",
+      "label": "Hosting dan deployment — imports",
+      "index": 327
+    },
+    {
+      "folder": "328-billing-imports",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — imports",
+      "index": 328
+    },
+    {
+      "folder": "329-security-imports",
+      "group": "security",
+      "label": "Keamanan dan audit — imports",
+      "index": 329
+    },
+    {
+      "folder": "330-configuration-imports",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — imports",
+      "index": 330
+    },
+    {
+      "folder": "331-filemanager-imports",
+      "group": "filemanager",
+      "label": "Manajer file — imports",
+      "index": 331
+    },
+    {
+      "folder": "332-api-imports",
+      "group": "api",
+      "label": "API dan integrasi — imports",
+      "index": 332
+    },
+    {
+      "folder": "333-reports-imports",
+      "group": "reports",
+      "label": "Laporan dan analitik — imports",
+      "index": 333
+    },
+    {
+      "folder": "334-content-imports",
+      "group": "content",
+      "label": "Konten dan halaman — imports",
+      "index": 334
+    },
+    {
+      "folder": "335-support-imports",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — imports",
+      "index": 335
+    },
+    {
+      "folder": "336-monitoring-imports",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — imports",
+      "index": 336
+    },
+    {
+      "folder": "337-backup-imports",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — imports",
+      "index": 337
+    },
+    {
+      "folder": "338-workflow-imports",
+      "group": "workflow",
+      "label": "Alur kerja — imports",
+      "index": 338
+    },
+    {
+      "folder": "339-database-imports",
+      "group": "database",
+      "label": "Skema dan data — imports",
+      "index": 339
+    },
+    {
+      "folder": "340-system-imports",
+      "group": "system",
+      "label": "Sistem dan utilitas — imports",
+      "index": 340
+    },
+    {
+      "folder": "341-dashboard-exports",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — exports",
+      "index": 341
+    },
+    {
+      "folder": "342-admin-exports",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — exports",
+      "index": 342
+    },
+    {
+      "folder": "343-member-exports",
+      "group": "member",
+      "label": "Keanggotaan — exports",
+      "index": 343
+    },
+    {
+      "folder": "344-user-exports",
+      "group": "user",
+      "label": "Pengguna — exports",
+      "index": 344
+    },
+    {
+      "folder": "345-domain-exports",
+      "group": "domain",
+      "label": "Domain dan registrar — exports",
+      "index": 345
+    },
+    {
+      "folder": "346-dns-exports",
+      "group": "dns",
+      "label": "DNS dan nameserver — exports",
+      "index": 346
+    },
+    {
+      "folder": "347-hosting-exports",
+      "group": "hosting",
+      "label": "Hosting dan deployment — exports",
+      "index": 347
+    },
+    {
+      "folder": "348-billing-exports",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — exports",
+      "index": 348
+    },
+    {
+      "folder": "349-security-exports",
+      "group": "security",
+      "label": "Keamanan dan audit — exports",
+      "index": 349
+    },
+    {
+      "folder": "350-configuration-exports",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — exports",
+      "index": 350
+    },
+    {
+      "folder": "351-filemanager-exports",
+      "group": "filemanager",
+      "label": "Manajer file — exports",
+      "index": 351
+    },
+    {
+      "folder": "352-api-exports",
+      "group": "api",
+      "label": "API dan integrasi — exports",
+      "index": 352
+    },
+    {
+      "folder": "353-reports-exports",
+      "group": "reports",
+      "label": "Laporan dan analitik — exports",
+      "index": 353
+    },
+    {
+      "folder": "354-content-exports",
+      "group": "content",
+      "label": "Konten dan halaman — exports",
+      "index": 354
+    },
+    {
+      "folder": "355-support-exports",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — exports",
+      "index": 355
+    },
+    {
+      "folder": "356-monitoring-exports",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — exports",
+      "index": 356
+    },
+    {
+      "folder": "357-backup-exports",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — exports",
+      "index": 357
+    },
+    {
+      "folder": "358-workflow-exports",
+      "group": "workflow",
+      "label": "Alur kerja — exports",
+      "index": 358
+    },
+    {
+      "folder": "359-database-exports",
+      "group": "database",
+      "label": "Skema dan data — exports",
+      "index": 359
+    },
+    {
+      "folder": "360-system-exports",
+      "group": "system",
+      "label": "Sistem dan utilitas — exports",
+      "index": 360
+    },
+    {
+      "folder": "361-dashboard-validation",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — validation",
+      "index": 361
+    },
+    {
+      "folder": "362-admin-validation",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — validation",
+      "index": 362
+    },
+    {
+      "folder": "363-member-validation",
+      "group": "member",
+      "label": "Keanggotaan — validation",
+      "index": 363
+    },
+    {
+      "folder": "364-user-validation",
+      "group": "user",
+      "label": "Pengguna — validation",
+      "index": 364
+    },
+    {
+      "folder": "365-domain-validation",
+      "group": "domain",
+      "label": "Domain dan registrar — validation",
+      "index": 365
+    },
+    {
+      "folder": "366-dns-validation",
+      "group": "dns",
+      "label": "DNS dan nameserver — validation",
+      "index": 366
+    },
+    {
+      "folder": "367-hosting-validation",
+      "group": "hosting",
+      "label": "Hosting dan deployment — validation",
+      "index": 367
+    },
+    {
+      "folder": "368-billing-validation",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — validation",
+      "index": 368
+    },
+    {
+      "folder": "369-security-validation",
+      "group": "security",
+      "label": "Keamanan dan audit — validation",
+      "index": 369
+    },
+    {
+      "folder": "370-configuration-validation",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — validation",
+      "index": 370
+    },
+    {
+      "folder": "371-filemanager-validation",
+      "group": "filemanager",
+      "label": "Manajer file — validation",
+      "index": 371
+    },
+    {
+      "folder": "372-api-validation",
+      "group": "api",
+      "label": "API dan integrasi — validation",
+      "index": 372
+    },
+    {
+      "folder": "373-reports-validation",
+      "group": "reports",
+      "label": "Laporan dan analitik — validation",
+      "index": 373
+    },
+    {
+      "folder": "374-content-validation",
+      "group": "content",
+      "label": "Konten dan halaman — validation",
+      "index": 374
+    },
+    {
+      "folder": "375-support-validation",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — validation",
+      "index": 375
+    },
+    {
+      "folder": "376-monitoring-validation",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — validation",
+      "index": 376
+    },
+    {
+      "folder": "377-backup-validation",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — validation",
+      "index": 377
+    },
+    {
+      "folder": "378-workflow-validation",
+      "group": "workflow",
+      "label": "Alur kerja — validation",
+      "index": 378
+    },
+    {
+      "folder": "379-database-validation",
+      "group": "database",
+      "label": "Skema dan data — validation",
+      "index": 379
+    },
+    {
+      "folder": "380-system-validation",
+      "group": "system",
+      "label": "Sistem dan utilitas — validation",
+      "index": 380
+    },
+    {
+      "folder": "381-dashboard-health",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — health",
+      "index": 381
+    },
+    {
+      "folder": "382-admin-health",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — health",
+      "index": 382
+    },
+    {
+      "folder": "383-member-health",
+      "group": "member",
+      "label": "Keanggotaan — health",
+      "index": 383
+    },
+    {
+      "folder": "384-user-health",
+      "group": "user",
+      "label": "Pengguna — health",
+      "index": 384
+    },
+    {
+      "folder": "385-domain-health",
+      "group": "domain",
+      "label": "Domain dan registrar — health",
+      "index": 385
+    },
+    {
+      "folder": "386-dns-health",
+      "group": "dns",
+      "label": "DNS dan nameserver — health",
+      "index": 386
+    },
+    {
+      "folder": "387-hosting-health",
+      "group": "hosting",
+      "label": "Hosting dan deployment — health",
+      "index": 387
+    },
+    {
+      "folder": "388-billing-health",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — health",
+      "index": 388
+    },
+    {
+      "folder": "389-security-health",
+      "group": "security",
+      "label": "Keamanan dan audit — health",
+      "index": 389
+    },
+    {
+      "folder": "390-configuration-health",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — health",
+      "index": 390
+    },
+    {
+      "folder": "391-filemanager-health",
+      "group": "filemanager",
+      "label": "Manajer file — health",
+      "index": 391
+    },
+    {
+      "folder": "392-api-health",
+      "group": "api",
+      "label": "API dan integrasi — health",
+      "index": 392
+    },
+    {
+      "folder": "393-reports-health",
+      "group": "reports",
+      "label": "Laporan dan analitik — health",
+      "index": 393
+    },
+    {
+      "folder": "394-content-health",
+      "group": "content",
+      "label": "Konten dan halaman — health",
+      "index": 394
+    },
+    {
+      "folder": "395-support-health",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — health",
+      "index": 395
+    },
+    {
+      "folder": "396-monitoring-health",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — health",
+      "index": 396
+    },
+    {
+      "folder": "397-backup-health",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — health",
+      "index": 397
+    },
+    {
+      "folder": "398-workflow-health",
+      "group": "workflow",
+      "label": "Alur kerja — health",
+      "index": 398
+    },
+    {
+      "folder": "399-database-health",
+      "group": "database",
+      "label": "Skema dan data — health",
+      "index": 399
+    },
+    {
+      "folder": "400-system-health",
+      "group": "system",
+      "label": "Sistem dan utilitas — health",
+      "index": 400
+    },
+    {
+      "folder": "401-dashboard-notifications",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — notifications",
+      "index": 401
+    },
+    {
+      "folder": "402-admin-notifications",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — notifications",
+      "index": 402
+    },
+    {
+      "folder": "403-member-notifications",
+      "group": "member",
+      "label": "Keanggotaan — notifications",
+      "index": 403
+    },
+    {
+      "folder": "404-user-notifications",
+      "group": "user",
+      "label": "Pengguna — notifications",
+      "index": 404
+    },
+    {
+      "folder": "405-domain-notifications",
+      "group": "domain",
+      "label": "Domain dan registrar — notifications",
+      "index": 405
+    },
+    {
+      "folder": "406-dns-notifications",
+      "group": "dns",
+      "label": "DNS dan nameserver — notifications",
+      "index": 406
+    },
+    {
+      "folder": "407-hosting-notifications",
+      "group": "hosting",
+      "label": "Hosting dan deployment — notifications",
+      "index": 407
+    },
+    {
+      "folder": "408-billing-notifications",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — notifications",
+      "index": 408
+    },
+    {
+      "folder": "409-security-notifications",
+      "group": "security",
+      "label": "Keamanan dan audit — notifications",
+      "index": 409
+    },
+    {
+      "folder": "410-configuration-notifications",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — notifications",
+      "index": 410
+    },
+    {
+      "folder": "411-filemanager-notifications",
+      "group": "filemanager",
+      "label": "Manajer file — notifications",
+      "index": 411
+    },
+    {
+      "folder": "412-api-notifications",
+      "group": "api",
+      "label": "API dan integrasi — notifications",
+      "index": 412
+    },
+    {
+      "folder": "413-reports-notifications",
+      "group": "reports",
+      "label": "Laporan dan analitik — notifications",
+      "index": 413
+    },
+    {
+      "folder": "414-content-notifications",
+      "group": "content",
+      "label": "Konten dan halaman — notifications",
+      "index": 414
+    },
+    {
+      "folder": "415-support-notifications",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — notifications",
+      "index": 415
+    },
+    {
+      "folder": "416-monitoring-notifications",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — notifications",
+      "index": 416
+    },
+    {
+      "folder": "417-backup-notifications",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — notifications",
+      "index": 417
+    },
+    {
+      "folder": "418-workflow-notifications",
+      "group": "workflow",
+      "label": "Alur kerja — notifications",
+      "index": 418
+    },
+    {
+      "folder": "419-database-notifications",
+      "group": "database",
+      "label": "Skema dan data — notifications",
+      "index": 419
+    },
+    {
+      "folder": "420-system-notifications",
+      "group": "system",
+      "label": "Sistem dan utilitas — notifications",
+      "index": 420
+    },
+    {
+      "folder": "421-dashboard-templates",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — templates",
+      "index": 421
+    },
+    {
+      "folder": "422-admin-templates",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — templates",
+      "index": 422
+    },
+    {
+      "folder": "423-member-templates",
+      "group": "member",
+      "label": "Keanggotaan — templates",
+      "index": 423
+    },
+    {
+      "folder": "424-user-templates",
+      "group": "user",
+      "label": "Pengguna — templates",
+      "index": 424
+    },
+    {
+      "folder": "425-domain-templates",
+      "group": "domain",
+      "label": "Domain dan registrar — templates",
+      "index": 425
+    },
+    {
+      "folder": "426-dns-templates",
+      "group": "dns",
+      "label": "DNS dan nameserver — templates",
+      "index": 426
+    },
+    {
+      "folder": "427-hosting-templates",
+      "group": "hosting",
+      "label": "Hosting dan deployment — templates",
+      "index": 427
+    },
+    {
+      "folder": "428-billing-templates",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — templates",
+      "index": 428
+    },
+    {
+      "folder": "429-security-templates",
+      "group": "security",
+      "label": "Keamanan dan audit — templates",
+      "index": 429
+    },
+    {
+      "folder": "430-configuration-templates",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — templates",
+      "index": 430
+    },
+    {
+      "folder": "431-filemanager-templates",
+      "group": "filemanager",
+      "label": "Manajer file — templates",
+      "index": 431
+    },
+    {
+      "folder": "432-api-templates",
+      "group": "api",
+      "label": "API dan integrasi — templates",
+      "index": 432
+    },
+    {
+      "folder": "433-reports-templates",
+      "group": "reports",
+      "label": "Laporan dan analitik — templates",
+      "index": 433
+    },
+    {
+      "folder": "434-content-templates",
+      "group": "content",
+      "label": "Konten dan halaman — templates",
+      "index": 434
+    },
+    {
+      "folder": "435-support-templates",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — templates",
+      "index": 435
+    },
+    {
+      "folder": "436-monitoring-templates",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — templates",
+      "index": 436
+    },
+    {
+      "folder": "437-backup-templates",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — templates",
+      "index": 437
+    },
+    {
+      "folder": "438-workflow-templates",
+      "group": "workflow",
+      "label": "Alur kerja — templates",
+      "index": 438
+    },
+    {
+      "folder": "439-database-templates",
+      "group": "database",
+      "label": "Skema dan data — templates",
+      "index": 439
+    },
+    {
+      "folder": "440-system-templates",
+      "group": "system",
+      "label": "Sistem dan utilitas — templates",
+      "index": 440
+    },
+    {
+      "folder": "441-dashboard-jobs",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — jobs",
+      "index": 441
+    },
+    {
+      "folder": "442-admin-jobs",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — jobs",
+      "index": 442
+    },
+    {
+      "folder": "443-member-jobs",
+      "group": "member",
+      "label": "Keanggotaan — jobs",
+      "index": 443
+    },
+    {
+      "folder": "444-user-jobs",
+      "group": "user",
+      "label": "Pengguna — jobs",
+      "index": 444
+    },
+    {
+      "folder": "445-domain-jobs",
+      "group": "domain",
+      "label": "Domain dan registrar — jobs",
+      "index": 445
+    },
+    {
+      "folder": "446-dns-jobs",
+      "group": "dns",
+      "label": "DNS dan nameserver — jobs",
+      "index": 446
+    },
+    {
+      "folder": "447-hosting-jobs",
+      "group": "hosting",
+      "label": "Hosting dan deployment — jobs",
+      "index": 447
+    },
+    {
+      "folder": "448-billing-jobs",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — jobs",
+      "index": 448
+    },
+    {
+      "folder": "449-security-jobs",
+      "group": "security",
+      "label": "Keamanan dan audit — jobs",
+      "index": 449
+    },
+    {
+      "folder": "450-configuration-jobs",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — jobs",
+      "index": 450
+    },
+    {
+      "folder": "451-filemanager-jobs",
+      "group": "filemanager",
+      "label": "Manajer file — jobs",
+      "index": 451
+    },
+    {
+      "folder": "452-api-jobs",
+      "group": "api",
+      "label": "API dan integrasi — jobs",
+      "index": 452
+    },
+    {
+      "folder": "453-reports-jobs",
+      "group": "reports",
+      "label": "Laporan dan analitik — jobs",
+      "index": 453
+    },
+    {
+      "folder": "454-content-jobs",
+      "group": "content",
+      "label": "Konten dan halaman — jobs",
+      "index": 454
+    },
+    {
+      "folder": "455-support-jobs",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — jobs",
+      "index": 455
+    },
+    {
+      "folder": "456-monitoring-jobs",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — jobs",
+      "index": 456
+    },
+    {
+      "folder": "457-backup-jobs",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — jobs",
+      "index": 457
+    },
+    {
+      "folder": "458-workflow-jobs",
+      "group": "workflow",
+      "label": "Alur kerja — jobs",
+      "index": 458
+    },
+    {
+      "folder": "459-database-jobs",
+      "group": "database",
+      "label": "Skema dan data — jobs",
+      "index": 459
+    },
+    {
+      "folder": "460-system-jobs",
+      "group": "system",
+      "label": "Sistem dan utilitas — jobs",
+      "index": 460
+    },
+    {
+      "folder": "461-dashboard-queues",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — queues",
+      "index": 461
+    },
+    {
+      "folder": "462-admin-queues",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — queues",
+      "index": 462
+    },
+    {
+      "folder": "463-member-queues",
+      "group": "member",
+      "label": "Keanggotaan — queues",
+      "index": 463
+    },
+    {
+      "folder": "464-user-queues",
+      "group": "user",
+      "label": "Pengguna — queues",
+      "index": 464
+    },
+    {
+      "folder": "465-domain-queues",
+      "group": "domain",
+      "label": "Domain dan registrar — queues",
+      "index": 465
+    },
+    {
+      "folder": "466-dns-queues",
+      "group": "dns",
+      "label": "DNS dan nameserver — queues",
+      "index": 466
+    },
+    {
+      "folder": "467-hosting-queues",
+      "group": "hosting",
+      "label": "Hosting dan deployment — queues",
+      "index": 467
+    },
+    {
+      "folder": "468-billing-queues",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — queues",
+      "index": 468
+    },
+    {
+      "folder": "469-security-queues",
+      "group": "security",
+      "label": "Keamanan dan audit — queues",
+      "index": 469
+    },
+    {
+      "folder": "470-configuration-queues",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — queues",
+      "index": 470
+    },
+    {
+      "folder": "471-filemanager-queues",
+      "group": "filemanager",
+      "label": "Manajer file — queues",
+      "index": 471
+    },
+    {
+      "folder": "472-api-queues",
+      "group": "api",
+      "label": "API dan integrasi — queues",
+      "index": 472
+    },
+    {
+      "folder": "473-reports-queues",
+      "group": "reports",
+      "label": "Laporan dan analitik — queues",
+      "index": 473
+    },
+    {
+      "folder": "474-content-queues",
+      "group": "content",
+      "label": "Konten dan halaman — queues",
+      "index": 474
+    },
+    {
+      "folder": "475-support-queues",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — queues",
+      "index": 475
+    },
+    {
+      "folder": "476-monitoring-queues",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — queues",
+      "index": 476
+    },
+    {
+      "folder": "477-backup-queues",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — queues",
+      "index": 477
+    },
+    {
+      "folder": "478-workflow-queues",
+      "group": "workflow",
+      "label": "Alur kerja — queues",
+      "index": 478
+    },
+    {
+      "folder": "479-database-queues",
+      "group": "database",
+      "label": "Skema dan data — queues",
+      "index": 479
+    },
+    {
+      "folder": "480-system-queues",
+      "group": "system",
+      "label": "Sistem dan utilitas — queues",
+      "index": 480
+    },
+    {
+      "folder": "481-dashboard-storage",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — storage",
+      "index": 481
+    },
+    {
+      "folder": "482-admin-storage",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — storage",
+      "index": 482
+    },
+    {
+      "folder": "483-member-storage",
+      "group": "member",
+      "label": "Keanggotaan — storage",
+      "index": 483
+    },
+    {
+      "folder": "484-user-storage",
+      "group": "user",
+      "label": "Pengguna — storage",
+      "index": 484
+    },
+    {
+      "folder": "485-domain-storage",
+      "group": "domain",
+      "label": "Domain dan registrar — storage",
+      "index": 485
+    },
+    {
+      "folder": "486-dns-storage",
+      "group": "dns",
+      "label": "DNS dan nameserver — storage",
+      "index": 486
+    },
+    {
+      "folder": "487-hosting-storage",
+      "group": "hosting",
+      "label": "Hosting dan deployment — storage",
+      "index": 487
+    },
+    {
+      "folder": "488-billing-storage",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — storage",
+      "index": 488
+    },
+    {
+      "folder": "489-security-storage",
+      "group": "security",
+      "label": "Keamanan dan audit — storage",
+      "index": 489
+    },
+    {
+      "folder": "490-configuration-storage",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — storage",
+      "index": 490
+    },
+    {
+      "folder": "491-filemanager-storage",
+      "group": "filemanager",
+      "label": "Manajer file — storage",
+      "index": 491
+    },
+    {
+      "folder": "492-api-storage",
+      "group": "api",
+      "label": "API dan integrasi — storage",
+      "index": 492
+    },
+    {
+      "folder": "493-reports-storage",
+      "group": "reports",
+      "label": "Laporan dan analitik — storage",
+      "index": 493
+    },
+    {
+      "folder": "494-content-storage",
+      "group": "content",
+      "label": "Konten dan halaman — storage",
+      "index": 494
+    },
+    {
+      "folder": "495-support-storage",
+      "group": "support",
+      "label": "Dukungan dan notifikasi — storage",
+      "index": 495
+    },
+    {
+      "folder": "496-monitoring-storage",
+      "group": "monitoring",
+      "label": "Pemantauan dan kesehatan — storage",
+      "index": 496
+    },
+    {
+      "folder": "497-backup-storage",
+      "group": "backup",
+      "label": "Cadangan dan pemulihan — storage",
+      "index": 497
+    },
+    {
+      "folder": "498-workflow-storage",
+      "group": "workflow",
+      "label": "Alur kerja — storage",
+      "index": 498
+    },
+    {
+      "folder": "499-database-storage",
+      "group": "database",
+      "label": "Skema dan data — storage",
+      "index": 499
+    },
+    {
+      "folder": "500-system-storage",
+      "group": "system",
+      "label": "Sistem dan utilitas — storage",
+      "index": 500
+    },
+    {
+      "folder": "501-dashboard-retention",
+      "group": "dashboard",
+      "label": "Dasbor dan ringkasan — retention",
+      "index": 501
+    },
+    {
+      "folder": "502-admin-retention",
+      "group": "admin",
+      "label": "Administrasi dan hak akses — retention",
+      "index": 502
+    },
+    {
+      "folder": "503-member-retention",
+      "group": "member",
+      "label": "Keanggotaan — retention",
+      "index": 503
+    },
+    {
+      "folder": "504-user-retention",
+      "group": "user",
+      "label": "Pengguna — retention",
+      "index": 504
+    },
+    {
+      "folder": "505-domain-retention",
+      "group": "domain",
+      "label": "Domain dan registrar — retention",
+      "index": 505
+    },
+    {
+      "folder": "506-dns-retention",
+      "group": "dns",
+      "label": "DNS dan nameserver — retention",
+      "index": 506
+    },
+    {
+      "folder": "507-hosting-retention",
+      "group": "hosting",
+      "label": "Hosting dan deployment — retention",
+      "index": 507
+    },
+    {
+      "folder": "508-billing-retention",
+      "group": "billing",
+      "label": "Tagihan dan transaksi — retention",
+      "index": 508
+    },
+    {
+      "folder": "509-security-retention",
+      "group": "security",
+      "label": "Keamanan dan audit — retention",
+      "index": 509
+    },
+    {
+      "folder": "510-configuration-retention",
+      "group": "configuration",
+      "label": "Konfigurasi sistem — retention",
+      "index": 510
+    }
+  ]
+}
