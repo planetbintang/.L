@@ -56,7 +56,7 @@
   function generatedSystemEntries(path) {
     // Pemetaan domain + template konfigurasi deployment (virtual File Manager; bukan server aktif).
     if (path === 'planetbintang') return [
-      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 10, function: 'Domain utama .L · CNAME, entry point, hosting/DNS/SSL/sertifikat/SSH/email/browser/HTTP-HTTPS' },
+      { path: 'planetbintang/planetbintang.com', type: 'directory', mode: '040755', items: 11, function: 'Domain utama .L · CNAME, konfigurasi JSON, panduan aktivasi, hosting/DNS/SSL/sertifikat/SSH/email/browser/HTTP-HTTPS' },
     ];
     if (path === 'planetbintang/planetbintang.com') return [
       { path: 'planetbintang/planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Alias entry point ke halaman utama GitHub Pages .L', codeContent: `<!doctype html>
