@@ -1,13 +1,32 @@
 (() => {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
-  const form = $('#globalSearchForm'), input = $('#globalSearchInput');
   const topForm = $('#topbarSearchForm'), topInput = $('#topbarSearchInput');
   const homeForm = $('#homeSearchForm'), homeInput = $('#homeSearchInput');
+  const section = $('#searchPage');
+  if (!section) return;
+  let form = $('#globalSearchForm'), input = $('#globalSearchInput');
+  if (!form || !input) {
+    const toolbar = document.createElement('form');
+    toolbar.id = 'globalSearchForm'; toolbar.className = 'toolbar'; toolbar.setAttribute('role','search');
+    toolbar.setAttribute('aria-label','Cari repositori, folder, domain, Google, atau ChatGPT');
+    const field = document.createElement('input'); field.id = 'globalSearchInput'; field.type = 'search';
+    field.placeholder = 'Cari domain, isi path, repo, Google, ChatGPT…'; field.autocomplete = 'off';
+    field.setAttribute('aria-label','Cari domain, path, repositori, Google, atau ChatGPT');
+    const submit = document.createElement('button'); submit.type = 'submit'; submit.className = 'repo-action primary'; submit.textContent = 'Cari';
+    toolbar.append(field,submit);
+    const statusNode = document.createElement('p'); statusNode.id = 'globalSearchStatus'; statusNode.setAttribute('aria-live','polite');
+    const resultsNode = document.createElement('div'); resultsNode.id = 'globalSearchResults'; resultsNode.className = 'repo-grid';
+    const source = $('.search-source-view',section);
+    section.insertBefore(toolbar,source || null);
+    section.insertBefore(statusNode,source || null);
+    section.insertBefore(resultsNode,source || null);
+    form = toolbar; input = field;
+  }
   const results = $('#globalSearchResults'), status = $('#globalSearchStatus');
   if (!form || !input || !results || !status) return;
   const stylesheet = document.createElement('link');
-  stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-search-actions-v2';
+  stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-search-actions-v3';
   document.head.append(stylesheet);
   let repositories = [], treeIndexes = new Map(), activeType = 'all', requestToken = 0;
   const text = value => String(value ?? '');
@@ -63,7 +82,9 @@
     const filterBox = document.createElement('div'); filterBox.id = 'globalSearchFilters'; filterBox.className = 'global-search-filters'; aside.append(filterBox);
     const main = document.createElement('div'); main.className = 'global-search-main';
     if (toolbar) main.append(toolbar); main.append(statusNode, resultsNode);
-    layout.append(aside, main); section.append(layout);
+    layout.append(aside, main);
+    const sourceView = $('.search-source-view', section);
+    section.insertBefore(layout, sourceView || null);
   }
   setupLayout();
   const filterBox = $('#globalSearchFilters');
@@ -100,7 +121,16 @@
   }
   async function render(query) {
     const token = ++requestToken, q = cleanQuery(query); results.replaceChildren();
-    if (!q) { status.textContent = 'Indeks siap. Cari repositori, folder, atau domain dari katalog al.l/data.media.'; renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0}); return; }
+    const layout = $('.global-search-layout', section), sourceView = $('.search-source-view', section);
+    if (!q) {
+      if (layout) layout.hidden = true;
+      if (sourceView) sourceView.hidden = false;
+      status.textContent = 'Indeks siap. Masukkan kata kunci di kolom cari untuk melihat isi domain, path, repositori, Google, dan ChatGPT.';
+      renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0});
+      return;
+    }
+    if (layout) layout.hidden = false;
+    if (sourceView) sourceView.hidden = true;
     status.textContent = 'Mencari repositori, path folder, dan katalog domain al.l/data.media…';
     const repoMatches = repositories.filter(repo => [repo.name,repo.fullName,repo.description,repo.language,repo.appType,repo.host,repo.homepage,repo.pagesUrl,...(repo.languages||[]).map(x=>x.name)].some(v=>normalize(v).includes(q))).slice(0,100);
     const [folderMatches, allDomains] = await Promise.all([collectFolderResults(q,token), loadDomainCatalog()]);
