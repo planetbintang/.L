@@ -1,0 +1,53 @@
+name: Generate OS MEDIA VM Enterprise REIC components
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [io]
+    paths:
+      - "tools/generate-osmediavm-enterprise.py"
+      - ".github/workflows/generate-osmediavm-enterprise.yml"
+      - "osmediavm/recordin/**/*.reic"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: osmediavm-enterprise-io
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: io
+      - name: Generate CSS and JavaScript pair for every REIC
+        run: python3 tools/generate-osmediavm-enterprise.py
+      - name: Verify 15,000 component minimum and all pairs
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("osmediavm/recordin")
+          manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+          infra = [x for x in manifest if x["file"].startswith("infra-15000-") and x["file"].endswith(".reic")]
+          missing = [x for x in manifest if not (root / x["file"]).is_file() or not (root / x["css"]).is_file() or not (root / x["js"]).is_file()]
+          assert len(infra) >= 15000, f"Expected 15000 REIC components, got {len(infra)}"
+          assert not missing, f"Missing file pairs: {len(missing)}"
+          print(f"Verified: {len(infra)} infrastructure REIC units; {len(manifest)} complete triplets.")
+          PY
+      - name: Commit generated pairs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add osmediavm/recordin/
+          if git diff --cached --quiet; then
+            echo "All component pairs already current."
+          else
+            git commit -m "Generate enterprise CSS and JavaScript pairs for OS MEDIA VM REIC"
+            git push origin io
+          fi
