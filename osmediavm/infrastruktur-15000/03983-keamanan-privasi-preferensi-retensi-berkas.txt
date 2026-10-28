@@ -1,0 +1,42 @@
+OS MEDIA VM — SPESIFIKASI KOMPONEN INFRASTRUKTUR
+ID: OSM-INF-03983
+Nama: Preferensi retensi berkas
+Kelompok: Keamanan dan privasi
+Konsep: retensi berkas
+Tipe: preferensi
+
+TUJUAN
+Menentukan kontrak komponen yang dapat diimplementasikan, ditinjau, dan diuji secara terpisah untuk OS MEDIA VM desktop dan modal dialog.
+
+PERILAKU DAN STATUS
+- Definisikan input, output, validasi, dan pemilik keadaan secara eksplisit.
+- Bedakan status idle, loading, success, empty, dan error.
+- Cegah pengiriman ganda dan konfirmasi perubahan yang destruktif.
+- Sediakan pesan kesalahan yang jelas dan jalur pemulihan.
+- Gunakan tautan relatif yang bekerja pada subpath GitHub Pages / .L/.
+
+KONTRAK ANTARMUKA
+- ID stabil: osm-inf-03983; nama dan jalur harus konsisten dengan katalog.
+- Kontrol interaktif memiliki label yang dapat diakses, fokus terlihat, dan navigasi keyboard.
+- Dialog menggunakan judul terhubung, role=dialog, aria-modal=true, Escape, tombol tutup, fokus awal, dan pemulihan fokus.
+- Dialog responsif, tinggi dibatasi, dan konten dapat digulir pada viewport kecil.
+- Hormati prefers-reduced-motion dan zoom browser.
+
+DATA DAN KEAMANAN
+- Validasi tipe, rentang, dan ukuran input; sanitasi output yang ditampilkan.
+- Terapkan prinsip hak akses minimum; UI tidak menggantikan otorisasi server.
+- Jangan menaruh token, kata sandi, atau rahasia dalam TXT, HTML, JavaScript, atau repositori.
+- Kegagalan harus aman dan tidak boleh membocorkan data sensitif.
+
+DEPLOYMENT DAN INTEGRASI
+GitHub Pages hanya meng-host aset statis. Database, autentikasi server, pekerjaan latar, antrean, container, AI, dan operasi infrastruktur membutuhkan layanan eksternal dan konfigurasi tersendiri. Jangan menyatakan layanan aktif hanya karena spesifikasi tersedia.
+
+UJI PENERIMAAN
+1. Jalur sukses dan hasil cocok dengan kontrak.
+2. Input kosong, salah format, dan batas ukuran diuji.
+3. Kegagalan ditangani tanpa membocorkan data sensitif.
+4. Kontrol dapat dipakai dengan keyboard dan pembaca layar.
+5. Tautan berkas, ID, katalog, dan subpath Pages valid.
+
+STATUS
+Spesifikasi rancangan; bukan bukti bahwa layanan atau backend terkait telah berjalan.
