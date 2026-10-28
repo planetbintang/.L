@@ -1,0 +1,35 @@
+{
+  "id": "OSMV-0908",
+  "nama": "Pengelola waktu 008",
+  "kategori": "Pengaturan Sistem",
+  "alias": [
+    "waktu",
+    "pengelola",
+    "pengelola waktu 008",
+    "pengaturan sistem"
+  ],
+  "ekstensi_didukung": [
+    ".json",
+    ".js",
+    ".html",
+    ".css",
+    ".md",
+    ".ts",
+    ".sql",
+    ".svg",
+    ".txt"
+  ],
+  "deskripsi": "Aplikasi pengaturan sistem untuk waktu. Modul ini menyediakan titik integrasi, pengaturan, pemeriksaan masukan, dan catatan proses bagi inti OS MEDIA VM.",
+  "status": "kerangka_pengembangan",
+  "titik_masuk": "belum_dipasang",
+  "izin": [
+    "baca_manifes"
+  ],
+  "konfigurasi": {
+    "bahasa": "Indonesia",
+    "runtime": "OS MEDIA VM",
+    "format": "JSON",
+    "versi": "0.3.0"
+  },
+  "catatan": "Berkas ini adalah manifes kustom untuk katalog OS MEDIA VM. Fitur khusus aplikasi perlu diimplementasikan pada modul tersendiri."
+}

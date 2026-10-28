@@ -1,9 +1,18 @@
 # OS MEDIA VM
 
-Folder ini menjadi pintu halaman OS MEDIA VM di situs Planetbintang.
+Desktop web modular dan fondasi inti runtime untuk proyek Planetbintang.
 
-- `index.html` — halaman utama OS MEDIA VM.
-- Galeri media ditautkan ke `../galeri.html`.
-- Dashboard dan File Manager ditautkan kembali ke halaman utama `.L`.
+## Pusat Aplikasi
+Buka `pusat_aplikasi/index.html` untuk mencari katalog 1.000 aplikasi sistem, menyaring kategori, menelusuri halaman hasil, dan membaca manifes konfigurasi aplikasi.
 
-Catatan: ini adalah antarmuka situs statis. Fitur yang memerlukan backend, server media, atau layanan eksternal perlu dikonfigurasi dan diaktifkan secara terpisah.
+## Struktur
+- `mesin_runtime/`: inti runtime peramban dan daftar aplikasi.
+- `berkas_sistem/`: 1.000 manifes aplikasi dalam berkas JSON yang terpisah dan dikelompokkan ke 10 folder berbahasa Indonesia.
+- `pusat_aplikasi/`: antarmuka katalog aplikasi.
+- `index.html`: desktop OS MEDIA VM.
+
+## Kesesuaian dengan AI Reber
+Struktur berkas memakai ekstensi yang ditemukan pada pohon sumber AI Reber, termasuk HTML, JS, CSS, JSON, Markdown, TypeScript, SQL, SVG, dan TXT. Manifes aplikasi menggunakan JSON agar aman dibaca oleh halaman statis. Ekstensi lain dipakai untuk dokumentasi dan modul runtime.
+
+## Batas pelaksanaan
+GitHub Pages menyediakan situs statis. Runtime saat ini membaca konfigurasi JSON dan menyajikan katalog; ia tidak mengaku menjalankan proses sistem operasi, peladen, DNS, atau kode aplikasi arbitrer. Layanan semacam itu harus dibangun dan diaktifkan terpisah dengan kontrol keamanan yang sesuai.
