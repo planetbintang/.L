@@ -5,6 +5,9 @@ on:
     paths:
       - '.github/workflows/generate-reic.yml'
       - 'osmediavm/scripts/generate-reic.mjs'
+      - 'osmediavm/recordin/component-detail.html'
+      - 'osmediavm/recordin/component-detail.css'
+      - 'osmediavm/recordin/component-detail.js'
   workflow_dispatch:
 permissions:
   contents: write
