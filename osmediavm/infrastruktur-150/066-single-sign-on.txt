@@ -1,0 +1,39 @@
+OS MEDIA VM — SPESIFIKASI INFRASTRUKTUR
+ID: OSM-066
+NAMA: Single Sign On
+KELOMPOK: Keamanan dan privasi
+STATUS: Rancangan; implementasi wajib diverifikasi.
+
+TUJUAN
+Menetapkan fungsi, batasan, integrasi, dan kriteria penerimaan komponen Single Sign On untuk OS MEDIA VM.
+
+FUNGSI
+- Menyediakan kemampuan single sign on melalui kontrak terdokumentasi.
+- Memisahkan konfigurasi, tampilan, data, dan logika agar komponen dapat diuji terpisah.
+- Menangani status kosong, memuat, berhasil, dan gagal bila relevan.
+- Tidak menyediakan tombol dekoratif tanpa aksi nyata; fitur belum terhubung harus diberi label.
+
+ANTARMUKA DAN UKURAN
+- UI responsif, label jelas, navigasi keyboard, fokus terlihat, dan aksesibilitas pembaca layar.
+- Modal dialog: judul, deskripsi, area isi, aksi utama, tombol tutup, dukungan Escape dan fokus keyboard.
+- Modal standar maksimal 720px; layar kecil lebar viewport dikurangi 24px dan tinggi maksimal 90vh.
+- Pesan kesalahan harus mudah dipahami dan tidak membocorkan data sensitif.
+
+INTEGRASI GITHUB PAGES
+- Spesifikasi: osmediavm/infrastruktur-150/066-single-sign-on.txt
+- Target: https://planetbintang.github.io/.L/osmediavm/
+- GitHub Pages hanya menyajikan aset statis. Database, autentikasi server, container, pekerjaan latar, dan layanan AI memerlukan backend eksternal.
+- Gunakan tautan relatif. Jangan menyimpan token atau kredensial di frontend.
+
+KEAMANAN DAN KETAHANAN
+Validasi input, terapkan hak akses minimum, tangani kegagalan jaringan dan data tidak valid, serta dokumentasikan backup/pemulihan jika mengelola data persisten. Jangan mengklaim enkripsi, high availability, proteksi DDoS, atau backend aktif tanpa konfigurasi dan bukti uji.
+
+KRITERIA PENERIMAAN
+[ ] Nama dan ID cocok dengan katalog.
+[ ] Jalur file dan tautan valid.
+[ ] Tampilan responsif dan aksesibel.
+[ ] Interaksi utama diuji.
+[ ] Kesalahan ditangani dan tidak ada rahasia di frontend.
+[ ] Status TERVERIFIKASI hanya diberikan setelah uji nyata.
+
+Catatan: spesifikasi ini bukan bukti bahwa layanan sudah aktif.
