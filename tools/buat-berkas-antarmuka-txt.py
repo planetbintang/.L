@@ -444,14 +444,14 @@ def migrate_recordin():
     # Register a dedicated .reic entry for the main OS MEDIA VM workspace.
     main_name = "osmediavm-workspace.reic"
     (root / main_name).write_text(
-        "--- REIC/1 ---\\ntitle: OS MEDIA VM Workspace\\nrender: workspace\\n--- END REIC HEADER ---\\n"
-        "OS MEDIA VM — WORKSPACE UTAMA\\nKatalog semua komponen REIC, pencarian, input, keluaran, dan sumber komponen.\\n",
+        "--- REIC/1 ---\ntitle: OS MEDIA VM Workspace\nrender: workspace\n--- END REIC HEADER ---\n"
+        "OS MEDIA VM — WORKSPACE UTAMA\nKatalog semua komponen REIC, pencarian, input, keluaran, dan sumber komponen.\n",
         encoding="utf-8")
     (root / "osmediavm-workspace.css").write_text(
-        "/* Main workspace component */\\n.reic-component{display:grid;gap:1rem}\\n",
+        "/* Main workspace component */\n.reic-component{display:grid;gap:1rem}\n",
         encoding="utf-8")
     (root / "osmediavm-workspace.js").write_text(
-        "/* Main workspace component */\\nwindow.REIC_MAIN_WORKSPACE={catalog:'./index.html',format:'REIC/1'};\\n",
+        "/* Main workspace component */\nwindow.REIC_MAIN_WORKSPACE={catalog:'./index.html',format:'REIC/1'};\n",
         encoding="utf-8")
     entries.insert(0, {"file": main_name, "title": "OS MEDIA VM Workspace Utama", "source": "recordin"})
     (root / "manifest.json").write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -460,11 +460,11 @@ def migrate_recordin():
     main_page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OS MEDIA VM — Tampilan Utama REIC</title><style>html,body,main,iframe{margin:0;width:100%;height:100%;border:0;background:#07111f}main{height:100dvh}iframe{display:block}</style></head><body><main><iframe title="OS MEDIA VM Recordin REIC workspace" src="./recordin/index.html"></iframe></main></body></html>"""
     (ROOT / "osmediavm" / "index.html").write_text(main_page, encoding="utf-8")
     (ROOT / "osmediavm" / "index.reic").write_text(
-        "--- REIC/1 ---\\ntitle: OS MEDIA VM Tampilan Utama\\nrender: workspace\\n--- END REIC HEADER ---\\n"
-        "Tampilan utama memuat seluruh katalog Recordin REIC melalui osmediavm/recordin/index.html.\\n",
+        "--- REIC/1 ---\ntitle: OS MEDIA VM Tampilan Utama\nrender: workspace\n--- END REIC HEADER ---\n"
+        "Tampilan utama memuat seluruh katalog Recordin REIC melalui osmediavm/recordin/index.html.\n",
         encoding="utf-8")
-    (ROOT / "osmediavm" / "index.css").write_text("/* OS MEDIA VM main view */\\nhtml,body,iframe{width:100%;height:100%;margin:0;border:0}\\n", encoding="utf-8")
-    (ROOT / "osmediavm" / "index.js").write_text("/* OS MEDIA VM main view */\\ndocument.documentElement.dataset.runtime='REIC';\\n", encoding="utf-8")
+    (ROOT / "osmediavm" / "index.css").write_text("/* OS MEDIA VM main view */\nhtml,body,iframe{width:100%;height:100%;margin:0;border:0}\n", encoding="utf-8")
+    (ROOT / "osmediavm" / "index.js").write_text("/* OS MEDIA VM main view */\ndocument.documentElement.dataset.runtime='REIC';\n", encoding="utf-8")
     (root / "README.md").write_text(
         "# OS MEDIA VM — Recordin / REIC\n\n"
         "Spesifikasi dari tiga folder infrastruktur dikumpulkan ke sini dan diubah dari TXT menjadi REIC.\n\n"
