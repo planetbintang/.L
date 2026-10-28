@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071321">
+  <meta name="description" content="OS MEDIA VM — pintu media dan workspace visual Planetbintang.">
+  <title>OS MEDIA VM · Planetbintang</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#071321;color:#eaf4ff}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top left,#123653 0,transparent 55%),#071321}
+    header,main,footer{width:min(100% - 32px,1000px);margin-inline:auto}header{padding:28px 0;border-bottom:1px solid #24435e;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+    a{color:#80ddff;text-decoration:none}a:hover{text-decoration:underline}.brand{font-size:.8rem;letter-spacing:.15em;font-weight:800}
+    main{padding:clamp(28px,7vw,76px) 0}.eyebrow{font-size:.75rem;letter-spacing:.18em;color:#80ddff;font-weight:800}h1{font-size:clamp(2.5rem,8vw,5.5rem);line-height:1;margin:.5rem 0 1rem;letter-spacing:-.05em}p{line-height:1.75;color:#b9cde0;max-width:70ch}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:32px}.card{display:block;padding:20px;border:1px solid #294c68;background:#0b1d2e;min-height:150px}.card strong{display:block;color:#f3f9ff;font-size:1.05rem;margin-bottom:8px}.card span{font-size:.9rem;color:#b9cde0;line-height:1.6}
+    footer{border-top:1px solid #24435e;padding:20px 0 32px;color:#89a7c2;font-size:.8rem}
+  </style>
+</head>
+<body>
+  <header><a class="brand" href="../">PLANETBINTANG / ROOT SYSTEM</a><a href="../galeri.html">Buka Galeri ↗</a></header>
+  <main>
+    <p class="eyebrow">MEDIA WORKSPACE / STATIC WEB MODE</p>
+    <h1>OS MEDIA VM</h1>
+    <p>Pusat masuk untuk media, galeri, dan menu OS Planetbintang. Halaman ini merupakan bagian dari situs statis; fitur yang memerlukan server atau layanan eksternal harus dihubungkan secara terpisah.</p>
+    <nav class="grid" aria-label="Menu utama OS MEDIA VM">
+      <a class="card" href="../galeri.html"><strong>Galeri Media ↗</strong><span>Buka galeri gambar yang sudah tersedia pada situs.</span></a>
+      <a class="card" href="../#desktop-os-menus" data-os-menu><strong>Desktop OS Menu Center ↗</strong><span>Masuk ke katalog 15.000 menu pada halaman utama.</span></a>
+      <a class="card" href="../#fileManager"><strong>File Manager ↗</strong><span>Kembali ke pengelolaan file dan folder situs.</span></a>
+      <a class="card" href="../"><strong>Halaman Utama ↗</strong><span>Kembali ke dashboard Planetbintang.</span></a>
+    </nav>
+  </main>
+  <footer>OS MEDIA VM · /osmediavm/ · Planetbintang</footer>
+  <script>
+    document.querySelector('[data-os-menu]').addEventListener('click', function(event) {
+      event.preventDefault();
+      sessionStorage.setItem('pb-open-desktop-os-menu', '1');
+      location.href = '../#desktop-os-menus';
+    });
+  </script>
+</body>
+</html>
