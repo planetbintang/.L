@@ -55,10 +55,10 @@
   function generatedSystemEntries(path) {
     // Pemetaan domain + template konfigurasi deployment (virtual File Manager; bukan server aktif).
     if (path === 'planetbintang.com') return [
-      { path: 'planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Alias entry point ke halaman utama GitHub Pages .L', codeContent: `<!doctype html>
+      { path: 'planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Halaman indeks domain tanpa redirect ke alamat GitHub Pages', codeContent: `<!doctype html>
 <html lang="id">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>planetbintang.com</title><link rel="canonical" href="https://planetbintang.github.io/.L/"></head>
-<body><main><h1>planetbintang.com</h1><p>Halaman utama dipublikasikan melalui GitHub Pages.</p><a href="https://planetbintang.github.io/.L/">Buka Planetbintang Root System ↗</a></main></body>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>planetbintang.com</title><meta name="description" content="Halaman utama Planetbintang."></head>
+<body><main><h1>planetbintang.com</h1><p>Selamat datang di Planetbintang.</p></main></body>
 </html>` },
       { path: 'planetbintang.com/CNAME', type: 'file', mode: '0100644', size: 17, sizeKnown: true, function: 'Nilai custom domain GitHub Pages', codeContent: 'planetbintang.com' },
       { path: 'planetbintang.com/domain-config.json', type: 'file', mode: '0100644', size: 900, sizeKnown: true, function: 'Konfigurasi domain machine-readable; sinkron dengan deployment/planetbintang.com/domain-config.json', codeContent: `{
