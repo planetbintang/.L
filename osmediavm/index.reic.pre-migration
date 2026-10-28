@@ -1,0 +1,9 @@
+--- REIC/1 ---
+title: OS MEDIA VM Tampilan Utama
+render: workspace
+infrastructure: infra-150/index.reic
+architecture: REIC-first
+component_count: 150
+component_file_triplets: 450
+--- END REIC HEADER ---
+Tampilan utama OS MEDIA VM menggunakan REIC sebagai fondasi deklaratif. Katalog infrastruktur berada di osmediavm/infra-150/ dan setiap komponen memiliki file .reic, .css, serta .js dengan basename yang sama. GitHub Pages menangani runtime statis; backend terpisah diperlukan untuk layanan server.
