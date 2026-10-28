@@ -27,14 +27,14 @@ a{color:var(--cyan)}button,input,select{font:inherit}button{cursor:pointer}.shel
 <footer>Perpustakaan Planetbintang · Tampilan statis interaktif. Penyimpanan favorit atau riwayat lintas perangkat memerlukan layanan penyimpanan terpisah. Ikon dunia dan IC merupakan lambang antarmuka konseptual.</footer>
 </div>
 <script type="module">
-import {KATA_CATEGORIES,KATA_TOTAL,getKataList,searchKata} from '../aireber/assets/kata-data.js';
+import {KATA_CATEGORIES,KATA_TOTAL,getKataList} from '../aireber/assets/kata-data.js';
 const $=id=>document.getElementById(id), pageSize=50;let page=0,selected=null,results=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const category=()=>KATA_CATEGORIES.find(c=>c.id===$('category').value)||KATA_CATEGORIES[0];
 const binary=s=>Array.from(new TextEncoder().encode(String(s))).map(n=>n.toString(2).padStart(8,'0')).join(' ');
 function render(){
  const c=category(),q=$('query').value.trim().toLocaleLowerCase('id');
- if(q){results=searchKata(q,250).filter(x=>!$('category').value||x.category===$('category').value).map(x=>x.kata);}
+ if(q){const source=c.words||(c.generator?c.generator(0,Math.min(c.count,200000)):[]);results=source.filter(w=>String(w).toLocaleLowerCase('id').includes(q)).slice(0,250);}
  else results=getKataList(c.id,page,pageSize);
  const total=q?results.length:c.count,pages=Math.max(1,Math.ceil(total/pageSize));
  if(q)results=results.slice(page*pageSize,(page+1)*pageSize);
