@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 0671
+NAMA MENU  : Instalasi — Opsi
+FITUR      : Instalasi
+SLUG       : menu-0671-opsi-instalasi
+URL MODAL  : ../menu-0671-opsi-instalasi/index.html
+DESKRIPSI  : Kelola status, preferensi, dan tindakan untuk instalasi.
+PETUNJUK   : Tinjau informasi yang tersedia dan gunakan kontrol antarmuka; fungsi perangkat nyata memerlukan adapter sistem berizin.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[11391] MENU
+Nama       : Instalasi — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : di-dalam-konten
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11392] TOMBOL
+Nama       : Instalasi — Tombol
+Tombol     : Buka Instalasi
+Layout     : tiga kolom
+Posisi     : atas-kiri
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11393] LAYOUT
+Nama       : Instalasi — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : atas-tengah
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11394] POSISI
+Nama       : Instalasi — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : atas-kanan
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11395] UKURAN
+Nama       : Instalasi — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kartu adaptif
+Posisi     : tengah-kiri
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11396] DIALOG
+Nama       : Instalasi — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : tengah
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11397] PANEL
+Nama       : Instalasi — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : tengah-kanan
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11398] TOOLBAR
+Nama       : Instalasi — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : bawah-kiri
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11399] NAVIGASI
+Nama       : Instalasi — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : bawah-tengah
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11400] KARTU
+Nama       : Instalasi — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : grid responsif
+Posisi     : bawah-kanan
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11401] KONTROL
+Nama       : Instalasi — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : mengikuti-alur
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11402] JENDELA
+Nama       : Instalasi — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex vertikal
+Posisi     : tetap
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11403] IKON
+Nama       : Instalasi — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : mengambang
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11404] FORMULIR
+Nama       : Instalasi — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : menempel-atas
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11405] TAB
+Nama       : Instalasi — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : menempel-bawah
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11406] NOTIFIKASI
+Nama       : Instalasi — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : modal-terpusat
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+[11407] AKSESIBILITAS
+Nama       : Instalasi — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel terpusat
+Posisi     : panel-samping
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Instalasi
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.

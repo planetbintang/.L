@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 0907
+NAMA MENU  : Kontak — Preferensi
+FITUR      : Kontak
+SLUG       : menu-0907-preferensi-kontak
+URL MODAL  : ../menu-0907-preferensi-kontak/index.html
+DESKRIPSI  : Kelola status, preferensi, dan tindakan untuk kontak.
+PETUNJUK   : Tinjau informasi yang tersedia dan gunakan kontrol antarmuka; fungsi perangkat nyata memerlukan adapter sistem berizin.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[15403] MENU
+Nama       : Kontak — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : menempel-atas
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15404] TOMBOL
+Nama       : Kontak — Tombol
+Tombol     : Buka Kontak
+Layout     : panel terpusat
+Posisi     : menempel-bawah
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15405] LAYOUT
+Nama       : Kontak — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : modal-terpusat
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15406] POSISI
+Nama       : Kontak — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : tiga kolom
+Posisi     : panel-samping
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15407] UKURAN
+Nama       : Kontak — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : di-dalam-konten
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15408] DIALOG
+Nama       : Kontak — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : atas-kiri
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15409] PANEL
+Nama       : Kontak — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kartu adaptif
+Posisi     : atas-tengah
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15410] TOOLBAR
+Nama       : Kontak — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : atas-kanan
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15411] NAVIGASI
+Nama       : Kontak — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : tengah-kiri
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15412] KARTU
+Nama       : Kontak — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : tengah
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15413] KONTROL
+Nama       : Kontak — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : tengah-kanan
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15414] JENDELA
+Nama       : Kontak — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : grid responsif
+Posisi     : bawah-kiri
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15415] IKON
+Nama       : Kontak — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : bawah-tengah
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15416] FORMULIR
+Nama       : Kontak — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex vertikal
+Posisi     : bawah-kanan
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15417] TAB
+Nama       : Kontak — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : mengikuti-alur
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15418] NOTIFIKASI
+Nama       : Kontak — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : tetap
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+[15419] AKSESIBILITAS
+Nama       : Kontak — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : mengambang
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Kontak
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.

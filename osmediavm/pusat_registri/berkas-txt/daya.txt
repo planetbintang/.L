@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 0050
+NAMA MENU  : Daya — Dialog
+FITUR      : Daya
+SLUG       : menu-0050-dialog-daya
+URL MODAL  : ../menu-0050-dialog-daya/index.html
+DESKRIPSI  : Kelola status, preferensi, dan tindakan untuk daya.
+PETUNJUK   : Tinjau informasi yang tersedia dan gunakan kontrol antarmuka; fungsi perangkat nyata memerlukan adapter sistem berizin.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[00834] MENU
+Nama       : Daya — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : panel-samping
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00835] TOMBOL
+Nama       : Daya — Tombol
+Tombol     : Buka Daya
+Layout     : grid responsif
+Posisi     : di-dalam-konten
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00836] LAYOUT
+Nama       : Daya — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : atas-kiri
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00837] POSISI
+Nama       : Daya — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex vertikal
+Posisi     : atas-tengah
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00838] UKURAN
+Nama       : Daya — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : atas-kanan
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00839] DIALOG
+Nama       : Daya — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : tengah-kiri
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00840] PANEL
+Nama       : Daya — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : tengah
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00841] TOOLBAR
+Nama       : Daya — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : tengah-kanan
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00842] NAVIGASI
+Nama       : Daya — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel terpusat
+Posisi     : bawah-kiri
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00843] KARTU
+Nama       : Daya — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : bawah-tengah
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00844] KONTROL
+Nama       : Daya — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : tiga kolom
+Posisi     : bawah-kanan
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00845] JENDELA
+Nama       : Daya — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : mengikuti-alur
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00846] IKON
+Nama       : Daya — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : tetap
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00847] FORMULIR
+Nama       : Daya — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kartu adaptif
+Posisi     : mengambang
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00848] TAB
+Nama       : Daya — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : menempel-atas
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00849] NOTIFIKASI
+Nama       : Daya — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : menempel-bawah
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+[00850] AKSESIBILITAS
+Nama       : Daya — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : modal-terpusat
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Daya
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.

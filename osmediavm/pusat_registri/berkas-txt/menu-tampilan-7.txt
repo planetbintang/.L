@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 1405
+NAMA MENU  : Menu Tampilan — Pengelola
+FITUR      : Menu Tampilan
+SLUG       : menu-1405-pengelola-menu-tampilan
+URL MODAL  : ../menu-1405-pengelola-menu-tampilan/index.html
+DESKRIPSI  : Atur tema, tata letak, dan perilaku visual.
+PETUNJUK   : Pilih opsi tampilan untuk pratinjau desktop.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[23869] MENU
+Nama       : Menu Tampilan — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : tengah-kanan
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23870] TOMBOL
+Nama       : Menu Tampilan — Tombol
+Tombol     : Buka Menu Tampilan
+Layout     : kartu adaptif
+Posisi     : bawah-kiri
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23871] LAYOUT
+Nama       : Menu Tampilan — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : bawah-tengah
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23872] POSISI
+Nama       : Menu Tampilan — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : bawah-kanan
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23873] UKURAN
+Nama       : Menu Tampilan — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : mengikuti-alur
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23874] DIALOG
+Nama       : Menu Tampilan — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : tetap
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23875] PANEL
+Nama       : Menu Tampilan — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : grid responsif
+Posisi     : mengambang
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23876] TOOLBAR
+Nama       : Menu Tampilan — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : menempel-atas
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23877] NAVIGASI
+Nama       : Menu Tampilan — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex vertikal
+Posisi     : menempel-bawah
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23878] KARTU
+Nama       : Menu Tampilan — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : modal-terpusat
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23879] KONTROL
+Nama       : Menu Tampilan — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : panel-samping
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23880] JENDELA
+Nama       : Menu Tampilan — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : di-dalam-konten
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23881] IKON
+Nama       : Menu Tampilan — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : atas-kiri
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23882] FORMULIR
+Nama       : Menu Tampilan — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel terpusat
+Posisi     : atas-tengah
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23883] TAB
+Nama       : Menu Tampilan — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : atas-kanan
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23884] NOTIFIKASI
+Nama       : Menu Tampilan — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : tiga kolom
+Posisi     : tengah-kiri
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+[23885] AKSESIBILITAS
+Nama       : Menu Tampilan — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : tengah
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Tampilan
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.

@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 0062
+NAMA MENU  : Berbagi — Dialog
+FITUR      : Berbagi
+SLUG       : menu-0062-dialog-berbagi
+URL MODAL  : ../menu-0062-dialog-berbagi/index.html
+DESKRIPSI  : Kelola status, preferensi, dan tindakan untuk berbagi.
+PETUNJUK   : Tinjau informasi yang tersedia dan gunakan kontrol antarmuka; fungsi perangkat nyata memerlukan adapter sistem berizin.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[01038] MENU
+Nama       : Berbagi — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : tengah-kanan
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01039] TOMBOL
+Nama       : Berbagi — Tombol
+Tombol     : Buka Berbagi
+Layout     : kartu adaptif
+Posisi     : bawah-kiri
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01040] LAYOUT
+Nama       : Berbagi — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : bawah-tengah
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01041] POSISI
+Nama       : Berbagi — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : bawah-kanan
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01042] UKURAN
+Nama       : Berbagi — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : mengikuti-alur
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01043] DIALOG
+Nama       : Berbagi — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : tetap
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01044] PANEL
+Nama       : Berbagi — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : grid responsif
+Posisi     : mengambang
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01045] TOOLBAR
+Nama       : Berbagi — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : menempel-atas
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01046] NAVIGASI
+Nama       : Berbagi — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex vertikal
+Posisi     : menempel-bawah
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01047] KARTU
+Nama       : Berbagi — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : modal-terpusat
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01048] KONTROL
+Nama       : Berbagi — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : panel-samping
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01049] JENDELA
+Nama       : Berbagi — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : di-dalam-konten
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01050] IKON
+Nama       : Berbagi — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : atas-kiri
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01051] FORMULIR
+Nama       : Berbagi — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel terpusat
+Posisi     : atas-tengah
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01052] TAB
+Nama       : Berbagi — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : atas-kanan
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01053] NOTIFIKASI
+Nama       : Berbagi — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : tiga kolom
+Posisi     : tengah-kiri
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+[01054] AKSESIBILITAS
+Nama       : Berbagi — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : tengah
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pengelola Berbagi
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.

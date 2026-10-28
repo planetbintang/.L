@@ -1,0 +1,203 @@
+OS MEDIA VM — BERKAS DEFINISI ANTARMUKA
+==============================================
+ID REGISTRI : 1242
+NAMA MENU  : Pusat Suara — Konfigurasi
+FITUR      : Pusat Suara
+SLUG       : menu-1242-konfigurasi-pusat-suara
+URL MODAL  : ../menu-1242-konfigurasi-pusat-suara/index.html
+DESKRIPSI  : Buka pusat pengelolaan fitur sistem.
+PETUNJUK   : Cari atau pilih fitur dari daftar registri.
+
+DEFINISI KOMPONEN
+----------------------------------------------
+
+[21098] MENU
+Nama       : Pusat Suara — Menu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : flex horizontal
+Posisi     : atas-kanan
+Ukuran     : sm
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21099] TOMBOL
+Nama       : Pusat Suara — Tombol
+Tombol     : Buka Pusat Suara
+Layout     : flex vertikal
+Posisi     : tengah-kiri
+Ukuran     : lg
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21100] LAYOUT
+Nama       : Pusat Suara — Layout
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kiri
+Posisi     : tengah
+Ukuran     : penuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21101] POSISI
+Nama       : Pusat Suara — Posisi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : sidebar kanan
+Posisi     : tengah-kanan
+Ukuran     : responsif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21102] UKURAN
+Nama       : Pusat Suara — Ukuran
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar atas
+Posisi     : bawah-kiri
+Ukuran     : normal
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21103] DIALOG
+Nama       : Pusat Suara — Dialog
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : toolbar bawah
+Posisi     : bawah-tengah
+Ukuran     : ikon
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21104] PANEL
+Nama       : Pusat Suara — Panel
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel terpusat
+Posisi     : bawah-kanan
+Ukuran     : sentuh
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21105] TOOLBAR
+Nama       : Pusat Suara — Toolbar
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dua kolom
+Posisi     : mengikuti-alur
+Ukuran     : maksimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21106] NAVIGASI
+Nama       : Pusat Suara — Navigasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : tiga kolom
+Posisi     : tetap
+Ukuran     : xs
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21107] KARTU
+Nama       : Pusat Suara — Kartu
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kanvas penuh
+Posisi     : mengambang
+Ukuran     : md
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21108] KONTROL
+Nama       : Pusat Suara — Kontrol
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : daftar bertingkat
+Posisi     : menempel-atas
+Ukuran     : xl
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21109] JENDELA
+Nama       : Pusat Suara — Jendela
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : kartu adaptif
+Posisi     : menempel-bawah
+Ukuran     : otomatis
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21110] IKON
+Nama       : Pusat Suara — Ikon
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dock mengambang
+Posisi     : modal-terpusat
+Ukuran     : kompak
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21111] FORMULIR
+Nama       : Pusat Suara — Formulir
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : dialog terpusat
+Posisi     : panel-samping
+Ukuran     : luas
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21112] TAB
+Nama       : Pusat Suara — Tab
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : lembar samping
+Posisi     : di-dalam-konten
+Ukuran     : teks
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21113] NOTIFIKASI
+Nama       : Pusat Suara — Notifikasi
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : panel bertumpuk
+Posisi     : atas-kiri
+Ukuran     : adaptif
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+[21114] AKSESIBILITAS
+Nama       : Pusat Suara — Aksesibilitas
+Tombol     : Pilih / buka / tutup sesuai konteks
+Layout     : grid responsif
+Posisi     : atas-tengah
+Ukuran     : minimum
+Responsif  : ya
+Aksesibilitas: label jelas, fokus keyboard, kontras memadai
+Penutupan  : tombol tutup dan Escape bila berupa dialog
+Ringkasan  : Pusat kendali
+
+CATATAN RUNTIME
+Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter
+runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.
