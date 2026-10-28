@@ -9,18 +9,18 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "aktif" / "modul"
 TOTAL = 15000
 CATEGORIES = [
-    ("sistem-perangkat", "Sistem dan Perangkat", "perangkat, proses, sumber daya, dan informasi perangkat"),
-    ("file-penyimpanan", "Berkas dan Penyimpanan", "berkas, folder, pencarian, metadata, dan penyimpanan"),
-    ("jaringan-internet", "Jaringan dan Internet", "jaringan, koneksi, DNS, host, dan konektivitas"),
-    ("aplikasi-utilitas", "Aplikasi dan Utilitas", "aplikasi, utilitas, pembuka, dan preferensi"),
-    ("keamanan-akses", "Keamanan dan Akses", "privasi, izin, sesi, dan pemeriksaan keamanan"),
+    ("sistem-perangkat", "Sistem & perangkat", "perangkat, proses, sumber daya, dan informasi perangkat"),
+    ("file-penyimpanan", "File & penyimpanan", "berkas, folder, pencarian, metadata, dan penyimpanan"),
+    ("jaringan-internet", "Jaringan & internet", "jaringan, koneksi, DNS, host, dan konektivitas"),
+    ("aplikasi-utilitas", "Aplikasi & utilitas", "aplikasi, utilitas, pembuka, dan preferensi"),
+    ("keamanan-akses", "Keamanan & akses", "privasi, izin, sesi, dan pemeriksaan keamanan"),
     ("pengembangan", "Pengembangan", "repositori, penyunting kode, proyek, pembangunan, dan dokumentasi"),
-    ("data-analitik", "Data dan Analitik", "himpunan data, tabel, laporan, grafik, dan ekspor"),
-    ("media-kreativitas", "Media dan Kreativitas", "gambar, audio, video, koleksi, dan pratinjau"),
+    ("data-analitik", "Data & analitik", "himpunan data, tabel, laporan, grafik, dan ekspor"),
+    ("media-kreativitas", "Media & kreativitas", "gambar, audio, video, koleksi, dan pratinjau"),
     ("produktivitas", "Produktivitas", "catatan, tugas, kalender, papan kerja, dan aktivitas"),
     ("administrasi", "Administrasi", "log, konfigurasi, pemantauan, kebijakan, dan audit"),
     ("aksesibilitas", "Aksesibilitas", "tampilan, navigasi, masukan, pembaca, dan preferensi akses"),
-    ("bantuan-pemulihan", "Bantuan dan Pemulihan", "panduan, diagnostik, pemulihan, dan informasi sistem"),
+    ("bantuan-pemulihan", "Bantuan & pemulihan", "panduan, diagnostik, pemulihan, dan informasi sistem"),
 ]
 NOUNS = [
     "Ringkasan", "Pengelola", "Penampil", "Pencarian", "Konfigurasi",
@@ -100,6 +100,24 @@ function draw(){const q=$('q').value.toLocaleLowerCase('id').trim(),c=$('cat').v
 $('q').addEventListener('input',()=>{page=0;draw()});$('cat').addEventListener('change',()=>{page=0;draw()});$('prev').addEventListener('click',()=>{page=Math.max(0,page-1);draw()});$('next').addEventListener('click',()=>{page++;draw()});
 </script></body></html>"""
     (OUT / "index.html").write_text(catalog, encoding="utf-8")
+    # Ganti katalog lama pada hasil publikasi dengan pustaka /aktif/.
+    # Sisakan satu alamat kompatibilitas yang mengarahkan URL lama ke Kamus Digital Modern.
+    legacy = ROOT / "system-menus"
+    alias = legacy / "sistem-perangkat" / "menu-00001" / "index.html"
+    if legacy.exists():
+        for child in list(legacy.iterdir()):
+            if child.name != "sistem-perangkat":
+                shutil.rmtree(child) if child.is_dir() else child.unlink()
+        category_dir = legacy / "sistem-perangkat"
+        if category_dir.exists():
+            for child in list(category_dir.iterdir()):
+                if child.name != "menu-00001":
+                    shutil.rmtree(child) if child.is_dir() else child.unlink()
+            alias_dir = category_dir / "menu-00001"
+            if alias_dir.exists():
+                for child in list(alias_dir.iterdir()):
+                    if child.name != "index.html":
+                        shutil.rmtree(child) if child.is_dir() else child.unlink()
     print(f"Perpustakaan dibangun: {TOTAL} halaman, {len(manifest)} entri.")
 
 if __name__ == "__main__":
