@@ -65,7 +65,7 @@ DATA → [ IC / LOGO ] → KOMPONEN ANTARMUKA
 MODUL := "{esc(slug(title))}"
 STATUS := "TERDAFTAR"
 TAUTAN := "/aktif/kamus-digital-modern/"</pre><p>Notasi di atas merupakan rumus konseptual aliran data dan visualisasi identitas modul. Notasi ini bukan instruksi prosesor atau simulasi rangkaian magnetik/elektrik.</p><div class="clear"></div></section>
-<nav class="actions"><a href="../../index.html">Buka Kamus Digital Modern</a><a href="../../index.html#query">Cari kata</a><a href="../../../index.html">Kembali ke halaman utama</a></nav>
+<nav class="actions"><a href="../../../index.html">Buka Kamus Digital Modern</a><a href="../../../index.html#query">Cari kata</a><a href="../../../../index.html">Kembali ke halaman utama</a></nav>
 <p class="small">Pustaka kata bahasa Indonesia · ikon dunia 🌐 · komponen IC konseptual · dokumen {number:05d}</p>
 </main></body></html>'''
 
