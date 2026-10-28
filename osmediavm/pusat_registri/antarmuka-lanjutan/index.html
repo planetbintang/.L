@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07152f">
+<title>Antarmuka Lanjutan · OS MEDIA VM</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#07152f;color:#eff7ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0,#1c477f,transparent 45%),#07152f;min-height:100vh;padding:20px}
+main{max-width:1200px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.top a,button{color:inherit;border:1px solid #6ea8e966;border-radius:12px;padding:10px 14px;background:#10274b;cursor:pointer;text-decoration:none}.panel{margin-top:16px;border:1px solid #6ea8e955;border-radius:18px;background:#091a34eF;padding:18px;box-shadow:0 18px 50px #0004}h1{font-size:clamp(25px,4vw,42px);margin:10px 0}p,small{color:#a9c1e3;line-height:1.6}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{padding:12px;border-radius:12px;background:#11294c;min-width:130px}.stat strong{display:block;font-size:22px;color:#62e8f5}.tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tools input,.tools select{min-width:180px;flex:1;background:#07152f;color:#fff;border:1px solid #6ea8e966;border-radius:10px;padding:11px}.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}.item{border:1px solid #6ea8e944;border-radius:12px;padding:12px;background:#0b2040;min-width:0}.item strong{display:block;overflow-wrap:anywhere;font-size:13px}.item small{display:block;margin:6px 0}.item button{width:100%;margin-top:7px}.muted{color:#8caed7}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}.empty{padding:25px;text-align:center}.pill{font-size:11px;color:#7af0dc}.note{font-size:12px}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="../">← Kembali ke Registri</a><a href="../index.html">Buka Desktop OS MEDIA VM</a></div>
+<section class="panel">
+<p class="pill">OS MEDIA VM · DESKTOP INTERFACE BUILDER</p>
+<h1>Antarmuka Lanjutan</h1>
+<p>Definisi antarmuka untuk 1.500 modal dialog dan katalog 25.000 menu, tombol, layout, posisi, serta ukuran. Pilih item untuk melihat isi konfigurasi dan mengunduh berkas teks bernama sesuai menu.</p>
+<div class="stats"><div class="stat"><strong id="modalCount">1.500</strong><small>modal dari registri</small></div><div class="stat"><strong id="itemCount">25.000</strong><small>definisi antarmuka</small></div><div class="stat"><strong id="shownCount">0</strong><small>hasil yang ditampilkan</small></div></div>
+<div class="tools"><input id="search" type="search" placeholder="Cari nama menu, tombol, layout…"><select id="kind"><option value="all">Semua komponen</option><option value="Menu">Menu</option><option value="Tombol">Tombol</option><option value="Layout">Layout</option><option value="Posisi">Posisi</option><option value="Ukuran">Ukuran</option><option value="Dialog">Dialog</option></select><select id="modal"><option value="all">Semua modal</option></select></div>
+<div class="row"><p id="status" class="note">Memuat daftar modal…</p><div><button id="prev">Sebelumnya</button> <button id="next">Berikutnya</button></div></div>
+<div id="list" class="list"></div>
+</section>
+<section class="panel"><h2>Pratinjau berkas .txt</h2><p class="note">Berkas dibuat saat tombol unduh dipilih. Nama berkas mengikuti nama menu dan komponen. Katalog ini menyediakan definisi virtual agar 25.000 entri tidak membebani repositori dengan 25.000 berkas statis terpisah.</p><pre id="preview" style="white-space:pre-wrap;overflow-wrap:anywhere;background:#061127;padding:14px;border-radius:12px;color:#d4f4ff">Pilih sebuah item untuk menampilkan definisinya.</pre><button id="downloadPreview" disabled>Unduh .txt yang dipilih</button></section>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const kinds=['Menu','Tombol','Layout','Posisi','Ukuran','Dialog','Panel','Toolbar','Navigasi','Kartu','Kontrol','Jendela','Ikon','Formulir','Tab','Notifikasi','Aksesibilitas'];
+const layouts=['grid responsif','flex horizontal','flex vertikal','sidebar kiri','sidebar kanan','toolbar atas','toolbar bawah','panel terpusat','dua kolom','tiga kolom','kanvas penuh','daftar bertingkat','kartu adaptif','dock mengambang','dialog terpusat','lembar samping','panel bertumpuk'];
+const positions=['atas-kiri','atas-tengah','atas-kanan','tengah-kiri','tengah','tengah-kanan','bawah-kiri','bawah-tengah','bawah-kanan','mengikuti-alur','tetap','mengambang','menempel-atas','menempel-bawah','modal-terpusat','panel-samping','di-dalam-konten'];
+const sizes=['xs','sm','md','lg','xl','penuh','otomatis','responsif','kompak','normal','luas','ikon','teks','sentuh','adaptif','maksimum','minimum'];
+let modals=[],items=[],page=0,selected=null;const pageSize=60;
+function slug(s){return String(s||'menu').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,90)||'menu'}
+function build(m,index,kind,variant){const n=index+1;const title=(m.namaFitur||m.judul||'Menu')+' '+kind+' '+String(n).padStart(5,'0');return {id:'UI-'+String(n).padStart(5,'0'),nama:title,menuSumber:m.judul||m.slug,slug:m.slug||'',jenis:kind,nomorVarian:variant,modalId:m.id||'',modalUrl:m.url||'',tombol:{label:kind==='Tombol'?'Jalankan '+(m.namaFitur||'aksi'):'Buka '+(m.namaFitur||m.judul||'menu'),gaya:['primer','sekunder','ikon','teks'][variant%4],aksi:'buka-modal'},layout:layouts[variant%layouts.length],posisi:positions[Math.floor(variant/2)%positions.length],ukuran:sizes[Math.floor(variant/3)%sizes.length],perilaku:{responsif:true,aksesibilitas:'label dan fokus keyboard',tutup:'Escape atau tombol tutup',overflow:'auto'},konten:{ringkasan:m.ringkasan||m.namaFitur||m.judul||'Definisi antarmuka',deskripsi:m.deskripsi||'Definisi komponen desktop.',petunjuk:m.petunjuk||'Gunakan komponen pada desktop OS MEDIA VM.'},sumber:'OS MEDIA VM / pusat_registri/daftar-menu.json'}}
+function txt(item){return 'OS MEDIA VM — DEFINISI ANTARMUKA\n'+'='.repeat(38)+'\n'+Object.entries(item).map(([k,v])=>k.toUpperCase()+': '+(typeof v==='object'?JSON.stringify(v,null,2):v)).join('\n\n')+'\n'}
+function makeItems(){const target=25000;if(!modals.length){const base={id:'0000',judul:'Desktop OS MEDIA VM',namaFitur:'Desktop',slug:'desktop',url:'../index.html',ringkasan:'Komponen desktop',deskripsi:'Definisi antarmuka desktop.',petunjuk:'Gunakan keyboard dan kontrol antarmuka.'};modals=[base]}const out=[];let i=0;while(out.length<target){const m=modals[i%modals.length],variant=Math.floor(i/modals.length),kind=kinds[variant%kinds.length];out.push(build(m,out.length,kind,variant));i++}return out}
+function render(){const q=$('search').value.trim().toLocaleLowerCase('id'),k=$('kind').value,mid=$('modal').value;const filtered=items.filter(x=>(k==='all'||x.jenis===k)&&(mid==='all'||x.modalId===mid)&&(x.nama+' '+x.menuSumber+' '+x.jenis+' '+x.layout+' '+x.posisi+' '+x.ukuran).toLocaleLowerCase('id').includes(q));const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.max(0,Math.min(page,pages-1));const slice=filtered.slice(page*pageSize,(page+1)*pageSize);$('shownCount').textContent=filtered.length.toLocaleString('id-ID');$('status').textContent='Halaman '+(page+1)+'/'+pages+' · menampilkan '+slice.length+' dari '+filtered.length.toLocaleString('id-ID')+' hasil';$('list').replaceChildren();slice.forEach(item=>{const card=document.createElement('article');card.className='item';const title=document.createElement('strong');title.textContent=item.nama;const info=document.createElement('small');info.textContent=item.jenis+' · '+item.layout+' · '+item.ukuran;const choose=document.createElement('button');choose.textContent='Lihat definisi';choose.addEventListener('click',()=>selectItem(item));const dl=document.createElement('button');dl.textContent='Unduh '+slug(item.nama)+'.txt';dl.addEventListener('click',()=>download(item));card.append(title,info,choose,dl);$('list').append(card)});if(!slice.length){const empty=document.createElement('p');empty.className='empty';empty.textContent='Tidak ada item yang cocok.';$('list').append(empty)}$('prev').disabled=page===0;$('next').disabled=page>=pages-1}
+function selectItem(item){selected=item;$('preview').textContent=txt(item);$('downloadPreview').disabled=false}
+function download(item){const blob=new Blob([txt(item)],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=slug(item.nama)+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);selectItem(item)}
+async function init(){try{const r=await fetch('./daftar-menu.json');if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();modals=data.menu||[];$('modalCount').textContent=modals.length.toLocaleString('id-ID');modals.forEach(m=>{const o=document.createElement('option');o.value=m.id;o.textContent=m.judul;$('modal').append(o)})}catch(e){$('status').textContent='Registri tidak dapat dimuat; definisi contoh akan digunakan.'}items=makeItems();$('itemCount').textContent=items.length.toLocaleString('id-ID');render()}
+['search','kind','modal'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',()=>{page=0;render()}));$('prev').addEventListener('click',()=>{page--;render()});$('next').addEventListener('click',()=>{page++;render()});$('downloadPreview').addEventListener('click',()=>{if(selected)download(selected)});init();
+})();
+</script>
+</body>
+</html>
