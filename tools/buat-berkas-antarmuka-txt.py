@@ -385,11 +385,55 @@ Spesifikasi rancangan; bukan bukti bahwa layanan atau backend terkait telah berj
         raise SystemExit(f"Jumlah komponen salah: {number}")
     print(f"Infrastruktur selesai: {number} berkas TXT unik.")
 
+# Generator revisi: nama berkas berdasarkan nama menu dan total definisi tepat 25.000.
+
+def migrate_recordin():
+    """Move infrastructure TXT files to a .reic catalog and install a static viewer."""
+    import json
+    root = ROOT / "osmediavm" / "recordin"
+    root.mkdir(parents=True, exist_ok=True)
+    sources = [ROOT / "osmediavm" / n for n in
+               ("infrastruktur-15000", "infrastruktur-1500", "infrastruktur-150")]
+    entries, used, moved = [], set(), 0
+    for source in sources:
+        if not source.exists():
+            continue
+        prefix = source.name.replace("infrastruktur-", "infra-")
+        for old in sorted(source.rglob("*.txt")):
+            if not old.is_file():
+                continue
+            base = old.stem
+            name = f"{prefix}-{base}.reic"
+            n = 2
+            while name.casefold() in used or (root / name).exists():
+                name = f"{prefix}-{base}-{n}.reic"
+                n += 1
+            used.add(name.casefold())
+            body = old.read_text(encoding="utf-8", errors="replace")
+            (root / name).write_text(
+                "--- REIC/1 ---\ntitle: " + base.replace("-", " ") +
+                "\nsource: " + source.name + "/" + old.relative_to(source).as_posix() +
+                "\nrender: text\n--- END REIC HEADER ---\n\n" + body, encoding="utf-8")
+            old.unlink()
+            entries.append({"file": name, "title": base.replace("-", " "), "source": source.name})
+            moved += 1
+    css = """*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eef5ff;font:16px/1.6 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:24px}header,.panel{background:#101e31;border:1px solid #2b405a;border-radius:16px;padding:18px}input{width:100%;padding:13px;margin:16px 0;background:#081423;color:inherit;border:1px solid #38516d;border-radius:10px}#list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}.item{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #2b405a;border-radius:10px;color:#c9eaff;text-decoration:none;overflow-wrap:anywhere}small,code,.muted{color:#a9bad0}code{font-size:.78rem;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 ui-monospace,monospace;background:#081423;padding:18px;border-radius:12px;max-height:65vh;overflow:auto}button{padding:10px 14px;border:1px solid #38516d;border-radius:9px;background:#17314c;color:#fff;cursor:pointer}.hidden{display:none!important}:focus{outline:2px solid #8dd8ff;outline-offset:2px}"""
+    js = """(()=>{'use strict';const q=s=>document.querySelector(s),list=q('#list'),search=q('#search'),view=q('#viewer'),source=q('#source'),back=q('#back'),count=q('#count');let entries=[];function el(t,c,v){const n=document.createElement(t);if(c)n.className=c;if(v!==undefined)n.textContent=v;return n}async function openFile(file){try{const r=await fetch('./'+encodeURIComponent(file));if(!r.ok)throw Error('HTTP '+r.status);source.textContent=await r.text();q('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');history.replaceState(null,'','#'+encodeURIComponent(file))}catch(e){source.textContent='Gagal membuka berkas: '+e.message;view.classList.remove('hidden')}}function draw(){const s=search.value.toLocaleLowerCase('id'),found=entries.filter(x=>(x.file+' '+x.title+' '+x.source).toLocaleLowerCase('id').includes(s));list.replaceChildren(...found.map(x=>{const a=el('a','item');a.href='./'+encodeURIComponent(x.file);a.append(el('strong','',x.title),el('small','',x.source),el('code','',x.file));a.addEventListener('click',e=>{e.preventDefault();openFile(x.file)});return a}));count.textContent=found.length.toLocaleString('id')+' berkas REIC'}search.addEventListener('input',draw);back.addEventListener('click',()=>{view.classList.add('hidden');list.parentElement.classList.remove('hidden');history.replaceState(null,'',location.pathname)});fetch('./manifest.json').then(r=>{if(!r.ok)throw Error('manifest tidak tersedia');return r.json()}).then(d=>{entries=d;draw();const f=decodeURIComponent(location.hash.slice(1));if(f&&entries.some(x=>x.file===f))openFile(f)}).catch(e=>count.textContent='Gagal memuat katalog: '+e.message)})();"""
+    (root / "recordin.css").write_text(css, encoding="utf-8")
+    (root / "recordin.js").write_text(js, encoding="utf-8")
+    (root / "manifest.json").write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+    page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OS MEDIA VM — Recordin REIC</title><link rel="stylesheet" href="./recordin.css"></head><body><main><header><small>OS MEDIA VM / RECORDIN</small><h1>Runtime berkas .reic</h1><p class="muted">Berkas REIC dibaca oleh runtime JavaScript statis. Konten ditampilkan sebagai teks aman, bukan dieksekusi sebagai kode arbitrer.</p><input id="search" type="search" placeholder="Cari nama atau sumber berkas" aria-label="Cari berkas REIC"><p id="count">Memuat katalog…</p></header><section class="panel" style="margin-top:16px"><div id="list"></div></section><section id="viewer" class="panel hidden" style="margin-top:16px"><button id="back" type="button">Kembali ke katalog</button><h2 id="viewTitle">Berkas REIC</h2><pre id="source" tabindex="0"></pre></section><p class="muted">Ekstensi .reic bukan standar browser dan memerlukan runtime ini. PHP memerlukan server PHP; GitHub Pages hanya menyajikan aset statis.</p></main><script src="./recordin.js" defer></script></body></html>"""
+    (root / "index.html").write_text(page, encoding="utf-8")
+    (root / "README.md").write_text(
+        "# OS MEDIA VM — Recordin / REIC\n\n"
+        "Spesifikasi dari tiga folder infrastruktur dikumpulkan ke sini dan diubah dari TXT menjadi REIC.\n\n"
+        "Runtime statis: index.html, recordin.css, recordin.js, manifest.json. REIC adalah format khusus proyek; browser tidak menjalankannya secara native. Runtime saat ini menampilkan sumber dengan aman sebagai teks. PHP memerlukan server PHP dan tidak berjalan pada GitHub Pages.\n",
+        encoding="utf-8")
+    print(f"Recordin: {moved} TXT dipindahkan dan diubah menjadi REIC.")
 
 if __name__ == "__main__":
     main()
     generate_infrastructure_150()
     generate_infrastructure_1500()
     generate_infrastructure_15000()
-
-# Generator revisi: nama berkas berdasarkan nama menu dan total definisi tepat 25.000.
+    migrate_recordin()
