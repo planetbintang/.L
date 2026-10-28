@@ -7,6 +7,10 @@ on:
       - "tools/buat-berkas-antarmuka-txt.py"
       - "osmediavm/pusat_registri/daftar-menu.json"
       - "osmediavm/recordin/**"
+      - "osmediavm/index.html"
+      - "osmediavm/index.reic"
+      - "osmediavm/index.css"
+      - "osmediavm/index.js"
       - ".github/workflows/generate-interface-txt.yml"
 
 permissions:
@@ -24,7 +28,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add osmediavm/pusat_registri/berkas-txt/ osmediavm/infrastruktur-150/ osmediavm/infrastruktur-1500/ osmediavm/infrastruktur-15000/ osmediavm/recordin/
+          git add osmediavm/pusat_registri/berkas-txt/ osmediavm/infrastruktur-150/ osmediavm/infrastruktur-1500/ osmediavm/infrastruktur-15000/ osmediavm/recordin/ osmediavm/index.html osmediavm/index.reic osmediavm/index.css osmediavm/index.js
           if git diff --cached --quiet; then
             echo "Tidak ada perubahan berkas TXT."
           else
