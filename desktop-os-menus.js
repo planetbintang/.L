@@ -40,7 +40,7 @@
     const title = noun + ' ' + category[0] + (variant ? ' ' + String(variant + 1).padStart(3, '0') : '');
     const number = String(safeIndex + 1).padStart(5, '0');
     const nounSlug = nouns[Math.floor(safeIndex / categories.length) % nouns.length].toLocaleLowerCase('id').replace(/\\s+/g, '-');
-    const filePath = './aktif/modul/' + categorySlugs[categoryIndex] + '/' + nounSlug + '-' + categorySlugs[categoryIndex] + (variant ? '-varian-' + String(variant).padStart(3, '0') : '') + '/index.html';
+    const filePath = './aktif/modul/' + categorySlugs[categoryIndex] + '/' + nounSlug + '-' + categorySlugs[categoryIndex] + (variant ? '-varian-' + String(variant + 1).padStart(3, '0') : '') + '/index.html';
     return {
       id: 'pbos-' + number, index: safeIndex + 1,
       category: category[0], categorySlug: categorySlugs[categoryIndex], display: title,
