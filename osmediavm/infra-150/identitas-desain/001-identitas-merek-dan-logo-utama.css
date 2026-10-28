@@ -1,0 +1,5 @@
+/* 001 — Identitas merek dan logo utama; stylesheet pasangan 001-identitas-merek-dan-logo-utama.reic */
+:root{--reic-001-accent:#83e1ff;--reic-001-surface:#0d1a2b;--reic-001-border:#29425d}
+[data-reic-id="INFRA-001"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-001-surface);border:1px solid var(--reic-001-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-001"] :focus-visible{outline:2px solid var(--reic-001-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-001"] *{animation:none!important;transition:none!important}}

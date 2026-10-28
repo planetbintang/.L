@@ -1,0 +1,5 @@
+/* 005 — Ikonografi terpadu; stylesheet pasangan 005-ikonografi-terpadu.reic */
+:root{--reic-005-accent:#83e1ff;--reic-005-surface:#0d1a2b;--reic-005-border:#29425d}
+[data-reic-id="INFRA-005"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-005-surface);border:1px solid var(--reic-005-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-005"] :focus-visible{outline:2px solid var(--reic-005-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-005"] *{animation:none!important;transition:none!important}}

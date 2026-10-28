@@ -1,0 +1,5 @@
+/* 022 — Pusat notifikasi; stylesheet pasangan 022-pusat-notifikasi.reic */
+:root{--reic-022-accent:#83e1ff;--reic-022-surface:#0d1a2b;--reic-022-border:#29425d}
+[data-reic-id="INFRA-022"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-022-surface);border:1px solid var(--reic-022-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-022"] :focus-visible{outline:2px solid var(--reic-022-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-022"] *{animation:none!important;transition:none!important}}

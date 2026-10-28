@@ -1,0 +1,5 @@
+/* 067 — Kontrol akses berbasis peran; stylesheet pasangan 067-kontrol-akses-berbasis-peran.reic */
+:root{--reic-067-accent:#83e1ff;--reic-067-surface:#0d1a2b;--reic-067-border:#29425d}
+[data-reic-id="INFRA-067"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-067-surface);border:1px solid var(--reic-067-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-067"] :focus-visible{outline:2px solid var(--reic-067-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-067"] *{animation:none!important;transition:none!important}}

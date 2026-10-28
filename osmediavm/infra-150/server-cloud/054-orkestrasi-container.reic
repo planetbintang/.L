@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Orkestrasi container
+id: INFRA-054
+category: server-cloud
+stylesheet: 054-orkestrasi-container.css
+script: 054-orkestrasi-container.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Orkestrasi container
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 054 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

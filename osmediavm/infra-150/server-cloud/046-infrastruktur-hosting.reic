@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Infrastruktur hosting
+id: INFRA-046
+category: server-cloud
+stylesheet: 046-infrastruktur-hosting.css
+script: 046-infrastruktur-hosting.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Infrastruktur hosting
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 046 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Container runtime
+id: INFRA-053
+category: server-cloud
+stylesheet: 053-container-runtime.css
+script: 053-container-runtime.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Container runtime
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 053 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Infrastruktur cloud
+id: INFRA-055
+category: server-cloud
+stylesheet: 055-infrastruktur-cloud.css
+script: 055-infrastruktur-cloud.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Infrastruktur cloud
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 055 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

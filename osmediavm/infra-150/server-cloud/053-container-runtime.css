@@ -1,0 +1,5 @@
+/* 053 — Container runtime; stylesheet pasangan 053-container-runtime.reic */
+:root{--reic-053-accent:#83e1ff;--reic-053-surface:#0d1a2b;--reic-053-border:#29425d}
+[data-reic-id="INFRA-053"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-053-surface);border:1px solid var(--reic-053-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-053"] :focus-visible{outline:2px solid var(--reic-053-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-053"] *{animation:none!important;transition:none!important}}

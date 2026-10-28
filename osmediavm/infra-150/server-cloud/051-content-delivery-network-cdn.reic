@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Content Delivery Network (CDN)
+id: INFRA-051
+category: server-cloud
+stylesheet: 051-content-delivery-network-cdn.css
+script: 051-content-delivery-network-cdn.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Content Delivery Network (CDN)
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 051 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

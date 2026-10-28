@@ -1,0 +1,5 @@
+/* 088 — Lingkungan staging; stylesheet pasangan 088-lingkungan-staging.reic */
+:root{--reic-088-accent:#83e1ff;--reic-088-surface:#0d1a2b;--reic-088-border:#29425d}
+[data-reic-id="INFRA-088"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-088-surface);border:1px solid var(--reic-088-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-088"] :focus-visible{outline:2px solid var(--reic-088-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-088"] *{animation:none!important;transition:none!important}}

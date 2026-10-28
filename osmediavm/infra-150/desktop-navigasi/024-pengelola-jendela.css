@@ -1,0 +1,5 @@
+/* 024 — Pengelola jendela; stylesheet pasangan 024-pengelola-jendela.reic */
+:root{--reic-024-accent:#83e1ff;--reic-024-surface:#0d1a2b;--reic-024-border:#29425d}
+[data-reic-id="INFRA-024"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-024-surface);border:1px solid var(--reic-024-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-024"] :focus-visible{outline:2px solid var(--reic-024-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-024"] *{animation:none!important;transition:none!important}}

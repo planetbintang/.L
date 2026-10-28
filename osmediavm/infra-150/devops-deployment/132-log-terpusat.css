@@ -1,0 +1,5 @@
+/* 132 — Log terpusat; stylesheet pasangan 132-log-terpusat.reic */
+:root{--reic-132-accent:#83e1ff;--reic-132-surface:#0d1a2b;--reic-132-border:#29425d}
+[data-reic-id="INFRA-132"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-132-surface);border:1px solid var(--reic-132-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-132"] :focus-visible{outline:2px solid var(--reic-132-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-132"] *{animation:none!important;transition:none!important}}

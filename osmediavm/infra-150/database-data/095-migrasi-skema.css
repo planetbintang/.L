@@ -1,0 +1,5 @@
+/* 095 — Migrasi skema; stylesheet pasangan 095-migrasi-skema.reic */
+:root{--reic-095-accent:#83e1ff;--reic-095-surface:#0d1a2b;--reic-095-border:#29425d}
+[data-reic-id="INFRA-095"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-095-surface);border:1px solid var(--reic-095-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-095"] :focus-visible{outline:2px solid var(--reic-095-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-095"] *{animation:none!important;transition:none!important}}

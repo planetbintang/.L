@@ -1,0 +1,5 @@
+/* 139 — Pengujian pemulihan; stylesheet pasangan 139-pengujian-pemulihan.reic */
+:root{--reic-139-accent:#83e1ff;--reic-139-surface:#0d1a2b;--reic-139-border:#29425d}
+[data-reic-id="INFRA-139"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-139-surface);border:1px solid var(--reic-139-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-139"] :focus-visible{outline:2px solid var(--reic-139-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-139"] *{animation:none!important;transition:none!important}}

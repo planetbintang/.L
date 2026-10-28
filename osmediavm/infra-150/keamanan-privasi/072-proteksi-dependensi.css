@@ -1,0 +1,5 @@
+/* 072 — Proteksi dependensi; stylesheet pasangan 072-proteksi-dependensi.reic */
+:root{--reic-072-accent:#83e1ff;--reic-072-surface:#0d1a2b;--reic-072-border:#29425d}
+[data-reic-id="INFRA-072"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-072-surface);border:1px solid var(--reic-072-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-072"] :focus-visible{outline:2px solid var(--reic-072-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-072"] *{animation:none!important;transition:none!important}}

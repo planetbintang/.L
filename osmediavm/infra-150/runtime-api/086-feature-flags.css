@@ -1,0 +1,5 @@
+/* 086 — Feature flags; stylesheet pasangan 086-feature-flags.reic */
+:root{--reic-086-accent:#83e1ff;--reic-086-surface:#0d1a2b;--reic-086-border:#29425d}
+[data-reic-id="INFRA-086"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-086-surface);border:1px solid var(--reic-086-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-086"] :focus-visible{outline:2px solid var(--reic-086-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-086"] *{animation:none!important;transition:none!important}}

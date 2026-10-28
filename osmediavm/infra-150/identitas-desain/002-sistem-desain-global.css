@@ -1,0 +1,5 @@
+/* 002 — Sistem desain global; stylesheet pasangan 002-sistem-desain-global.reic */
+:root{--reic-002-accent:#83e1ff;--reic-002-surface:#0d1a2b;--reic-002-border:#29425d}
+[data-reic-id="INFRA-002"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-002-surface);border:1px solid var(--reic-002-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-002"] :focus-visible{outline:2px solid var(--reic-002-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-002"] *{animation:none!important;transition:none!important}}

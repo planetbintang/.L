@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: OCR
+id: INFRA-118
+category: ai-otomasi
+stylesheet: 118-ocr.css
+script: 118-ocr.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# OCR
+
+Integrasi AI dan otomasi berbasis izin; panggilan model harus melalui backend agar kunci tidak terekspos.
+
+Komponen 118 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Reverse proxy
+id: INFRA-049
+category: server-cloud
+stylesheet: 049-reverse-proxy.css
+script: 049-reverse-proxy.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Reverse proxy
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 049 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

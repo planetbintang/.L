@@ -1,0 +1,5 @@
+/* 011 — Komponen UI reusable; stylesheet pasangan 011-komponen-ui-reusable.reic */
+:root{--reic-011-accent:#83e1ff;--reic-011-surface:#0d1a2b;--reic-011-border:#29425d}
+[data-reic-id="INFRA-011"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-011-surface);border:1px solid var(--reic-011-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-011"] :focus-visible{outline:2px solid var(--reic-011-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-011"] *{animation:none!important;transition:none!important}}

@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Infrastruktur multi-region
+id: INFRA-056
+category: server-cloud
+stylesheet: 056-infrastruktur-multi-region.css
+script: 056-infrastruktur-multi-region.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Infrastruktur multi-region
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 056 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

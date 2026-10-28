@@ -1,0 +1,5 @@
+/* 073 — Audit keamanan; stylesheet pasangan 073-audit-keamanan.reic */
+:root{--reic-073-accent:#83e1ff;--reic-073-surface:#0d1a2b;--reic-073-border:#29425d}
+[data-reic-id="INFRA-073"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-073-surface);border:1px solid var(--reic-073-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-073"] :focus-visible{outline:2px solid var(--reic-073-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-073"] *{animation:none!important;transition:none!important}}

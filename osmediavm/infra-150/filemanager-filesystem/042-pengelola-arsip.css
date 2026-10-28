@@ -1,0 +1,5 @@
+/* 042 — Pengelola arsip; stylesheet pasangan 042-pengelola-arsip.reic */
+:root{--reic-042-accent:#83e1ff;--reic-042-surface:#0d1a2b;--reic-042-border:#29425d}
+[data-reic-id="INFRA-042"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-042-surface);border:1px solid var(--reic-042-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-042"] :focus-visible{outline:2px solid var(--reic-042-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-042"] *{animation:none!important;transition:none!important}}

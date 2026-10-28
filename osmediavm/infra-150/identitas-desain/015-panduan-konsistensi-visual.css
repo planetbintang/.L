@@ -1,0 +1,5 @@
+/* 015 — Panduan konsistensi visual; stylesheet pasangan 015-panduan-konsistensi-visual.reic */
+:root{--reic-015-accent:#83e1ff;--reic-015-surface:#0d1a2b;--reic-015-border:#29425d}
+[data-reic-id="INFRA-015"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-015-surface);border:1px solid var(--reic-015-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-015"] :focus-visible{outline:2px solid var(--reic-015-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-015"] *{animation:none!important;transition:none!important}}

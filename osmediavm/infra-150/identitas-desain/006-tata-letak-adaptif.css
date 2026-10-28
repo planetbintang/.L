@@ -1,0 +1,5 @@
+/* 006 — Tata letak adaptif; stylesheet pasangan 006-tata-letak-adaptif.reic */
+:root{--reic-006-accent:#83e1ff;--reic-006-surface:#0d1a2b;--reic-006-border:#29425d}
+[data-reic-id="INFRA-006"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-006-surface);border:1px solid var(--reic-006-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-006"] :focus-visible{outline:2px solid var(--reic-006-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-006"] *{animation:none!important;transition:none!important}}

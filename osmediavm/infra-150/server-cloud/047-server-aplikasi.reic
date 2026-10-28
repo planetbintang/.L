@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Server aplikasi
+id: INFRA-047
+category: server-cloud
+stylesheet: 047-server-aplikasi.css
+script: 047-server-aplikasi.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Server aplikasi
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 047 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

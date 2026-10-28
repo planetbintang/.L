@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Pemantauan biaya AI
+id: INFRA-120
+category: ai-otomasi
+stylesheet: 120-pemantauan-biaya-ai.css
+script: 120-pemantauan-biaya-ai.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Pemantauan biaya AI
+
+Integrasi AI dan otomasi berbasis izin; panggilan model harus melalui backend agar kunci tidak terekspos.
+
+Komponen 120 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.

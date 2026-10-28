@@ -1,0 +1,5 @@
+/* 118 — OCR; stylesheet pasangan 118-ocr.reic */
+:root{--reic-118-accent:#83e1ff;--reic-118-surface:#0d1a2b;--reic-118-border:#29425d}
+[data-reic-id="INFRA-118"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-118-surface);border:1px solid var(--reic-118-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-118"] :focus-visible{outline:2px solid var(--reic-118-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-118"] *{animation:none!important;transition:none!important}}

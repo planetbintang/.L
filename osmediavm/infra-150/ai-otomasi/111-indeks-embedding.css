@@ -1,0 +1,5 @@
+/* 111 — Indeks embedding; stylesheet pasangan 111-indeks-embedding.reic */
+:root{--reic-111-accent:#83e1ff;--reic-111-surface:#0d1a2b;--reic-111-border:#29425d}
+[data-reic-id="INFRA-111"]{box-sizing:border-box;color:var(--reic-text,#edf5ff);background:var(--reic-111-surface);border:1px solid var(--reic-111-border);border-radius:12px;padding:16px;min-width:0}
+[data-reic-id="INFRA-111"] :focus-visible{outline:2px solid var(--reic-111-accent);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){[data-reic-id="INFRA-111"] *{animation:none!important;transition:none!important}}

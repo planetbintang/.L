@@ -1,0 +1,16 @@
+--- REIC/1 ---
+title: Autoscaling
+id: INFRA-057
+category: server-cloud
+stylesheet: 057-autoscaling.css
+script: 057-autoscaling.js
+status: blueprint
+runtime: browser
+--- END REIC HEADER ---
+# Autoscaling
+
+Arsitektur hosting/cloud. GitHub Pages melayani aset statis; kemampuan server memerlukan backend terpisah.
+
+Komponen 057 dari 150 komponen infrastruktur OS MEDIA VM.
+
+REIC menjadi sumber metadata; CSS dan JS dengan basename yang sama merupakan pasangan wajib. Status blueprint tidak mengklaim layanan backend sudah aktif.
