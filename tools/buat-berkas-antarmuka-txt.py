@@ -288,9 +288,108 @@ UJI PENERIMAAN
         raise SystemExit(f"Jumlah komponen tidak sesuai: {number}")
     print(f"Infrastruktur 1500 selesai: {number} TXT + katalog HTML dan README.")
 
+
+def generate_infrastructure_15000():
+    """Generate exactly 15,000 individual TXT infrastructure component specifications."""
+    import html
+    out = ROOT / "osmediavm/infrastruktur-15000"
+    out.mkdir(parents=True, exist_ok=True)
+    groups = [
+        ("antarmuka-desain", "Antarmuka dan desain"), ("desktop-navigasi", "Desktop dan navigasi"),
+        ("modal-dialog", "Modal dan dialog"), ("file-manager", "Pengelola berkas"),
+        ("filesystem", "Sistem berkas"), ("hosting-server", "Hosting dan server"),
+        ("cloud-edge", "Cloud dan edge"), ("keamanan-privasi", "Keamanan dan privasi"),
+        ("identitas-akses", "Identitas dan akses"), ("runtime-api", "Runtime dan API"),
+        ("backend-jobs", "Backend dan pekerjaan latar"), ("database-data", "Database dan data"),
+        ("pencarian-indeks", "Pencarian dan indeks"), ("ai-asisten", "AI dan asisten"),
+        ("otomasi-alur", "Otomasi alur kerja"), ("devops-ci", "DevOps dan CI"),
+        ("deployment-pages", "Deployment dan Pages"), ("domain-dns-tls", "Domain DNS dan TLS"),
+        ("observabilitas", "Observabilitas"), ("backup-pemulihan", "Backup dan pemulihan"),
+        ("performa-cache", "Performa dan cache"), ("aksesibilitas", "Aksesibilitas"),
+        ("lokalisasi", "Bahasa dan lokalisasi"), ("analitik", "Analitik dan telemetri"),
+        ("konten-media", "Konten dan media"), ("kolaborasi", "Kolaborasi"),
+        ("notifikasi", "Notifikasi dan pesan"), ("konfigurasi", "Konfigurasi sistem"),
+        ("pengujian", "Pengujian dan kualitas"), ("tata-kelola", "Tata kelola dan dokumentasi"),
+    ]
+    concepts = [
+        "identitas", "palet-warna", "tipografi", "ikonografi", "grid", "tata-letak", "tema",
+        "animasi", "komponen", "responsivitas", "desktop", "taskbar", "dock", "peluncur",
+        "pencarian", "notifikasi", "jendela", "desktop-virtual", "pintasan", "menu-konteks",
+        "dialog-konfirmasi", "dialog-peringatan", "dialog-formulir", "dialog-progres",
+        "dialog-pemilih", "dialog-bantuan", "dialog-kesalahan", "panel-samping", "fokus-modal",
+        "pengelolaan-fokus", "daftar-berkas", "pohon-direktori", "pratinjau-berkas", "editor-teks",
+        "editor-kode", "salin-berkas", "pindah-berkas", "arsip", "tempat-sampah", "riwayat-versi",
+        "metadata", "izin-berkas", "indeks-berkas", "filter-berkas", "pengurutan-berkas",
+        "checksum", "validasi-berkas", "sinkronisasi-berkas", "retensi-berkas", "server-web",
+    ]
+    modifiers = ["registri", "konfigurasi", "preferensi", "status", "validasi", "pemrosesan",
+                 "penyimpanan", "pemulihan", "pencarian", "penyaringan"]
+    records = []
+    number = 0
+    for group_slug, group_name in groups:
+        for concept in concepts:
+            for modifier in modifiers:
+                number += 1
+                title = modifier.replace("-", " ").title() + " " + concept.replace("-", " ")
+                filename = f"{number:05d}-{group_slug}-{modifier}-{concept}.txt"
+                body = f"""OS MEDIA VM — SPESIFIKASI KOMPONEN INFRASTRUKTUR
+ID: OSM-INF-{number:05d}
+Nama: {title}
+Kelompok: {group_name}
+Konsep: {concept.replace('-', ' ')}
+Tipe: {modifier.replace('-', ' ')}
+
+TUJUAN
+Menentukan kontrak komponen yang dapat diimplementasikan, ditinjau, dan diuji secara terpisah untuk OS MEDIA VM desktop dan modal dialog.
+
+PERILAKU DAN STATUS
+- Definisikan input, output, validasi, dan pemilik keadaan secara eksplisit.
+- Bedakan status idle, loading, success, empty, dan error.
+- Cegah pengiriman ganda dan konfirmasi perubahan yang destruktif.
+- Sediakan pesan kesalahan yang jelas dan jalur pemulihan.
+- Gunakan tautan relatif yang bekerja pada subpath GitHub Pages / .L/.
+
+KONTRAK ANTARMUKA
+- ID stabil: osm-inf-{number:05d}; nama dan jalur harus konsisten dengan katalog.
+- Kontrol interaktif memiliki label yang dapat diakses, fokus terlihat, dan navigasi keyboard.
+- Dialog menggunakan judul terhubung, role=dialog, aria-modal=true, Escape, tombol tutup, fokus awal, dan pemulihan fokus.
+- Dialog responsif, tinggi dibatasi, dan konten dapat digulir pada viewport kecil.
+- Hormati prefers-reduced-motion dan zoom browser.
+
+DATA DAN KEAMANAN
+- Validasi tipe, rentang, dan ukuran input; sanitasi output yang ditampilkan.
+- Terapkan prinsip hak akses minimum; UI tidak menggantikan otorisasi server.
+- Jangan menaruh token, kata sandi, atau rahasia dalam TXT, HTML, JavaScript, atau repositori.
+- Kegagalan harus aman dan tidak boleh membocorkan data sensitif.
+
+DEPLOYMENT DAN INTEGRASI
+GitHub Pages hanya meng-host aset statis. Database, autentikasi server, pekerjaan latar, antrean, container, AI, dan operasi infrastruktur membutuhkan layanan eksternal dan konfigurasi tersendiri. Jangan menyatakan layanan aktif hanya karena spesifikasi tersedia.
+
+UJI PENERIMAAN
+1. Jalur sukses dan hasil cocok dengan kontrak.
+2. Input kosong, salah format, dan batas ukuran diuji.
+3. Kegagalan ditangani tanpa membocorkan data sensitif.
+4. Kontrol dapat dipakai dengan keyboard dan pembaca layar.
+5. Tautan berkas, ID, katalog, dan subpath Pages valid.
+
+STATUS
+Spesifikasi rancangan; bukan bukti bahwa layanan atau backend terkait telah berjalan.
+"""
+                (out / filename).write_text(body, encoding="utf-8")
+                records.append({"file": filename, "title": title, "group": group_name, "id": f"OSM-INF-{number:05d}"})
+    page_data = json.dumps(records, ensure_ascii=False).replace("</", "<\\/")
+    page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Katalog 15.000 spesifikasi komponen infrastruktur OS MEDIA VM"><title>OS MEDIA VM — 15.000 Komponen</title><style>body{font:16px/1.55 system-ui;margin:0;background:#08152d;color:#edf5ff}main{max-width:1100px;margin:auto;padding:26px}input{box-sizing:border-box;width:100%;padding:13px;border:1px solid #365273;border-radius:12px;background:#102447;color:white;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}a{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #29466c;border-radius:10px;color:#bfe8ff;text-decoration:none;overflow-wrap:anywhere}a:hover,a:focus{background:#17345c;outline:2px solid #8dd8ff}small,code,p{color:#9db6d7}code{font-size:11px;overflow-wrap:anywhere}</style></head><body><main><p>OS MEDIA VM / KATALOG INFRASTRUKTUR</p><h1>15.000 komponen infrastruktur</h1><p>Satu komponen per berkas TXT. Ini spesifikasi dan kriteria penerimaan, bukan bukti backend aktif.</p><input id="q" type="search" placeholder="Cari ID, komponen, atau domain…" aria-label="Cari komponen"><p id="count"></p><div class="grid" id="grid"></div><p>GitHub Pages hanya menyajikan aset statis. Backend memerlukan integrasi eksternal.</p></main><script>const data=__DATA__;const q=document.querySelector('#q'),grid=document.querySelector('#grid'),count=document.querySelector('#count');function draw(){const s=q.value.toLocaleLowerCase('id');const found=data.filter(x=>(x.file+' '+x.title+' '+x.group+' '+x.id).toLocaleLowerCase('id').includes(s));count.textContent=found.length.toLocaleString('id')+' dari '+data.length.toLocaleString('id')+' komponen';grid.replaceChildren(...found.map(x=>{const a=document.createElement('a');a.href='./'+x.file;const small=document.createElement('small');small.textContent=x.id+' · '+x.group;const strong=document.createElement('strong');strong.textContent=x.title;const code=document.createElement('code');code.textContent=x.file;a.append(small,strong,code);return a}))}q.addEventListener('input',draw);draw()</script></body></html>""".replace("__DATA__", page_data)
+    (out / "index.html").write_text(page, encoding="utf-8")
+    (out / "README.md").write_text("# OS MEDIA VM — Infrastruktur 15.000 Komponen\n\nBerisi tepat 15.000 berkas TXT, satu komponen per berkas, serta katalog pencarian index.html.\n\nGitHub Pages hanya menyajikan aset statis; layanan server membutuhkan integrasi eksternal.\n", encoding="utf-8")
+    if number != 15000 or len(records) != 15000:
+        raise SystemExit(f"Jumlah komponen salah: {number}")
+    print(f"Infrastruktur selesai: {number} berkas TXT unik.")
+
+
 if __name__ == "__main__":
     main()
     generate_infrastructure_150()
     generate_infrastructure_1500()
+    generate_infrastructure_15000()
 
 # Generator revisi: nama berkas berdasarkan nama menu dan total definisi tepat 25.000.
