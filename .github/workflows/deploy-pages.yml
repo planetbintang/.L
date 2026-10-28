@@ -28,6 +28,9 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Bangun 15.000 halaman modul Perpustakaan
+        run: python3 scripts/bangun-perpustakaan.py
+
       - name: Upload complete repository as Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
