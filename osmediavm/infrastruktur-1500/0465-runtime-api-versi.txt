@@ -1,0 +1,29 @@
+OS MEDIA VM — SPESIFIKASI KOMPONEN INFRASTRUKTUR
+ID: OSM-INF-0465
+Nama: Versi — Runtime dan API
+Kelompok: Runtime dan API
+Fungsi: Versi untuk domain Runtime dan API pada OS MEDIA VM desktop dan modal dialog.
+
+TUJUAN
+Mendefinisikan satu komponen yang dapat ditinjau, diimplementasikan, dan diuji secara terpisah. Dokumen ini adalah spesifikasi, bukan bukti layanan sudah aktif.
+
+PERILAKU DAN KONTRAK
+- Validasi masukan; bedakan status idle, loading, success, empty, dan error.
+- Input: konfigurasi tervalidasi dan konteks minimum. Output: status, hasil, dan diagnostik tanpa rahasia.
+- Tangani kegagalan secara aman; hindari aksi ganda dan perubahan destruktif tanpa konfirmasi.
+- Gunakan tautan relatif yang kompatibel dengan subpath GitHub Pages / .L/.
+- Untuk dialog: judul terhubung, role=dialog, aria-modal=true, fokus awal, Escape, tombol tutup, dan pemulihan fokus.
+- Dialog harus responsif, memiliki batas tinggi, dan mendukung gulir konten pada layar kecil.
+
+KEAMANAN DAN AKSESIBILITAS
+Terapkan hak akses minimum, sanitasi keluaran, perlindungan injeksi, label kontrol, fokus terlihat, navigasi keyboard, kontras memadai, dan prefers-reduced-motion. Antarmuka bukan pengganti otorisasi server. Jangan simpan kredensial di repositori atau browser.
+
+INTEGRASI
+GitHub Pages menyajikan aset statis. Database, autentikasi server, antrean, container, pekerjaan latar, dan AI membutuhkan layanan eksternal. Jangan menyatakan integrasi aktif tanpa konfigurasi dan pengujian nyata.
+
+UJI PENERIMAAN
+1. Jalur sukses menghasilkan keluaran sesuai kontrak.
+2. Input kosong, salah format, dan batas ukuran diuji.
+3. Kegagalan ditangani tanpa membocorkan data sensitif.
+4. Kontrol dapat digunakan dengan keyboard dan pembaca layar.
+5. Nama file, ID, tautan, dan katalog konsisten.
