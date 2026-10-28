@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Generate 1,500 menu TXT files and 25,000 definitions
+      - name: Generate 1,500 menu TXT files, 25,000 definitions, and 150 infrastructure TXT specifications
         run: python3 tools/buat-berkas-antarmuka-txt.py
       - name: Commit generated files
         run: |
