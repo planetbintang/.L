@@ -150,7 +150,8 @@
     const root=document.createElement('div');root.id='pbDesktopOS';root.hidden=true;
     const launcher=document.createElement('button');launcher.type='button';launcher.id='pbOsLauncher';launcher.className='pb-os-launcher-button';launcher.textContent='☷ Menu OS · 15.000';launcher.setAttribute('aria-controls','pbDesktopOS');launcher.setAttribute('aria-expanded','false');
     launcher.addEventListener('click',()=>{root.hidden=!root.hidden;launcher.setAttribute('aria-expanded',String(!root.hidden));if(!root.dataset.ready){render();root.dataset.ready='true';}if(!root.hidden)root.querySelector('#pbOsSearch')?.focus();});
-    document.body.append(launcher,root);
+    const library=document.createElement('a');library.id='pbOsLibraryShortcut';library.href='./aktif/index.html';library.textContent='🌐 Perpustakaan';library.setAttribute('aria-label','Buka Perpustakaan Kamus Digital Modern');library.style.cssText='position:fixed;right:12px;bottom:62px;z-index:10020;display:block;padding:10px 15px;border:1px solid #68cfff;background:#102b44;color:#eaf7ff;text-decoration:none;font:600 13px/1.3 system-ui,sans-serif;box-shadow:0 8px 28px #0007';
+    document.body.append(launcher,root,library);
     document.addEventListener('click',event=>{const trigger=event.target.closest('[data-open-desktop-os]');if(!trigger)return;event.preventDefault();if(root.hidden){root.hidden=false;launcher.setAttribute('aria-expanded','true');if(!root.dataset.ready){render();root.dataset.ready='true';}}root.querySelector('#pbOsSearch')?.focus();});
     window.addEventListener('hashchange',()=>{if(!root.hidden&&location.hash) {root.hidden=true;launcher.setAttribute('aria-expanded','false');}});
   }
