@@ -9,10 +9,10 @@
   if (!form || !input) {
     const toolbar = document.createElement('form');
     toolbar.id = 'globalSearchForm'; toolbar.className = 'toolbar'; toolbar.setAttribute('role','search');
-    toolbar.setAttribute('aria-label','Cari repositori, folder, domain, Google, atau ChatGPT');
+    toolbar.setAttribute('aria-label','Cari repositori, folder, domain, atau Google');
     const field = document.createElement('input'); field.id = 'globalSearchInput'; field.type = 'search';
-    field.placeholder = 'Cari domain, isi path, repo, Google, ChatGPT…'; field.autocomplete = 'off';
-    field.setAttribute('aria-label','Cari domain, path, repositori, Google, atau ChatGPT');
+    field.placeholder = 'Cari domain, isi path, repo, atau Google…'; field.autocomplete = 'off';
+    field.setAttribute('aria-label','Cari domain, path, repositori, atau Google');
     const submit = document.createElement('button'); submit.type = 'submit'; submit.className = 'repo-action primary'; submit.textContent = 'Cari';
     toolbar.append(field,submit);
     const statusNode = document.createElement('p'); statusNode.id = 'globalSearchStatus'; statusNode.setAttribute('aria-live','polite');
@@ -125,7 +125,7 @@
     if (!q) {
       if (layout) layout.hidden = true;
       if (sourceView) sourceView.hidden = false;
-      status.textContent = 'Indeks siap. Masukkan kata kunci di kolom cari untuk melihat isi domain, path, repositori, Google, dan ChatGPT.';
+      status.textContent = 'Indeks siap. Masukkan kata kunci untuk mencari domain, path, repositori, dan Google.';
       renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0});
       return;
     }
@@ -141,8 +141,7 @@
       siteMatches.push({title:'planetbintang.com · halaman utama .L',description:'Domain utama yang dipetakan ke halaman GitHub Pages .L. DNS dan domain custom harus aktif di pengelola domain.',path:'planetbintang/planetbintang.com/index.html',href:'https://planetbintang.github.io/.L/',label:'Buka halaman .L',kind:'SITUS UTAMA'});
     }
     const utilityMatches = [
-      {title:'Google Search',description:'Cari “' + text(query).trim() + '” langsung di Google.',path:'google.com/search',href:'https://www.google.com/search?q=' + encodeURIComponent(text(query).trim()),label:'Cari di Google ↗',kind:'MESIN PENCARI'},
-      {title:'ChatGPT',description:'Buka ChatGPT untuk melanjutkan pertanyaan atau analisis: “' + text(query).trim() + '”.',path:'chatgpt.com',href:'https://chatgpt.com/?q=' + encodeURIComponent(text(query).trim()),label:'Buka ChatGPT ↗',kind:'ASISTEN AI'}
+      {title:'Google Search',description:'Cari “' + text(query).trim() + '” langsung di Google.',path:'google.com/search',href:'https://www.google.com/search?q=' + encodeURIComponent(text(query).trim()),label:'Cari di Google ↗',kind:'MESIN PENCARI'}
     ];
     const allCount = repoMatches.length + folderMatches.length + domainMatches.length + siteMatches.length + utilityMatches.length;
     renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length,domain:domainMatches.length + siteMatches.length + utilityMatches.length});
