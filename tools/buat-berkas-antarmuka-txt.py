@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Buat 25.000 file TXT antarmuka dari registri OS MEDIA VM.
+"""Generate 1,500 menu-named TXT files containing exactly 25,000 UI definitions.
 
-Jalankan dari root repository:
+Run from repository root:
   python3 tools/buat-berkas-antarmuka-txt.py
 
-Hasil:
-  osmediavm/pusat_registri/berkas-txt/  (1.500 berkas bernama sesuai menu)
-Setiap berkas berisi 17 definisi komponen UI; total 25.500 definisi
-menu/tombol/layout/posisi/ukuran dan komponen pendukung.
+Output:
+  osmediavm/pusat_registri/berkas-txt/
+Each TXT file corresponds to one registered modal/menu. File names use the menu
+name (normalized to a filesystem-safe Indonesian slug); duplicate names receive
+a numeric suffix. Definitions describe menu, button, layout, position, and size.
 """
 import json
 import re
@@ -17,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "osmediavm/pusat_registri/daftar-menu.json"
 OUT = ROOT / "osmediavm/pusat_registri/berkas-txt"
+TARGET_DEFINITIONS = 25_000
 KINDS = [
     "Menu", "Tombol", "Layout", "Posisi", "Ukuran", "Dialog", "Panel",
     "Toolbar", "Navigasi", "Kartu", "Kontrol", "Jendela", "Ikon",
@@ -50,14 +52,27 @@ def slug(value):
 def main():
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
     menus = data.get("menu", [])
+    if len(menus) != 1500:
+        raise SystemExit(f"Registri diharapkan berisi 1500 menu; ditemukan {len(menus)}")
     OUT.mkdir(parents=True, exist_ok=True)
-    # Remove only prior generated .txt files, not other content.
     for old in OUT.glob("*.txt"):
         old.unlink()
+
     manifest = []
+    definition_count = 0
+    used_names = set()
     for i, menu in enumerate(menus, 1):
         title = menu.get("namaFitur") or menu.get("judul") or menu.get("slug") or f"Menu {i}"
-        filename = f"{slug(title)}-{i:04d}.txt"
+        base = slug(title)
+        filename = base + ".txt"
+        duplicate = 2
+        while filename.casefold() in used_names:
+            filename = f"{base}-{duplicate}.txt"
+            duplicate += 1
+        used_names.add(filename.casefold())
+
+        remaining = TARGET_DEFINITIONS - definition_count
+        component_count = min(len(KINDS), max(0, remaining))
         lines = [
             "OS MEDIA VM — BERKAS DEFINISI ANTARMUKA",
             "=" * 46,
@@ -72,8 +87,8 @@ def main():
             "DEFINISI KOMPONEN",
             "-" * 46,
         ]
-        for j, kind in enumerate(KINDS):
-            number = (i - 1) * len(KINDS) + j + 1
+        for j, kind in enumerate(KINDS[:component_count]):
+            number = definition_count + 1
             lines.extend([
                 "",
                 f"[{number:05d}] {kind.upper()}",
@@ -83,28 +98,35 @@ def main():
                 f"Posisi     : {POSITIONS[(i * 2 + j) % len(POSITIONS)]}",
                 f"Ukuran     : {SIZES[(i + j * 2) % len(SIZES)]}",
                 "Responsif  : ya",
-                "Aksesibilitas: label jelas, fokus keyboard, kontras yang memadai",
-                "Penutupan  : tombol tutup dan tombol Escape bila berupa dialog",
+                "Aksesibilitas: label jelas, fokus keyboard, kontras memadai",
+                "Penutupan  : tombol tutup dan Escape bila berupa dialog",
                 f"Ringkasan  : {menu.get('ringkasan', title)}",
             ])
+            definition_count += 1
         lines.extend([
             "",
             "CATATAN RUNTIME",
-            "Definisi ini mendeskripsikan antarmuka web. Pengendalian perangkat keras atau OS host",
-            "membutuhkan adapter runtime dengan izin yang sesuai; berkas TXT tidak menjalankan aksi.",
+            "Berkas ini mendeskripsikan antarmuka web. Aksi OS host membutuhkan adapter",
+            "runtime dengan izin sesuai; definisi TXT tidak menjalankan aksi sendiri.",
             "",
         ])
         (OUT / filename).write_text("\n".join(lines), encoding="utf-8")
-        manifest.append({"file": filename, "menu": menu.get("judul", title), "id": menu.get("id", str(i).zfill(4))})
+        manifest.append({
+            "file": filename,
+            "menu": menu.get("judul", title),
+            "id": menu.get("id", str(i).zfill(4)),
+            "definitions": component_count,
+        })
+
     (OUT / "INDEKS-BERKAS.txt").write_text(
         "INDEKS BERKAS TXT OS MEDIA VM\n"
         f"Jumlah berkas menu: {len(manifest)}\n"
-        f"Jumlah definisi komponen: {len(manifest) * len(KINDS)}\n\n"
-        + "\n".join(f"{x['id']} | {x['menu']} | {x['file']}" for x in manifest)
+        f"Jumlah definisi komponen: {definition_count}\n\n"
+        + "\n".join(f"{x['id']} | {x['menu']} | {x['file']} | {x['definitions']} definisi" for x in manifest)
         + "\n",
         encoding="utf-8",
     )
-    print(f"Selesai: {len(manifest)} file menu + 1 indeks, {len(manifest) * len(KINDS):,} definisi komponen.")
+    print(f"Selesai: {len(manifest)} file menu + 1 indeks; {definition_count:,} definisi komponen.")
     print(f"Lokasi: {OUT.relative_to(ROOT)}")
 
 if __name__ == "__main__":
