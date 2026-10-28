@@ -1,0 +1,1 @@
+/* Pengendali modal desktop OS MEDIA VM */(()=>{document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(window.parent&&window.parent!==window)window.parent.postMessage({type:'osmediavm:close-menu'},'*');else location.href='../pusat_registri/'}})})();
