@@ -16,7 +16,7 @@
       root.innerHTML = '<p class="eyebrow">DESKTOP OS · FILESYSTEM SITUS</p><h1>'+esc(item.display)+'</h1><p>'+esc(item.category)+' · '+esc(item.id)+'</p><section class="details"><dl><dt>Tampilan</dt><dd>Halaman website responsif</dd><dt>Fungsi sistem</dt><dd>'+esc(item.systemFunction)+'</dd><dt>Integrasi menu</dt><dd>'+esc(item.integration)+'</dd><dt>Data</dt><dd>'+esc(item.data)+'</dd><dt>Data otomatis tersimpan</dt><dd>Favorit dan aktivitas disimpan di browser utama</dd><dt>Mode aktivitas</dt><dd>'+esc(item.activityMode)+'</dd><dt>File sistem</dt><dd><code>'+esc(item.folderPath)+'</code> · '+item.fileCount+' file</dd><dt>Menu induk</dt><dd>'+esc(item.category)+'</dd></dl></section><p class="actions"><a href="../../../index.html'+esc(item.parentRoute)+'">Buka sistem induk</a><a href="../index.html">Buka kategori</a><a href="../../../index.html">Kembali ke beranda</a></p><p class="note">Halaman ini adalah modul situs statis. Fungsi yang memerlukan OS native atau backend harus dihubungkan secara terpisah.</p>';
       return;
     }
-    const slug = path.match(/system-menus\/([^/]+)\/index\.html$/)?.[1];
+    const slug = path.match(/(?:system-menus|aktif)\/([^/]+)\/index\.html$/)?.[1];
     const category = categories.find(c=>c.slug===slug);
     if (!category) { root.innerHTML='<h1>Kategori tidak ditemukan</h1><a href="../../index.html">Kembali</a>'; return; }
     document.title = category.name + ' · Menu OS Planetbintang';
