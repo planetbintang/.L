@@ -1,0 +1,30 @@
+name: Generate REIC infrastructure files
+on:
+  push:
+    branches: [io]
+    paths:
+      - '.github/workflows/generate-reic.yml'
+      - 'scripts/generate-reic.js'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate 150 REIC/CSS/JS triplets
+        run: node scripts/generate-reic.js
+      - name: Commit generated infrastructure
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add osmediavm/infra-150 osmediavm/index.reic
+          if git diff --cached --quiet; then echo "No generated changes"; exit 0; fi
+          git commit -m "Generate 150 REIC infrastructure triplets"
+          git push origin HEAD:io
