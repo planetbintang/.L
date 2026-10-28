@@ -48,7 +48,7 @@
       data: category[2], autoSave: true, activityMode: modes[safeIndex % modes.length],
       route: safeIndex === 0 ? '#overview' : safeIndex === 1 ? '#fileManager' : safeIndex === 2 ? '#cari' : '',
       parentRoute: parentRoutes[categoryIndex], filePath,
-      folderPath: filePath.replace(/index\\.html$/, ''), fileCount: 1,
+      folderPath: filePath.replace(/index\.html$/, ''), fileCount: 1,
       filesystemState: 'file statis terdaftar'
     };
   }
@@ -155,5 +155,5 @@
     window.addEventListener('hashchange',()=>{if(!root.hidden&&location.hash) {root.hidden=true;launcher.setAttribute('aria-expanded','false');}});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
-  window.PBDesktopOSMenus=Object.freeze({total:TOTAL,get:menuAt,search:(query='',category='')=>allMatches(query,category).slice(0,200),listCategory:(category)=>allMatches('',category),categorySlugs:Object.freeze(categorySlugs.slice()),categories:Object.freeze(categories.map((c,i)=>({name:c[0],slug:categorySlugs[i],parentRoute:parentRoutes[i]})),open:()=>{const b=document.getElementById('pbOsLauncher');if(b)b.click();},version:2});
+  window.PBDesktopOSMenus=Object.freeze({total:TOTAL,get:menuAt,search:(query='',category='')=>allMatches(query,category).slice(0,200),listCategory:(category)=>allMatches('',category),categorySlugs:Object.freeze(categorySlugs.slice()),categories:Object.freeze(categories.map((c,i)=>({name:c[0],slug:categorySlugs[i],parentRoute:parentRoutes[i]}))),open:()=>{const b=document.getElementById('pbOsLauncher');if(b)b.click();},version:2});
 })();
