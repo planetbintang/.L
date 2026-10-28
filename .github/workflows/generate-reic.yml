@@ -1,30 +1,35 @@
-name: Generate REIC infrastructure files
+name: Bangun katalog komponen REIC
 on:
   push:
     branches: [io]
     paths:
       - '.github/workflows/generate-reic.yml'
-      - 'scripts/generate-reic.js'
+      - 'osmediavm/scripts/generate-reic.mjs'
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: generate-reic-catalog
+  cancel-in-progress: false
 jobs:
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           ref: io
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Generate 150 REIC/CSS/JS triplets
-        run: node scripts/generate-reic.js
-      - name: Commit generated infrastructure
+      - name: Hasilkan 15.000 komponen REIC
+        run: node osmediavm/scripts/generate-reic.mjs
+      - name: Commit 45.000 berkas komponen
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add osmediavm/infra-150 osmediavm/index.reic
-          if git diff --cached --quiet; then echo "No generated changes"; exit 0; fi
-          git commit -m "Generate 150 REIC infrastructure triplets"
+          git add osmediavm/recordin/components
+          if git diff --cached --quiet; then echo "Katalog sudah mutakhir"; exit 0; fi
+          git commit -m "Bangun katalog 15.000 komponen REIC"
           git push origin HEAD:io
