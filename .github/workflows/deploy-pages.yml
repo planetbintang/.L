@@ -32,6 +32,25 @@ jobs:
       - name: Bangun 15.000 halaman modul Perpustakaan
         run: python3 scripts/bangun-perpustakaan.py
 
+      - name: Reconstruct HTML from REIC sources for static hosting
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          manifest = Path('scripts/html-reic-migration-manifest.txt')
+          if manifest.exists():
+              restored = 0
+              for line in manifest.read_text(encoding='utf-8').splitlines():
+                  source = Path(line.strip())
+                  if str(source).endswith('.reic') and source.is_file():
+                      target = source.with_suffix('.html')
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      target.write_bytes(source.read_bytes())
+                      restored += 1
+              print(f'Direkonstruksi {restored} halaman HTML dari sumber REIC.')
+          else:
+              print('Belum ada migrasi REIC; deployment menggunakan berkas saat ini.')
+          PY
+
       - name: Upload complete repository as Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
