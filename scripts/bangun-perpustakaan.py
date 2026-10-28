@@ -6,7 +6,7 @@ import html
 import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "aktif" / "modul"
+OUT = ROOT / "leksikon" / "modul"
 TOTAL = 15000
 CATEGORIES = [
     ("sistem-perangkat", "Sistem & perangkat", "perangkat, proses, sumber daya, dan informasi perangkat"),
