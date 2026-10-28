@@ -1,0 +1,70 @@
+name: Bangun 250.000+ folder leksikon
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "leksikon/data/lema.jsonl"
+      - "scripts/bangun-folder-leksikon.py"
+      - ".github/workflows/bangun-leksikon.yml"
+  schedule:
+    - cron: "17 2 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bangun-leksikon
+  cancel-in-progress: false
+
+jobs:
+  bangun:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Ambil repositori
+        uses: actions/checkout@v4
+
+      - name: Siapkan Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Periksa korpus sumber
+        id: corpus
+        shell: bash
+        run: |
+          if [ ! -f leksikon/data/lema.jsonl ]; then
+            echo "::error::Korpus leksikon/data/lema.jsonl belum tersedia. Tambahkan korpus JSONL berizin dengan minimal 250.000 lema unik; workflow tidak akan mengarang lema atau definisi."
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          seen=set()
+          with open("leksikon/data/lema.jsonl", encoding="utf-8") as f:
+              for n,line in enumerate(f,1):
+                  if not line.strip(): continue
+                  try: row=json.loads(line)
+                  except Exception as e: raise SystemExit(f"JSONL baris {n} tidak valid: {e}")
+                  lemma=str(row.get("lemma","")).strip()
+                  if lemma: seen.add(lemma.casefold())
+          print(f"Lema unik tersedia: {len(seen)}")
+          if len(seen) < 250000:
+              raise SystemExit(f"Korpus baru berisi {len(seen)} lema unik; target minimum 250.000 belum terpenuhi.")
+          PY
+
+      - name: Bangun halaman per lema
+        run: python scripts/bangun-folder-leksikon.py leksikon/data/lema.jsonl --limit 250000 --output dist/leksikon/kata
+
+      - name: Sertakan halaman utama leksikon
+        run: |
+          mkdir -p dist/leksikon
+          cp leksikon/index.html dist/leksikon/index.html
+
+      - name: Arsipkan hasil pembangunan
+        uses: actions/upload-artifact@v4
+        with:
+          name: leksikon-250000-folder
+          path: dist/leksikon/
+          if-no-files-found: error
+          retention-days: 30
