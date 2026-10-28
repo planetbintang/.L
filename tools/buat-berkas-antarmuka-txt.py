@@ -131,3 +131,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Generator revisi: nama berkas berdasarkan nama menu dan total definisi tepat 25.000.
