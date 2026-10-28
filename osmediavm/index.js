@@ -1,1 +1,2 @@
-/* OS MEDIA VM main view */\ndocument.documentElement.dataset.runtime='REIC';\n
+/* OS MEDIA VM main view */
+document.documentElement.dataset.runtime='REIC';
