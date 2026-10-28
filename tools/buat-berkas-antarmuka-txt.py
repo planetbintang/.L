@@ -206,8 +206,91 @@ Catatan: berkas ini adalah spesifikasi, bukan bukti bahwa layanan telah aktif.
     (out / "README.md").write_text("# OS MEDIA VM — 150 Komponen Infrastruktur\n\nBerisi 150 spesifikasi TXT bernomor, satu komponen per berkas, serta katalog pencarian index.html.\n\nTarget publik: https://planetbintang.github.io/.L/osmediavm/infrastruktur-150/\n\nSpesifikasi bukan bukti bahwa layanan backend telah aktif. GitHub Pages hanya menyajikan aset statis.\n", encoding="utf-8")
     print(f"Infrastruktur selesai: {number} berkas TXT + katalog HTML dan README.")
 
+
+def generate_infrastructure_1500():
+    """Generate 1,500 distinct component TXT specifications and a searchable catalog."""
+    import html
+    out = ROOT / "osmediavm/infrastruktur-1500"
+    out.mkdir(parents=True, exist_ok=True)
+    groups = [
+        ("antarmuka-desain", "Antarmuka dan desain"), ("desktop-navigasi", "Desktop dan navigasi"),
+        ("modal-dialog", "Modal dan dialog"), ("file-manager", "Pengelola berkas"),
+        ("filesystem", "Sistem berkas"), ("hosting-server", "Hosting dan server"),
+        ("cloud-edge", "Cloud dan edge"), ("keamanan-privasi", "Keamanan dan privasi"),
+        ("identitas-akses", "Identitas dan akses"), ("runtime-api", "Runtime dan API"),
+        ("backend-jobs", "Backend dan pekerjaan latar"), ("database-data", "Database dan data"),
+        ("pencarian-indeks", "Pencarian dan indeks"), ("ai-asisten", "AI dan asisten"),
+        ("otomasi-alur", "Otomasi alur kerja"), ("devops-ci", "DevOps dan CI"),
+        ("deployment-pages", "Deployment dan Pages"), ("domain-dns-tls", "Domain DNS dan TLS"),
+        ("observabilitas", "Observabilitas"), ("backup-pemulihan", "Backup dan pemulihan"),
+        ("performa-cache", "Performa dan cache"), ("aksesibilitas", "Aksesibilitas"),
+        ("lokalisasi", "Bahasa dan lokalisasi"), ("analitik", "Analitik dan telemetri"),
+        ("konten-media", "Konten dan media"), ("kolaborasi", "Kolaborasi"),
+        ("notifikasi", "Notifikasi dan pesan"), ("konfigurasi", "Konfigurasi sistem"),
+        ("pengujian", "Pengujian dan kualitas"), ("tata-kelola", "Tata kelola dan dokumentasi"),
+    ]
+    concepts = [
+        "Registri", "Konfigurasi", "Preferensi", "Status", "Validasi", "Pemrosesan", "Penyimpanan",
+        "Pemulihan", "Pencarian", "Penyaringan", "Pengurutan", "Pratinjau", "Editor", "Riwayat",
+        "Versi", "Izin", "Autentikasi", "Otorisasi", "Audit", "Notifikasi", "Dialog konfirmasi",
+        "Dialog formulir", "Dialog peringatan", "Dialog progres", "Panel samping", "Pintasan keyboard",
+        "Tata letak responsif", "Tema", "Aksesibilitas", "Telemetri", "Pencatatan", "Metrik", "Alarm",
+        "Penjadwalan", "Antrean", "Percobaan ulang", "Batas waktu", "Cache", "Sinkronisasi", "Ekspor",
+        "Impor", "Backup", "Enkripsi", "Sanitasi", "Rate limit", "Health check", "Dokumentasi",
+        "Pengujian", "Integrasi", "Pemantauan",
+    ]
+    records = []
+    number = 0
+    for group_slug, group_name in groups:
+        for concept in concepts:
+            number += 1
+            title = concept + " — " + group_name
+            filename = f"{number:04d}-{slug(group_slug)}-{slug(concept)}.txt"
+            body = f"""OS MEDIA VM — SPESIFIKASI KOMPONEN INFRASTRUKTUR
+ID: OSM-INF-{number:04d}
+Nama: {title}
+Kelompok: {group_name}
+Fungsi: {concept} untuk domain {group_name} pada OS MEDIA VM desktop dan modal dialog.
+
+TUJUAN
+Mendefinisikan satu komponen yang dapat ditinjau, diimplementasikan, dan diuji secara terpisah. Dokumen ini adalah spesifikasi, bukan bukti layanan sudah aktif.
+
+PERILAKU DAN KONTRAK
+- Validasi masukan; bedakan status idle, loading, success, empty, dan error.
+- Input: konfigurasi tervalidasi dan konteks minimum. Output: status, hasil, dan diagnostik tanpa rahasia.
+- Tangani kegagalan secara aman; hindari aksi ganda dan perubahan destruktif tanpa konfirmasi.
+- Gunakan tautan relatif yang kompatibel dengan subpath GitHub Pages / .L/.
+- Untuk dialog: judul terhubung, role=dialog, aria-modal=true, fokus awal, Escape, tombol tutup, dan pemulihan fokus.
+- Dialog harus responsif, memiliki batas tinggi, dan mendukung gulir konten pada layar kecil.
+
+KEAMANAN DAN AKSESIBILITAS
+Terapkan hak akses minimum, sanitasi keluaran, perlindungan injeksi, label kontrol, fokus terlihat, navigasi keyboard, kontras memadai, dan prefers-reduced-motion. Antarmuka bukan pengganti otorisasi server. Jangan simpan kredensial di repositori atau browser.
+
+INTEGRASI
+GitHub Pages menyajikan aset statis. Database, autentikasi server, antrean, container, pekerjaan latar, dan AI membutuhkan layanan eksternal. Jangan menyatakan integrasi aktif tanpa konfigurasi dan pengujian nyata.
+
+UJI PENERIMAAN
+1. Jalur sukses menghasilkan keluaran sesuai kontrak.
+2. Input kosong, salah format, dan batas ukuran diuji.
+3. Kegagalan ditangani tanpa membocorkan data sensitif.
+4. Kontrol dapat digunakan dengan keyboard dan pembaca layar.
+5. Nama file, ID, tautan, dan katalog konsisten.
+"""
+            (out / filename).write_text(body, encoding="utf-8")
+            records.append((filename, title, group_name))
+    cards = []
+    for filename, title, group_name in records:
+        cards.append('<a class="item" data-search="' + html.escape((title + " " + group_name).lower(), quote=True) + '" href="./' + filename + '"><small>' + html.escape(group_name) + '</small><strong>' + html.escape(title) + '</strong><code>' + filename + '</code></a>')
+    page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OS MEDIA VM — 1500 Komponen</title><style>body{font:16px/1.55 system-ui;margin:0;background:#08152d;color:#edf5ff}main{max-width:1100px;margin:auto;padding:26px}input{box-sizing:border-box;width:100%;padding:13px;border:1px solid #365273;border-radius:12px;background:#102447;color:white;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}a{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #29466c;border-radius:10px;color:#bfe8ff;text-decoration:none}a:hover{background:#17345c}small,code,p{color:#9db6d7}code{font-size:11px;overflow-wrap:anywhere}</style></head><body><main><p>OS MEDIA VM / KATALOG INFRASTRUKTUR</p><h1>1500 komponen infrastruktur</h1><p>Satu spesifikasi TXT untuk setiap komponen. Isi adalah rancangan dan kriteria penerimaan, bukan bukti layanan backend aktif.</p><input id="q" type="search" placeholder="Cari komponen…" aria-label="Cari komponen"><p id="count"></p><div class="grid" id="grid">""" + "".join(cards) + """</div><p>GitHub Pages menyajikan aset statis; layanan backend memerlukan integrasi eksternal.</p></main><script>const q=document.querySelector('#q'),items=[...document.querySelectorAll('.item')];function filter(){const s=q.value.toLocaleLowerCase('id');let n=0;items.forEach(a=>{const ok=(a.textContent+' '+a.dataset.search).toLocaleLowerCase('id').includes(s);a.hidden=!ok;if(ok)n++});document.querySelector('#count').textContent=n+' dari '+items.length+' komponen'}q.addEventListener('input',filter);filter()</script></body></html>"""
+    (out / "index.html").write_text(page, encoding="utf-8")
+    (out / "README.md").write_text("# OS MEDIA VM — 1500 Komponen Infrastruktur\n\nBerisi 1500 berkas TXT komponen, satu spesifikasi per berkas, dan katalog pencarian index.html.\n\nGitHub Pages menyajikan aset statis; backend dan layanan server membutuhkan integrasi eksternal.\n", encoding="utf-8")
+    if number != 1500:
+        raise SystemExit(f"Jumlah komponen tidak sesuai: {number}")
+    print(f"Infrastruktur 1500 selesai: {number} TXT + katalog HTML dan README.")
+
 if __name__ == "__main__":
     main()
     generate_infrastructure_150()
+    generate_infrastructure_1500()
 
 # Generator revisi: nama berkas berdasarkan nama menu dan total definisi tepat 25.000.
