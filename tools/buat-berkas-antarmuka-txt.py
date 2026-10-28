@@ -394,6 +394,9 @@ def migrate_recordin():
     root.mkdir(parents=True, exist_ok=True)
     sources = [ROOT / "osmediavm" / n for n in
                ("infrastruktur-15000", "infrastruktur-1500", "infrastruktur-150")]
+    # Remove only files produced by this migration so repeated runs stay idempotent.
+    for prior in root.glob("infra-*.reic"):
+        prior.unlink()
     entries, used, moved = [], set(), 0
     for source in sources:
         if not source.exists():
