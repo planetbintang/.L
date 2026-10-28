@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Migrasi sumber antarmuka HTML menjadi berkas sumber .reic.
+ * Migrasi seluruh sumber antarmuka HTML menjadi berkas sumber .reic.
  * Manifest dipakai untuk merekonstruksi halaman web pada artefak GitHub Pages.
  */
 import fs from 'node:fs';
@@ -21,14 +21,20 @@ const files = tracked.split('\0').filter(Boolean)
 
 const migrated = new Set(prior);
 let renamed = 0;
-let skipped = 0;
+let preservedConflicts = 0;
 
 for (const file of files) {
   const target = file.slice(0, -5) + '.reic';
   if (fs.existsSync(target)) {
-    console.log('Lewati tujuan sudah ada: ' + target);
-    skipped++;
-    continue;
+    // Pertahankan sumber REIC lama tanpa menghalangi migrasi HTML.
+    let backup = target + '.pre-migration';
+    let suffix = 2;
+    while (fs.existsSync(backup)) {
+      backup = target + '.pre-migration-' + suffix++;
+    }
+    fs.renameSync(target, backup);
+    console.log('Sumber REIC sebelumnya dipertahankan sebagai: ' + backup);
+    preservedConflicts++;
   }
   fs.renameSync(file, target);
   migrated.add(target);
@@ -36,4 +42,4 @@ for (const file of files) {
 }
 
 fs.writeFileSync(manifest, [...migrated].sort().join('\n') + '\n');
-console.log(`Migrasi selesai: ${renamed} file HTML menjadi REIC; ${skipped} dilewati karena konflik nama. Total manifest: ${migrated.size}`);
+console.log(`Migrasi selesai: ${renamed} file HTML menjadi REIC; ${preservedConflicts} konflik diselesaikan dengan backup; total manifest: ${migrated.size}`);
