@@ -1,0 +1,63 @@
+name: Migrasi HTML ke REIC dan deploy Pages
+on:
+  push:
+    branches: [io]
+    paths:
+      - 'scripts/migrate-html-to-reic.mjs'
+      - '.github/workflows/migrate-html-to-reic.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: reic-source-migration
+  cancel-in-progress: false
+jobs:
+  migrate-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout branch io
+        uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - name: Rename tracked HTML source files to REIC
+        run: node scripts/migrate-html-to-reic.mjs
+      - name: Commit source migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Tidak ada migrasi baru"; else git commit -m "Migrasi sumber HTML menjadi REIC"; git push origin HEAD:io; fi
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Reconstruct HTML only for the Pages artifact
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          manifest = Path('scripts/html-reic-migration-manifest.txt')
+          if not manifest.exists():
+              raise SystemExit('Manifest migrasi tidak ditemukan')
+          restored = 0
+          for line in manifest.read_text(encoding='utf-8').splitlines():
+              source = Path(line.strip())
+              if not str(source).endswith('.reic') or not source.is_file():
+                  continue
+              target = source.with_suffix('.html')
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(source.read_bytes())
+              restored += 1
+          print(f'Direkonstruksi {restored} halaman untuk deployment Pages; sumber tetap .reic.')
+          PY
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
