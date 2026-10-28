@@ -24,18 +24,11 @@
     <p>Pusat masuk untuk media, galeri, dan menu OS Planetbintang. Halaman ini merupakan bagian dari situs statis; fitur yang memerlukan server atau layanan eksternal harus dihubungkan secara terpisah.</p>
     <nav class="grid" aria-label="Menu utama OS MEDIA VM">
       <a class="card" href="../galeri.html"><strong>Galeri Media ↗</strong><span>Buka galeri gambar yang sudah tersedia pada situs.</span></a>
-      <a class="card" href="../#desktop-os-menus" data-os-menu><strong>Desktop OS Menu Center ↗</strong><span>Masuk ke katalog 15.000 menu pada halaman utama.</span></a>
+      <a class="card" href="../#overview"><strong>Desktop OS Menu Center ↗</strong><span>Masuk ke katalog 15.000 menu pada halaman utama.</span></a>
       <a class="card" href="../#fileManager"><strong>File Manager ↗</strong><span>Kembali ke pengelolaan file dan folder situs.</span></a>
       <a class="card" href="../"><strong>Halaman Utama ↗</strong><span>Kembali ke dashboard Planetbintang.</span></a>
     </nav>
   </main>
   <footer>OS MEDIA VM · /osmediavm/ · Planetbintang</footer>
-  <script>
-    document.querySelector('[data-os-menu]').addEventListener('click', function(event) {
-      event.preventDefault();
-      sessionStorage.setItem('pb-open-desktop-os-menu', '1');
-      location.href = '../#desktop-os-menus';
-    });
-  </script>
 </body>
 </html>
