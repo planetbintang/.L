@@ -422,28 +422,49 @@ def migrate_recordin():
             # Every REIC component receives dedicated CSS and JS companions.
             stem = name[:-5]
             (root / (stem + ".css")).write_text(
-                "/* Component stylesheet: " + stem + " */\\n"
+                "/* Component stylesheet: " + stem + " */\n"
                 ".reic-component{display:grid;gap:1rem}.reic-component label{display:block;font-weight:600}"
                 ".reic-component input,.reic-component textarea{width:100%;padding:.7rem;border:1px solid #38516d;border-radius:.6rem;background:#081423;color:inherit}"
                 ".reic-component output{display:block;white-space:pre-wrap;overflow-wrap:anywhere;padding:.8rem;border-radius:.6rem;background:#081423}"
                 ".reic-component button{cursor:pointer}", encoding="utf-8")
             (root / (stem + ".js")).write_text(
-                "/* REIC component module: " + stem + " */\\n"
+                "/* REIC component module: " + stem + " */\n"
                 "(function(){'use strict';window.REIC_MODULES=window.REIC_MODULES||{};"
                 "window.REIC_MODULES[" + json.dumps(name) + "]={"
                 "init:function(root,api){const form=root.querySelector('form');"
                 "if(form)form.addEventListener('submit',function(e){e.preventDefault();"
                 "const data=new FormData(form),out=root.querySelector('output');"
                 "out.textContent=JSON.stringify(Object.fromEntries(data.entries()),null,2);"
-                "api.setOutput(out.textContent)});}};})();\\n", encoding="utf-8")
+                "api.setOutput(out.textContent)});}};})();\n", encoding="utf-8")
             moved += 1
     css = """*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eef5ff;font:16px/1.6 system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:24px}header,.panel{background:#101e31;border:1px solid #2b405a;border-radius:16px;padding:18px}input{width:100%;padding:13px;margin:16px 0;background:#081423;color:inherit;border:1px solid #38516d;border-radius:10px}#list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px}.item{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #2b405a;border-radius:10px;color:#c9eaff;text-decoration:none;overflow-wrap:anywhere}small,code,.muted{color:#a9bad0}code{font-size:.78rem;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 ui-monospace,monospace;background:#081423;padding:18px;border-radius:12px;max-height:65vh;overflow:auto}button{padding:10px 14px;border:1px solid #38516d;border-radius:9px;background:#17314c;color:#fff;cursor:pointer}.hidden{display:none!important}:focus{outline:2px solid #8dd8ff;outline-offset:2px}"""
     js = """(()=>{'use strict';const q=s=>document.querySelector(s),list=q('#list'),search=q('#search'),view=q('#viewer'),source=q('#source'),back=q('#back'),count=q('#count');let entries=[];function el(t,c,v){const n=document.createElement(t);if(c)n.className=c;if(v!==undefined)n.textContent=v;return n}async function openFile(file){try{const r=await fetch('./'+encodeURIComponent(file));if(!r.ok)throw Error('HTTP '+r.status);const text=await r.text();source.textContent=text;q('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');history.replaceState(null,'','#'+encodeURIComponent(file));const stem=file.slice(0,-5),style=q('#componentStyle'),script=q('#componentScript');style.href='./'+encodeURIComponent(stem+'.css');script.src='./'+encodeURIComponent(stem+'.js');script.onload=()=>{const mod=window.REIC_MODULES&&window.REIC_MODULES[file];if(mod)mod.init(q('#componentWorkspace'),{setOutput:v=>{q('#runtimeOutput').textContent=v}})};q('#componentWorkspace').replaceChildren();const form=el('form','reic-component');const label=el('label','', 'Input komponen');const input=el('textarea');input.name='input';input.rows=3;input.placeholder='Masukkan nilai untuk diproses';const button=el('button','','Proses input');button.type='submit';const output=el('output','','Keluaran akan muncul di sini');form.append(label,input,button,output);q('#componentWorkspace').append(form);q('#runtimeOutput').textContent='';}catch(e){source.textContent='Gagal membuka berkas: '+e.message;view.classList.remove('hidden')}}function draw(){const s=search.value.toLocaleLowerCase('id'),found=entries.filter(x=>(x.file+' '+x.title+' '+x.source).toLocaleLowerCase('id').includes(s));list.replaceChildren(...found.map(x=>{const a=el('a','item');a.href='./'+encodeURIComponent(x.file);a.append(el('strong','',x.title),el('small','',x.source),el('code','',x.file));a.addEventListener('click',e=>{e.preventDefault();openFile(x.file)});return a}));count.textContent=found.length.toLocaleString('id')+' berkas REIC'}search.addEventListener('input',draw);back.addEventListener('click',()=>{view.classList.add('hidden');list.parentElement.classList.remove('hidden');history.replaceState(null,'',location.pathname)});fetch('./manifest.json').then(r=>{if(!r.ok)throw Error('manifest tidak tersedia');return r.json()}).then(d=>{entries=d;draw();const f=decodeURIComponent(location.hash.slice(1));if(f&&entries.some(x=>x.file===f))openFile(f)}).catch(e=>count.textContent='Gagal memuat katalog: '+e.message)})();"""
     (root / "recordin.css").write_text(css, encoding="utf-8")
     (root / "recordin.js").write_text(js, encoding="utf-8")
+    # Register a dedicated .reic entry for the main OS MEDIA VM workspace.
+    main_name = "osmediavm-workspace.reic"
+    (root / main_name).write_text(
+        "--- REIC/1 ---\\ntitle: OS MEDIA VM Workspace\\nrender: workspace\\n--- END REIC HEADER ---\\n"
+        "OS MEDIA VM — WORKSPACE UTAMA\\nKatalog semua komponen REIC, pencarian, input, keluaran, dan sumber komponen.\\n",
+        encoding="utf-8")
+    (root / "osmediavm-workspace.css").write_text(
+        "/* Main workspace component */\\n.reic-component{display:grid;gap:1rem}\\n",
+        encoding="utf-8")
+    (root / "osmediavm-workspace.js").write_text(
+        "/* Main workspace component */\\nwindow.REIC_MAIN_WORKSPACE={catalog:'./index.html',format:'REIC/1'};\\n",
+        encoding="utf-8")
+    entries.insert(0, {"file": main_name, "title": "OS MEDIA VM Workspace Utama", "source": "recordin"})
     (root / "manifest.json").write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
     page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OS MEDIA VM — Recordin REIC</title><link rel="stylesheet" href="./recordin.css"></head><body><main><header><small>OS MEDIA VM / RECORDIN</small><h1>Runtime berkas .reic</h1><p class="muted">Berkas REIC dibaca oleh runtime JavaScript statis. Konten ditampilkan sebagai teks aman, bukan dieksekusi sebagai kode arbitrer.</p><input id="search" type="search" placeholder="Cari nama atau sumber berkas" aria-label="Cari berkas REIC"><p id="count">Memuat katalog…</p></header><section class="panel" style="margin-top:16px"><div id="list"></div></section><section id="viewer" class="panel hidden" style="margin-top:16px"><button id="back" type="button">Kembali ke katalog</button><h2 id="viewTitle">Berkas REIC</h2><div id="componentWorkspace" class="panel"></div><h3>Keluaran runtime</h3><pre id="runtimeOutput" tabindex="0"></pre><details><summary>Lihat sumber REIC</summary><pre id="source" tabindex="0"></pre></details><link id="componentStyle" rel="stylesheet" href="./recordin.css"><script id="componentScript"></script></section><p class="muted">Ekstensi .reic bukan standar browser dan memerlukan runtime ini. PHP memerlukan server PHP; GitHub Pages hanya menyajikan aset statis.</p></main><script src="./recordin.js" defer></script></body></html>"""
     (root / "index.html").write_text(page, encoding="utf-8")
+    main_page = """<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OS MEDIA VM — Tampilan Utama REIC</title><style>html,body,main,iframe{margin:0;width:100%;height:100%;border:0;background:#07111f}main{height:100dvh}iframe{display:block}</style></head><body><main><iframe title="OS MEDIA VM Recordin REIC workspace" src="./recordin/index.html"></iframe></main></body></html>"""
+    (ROOT / "osmediavm" / "index.html").write_text(main_page, encoding="utf-8")
+    (ROOT / "osmediavm" / "index.reic").write_text(
+        "--- REIC/1 ---\\ntitle: OS MEDIA VM Tampilan Utama\\nrender: workspace\\n--- END REIC HEADER ---\\n"
+        "Tampilan utama memuat seluruh katalog Recordin REIC melalui osmediavm/recordin/index.html.\\n",
+        encoding="utf-8")
+    (ROOT / "osmediavm" / "index.css").write_text("/* OS MEDIA VM main view */\\nhtml,body,iframe{width:100%;height:100%;margin:0;border:0}\\n", encoding="utf-8")
+    (ROOT / "osmediavm" / "index.js").write_text("/* OS MEDIA VM main view */\\ndocument.documentElement.dataset.runtime='REIC';\\n", encoding="utf-8")
     (root / "README.md").write_text(
         "# OS MEDIA VM — Recordin / REIC\n\n"
         "Spesifikasi dari tiga folder infrastruktur dikumpulkan ke sini dan diubah dari TXT menjadi REIC.\n\n"
