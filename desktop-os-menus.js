@@ -29,17 +29,27 @@
   }
   function setSaveStatus(message) { const el = document.getElementById('pbOsSaveStatus'); if (el) el.textContent = message; }
   function esc(value) { return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])); }
+  const categorySlugs = ['sistem-perangkat','file-penyimpanan','jaringan-internet','aplikasi-utilitas','keamanan-akses','pengembangan','data-analitik','media-kreativitas','produktivitas','administrasi','aksesibilitas','bantuan-pemulihan'];
+  const parentRoutes = ['#overview','#fileManager','#hosts','#workspace/projects','#workspace/account','#workspace/code','#workspace/analytics','#workspace/features','#workspace/projects','#workspace/help','#workspace/account','#workspace/help'];
   function menuAt(index) {
-    const category = categories[index % categories.length];
-    const noun = nouns[Math.floor(index / categories.length) % nouns.length];
-    const variant = Math.floor(index / (categories.length * nouns.length));
+    const safeIndex = Math.max(0, Math.min(TOTAL - 1, Number(index) || 0));
+    const categoryIndex = safeIndex % categories.length;
+    const category = categories[categoryIndex];
+    const noun = nouns[Math.floor(safeIndex / categories.length) % nouns.length];
+    const variant = Math.floor(safeIndex / (categories.length * nouns.length));
     const title = noun + ' ' + category[0] + (variant ? ' ' + String(variant + 1).padStart(3, '0') : '');
+    const number = String(safeIndex + 1).padStart(5, '0');
+    const filePath = './system-menus/' + categorySlugs[categoryIndex] + '/menu-' + number + '/index.html';
     return {
-      id: 'pbos-' + String(index + 1).padStart(5, '0'), index: index + 1,
-      category: category[0], display: title, systemFunction: category[1] + ': ' + noun.toLowerCase(),
-      integration: index % 4 === 0 ? 'Registry sistem + tautan sumber' : index % 4 === 1 ? 'File Manager + data lokal' : index % 4 === 2 ? 'Navigasi situs + modul terkait' : 'Workspace + aktivitas lokal',
-      data: category[2], autoSave: true, activityMode: modes[index % modes.length],
-      route: index === 0 ? '#overview' : index === 1 ? '#fileManager' : index === 2 ? '#cari' : ''
+      id: 'pbos-' + number, index: safeIndex + 1,
+      category: category[0], categorySlug: categorySlugs[categoryIndex], display: title,
+      systemFunction: category[1] + ': ' + noun.toLowerCase(),
+      integration: safeIndex % 4 === 0 ? 'Registry sistem + tautan sumber' : safeIndex % 4 === 1 ? 'File Manager + data lokal' : safeIndex % 4 === 2 ? 'Navigasi situs + modul terkait' : 'Workspace + aktivitas lokal',
+      data: category[2], autoSave: true, activityMode: modes[safeIndex % modes.length],
+      route: safeIndex === 0 ? '#overview' : safeIndex === 1 ? '#fileManager' : safeIndex === 2 ? '#cari' : '',
+      parentRoute: parentRoutes[categoryIndex], filePath,
+      folderPath: filePath.replace(/index\\.html$/, ''), fileCount: 1,
+      filesystemState: 'file statis terdaftar'
     };
   }
   function allMatches(query, category) {
@@ -79,11 +89,10 @@
       current = item; activity(item, 'dibuka');
       const isFavorite = (saved.favorites || []).includes(item.id);
       const isPinned = (saved.pinned || []).includes(item.id);
-      detail.innerHTML = `<div class="pb-os-detail-top"><span>${esc(item.id)}</span><span>${esc(item.category)}</span></div><h3>${esc(item.display)}</h3><dl><dt>Tampilan</dt><dd>Panel situs responsif / website mode</dd><dt>Fungsi sistem</dt><dd>${esc(item.systemFunction)}</dd><dt>Integrasi menu</dt><dd>${esc(item.integration)}</dd><dt>Data</dt><dd>${esc(item.data)}</dd><dt>Data otomatis tersimpan</dt><dd><b>${item.autoSave ? 'Aktif — localStorage browser' : 'Nonaktif'}</b></dd><dt>Mode aktivitas</dt><dd>${esc(item.activityMode)}</dd></dl><div class="pb-os-detail-actions"><button type="button" id="pbOsOpen">${item.route ? 'Buka modul terkait' : 'Buka tampilan menu'}</button><button type="button" id="pbOsFavorite">${isFavorite ? '★ Favorit' : '☆ Jadikan favorit'}</button><button type="button" id="pbOsPin">${isPinned ? 'Lepas pin' : 'Sematkan menu'}</button></div><p class="pb-os-small">Status integrasi menunjukkan rute atau subsistem yang terkait, bukan jaminan bahwa layanan server eksternal sedang aktif.</p>`;
+      detail.innerHTML = `<div class="pb-os-detail-top"><span>${esc(item.id)}</span><span>${esc(item.category)}</span></div><h3>${esc(item.display)}</h3><dl><dt>Tampilan</dt><dd>Panel situs responsif / website mode</dd><dt>Fungsi sistem</dt><dd>${esc(item.systemFunction)}</dd><dt>Integrasi menu</dt><dd>${esc(item.integration)}</dd><dt>Data</dt><dd>${esc(item.data)}</dd><dt>Menu induk</dt><dd><a href="${esc(item.parentRoute)}">Buka sistem menu induk</a></dd><dt>Filesystem situs</dt><dd><code>${esc(item.folderPath)}</code> · ${item.fileCount} file</dd><dt>Data otomatis tersimpan</dt><dd><b>${item.autoSave ? 'Aktif — localStorage browser' : 'Nonaktif'}</b></dd><dt>Mode aktivitas</dt><dd>${esc(item.activityMode)}</dd></dl><div class="pb-os-detail-actions"><button type="button" id="pbOsOpen">${'Buka file menu'}</button><button type="button" id="pbOsFavorite">${isFavorite ? '★ Favorit' : '☆ Jadikan favorit'}</button><button type="button" id="pbOsPin">${isPinned ? 'Lepas pin' : 'Sematkan menu'}</button></div><p class="pb-os-small">Status integrasi menunjukkan rute atau subsistem yang terkait, bukan jaminan bahwa layanan server eksternal sedang aktif.</p>`;
       detail.querySelector('#pbOsOpen').addEventListener('click', () => {
-        activity(item, 'tampilan dibuka');
-        if (item.route) { location.hash = item.route; root.hidden = true; }
-        else { detail.querySelector('.pb-os-small').textContent = 'Panel menu aktif. Integrasi spesifik dapat ditautkan ke modul saat implementasi fungsi tersedia.'; }
+        activity(item, 'file menu dibuka');
+        location.href = item.filePath;
       });
       detail.querySelector('#pbOsFavorite').addEventListener('click', () => {
         saved.favorites = Array.isArray(saved.favorites) ? saved.favorites : [];
@@ -102,7 +111,7 @@
     function showDetailMarkupOnly(item) {
       current = item;
       const favorite = (saved.favorites || []).includes(item.id), pinned = (saved.pinned || []).includes(item.id);
-      detail.innerHTML = `<div class="pb-os-detail-top"><span>${esc(item.id)}</span><span>${esc(item.category)}</span></div><h3>${esc(item.display)}</h3><dl><dt>Tampilan</dt><dd>Panel situs responsif / website mode</dd><dt>Fungsi sistem</dt><dd>${esc(item.systemFunction)}</dd><dt>Integrasi menu</dt><dd>${esc(item.integration)}</dd><dt>Data</dt><dd>${esc(item.data)}</dd><dt>Data otomatis tersimpan</dt><dd>Aktif — localStorage browser</dd><dt>Mode aktivitas</dt><dd>${esc(item.activityMode)}</dd></dl><div class="pb-os-detail-actions"><button type="button" id="pbOsOpen">Buka tampilan menu</button><button type="button" id="pbOsFavorite">${favorite ? '★ Favorit' : '☆ Jadikan favorit'}</button><button type="button" id="pbOsPin">${pinned ? 'Lepas pin' : 'Sematkan menu'}</button></div><p class="pb-os-small">Status integrasi menunjukkan rute atau subsistem yang terkait, bukan jaminan bahwa layanan server eksternal sedang aktif.</p>`;
+      detail.innerHTML = `<div class="pb-os-detail-top"><span>${esc(item.id)}</span><span>${esc(item.category)}</span></div><h3>${esc(item.display)}</h3><dl><dt>Tampilan</dt><dd>Panel situs responsif / website mode</dd><dt>Fungsi sistem</dt><dd>${esc(item.systemFunction)}</dd><dt>Integrasi menu</dt><dd>${esc(item.integration)}</dd><dt>Data</dt><dd>${esc(item.data)}</dd><dt>Menu induk</dt><dd><a href="${esc(item.parentRoute)}">Buka sistem menu induk</a></dd><dt>Filesystem situs</dt><dd><code>${esc(item.folderPath)}</code> · ${item.fileCount} file</dd><dt>Data otomatis tersimpan</dt><dd>Aktif — localStorage browser</dd><dt>Mode aktivitas</dt><dd>${esc(item.activityMode)}</dd></dl><div class="pb-os-detail-actions"><button type="button" id="pbOsOpen">Buka tampilan menu</button><button type="button" id="pbOsFavorite">${favorite ? '★ Favorit' : '☆ Jadikan favorit'}</button><button type="button" id="pbOsPin">${pinned ? 'Lepas pin' : 'Sematkan menu'}</button></div><p class="pb-os-small">Status integrasi menunjukkan rute atau subsistem yang terkait, bukan jaminan bahwa layanan server eksternal sedang aktif.</p>`;
       detail.querySelector('#pbOsOpen').addEventListener('click', () => { activity(item,'tampilan dibuka'); detail.querySelector('.pb-os-small').textContent = 'Panel menu aktif.'; });
       detail.querySelector('#pbOsFavorite').addEventListener('click', () => { saved.favorites = Array.isArray(saved.favorites)?saved.favorites:[]; saved.favorites = favorite ? saved.favorites.filter(id=>id!==item.id) : [...new Set([...saved.favorites,item.id])]; persist(); showDetailWithoutActivity(item); renderList(); });
       detail.querySelector('#pbOsPin').addEventListener('click', () => { saved.pinned = Array.isArray(saved.pinned)?saved.pinned:[]; saved.pinned = pinned ? saved.pinned.filter(id=>id!==item.id) : [...new Set([...saved.pinned,item.id])]; persist(); showDetailWithoutActivity(item); renderList(); });
@@ -142,8 +151,9 @@
     const launcher=document.createElement('button');launcher.type='button';launcher.id='pbOsLauncher';launcher.className='pb-os-launcher-button';launcher.textContent='☷ Menu OS · 15.000';launcher.setAttribute('aria-controls','pbDesktopOS');launcher.setAttribute('aria-expanded','false');
     launcher.addEventListener('click',()=>{root.hidden=!root.hidden;launcher.setAttribute('aria-expanded',String(!root.hidden));if(!root.dataset.ready){render();root.dataset.ready='true';}if(!root.hidden)root.querySelector('#pbOsSearch')?.focus();});
     document.body.append(launcher,root);
+    document.addEventListener('click',event=>{const trigger=event.target.closest('[data-open-desktop-os]');if(!trigger)return;event.preventDefault();if(root.hidden){root.hidden=false;launcher.setAttribute('aria-expanded','true');if(!root.dataset.ready){render();root.dataset.ready='true';}}root.querySelector('#pbOsSearch')?.focus();});
     window.addEventListener('hashchange',()=>{if(!root.hidden&&location.hash) {root.hidden=true;launcher.setAttribute('aria-expanded','false');}});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
-  window.PBDesktopOSMenus=Object.freeze({total:TOTAL,get:menuAt,search:(query='')=>allMatches(query,'').slice(0,200),version:1});
+  window.PBDesktopOSMenus=Object.freeze({total:TOTAL,get:menuAt,search:(query='',category='')=>allMatches(query,category).slice(0,200),listCategory:(category)=>allMatches('',category),categorySlugs:Object.freeze(categorySlugs.slice()),categories:Object.freeze(categories.map((c,i)=>({name:c[0],slug:categorySlugs[i],parentRoute:parentRoutes[i]})),open:()=>{const b=document.getElementById('pbOsLauncher');if(b)b.click();},version:2});
 })();

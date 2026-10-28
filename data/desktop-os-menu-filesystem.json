@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "title": "Planetbintang Desktop OS Menu Filesystem",
+  "repository": "planetbintang/.L",
+  "branch": "io",
+  "totalMenus": 15000,
+  "filesPerMenu": {
+    "minimum": 1,
+    "maximum": 9,
+    "implemented": 1
+  },
+  "layout": "system-menus/<category-slug>/menu-<global-five-digit-id>/index.html",
+  "generation": "deterministic template; every menu has an actual static HTML file",
+  "categories": [
+    {
+      "name": "Sistem & perangkat",
+      "slug": "sistem-perangkat",
+      "count": 1250,
+      "parentRoute": "#overview"
+    },
+    {
+      "name": "File & penyimpanan",
+      "slug": "file-penyimpanan",
+      "count": 1250,
+      "parentRoute": "#fileManager"
+    },
+    {
+      "name": "Jaringan & internet",
+      "slug": "jaringan-internet",
+      "count": 1250,
+      "parentRoute": "#hosts"
+    },
+    {
+      "name": "Aplikasi & utilitas",
+      "slug": "aplikasi-utilitas",
+      "count": 1250,
+      "parentRoute": "#workspace/projects"
+    },
+    {
+      "name": "Keamanan & akses",
+      "slug": "keamanan-akses",
+      "count": 1250,
+      "parentRoute": "#workspace/account"
+    },
+    {
+      "name": "Pengembangan",
+      "slug": "pengembangan",
+      "count": 1250,
+      "parentRoute": "#workspace/code"
+    },
+    {
+      "name": "Data & analitik",
+      "slug": "data-analitik",
+      "count": 1250,
+      "parentRoute": "#workspace/analytics"
+    },
+    {
+      "name": "Media & kreativitas",
+      "slug": "media-kreativitas",
+      "count": 1250,
+      "parentRoute": "#workspace/features"
+    },
+    {
+      "name": "Produktivitas",
+      "slug": "produktivitas",
+      "count": 1250,
+      "parentRoute": "#workspace/projects"
+    },
+    {
+      "name": "Administrasi",
+      "slug": "administrasi",
+      "count": 1250,
+      "parentRoute": "#workspace/help"
+    },
+    {
+      "name": "Aksesibilitas",
+      "slug": "aksesibilitas",
+      "count": 1250,
+      "parentRoute": "#workspace/account"
+    },
+    {
+      "name": "Bantuan & pemulihan",
+      "slug": "bantuan-pemulihan",
+      "count": 1250,
+      "parentRoute": "#workspace/help"
+    }
+  ],
+  "policy": "Each menu folder contains one index.html. Browser-local autosave remains local to that browser/device; native OS and backend actions are not implied."
+}
