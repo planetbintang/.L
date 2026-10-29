@@ -484,6 +484,73 @@ Isi dari panel provider yang dipilih:
         { path: 'cache/recovery/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Metadata recovery virtual; tidak menjalankan update_engine.' },
         { path: 'cache/recovery/commands.txt', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '# Tidak ada perintah recovery aktif.' },
       ],
+      'acct/uid_10123': [
+        { path: 'acct/uid_10123/apps', type: 'directory', mode: '040755', function: 'Accounting aplikasi UID contoh' },
+        { path: 'acct/uid_10123/README.md', type: 'file', mode: '0100644', size: 160, sizeKnown: true, codeContent: 'UID ini ilustratif; tidak membaca akun atau proses perangkat.' },
+      ],
+      'sys/class/net': [
+        { path: 'sys/class/net/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Antarmuka jaringan virtual; tidak terhubung ke perangkat.' },
+      ],
+      'sys/class/power_supply': [
+        { path: 'sys/class/power_supply/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Metadata baterai virtual; tidak membaca sensor perangkat.' },
+      ],
+      'sys/class/usb': [
+        { path: 'sys/class/usb/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Inventaris USB virtual; tidak membaca bus perangkat.' },
+      ],
+      'sys/bus/platform': [
+        { path: 'sys/bus/platform/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Bus platform ilustratif.' },
+      ],
+      'sys/bus/i2c': [
+        { path: 'sys/bus/i2c/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Bus I2C ilustratif.' },
+      ],
+      'sys/bus/usb': [
+        { path: 'sys/bus/usb/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Bus USB ilustratif.' },
+      ],
+      'sys/kernel/mm': [
+        { path: 'sys/kernel/mm/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Metadata manajemen memori virtual.' },
+      ],
+      'sys/kernel/sched': [
+        { path: 'sys/kernel/sched/README.md', type: 'file', mode: '0100444', size: 120, sizeKnown: true, codeContent: 'Metadata penjadwalan virtual.' },
+      ],
+      'system_ext/framework': [
+        { path: 'system_ext/framework/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Inventaris framework ekstensi sistem (metadata virtual).' },
+      ],
+      'system_ext/priv-app': [
+        { path: 'system_ext/priv-app/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Inventaris aplikasi sistem (metadata saja; tidak ada APK perangkat).' },
+      ],
+      'system_ext/permissions': [
+        { path: 'system_ext/permissions/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Metadata kebijakan izin system_ext.' },
+      ],
+      'system_ext/etc/permissions': [
+        { path: 'system_ext/etc/permissions/README.md', type: 'file', mode: '0100644', size: 160, sizeKnown: true, codeContent: 'Metadata izin virtual.' },
+      ],
+      'system_ext/etc/init': [
+        { path: 'system_ext/etc/init/README.md', type: 'file', mode: '0100644', size: 160, sizeKnown: true, codeContent: 'Metadata init virtual; tidak menjalankan layanan perangkat.' },
+      ],
+      'media/emulated': [
+        { path: 'media/emulated/0', type: 'directory', mode: '040770', function: 'Storage pengguna contoh' },
+        { path: 'media/emulated/README.md', type: 'file', mode: '0100644', size: 160, sizeKnown: true, codeContent: 'Namespace emulasi virtual; bukan storage perangkat.' },
+      ],
+      'media/emulated/0': [
+        { path: 'media/emulated/0/Download', type: 'directory', mode: '040770', function: 'Folder Download contoh' },
+        { path: 'media/emulated/0/Documents', type: 'directory', mode: '040770', function: 'Folder Documents contoh' },
+        { path: 'media/emulated/0/README.md', type: 'file', mode: '0100644', size: 150, sizeKnown: true, codeContent: 'Folder pengguna virtual.' },
+      ],
+      'media/emulated/0/Download': [
+        { path: 'media/emulated/0/Download/README.md', type: 'file', mode: '0100644', size: 120, sizeKnown: true, codeContent: 'Tidak ada file unduhan perangkat yang disalin.' },
+      ],
+      'media/emulated/0/Documents': [
+        { path: 'media/emulated/0/Documents/README.md', type: 'file', mode: '0100644', size: 120, sizeKnown: true, codeContent: 'Tidak ada dokumen perangkat yang disalin.' },
+      ],
+      'media/asec': [
+        { path: 'media/asec/README.md', type: 'file', mode: '0100644', size: 160, sizeKnown: true, codeContent: 'Container aplikasi virtual; tidak berisi data aplikasi asli.' },
+      ],
+      'config/permissions': [
+        { path: 'config/permissions/README.md', type: 'file', mode: '0100644', size: 140, sizeKnown: true, codeContent: 'Kebijakan izin demonstrasi; tidak diterapkan pada perangkat.' },
+      ],
+      'cache/tmp': [
+        { path: 'cache/tmp/README.md', type: 'file', mode: '0100600', size: 120, sizeKnown: true, codeContent: 'Area temporer virtual; tidak berisi cache perangkat.' },
+      ],
     };
     if (path === 'media/brand') return [
       { path: 'media/brand/IDENTITY.md', type: 'file', mode: '0100644', function: 'Kebijakan identitas resmi; logo sumber tetap aset kanonis pada root', fetchPath: 'media/brand/IDENTITY.md' },
