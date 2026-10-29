@@ -1,7 +1,7 @@
 /* Shared OS MEDIA VM design tokens for secondary PlanetBintang workspaces.
    All broad rules are scoped to workspace roots; root homepage styling is excluded. */
 :root{--pb-bg:#050a14;--pb-panel:#0b1728;--pb-panel-2:#10243a;--pb-line:#29415d;--pb-text:#eaf4ff;--pb-muted:#9cb2cc;--pb-blue:#73cfff;--pb-cyan:#63e4d1;--pb-green:#68dfa2;--pb-shadow:0 16px 42px rgba(0,0,0,.22)}
-.app-shell,.layout{color-scheme:dark;color:var(--pb-text)}
+.app-shell{color-scheme:dark;color:var(--pb-text)}
 .app-shell{background:radial-gradient(ellipse at 82% -12%,#14375a 0,transparent 42%),linear-gradient(180deg,#050a14,#071321 55%,#050a14)}
 .app-shell :where(.appbar,.topbar,.top,.sidebar,.surface,.panel,.metric,.metrics article,.metric-card,.service,.feature,.featureitem,.hero-main,.hero-side,.hero,.system-banner,.view-panel,.chat-panel,.compose-panel,.feature-block,.feature-card,.workspace-card){border-color:var(--pb-line);box-shadow:var(--pb-shadow)}
 .app-shell :where(.sidebar,.surface,.panel,.metric,.metrics article,.metric-card,.service,.feature,.featureitem,.hero-main,.hero-side,.hero,.system-banner,.view-panel,.chat-panel,.compose-panel,.feature-block,.feature-card,.workspace-card){background:linear-gradient(145deg,#0d1b2d,#081321);color:var(--pb-text)}
@@ -9,7 +9,6 @@
 .app-shell :where(button,.quiet-button,.primary-button,.danger-button,.primary-btn,.secondary-btn,.icon-btn,.side-open-fm,.tabs button,.back-link){border-radius:8px;transition:background-color .16s ease,border-color .16s ease,transform .16s ease}
 .app-shell :where(input,select,textarea){background:#071321;color:var(--pb-text);border-color:var(--pb-line);border-radius:8px}
 .app-shell :where(button,a,input,select,textarea):focus-visible{outline:2px solid var(--pb-cyan);outline-offset:2px}
-.layout{background:var(--pb-bg)}
 /* Root File Manager only: these rules never style the PlanetBintang homepage. */
 #fileManager{color:var(--pb-text);background:radial-gradient(ellipse at 85% 0%,rgba(20,55,90,.25),transparent 45%),var(--pb-bg)}
 #fileManager .section-heading,#fileManager .fm-toolbar,#fileManager .fm-sidebar,#fileManager .fm-browser,#fileManager .fm-layout,#fileManager .panel,#fileManager .fm-pane-heading,#fileManager .fm-file-preview,#fileManager .fm-preview,#fileManager .fm-inspector,#fileManager .fm-list-panel,#fileManager .fm-preview-panel{color:var(--pb-text);border-color:var(--pb-line)}
