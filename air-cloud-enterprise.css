@@ -178,3 +178,131 @@
 .aircloud-page .ac-feature-copy small{display:block;overflow-wrap:anywhere;color:#71859a;font-size:9px}
 .aircloud-page .ac-feature-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:5px}
 @media(max-width:760px){.aircloud-page .ac-feature-row{grid-template-columns:30px minmax(0,1fr)}.aircloud-page .ac-feature-actions{grid-column:2;justify-content:flex-start}}
+
+
+/* Air Cloud — diselaraskan dengan sistem visual VendorDomain / OS MEDIA VM.
+   Menjaga struktur dan perilaku konsol serta integrasi katalog airz/ yang sudah ada. */
+#airCloudPage,.aircloud-page{
+  --ac-bg:#07111f;--ac-panel:#0d1a2c;--ac-panel2:#12243b;--ac-line:#243953;
+  --ac-text:#edf5ff;--ac-muted:#9cb0c9;--ac-blue:#77aaff;--ac-cyan:#63e4d1;--ac-green:#68dfa2;
+  color:var(--ac-text);color-scheme:dark;
+}
+#airCloudPage .ac-shell{gap:16px}
+#airCloudPage .ac-top{
+  border:1px solid var(--ac-line);border-radius:14px;
+  background:radial-gradient(600px 220px at 90% 0%,#18376066,transparent 70%),linear-gradient(135deg,#0d1a2c,#07111f 78%);
+  box-shadow:0 18px 44px #0004;color:var(--ac-text)
+}
+#airCloudPage .ac-top h2{color:var(--ac-text)}
+#airCloudPage .ac-top .eyebrow{color:var(--ac-cyan)}
+#airCloudPage .ac-top-icon{border:1px solid #29415d;border-radius:12px;background:linear-gradient(140deg,#73aaff,#6ce4d3);color:#07111f;box-shadow:0 8px 24px #0003}
+#airCloudPage .ac-top-actions .tools-badge{border:1px solid #29415d;border-radius:999px;background:#10243a;color:#cde6ff}
+#airCloudPage .ac-stats{gap:10px}
+#airCloudPage .ac-stat,#airCloudPage .ac-metrics article{
+  border:1px solid var(--ac-line);border-radius:12px;
+  background:linear-gradient(150deg,#102139,#0b1728);box-shadow:0 8px 22px #0002
+}
+#airCloudPage .ac-stat small,#airCloudPage .ac-metrics small{color:var(--ac-muted)}
+#airCloudPage .ac-stat b,#airCloudPage .ac-metrics article b{color:var(--ac-blue)}
+#airCloudPage .ac-stat span{color:#91a8c3}
+#airCloudPage .ac-sidebar{
+  border:1px solid var(--ac-line);border-radius:14px;
+  background:linear-gradient(160deg,#0d1a2c,#091525);box-shadow:0 12px 30px #0003
+}
+#airCloudPage .ac-sidebar-head{background:#0d1a2c;border-color:#243953}
+#airCloudPage .ac-sidebar-head h3{color:var(--ac-text)}
+#airCloudPage .ac-sidebar-head input,#airCloudPage .ac-airz-filter{
+  border:1px solid #29415d;border-radius:9px;background:#081526;color:var(--ac-text)
+}
+#airCloudPage .ac-sidebar-status{color:var(--ac-muted)}
+#airCloudPage .ac-nav-group{border-color:#1b3049}
+#airCloudPage .ac-nav-main{color:#c6d8ec}
+#airCloudPage .ac-nav-main:hover{background:#12243b;border-color:#29415d}
+#airCloudPage .ac-nav-main.active,#airCloudPage .ac-nav-main[aria-current=page]{
+  background:linear-gradient(100deg,#17385b,#10243a);border-color:#4779a8;color:#eaf5ff;
+  box-shadow:inset 3px 0 #77aaff
+}
+#airCloudPage .ac-nav-icon{background:#172b45;color:#a9d4ff}
+#airCloudPage .ac-nav-count{border:1px solid #29415d;background:#12243b;color:#a9bfd8}
+#airCloudPage .ac-nav-main.active .ac-nav-count{background:#244668;color:#eaf5ff}
+#airCloudPage .ac-nav-subs{border-color:#29415d}
+#airCloudPage .ac-nav-sub,#airCloudPage .ac-nav-leaf{color:#a9bfd8}
+#airCloudPage .ac-nav-sub:hover,#airCloudPage .ac-nav-leaf:hover{background:#12243b;color:#edf5ff}
+#airCloudPage .ac-nav-sub.active,#airCloudPage .ac-nav-leaf.active{background:#17385b;color:#eaf5ff}
+#airCloudPage .ac-nav-expander{border-color:#29415d;background:#10243a;color:#bcd3ed}
+#airCloudPage .ac-nav-expander:hover{background:#17385b}
+#airCloudPage .ac-content{color:var(--ac-text)}
+#airCloudPage .ac-crumbs{color:var(--ac-muted)}
+#airCloudPage .ac-crumbs button{color:#a9c5e4}
+#airCloudPage .ac-crumbs button:hover{background:#12243b;color:#fff}
+#airCloudPage .ac-crumbs button.current{color:var(--ac-cyan)}
+#airCloudPage .ac-crumbs i{color:#52708e}
+#airCloudPage .ac-empty{border-color:#29415d;background:#0b1728;color:var(--ac-muted)}
+#airCloudPage .ac-hero{
+  border:1px solid #29415d;border-radius:14px;
+  background:radial-gradient(700px 240px at 100% 0%,#18376066,transparent 72%),linear-gradient(135deg,#10243a,#0b1728 70%);
+  box-shadow:0 12px 30px #0002
+}
+#airCloudPage .ac-hero-kicker{color:var(--ac-cyan)}
+#airCloudPage .ac-hero h3{color:var(--ac-text)}
+#airCloudPage .ac-hero p,#airCloudPage .ac-docs p{color:#b6c9df}
+#airCloudPage .ac-hero-meta{color:var(--ac-muted)}
+#airCloudPage .ac-hero-meta code,#airCloudPage .ac-bullets code{
+  border:1px solid #29415d;border-radius:6px;background:#081526;color:#cce5ff
+}
+#airCloudPage .ac-card{
+  border:1px solid var(--ac-line);border-radius:13px;background:linear-gradient(150deg,#0d1a2c,#0a1626);
+  box-shadow:0 10px 28px #0002
+}
+#airCloudPage .ac-card-head{border-color:#243953;background:#102139}
+#airCloudPage .ac-card-head h4{color:var(--ac-text)}
+#airCloudPage .ac-card-head small{color:var(--ac-muted)}
+#airCloudPage .ac-child-tile,#airCloudPage .ac-airz-domains .ac-airz-domain{
+  border:1px solid #29415d;border-radius:10px;background:linear-gradient(150deg,#12243b,#0b1728);color:var(--ac-text)
+}
+#airCloudPage .ac-child-tile:hover,#airCloudPage .ac-airz-domains .ac-airz-domain:hover{border-color:#77aaff;background:#142b46;box-shadow:0 10px 24px #0003}
+#airCloudPage .ac-child-tile b,#airCloudPage .ac-airz-domains .ac-airz-domain b{color:#e3f1ff}
+#airCloudPage .ac-child-tile small,#airCloudPage .ac-airz-domains .ac-airz-domain small{color:#9cb0c9}
+#airCloudPage .ac-child-tile span{color:#b0c4da}
+#airCloudPage .ac-table th{background:#102139;color:#a9bfd8;border-color:#29415d}
+#airCloudPage .ac-table td{background:#0d1a2c;color:#c0d2e6;border-color:#1b3049}
+#airCloudPage .ac-table tbody tr:hover td{background:#12243b}
+#airCloudPage .ac-table code{color:#9fd4ff}
+#airCloudPage .ac-status-ok{border-color:#285b4b;background:#12372f;color:#8ce8bb}
+#airCloudPage .ac-status-warn{border-color:#6d5630;background:#382b16;color:#ffcf76}
+#airCloudPage .ac-status-busy{border-color:#294b70;background:#142c46;color:#a9d4ff}
+#airCloudPage .ac-bullets{color:#b6c9df}
+#airCloudPage .ac-action-note{color:var(--ac-muted)}
+#airCloudPage .ac-mini-btn,#airCloudPage .ac-pill,#airCloudPage .ac-nav-feature-actions button{
+  border-color:#29415d;background:#12243b;color:#c6d8ec
+}
+#airCloudPage .ac-mini-btn:hover,#airCloudPage .ac-pill:hover,#airCloudPage .ac-nav-feature-actions button:hover{
+  border-color:#77aaff;background:#17385b;color:#fff
+}
+#airCloudPage .ac-bin-chip{border-color:#29415d;background:#17385b;color:#cce8ff}
+#airCloudPage .ac-nav-feature-group{border-color:#29415d}
+#airCloudPage .ac-nav-feature-head{color:#dcecff}
+#airCloudPage .ac-nav-feature-head b{border-color:#29415d;background:#12243b;color:#9fd4ff}
+#airCloudPage .ac-nav-feature-help,#airCloudPage .ac-nav-feature-card .ac-nav-feature small{color:#9cb0c9}
+#airCloudPage .ac-nav-feature-card{border-color:#29415d;background:#0d1a2c}
+#airCloudPage .ac-nav-feature-card:hover{border-color:#4779a8;background:#102139}
+#airCloudPage .ac-nav-feature-card .ac-nav-feature{color:#dcecff}
+#airCloudPage .ac-nav-feature-card .ac-nav-feature:hover{background:#12243b}
+#airCloudPage .ac-nav-feature-more{border-color:#355879;background:#12243b;color:#9fd4ff}
+#airCloudPage .ac-modal{border-color:#29415d;background:#0d1a2c;box-shadow:0 30px 70px #0009}
+#airCloudPage .ac-modal header{background:linear-gradient(135deg,#12243b,#17385b);border-color:#29415d}
+#airCloudPage .ac-modal-body{background:#081526;color:#cce0f5}
+#airCloudPage .ac-modal footer{border-color:#243953;background:#0d1a2c}
+#airCloudPage .ac-favorite-toggle,#airCloudPage .ac-favorite-export{
+  border-color:#29415d;background:#12243b;color:#d6e8fb
+}
+#airCloudPage .ac-favorite-toggle.is-favorite{border-color:#477f6a;background:#12372f;color:#8ce8bb}
+#airCloudPage .ac-sidebar-controls button{border-color:#29415d;background:#12243b;color:#c6d8ec}
+#airCloudPage .ac-sidebar-controls button:hover{border-color:#77aaff;background:#17385b;color:#fff}
+#airCloudPage button:focus-visible,#airCloudPage input:focus-visible,#airCloudPage select:focus-visible{
+  outline:3px solid #77aaff;outline-offset:2px
+}
+@media(max-width:780px){
+  #airCloudPage .ac-layout{grid-template-columns:minmax(0,1fr)}
+  #airCloudPage .ac-sidebar{position:relative;top:auto;max-height:55vh}
+}
