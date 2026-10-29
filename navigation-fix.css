@@ -347,3 +347,77 @@ input, textarea, select {
     font-size: 11px !important;
   }
 }
+
+
+/* Main navigation layout: show every primary menu item in exactly two rows. */
+.topbar > .main-nav {
+  display: grid !important;
+  grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(2, minmax(34px, auto)) !important;
+  grid-auto-flow: row !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  gap: 2px 6px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+}
+.topbar > .main-nav > .main-nav-link,
+.topbar > .main-nav > .nav-dropdown {
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+.topbar > .main-nav > .main-nav-link,
+.topbar > .main-nav > .nav-dropdown > summary {
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  padding: 5px 3px !important;
+  font-size: clamp(10px, .78vw, 13px) !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+.topbar > .main-nav > .nav-dropdown > summary {
+  list-style: none !important;
+}
+.topbar > .main-nav > .nav-dropdown > .nav-dropdown-menu {
+  text-align: left;
+}
+@media (max-width: 760px) {
+  .topbar > .main-nav {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(32px, auto)) !important;
+    gap: 2px !important;
+    padding: 2px 0 !important;
+  }
+  .topbar > .main-nav > .main-nav-link,
+  .topbar > .main-nav > .nav-dropdown > summary {
+    min-height: 32px !important;
+    padding: 4px 1px !important;
+    font-size: clamp(8px, 2.5vw, 11px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.02em;
+  }
+}
+@media (max-width: 360px) {
+  .topbar > .main-nav {
+    column-gap: 1px !important;
+  }
+  .topbar > .main-nav > .main-nav-link,
+  .topbar > .main-nav > .nav-dropdown > summary {
+    font-size: 8px !important;
+  }
+}
