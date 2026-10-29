@@ -131,7 +131,7 @@
           <a href="#workspace/account" data-system-route="workspace-account"><b>Pengaturan</b><small>Preferensi workspace</small></a>
           <a href="#workspace/help" data-system-route="workspace-help"><b>Bantuan</b><small>Panduan dan dukungan</small></a>
         </div></details>
-        <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="./domain-catalog.html"><b>Katalog Domain</b><small>Indeks domain dari al.l/data.media</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="./git-feature-catalog.html"><b>Katalog 1.500 Fitur Git</b><small>Spesifikasi, detail, dan prompt implementasi</small></a>\n          <a href="./feature-workbench.html"><b>Ruang Kerja Implementasi</b><small>Kelola pekerjaan, checklist, bukti, dan verifikasi fitur</small></a><a href="./github-operations.html"><b>GitHub Operations</b><small>Repositori, branch, commit, issue, PR, dan Actions dari API GitHub</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
+        <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="./domain-catalog.html"><b>Katalog Domain</b><small>Indeks domain dari al.l/data.media</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="./git-feature-catalog.html"><b>Katalog 1.500 Fitur Git</b><small>Spesifikasi, detail, dan prompt implementasi</small></a>\n          <a href="./feature-workbench.html"><b>Ruang Kerja Implementasi</b><small>Kelola pekerjaan, checklist, bukti, dan verifikasi fitur</small></a><a href="./github-operations.html"><b>GitHub Operations</b><small>Repositori, branch, commit, issue, PR, dan Actions dari API GitHub</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
           <a href="#aircloud" data-system-route="aircloud"><b>Air Cloud Console</b><small>Konsol cloud · registry 4.394 halaman menu</small></a>
           <a href="#aircloud/compute" data-system-route="aircloud-compute"><b>Compute</b><small>AC-M001 · virtual server &amp; instance</small></a>
@@ -427,6 +427,11 @@
           <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
           <div class="file-manager-brand"><img src="./folder-3d-icon.jpg" alt="Ikon folder sistem Planetbintang" /><span>ROOT PATH <b>/</b></span></div>
         </div>
+        <section class="fm-github-catalog panel" aria-labelledby="fmGithubCatalogTitle">
+          <div class="fm-github-catalog-heading"><div><p class="eyebrow">CODE <span>/</span> GITHUB INDEX</p><h3 id="fmGithubCatalogTitle">Katalog Repositori GitHub</h3><p>Repositori ditampilkan langsung di File Manager. Pilih nama untuk membuka sumber atau telusuri berkas pada cabang default.</p></div><a class="text-button" href="#fileManager" data-system-route="file-manager">Buka pohon file ↓</a></div>
+          <div class="fm-github-catalog-tools"><label><span>CARI REPOSITORI</span><input id="fmGithubRepoSearch" type="search" placeholder="Cari nama repositori…" autocomplete="off" /></label><button class="text-button" id="fmGithubRepoRefresh" type="button">Segarkan daftar</button><span id="fmGithubRepoCount" aria-live="polite">Memuat katalog…</span></div>
+          <div id="fmGithubRepoCards" class="fm-github-repo-grid" aria-live="polite"></div>
+        </section>
         <div class="fm-toolbar panel">
           <label class="fm-repo-label"><span>REPOSITORY</span><select id="fileRepoSelect" aria-label="Pilih repositori"></select></label>
           <button class="text-button" id="fileUpButton" type="button" disabled>↑ Folder atas</button>
@@ -536,6 +541,46 @@
     <script src="./search-page.js?v=20261027-search-actions-v3" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
+    <style id="fm-github-catalog-styles">
+      .fm-github-catalog{margin:0 0 1rem;padding:1rem;border:1px solid rgba(119,174,225,.24);background:linear-gradient(145deg,rgba(13,30,53,.9),rgba(5,12,25,.96));color:#e8f2ff}
+      .fm-github-catalog-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+      .fm-github-catalog h3{margin:.2rem 0 .4rem;font-size:1.1rem}.fm-github-catalog p{margin:.25rem 0;color:#9fb4cc;line-height:1.6}
+      .fm-github-catalog-tools{display:flex;align-items:end;gap:.65rem;flex-wrap:wrap;margin:1rem 0}
+      .fm-github-catalog-tools label{display:grid;gap:.3rem;flex:1;min-width:200px}.fm-github-catalog-tools label span{font-size:.68rem;letter-spacing:.1em;color:#9fb4cc}
+      .fm-github-catalog-tools input{width:100%;padding:.65rem .75rem;background:#081626;border:1px solid #29445f;color:#e8f2ff}
+      #fmGithubRepoCount{font-size:.78rem;color:#9fb4cc;padding:.6rem 0}
+      .fm-github-repo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:.65rem}
+      .fm-github-repo-card{min-width:0;padding:.8rem;border:1px solid #29445f;background:rgba(7,18,34,.75)}
+      .fm-github-repo-card h4{margin:0 0 .4rem;font-size:.92rem;overflow-wrap:anywhere;color:#e8f2ff}.fm-github-repo-card p{font-size:.75rem;overflow-wrap:anywhere}
+      .fm-github-repo-actions{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.7rem}.fm-github-repo-actions a{font-size:.75rem;color:#70c7ff;text-decoration:none;border:1px solid #31506e;padding:.4rem .55rem}
+      .fm-github-repo-empty{padding:1rem;border:1px dashed #31506e;color:#9fb4cc}
+      @media(max-width:600px){.fm-github-catalog{padding:.75rem}.fm-github-catalog-heading{display:block}}
+    </style>
+    <script>
+      (function(){
+        'use strict';
+        const search=document.getElementById('fmGithubRepoSearch');
+        const cards=document.getElementById('fmGithubRepoCards');
+        const count=document.getElementById('fmGithubRepoCount');
+        const refresh=document.getElementById('fmGithubRepoRefresh');
+        if(!search||!cards||!count||!refresh)return;
+        let repositories=[];
+        const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+        function draw(){
+          const query=search.value.trim().toLocaleLowerCase();
+          const filtered=repositories.filter(repo=>repo&&typeof repo.name==='string'&&!/^\d+$/.test(repo.name.trim())&&repo.name.toLocaleLowerCase().includes(query));
+          count.textContent=filtered.length+' dari '+repositories.length+' repositori';
+          cards.innerHTML=filtered.length?filtered.map(repo=>'<article class="fm-github-repo-card"><h4>📦 '+escapeHtml(repo.name)+'</h4><p>planetbintang / '+escapeHtml(repo.name)+' · cabang '+escapeHtml(repo.defaultBranch||'default')+'</p><div class="fm-github-repo-actions"><a href="'+escapeHtml(repo.url)+'" target="_blank" rel="noopener noreferrer">Repositori ↗</a><a href="'+escapeHtml(repo.treeUrl)+'" target="_blank" rel="noopener noreferrer">Berkas ↗</a></div></article>').join(''):'<div class="fm-github-repo-empty">Tidak ada repositori yang cocok.</div>';
+        }
+        async function load(){
+          count.textContent='Memuat katalog…';refresh.disabled=true;
+          try{const response=await fetch('./data/github-repositories.json?refresh='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();repositories=(Array.isArray(data.repositories)?data.repositories:[]).filter(repo=>repo&&typeof repo.name==='string'&&!/^\d+$/.test(repo.name.trim()));draw();}
+          catch(error){count.textContent='Katalog gagal dimuat. Periksa data/github-repositories.json.';cards.innerHTML='';}
+          finally{refresh.disabled=false;}
+        }
+        search.addEventListener('input',draw);refresh.addEventListener('click',load);load();
+      })();
+    </script>
     <script src="./file-manager.js?v=20261030-nested-tree-fix-v3" defer></script>
     <script src="./workspace.js?v=20261023-ice-platform-v1" defer></script>
     <script src="./feature-catalog.js?v=20261025-feature-registry-v1" defer></script>
@@ -558,12 +603,7 @@
     <script src="./control-center.js?v=20261026-control-center-v2" defer></script>
 
 <!-- PlanetBintang CODE repository browser: added without replacing existing navigation -->
-<style id="pb-code-repository-shortcut-style">
-#pbCodeRepoShortcut{position:fixed;right:16px;bottom:16px;z-index:99990;display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid #426a8d;border-radius:12px;background:linear-gradient(135deg,#12304c,#071a2c);color:#e8f4ff;font:600 13px/1.2 system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 28px #0005}
-#pbCodeRepoShortcut:hover{border-color:#83d3ff;transform:translateY(-1px)}
-@media(max-width:520px){#pbCodeRepoShortcut{right:10px;bottom:10px;padding:10px 12px}}
-</style>
-<a id="pbCodeRepoShortcut" href="./code-repositories.html" aria-label="Buka File Manager CODE dan daftar repositori GitHub">⌘ CODE · Repositori GitHub ↗</a>
+
 
 </body>
 </html>
