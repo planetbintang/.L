@@ -418,7 +418,9 @@ Isi dari panel provider yang dipilih:
         { path: 'systsm_ext/reconstruction-queue.json', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '{\n  "schemaVersion": 1,\n  "source": "systsm_ext",\n  "target": "sys",\n  "state": "staging-only",\n  "requiresValidation": true,\n  "neverCopySecrets": true\n}' },
       ],
     };
-    if (path === 'systsm_ext') return children.systsm_ext;\n    if (path.startsWith('systsm_ext/')) return [];\n    if (path === 'system_ext') return children.system_ext;\n    if (path === 'workspace') return localWorkspaceEntries();
+    if (path === 'systsm_ext') return children.systsm_ext;
+    if (path.startsWith('systsm_ext/')) return [];
+    if (path === 'system_ext') return children.system_ext;\n    if (path === 'workspace') return localWorkspaceEntries();
     return children[path] || [];
   }
   const EXT_FUNCTION = {
