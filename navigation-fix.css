@@ -613,3 +613,148 @@ input, textarea, select {
     gap: 4px !important;
   }
 }
+
+
+/* Final navigation refinement: one uninterrupted primary row, with cascading
+   flyout menus for every category nested under "Lainnya". */
+.topbar > .main-nav {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: clamp(2px, .35vw, 6px) !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  white-space: nowrap !important;
+  scrollbar-width: thin;
+}
+.topbar > .main-nav > .main-nav-link,
+.topbar > .main-nav > .nav-dropdown {
+  display: flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  align-items: center !important;
+}
+.topbar > .main-nav > .main-nav-link,
+.topbar > .main-nav > .nav-dropdown > summary {
+  min-height: 34px !important;
+  width: auto !important;
+  padding: 6px clamp(4px, .55vw, 10px) !important;
+  font-size: clamp(9px, .72vw, 12px) !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+}
+.topbar > .main-nav > .main-nav-more {
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  left: auto !important;
+  right: 0 !important;
+  display: none !important;
+  width: min(320px, calc(100vw - 24px)) !important;
+  min-width: 240px !important;
+  max-height: min(75vh, 620px) !important;
+  overflow: visible !important;
+  padding: 6px !important;
+  border: 1px solid rgba(100,172,237,.32) !important;
+  background: rgba(7,17,33,.98) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.52) !important;
+}
+.topbar > .main-nav > .main-nav-more[open] > .nav-submenu-groups {
+  display: grid !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(128,160,200,.2) !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details > summary {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  min-height: 36px !important;
+  padding: 8px 10px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  list-style: none !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details > summary::after {
+  content: "›";
+  color: #75d5ff;
+  font-size: 18px;
+  line-height: 1;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details > .nav-dropdown-menu {
+  position: absolute !important;
+  top: -1px !important;
+  left: calc(100% + 6px) !important;
+  right: auto !important;
+  display: none !important;
+  width: min(300px, calc(100vw - 32px)) !important;
+  min-width: 220px !important;
+  max-height: min(65vh, 540px) !important;
+  overflow: auto !important;
+  padding: 6px !important;
+  border: 1px solid rgba(100,172,237,.32) !important;
+  background: rgba(7,17,33,.98) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.52) !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details[open] > .nav-dropdown-menu {
+  display: grid !important;
+}
+.topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details:nth-last-child(-n+2)[open] > .nav-dropdown-menu {
+  left: auto !important;
+  right: calc(100% + 6px) !important;
+}
+@media (max-width: 760px) {
+  .topbar > .main-nav {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    gap: 6px !important;
+    padding-bottom: 4px !important;
+  }
+  .topbar > .main-nav > .main-nav-link,
+  .topbar > .main-nav > .nav-dropdown {
+    flex: 0 0 auto !important;
+    min-width: max-content !important;
+  }
+  .topbar > .main-nav > .main-nav-link,
+  .topbar > .main-nav > .nav-dropdown > summary {
+    min-height: 34px !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+  .topbar > .main-nav > .main-nav-more > .nav-submenu-groups {
+    position: fixed !important;
+    top: auto !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-height: min(65dvh, 560px) !important;
+    overflow: auto !important;
+  }
+  .topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details > .nav-dropdown-menu,
+  .topbar > .main-nav > .main-nav-more > .nav-submenu-groups > details:nth-last-child(-n+2)[open] > .nav-dropdown-menu {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-left: 2px solid rgba(83,190,255,.35) !important;
+    box-shadow: none !important;
+    background: rgba(16,35,58,.65) !important;
+  }
+}
