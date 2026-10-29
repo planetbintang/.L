@@ -1,6 +1,8 @@
 (()=>{'use strict';
 const $=s=>document.querySelector(s),list=$('#list'),search=$('#search'),view=$('#viewer'),source=$('#source'),back=$('#back'),count=$('#count');
 let entries=[],currentFile='';
+const siteRoot=location.origin+location.pathname.split('/').slice(0,-3).join('/')+'/';
+const siteFile=file=>siteRoot+file.split('/').map(encodeURIComponent).join('/');
 const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
 const ext=f=>(f.split('.').pop()||'').toLowerCase();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -8,7 +10,7 @@ function setMode(mode){document.querySelectorAll('[data-view-mode]').forEach(b=>
 function showSource(text){source.textContent=text}
 function renderHtml(text,file,meta){
  const frame=el('iframe','reic-preview');frame.title='Pratinjau '+file;frame.setAttribute('sandbox','allow-forms allow-scripts');frame.setAttribute('referrerpolicy','no-referrer');
- const base=new URL('./'+file,location.href);base.pathname=base.pathname.slice(0,base.pathname.lastIndexOf('/')+1);
+ const base=new URL(siteFile(file));base.pathname=base.pathname.slice(0,base.pathname.lastIndexOf('/')+1);
  let html=text;
  if(/<html[\s>]/i.test(text)){html=text.replace(/<head([^>]*)>/i,'<head$1><base href="'+esc(base.href)+'">');if(!/<head[\s>]/i.test(html))html='<base href="'+esc(base.href)+'">'+html}
  else html='<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+esc(base.href)+'"></head><body>'+text+'</body></html>';
@@ -54,7 +56,7 @@ function render(text,file){
 }
 async function openFile(file){
  try{
-  currentFile=file;const response=await fetch('./'+file.split('/').map(encodeURIComponent).join('/'),{cache:'no-cache'});
+  currentFile=file;const response=await fetch(siteFile(file),{cache:'no-cache'});
   if(!response.ok)throw Error('HTTP '+response.status+' saat membaca '+file);
   const text=await response.text();$('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');
   history.replaceState(null,'','#'+encodeURIComponent(file));render(text,file);
@@ -68,8 +70,17 @@ function draw(){
 }
 search.addEventListener('input',draw);
 back.addEventListener('click',()=>{view.classList.add('hidden');list.parentElement.classList.remove('hidden');history.replaceState(null,'',location.pathname);$('#componentWorkspace').replaceChildren()});
-fetch('./manifest.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('manifest.json tidak tersedia (HTTP '+r.status+')');return r.json()}).then(d=>{
- entries=(Array.isArray(d)?d:Array.isArray(d.files)?d.files:[]).filter(x=>x&&typeof x.file==='string'&&x.file.toLowerCase().endsWith('.reic'));
+async function loadCatalog(){
+ let data=null,lastError=null;
+ try{const r=await fetch('./manifest.json',{cache:'no-cache'});if(!r.ok)throw Error('manifest.json HTTP '+r.status);data=await r.json();}catch(e){lastError=e;}
+ let files=Array.isArray(data)?data:Array.isArray(data?.files)?data.files:null;
+ if(!files){
+  try{const r=await fetch(siteFile('scripts/html-reic-migration-manifest.txt'),{cache:'no-cache'});if(!r.ok)throw Error('daftar migrasi HTTP '+r.status);const txt=await r.text();files=txt.split(/\\r?\\n/).map(s=>s.trim()).filter(s=>s.toLowerCase().endsWith('.reic')).map(file=>({file,title:file.split('/').pop().replace(/\\.reic$/i,''),source:file.split('/').slice(0,-1).join('/')||'Root',type:'reic'}));}
+  catch(e){lastError=e;}
+ }
+ if(!files)throw lastError||Error('Katalog REIC tidak tersedia');
+ entries=files.filter(x=>x&&typeof x.file==='string'&&x.file.toLowerCase().endsWith('.reic')&&!x.file.startsWith('/')&&!x.file.split('/').includes('..'));
  draw();const hash=decodeURIComponent(location.hash.slice(1));if(hash&&entries.some(x=>x.file===hash))openFile(hash);
-}).catch(e=>{count.textContent='Katalog gagal dimuat: '+e.message;list.replaceChildren(el('p','runtime-error','Periksa manifest.json dan pastikan berisi daftar berkas REIC yang tersedia.'))});
+}
+loadCatalog().catch(e=>{count.textContent='Katalog gagal dimuat: '+e.message;list.replaceChildren(el('p','runtime-error','Katalog tidak dapat dibaca. Pastikan scripts/html-reic-migration-manifest.txt tersedia dan berisi jalur berkas .reic.'))});
 })();
