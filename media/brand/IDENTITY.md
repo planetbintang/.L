@@ -1,8 +1,8 @@
 # Identitas Resmi PLANETBINTANG
 
 - Nama kanonis sistem: `PLANETBINTANG`.
-- Sumber logo kanonis: `../brand-logo-browser.png` (aset yang sudah ada pada root repositori); sumber aset alternatif yang tercatat: `../brand-logo.jpg`.
-- Pertahankan bentuk logo asli dan ciri putihnya. Jangan membuat logo tiruan atau mengganti identitas dengan ikon generik.
+- Sumber logo kanonis: `./planetbintang-logo.svg` (logo yang diunggah pemilik dan tersimpan di direktori brand pusat).
+- Logo kanonis adalah aset dari unggahan pemilik. Gunakan file yang sama untuk header, halaman utama, manifest PWA, dan aplikasi turunan; jangan mengganti identitas dengan ikon generik.
 - Logo dan nama brand harus merujuk pada identitas yang sama di header, halaman utama, manifest, File Manager, dan aplikasi turunan.
 - Perubahan identitas inti harus ditinjau pemilik repository dan dicatat di riwayat Git.
 
