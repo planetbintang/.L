@@ -9,6 +9,20 @@
     const summary = menu.querySelector(':scope > summary');
     if (summary) summary.setAttribute('aria-expanded', String(open));
   };
+  const mainNav = header.querySelector(':scope > .main-nav');
+  const isTopLevel = (menu) => menu.parentElement === mainNav;
+  const positionPanel = (menu) => {
+    if (!isTopLevel(menu) || !menu.open) return;
+    const summary = menu.querySelector(':scope > summary');
+    const panel = menu.querySelector(':scope > .nav-dropdown-menu');
+    if (!summary || !panel) return;
+    const rect = summary.getBoundingClientRect();
+    const width = Math.min(320, window.innerWidth - 24);
+    const isMore = menu.classList.contains('main-nav-more');
+    const left = Math.max(12, Math.min(isMore ? window.innerWidth - width - 12 : rect.left, window.innerWidth - width - 12));
+    panel.style.setProperty('--dropdown-top', `${Math.min(rect.bottom + 6, window.innerHeight - 80)}px`);
+    panel.style.setProperty('--dropdown-left', `${left}px`);
+  };
   const closeOthers = (except) => menus.forEach((menu) => {
     if (menu !== except) {
       menu.open = false;
@@ -32,6 +46,7 @@
       closeOthers(menu);
       menu.open = shouldOpen;
       setExpanded(menu, shouldOpen);
+      if (shouldOpen) positionPanel(menu);
     }, true);
 
     menu.addEventListener('toggle', () => setExpanded(menu, menu.open));
@@ -54,6 +69,7 @@
           closeOthers(menu);
           menu.open = true;
           setExpanded(menu, true);
+          positionPanel(menu);
           panel.querySelector('a, button')?.focus();
         }
       }
@@ -73,6 +89,9 @@
 
   window.addEventListener('resize', () => {
     // Keep expanded state and layout in sync after orientation or viewport changes.
-    menus.forEach((menu) => setExpanded(menu, menu.open));
+    menus.forEach((menu) => {
+      setExpanded(menu, menu.open);
+      positionPanel(menu);
+    });
   }, { passive: true });
 })();
