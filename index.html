@@ -265,7 +265,16 @@
         .home-reference-caption b{font-size:.85rem;letter-spacing:.06em}
         .home-reference-caption span{font-size:.78rem;color:#b7cbe0;line-height:1.5}
         @media(max-width:640px){.home-reference-images{grid-template-columns:1fr;gap:10px}.home-reference-image img{aspect-ratio:16/9}}
-      </style>
+      
+      /* Production home layout: remove floating OS MEDIA VM launcher and use full-width responsive content. */
+      #osmediavm-reic-launcher,#osmediavm-reic-shell,[id*="osmediavm-reic-launcher"],[class*="osmediavm-reic-launcher"]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+      html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+      main,.main-content,.app-shell,.section-block,.platform-page,.enterprise-page,.tools-page,.snaps-page,.aircloud-page{max-width:100%;min-width:0;box-sizing:border-box}
+      img,iframe,video,canvas,svg{max-width:100%}
+      button,input,select,textarea{max-width:100%;min-width:0}
+      @media(max-width:760px){.main-content{padding-left:12px!important;padding-right:12px!important}.section-heading{gap:10px;flex-wrap:wrap}.toolbar,.fm-toolbar{flex-wrap:wrap}.fm-layout{grid-template-columns:minmax(0,1fr)!important}.fm-sidebar,.fm-inspector{min-width:0;max-width:100%}}
+
+</style>
 <section class="metrics" id="metricsOverview" data-system-page="system" aria-label="Ringkasan sistem">
         <article class="metric-card"><span class="metric-label">REPOSITORI TERINDEKS</span><strong id="metricTotal">—</strong><small>cakupan tetap: planetbintang</small></article>
         <article class="metric-card"><span class="metric-label">PUBLIK / PRIVAT</span><strong><span id="metricPublic">—</span><i>/</i><span id="metricPrivate">—</span></strong><small>nama & tautan ditampilkan atas permintaan pemilik</small></article>
@@ -561,8 +570,5 @@
     <script src="./air-cloud-console.js?v=20261026-aircloud-feature-stack-v4" defer></script>
     <script src="./planetbintang-themes.js?v=20261026-sync-reber-themes-v1" defer></script>
     <script src="./control-center.js?v=20261026-control-center-v2" defer></script>
-  
-<link rel="stylesheet" href="./osmediavm.css">
-  <script src="./osmediavm.js" defer></script>
 </body>
 </html>
