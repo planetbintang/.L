@@ -24,7 +24,7 @@
   };
   const BRAND = {
     wordmark: 'PLANETBINTANG',
-    logo: './brand-logo-browser.png',
+    logo: './media/brand/planetbintang-logo.svg',
     folderIcon: './file-manager-icon.png',
     tagline: 'SNAPS · MCP HUB · PUSAT KODE & DATA AI',
   };
