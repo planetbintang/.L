@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0.0",
+  "system": {
+    "id": "osmediavm",
+    "name": "OS MEDIA VM",
+    "language": "id",
+    "deployment": "github-pages-static",
+    "entry": "../index.html",
+    "integration_hub": "./index.html"
+  },
+  "principles": [
+    "modul-terpisah",
+    "konfigurasi-eksplisit",
+    "tampilan-responsif",
+    "validasi-sebelum-integrasi",
+    "tidak-mengklaim-backend-yang-tidak-tersedia"
+  ],
+  "view_types": [
+    {
+      "id": "desktop",
+      "name": "Desktop utama",
+      "purpose": "Shell utama, navigasi, dock, dan ruang kerja.",
+      "entry": "../index.html",
+      "kind": "page"
+    },
+    {
+      "id": "catalog",
+      "name": "Katalog aplikasi",
+      "purpose": "Pencarian dan penelusuran manifes aplikasi.",
+      "entry": "../pusat_aplikasi/index.html",
+      "kind": "page"
+    },
+    {
+      "id": "detail",
+      "name": "Halaman detail modul",
+      "purpose": "Konten dan tindakan khusus per modul.",
+      "entry": "../",
+      "kind": "module"
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog / modal",
+      "purpose": "Tindakan ringkas dengan konteks dan kontrol yang jelas.",
+      "entry": "../",
+      "kind": "component"
+    },
+    {
+      "id": "settings",
+      "name": "Panel konfigurasi",
+      "purpose": "Mengubah preferensi dan opsi yang disediakan modul.",
+      "entry": "./index.html#settings",
+      "kind": "view"
+    }
+  ],
+  "module_contract": {
+    "required": [
+      "id",
+      "name",
+      "description",
+      "entry",
+      "view_type",
+      "config",
+      "capabilities",
+      "status"
+    ],
+    "optional": [
+      "icon",
+      "category",
+      "dependencies",
+      "permissions",
+      "events",
+      "api_adapter"
+    ],
+    "status_values": [
+      "ready",
+      "planned",
+      "disabled",
+      "needs-backend"
+    ],
+    "rules": [
+      "entry harus relatif terhadap root osmediavm atau URL HTTPS yang diizinkan",
+      "dependensi harus terdaftar dan tidak membentuk siklus",
+      "kemampuan yang membutuhkan backend harus menandai needs-backend",
+      "fitur tidak boleh mengaku sukses jika operasi tidak benar-benar dijalankan"
+    ]
+  },
+  "settings": [
+    {
+      "key": "appearance.theme",
+      "label": "Tema antarmuka",
+      "type": "select",
+      "default": "midnight",
+      "options": [
+        "midnight",
+        "light",
+        "system"
+      ],
+      "scope": "local-browser",
+      "description": "Preferensi tampilan pada browser ini."
+    },
+    {
+      "key": "appearance.density",
+      "label": "Kerapatan tampilan",
+      "type": "select",
+      "default": "comfortable",
+      "options": [
+        "comfortable",
+        "compact"
+      ],
+      "scope": "local-browser",
+      "description": "Mengatur kerapatan visual komponen pada halaman pusat integrasi."
+    },
+    {
+      "key": "navigation.openMode",
+      "label": "Cara membuka modul",
+      "type": "select",
+      "default": "same-tab",
+      "options": [
+        "same-tab",
+        "new-tab"
+      ],
+      "scope": "session",
+      "description": "Pilihan navigasi untuk tautan modul."
+    },
+    {
+      "key": "runtime.strictValidation",
+      "label": "Validasi ketat",
+      "type": "boolean",
+      "default": true,
+      "scope": "session",
+      "description": "Periksa bidang wajib, tipe tampilan, dan status kemampuan sebelum menyimpan konfigurasi."
+    }
+  ],
+  "modules": [
+    {
+      "id": "desktop-shell",
+      "name": "Desktop OS MEDIA VM",
+      "description": "Shell dan navigasi utama.",
+      "entry": "../index.html",
+      "view_type": "desktop",
+      "config": "../mesin_runtime/",
+      "capabilities": [
+        "navigation",
+        "layout"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "application-catalog",
+      "name": "Pusat Aplikasi",
+      "description": "Katalog aplikasi dan manifes JSON.",
+      "entry": "../pusat_aplikasi/index.html",
+      "view_type": "catalog",
+      "config": "../berkas_sistem/",
+      "capabilities": [
+        "search",
+        "catalog",
+        "manifest-read"
+      ],
+      "status": "ready"
+    },
+    {
+      "id": "menu-registry",
+      "name": "Pusat Registri Menu",
+      "description": "Registri menu dan halaman detail REIC yang sudah ada.",
+      "entry": "../pusat_registri/",
+      "view_type": "catalog",
+      "config": "../pusat_registri/",
+      "capabilities": [
+        "registry",
+        "detail-navigation"
+      ],
+      "status": "needs-validation"
+    },
+    {
+      "id": "integration-hub",
+      "name": "Pusat Integrasi",
+      "description": "Kontrak modul, preferensi, dan validasi konfigurasi.",
+      "entry": "./index.html",
+      "view_type": "settings",
+      "config": "./integrasi.json",
+      "capabilities": [
+        "settings",
+        "configuration-validation"
+      ],
+      "status": "ready"
+    }
+  ],
+  "limitations": {
+    "github_pages": "Hanya hosting statis; tidak menyediakan proses server, database transaksional, akses perangkat, atau eksekusi kode arbitrer.",
+    "persistence": "Pengaturan pada halaman ini disimpan lokal di browser dan tidak mengubah file repository.",
+    "real_operations": "Operasi sistem nyata membutuhkan adapter/backend berizin dan harus diverifikasi terpisah."
+  }
+}
