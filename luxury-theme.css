@@ -877,3 +877,48 @@ body {
   .main-nav .nav-dropdown > summary,
   .main-nav > .main-nav-link { font-size: 10px; padding: 0 8px; height: 30px; min-height: 30px; }
 }
+
+
+/* Match the animated system-flow area to the former metric-card surface texture. */
+.system-flow-block {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid var(--lux-line, rgba(101,146,219,.23));
+  border-radius: 0;
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(32,95,224,.16), transparent 48%),
+    linear-gradient(145deg, rgba(22,29,41,.97), rgba(11,15,23,.97));
+  box-shadow: 0 22px 65px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.035);
+}
+.system-flow-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .24;
+  background-image:
+    linear-gradient(rgba(129,160,205,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129,160,205,.075) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(135deg, #000, transparent 85%);
+}
+.system-flow-card {
+  border-color: rgba(101,146,219,.28);
+  border-radius: 0;
+  background:
+    linear-gradient(145deg, rgba(22,29,41,.96), rgba(11,15,23,.96));
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+.system-flow-card:hover,
+.system-flow-card:focus-visible {
+  border-color: rgba(61,124,255,.72);
+  background:
+    linear-gradient(145deg, rgba(32,95,224,.24), rgba(11,15,23,.98));
+  box-shadow: 0 8px 24px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.06);
+}
+@media (max-width: 650px) {
+  .system-flow-block { padding: 10px; }
+}
