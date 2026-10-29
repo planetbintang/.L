@@ -1,0 +1,46 @@
+{
+  "title": "PLANETBINTANG repository migration",
+  "status": "partial",
+  "updatedAt": "2026-10-29",
+  "sourceCatalog": "media/repositories/index.json",
+  "sourceRepositoryCount": 47,
+  "sourceVisibility": {
+    "private": 41,
+    "public": 6
+  },
+  "verifiedImportedFiles": [
+    {
+      "sourceRepository": "planetbintang/owner",
+      "sourceBranch": "io",
+      "sourcePath": "README.md",
+      "destinationPath": "media/repositories/imported/owner/README.md",
+      "verification": "destination read-back succeeded"
+    },
+    {
+      "sourceRepository": "planetbintang/ptlstudio",
+      "sourceBranch": "main",
+      "sourcePath": "metadata.json",
+      "destinationPath": "media/repositories/imported/ptlstudio/metadata.json",
+      "verification": "destination read-back succeeded"
+    },
+    {
+      "sourceRepository": "planetbintang/.sumberkode",
+      "sourceBranch": "io",
+      "sourcePath": "README.md",
+      "destinationPath": "media/repositories/imported/sumberkode/README.md",
+      "verification": "destination read-back succeeded"
+    }
+  ],
+  "notYetMigrated": [
+    "planetbintang/ptl",
+    "planetbintang/index.html.app",
+    "all 41 private repositories",
+    "remaining source repository files not explicitly listed as imported"
+  ],
+  "securityPolicy": "Do not copy private repository contents into a public deployment. Audit secrets, personal data, licenses, large files, Git LFS, submodules, and deployment impact before each migration.",
+  "importantLimitations": [
+    "This is a staged partial migration, not a complete migration of all 47 repositories.",
+    "The imported files are individual source files; full Git history and repository contents have not been copied.",
+    "Deployment and public website behavior have not yet been verified."
+  ]
+}
