@@ -267,8 +267,13 @@
         .home-reference-caption span{font-size:.78rem;color:#b7cbe0;line-height:1.5}
         @media(max-width:640px){.home-reference-images{grid-template-columns:1fr;gap:10px}.home-reference-image img{aspect-ratio:16/9}}
       
-      /* Production home layout: remove floating OS MEDIA VM launcher and use full-width responsive content. */
-      #osmediavm-reic-launcher,#osmediavm-reic-shell,[id*="osmediavm-reic-launcher"],[class*="osmediavm-reic-launcher"]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+      /* Production homepage: hide only the floating OS MEDIA VM / REIC shortcuts, never the main PlanetBintang content. */
+      #osmediavm-reic-launcher,#osmediavm-reic-shell,[id*="osmediavm-reic-launcher"],[class*="osmediavm-reic-launcher"],[id*="osmediavm"][id*="reic"][class*="float"],[class*="osmediavm"][class*="reic"][class*="float"],[data-osmediavm-reic-launcher],[data-floating-osmediavm]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+      /* Keep the homepage in its normal document flow: no floating OS launcher, no artificial right-side blank area. */
+      body{overflow-x:hidden}
+      #overview,#repositories,#metricsOverview,.main-content{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+      .main-content{margin-left:auto;margin-right:auto}
+      .vm-home-showcase,.home-ai-gallery,.home-reference-images{position:relative;inset:auto;float:none;max-width:100%;box-sizing:border-box}
       html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
       main,.main-content,.app-shell,.section-block,.platform-page,.enterprise-page,.tools-page,.snaps-page,.aircloud-page{max-width:100%;min-width:0;box-sizing:border-box}
       img,iframe,video,canvas,svg{max-width:100%}
