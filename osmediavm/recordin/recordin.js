@@ -6,12 +6,16 @@ const ext=f=>(f.split('.').pop()||'').toLowerCase();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function setMode(mode){document.querySelectorAll('[data-view-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.viewMode===mode));document.querySelectorAll('[data-view-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.viewPanel!==mode))}
 function showSource(text){source.textContent=text}
-function renderHtml(text,file){
+function renderHtml(text,file,meta){
  const frame=el('iframe','reic-preview');frame.title='Pratinjau '+file;frame.setAttribute('sandbox','allow-forms allow-scripts');frame.setAttribute('referrerpolicy','no-referrer');
  const base=new URL('./'+file,location.href);base.pathname=base.pathname.slice(0,base.pathname.lastIndexOf('/')+1);
  let html=text;
  if(/<html[\s>]/i.test(text)){html=text.replace(/<head([^>]*)>/i,'<head$1><base href="'+esc(base.href)+'">');if(!/<head[\s>]/i.test(html))html='<base href="'+esc(base.href)+'">'+html}
  else html='<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+esc(base.href)+'"></head><body>'+text+'</body></html>';
+ const stylePath=(meta.match(/^\\s*style:\\s*(.+)\\s*$/im)||[])[1];
+ const scriptPath=(meta.match(/^\\s*script:\\s*(.+)\\s*$/im)||[])[1];
+ if(stylePath){const link='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=/<head[^>]*>/i.test(html)?html.replace(/<head[^>]*>/i,m=>m+link):html.replace(/<html[^>]*>/i,m=>m+'<head>'+link+'</head>');}
+ if(scriptPath){const script='<script src="'+esc(scriptPath.trim())+'"><\\/script>';html=/<\\/body>/i.test(html)?html.replace(/<\\/body>/i,script+'</body>'):html+script;}
  frame.srcdoc=html;return frame
 }
 function renderMarkdown(text){
@@ -38,7 +42,7 @@ function render(text,file){
  toolbar.append(preview,raw);workspace.append(toolbar);
  const previewPanel=el('section','runtime-panel');previewPanel.dataset.viewPanel='preview';
  const sourcePanel=el('section','runtime-panel hidden');sourcePanel.dataset.viewPanel='source';
- if(looksHtml){previewPanel.append(renderHtml(body,file))}
+ if(looksHtml){previewPanel.append(renderHtml(body,file,header?header[1]:''))}
  else if(type==='json'){try{const pre=el('pre','code-preview',JSON.stringify(JSON.parse(body),null,2));previewPanel.append(pre)}catch{previewPanel.append(el('pre','code-preview',body))}}
  else if(type==='md'||type==='markdown'||type==='txt'){previewPanel.append(type==='md'||type==='markdown'?renderMarkdown(body):el('pre','code-preview',body))}
  else {previewPanel.append(el('pre','code-preview',body))}
