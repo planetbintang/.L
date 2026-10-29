@@ -1,0 +1,7 @@
+# Domain Search System (.NZ)
+# Purpose: runtime logic specification for the PlanetBintang global search.
+# Live browser implementation: ../search-page.js
+# Data source: ../data/domain-registry.nz plus available al.l data.media domain shards.
+# Internet results use the public Wikipedia API; Google Search remains available as an external search link.
+# Records must be one JSON object per line: {"domain":"example.tld","status":"source/status"}
+# Never label an unverified domain as live, registered, or reachable.
