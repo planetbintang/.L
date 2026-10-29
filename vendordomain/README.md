@@ -31,3 +31,12 @@ GitHub Pages akan memperbarui situs setelah commit pada branch yang dikonfiguras
 Satu menu utama pada header adalah **Vendor Domain** dengan empat dropdown: **Domain & DNS**, **Vendor & Ekstensi**, **Situs & Deployment**, dan **Sistem & Administrasi**. Sidebar dan blok fitur menampilkan 20 modul × 25 entri = 500 fitur. Panel detail, filter, pencarian, ekspor CSV, tema, navigasi seluler, serta pratinjau dan unduhan HTML berjalan sebagai fitur frontend statis.
 
 Perubahan ini tidak menambahkan backend registrar, DNS, pembayaran, atau hosting. Operasi produksi tetap memerlukan server/API layanan yang terautentikasi. GitHub Pages menyajikan frontend statis; publikasi situs yang dibuat dari teks mengharuskan file HTML hasil unduhan diterapkan ke hosting.
+
+
+## VendorDomain Enterprise — 150 fitur
+
+Antarmuka implementasi tambahan dengan 150 fitur utama dan 1.800 submenu tersedia di [VendorDomain Enterprise](./enterprise/). Katalog ini menyediakan pencarian, filter, detail tampilan/fungsi, prompt per fitur, serta ekspor JSON/CSV.
+
+- Source: `vendordomain/enterprise/index.html`
+- Dokumen: [enterprise/README.md](./enterprise/README.md)
+- Status: scaffold frontend; operasi domain, DNS, billing, hosting, dan cloud tetap memerlukan backend serta provider terkonfigurasi.
