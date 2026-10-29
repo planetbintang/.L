@@ -1,6 +1,6 @@
 {
   "title": "PLANETBINTANG repository migration",
-  "status": "partial",
+  "status": "partial-filesystem-entries-created",
   "updatedAt": "2026-10-29",
   "sourceCatalog": "media/repositories/index.json",
   "sourceRepositoryCount": 47,
@@ -42,5 +42,25 @@
     "This is a staged partial migration, not a complete migration of all 47 repositories.",
     "The imported files are individual source files; full Git history and repository contents have not been copied.",
     "Deployment and public website behavior have not yet been verified."
-  ]
+  ],
+  "filesystemRoot": "media/repositories/filesystem/",
+  "actualDirectoryEntries": "README.md files have been created in Git for the repository entries; these are real persisted directory entries, not full repository content copies.",
+  "completedInThisStage": [
+    "Created or confirmed per-repository README entries under media/repositories/filesystem/ for the catalogued repositories.",
+    "Preserved canonical source URLs and visibility metadata in directory entries.",
+    "Kept private repository contents out of the public website."
+  ],
+  "notCompleted": [
+    "Full file-by-file transfer of all 47 source repositories.",
+    "Full Git history, tags, branches, Git LFS objects, and submodules.",
+    "Complete audit of secrets, licenses, personal data, and deployment compatibility.",
+    "Deployment verification on GitHub Pages."
+  ],
+  "constraints": [
+    "The public ptl repository's recursive tree contains 8,806 files and about 378,413,400 bytes of current tree content; copying every file via individual content API calls is not practical in this workflow.",
+    "The public index.html.app recursive tree response is truncated at 61,479 entries, so a complete inventory requires paginated or subtree-based retrieval.",
+    "The GitHub API tree endpoint reports 409 for the empty 100.100.100.9 repository; it has no files to copy.",
+    "The source catalog marks 41 repositories private; these cannot be copied into a public site without explicit authorization and a private destination."
+  ],
+  "nextStep": "Run a repository-level migration using git clone --mirror / git bundle or GitHub import for each approved repository into appropriately permissioned destinations; then validate checksums and deployment."
 }
