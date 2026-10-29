@@ -42,8 +42,9 @@
     const base = 'https://raw.githubusercontent.com/planetbintang/al.l/io/data.media/';
     domainCatalogPromise = Promise.all([
       fetch(base + 'domain-000001.media', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => ''),
-      fetch(base + 'domain-seeds.txt', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => '')
-    ]).then(([jsonl,seeds]) => {
+      fetch(base + 'domain-seeds.txt', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => ''),
+      fetch('./data/domain-registry.nz', {cache:'no-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => '')
+    ]).then(([jsonl,seeds,systemNz]) => {
       const found = new Map();
       jsonl.split(/\r?\n/).forEach(line => {
         try {
@@ -51,6 +52,9 @@
           const domain = text(record.domain).trim().toLowerCase();
           if (domain && /^[a-z0-9.-]+$/.test(domain)) found.set(domain, {domain, status:text(record.status || 'tercatat'), source:'domain-000001.media'});
         } catch (_) {}
+      });
+      systemNz.split(/\r?\n/).forEach(line => {
+        try { const record = JSON.parse(line); const domain = text(record.domain).trim().toLowerCase(); if (domain && /^[a-z0-9.-]+$/.test(domain)) found.set(domain, {domain,status:text(record.status || 'sistem .NZ'),source:'data/domain-registry.nz'}); } catch (_) {}
       });
       seeds.split(/\r?\n/).forEach(line => {
         const domain = line.trim().toLowerCase();
@@ -91,7 +95,7 @@
   function renderFilters(counts = {}) {
     if (!filterBox) return;
     filterBox.replaceChildren();
-    [['all','Semua hasil',counts.all || 0],['repository','Repositori',counts.repository || 0],['folder','Folder & path',counts.folder || 0],['domain','Domain .media',counts.domain || 0]].forEach(([type,label,count]) => {
+    [['all','Semua hasil',counts.all || 0],['repository','Repositori',counts.repository || 0],['folder','Folder & path',counts.folder || 0],['domain','Domain & Internet',counts.domain || 0]].forEach(([type,label,count]) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'global-search-filter'; b.setAttribute('aria-pressed', String(activeType === type));
       const name = document.createElement('span'); name.textContent = label; const total = document.createElement('small'); total.textContent = String(count);
       b.append(name,total); b.addEventListener('click', () => { activeType = type; render(input.value); }); filterBox.append(b);
@@ -119,21 +123,30 @@
     }
     return output.slice(0,150);
   }
+  async function fetchWebResults(query) {
+    const q = text(query).trim(); if (!q) return [];
+    try {
+      const url = 'https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=' + encodeURIComponent(q) + '&gsrnamespace=0&gsrlimit=8&prop=pageimages%7Cextracts&piprop=thumbnail&pithumbsize=240&exintro=1&explaintext=1&exsentences=2&format=json&origin=*';
+      const response = await fetch(url, {credentials:'omit'}); if (!response.ok) return [];
+      const data = await response.json();
+      return Object.values(data.query?.pages || {}).sort((a,b) => (a.index||999)-(b.index||999)).map(page => ({title:page.title,description:page.extract || 'Artikel ensiklopedia terkait pencarian.',path:'wikipedia.org/wiki/' + String(page.title).replace(/ /g,'_'),href:'https://en.wikipedia.org/?curid=' + page.pageid,label:'Buka hasil web ↗',kind:'HASIL INTERNET'}));
+    } catch (_) { return []; }
+  }
   async function render(query) {
     const token = ++requestToken, q = cleanQuery(query); results.replaceChildren();
     const layout = $('.global-search-layout', section), sourceView = $('.search-source-view', section);
     if (!q) {
       if (layout) layout.hidden = true;
       if (sourceView) sourceView.hidden = false;
-      status.textContent = 'Indeks siap. Masukkan kata kunci untuk mencari domain, path, repositori, dan Google.';
+      status.textContent = 'Mesin pencari siap. Cari domain, repositori, direktori sistem, dan hasil internet.';
       renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0});
       return;
     }
     if (layout) layout.hidden = false;
     if (sourceView) sourceView.hidden = true;
-    status.textContent = 'Mencari repositori, path folder, dan katalog domain al.l/data.media…';
+    status.textContent = 'Mencari repositori, direktori, katalog domain sistem .NZ, dan hasil internet…';
     const repoMatches = repositories.filter(repo => [repo.name,repo.fullName,repo.description,repo.language,repo.appType,repo.host,repo.homepage,repo.pagesUrl,...(repo.languages||[]).map(x=>x.name)].some(v=>normalize(v).includes(q))).slice(0,100);
-    const [folderMatches, allDomains] = await Promise.all([collectFolderResults(q,token), loadDomainCatalog()]);
+    const [folderMatches, allDomains, webMatches] = await Promise.all([collectFolderResults(q,token), loadDomainCatalog(), fetchWebResults(text(query).trim())]);
     if (token !== requestToken) return;
     const domainMatches = allDomains.filter(item => normalize(item.domain).includes(q)).slice(0,100);
     const siteMatches = [];
@@ -143,7 +156,7 @@
     const utilityMatches = [
       {title:'Google Search',description:'Cari “' + text(query).trim() + '” langsung di Google.',path:'google.com/search',href:'https://www.google.com/search?q=' + encodeURIComponent(text(query).trim()),label:'Cari di Google ↗',kind:'MESIN PENCARI'}
     ];
-    const allCount = repoMatches.length + folderMatches.length + domainMatches.length + siteMatches.length + utilityMatches.length;
+    const allCount = repoMatches.length + folderMatches.length + domainMatches.length + siteMatches.length + utilityMatches.length + webMatches.length + webMatches.length;
     renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length,domain:domainMatches.length + siteMatches.length + utilityMatches.length});
     const items = [];
     if (activeType === 'all' || activeType === 'repository') repoMatches.forEach(repo => {
@@ -166,13 +179,12 @@
     if (activeType === 'all' || activeType === 'domain') {
       siteMatches.forEach(match => items.push(card(match)));
       utilityMatches.forEach(match => {
-        const item = card(match);
-        const link = item.querySelector('a'); link.target = '_blank'; link.rel = 'noopener noreferrer';
-        items.push(item);
+        const item = card(match); const link = item.querySelector('a'); link.target = '_blank'; link.rel = 'noopener noreferrer'; items.push(item);
       });
+      webMatches.forEach(match => { const item = card(match); const link = item.querySelector('a'); link.target = '_blank'; link.rel = 'noopener noreferrer'; items.push(item); });
     }
     items.forEach(item=>results.append(item));
-    status.textContent = allCount + ' hasil ditemukan: ' + repoMatches.length + ' repositori, ' + folderMatches.length + ' folder, ' + domainMatches.length + ' domain dari katalog al.l/data.media. Katalog membaca shard yang tersedia di GitHub; file bulk di storage terpisah tidak diasumsikan tersedia.';
+    status.textContent = allCount + ' hasil ditemukan: ' + repoMatches.length + ' repositori, ' + folderMatches.length + ' folder, ' + domainMatches.length + ' domain, ' + webMatches.length + ' hasil internet.';
     if (!items.length) { const empty=document.createElement('p'); empty.className='global-search-empty'; empty.textContent='Tidak ada hasil cocok pada jenis pencarian ini.'; results.append(empty); }
   }
   function openGlobalSearch(value) {
@@ -197,6 +209,6 @@
     if (savedQuery && input) { input.value = savedQuery; if (topInput) topInput.value = savedQuery; if (homeInput) homeInput.value = savedQuery; }
   } catch (_) {}
   fetch('./data/repositories.json',{cache:'no-cache',credentials:'omit'}).then(r=>{if(!r.ok)throw new Error('Snapshot tidak tersedia');return r.json();})
-    .then(data=>{repositories=Array.isArray(data.repositories)?data.repositories:[];status.textContent='Indeks siap · '+repositories.length+' entri sumber.';renderFilters({all:repositories.length,repository:repositories.length,folder:0});render(input.value);})
+    .then(data=>{repositories=Array.isArray(data.repositories)?data.repositories:[];status.textContent='Mesin pencari siap · '+repositories.length+' entri repositori. Sumber domain sistem .NZ dan hasil internet aktif saat tersedia.';renderFilters({all:repositories.length,repository:repositories.length,folder:0});render(input.value);})
     .catch(()=>{status.textContent='Indeks repositori belum dapat dimuat. Periksa data/repositories.json.';});
 })();
