@@ -4,27 +4,26 @@
   const fmt = new Intl.NumberFormat('id-ID');
   const state = { data: null, repo: '', path: '', query: '', extension: 'all', manifest: null, entries: [], pageIndex: 0, pageCount: 0, loading: false, selected: null, requestId: 0 };
 
-  // Root virtual sistem pada repository `.L` (sub URL planetbintang.snapshot lokal `.L`/):
-  // folder /data /proc /sys /media /acct /pro /config /cache — masing-masing adalah
-  // sub-URL File Manager (`#fileManager/<folder>`), berisi sub-folder khas sistem,
-  // file dengan nama/ekstensi/fungsi serta isi kode contoh, dan tampilan+pengaturan
-  // terpusat per folder.
+  // Pemetaan root OS MEDIA VM pada File Manager. Folder ini adalah namespace filesystem aplikasi;
+  // bukan akses langsung ke partisi OS Android atau penyimpanan server.
+  // /acct /sys /systsm_ext /cache /config /media /data memiliki peran sesuai system-root-map.
   const VIRTUAL_REPO = 'planetbintang/.SYSTEM';
   const L_REPO = 'planetbintang/.L';
   const VIRTUAL_INDEX_URL = 'data/trees/0000000000000000/index.json';
   // Folder tingkat root yang dikelola pada ROOT .L — termasuk folder sistem
   // virtual (/proc /sys /media /acct /pro /config /cache /system_ext) yang
   // selalu ditampilkan di samping folder nyata repositori (.github data scripts).
-  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'system_ext', 'workspace', 'planetbintang.com'];
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'systsm_ext', 'system_ext', 'workspace', 'planetbintang.com'];
   const VIRTUAL_ROOT_META = {
-    proc: { desc: 'Virtual filesystem proses (pid, stat, cmdline)', items: 3 },
-    sys: { desc: 'Sysfs perangkat & kernel (class, bus, devices)', items: 3 },
-    media: { desc: 'Mount point penyimpanan eksternal', items: 2 },
-    acct: { desc: 'Cgroup accounting proses Android', items: 2 },
-    pro: { desc: 'Folder konfigurasi profil sistem', items: 2 },
-    config: { desc: 'Konfigurasi terpusat sistem & layanan', items: 2 },
-    cache: { desc: 'Cache aplikasi & sistem (writable)', items: 2 },
-    system_ext: { desc: 'Filesystem kode virtual Planetbintang: katalog fitur + enterprise map', items: 20692 },
+    proc: { desc: 'Snapshot proses dan diagnostik; data contoh, bukan /proc perangkat langsung', items: 3 },
+    sys: { desc: 'Sistem inti permanen: registry, status, dan rekonstruksi modul yang telah divalidasi', items: 6 },
+    media: { desc: 'Media publik hasil rilis/publikasi dari rangkaian sistem yang sudah disiapkan', items: 2 },
+    acct: { desc: 'Action, activity, activation, dan account; semua aksi dicatat sebagai event', items: 4 },
+    pro: { desc: 'Profil kebijakan sistem kompatibilitas lama', items: 2 },
+    config: { desc: 'Konfigurasi internal permanen yang hanya dapat diubah pemilik sistem', items: 2 },
+    cache: { desc: 'Area sementara untuk rekonstruksi system_ext sebelum promosi ke sys; tunduk pada kebijakan hemat baterai', items: 3 },
+    systsm_ext: { desc: 'Staging dan penyimpanan sementara seluruh sistem/perangkat terdeteksi; sumber rekonstruksi untuk sys', items: 5 },
+    system_ext: { desc: 'Alias kompatibilitas untuk systsm_ext dan katalog modul virtual terdahulu', items: 20692 },
     workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
   };
   const GENERATED_EXTENSIONS = ['html', 'css', 'js', 'nz'];
@@ -410,11 +409,16 @@ Isi dari panel provider yang dipilih:
         { path: 'cache/global.config', type: 'file', mode: '0100644', size: 64, sizeKnown: true, codeContent: 'wipe_on_boot=false\nverbose_log=false' },
       ],
       system_ext: [
-        { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext' },
+        { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext kompatibilitas' },
         { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework">\n  <hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal>\n</compatibility-matrix>' },
       ],
+      systsm_ext: [
+        { path: 'systsm_ext/device-snapshots', type: 'directory', mode: '040700', function: 'Snapshot metadata perangkat yang terdeteksi; simpan metadata minimum, jangan salin rahasia' },
+        { path: 'systsm_ext/system-catalog', type: 'directory', mode: '040700', function: 'Katalog modul staging yang siap divalidasi sebelum masuk sys' },
+        { path: 'systsm_ext/reconstruction-queue.json', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '{\n  "schemaVersion": 1,\n  "source": "systsm_ext",\n  "target": "sys",\n  "state": "staging-only",\n  "requiresValidation": true,\n  "neverCopySecrets": true\n}' },
+      ],
     };
-    if (path === 'workspace') return localWorkspaceEntries();
+    if (path === 'systsm_ext') return children.systsm_ext;\n    if (path.startsWith('systsm_ext/')) return [];\n    if (path === 'system_ext') return children.system_ext;\n    if (path === 'workspace') return localWorkspaceEntries();
     return children[path] || [];
   }
   const EXT_FUNCTION = {
