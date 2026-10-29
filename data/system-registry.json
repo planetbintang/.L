@@ -4,7 +4,7 @@
   "title": "Planetbintang Root System — File and Route Registry",
   "repository": "planetbintang/.L",
   "branch": "io",
-  "updatedAt": "2026-10-28",
+  "updatedAt": "2026-10-29",
   "baseUrl": "./",
   "policy": {
     "sourceOfTruth": "This file declares main-screen routes, feature ownership, and links to source files.",
@@ -767,6 +767,27 @@
         "execution request logs view"
       ],
       "executionState": "browser-local-or-static-no-server-logs"
+    },
+    {
+      "id": "git-feature-catalog",
+      "label": "Katalog 1.500 Fitur Git",
+      "group": "developer-tools",
+      "route": "./git-feature-catalog.html",
+      "sourceFiles": [
+        "git-feature-catalog.html",
+        "git-feature-catalog.css",
+        "git-feature-catalog.js",
+        "data/git-feature-catalog.json"
+      ],
+      "capabilities": [
+        "1500 feature specifications",
+        "module filtering",
+        "search",
+        "five-point implementation detail",
+        "prompt copy",
+        "JSON export"
+      ],
+      "executionState": "browser-static-specification-catalog"
     }
   ],
   "sourceFiles": [
