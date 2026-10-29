@@ -1,1 +1,71 @@
-(()=>{'use strict';const q=s=>document.querySelector(s),list=q('#list'),search=q('#search'),view=q('#viewer'),source=q('#source'),back=q('#back'),count=q('#count');let entries=[];function el(t,c,v){const n=document.createElement(t);if(c)n.className=c;if(v!==undefined)n.textContent=v;return n}async function openFile(file){try{const r=await fetch('./'+encodeURIComponent(file));if(!r.ok)throw Error('HTTP '+r.status);const text=await r.text();source.textContent=text;q('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');history.replaceState(null,'','#'+encodeURIComponent(file));const stem=file.slice(0,-5),style=q('#componentStyle'),script=q('#componentScript');style.href='./'+encodeURIComponent(stem+'.css');script.src='./'+encodeURIComponent(stem+'.js');script.onload=()=>{const mod=window.REIC_MODULES&&window.REIC_MODULES[file];if(mod)mod.init(q('#componentWorkspace'),{setOutput:v=>{q('#runtimeOutput').textContent=v}})};q('#componentWorkspace').replaceChildren();const form=el('form','reic-component');const label=el('label','', 'Input komponen');const input=el('textarea');input.name='input';input.rows=3;input.placeholder='Masukkan nilai untuk diproses';const button=el('button','','Proses input');button.type='submit';const output=el('output','','Keluaran akan muncul di sini');form.append(label,input,button,output);q('#componentWorkspace').append(form);q('#runtimeOutput').textContent='';}catch(e){source.textContent='Gagal membuka berkas: '+e.message;view.classList.remove('hidden')}}function draw(){const s=search.value.toLocaleLowerCase('id'),found=entries.filter(x=>(x.file+' '+x.title+' '+x.source).toLocaleLowerCase('id').includes(s));list.replaceChildren(...found.map(x=>{const a=el('a','item');a.href='./'+encodeURIComponent(x.file);a.append(el('strong','',x.title),el('small','',x.source),el('code','',x.file));a.addEventListener('click',e=>{e.preventDefault();openFile(x.file)});return a}));count.textContent=found.length.toLocaleString('id')+' berkas REIC'}search.addEventListener('input',draw);back.addEventListener('click',()=>{view.classList.add('hidden');list.parentElement.classList.remove('hidden');history.replaceState(null,'',location.pathname)});fetch('./manifest.json').then(r=>{if(!r.ok)throw Error('manifest tidak tersedia');return r.json()}).then(d=>{entries=d;draw();const f=decodeURIComponent(location.hash.slice(1));if(f&&entries.some(x=>x.file===f))openFile(f)}).catch(e=>count.textContent='Gagal memuat katalog: '+e.message)})();
+(()=>{'use strict';
+const $=s=>document.querySelector(s),list=$('#list'),search=$('#search'),view=$('#viewer'),source=$('#source'),back=$('#back'),count=$('#count');
+let entries=[],currentFile='';
+const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
+const ext=f=>(f.split('.').pop()||'').toLowerCase();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function setMode(mode){document.querySelectorAll('[data-view-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.viewMode===mode));document.querySelectorAll('[data-view-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.viewPanel!==mode))}
+function showSource(text){source.textContent=text}
+function renderHtml(text,file){
+ const frame=el('iframe','reic-preview');frame.title='Pratinjau '+file;frame.setAttribute('sandbox','allow-forms allow-scripts');frame.setAttribute('referrerpolicy','no-referrer');
+ const base=new URL('./'+file,location.href);base.pathname=base.pathname.slice(0,base.pathname.lastIndexOf('/')+1);
+ let html=text;
+ if(/<html[\s>]/i.test(text)){html=text.replace(/<head([^>]*)>/i,'<head$1><base href="'+esc(base.href)+'">');if(!/<head[\s>]/i.test(html))html='<base href="'+esc(base.href)+'">'+html}
+ else html='<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+esc(base.href)+'"></head><body>'+text+'</body></html>';
+ frame.srcdoc=html;return frame
+}
+function renderMarkdown(text){
+ const root=el('article','markdown-preview');
+ text.split(/\r?\n/).forEach(line=>{
+  let m;if(!line.trim()){root.append(el('div','md-space'));return}
+  if((m=/^(#{1,6})\s+(.*)$/.exec(line))){root.append(el('h'+m[1].length,'',m[2]));return}
+  if(/^\s*[-*]\s+/.test(line)){root.append(el('p','md-list','• '+line.replace(/^\s*[-*]\s+/,'')));return}
+  if(/^>\s?/.test(line)){root.append(el('blockquote','',line.replace(/^>\s?/,'')));return}
+  root.append(el('p','',line))
+ });return root
+}
+function render(text,file){
+ const workspace=$('#componentWorkspace');workspace.replaceChildren();
+ const type=ext(file),looksHtml=type==='html'||type==='htm'||/<(?:!doctype\s+html|html|body|section|main|article|div|header|nav|form|table|svg)(?:\s|>)/i.test(text);
+ const header=text.match(/^---\s*REIC[^\n]*---\s*([\s\S]*?)---\s*END REIC HEADER\s*---/i);
+ const body=header?text.slice(header[0].length).trim():text;
+ const info=el('div','runtime-info');
+ info.append(el('span','runtime-chip',type.toUpperCase()+' · '+(looksHtml?'pratinjau antarmuka':type==='json'?'data terstruktur':type==='md'||type==='markdown'?'dokumen':'teks sumber')));
+ workspace.append(info);
+ const toolbar=el('div','runtime-toolbar');
+ const preview=el('button','selected','Pratinjau');preview.type='button';preview.dataset.viewMode='preview';
+ const raw=el('button','','Sumber');raw.type='button';raw.dataset.viewMode='source';
+ toolbar.append(preview,raw);workspace.append(toolbar);
+ const previewPanel=el('section','runtime-panel');previewPanel.dataset.viewPanel='preview';
+ const sourcePanel=el('section','runtime-panel hidden');sourcePanel.dataset.viewPanel='source';
+ if(looksHtml){previewPanel.append(renderHtml(body,file))}
+ else if(type==='json'){try{const pre=el('pre','code-preview',JSON.stringify(JSON.parse(body),null,2));previewPanel.append(pre)}catch{previewPanel.append(el('pre','code-preview',body))}}
+ else if(type==='md'||type==='markdown'||type==='txt'){previewPanel.append(type==='md'||type==='markdown'?renderMarkdown(body):el('pre','code-preview',body))}
+ else {previewPanel.append(el('pre','code-preview',body))}
+ sourcePanel.append(el('pre','code-preview',text));
+ workspace.append(previewPanel,sourcePanel);
+ const choose=mode=>{setMode(mode);previewPanel.classList.toggle('hidden',mode!=='preview');sourcePanel.classList.toggle('hidden',mode!=='source')};
+ preview.addEventListener('click',()=>choose('preview'));raw.addEventListener('click',()=>choose('source'));
+ showSource(text);$('#runtimeOutput').textContent=header?'Metadata REIC terdeteksi. Pratinjau berjalan dalam iframe terisolasi; kode sumber tersedia pada tab Sumber.':'Berkas dimuat. Pratinjau dipilih berdasarkan tipe konten.';
+}
+async function openFile(file){
+ try{
+  currentFile=file;const response=await fetch('./'+file.split('/').map(encodeURIComponent).join('/'),{cache:'no-cache'});
+  if(!response.ok)throw Error('HTTP '+response.status+' saat membaca '+file);
+  const text=await response.text();$('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');
+  history.replaceState(null,'','#'+encodeURIComponent(file));render(text,file);
+ }catch(e){$('#componentWorkspace').replaceChildren(el('p','runtime-error','Berkas gagal dibuka: '+e.message));view.classList.remove('hidden');list.parentElement.classList.add('hidden');showSource('Gagal membuka berkas: '+e.message)}
+}
+function draw(){
+ const term=search.value.trim().toLocaleLowerCase('id');
+ const found=entries.filter(x=>(x.file+' '+x.title+' '+x.source+' '+(x.type||'')).toLocaleLowerCase('id').includes(term));
+ list.replaceChildren(...found.map(x=>{const a=el('a','item');a.href='#'+encodeURIComponent(x.file);a.append(el('strong','',x.title||x.file),el('small','',x.source||'REIC'),el('code','',x.file));a.addEventListener('click',e=>{e.preventDefault();openFile(x.file)});return a}));
+ count.textContent=found.length.toLocaleString('id')+' berkas ditemukan'+(entries.length?' · total '+entries.length.toLocaleString('id'):'');
+}
+search.addEventListener('input',draw);
+back.addEventListener('click',()=>{view.classList.add('hidden');list.parentElement.classList.remove('hidden');history.replaceState(null,'',location.pathname);$('#componentWorkspace').replaceChildren()});
+fetch('./manifest.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('manifest.json tidak tersedia (HTTP '+r.status+')');return r.json()}).then(d=>{
+ entries=(Array.isArray(d)?d:Array.isArray(d.files)?d.files:[]).filter(x=>x&&typeof x.file==='string'&&x.file.toLowerCase().endsWith('.reic'));
+ draw();const hash=decodeURIComponent(location.hash.slice(1));if(hash&&entries.some(x=>x.file===hash))openFile(hash);
+}).catch(e=>{count.textContent='Katalog gagal dimuat: '+e.message;list.replaceChildren(el('p','runtime-error','Periksa manifest.json dan pastikan berisi daftar berkas REIC yang tersedia.'))});
+})();
