@@ -26,6 +26,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate production pages and feature registry
+        run: python3 scripts/validate-production-surface.py
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
