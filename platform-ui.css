@@ -403,3 +403,134 @@ body {
 
 /* Keep header navigation strictly square across responsive breakpoints. */
 .nav-dropdown > summary, .nav-dropdown-menu, .nav-dropdown-menu a, .nav-dropdown-menu button, .icon-button { border-radius: 0 !important; }
+
+
+/* Reic library-inspired surfaces for every main-menu destination and submenu view. */
+:root {
+  --pb-library-ink: #eaf5ff;
+  --pb-library-muted: #a9c1d8;
+  --pb-library-line: rgba(102, 190, 245, .28);
+  --pb-library-panel: linear-gradient(145deg, rgba(12, 34, 56, .96), rgba(5, 17, 31, .97));
+  --pb-library-glow: rgba(54, 160, 225, .12);
+}
+body [data-system-page]:not([hidden]) {
+  color: var(--pb-library-ink);
+}
+body [data-system-page]:not([hidden]) .section-heading,
+body [data-system-page]:not([hidden]) .platform-page-heading {
+  padding: clamp(14px, 2vw, 24px);
+  border: 1px solid var(--pb-library-line);
+  background: radial-gradient(ellipse at 90% 0, rgba(35, 118, 174, .22), transparent 55%), var(--pb-library-panel);
+  box-shadow: inset 0 1px rgba(255,255,255,.035), 0 12px 30px rgba(0,0,0,.12);
+}
+body [data-system-page]:not([hidden]) .section-heading h1,
+body [data-system-page]:not([hidden]) .section-heading h2,
+body [data-system-page]:not([hidden]) .platform-page-copy h1,
+body [data-system-page]:not([hidden]) .platform-side-panel h2 {
+  color: #edf8ff;
+}
+body [data-system-page]:not([hidden]) .section-description,
+body [data-system-page]:not([hidden]) .platform-page-copy .section-description {
+  color: var(--pb-library-muted);
+}
+body [data-system-page]:not([hidden]) .panel,
+body [data-system-page]:not([hidden]) .toolbar,
+body [data-system-page]:not([hidden]) .repo-card,
+body [data-system-page]:not([hidden]) .host-card,
+body [data-system-page]:not([hidden]) .metric-card,
+body [data-system-page]:not([hidden]) .settings-panel,
+body [data-system-page]:not([hidden]) .workspace-section,
+body [data-system-page]:not([hidden]) .platform-stat-card,
+body [data-system-page]:not([hidden]) .platform-data-panel,
+body [data-system-page]:not([hidden]) .platform-side-panel,
+body [data-system-page]:not([hidden]) .platform-differentiators,
+body [data-system-page]:not([hidden]) .platform-connector-card,
+body [data-system-page]:not([hidden]) .platform-planner-card,
+body [data-system-page]:not([hidden]) .platform-toolbar,
+body [data-system-page]:not([hidden]) .platform-planner-form {
+  color: var(--pb-library-ink);
+  border: 1px solid var(--pb-library-line);
+  background: var(--pb-library-panel);
+  box-shadow: inset 0 1px rgba(255,255,255,.035), 0 12px 28px rgba(0,0,0,.13);
+}
+body [data-system-page]:not([hidden]) .repo-card p,
+body [data-system-page]:not([hidden]) .host-card p,
+body [data-system-page]:not([hidden]) .platform-connector-card p,
+body [data-system-page]:not([hidden]) .platform-side-panel > p:not(.eyebrow),
+body [data-system-page]:not([hidden]) .platform-differentiators p {
+  color: var(--pb-library-muted);
+}
+body [data-system-page]:not([hidden]) .repo-card h3,
+body [data-system-page]:not([hidden]) .host-card h3,
+body [data-system-page]:not([hidden]) .platform-connector-card h3,
+body [data-system-page]:not([hidden]) .platform-planner-title,
+body [data-system-page]:not([hidden]) .platform-stat-card b {
+  color: #e6f6ff;
+}
+body [data-system-page]:not([hidden]) .platform-table th {
+  color: #c7e6ff;
+  background: #102b43;
+  border-color: var(--pb-library-line);
+}
+body [data-system-page]:not([hidden]) .platform-table td {
+  color: #d1e6f7;
+  border-color: rgba(102,190,245,.14);
+}
+body [data-system-page]:not([hidden]) .platform-table tbody tr:hover {
+  background: rgba(55, 133, 187, .15);
+}
+body [data-system-page]:not([hidden]) input,
+body [data-system-page]:not([hidden]) select,
+body [data-system-page]:not([hidden]) textarea,
+body [data-system-page]:not([hidden]) .platform-control input,
+body [data-system-page]:not([hidden]) .platform-control select {
+  color: #eaf6ff;
+  border-color: var(--pb-library-line);
+  background: #081a2b;
+}
+body [data-system-page]:not([hidden]) input::placeholder,
+body [data-system-page]:not([hidden]) textarea::placeholder {
+  color: #7895b0;
+}
+body [data-system-page]:not([hidden]) .eyebrow,
+body [data-system-page]:not([hidden]) .platform-page-copy .eyebrow {
+  color: #75d9ff;
+}
+body [data-system-page]:not([hidden]) .repo-card,
+body [data-system-page]:not([hidden]) .host-card,
+body [data-system-page]:not([hidden]) .platform-connector-card,
+body [data-system-page]:not([hidden]) .platform-planner-card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+body [data-system-page]:not([hidden]) .repo-card:hover,
+body [data-system-page]:not([hidden]) .host-card:hover,
+body [data-system-page]:not([hidden]) .platform-connector-card:hover,
+body [data-system-page]:not([hidden]) .platform-planner-card:hover {
+  border-color: rgba(102, 225, 255, .65);
+  box-shadow: 0 14px 32px rgba(0,0,0,.22), inset 0 1px rgba(255,255,255,.04);
+}
+body [data-system-page]:not([hidden]) .platform-status-chip,
+body [data-system-page]:not([hidden]) .readonly-pill,
+body [data-system-page]:not([hidden]) .snapshot-date {
+  color: #bdeaff;
+  border-color: var(--pb-library-line);
+  background: rgba(38, 113, 159, .16);
+}
+body [data-system-page]:not([hidden]) .platform-open-link,
+body [data-system-page]:not([hidden]) .workspace-secondary {
+  color: #d9f4ff;
+  border-color: rgba(102,190,245,.35);
+  background: linear-gradient(135deg, #123c5a, #0a2238);
+}
+body [data-system-page]:not([hidden]) .platform-source-note,
+body [data-system-page]:not([hidden]) .platform-empty-card {
+  color: var(--pb-library-muted);
+  border-color: var(--pb-library-line);
+  background: rgba(7, 24, 40, .8);
+}
+@media (max-width: 650px) {
+  body [data-system-page]:not([hidden]) .section-heading,
+  body [data-system-page]:not([hidden]) .platform-page-heading { padding: 12px; }
+}
