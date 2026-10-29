@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071222"><title>Repositori GitHub · PlanetBintang CODE</title>
+<style>
+:root{color-scheme:dark;--bg:#071222;--panel:#0d1c31;--line:#233b58;--text:#e8f2ff;--muted:#9fb4cc;--accent:#70c7ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#122b48,var(--bg) 60%);color:var(--text);font:14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:24px clamp(16px,4vw,48px);border-bottom:1px solid var(--line);background:#071222dd;position:sticky;top:0;backdrop-filter:blur(12px);z-index:2}
+h1{font-size:clamp(22px,3vw,32px);margin:0 0 6px}p{color:var(--muted);margin:4px 0 0}.wrap{max-width:1200px;margin:auto;padding:20px clamp(12px,3vw,36px)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.tools input{flex:1;min-width:190px}input,button{font:inherit;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#0a1728;color:var(--text)}button{cursor:pointer}button:hover,a:hover{border-color:var(--accent)}.count{color:var(--muted);margin:8px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,245px),1fr));gap:12px}.repo{padding:15px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#10243a,#0a1728);min-width:0}.repo h2{font-size:16px;margin:0 0 8px;overflow-wrap:anywhere}.repo p{font-size:12px;min-height:36px}.actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}a{color:var(--accent);text-decoration:none;border:1px solid #31506e;border-radius:8px;padding:7px 10px;font-size:12px}.empty{padding:24px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}footer{padding:24px 0;color:var(--muted);font-size:12px}
+</style></head>
+<body><header><h1>PlanetBintang · CODE / Repositori</h1><p>Penjelajah repositori untuk seluruh daftar yang tersedia pada koneksi GitHub.</p><div class="tools"><input id="search" type="search" placeholder="Cari nama repositori…" aria-label="Cari repositori"><button id="refresh" type="button">Segarkan daftar</button><a href="./index.html">Kembali ke sistem utama</a></div></header>
+<main class="wrap"><div id="count" class="count">Memuat katalog…</div><section id="repos" class="grid" aria-live="polite"></section><footer>File Manager ini menampilkan indeks dan tautan ke repositori sumber. Isi repo tidak diduplikasi ke situs ini; repositori privat mungkin meminta login GitHub.</footer></main>
+<script>
+(function(){'use strict';const root=document.getElementById('repos'),search=document.getElementById('search'),count=document.getElementById('count');let items=[];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function draw(){const q=search.value.trim().toLowerCase(),list=items.filter(x=>x.name.toLowerCase().includes(q));count.textContent=list.length+' dari '+items.length+' repositori';root.innerHTML=list.length?list.map(x=>'<article class="repo"><h2>📦 '+esc(x.name)+'</h2><p>planetbintang / '+esc(x.name)+' · repositori GitHub</p><div class="actions"><a href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">Buka repositori ↗</a><a href="'+esc(x.treeUrl)+'" target="_blank" rel="noopener noreferrer">Lihat berkas ↗</a></div></article>').join(''):'<div class="empty">Tidak ada repositori yang cocok.</div>';}
+async function load(){count.textContent='Memuat katalog…';try{const r=await fetch('./data/github-repositories.json',{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const data=await r.json();items=data.repositories||[];draw();}catch(e){count.textContent='Katalog lokal tidak dapat dimuat. Periksa koneksi dan berkas data/github-repositories.json.';root.innerHTML='';}}
+search.addEventListener('input',draw);document.getElementById('refresh').addEventListener('click',load);load();})();
+</script></body></html>
