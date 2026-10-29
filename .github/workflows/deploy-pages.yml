@@ -1,6 +1,5 @@
-name: Deploy entire .L system to GitHub Pages
-# Deployment refresh: 2026-10-28
-
+name: Deploy Planetbintang REIC to GitHub Pages
+# REIC is the canonical source format; HTML is generated only in the Pages artifact.
 on:
   push:
     branches:
@@ -23,38 +22,68 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout repository
+      - name: Checkout Planetbintang REIC system
         uses: actions/checkout@v4
-
-      - name: Validate production pages and feature registry
-        run: python3 scripts/validate-production-surface.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Bangun 15.000 halaman modul Perpustakaan
-        run: python3 scripts/bangun-perpustakaan.py
-
-      - name: Reconstruct HTML from REIC sources for static hosting
+      - name: Build REIC sources into browser-renderable Pages output
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          manifest = Path('scripts/html-reic-migration-manifest.txt')
-          if manifest.exists():
-              restored = 0
-              for line in manifest.read_text(encoding='utf-8').splitlines():
-                  source = Path(line.strip())
-                  if str(source).endswith('.reic') and source.is_file():
-                      target = source.with_suffix('.html')
-                      target.parent.mkdir(parents=True, exist_ok=True)
-                      target.write_bytes(source.read_bytes())
-                      restored += 1
-              print(f'Direkonstruksi {restored} halaman HTML dari sumber REIC.')
-          else:
-              print('Belum ada migrasi REIC; deployment menggunakan berkas saat ini.')
+          import sys
+
+          root = Path('.').resolve()
+          manifest = root / 'scripts/html-reic-migration-manifest.txt'
+          if not manifest.is_file():
+              raise SystemExit('FAIL: scripts/html-reic-migration-manifest.txt is missing')
+
+          restored = 0
+          missing = []
+          for raw in manifest.read_text(encoding='utf-8').splitlines():
+              rel = raw.strip()
+              if not rel or rel.startswith('#'):
+                  continue
+              source = (root / rel).resolve()
+              if root not in source.parents or source.suffix.lower() != '.reic':
+                  raise SystemExit(f'FAIL: invalid REIC source path: {rel}')
+              if not source.is_file():
+                  missing.append(rel)
+                  continue
+              target = source.with_suffix('.html')
+              target.parent.mkdir(parents=True, exist_ok=True)
+              target.write_bytes(source.read_bytes())
+              restored += 1
+
+          if missing:
+              print('Missing REIC source files:')
+              print('\n'.join(f' - {p}' for p in missing[:100]))
+              raise SystemExit(f'FAIL: {len(missing)} manifest source(s) missing')
+          for required in ('index.html', 'osmediavm/index.html', 'osmediavm/recordin/index.html'):
+              if not (root / required).is_file():
+                  raise SystemExit(f'FAIL: Pages entrypoint not generated: {required}')
+          print(f'REIC build complete: generated {restored} HTML pages for GitHub Pages.')
+          print('Canonical source files remain .reic; generated HTML is only a deployment artifact.')
           PY
 
-      - name: Upload complete repository as Pages artifact
+      - name: Build REIC library modules
+        run: python3 scripts/bangun-perpustakaan.py
+
+      - name: Validate generated production pages and feature registry
+        run: python3 scripts/validate-production-surface.py
+
+      - name: Keep static files and REIC sources in the Pages artifact
+        run: |
+          touch .nojekyll
+          test -f index.reic
+          test -f index.html
+          test -f osmediavm/index.reic
+          test -f osmediavm/index.html
+          test -f osmediavm/recordin/index.reic
+          test -f osmediavm/recordin/index.html
+
+      - name: Upload Planetbintang system as Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: .
