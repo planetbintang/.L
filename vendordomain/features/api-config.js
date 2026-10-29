@@ -1,2 +1,2 @@
-/* Set this to the deployed HTTPS API origin. Do not put secrets or admin tokens here. */
+/* URL dasar backend HTTPS yang benar-benar sudah dideploy. Jangan taruh token/secret di sini. */
 window.VENDORDOMAIN_API_BASE = window.VENDORDOMAIN_API_BASE || "";
