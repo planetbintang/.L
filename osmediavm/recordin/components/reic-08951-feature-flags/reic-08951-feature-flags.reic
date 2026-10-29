@@ -9,6 +9,20 @@ render: html-fragment
 runtime: static-compatible
 inputs: query, text, option
 outputs: status, result, event
+integration: reic-event-bus
+integration_scope: browser-local
+integration_events: reic:mount, reic:action, reic:output
+integration_contract: detail.id, detail.title, detail.input, detail.mode
+accessibility: labels, live-output, keyboard-focus
+security: no-eval, no-inline-network, local-processing
+lifecycle: mount, validate, process, emit, render
+error_handling: empty-input, missing-elements, safe-text-output
+state: isolated-component, idempotent-init
+dependencies: vanilla-javascript, standard-css, html-fragment
+api: CustomEvent(reic:action)
+api: CustomEvent(reic:output)
+compatibility: github-pages, static-hosting
+observability: status-text, processed-timestamp
 links: #reic-8951, ../manifest.json
 --- END REIC HEADER ---
 
