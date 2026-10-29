@@ -420,7 +420,8 @@ Isi dari panel provider yang dipilih:
     };
     if (path === 'systsm_ext') return children.systsm_ext;
     if (path.startsWith('systsm_ext/')) return [];
-    if (path === 'system_ext') return children.system_ext;\n    if (path === 'workspace') return localWorkspaceEntries();
+    if (path === 'system_ext') return children.system_ext;
+    if (path === 'workspace') return localWorkspaceEntries();
     return children[path] || [];
   }
   const EXT_FUNCTION = {
