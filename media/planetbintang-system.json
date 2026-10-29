@@ -15,10 +15,15 @@
     "owner": "planetbintang",
     "catalogPath": "../data/repositories.json",
     "scopePath": "../data/repository-scope.json",
-    "snapshotRepositoryCount": 45,
-    "treePathCount": 1872594,
-    "privateRepositoryCount": 39,
-    "copyPolicy": "Metadata katalog dapat dirujuk. Jangan menyalin seluruh blob repo privat ke repo publik; sinkronisasi penuh perlu pemeriksaan izin, lisensi, secret scanning, dan penyimpanan yang sesuai."
+    "centralManifestPath": "./repositories/index.json",
+    "manifestRepositoryCount": 47,
+    "manifestVisibilityCounts": {
+      "private": 41,
+      "public": 6
+    },
+    "manifestGeneratedAt": "2026-10-29T11:26:01Z",
+    "manifestPurpose": "Indeks metadata dan tautan ke repositori sumber; bukan salinan isi atau riwayat Git.",
+    "copyPolicy": "Repositori sumber tetap menjadi sumber kebenaran. Jangan salin blob privat ke publik tanpa pemeriksaan izin, lisensi, secret scanning, dan kebijakan publikasi."
   },
   "integrity": {
     "policy": "owner-controlled",
@@ -38,8 +43,10 @@
   },
   "paths": {
     "documentation": "./README.md",
+    "structure": "./STRUKTUR.md",
     "landingPage": "./index.html",
     "brandPolicy": "./brand/IDENTITY.md",
-    "repositoryNotes": "./repositories/README.md"
+    "repositoryNotes": "./repositories/README.md",
+    "repositoryManifest": "./repositories/index.json"
   }
 }
