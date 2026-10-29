@@ -1,6 +1,6 @@
 {
   "title": "PLANETBINTANG repository migration",
-  "status": "partial-filesystem-index; full-content-migration-incomplete",
+  "status": "runner-created; migration-not-executed",
   "updatedAt": "2026-10-29",
   "sourceCatalog": "media/repositories/index.json",
   "sourceRepositoryCount": 47,
@@ -48,7 +48,9 @@
   "completedInThisStage": [
     "Created or confirmed per-repository README entries under media/repositories/filesystem/ for the catalogued repositories.",
     "Preserved canonical source URLs and visibility metadata in directory entries.",
-    "Kept private repository contents out of the public website."
+    "Kept private repository contents out of the public website.",
+    "Created media/repositories/MIGRATE_ALL.sh and verified its contents via GitHub read-back.",
+    "Corrected catalog parser to use defaultBranch from index.json."
   ],
   "notCompleted": [
     "Full file-by-file transfer of all 47 source repositories.",
@@ -56,7 +58,9 @@
     "Complete audit of secrets, licenses, personal data, and deployment compatibility.",
     "Deployment verification on GitHub Pages.",
     "Full file-by-file content transfer for all 47 repositories has not been performed by this integration.",
-    "No destination repository has been specified/verified for the 41 private repositories; private contents must not be placed in the published Pages tree."
+    "No destination repository has been specified/verified for the 41 private repositories; private contents must not be placed in the published Pages tree.",
+    "The migration runner has not been executed in an authenticated Git environment; no full mirror bundles or full file trees have been verified.",
+    "No import of all 47 repositories into the media filesystem has been completed."
   ],
   "constraints": [
     "The public ptl repository's recursive tree contains 8,806 files and about 378,413,400 bytes of current tree content; copying every file via individual content API calls is not practical in this workflow.",
@@ -64,9 +68,10 @@
     "The GitHub API tree endpoint reports 409 for the empty 100.100.100.9 repository; it has no files to copy.",
     "The source catalog marks 41 repositories private; these cannot be copied into a public site without explicit authorization and a private destination."
   ],
-  "nextStep": "Run the runbook from an authenticated local Git environment or approved private migration runner; migrate public repositories only after audit and send private repositories to a separate private destination. Then update this status with per-repository checksums and deployment verification.",
+  "nextStep": "Run media/repositories/MIGRATE_ALL.sh from an authenticated local checkout of planetbintang/.L, inspect migration-results.tsv, then import each verified mirror to the intended destination. Do not put private bundles or working trees in a published Pages tree.",
   "runbook": "media/repositories/MIGRATION_RUNBOOK.md",
   "verifiedActions": [
     "Added media/repositories/MIGRATION_RUNBOOK.md; commit 42141c834ccf55f04faf028ea665709f5b6f79f9."
-  ]
+  ],
+  "localMigrationRunner": "media/repositories/MIGRATE_ALL.sh"
 }
