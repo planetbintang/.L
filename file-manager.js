@@ -389,8 +389,13 @@ Isi dari panel provider yang dipilih:
         { path: 'sys/enterprise', type: 'directory', mode: '040755', items: 10020, function: 'Enterprise Map List · Hyper-Enterprise Master Registry — 20 arsitektur × 500 menu (system_menus)' },
       ],
       media: [
-        { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Storage emulated pengguna (0..N)' },
-        { path: 'media/asec', type: 'directory', mode: '040770', function: 'Container aplikasi terenkripsi' },
+        { path: 'media/README.md', type: 'file', mode: '0100644', size: 1300, sizeKnown: true, function: 'Dokumentasi folder media nyata yang tersimpan di Git', fetchPath: 'media/README.md' },
+        { path: 'media/index.html', type: 'file', mode: '0100644', size: 2300, sizeKnown: true, function: 'Halaman publik Media Root dengan logo resmi Planetbintang', fetchPath: 'media/index.html' },
+        { path: 'media/planetbintang-system.json', type: 'file', mode: '0100644', size: 1500, sizeKnown: true, function: 'Manifest identitas pusat dan kebijakan integritas sistem', fetchPath: 'media/planetbintang-system.json' },
+        { path: 'media/brand', type: 'directory', mode: '040755', items: 1, function: 'Kebijakan logo dan identitas resmi Planetbintang' },
+        { path: 'media/repositories', type: 'directory', mode: '040755', items: 1, function: 'Katalog rujukan seluruh repositori yang tercatat pada snapshot' },
+        { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Storage emulated pengguna (0..N); namespace kompatibilitas' },
+        { path: 'media/asec', type: 'directory', mode: '040770', function: 'Container aplikasi terenkripsi; namespace kompatibilitas' },
       ],
       acct: [
         { path: 'acct/current', type: 'file', mode: '0100644', size: 28, sizeKnown: true, codeContent: '/uid_10123/pid_4567/apps' },
@@ -418,6 +423,12 @@ Isi dari panel provider yang dipilih:
         { path: 'systsm_ext/reconstruction-queue.json', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '{\n  "schemaVersion": 1,\n  "source": "systsm_ext",\n  "target": "sys",\n  "state": "staging-only",\n  "requiresValidation": true,\n  "neverCopySecrets": true\n}' },
       ],
     };
+    if (path === 'media/brand') return [
+      { path: 'media/brand/IDENTITY.md', type: 'file', mode: '0100644', function: 'Kebijakan identitas resmi; logo sumber tetap aset kanonis pada root', fetchPath: 'media/brand/IDENTITY.md' },
+    ];
+    if (path === 'media/repositories') return [
+      { path: 'media/repositories/README.md', type: 'file', mode: '0100644', function: 'Penjelasan katalog metadata dan batas mirror repo privat', fetchPath: 'media/repositories/README.md' },
+    ];
     if (path === 'systsm_ext') return children.systsm_ext;
     if (path.startsWith('systsm_ext/')) return [];
     if (path === 'system_ext') return children.system_ext;
