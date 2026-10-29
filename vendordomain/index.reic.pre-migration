@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b34"><meta name="description" content="Dashboard vendor domain PlanetBintang — 500 fitur pengelolaan domain, DNS, konten, hosting dan penerbitan situs.">
+<title>Vendor Domain · PlanetBintang .L</title>
+<link rel="stylesheet" href="vendor.css?v=20261027-themed-header-v1">
+<link rel="stylesheet" href="../shared-osmediavm-theme.css?v=20261029-shared-v1">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./" aria-label="Vendor Domain beranda"><span class="brand-mark">.L</span><span><strong>Vendor Domain</strong><small>PlanetBintang System</small></span></a>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Buka sidebar" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <nav class="main-nav" aria-label="Menu utama">
+    <a class="nav-home active" href="#dashboard" aria-current="page">Vendor Domain</a>
+    <div class="nav-dropdown"><button aria-expanded="false">Domain & DNS <span>⌄</span></button><div class="dropdown-panel" id="drop-domain"></div></div>
+    <div class="nav-dropdown"><button aria-expanded="false">Vendor & Ekstensi <span>⌄</span></button><div class="dropdown-panel" id="drop-vendor"></div></div>
+    <div class="nav-dropdown"><button aria-expanded="false">Situs & Deployment <span>⌄</span></button><div class="dropdown-panel" id="drop-publish"></div></div>
+    <div class="nav-dropdown"><button aria-expanded="false">Sistem & Administrasi <span>⌄</span></button><div class="dropdown-panel" id="drop-system"></div></div>
+  </nav>
+  <div class="top-actions"><span class="status-dot"></span><span class="status-label">500 fitur · 20 modul · Pages</span><button class="icon-btn" id="themeToggle" title="Ganti tema" aria-label="Ganti tema">◐</button></div>
+</header>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="side-head"><span class="eyebrow">WORKSPACE</span><button id="collapseSidebar" class="icon-btn" aria-label="Ciutkan sidebar">⇤</button></div>
+    <a class="side-link selected" href="#dashboard" data-view="dashboard"><span>⌂</span> Dashboard <kbd>⌂</kbd></a>
+    <div class="side-caption">PENGELOLAAN FITUR <span id="featureCount">500</span></div>
+    <div id="sideModules" class="side-modules"></div>
+    <div class="sidebar-bottom"><div class="avatar">PB</div><div><strong>Workspace .L</strong><small>Vendor Domain</small></div><span class="live-pill">LOCAL</span></div>
+  </aside>
+  <main id="mainContent" class="main-content">
+    <section id="dashboard" class="hero">
+      <div><div class="eyebrow">PLATFORM CONTROL CENTER / VENDOR DOMAIN</div><h1>Kelola seluruh ekosistem <span>domain Anda.</span></h1><p>Kelola domain, vendor, DNS, situs, ekstensi, dan sistem inti melalui satu dashboard.</p><div class="hero-actions"><button class="primary-btn" id="browseFeatures">Jelajahi 500 fitur <span>→</span></button><button class="secondary-btn" id="openPublisher">Buat halaman dari teks</button></div></div>
+      <div class="hero-orb"><div class="orb-ring ring-one"></div><div class="orb-ring ring-two"></div><div class="orb-core">.L<span>DOMAIN OS</span></div><div class="orb-chip chip-one">DNS · TLS</div><div class="orb-chip chip-two">HOSTING</div><div class="orb-chip chip-three">VENDOR API</div></div>
+    </section>
+    <section class="metric-grid" aria-label="Ringkasan fitur">
+      <article class="metric-card"><span class="metric-icon blue">▦</span><span class="metric-label">Total menu fitur</span><strong>500</strong><small>20 modul · 25 fitur per modul</small></article>
+      <article class="metric-card"><span class="metric-icon purple">◎</span><span class="metric-label">Modul utama</span><strong>20</strong><small>Pengelolaan dalam blok</small></article>
+      <article class="metric-card"><span class="metric-icon green">⌘</span><span class="metric-label">Dropdown header</span><strong>4</strong><small>Pengelompokan navigasi</small></article>
+      <article class="metric-card"><span class="metric-icon amber">↗</span><span class="metric-label">Alur penerbitan</span><strong>15</strong><small>Teks → domain → situs</small></article>
+    </section>
+    <section class="quick-grid">
+      <button class="quick-card" data-open-module="5"><span class="quick-symbol">✎</span><span><strong>Teks menjadi situs</strong><small>Editor, pratinjau, publikasi</small></span><b>→</b></button>
+      <button class="quick-card" data-open-module="4"><span class="quick-symbol">⌘</span><span><strong>DNS & nameserver</strong><small>Record, zona, propagasi</small></span><b>→</b></button>
+      <button class="quick-card" data-open-module="2"><span class="quick-symbol">◈</span><span><strong>Vendor & reseller</strong><small>Registrar, harga dan API</small></span><b>→</b></button>
+      <button class="quick-card" data-open-module="6"><span class="quick-symbol">▤</span><span><strong>Hosting & server</strong><small>Proyek, file dan runtime</small></span><b>→</b></button>
+    </section>
+    <section class="feature-section" id="features">
+      <div class="section-title"><div><div class="eyebrow">FEATURE EXPLORER</div><h2>Seluruh 500 menu dan sistem</h2><p>20 blok modul, setiap blok berisi 25 fitur. Cari, saring, dan buka detail katalog.</p></div></div>
+      <div class="toolbar"><label class="search-box"><span>⌕</span><input type="search" id="featureSearch" placeholder="Cari 500 fitur, menu atau modul..." autocomplete="off"><kbd>/</kbd></label><select id="moduleFilter" aria-label="Filter modul"><option value="all">Semua modul</option></select><select id="statusFilter" aria-label="Filter kategori"><option value="all">Semua kategori</option><option value="domain">Domain & DNS</option><option value="vendor">Vendor & ekstensi</option><option value="publish">Situs & deployment</option><option value="system">Sistem & administrasi</option></select><span id="resultCount" class="result-count">500 fitur</span></div>
+      <div id="featureBlocks" class="feature-grid"></div>
+      <div class="pagination-row"><span id="pageInfo">Menampilkan 1–60 dari 500 fitur</span><div><button class="secondary-btn" id="prevPage" disabled>← Sebelumnya</button><button class="secondary-btn" id="nextPage">Berikutnya →</button></div></div>
+    </section>
+    <section class="publisher-section" id="publisher">
+      <div class="section-title"><div><div class="eyebrow">TEXT-TO-WEB</div><h2>Studio penerbitan teks</h2><p>Buat pratinjau HTML dari teks, lalu ekspor sebagai file HTML statis untuk hosting.</p></div><span class="local-tag">Prototipe lokal</span></div>
+      <div class="publisher-grid"><div class="publisher-form"><label for="pageTitle">Judul halaman</label><input id="pageTitle" value="Halaman Baru Saya" maxlength="120"><label for="pageSlug">Slug URL</label><input id="pageSlug" value="halaman-baru-saya" maxlength="120"><label for="pageText">Isi teks</label><textarea id="pageText" rows="7" placeholder="Tulis konten halaman yang akan dipublikasikan..."></textarea><div class="form-actions"><button class="primary-btn" id="previewPage">Perbarui pratinjau</button><button class="secondary-btn" id="downloadPage">Unduh HTML</button></div><p class="helper-note">Unduhan menghasilkan HTML statis. Untuk tayang di domain publik, unggah file ke layanan hosting lalu hubungkan DNS dan HTTPS.</p></div><div class="preview-frame"><div class="preview-top"><span></span><span></span><span></span><small>Pratinjau halaman</small></div><iframe id="pagePreview" title="Pratinjau halaman teks" sandbox=""></iframe></div></div>
+    </section>
+    <footer><span>PlanetBintang .L · Vendor Domain</span><span>Dashboard statis · Integrasi registrar/server perlu konfigurasi</span></footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="featureDialog" class="feature-dialog"><form method="dialog"><button class="dialog-close" aria-label="Tutup">×</button></form><div class="eyebrow" id="dialogModule">MODUL FITUR</div><h2 id="dialogTitle">Detail fitur</h2><p id="dialogDescription"></p><div class="detail-meta" id="dialogMeta"></div><div class="detail-panel"><strong>Fungsi panel</strong><p id="dialogAction"></p><span class="local-tag">Status: antarmuka demonstrasi</span></div><button class="primary-btn" id="dialogTry">Jalankan demo fitur</button><p class="helper-note">Operasi domain nyata memerlukan kredensial vendor/API, server, DNS, dan hak akses yang valid.</p></dialog>
+<script src="vendor.js?v=20261026-pages-release-v2"></script>
+<script src="filesystem.js?v=20261027-filesystem-integration-v1"></script>
+</body></html>
