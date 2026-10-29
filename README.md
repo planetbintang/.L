@@ -18,11 +18,11 @@ Dashboard publik utama untuk workspace repositori Planetbintang: **./**. Ikon br
 
 - Panel Pengaturan menampilkan alias root, status sumber GitHub, status snapshot, opsi tema lokal, dan kebijakan privasi.
 
-- Menu workspace menambahkan papan Proyek/Kanban, Issues lokal dengan komentar dan status, Code workspace, Analitik snapshot, Pengaturan akun lokal, pusat Bantuan, serta toolbox AI.
+- Menu workspace menyediakan papan Proyek/Kanban, Issues lokal dengan komentar dan status, Analitik snapshot, Pengaturan akun lokal, pusat Bantuan, serta toolbox AI. Katalog Code berada di Pusat Pengembangan agar tidak berulang di menu Code.
 
 - Setiap menu header membuka satu view tersendiri; header tetap melekat dan navigasi tetap dapat digeser pada layar kecil. Route menu workspace, File Manager, repositori, domain/host, dan Sistem dapat dibuka lewat hash URL.
 
-- Header memiliki lima dropdown utama (Code, Plan, Review, Delivery, Insights), masing-masing dengan lima pintasan fitur. Halaman Branches/Commits memakai metadata snapshot; Pull Requests, Merge Requests, Discussions, CI, deploy, packages, dan security menyediakan shortcut ke provider sumber tanpa memalsukan status live.
+- Header memisahkan katalog Code ke dropdown **Pusat Pengembangan**. Dropdown ini membuka katalog fitur, ruang kerja implementasi, Operasi GitHub, repositori, File Manager, branch, commit, dan tag/release. Halaman Branches/Commits memakai metadata snapshot; Pull Requests, Merge Requests, Discussions, CI, deploy, packages, dan security menyediakan shortcut ke provider sumber tanpa memalsukan status live.
 
 - Perbedaan pengalaman provider ditampilkan transparan: GitHub menjadi snapshot read-only aktif; GitLab menonjolkan lifecycle DevSecOps; Bitbucket menonjolkan pola Atlassian/Jira dan Pipelines; `.L` menambahkan root lintas repo, File Manager `/`, dan hash struktur bersama. Hanya GitHub yang memiliki snapshot terhubung; GitLab dan Bitbucket belum memiliki connector/API di sesi ini.
 
@@ -32,7 +32,7 @@ Dashboard publik utama untuk workspace repositori Planetbintang: **./**. Ikon br
 
 - Tugas, masalah, profil, permintaan AI, dan draft kode disimpan di `localStorage` browser saat ini; data tersebut tidak disinkronkan ke GitHub. Analitik dihitung dari snapshot metadata repositori dan trafik GitHub agregat jika tersedia.
 
-- Code workspace memuat source file publik dari `raw.githubusercontent.com` untuk ditinjau di browser. Repo privat tidak diambil; draft dapat disimpan lokal atau diunduh. Aksi simpan tidak melakukan commit atau deploy. Pemeriksa sintaks hanya mem-parse format yang didukung tanpa menjalankan skrip.
+- Pusat Pengembangan memuat katalog 1.500 spesifikasi fitur dan membangun halaman statis individual untuk tiap ID fitur saat publikasi. Workspace dan operasi GitHub tetap mengikuti batas integrasi yang terdokumentasi; halaman katalog tidak mengeksekusi kode atau mengaktifkan API yang belum terhubung.
 
 - Toolbox AI membantu menyiapkan tipe permintaan untuk membuat/mengedit/merapikan kode, evaluasi, eksekusi terisolasi, dan deploy. Saat ini AI/provider dan backend belum terhubung; permintaan hanya disimpan lokal, tidak dikirim dan tidak dijalankan.
 
