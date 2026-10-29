@@ -6,7 +6,7 @@ on:
     paths:
       - 'scripts/migrate-html-to-reic.mjs'
       - '.github/workflows/migrate-html-to-reic.yml'
-  workflow_dispatch
+  workflow_dispatch:
 permissions:
   contents: write
   pages: write
