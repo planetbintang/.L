@@ -20,13 +20,13 @@ Jika secret belum ada, workflow berhenti aman tanpa mengubah snapshot. Token tid
 
 ## Snapshot Hub dan navigasi
 
-Header menampilkan lima dropdown fitur dan satu view pada satu waktu. Logo header/hero kembali ke beranda; tombol Hub terpisah membuka Snapshot Hub. Tombol muat ulang di hub mengambil ulang `data/repositories.json` yang telah diterbitkan, lalu membagikan objek snapshot yang sama ke Dashboard, Workspace, File Manager, dan platform views. Status hub hanya mengonfirmasi bahwa consumer browser telah menerima snapshot; ia tidak memulai GitHub Actions, bukan koneksi langsung ke 45 repo, dan tidak menyinkronkan localStorage antarperangkat.
+Header memisahkan katalog Code ke dropdown Pusat Pengembangan dan menampilkan satu view pada satu waktu. Logo header/hero kembali ke beranda; tombol Hub terpisah membuka Snapshot Hub. Tombol muat ulang di hub mengambil ulang `data/repositories.json` yang telah diterbitkan, lalu membagikan objek snapshot yang sama ke Dashboard, Workspace, File Manager, dan platform views. Status hub hanya mengonfirmasi bahwa consumer browser telah menerima snapshot; ia tidak memulai GitHub Actions, bukan koneksi langsung ke 45 repo, dan tidak menyinkronkan localStorage antarperangkat.
 
 Untuk membuat snapshot baru, gunakan alur GitHub Actions yang terautentikasi. Snapshot browser tetap mencakup metadata/tree saja: isi blob privat tidak dapat dibuka melalui Pages dan kode di repo tidak dijalankan. File publik dapat dipreview satu per satu di Code workspace sesuai batas ukuran yang didokumentasikan.
 
 ## Provider views dan pembeda
 
-Menu Code, Plan, Review, Delivery, dan Insights memuat halaman fitur inspirasi pola umum GitHub, GitLab, dan Bitbucket. Branch/commit/Pages berasal dari snapshot; milestones dan roadmap tersimpan lokal. Pull/Merge Requests, review, discussions, pipelines, deployments, environments, packages, serta security hanya menyediakan shortcut provider sampai API resmi terhubung. Halaman tidak mengarang jumlah PR, status pipeline, hasil scan, reviewer, atau paket.
+Pusat Pengembangan memuat katalog 1.500 spesifikasi fitur Code dan menghasilkan halaman HTML individual untuk setiap ID saat build GitHub Pages. Plan, Review, Delivery, dan Insights tetap menyediakan halaman fitur yang terpisah. Branch/commit/Pages berasal dari snapshot; milestones dan roadmap tersimpan lokal. Pull/Merge Requests, review, discussions, pipelines, deployments, environments, packages, serta security hanya menyediakan shortcut provider sampai API resmi terhubung. Halaman tidak mengarang jumlah PR, status pipeline, hasil scan, reviewer, atau paket.
 
 Pada build ini, GitHub memiliki snapshot metadata read-only. GitLab dan Bitbucket belum tersambung dan tidak menerima atau mengirim data. Perbedaan produk yang ditampilkan bersifat ringkas: GitHub—ekosistem kolaborasi dan Actions; GitLab—alur DevSecOps terpadu; Bitbucket—integrasi Atlassian/Jira dan Pipelines; Planetbintang `.L`—indeks lintas repositori, root path `/`, serta SHA struktur bersama. Ini bukan klaim feature parity penuh atau pengganti layanan provider.
 
