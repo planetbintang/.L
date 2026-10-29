@@ -519,7 +519,13 @@ Isi dari panel provider yang dipilih:
   function isLVirtualPath(path) {
     if (!isLRepo()) return false;
     const top = String(path || '').split('/')[0];
-    return Boolean(top) && isVirtualRootName(top);
+    if (!top || !isVirtualRootName(top)) return false;
+    // Prefer the actual indexed repository directory whenever it exists.
+    // In particular, /data is a real .L directory and must not be shadowed
+    // by a same-named virtual Android namespace.
+    const actualDirectories = state.manifest?.directories || {};
+    if (Object.prototype.hasOwnProperty.call(actualDirectories, top)) return false;
+    return true;
   }
   function syncUrlPath() {
     if (!isVirtualRepo()) return;
@@ -603,12 +609,14 @@ Isi dari panel provider yang dipilih:
 
   function lVirtualEntriesFor(prefix) {
     const top = String(prefix || '').split('/')[0];
-    if (!top) return VIRTUAL_SHORTCUTS.filter((name) => isVirtualRootName(name)).map(virtualRootEntry);
-    if (!isVirtualRootName(top)) return [];
-    if (!prefix || prefix === top) return [];
+    if (!top) return VIRTUAL_SHORTCUTS.filter((name) => isVirtualRootName(name) && !Object.prototype.hasOwnProperty.call(state.manifest?.directories || {}, name)).map(virtualRootEntry);
+    if (!isLVirtualPath(prefix)) return [];
+    if (prefix === top) return virtualChildren(top);
     const generated = generatedSystemEntries(prefix);
     if (generated.length) return generated;
-    return virtualChildren(top).filter((item) => item.path.startsWith(`${prefix}/`) && !item.path.slice(prefix.length + 1).includes('/'));
+    // Ask for the selected directory's own children, not its root's immediate
+    // children; otherwise folders such as acct/current always appeared empty.
+    return virtualChildren(prefix).filter((item) => item.path.startsWith(`${prefix}/`) && !item.path.slice(prefix.length + 1).includes('/'));
   }
 
   // ---- Pengaturan & tampilan terpusat per folder (localStorage) ----
