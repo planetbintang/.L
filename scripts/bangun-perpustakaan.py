@@ -120,5 +120,54 @@ $('q').addEventListener('input',()=>{page=0;draw()});$('cat').addEventListener('
                         shutil.rmtree(child) if child.is_dir() else child.unlink()
     print(f"Perpustakaan dibangun: {TOTAL} halaman, {len(manifest)} entri.")
 
+
+def build_code_feature_pages():
+    """Bangun halaman individual untuk seluruh spesifikasi katalog Code."""
+    source = ROOT / "data" / "git-feature-catalog.json"
+    output = ROOT / "pusat-pengembangan" / "fitur"
+    if not source.is_file():
+        raise SystemExit("Katalog fitur Code tidak ditemukan: data/git-feature-catalog.json")
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    features = payload.get("features", [])
+    if not features:
+        raise SystemExit("Katalog fitur Code kosong; halaman fitur tidak dibangun.")
+    output.mkdir(parents=True, exist_ok=True)
+    template = """<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071321"><meta name="description" content="{description}">
+<title>{title} · Pusat Pengembangan Planetbintang</title>
+<style>
+:root{{color-scheme:dark;--bg:#071321;--panel:#0b2033;--line:#284760;--ink:#edf7ff;--muted:#a9c1d8;--cyan:#6de1ff;--gold:#ffd28b}}
+*{{box-sizing:border-box}}body{{margin:0;background:radial-gradient(ellipse at 85% 0,#163e60,transparent 42%),var(--bg);color:var(--ink);font:15px/1.7 system-ui,sans-serif}}main{{max-width:1000px;margin:auto;padding:clamp(16px,4vw,42px)}}a{{color:var(--cyan)}}.eyebrow{{font:11px ui-monospace,monospace;letter-spacing:.16em;color:var(--cyan)}}h1{{font-size:clamp(30px,5vw,54px);line-height:1.1;letter-spacing:-.04em}}.panel{{border:1px solid var(--line);background:linear-gradient(145deg,#0d253a,#071522);padding:clamp(16px,3vw,28px);margin:14px 0}}.muted{{color:var(--muted)}}.id{{color:var(--gold);font:12px ui-monospace,monospace}}li{{margin:.7em 0}}.actions{{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}}.actions a{{border:1px solid var(--line);padding:9px 12px;text-decoration:none}}.pill{{display:inline-block;border:1px solid var(--line);padding:4px 8px;font:11px ui-monospace,monospace;color:var(--gold)}}code{{overflow-wrap:anywhere}}
+</style></head><body><main>
+<p class="eyebrow">PLANETBINTANG · SPESIFIKASI FITUR</p><h1>{title}</h1>
+<p class="id">{id} · {module}</p><p><span class="pill">Status katalog: {status}</span></p>
+<section class="panel"><h2>Tujuan dan ruang lingkup</h2><p>Fitur <b>{title}</b> menyediakan alur kerja {action_lower} dalam modul <b>{module}</b>. Halaman ini merupakan spesifikasi implementasi individual yang terhubung ke katalog pusat; status implementasi harus diperbarui hanya setelah perubahan kode dan verifikasi nyata selesai.</p><p class="muted">Ruang lingkup data: identitas fitur, masukan, keluaran, status proses, penanganan kesalahan, dan navigasi kembali ke modul induk.</p></section>
+<section class="panel"><h2>Rancangan tampilan</h2><ul><li>Header dengan nama fitur, ID unik, breadcrumb, dan tautan kembali ke Pusat Pengembangan.</li><li>Area kerja responsif dengan panel ringkasan, kontrol yang sesuai untuk {action_lower}, hasil, serta keadaan memuat, kosong, berhasil, dan gagal.</li><li>Validasi masukan, pesan kesalahan yang jelas, dukungan keyboard, dan label aksesibel.</li><li>Gaya REIC gelap dengan permukaan berlapis, aksen sian, batas halus, dan tata letak yang menyesuaikan layar.</li></ul></section>
+<section class="panel"><h2>Integrasi dan verifikasi</h2><ul><li>Gunakan ID <code>{id}</code> sebagai kunci stabil dan pisahkan tampilan dari lapisan data/service.</li><li>Hubungkan API atau penyimpanan hanya melalui adapter yang benar-benar tersedia; GitHub Pages tidak menyediakan backend privat.</li><li>Uji alur sukses, data kosong, input tidak valid, kegagalan jaringan, izin akses, serta tampilan ponsel.</li><li>Jangan menandai fitur aktif/terverifikasi sebelum kode operasional dan hasil pengujian tersedia.</li></ul><p class="muted">Halaman ini adalah spesifikasi fitur yang dibangun dari data katalog. Halaman ini tidak dengan sendirinya mengaktifkan API, layanan eksternal, atau backend.</p></section>
+<div class="actions"><a href="../index.html">Kembali ke Pusat Pengembangan</a><a href="../../git-feature-catalog.html">Katalog Fitur Git</a><a href="../../feature-workbench.html?feature={id}">Ruang Kerja Implementasi</a><a href="../../index.html">Beranda Planetbintang</a></div>
+</main></body></html>"""
+    written = 0
+    for item in features:
+        feature_id = str(item.get("id", ""))
+        if not feature_id or any(ch not in "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_" for ch in feature_id):
+            raise SystemExit(f"ID fitur tidak valid: {feature_id!r}")
+        title = str(item.get("title") or feature_id)
+        module = str(item.get("module") or "Modul umum")
+        action = str(item.get("action") or "operasi fitur")
+        status = str(item.get("status") or "planned")
+        values = {
+            "id": html.escape(feature_id, quote=True),
+            "title": html.escape(title, quote=True),
+            "module": html.escape(module, quote=True),
+            "action_lower": html.escape(action.lower(), quote=True),
+            "status": html.escape(status, quote=True),
+            "description": html.escape(f"{title}: spesifikasi fitur {module}.", quote=True),
+        }
+        (output / f"{feature_id}.html").write_text(template.format(**values), encoding="utf-8")
+        written += 1
+    print(f"Pusat Pengembangan dibangun: {written} halaman fitur individual dari katalog sumber.")
+
 if __name__ == "__main__":
     main()
+    build_code_feature_pages()
