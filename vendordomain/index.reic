@@ -26,6 +26,22 @@ input,select,textarea,.result{background:#071321;border-color:#29415d;color:#eaf
 .footer{border-color:#29415d}
 @media(max-width:700px){.shell{padding-top:14px}.hero-main{padding:20px}.hero-side{padding:16px}.section{margin-top:24px}.sectionhead{align-items:flex-start;flex-direction:column}.grid{grid-template-columns:minmax(0,1fr)}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.toolsgrid{grid-template-columns:minmax(0,1fr)}}
 
+
+/* MODERN LIBRARY TEXTURE — VendorDomain workspace content */
+.vd-app{background:radial-gradient(ellipse at 85% -10%,rgba(39,105,150,.24),transparent 45%),linear-gradient(180deg,#050a14 0%,#071321 54%,#050a14 100%)}
+.vd-app-top,.vd-side,.vd-work-head{background:linear-gradient(145deg,rgba(13,27,45,.97),rgba(5,13,25,.98));border-color:rgba(119,174,225,.24)}
+.vd-app-layout{background:transparent}
+.vd-side{background:linear-gradient(180deg,rgba(10,24,41,.98),rgba(5,13,25,.98))}
+.vd-main{background:radial-gradient(ellipse at 70% 0,rgba(25,65,100,.18),transparent 48%),linear-gradient(180deg,#071321,#050a14)}
+.vd-work-head{box-shadow:0 10px 32px rgba(0,0,0,.18)}
+.vd-frame-wrap,.vd-welcome,.vd-app .panel,.vd-app .service,.vd-app .metric,.vd-app .hero-main,.vd-app .hero-side,.vd-app .feature-card,.vd-app .workspace-card{border:1px solid rgba(119,174,225,.23)!important;background:linear-gradient(145deg,rgba(13,30,53,.94),rgba(5,13,27,.98))!important;box-shadow:0 16px 42px rgba(0,0,0,.22)}
+.vd-welcome{position:relative;overflow:hidden}
+.vd-welcome:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 90% 0,rgba(90,190,220,.11),transparent 35%),repeating-linear-gradient(135deg,rgba(119,174,225,.025) 0,rgba(119,174,225,.025) 1px,transparent 1px,transparent 12px)}
+.vd-welcome>*{position:relative}
+.vd-side-nav a,.vd-topmenus a,.vd-menu summary{border-color:rgba(119,174,225,.14)}
+.vd-side-nav a:hover,.vd-topmenus a:hover,.vd-menu[open] summary,.vd-menu summary:hover{background:linear-gradient(135deg,rgba(23,65,96,.88),rgba(11,31,50,.96));border-color:rgba(112,215,255,.45)}
+.vd-app-top .vd-topmenus,.vd-app-top .vd-menu summary,.vd-app-top .vd-topmenus>a,.vd-app-top .vd-menu .vd-menu-items a{ text-transform:uppercase; letter-spacing:.035em}
+@media(max-width:760px){.vd-app-layout{background:#050a14}.vd-main{background:linear-gradient(180deg,#071321,#050a14)}}
 </style>
 </head>
 <body>
