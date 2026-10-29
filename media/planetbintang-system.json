@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "systemId": "planetbintang.root",
+  "canonicalName": "PLANETBINTANG",
+  "role": "central-system-identity",
+  "status": "declared-in-repository",
+  "mediaRoot": "/media/",
+  "brand": {
+    "wordmark": "PLANETBINTANG",
+    "logoPath": "../brand-logo-browser.png",
+    "sourceLogoPath": "../brand-logo.jpg",
+    "logoPolicy": "Gunakan aset logo resmi yang sudah ada; jangan mengganti dengan logo tiruan atau membuat identitas lain."
+  },
+  "repositories": {
+    "owner": "planetbintang",
+    "catalogPath": "../data/repositories.json",
+    "scopePath": "../data/repository-scope.json",
+    "snapshotRepositoryCount": 45,
+    "treePathCount": 1872594,
+    "privateRepositoryCount": 39,
+    "copyPolicy": "Metadata katalog dapat dirujuk. Jangan menyalin seluruh blob repo privat ke repo publik; sinkronisasi penuh perlu pemeriksaan izin, lisensi, secret scanning, dan penyimpanan yang sesuai."
+  },
+  "integrity": {
+    "policy": "owner-controlled",
+    "requiredChecks": [
+      "review-perubahan-identitas",
+      "validasi-manifest",
+      "secret-scanning",
+      "audit-riwayat-git"
+    ],
+    "technicalEnforcement": "GitHub repository ruleset/branch protection; konfigurasi ini tidak dapat dipaksakan hanya oleh file statis."
+  },
+  "runtime": {
+    "hosting": "GitHub Pages",
+    "mode": "static",
+    "deviceFilesystemAccess": false,
+    "backendRequiredForPersistentCrossUserState": true
+  },
+  "paths": {
+    "documentation": "./README.md",
+    "landingPage": "./index.html",
+    "brandPolicy": "./brand/IDENTITY.md",
+    "repositoryNotes": "./repositories/README.md"
+  }
+}
