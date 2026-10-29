@@ -48,7 +48,12 @@ jobs:
             const reicPath = path.join(root, item.reic);
             if (fs.existsSync(reicPath)) {
               const source = fs.readFileSync(reicPath, 'utf8');
-              const lines = source.split(/\\r?\\n/).length;\n              if (lines < 25) errors.push(`Kurang dari 25 baris: ${reicPath} (${lines})`);\n              if (!source.includes('<section') || !source.includes('data-reic-output')) errors.push(`Markup/input-output tidak lengkap: ${reicPath}`);\n              for (const marker of ['integration: reic-event-bus', 'integration_events:', 'lifecycle:', 'security:', 'api: CustomEvent(reic:action)', 'api: CustomEvent(reic:output)']) {\n                if (!source.includes(marker)) errors.push(`Kontrak REIC hilang (${marker}): ${reicPath}`);\n              }
+              const lines = source.split(/\r?\n/).length;
+              if (lines < 25) errors.push(`Kurang dari 25 baris: ${reicPath} (${lines})`);
+              if (!source.includes('<section') || !source.includes('data-reic-output')) errors.push(`Markup/input-output tidak lengkap: ${reicPath}`);
+              for (const marker of ['integration: reic-event-bus', 'integration_events:', 'lifecycle:', 'security:', 'api: CustomEvent(reic:action)', 'api: CustomEvent(reic:output)']) {
+                if (!source.includes(marker)) errors.push(`Kontrak REIC hilang (${marker}): ${reicPath}`);
+              }
             }
           }
           if (errors.length) {
