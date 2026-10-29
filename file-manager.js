@@ -1135,8 +1135,12 @@ Isi dari panel provider yang dipilih:
     // Root .L: sisipkan folder sistem virtual di samping entri pohon nyata.
     const lRootVirtual = (isLRepo() && !state.path) ? lVirtualEntriesFor('') : [];
     const allItems = [...state.entries, ...lRootVirtual];
-    const items = sortItems(allItems.filter((item) => matchesExtension(item) && (!query || item.path.toLocaleLowerCase('id').includes(query))));
-    renderShortcuts(allItems);
+    // Sembunyikan folder root bernama satu digit (0–9) hanya pada tampilan File Manager.
+    const visibleItems = (isLRepo() && !state.path)
+      ? allItems.filter((item) => !(item.type === 'directory' && /^[0-9]$/.test(basename(item.path))))
+      : allItems;
+    const items = sortItems(visibleItems.filter((item) => matchesExtension(item) && (!query || item.path.toLocaleLowerCase('id').includes(query))));
+    renderShortcuts(visibleItems);
     $('#fileEmpty').hidden = items.length > 0;
     $('#fileEmpty').textContent = state.extension !== 'all' ? `Tidak ada file .${state.extension} pada folder ini.` : state.query ? 'Tidak ada kecocokan pada halaman folder yang sudah dimuat.' : 'Folder ini kosong atau semua nama sensitif disaring.';
     for (const item of items) {
