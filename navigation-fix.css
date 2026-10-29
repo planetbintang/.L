@@ -758,3 +758,27 @@ input, textarea, select {
     background: rgba(16,35,58,.65) !important;
   }
 }
+
+
+/* Keep primary dropdown panels outside the horizontally scrollable nav viewport. */
+.topbar > .main-nav > details.nav-dropdown > .nav-dropdown-menu {
+  position: fixed !important;
+  top: var(--dropdown-top, 42px) !important;
+  left: var(--dropdown-left, 12px) !important;
+  right: auto !important;
+  z-index: 1500 !important;
+  max-height: min(68dvh, 560px) !important;
+  overflow: auto !important;
+}
+.topbar > .main-nav > details.nav-dropdown:not([open]) > .nav-dropdown-menu {
+  display: none !important;
+}
+.topbar > .main-nav > details.nav-dropdown[open] > .nav-dropdown-menu {
+  display: grid !important;
+}
+@media (max-width: 760px) {
+  .topbar > .main-nav > details.nav-dropdown > .nav-dropdown-menu {
+    width: min(320px, calc(100vw - 24px)) !important;
+    max-height: min(65dvh, 560px) !important;
+  }
+}
