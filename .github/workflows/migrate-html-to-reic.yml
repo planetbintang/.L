@@ -1,11 +1,12 @@
 name: Migrasi HTML ke REIC dan deploy Pages
+# Mengubah workflow ini sendiri menjalankan migrasi awal pada branch io.
 on:
   push:
     branches: [io]
     paths:
       - 'scripts/migrate-html-to-reic.mjs'
       - '.github/workflows/migrate-html-to-reic.yml'
-  workflow_dispatch:
+  workflow_dispatch
 permissions:
   contents: write
   pages: write
