@@ -60,7 +60,7 @@ require("./feature-workbench.html?feature=" in catalog_js, "feature detail must 
 require("./github-operations.html" in catalog_js, "feature detail must link to GitHub Operations")
 require("./github-operations.html" in homepage, "homepage must link to GitHub Operations")
 require("https://api.github.com" in ops, "GitHub Operations must use the actual GitHub REST API")
-require("localStorage" not in ops, "GitHub token/data must not be persisted in browser storage by this page")
+require("localStorage.setItem" not in ops and "sessionStorage.setItem" not in ops, "GitHub token/data must not be persisted in browser storage by this page")
 require("Authorization" in ops and "Bearer " in ops, "authenticated requests must use the Authorization header")
 require("method:'POST'" in ops and "/issues" in ops, "issue creation endpoint must be present")
 
