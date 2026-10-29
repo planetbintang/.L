@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "name": "OS MEDIA VM Root System Map",
+  "branch": "io",
+  "roots": {
+    "acct": {
+      "role": "action/activity/activation/account",
+      "access": "event-log",
+      "children": [
+        "actions",
+        "activities",
+        "activation",
+        "accounts"
+      ],
+      "policy": "Setiap aksi harus memiliki actor, action, target, timestamp, result; kredensial tidak disimpan dalam log."
+    },
+    "sys": {
+      "role": "sistem inti permanen",
+      "access": "validated-read-write",
+      "children": [
+        "core",
+        "registry",
+        "runtime",
+        "services",
+        "validated-modules",
+        "reconstruction-reports"
+      ],
+      "policy": "Hanya menerima snapshot dari systsm_ext/cache setelah validasi, pemeriksaan integritas, dan pemeriksaan izin."
+    },
+    "systsm_ext": {
+      "role": "staging dan penyimpanan sementara seluruh sistem/perangkat yang terdeteksi",
+      "access": "staging-only",
+      "children": [
+        "device-snapshots",
+        "system-catalog",
+        "reconstruction-queue.json",
+        "inventory",
+        "reports"
+      ],
+      "policy": "Simpan metadata minimum dan data yang diizinkan; jangan menyalin rahasia, token, data pribadi, atau data perangkat tanpa izin."
+    },
+    "cache": {
+      "role": "penyimpanan sementara untuk rekonstruksi sebelum promosi ke sys",
+      "access": "ephemeral",
+      "children": [
+        "recovery",
+        "reconstruction-jobs",
+        "battery-policy.json"
+      ],
+      "policy": "Dapat dibersihkan, dibatasi kuota dan umur data; mode hemat baterai menunda tugas berat dan tidak boleh menghapus data permanen."
+    },
+    "config": {
+      "role": "konfigurasi internal permanen milik pemilik sistem",
+      "access": "owner-only",
+      "children": [
+        "system.conf",
+        "policies",
+        "feature-flags",
+        "integrations"
+      ],
+      "policy": "Perubahan wajib melalui kontrol pemilik, validasi skema, audit, dan versi cadangan; bukan kontrol pengguna biasa."
+    },
+    "media": {
+      "role": "media publik hasil rilis/publikasi antarmuka",
+      "access": "published-read",
+      "children": [
+        "releases",
+        "images",
+        "video",
+        "audio",
+        "documents",
+        "public-manifest.json"
+      ],
+      "policy": "Hanya aset yang lolos build, pemeriksaan lisensi, keamanan, dan persetujuan publikasi yang masuk ke media."
+    },
+    "data": {
+      "role": "integrasi data bersama lintas sistem dengan identitas terkoordinasi",
+      "access": "governed-shared-data",
+      "children": [
+        "registry",
+        "schemas",
+        "records",
+        "indexes",
+        "lineage",
+        "retention",
+        "audit"
+      ],
+      "policy": "Semua record memiliki dataId stabil, schemaVersion, owner, sourceSystem, createdAt, classification, retentionPolicy, integrityHash, dan accessPolicy."
+    }
+  },
+  "flow": [
+    "systsm_ext",
+    "cache",
+    "validate",
+    "sys",
+    "media"
+  ],
+  "sharedDataRules": [
+    "Setiap record memiliki identitas stabil dan skema versi.",
+    "Tulis melalui API repositori yang memvalidasi akses dan skema.",
+    "Gunakan checksum untuk integritas; jangan mengandalkan nama file saja.",
+    "Pencatatan audit tidak boleh menyimpan secret.",
+    "GitHub Pages hanya menyajikan file statis; penyimpanan lintas pengguna membutuhkan backend terautentikasi."
+  ],
+  "compatibility": {
+    "legacyAlias": "system_ext",
+    "canonicalName": "systsm_ext"
+  },
+  "note": "Pemetaan ini mendefinisikan namespace File Manager aplikasi, bukan akses langsung ke filesystem OS Android atau server."
+}
