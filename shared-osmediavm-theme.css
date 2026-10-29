@@ -19,3 +19,39 @@
 #fileManager :where(.eyebrow,.fm-pane-heading,#fileManagerTitle){color:var(--pb-cyan)}
 #fileManager :where(.section-description,.fm-muted,.muted){color:var(--pb-muted)}
 @media(max-width:760px){#fileManager .fm-layout{grid-template-columns:minmax(0,1fr)}#fileManager .fm-sidebar{position:static;min-width:0}}
+
+
+/* Global OS MEDIA VM finish: logo surfaces and previously white panels across every workspace. */
+:root{
+  --pb-logo-surface:radial-gradient(ellipse at 25% 0%,rgba(34,91,135,.42),transparent 58%),linear-gradient(145deg,#0d1b2d,#081321);
+  --pb-logo-border:#29415d;
+}
+:where(.brand-icon-frame,.logo-frame,.logo-container,.site-logo,.brand-logo,.app-logo,.system-logo,.logo-badge,.brand-mark,.snaps-anchor-badge){
+  background:var(--pb-logo-surface)!important;
+  border:1px solid var(--pb-logo-border)!important;
+  color:var(--pb-text,#eaf4ff)!important;
+  box-shadow:inset 0 1px 0 rgba(115,207,255,.12),0 8px 22px rgba(0,0,0,.22)!important;
+}
+:where(.brand-icon-frame,.logo-frame,.logo-container,.site-logo,.brand-logo,.app-logo,.system-logo,.logo-badge,.brand-mark) img{
+  background:transparent!important;
+  object-fit:contain;
+}
+:where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card,.fm-pane,.fm-browser,.fm-sidebar,.fm-file-preview,.fm-preview,.fm-inspector,.fm-list-panel,.fm-preview-panel){
+  background:var(--pb-logo-surface)!important;
+  border-color:var(--pb-line,#29415d)!important;
+  color:var(--pb-text,#eaf4ff)!important;
+}
+:where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card) :where(h1,h2,h3,h4,p,small,label,span,li,dt,dd){
+  color:inherit;
+}
+:where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card) :where(.muted,.description,.subtitle,.helper-text,.text-muted){
+  color:var(--pb-muted,#9cb2cc)!important;
+}
+/* Normalize common inline and utility white backgrounds without affecting media previews. */
+:where(.app-shell,#fileManager,.workspace,.workspace-shell,.system-view,.view-container,.main-content) :where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card)[style*="background: white"],
+:where(.app-shell,#fileManager,.workspace,.workspace-shell,.system-view,.view-container,.main-content) :where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card)[style*="background:#fff"],
+:where(.app-shell,#fileManager,.workspace,.workspace-shell,.system-view,.view-container,.main-content) :where(.panel,.card,.tile,.surface,.surface-card,.content-card,.feature-card,.feature-block,.workspace-card,.modal-content,.dialog-content,.section-card,.list-panel,.preview-panel,.file-card)[style*="background: #fff"]{
+  background:var(--pb-logo-surface)!important;
+  color:var(--pb-text,#eaf4ff)!important;
+  border-color:var(--pb-line,#29415d)!important;
+}
