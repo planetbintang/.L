@@ -422,6 +422,68 @@ Isi dari panel provider yang dipilih:
         { path: 'systsm_ext/system-catalog', type: 'directory', mode: '040700', function: 'Katalog modul staging yang siap divalidasi sebelum masuk sys' },
         { path: 'systsm_ext/reconstruction-queue.json', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '{\n  "schemaVersion": 1,\n  "source": "systsm_ext",\n  "target": "sys",\n  "state": "staging-only",\n  "requiresValidation": true,\n  "neverCopySecrets": true\n}' },
       ],
+      'acct': [
+        { path: 'acct/current', type: 'directory', mode: '040755', function: 'Accounting untuk sesi pengguna aktif' },
+        { path: 'acct/uid_10123', type: 'directory', mode: '040755', function: 'Metadata namespace UID contoh' },
+        { path: 'acct/README.md', type: 'file', mode: '0100644', size: 420, sizeKnown: true, codeContent: '# acct/\nNamespace accounting virtual File Manager. Bukan cgroup perangkat aktif.' },
+      ],
+      'acct/current': [
+        { path: 'acct/current/apps', type: 'directory', mode: '040755', function: 'Accounting aplikasi pada sesi contoh' },
+        { path: 'acct/current/README.md', type: 'file', mode: '0100644', size: 220, sizeKnown: true, codeContent: 'Snapshot accounting contoh; tidak membaca proses perangkat.' },
+      ],
+      'sys/class': [
+        { path: 'sys/class/net', type: 'directory', mode: '040755', function: 'Kelas antarmuka jaringan virtual' },
+        { path: 'sys/class/power_supply', type: 'directory', mode: '040755', function: 'Kelas status daya virtual' },
+        { path: 'sys/class/usb', type: 'directory', mode: '040755', function: 'Kelas perangkat USB virtual' },
+      ],
+      'sys/bus': [
+        { path: 'sys/bus/platform', type: 'directory', mode: '040755', function: 'Bus platform virtual' },
+        { path: 'sys/bus/i2c', type: 'directory', mode: '040755', function: 'Bus I2C virtual' },
+        { path: 'sys/bus/usb', type: 'directory', mode: '040755', function: 'Bus USB virtual' },
+      ],
+      'sys/kernel': [
+        { path: 'sys/kernel/mm', type: 'directory', mode: '040755', function: 'Metadata pengelolaan memori virtual' },
+        { path: 'sys/kernel/sched', type: 'directory', mode: '040755', function: 'Metadata penjadwalan virtual' },
+        { path: 'sys/kernel/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Parameter kernel ilustratif; tidak terhubung ke kernel perangkat.' },
+      ],
+      'system_ext': [
+        { path: 'system_ext/etc', type: 'directory', mode: '040755', function: 'Konfigurasi partisi system_ext kompatibilitas' },
+        { path: 'system_ext/framework', type: 'directory', mode: '040755', function: 'Metadata framework ekstensi sistem' },
+        { path: 'system_ext/priv-app', type: 'directory', mode: '040755', function: 'Inventaris aplikasi sistem berhak istimewa (metadata)' },
+        { path: 'system_ext/permissions', type: 'directory', mode: '040755', function: 'Kebijakan izin dan allowlist (metadata)' },
+        { path: 'system_ext/compatibility_matrix.xml', type: 'file', mode: '0100644', size: 210, sizeKnown: true, codeContent: '<compatibility-matrix version="202404" type="framework"><hal format="aidl" optional="false"><name>gatekeeper</name><version>1</version></hal></compatibility-matrix>' },
+        { path: 'system_ext/README.md', type: 'file', mode: '0100644', size: 280, sizeKnown: true, codeContent: '# system_ext/\nStruktur virtual kompatibilitas; bukan salinan partisi Android asli.' },
+      ],
+      'system_ext/etc': [
+        { path: 'system_ext/etc/permissions', type: 'directory', mode: '040755', function: 'Metadata izin system_ext' },
+        { path: 'system_ext/etc/init', type: 'directory', mode: '040755', function: 'Metadata konfigurasi init system_ext' },
+      ],
+      'media': [
+        { path: 'media/README.md', type: 'file', mode: '0100644', size: 1300, sizeKnown: true, function: 'Dokumentasi media', fetchPath: 'media/README.md' },
+        { path: 'media/index.html', type: 'file', mode: '0100644', size: 2300, sizeKnown: true, function: 'Indeks media', fetchPath: 'media/index.html' },
+        { path: 'media/brand', type: 'directory', mode: '040755', function: 'Aset identitas dan branding' },
+        { path: 'media/repositories', type: 'directory', mode: '040755', function: 'Metadata repositori' },
+        { path: 'media/emulated', type: 'directory', mode: '040770', function: 'Namespace penyimpanan emulasi virtual' },
+        { path: 'media/asec', type: 'directory', mode: '040770', function: 'Namespace container aplikasi virtual' },
+      ],
+      'config': [
+        { path: 'config/services', type: 'directory', mode: '040755', function: 'Konfigurasi layanan sistem' },
+        { path: 'config/permissions', type: 'directory', mode: '040755', function: 'Kebijakan izin sistem' },
+        { path: 'config/system.conf', type: 'file', mode: '0100644', size: 120, sizeKnown: true, codeContent: 'manager centralized=true\nroot=/\nauto-mount=proc,sys\nlog-level=info' },
+        { path: 'config/README.md', type: 'file', mode: '0100644', size: 220, sizeKnown: true, codeContent: '# config/\nKonfigurasi virtual yang aman untuk demonstrasi; tidak mengubah perangkat.' },
+      ],
+      'config/services': [
+        { path: 'config/services/services.json', type: 'file', mode: '0100644', size: 120, sizeKnown: true, codeContent: '{ "schemaVersion": 1, "services": [], "source": "virtual-file-manager" }' },
+      ],
+      'cache': [
+        { path: 'cache/recovery', type: 'directory', mode: '040770', function: 'Metadata antrean recovery virtual' },
+        { path: 'cache/tmp', type: 'directory', mode: '040700', function: 'Area temporer virtual' },
+        { path: 'cache/global.config', type: 'file', mode: '0100644', size: 64, sizeKnown: true, codeContent: 'wipe_on_boot=false\nverbose_log=false' },
+      ],
+      'cache/recovery': [
+        { path: 'cache/recovery/README.md', type: 'file', mode: '0100644', size: 180, sizeKnown: true, codeContent: 'Metadata recovery virtual; tidak menjalankan update_engine.' },
+        { path: 'cache/recovery/commands.txt', type: 'file', mode: '0100600', size: 0, sizeKnown: true, codeContent: '# Tidak ada perintah recovery aktif.' },
+      ],
     };
     if (path === 'media/brand') return [
       { path: 'media/brand/IDENTITY.md', type: 'file', mode: '0100644', function: 'Kebijakan identitas resmi; logo sumber tetap aset kanonis pada root', fetchPath: 'media/brand/IDENTITY.md' },
