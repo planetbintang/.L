@@ -113,22 +113,8 @@
   function closeMenus(except = null) {
     menuDetails.forEach((menu) => { if (menu !== except) setMenuOpen(menu, false); });
   }
-  menuDetails.forEach((menu) => {
-    const summary = menu.querySelector(':scope > summary');
-    if (!summary) return;
-    summary.setAttribute('aria-haspopup', 'menu');
-    summary.setAttribute('aria-expanded', 'false');
-    // Explicit handling keeps dropdowns reliable across browsers and responsive overflow layouts.
-    summary.addEventListener('click', (event) => {
-      event.preventDefault();
-      const next = !menu.open;
-      closeMenus(menu);
-      setMenuOpen(menu, next);
-    });
-    menu.addEventListener('toggle', () => {
-      summary.setAttribute('aria-expanded', String(menu.open));
-    });
-  });
+  // Dropdown click handling is centralized in navigation-fix.js. Registering a second
+  // summary click handler here toggled each <details> twice and left it closed.
 
   function archFromHash() {
     const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
