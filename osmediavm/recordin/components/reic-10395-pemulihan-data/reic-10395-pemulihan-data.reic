@@ -5,9 +5,19 @@ group: data-search
 component_number: 10395
 style: ./reic-10395-pemulihan-data.css
 script: ./reic-10395-pemulihan-data.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-10395, ../manifest.json
 --- END REIC HEADER ---
 
-Pemulihan data — Modul 070 / Unit 045. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-10395-pemulihan-data" aria-labelledby="reic-10395-pemulihan-data-title">
+  <header class="reic-panel__header"><span class="reic-kicker">data-search</span><h2 id="reic-10395-pemulihan-data-title" class="reic-title">Pemulihan data — Modul 070 / Unit 045</h2></header>
+  <p class="reic-description">Modul 10395 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-10395-pemulihan-data-input">Masukan</label><input id="reic-10395-pemulihan-data-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Pemulihan data — Modul 070 / Unit 045"><label for="reic-10395-pemulihan-data-mode">Mode proses</label><select id="reic-10395-pemulihan-data-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-10395-pemulihan-data</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

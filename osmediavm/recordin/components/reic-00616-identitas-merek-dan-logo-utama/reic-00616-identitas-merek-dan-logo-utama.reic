@@ -5,9 +5,19 @@ group: identitas-desain
 component_number: 616
 style: ./reic-00616-identitas-merek-dan-logo-utama.css
 script: ./reic-00616-identitas-merek-dan-logo-utama.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-616, ../manifest.json
 --- END REIC HEADER ---
 
-Identitas merek dan logo utama — Modul 005 / Unit 016. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-00616-identitas-merek-dan-logo-utama" aria-labelledby="reic-00616-identitas-merek-dan-logo-utama-title">
+  <header class="reic-panel__header"><span class="reic-kicker">identitas-desain</span><h2 id="reic-00616-identitas-merek-dan-logo-utama-title" class="reic-title">Identitas merek dan logo utama — Modul 005 / Unit 016</h2></header>
+  <p class="reic-description">Modul 00616 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-00616-identitas-merek-dan-logo-utama-input">Masukan</label><input id="reic-00616-identitas-merek-dan-logo-utama-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Identitas merek dan logo utama — Modul 005 / Unit 016"><label for="reic-00616-identitas-merek-dan-logo-utama-mode">Mode proses</label><select id="reic-00616-identitas-merek-dan-logo-utama-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-00616-identitas-merek-dan-logo-utama</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

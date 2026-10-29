@@ -5,9 +5,19 @@ group: file-manager
 component_number: 4365
 style: ./reic-04365-indeks-berkas-dan-metadata.css
 script: ./reic-04365-indeks-berkas-dan-metadata.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-4365, ../manifest.json
 --- END REIC HEADER ---
 
-Indeks berkas dan metadata — Modul 030 / Unit 015. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-04365-indeks-berkas-dan-metadata" aria-labelledby="reic-04365-indeks-berkas-dan-metadata-title">
+  <header class="reic-panel__header"><span class="reic-kicker">file-manager</span><h2 id="reic-04365-indeks-berkas-dan-metadata-title" class="reic-title">Indeks berkas dan metadata — Modul 030 / Unit 015</h2></header>
+  <p class="reic-description">Modul 04365 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-04365-indeks-berkas-dan-metadata-input">Masukan</label><input id="reic-04365-indeks-berkas-dan-metadata-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Indeks berkas dan metadata — Modul 030 / Unit 015"><label for="reic-04365-indeks-berkas-dan-metadata-mode">Mode proses</label><select id="reic-04365-indeks-berkas-dan-metadata-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-04365-indeks-berkas-dan-metadata</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

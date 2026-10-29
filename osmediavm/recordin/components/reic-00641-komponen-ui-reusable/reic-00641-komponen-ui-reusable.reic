@@ -5,9 +5,19 @@ group: identitas-desain
 component_number: 641
 style: ./reic-00641-komponen-ui-reusable.css
 script: ./reic-00641-komponen-ui-reusable.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-641, ../manifest.json
 --- END REIC HEADER ---
 
-Komponen UI reusable — Modul 005 / Unit 041. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-00641-komponen-ui-reusable" aria-labelledby="reic-00641-komponen-ui-reusable-title">
+  <header class="reic-panel__header"><span class="reic-kicker">identitas-desain</span><h2 id="reic-00641-komponen-ui-reusable-title" class="reic-title">Komponen UI reusable — Modul 005 / Unit 041</h2></header>
+  <p class="reic-description">Modul 00641 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-00641-komponen-ui-reusable-input">Masukan</label><input id="reic-00641-komponen-ui-reusable-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Komponen UI reusable — Modul 005 / Unit 041"><label for="reic-00641-komponen-ui-reusable-mode">Mode proses</label><select id="reic-00641-komponen-ui-reusable-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-00641-komponen-ui-reusable</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

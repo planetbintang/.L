@@ -5,9 +5,19 @@ group: tata-kelola
 component_number: 13519
 style: ./reic-13519-pengujian-pemulihan-berkala.css
 script: ./reic-13519-pengujian-pemulihan-berkala.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-13519, ../manifest.json
 --- END REIC HEADER ---
 
-Pengujian pemulihan berkala — Modul 091 / Unit 019. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-13519-pengujian-pemulihan-berkala" aria-labelledby="reic-13519-pengujian-pemulihan-berkala-title">
+  <header class="reic-panel__header"><span class="reic-kicker">tata-kelola</span><h2 id="reic-13519-pengujian-pemulihan-berkala-title" class="reic-title">Pengujian pemulihan berkala — Modul 091 / Unit 019</h2></header>
+  <p class="reic-description">Modul 13519 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-13519-pengujian-pemulihan-berkala-input">Masukan</label><input id="reic-13519-pengujian-pemulihan-berkala-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Pengujian pemulihan berkala — Modul 091 / Unit 019"><label for="reic-13519-pengujian-pemulihan-berkala-mode">Mode proses</label><select id="reic-13519-pengujian-pemulihan-berkala-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-13519-pengujian-pemulihan-berkala</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

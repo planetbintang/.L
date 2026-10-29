@@ -5,9 +5,19 @@ group: file-manager
 component_number: 3219
 style: ./reic-03219-pencarian-berkas.css
 script: ./reic-03219-pencarian-berkas.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-3219, ../manifest.json
 --- END REIC HEADER ---
 
-Pencarian berkas — Modul 022 / Unit 069. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-03219-pencarian-berkas" aria-labelledby="reic-03219-pencarian-berkas-title">
+  <header class="reic-panel__header"><span class="reic-kicker">file-manager</span><h2 id="reic-03219-pencarian-berkas-title" class="reic-title">Pencarian berkas — Modul 022 / Unit 069</h2></header>
+  <p class="reic-description">Modul 03219 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-03219-pencarian-berkas-input">Masukan</label><input id="reic-03219-pencarian-berkas-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Pencarian berkas — Modul 022 / Unit 069"><label for="reic-03219-pencarian-berkas-mode">Mode proses</label><select id="reic-03219-pencarian-berkas-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-03219-pencarian-berkas</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

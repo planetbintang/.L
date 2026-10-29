@@ -5,9 +5,19 @@ group: devops-observabilitas
 component_number: 13329
 style: ./reic-13329-sertifikat-tls-otomatis.css
 script: ./reic-13329-sertifikat-tls-otomatis.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-13329, ../manifest.json
 --- END REIC HEADER ---
 
-Sertifikat TLS otomatis — Modul 089 / Unit 129. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-13329-sertifikat-tls-otomatis" aria-labelledby="reic-13329-sertifikat-tls-otomatis-title">
+  <header class="reic-panel__header"><span class="reic-kicker">devops-observabilitas</span><h2 id="reic-13329-sertifikat-tls-otomatis-title" class="reic-title">Sertifikat TLS otomatis — Modul 089 / Unit 129</h2></header>
+  <p class="reic-description">Modul 13329 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-13329-sertifikat-tls-otomatis-input">Masukan</label><input id="reic-13329-sertifikat-tls-otomatis-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Sertifikat TLS otomatis — Modul 089 / Unit 129"><label for="reic-13329-sertifikat-tls-otomatis-mode">Mode proses</label><select id="reic-13329-sertifikat-tls-otomatis-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-13329-sertifikat-tls-otomatis</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

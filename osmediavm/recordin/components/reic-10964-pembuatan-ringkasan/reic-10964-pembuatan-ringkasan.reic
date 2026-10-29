@@ -5,9 +5,19 @@ group: ai-otomasi
 component_number: 10964
 style: ./reic-10964-pembuatan-ringkasan.css
 script: ./reic-10964-pembuatan-ringkasan.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-10964, ../manifest.json
 --- END REIC HEADER ---
 
-Pembuatan ringkasan — Modul 074 / Unit 014. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-10964-pembuatan-ringkasan" aria-labelledby="reic-10964-pembuatan-ringkasan-title">
+  <header class="reic-panel__header"><span class="reic-kicker">ai-otomasi</span><h2 id="reic-10964-pembuatan-ringkasan-title" class="reic-title">Pembuatan ringkasan — Modul 074 / Unit 014</h2></header>
+  <p class="reic-description">Modul 10964 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-10964-pembuatan-ringkasan-input">Masukan</label><input id="reic-10964-pembuatan-ringkasan-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Pembuatan ringkasan — Modul 074 / Unit 014"><label for="reic-10964-pembuatan-ringkasan-mode">Mode proses</label><select id="reic-10964-pembuatan-ringkasan-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-10964-pembuatan-ringkasan</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

@@ -5,9 +5,19 @@ group: keamanan-privasi
 component_number: 6396
 style: ./reic-06396-single-sign-on.css
 script: ./reic-06396-single-sign-on.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-6396, ../manifest.json
 --- END REIC HEADER ---
 
-Single sign-on — Modul 043 / Unit 096. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-06396-single-sign-on" aria-labelledby="reic-06396-single-sign-on-title">
+  <header class="reic-panel__header"><span class="reic-kicker">keamanan-privasi</span><h2 id="reic-06396-single-sign-on-title" class="reic-title">Single sign-on — Modul 043 / Unit 096</h2></header>
+  <p class="reic-description">Modul 06396 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-06396-single-sign-on-input">Masukan</label><input id="reic-06396-single-sign-on-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Single sign-on — Modul 043 / Unit 096"><label for="reic-06396-single-sign-on-mode">Mode proses</label><select id="reic-06396-single-sign-on-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-06396-single-sign-on</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

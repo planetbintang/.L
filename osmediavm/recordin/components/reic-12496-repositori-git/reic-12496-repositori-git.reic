@@ -5,9 +5,19 @@ group: devops-observabilitas
 component_number: 12496
 style: ./reic-12496-repositori-git.css
 script: ./reic-12496-repositori-git.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-12496, ../manifest.json
 --- END REIC HEADER ---
 
-Repositori Git — Modul 084 / Unit 046. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-12496-repositori-git" aria-labelledby="reic-12496-repositori-git-title">
+  <header class="reic-panel__header"><span class="reic-kicker">devops-observabilitas</span><h2 id="reic-12496-repositori-git-title" class="reic-title">Repositori Git — Modul 084 / Unit 046</h2></header>
+  <p class="reic-description">Modul 12496 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-12496-repositori-git-input">Masukan</label><input id="reic-12496-repositori-git-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Repositori Git — Modul 084 / Unit 046"><label for="reic-12496-repositori-git-mode">Mode proses</label><select id="reic-12496-repositori-git-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-12496-repositori-git</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

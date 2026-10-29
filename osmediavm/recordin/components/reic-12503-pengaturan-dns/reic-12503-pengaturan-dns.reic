@@ -5,9 +5,19 @@ group: devops-observabilitas
 component_number: 12503
 style: ./reic-12503-pengaturan-dns.css
 script: ./reic-12503-pengaturan-dns.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-12503, ../manifest.json
 --- END REIC HEADER ---
 
-Pengaturan DNS — Modul 084 / Unit 053. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-12503-pengaturan-dns" aria-labelledby="reic-12503-pengaturan-dns-title">
+  <header class="reic-panel__header"><span class="reic-kicker">devops-observabilitas</span><h2 id="reic-12503-pengaturan-dns-title" class="reic-title">Pengaturan DNS — Modul 084 / Unit 053</h2></header>
+  <p class="reic-description">Modul 12503 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-12503-pengaturan-dns-input">Masukan</label><input id="reic-12503-pengaturan-dns-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Pengaturan DNS — Modul 084 / Unit 053"><label for="reic-12503-pengaturan-dns-mode">Mode proses</label><select id="reic-12503-pengaturan-dns-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-12503-pengaturan-dns</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->

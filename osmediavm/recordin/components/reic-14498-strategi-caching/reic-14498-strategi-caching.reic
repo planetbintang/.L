@@ -5,9 +5,19 @@ group: tata-kelola
 component_number: 14498
 style: ./reic-14498-strategi-caching.css
 script: ./reic-14498-strategi-caching.js
-render: interactive-panel
+render: html-fragment
 runtime: static-compatible
+inputs: query, text, option
+outputs: status, result, event
+links: #reic-14498, ../manifest.json
 --- END REIC HEADER ---
 
-Strategi caching — Modul 097 / Unit 098. Komponen modular OS MEDIA VM dengan konfigurasi mandiri.
-Fitur sisi-klien tersedia tanpa server; koneksi database, autentikasi terpusat, dan layanan AI memerlukan backend eksternal.
+<section class="reic-panel" data-reic-component="reic-14498-strategi-caching" aria-labelledby="reic-14498-strategi-caching-title">
+  <header class="reic-panel__header"><span class="reic-kicker">tata-kelola</span><h2 id="reic-14498-strategi-caching-title" class="reic-title">Strategi caching — Modul 097 / Unit 098</h2></header>
+  <p class="reic-description">Modul 14498 · Komponen terintegrasi OS MEDIA VM. Kelola masukan, lihat keluaran, dan hubungkan ke modul lain melalui event REIC.</p>
+  <form class="reic-form" data-reic-form><label for="reic-14498-strategi-caching-input">Masukan</label><input id="reic-14498-strategi-caching-input" name="query" type="text" autocomplete="off" placeholder="Masukkan data untuk Strategi caching — Modul 097 / Unit 098"><label for="reic-14498-strategi-caching-mode">Mode proses</label><select id="reic-14498-strategi-caching-mode" name="mode"><option value="ringkas">Ringkas</option><option value="detail">Detail</option><option value="validasi">Validasi</option></select><div class="reic-actions"><button type="submit" data-reic-action>Jalankan modul</button><a href="../manifest.json" class="reic-link">Manifest komponen ↗</a></div></form>
+  <output class="reic-output" data-reic-output aria-live="polite">Menunggu masukan.</output>
+  <footer class="reic-status" data-reic-status>Siap · mode statis · reic-14498-strategi-caching</footer>
+</section>
+
+<!-- Modul berjalan di browser. Integrasi server, akun, dan penyimpanan bersama harus dikonfigurasi eksplisit. -->
