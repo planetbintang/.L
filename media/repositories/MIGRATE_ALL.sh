@@ -35,7 +35,7 @@ jq -e 'type == "array" or type == "object"' "$CATALOG" >/dev/null
 jq -r '
   (if type == "array" then . else (.repositories // .items // []) end)
   | .[]
-  | [(.name // .full_name // ""), (.visibility // ""), (.default_branch // .branch // "")]
+  | [(.name // .full_name // ""), (.visibility // ""), (.defaultBranch // .default_branch // .branch // "")]
   | @tsv
 ' "$CATALOG" | while IFS=$'\t' read -r name visibility branch; do
   [[ -n "$name" ]] || continue
