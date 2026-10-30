@@ -31,3 +31,23 @@
 .fm-bottom{height:28px;flex:0 0 28px;display:flex;align-items:center;gap:8px;padding:0 12px;background:linear-gradient(#eee,#d9d9d9);border-top:1px solid #aeb8c0;color:#53697d;font-size:11px}
 .fm-led{width:9px;height:9px;border-radius:50%;background:#40ae65;box-shadow:0 0 0 2px #b9e6c8}
 @media(max-width:650px){.file-manager{height:auto;min-height:520px}.fm-main{grid-template-columns:27px 116px minmax(0,1fr)}.fm-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:8px}.fm-sidebar{padding:6px 3px}.fm-tree-item{font-size:10px;padding:6px 3px}.fm-toolbar{flex-wrap:wrap}.fm-search{width:100%;order:4}.fm-menubar{gap:12px;font-size:10px}.fm-entry-icon{transform:scale(.78);transform-origin:top center;margin-bottom:-10px}.fm-tools{gap:3px}.fm-tools button{font-size:10px;padding:4px 6px}}
+
+/* OS MEDIA VM · REIC component library mounted inside File Manager modal */
+.fm-reic-library{margin-top:14px;padding:16px;background:linear-gradient(135deg,#eaf2f9,#d9e5ef);border:1px solid #9eb4c8;color:#263b4e}
+.fm-reic-library>header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #b6c8d8}
+.fm-reic-library>header small,.fm-reic-component-head small{font-size:10px;letter-spacing:1.2px;color:#3978ad;font-weight:700}
+.fm-reic-library h3{margin:4px 0;font-size:16px;color:#263f56}
+.fm-reic-library p{margin:4px 0;font-size:11px;color:#5e7182}
+.fm-reic-library>header strong{font-size:11px;color:#2c689b;white-space:nowrap}
+.fm-reic-library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px;max-height:280px;overflow:auto}
+.fm-reic-library-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-height:76px;padding:10px;border:1px solid #b4c7d8;background:linear-gradient(#fff,#eaf1f7);color:#263c50;text-align:left;cursor:pointer}
+.fm-reic-library-card:hover{border-color:#5e9bce;background:#e2f1fc}
+.fm-reic-library-card small{font-size:9px;color:#5783a8}
+.fm-reic-library-card b{font-size:11px;line-height:1.35}
+.fm-reic-library-card span{font-size:9px;color:#3978ad;font-weight:700}
+.fm-reic-component-view{margin-top:14px;padding:12px;background:#fff;border:1px solid #aabed0}
+.fm-reic-component-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #dce5ed}
+.fm-reic-component-head h4{margin:3px 0;color:#29445c;font-size:14px}
+.fm-reic-component-head button{border:1px solid #aabaca;background:#edf4fa;padding:6px 10px;color:#34536d;cursor:pointer}
+.fm-reic-component-body{padding:12px 2px;max-height:460px;overflow:auto}
+@media(max-width:650px){.fm-reic-library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fm-reic-library{padding:10px}}
