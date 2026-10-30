@@ -1,0 +1,681 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "API dan integrasi",
+  "branch": "io",
+  "storagePolicy": "Konfigurasi non-rahasia saja. Token, API key, client secret, password, dan private key harus disimpan di secret manager/environment backend.",
+  "defaults": {
+    "method": "GET",
+    "environment": "development",
+    "auth": "none",
+    "timeoutMs": 15000,
+    "rateLimitPerMinute": 60,
+    "enabled": false
+  },
+  "layoutProfiles": [
+    "api-rail",
+    "api-console",
+    "api-matrix",
+    "api-split",
+    "api-stack"
+  ],
+  "layers": [
+    "layout",
+    "pilihan",
+    "penerapan",
+    "penyimpanan",
+    "penyimpanan-sistem-folder-file",
+    "konfigurasi"
+  ],
+  "features": [
+    {
+      "id": 251,
+      "code": "251",
+      "slug": "dokumentasi-api",
+      "name": "Dokumentasi API",
+      "configFile": "vendordomain/config/api-integrations/dokumentasi-api.json",
+      "folder": "vendordomain/config/api-integrations/dokumentasi-api/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 252,
+      "code": "252",
+      "slug": "api-domain",
+      "name": "API Domain",
+      "configFile": "vendordomain/config/api-integrations/api-domain.json",
+      "folder": "vendordomain/config/api-integrations/api-domain/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 253,
+      "code": "253",
+      "slug": "api-dns",
+      "name": "API DNS",
+      "configFile": "vendordomain/config/api-integrations/api-dns.json",
+      "folder": "vendordomain/config/api-integrations/api-dns/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 254,
+      "code": "254",
+      "slug": "api-hosting",
+      "name": "API Hosting",
+      "configFile": "vendordomain/config/api-integrations/api-hosting.json",
+      "folder": "vendordomain/config/api-integrations/api-hosting/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 255,
+      "code": "255",
+      "slug": "api-penerbitan-situs",
+      "name": "API Penerbitan Situs",
+      "configFile": "vendordomain/config/api-integrations/api-penerbitan-situs.json",
+      "folder": "vendordomain/config/api-integrations/api-penerbitan-situs/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 256,
+      "code": "256",
+      "slug": "api-file",
+      "name": "API File",
+      "configFile": "vendordomain/config/api-integrations/api-file.json",
+      "folder": "vendordomain/config/api-integrations/api-file/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 257,
+      "code": "257",
+      "slug": "api-ekstensi",
+      "name": "API Ekstensi",
+      "configFile": "vendordomain/config/api-integrations/api-ekstensi.json",
+      "folder": "vendordomain/config/api-integrations/api-ekstensi/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 258,
+      "code": "258",
+      "slug": "api-vendor",
+      "name": "API Vendor",
+      "configFile": "vendordomain/config/api-integrations/api-vendor.json",
+      "folder": "vendordomain/config/api-integrations/api-vendor/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 259,
+      "code": "259",
+      "slug": "api-pelanggan",
+      "name": "API Pelanggan",
+      "configFile": "vendordomain/config/api-integrations/api-pelanggan.json",
+      "folder": "vendordomain/config/api-integrations/api-pelanggan/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 260,
+      "code": "260",
+      "slug": "api-pembayaran",
+      "name": "API Pembayaran",
+      "configFile": "vendordomain/config/api-integrations/api-pembayaran.json",
+      "folder": "vendordomain/config/api-integrations/api-pembayaran/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 261,
+      "code": "261",
+      "slug": "api-analitik",
+      "name": "API Analitik",
+      "configFile": "vendordomain/config/api-integrations/api-analitik.json",
+      "folder": "vendordomain/config/api-integrations/api-analitik/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 262,
+      "code": "262",
+      "slug": "api-pencarian-domain",
+      "name": "API Pencarian Domain",
+      "configFile": "vendordomain/config/api-integrations/api-pencarian-domain.json",
+      "folder": "vendordomain/config/api-integrations/api-pencarian-domain/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 263,
+      "code": "263",
+      "slug": "api-pemeriksaan-status",
+      "name": "API Pemeriksaan Status",
+      "configFile": "vendordomain/config/api-integrations/api-pemeriksaan-status.json",
+      "folder": "vendordomain/config/api-integrations/api-pemeriksaan-status/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 264,
+      "code": "264",
+      "slug": "api-pembuatan-proyek",
+      "name": "API Pembuatan Proyek",
+      "configFile": "vendordomain/config/api-integrations/api-pembuatan-proyek.json",
+      "folder": "vendordomain/config/api-integrations/api-pembuatan-proyek/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 265,
+      "code": "265",
+      "slug": "api-publikasi-teks",
+      "name": "API Publikasi Teks",
+      "configFile": "vendordomain/config/api-integrations/api-publikasi-teks.json",
+      "folder": "vendordomain/config/api-integrations/api-publikasi-teks/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 266,
+      "code": "266",
+      "slug": "pembuatan-api-key",
+      "name": "Pembuatan API Key",
+      "configFile": "vendordomain/config/api-integrations/pembuatan-api-key.json",
+      "folder": "vendordomain/config/api-integrations/pembuatan-api-key/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 267,
+      "code": "267",
+      "slug": "rotasi-api-key",
+      "name": "Rotasi API Key",
+      "configFile": "vendordomain/config/api-integrations/rotasi-api-key.json",
+      "folder": "vendordomain/config/api-integrations/rotasi-api-key/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 268,
+      "code": "268",
+      "slug": "pencabutan-api-key",
+      "name": "Pencabutan API Key",
+      "configFile": "vendordomain/config/api-integrations/pencabutan-api-key.json",
+      "folder": "vendordomain/config/api-integrations/pencabutan-api-key/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 269,
+      "code": "269",
+      "slug": "pembatasan-akses-api",
+      "name": "Pembatasan Akses API",
+      "configFile": "vendordomain/config/api-integrations/pembatasan-akses-api.json",
+      "folder": "vendordomain/config/api-integrations/pembatasan-akses-api/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 270,
+      "code": "270",
+      "slug": "pembatasan-laju-permintaan",
+      "name": "Pembatasan Laju Permintaan",
+      "configFile": "vendordomain/config/api-integrations/pembatasan-laju-permintaan.json",
+      "folder": "vendordomain/config/api-integrations/pembatasan-laju-permintaan/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 271,
+      "code": "271",
+      "slug": "webhook-domain",
+      "name": "Webhook Domain",
+      "configFile": "vendordomain/config/api-integrations/webhook-domain.json",
+      "folder": "vendordomain/config/api-integrations/webhook-domain/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 272,
+      "code": "272",
+      "slug": "webhook-publikasi",
+      "name": "Webhook Publikasi",
+      "configFile": "vendordomain/config/api-integrations/webhook-publikasi.json",
+      "folder": "vendordomain/config/api-integrations/webhook-publikasi/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 273,
+      "code": "273",
+      "slug": "webhook-pembayaran",
+      "name": "Webhook Pembayaran",
+      "configFile": "vendordomain/config/api-integrations/webhook-pembayaran.json",
+      "folder": "vendordomain/config/api-integrations/webhook-pembayaran/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 274,
+      "code": "274",
+      "slug": "log-permintaan-api",
+      "name": "Log Permintaan API",
+      "configFile": "vendordomain/config/api-integrations/log-permintaan-api.json",
+      "folder": "vendordomain/config/api-integrations/log-permintaan-api/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    },
+    {
+      "id": 275,
+      "code": "275",
+      "slug": "konsol-uji-api",
+      "name": "Konsol Uji API",
+      "configFile": "vendordomain/config/api-integrations/konsol-uji-api.json",
+      "folder": "vendordomain/config/api-integrations/konsol-uji-api/",
+      "enabled": false,
+      "method": "GET",
+      "environment": "development",
+      "auth": "none",
+      "baseUrl": "",
+      "path": "/api/v1/",
+      "timeoutMs": 15000,
+      "rateLimitPerMinute": 60,
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "requestSchema": {
+        "type": "object",
+        "properties": {}
+      },
+      "secretReference": "",
+      "notes": "Tambahkan konfigurasi provider di backend; jangan simpan secret di repositori."
+    }
+  ]
+}
