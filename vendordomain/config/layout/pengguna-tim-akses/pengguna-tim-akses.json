@@ -1,0 +1,1215 @@
+{
+  "schemaVersion": 1,
+  "module": "Pengguna, tim dan akses",
+  "moduleNumber": 17,
+  "layers": [
+    "Layout",
+    "Pilihan",
+    "Penerapan",
+    "Penyimpanan",
+    "Penyimpanan Sistem Folder File",
+    "Konfigurasi"
+  ],
+  "items": [
+    {
+      "id": "401",
+      "name": "Manajemen Akun Pengguna",
+      "layout": {
+        "type": "Kanvas profil",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Kartu pengguna",
+        "Tabel",
+        "Inspector"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/401",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-401",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "402",
+      "name": "Pendaftaran Pengguna",
+      "layout": {
+        "type": "Form bertahap",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "Validasi",
+        "Pratinjau",
+        "Undangan"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/402",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-402",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "403",
+      "name": "Login Pengguna",
+      "layout": {
+        "type": "Panel autentikasi",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Kredensial",
+        "Keamanan",
+        "Perangkat"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/403",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-403",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "404",
+      "name": "Keluar dari Semua Sesi",
+      "layout": {
+        "type": "Tabel sesi",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Filter",
+        "Aksi massal",
+        "Konfirmasi"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/404",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-404",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "405",
+      "name": "Verifikasi Email",
+      "layout": {
+        "type": "Panel verifikasi",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Status",
+        "Template",
+        "Pratinjau"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/405",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-405",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "406",
+      "name": "Autentikasi Dua Faktor",
+      "layout": {
+        "type": "Konsol keamanan",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "TOTP",
+        "Kunci pemulihan",
+        "Perangkat"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/406",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-406",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "407",
+      "name": "Login melalui Penyedia Identitas",
+      "layout": {
+        "type": "Split workspace",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Penyedia",
+        "Pemetaan",
+        "Callback"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/407",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-407",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "408",
+      "name": "Pemulihan Akun",
+      "layout": {
+        "type": "Alur vertikal",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Verifikasi",
+        "Token",
+        "Riwayat"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/408",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-408",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "409",
+      "name": "Peran Administrator",
+      "layout": {
+        "type": "Matriks kapabilitas",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Kapabilitas",
+        "Izin",
+        "Audit"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/409",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-409",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "410",
+      "name": "Peran Pengembang",
+      "layout": {
+        "type": "Panel developer",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "Repositori",
+        "API",
+        "Lingkungan"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/410",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-410",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "411",
+      "name": "Peran Editor",
+      "layout": {
+        "type": "Editor konten",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Publikasi",
+        "Persetujuan",
+        "Ruang kerja"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/411",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-411",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "412",
+      "name": "Peran Vendor",
+      "layout": {
+        "type": "Panel vendor",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Katalog",
+        "Domain",
+        "Kontrak"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/412",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-412",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "413",
+      "name": "Peran Pelanggan",
+      "layout": {
+        "type": "Kartu profil",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Layanan",
+        "Privasi",
+        "Profil"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/413",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-413",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "414",
+      "name": "Kontrol Akses Berbasis Peran",
+      "layout": {
+        "type": "Matriks RBAC",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "Warisan peran",
+        "Simulasi",
+        "Konflik"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/414",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-414",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "415",
+      "name": "Izin per Proyek",
+      "layout": {
+        "type": "Pohon proyek",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Pohon proyek",
+        "Warisan",
+        "Perbandingan"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/415",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-415",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "416",
+      "name": "Izin per Domain",
+      "layout": {
+        "type": "Peta domain",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Domain",
+        "DNS",
+        "Validasi"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/416",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-416",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "417",
+      "name": "Undangan Anggota Tim",
+      "layout": {
+        "type": "Papan undangan",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Penerima",
+        "Peran",
+        "Masa berlaku"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/417",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-417",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "418",
+      "name": "Penghapusan Anggota Tim",
+      "layout": {
+        "type": "Alur pencabutan",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "Pencabutan",
+        "Transfer",
+        "Audit"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/418",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-418",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "419",
+      "name": "Grup Pengguna",
+      "layout": {
+        "type": "Kartu grup",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Keanggotaan",
+        "Aturan",
+        "Sinkronisasi"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/419",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-419",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "420",
+      "name": "Kebijakan Kata Sandi",
+      "layout": {
+        "type": "Panel kebijakan",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Aturan",
+        "Skor",
+        "Pengecualian"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/420",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-420",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "421",
+      "name": "Riwayat Login",
+      "layout": {
+        "type": "Timeline",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Lokasi",
+        "Perangkat",
+        "Ekspor"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/421",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-421",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "422",
+      "name": "Manajemen Sesi",
+      "layout": {
+        "type": "Daftar sesi",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "tabs"
+      },
+      "choices": [
+        "Kedaluwarsa",
+        "Perangkat",
+        "Pencabutan"
+      ],
+      "application": {
+        "mode": "langsung",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/422",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-422",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "423",
+      "name": "Daftar Perangkat Aktif",
+      "layout": {
+        "type": "Kartu perangkat",
+        "density": "normal",
+        "columns": 2,
+        "navigation": "split-panel"
+      },
+      "choices": [
+        "Kepercayaan",
+        "Lokasi",
+        "Tindakan"
+      ],
+      "application": {
+        "mode": "terjadwal",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/423",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-423",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "424",
+      "name": "Log Aktivitas Pengguna",
+      "layout": {
+        "type": "Log stream",
+        "density": "lega",
+        "columns": 3,
+        "navigation": "toolbar"
+      },
+      "choices": [
+        "Kejadian",
+        "Filter",
+        "Ekspor"
+      ],
+      "application": {
+        "mode": "dengan-persetujuan",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/424",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-424",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    },
+    {
+      "id": "425",
+      "name": "Persetujuan Tindakan Sensitif",
+      "layout": {
+        "type": "Wizard persetujuan",
+        "density": "rapat",
+        "columns": 1,
+        "navigation": "sidebar"
+      },
+      "choices": [
+        "Ambang",
+        "Persetujuan",
+        "Jejak keputusan"
+      ],
+      "application": {
+        "mode": "bertahap",
+        "validation": true,
+        "rollback": true,
+        "state": "draft"
+      },
+      "storage": {
+        "root": "vendordomain/config/layout/pengguna-tim-akses/425",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "folders": [
+        "layout/",
+        "choices/",
+        "applied/",
+        "storage/",
+        "config/",
+        "history/"
+      ],
+      "configuration": {
+        "profile": "profil-425",
+        "access": [
+          "pemilik",
+          "administrator"
+        ],
+        "audit": true,
+        "version": 1
+      }
+    }
+  ]
+}
