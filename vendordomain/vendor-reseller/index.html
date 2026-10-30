@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071321"><title>Vendor dan Reseller · VendorDomain</title>
+<style>
+:root{color-scheme:dark;--bg:#050a14;--panel:#0b1728;--panel2:#10243a;--line:#29415d;--text:#eaf4ff;--muted:#9cb2cc;--accent:#73cfff;--cyan:#63e4d1;--green:#68dfa2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#153b5b 0,transparent 42%),repeating-linear-gradient(135deg,#ffffff05 0 1px,transparent 1px 13px),linear-gradient(180deg,#050a14,#071321 58%,#050a14);color:var(--text);font:14px/1.55 Inter,system-ui,sans-serif}
+a{color:#83dfff;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit;background:#071321;border:1px solid var(--line);border-radius:0;padding:10px}button{cursor:pointer;background:#10243a}button:hover,a:hover{border-color:var(--accent);filter:brightness(1.1)}
+header{padding:22px clamp(14px,3vw,38px);border-bottom:1px solid var(--line);background:#071222ed;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}.crumb{font-size:10px;letter-spacing:1.5px;color:var(--cyan);font-weight:800}.headrow{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}h1{font-size:clamp(25px,4vw,42px);margin:6px 0;letter-spacing:-1px}.muted{color:var(--muted)}main{max-width:1500px;margin:auto;padding:22px clamp(12px,2.5vw,36px) 60px}
+.hero,.panel,.module,.layer,.folder{border:1px solid #29415d;background:linear-gradient(145deg,#0d1e30ee,#071321f5);box-shadow:0 14px 36px #0003}.hero{padding:22px;margin-bottom:16px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 92% 0,#63e4d119,transparent 30%),repeating-linear-gradient(135deg,#9cc9e608 0 1px,transparent 1px 12px)}.hero>*{position:relative;z-index:1}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}.stat{padding:12px;background:#071321;border:1px solid var(--line)}.stat b{display:block;font-size:19px}.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:14px}.panel{padding:16px;min-width:0}.side{display:grid;gap:8px;align-content:start}.side button{text-align:left}.side button.active{border-color:var(--cyan);background:#123149}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:12px}.section-head h2{margin:0;font-size:19px}.modules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.module{padding:14px;min-height:130px;display:flex;flex-direction:column;gap:6px}.module strong{font-size:14px}.module small{color:var(--muted);flex:1}.module .meta{font-size:10px;color:var(--cyan);letter-spacing:1px}.layers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:14px 0}.layer{padding:12px;min-height:95px}.layer b{display:block;margin-bottom:5px}.layer small{color:var(--muted)}.config-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{display:grid;gap:5px}.field label{font-size:11px;color:var(--muted);letter-spacing:.7px}.field select,.field input,.field textarea{width:100%}.folder-tree{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.folder{padding:12px}.folder b{display:block}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary{background:linear-gradient(120deg,#237ca8,#36b6b5);color:#03111e;font-weight:800}.status{margin-top:10px;color:var(--cyan);min-height:22px}.notice{border-left:3px solid var(--cyan);padding:10px 12px;background:#0a1d2c;color:var(--muted);margin-top:12px;font-size:12px}
+@media(max-width:980px){.modules{grid-template-columns:repeat(2,minmax(0,1fr))}.layers{grid-template-columns:repeat(3,minmax(0,1fr))}.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.modules,.config-grid,.folder-tree{grid-template-columns:1fr}.layers{grid-template-columns:repeat(2,minmax(0,1fr))}.side{grid-template-columns:repeat(2,minmax(0,1fr))}header{position:relative}}
+</style></head><body>
+<header><div class="headrow"><div><div class="crumb">VENDORDOMAIN / BISNIS / VENDOR DAN RESELLER</div><h1>Vendor dan Reseller</h1><div class="muted">Pusat konfigurasi bertingkat · setiap fitur memiliki profil layout dan penyimpanan sendiri</div></div><div class="actions"><a href="../index.html">← Kembali ke VendorDomain</a><a href="../features/index.html">Direktori fitur ↗</a></div></div></header>
+<main>
+<section class="hero"><div class="crumb">LAPISAN KENDALI / WORKSPACE CONFIGURATION</div><h2 id="activeTitle">Ruang konfigurasi Vendor dan Reseller</h2><p class="muted">Pilih menu di panel kiri. Setiap menu mempunyai layout, pilihan tampilan, penerapan, serta namespace konfigurasi dan berkas tersendiri.</p><div class="stats"><div class="stat"><b>25</b><span class="muted">Menu fitur terhubung</span></div><div class="stat"><b>05</b><span class="muted">Lapisan konfigurasi</span></div><div class="stat"><b>Per-menu</b><span class="muted">Profil tersendiri</span></div><div class="stat"><b>JSON</b><span class="muted">Ekspor konfigurasi</span></div></div></section>
+<div class="layout"><aside class="panel"><div class="section-head"><h2>Menu dan submenu</h2></div><input id="filter" type="search" placeholder="Cari menu..." style="width:100%;margin-bottom:10px"><nav class="side" id="menuList"></nav></aside>
+<section class="panel"><div class="section-head"><div><div class="crumb" id="activeCode">MENU / 01</div><h2 id="menuTitle">Profil Vendor</h2><p class="muted" id="menuDesc">Konfigurasi profil menu.</p></div><span class="muted" id="saveState">Belum ada perubahan</span></div>
+<div class="layers">
+<div class="layer"><b>01 · LAYOUT</b><small>Susunan panel, kolom, navigasi, dan kepadatan.</small></div>
+<div class="layer"><b>02 · PILIHAN</b><small>Gaya visual, warna aksen, dan komponen.</small></div>
+<div class="layer"><b>03 · PENERAPAN</b><small>Pratinjau dan aktifkan profil menu.</small></div>
+<div class="layer"><b>04 · PENYIMPANAN</b><small>Simpan profil per menu dan ekspor JSON.</small></div>
+<div class="layer"><b>05 · SISTEM</b><small>Namespace, folder, file, dan metadata.</small></div>
+</div>
+<div class="config-grid">
+<div class="field"><label for="layout">JENIS LAYOUT</label><select id="layout"><option value="editorial">Editorial bertingkat</option><option value="dashboard">Dashboard modular</option><option value="split">Panel dua sisi</option><option value="table">Tabel operasional</option><option value="cards">Kartu grid</option><option value="timeline">Alur / timeline</option></select></div>
+<div class="field"><label for="density">KEPADATAN TAMPILAN</label><select id="density"><option value="comfortable">Lapang</option><option value="compact">Ringkas</option><option value="wide">Lebar</option></select></div>
+<div class="field"><label for="accent">AKSEN VISUAL</label><select id="accent"><option value="cyan">Biru-sian</option><option value="blue">Biru</option><option value="mint">Hijau mint</option><option value="violet">Ungu</option><option value="amber">Amber</option></select></div>
+<div class="field"><label for="navigation">MODEL NAVIGASI</label><select id="navigation"><option value="sidebar">Sidebar bertingkat</option><option value="tabs">Tab horizontal</option><option value="rail">Rail ikon</option><option value="breadcrumbs">Breadcrumb + panel</option></select></div>
+<div class="field"><label for="storage">STRATEGI PENYIMPANAN</label><select id="storage"><option value="per-menu">Terpisah per menu</option><option value="shared">Ruang kerja bersama</option><option value="versioned">Versi konfigurasi</option></select></div>
+<div class="field"><label for="components">KOMPONEN UTAMA</label><select id="components"><option value="mixed">Campuran sesuai fitur</option><option value="forms">Formulir konfigurasi</option><option value="records">Daftar dan rekaman</option><option value="analytics">Analitik dan metrik</option><option value="workflow">Alur kerja</option></select></div>
+<div class="field"><label for="folder">FOLDER SISTEM</label><input id="folder" readonly></div>
+<div class="field"><label for="file">FILE KONFIGURASI</label><input id="file" readonly></div>
+</div>
+<div class="actions"><button class="primary" id="apply">Terapkan layout</button><button id="save">Simpan konfigurasi</button><button id="reset">Pulihkan menu ini</button><button id="export">Ekspor JSON</button></div><div class="status" id="status" role="status">Pilih menu untuk memulai konfigurasi.</div>
+<div class="notice">Penyimpanan browser bersifat lokal pada perangkat ini. Ekspor JSON dapat dipindahkan ke folder sistem proyek. Sinkronisasi server atau penyimpanan GitHub otomatis memerlukan backend/API yang dikonfigurasi terpisah.</div>
+<section style="margin-top:20px"><div class="section-head"><h2>Struktur folder dan file sistem</h2><span class="muted">MODEL PENYIMPANAN</span></div><div class="folder-tree" id="folderTree"></div></section>
+<section style="margin-top:20px"><div class="section-head"><h2>Submenu dan halaman fitur</h2><span class="muted">BUKA HALAMAN MANDIRI</span></div><div class="modules" id="featureLinks"></div></section>
+</section></div></main>
+<script>
+(()=>{const menus=[
+["Profil Vendor","vendordomain/pages/052-profil-vendor.reic","Data identitas, kontak, status, dan dokumen vendor."],
+["Registrasi Akun Reseller","vendordomain/pages/053-registrasi-akun-reseller.reic","Pendaftaran akun dan kelengkapan data reseller."],
+["Verifikasi Vendor","vendordomain/pages/054-verifikasi-vendor.reic","Pemeriksaan identitas dan status verifikasi."],
+["Perbandingan Harga Vendor","vendordomain/pages/055-perbandingan-harga-vendor.reic","Perbandingan harga dan ketentuan pemasok."],
+["Manajemen Vendor","vendordomain/pages/056-manajemen-vendor.reic","Daftar vendor, kategori, dan status kerja."],
+["Kontrak dan Perjanjian","vendordomain/pages/057-kontrak-vendor.reic","Dokumen kontrak, masa berlaku, dan persetujuan."],
+["Integrasi API Registrar","vendordomain/pages/058-integrasi-api-registrar.reic","Pengaturan koneksi API registrar."],
+["Pengaturan Margin Reseller","vendordomain/pages/059-pengaturan-margin-reseller.reic","Aturan margin, harga jual, dan pembagian."],
+["Harga Grosir Domain","vendordomain/pages/060-harga-grosir-domain.reic","Daftar harga grosir dan tingkatan reseller."],
+["Manajemen Pesanan Reseller","vendordomain/pages/061-manajemen-pesanan-reseller.reic","Pesanan, status pemrosesan, dan riwayat."],
+["Komisi Vendor","vendordomain/pages/062-komisi-vendor.reic","Perhitungan komisi mitra vendor."],
+["Komisi Reseller","vendordomain/pages/446-komisi-reseller.reic","Perhitungan dan ringkasan komisi reseller."],
+["Pembayaran Vendor","vendordomain/pages/063-pembayaran-vendor.reic","Jadwal, catatan, dan status pembayaran."],
+["Kuota Transaksi Vendor","vendordomain/pages/064-kuota-transaksi-vendor.reic","Batas dan penggunaan kuota transaksi."],
+["Status Koneksi Vendor","vendordomain/pages/065-status-koneksi-vendor.reic","Kondisi koneksi dan integrasi vendor."],
+["Uji Koneksi API","vendordomain/pages/066-uji-koneksi-api.reic","Pemeriksaan koneksi API dan respons."],
+["Pergantian Vendor Cadangan","vendordomain/pages/067-pergantian-vendor-cadangan.reic","Aturan pengalihan ke vendor cadangan."],
+["Daftar Reseller","vendordomain/pages/068-daftar-reseller.reic","Data reseller dan status kemitraan."],
+["Tingkat Reseller","vendordomain/pages/069-tingkat-reseller.reic","Level, kriteria, dan hak reseller."],
+["Aktivasi Reseller","vendordomain/pages/070-aktivasi-reseller.reic","Aktivasi dan penonaktifan akun reseller."],
+["Saldo Reseller","vendordomain/pages/071-saldo-reseller.reic","Ringkasan saldo dan mutasi reseller."],
+["Riwayat Transaksi Reseller","vendordomain/pages/072-riwayat-transaksi-reseller.reic","Riwayat pesanan dan transaksi reseller."],
+["Dokumen Perjanjian","vendordomain/pages/073-dokumen-perjanjian.reic","Dokumen kerja sama dan arsip."],
+["Pusat Sengketa Vendor","vendordomain/pages/074-pusat-sengketa-vendor.reic","Penanganan sengketa dan catatan tindak lanjut."],
+["Penilaian Vendor","vendordomain/pages/075-penilaian-vendor.reic","Penilaian kinerja dan kualitas vendor."]
+];const $=s=>document.querySelector(s), ids=["layout","density","accent","navigation","storage","components"], menuList=$("#menuList");let active=0;
+const defaults=i=>({layout:["editorial","dashboard","split","table","cards","timeline"][i%6],density:"comfortable",accent:["cyan","blue","mint","violet","amber"][i%5],navigation:["sidebar","tabs","rail","breadcrumbs"][i%4],storage:"per-menu",components:["mixed","forms","records","analytics","workflow"][i%5]});
+const key=i=>"pb-vendordomain-vendor-reseller-"+i;
+function config(i){try{return {...defaults(i),...JSON.parse(localStorage.getItem(key(i))||"{}")}}catch{return defaults(i)}}
+function renderMenu(q=""){menuList.innerHTML="";menus.forEach((m,i)=>{if(!m[0].toLowerCase().includes(q.toLowerCase()))return;const b=document.createElement("button");b.textContent=String(i+1).padStart(2,"0")+" · "+m[0];b.className=i===active?"active":"";b.onclick=()=>select(i);menuList.append(b)})}
+function select(i){active=i;const m=menus[i],c=config(i);$("#activeTitle").textContent=m[0];$("#menuTitle").textContent=m[0];$("#menuDesc").textContent=m[2];$("#activeCode").textContent="MENU / "+String(i+1).padStart(2,"0")+" · PROFIL TERPISAH";ids.forEach(id=>$("#"+id).value=c[id]);$("#folder").value="config/vendordomain/vendor-reseller/menu-"+String(i+1).padStart(2,"0")+"/";$("#file").value="config.reic.json";$("#saveState").textContent=localStorage.getItem(key(i))?"Konfigurasi tersimpan":"Profil bawaan";$("#folderTree").innerHTML=["config/","vendordomain/","vendor-reseller/","menu-"+String(i+1).padStart(2,"0")+"/","config.reic.json · layout.json · pilihan.json · penerapan.json · storage.json"].map((x,j)=>'<div class="folder"><b>'+(j===0?"▣ ":"↳ ")+x+'</b><span class="muted small">'+["Akar konfigurasi internal","Ruang sistem VendorDomain","Modul vendor dan reseller","Namespace konfigurasi menu aktif","File profil dan metadata per lapisan"][j]+'</span></div>').join("");$("#featureLinks").innerHTML='<a class="module" href="../'+m[1]+'"><span class="meta">HALAMAN FITUR</span><strong>'+m[0]+'</strong><small>Buka halaman mandiri fitur ini</small><span>BUKA ↗</span></a>';renderMenu($("#filter").value)}
+function current(){return Object.fromEntries(ids.map(id=>[id,$("#"+id).value]))}
+$("#filter").addEventListener("input",e=>renderMenu(e.target.value));
+$("#apply").onclick=()=>{const c=current();document.documentElement.dataset.layout=c.layout;document.documentElement.dataset.density=c.density;document.documentElement.style.setProperty("--accent",({cyan:"#73cfff",blue:"#73aaff",mint:"#68dfa2",violet:"#b69cff",amber:"#ffcf76"})[c.accent]);$("#status").textContent="Layout "+c.layout+" diterapkan untuk "+menus[active][0]+". Simpan untuk mempertahankan pilihan.";};
+$("#save").onclick=()=>{const c={...current(),menu:menus[active][0],updatedAt:new Date().toISOString(),schemaVersion:1};localStorage.setItem(key(active),JSON.stringify(c));$("#saveState").textContent="Tersimpan di browser";$("#status").textContent="Konfigurasi menu "+menus[active][0]+" disimpan pada namespace lokalnya.";};
+$("#reset").onclick=()=>{localStorage.removeItem(key(active));select(active);$("#status").textContent="Profil menu dipulihkan ke pengaturan bawaan.";};
+$("#export").onclick=()=>{const payload={module:"Vendor dan Reseller",menu:menus[active][0],folder:$("#folder").value,config:current(),exportedAt:new Date().toISOString()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="vendor-reseller-menu-"+String(active+1).padStart(2,"0")+".json";a.click();URL.revokeObjectURL(url);$("#status").textContent="File konfigurasi JSON dibuat untuk diunduh.";};
+select(0);
+})();
+</script></body></html>
