@@ -60,3 +60,70 @@
 .menu-back{margin:0 0 15px;padding:9px 12px;border:1px solid #31536b;background:#0d1a2b;color:#83e1ff;font-size:10px;letter-spacing:.1em;cursor:pointer}
 @media(max-width:760px){.menu-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vm-modal{width:calc(100% - 20px)}.vm-modal>header>b{font-size:16px}.modal-tabs{overflow-x:auto}}
 @media(max-width:480px){.menu-choice-grid{grid-template-columns:1fr}.menu-choice{min-height:66px}}
+
+
+/* RESPONSIVE VIEWPORT: desktop selalu memenuhi area website tanpa skala tetap 1920x1080. */
+html,body{width:100%;height:100%;min-height:100%;overflow:hidden}
+#desktop-root{width:100%;height:100%;min-height:100dvh;display:block;overflow:hidden}
+.vm-shell{width:100%;height:100%;min-width:0;min-height:0;max-width:none;transform:none;transform-origin:initial;padding:clamp(6px,1vw,14px);display:flex;flex-direction:column;gap:10px;overflow:hidden}
+.vm-header{height:auto;min-height:70px;flex:0 0 auto;gap:clamp(8px,1.2vw,22px);padding:10px clamp(10px,1.4vw,24px)}
+.vm-brand{width:auto;min-width:max-content;max-width:32%;font-size:clamp(15px,1.5vw,25px);gap:10px}
+.vm-logo{width:42px;height:42px;flex:0 0 42px;font-size:25px}
+.vm-search{height:46px;min-width:100px;padding:0 12px}
+.vm-search input{font-size:clamp(12px,1vw,16px)}
+.vm-header-tools{gap:6px}
+.vm-header-tools button{width:38px;height:38px;flex:0 0 38px}
+.vm-clock{min-width:84px;padding:5px}
+.vm-clock b{font-size:16px}
+.vm-desktop{height:auto;min-height:0;flex:1 1 auto;margin:0;display:grid;grid-template-columns:minmax(220px, min(24vw,326px)) minmax(0,1fr);overflow:hidden}
+.vm-core-menu{position:relative;left:auto;top:auto;transform:none;width:auto;height:100%;padding:clamp(10px,1.2vw,22px);display:flex;justify-content:center;align-items:stretch;gap:10px;overflow:auto;border-right:1px solid #29445d}
+.core-item,.core-item:hover,.core-item.active{width:100%;max-width:none;min-width:0;flex:0 0 76px;height:76px;transform:none;padding:8px 12px;gap:10px}
+.core-item b,.core-item:hover b,.core-item.active b{opacity:1;transform:none;white-space:normal;font-size:clamp(10px,.78vw,13px);line-height:1.25}
+.core-item>span{width:42px;height:42px;flex:0 0 42px;font-size:23px}
+.core-item i{margin-left:auto}
+.vm-workspace{position:relative;inset:auto;min-width:0;min-height:0}
+.vm-center-search{width:min( min(420px,70%), calc(100% - 32px) )}
+.vm-mini-tools{top:14px;right:14px;max-width:calc(100% - 28px)}
+.vm-statusbar{height:auto;min-height:42px;flex:0 0 auto;margin:0;padding:7px 14px;gap:12px;font-size:clamp(9px,.72vw,12px)}
+.vm-statusbar .status-progress{width:clamp(50px,12vw,220px);flex:0 1 220px}
+.vm-modal{width:min(1080px,calc(100% - 32px));max-height:calc(100% - 32px)}
+.modal-body{min-height:0}
+@media(max-width:760px){
+ .vm-shell{gap:6px;padding:6px}
+ .vm-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:8px}
+ .vm-brand{max-width:none;font-size:16px}
+ .vm-search{grid-column:1/-1;grid-row:2;height:38px}
+ .vm-header-tools{grid-column:2;grid-row:1}
+ .vm-header-tools button{width:32px;height:32px;flex-basis:32px;font-size:17px}
+ .vm-clock{min-width:66px}
+ .vm-clock b{font-size:13px}
+ .vm-clock small{font-size:9px}
+ .vm-desktop{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(140px,1fr)}
+ .vm-core-menu{height:auto;padding:8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;border-right:0;border-bottom:1px solid #29445d}
+ .core-item,.core-item:hover,.core-item.active{height:auto;min-height:58px;flex-basis:auto;padding:7px;gap:7px}
+ .core-item>span{width:30px;height:30px;flex-basis:30px;font-size:17px}
+ .core-item b,.core-item:hover b,.core-item.active b{font-size:10px}
+ .core-item i{font-size:18px}
+ .vm-workspace{min-height:140px}
+ .vm-mini-tools{top:8px;right:8px;gap:3px;padding:3px}
+ .vm-mini-tools button{width:30px;height:28px;font-size:13px}
+ .vm-center-search{margin-top:36px;width:calc(100% - 28px)}
+ .vm-statusbar{min-height:34px;padding:5px 8px}
+ .vm-statusbar .status-progress{display:none}
+ .vm-statusbar>span:last-child{max-width:55%;text-align:right}
+ .vm-modal{width:calc(100% - 12px);max-height:calc(100% - 12px)}
+ .vm-modal>header{height:58px;flex-basis:58px;padding:0 10px;gap:8px}
+ .vm-modal>header>b{font-size:14px}
+ .vm-modal>header button{width:32px;height:32px}
+ .modal-tabs{padding:8px;gap:5px}
+ .modal-tabs button{padding:8px 10px;font-size:10px;white-space:nowrap}
+ .modal-body{padding:12px}
+ .vm-modal>footer{height:48px;flex-basis:48px;padding:0 10px}
+ .vm-modal>footer button{padding:9px 14px}
+}
+@media(max-width:380px){
+ .vm-header-tools{gap:3px}
+ .vm-header-tools button{width:28px;height:28px;flex-basis:28px}
+ .vm-brand{font-size:14px}
+ .core-item b,.core-item:hover b,.core-item.active b{font-size:9px}
+}
