@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Vendor dan Reseller",
+  "menuId": "07",
+  "menu": "Integrasi API Registrar",
+  "layers": {
+    "layout": {
+      "type": "editorial",
+      "density": "comfortable",
+      "navigation": "rail"
+    },
+    "pilihan": {
+      "accent": "blue",
+      "components": "forms"
+    },
+    "penerapan": {
+      "mode": "manual-preview",
+      "requiresConfirmation": true
+    },
+    "penyimpanan": {
+      "strategy": "per-menu",
+      "folder": "vendordomain/vendor-reseller/config/menu-07/",
+      "files": [
+        "config.reic.json",
+        "layout.json",
+        "pilihan.json",
+        "penerapan.json",
+        "storage.json"
+      ]
+    },
+    "sistem": {
+      "namespace": "pb-vendordomain-vendor-reseller-7",
+      "backendSync": "not-configured"
+    }
+  },
+  "createdFor": "VendorDomain static workspace"
+}
