@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071222">
+<meta name="description" content="Galeri PlanetBintang — publikasi gambar, video, dan berkas kode.">
+<title>Galeri · PlanetBintang</title>
+<style>
+:root{color-scheme:dark;--bg:#071222;--panel:#0d2035;--panel2:#102943;--line:#29445f;--text:#e8f2ff;--muted:#9fb4cc;--accent:#70cfff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#153451 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,3rem);border-bottom:1px solid var(--line);background:#071222eF;position:sticky;top:0;z-index:5}.brand{font-weight:850;letter-spacing:.1em}.top a:last-child{color:var(--accent)}main{width:min(1180px,calc(100% - 2rem));margin:2rem auto}.intro{display:flex;align-items:end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.3rem}.eyebrow{color:var(--accent);font-size:.72rem;font-weight:800;letter-spacing:.18em}.intro h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin:.3rem 0}.intro p{max-width:65ch;color:var(--muted);margin:.5rem 0}.btn{border:1px solid #3a6283;background:linear-gradient(135deg,#153b59,#102943);color:var(--text);padding:.65rem .9rem;cursor:pointer}.btn:hover{border-color:var(--accent)}.panel{border:1px solid var(--line);background:linear-gradient(145deg,#102943e8,#091827f5);padding:1rem;margin:1rem 0}.composer{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.composer label{display:grid;gap:.35rem;color:var(--muted);font-size:.82rem}.composer input,.composer textarea,.composer select{width:100%;min-width:0;padding:.65rem;background:#071727;border:1px solid var(--line);color:var(--text)}.composer textarea{min-height:76px;resize:vertical}.wide{grid-column:1/-1}.toolbar{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:1.2rem 0}.toolbar input{flex:1;min-width:180px;padding:.65rem;background:#071727;border:1px solid var(--line);color:var(--text)}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem}.card{min-width:0;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#102943,#091827);display:flex;flex-direction:column}.media{display:grid;place-items:center;aspect-ratio:16/10;background:#06101d;overflow:hidden;color:var(--accent)}.media img,.media video{width:100%;height:100%;object-fit:cover}.media pre{width:100%;height:100%;overflow:hidden;padding:1rem;margin:0;color:#bfe7ff;white-space:pre-wrap}.body{padding:1rem;display:flex;flex:1;flex-direction:column}.body h2{font-size:1.05rem;margin:0 0 .4rem;overflow-wrap:anywhere}.body p{color:var(--muted);font-size:.9rem;margin:.2rem 0 .8rem;overflow-wrap:anywhere}.meta,.actions{display:flex;align-items:center;justify-content:space-between;gap:.5rem;flex-wrap:wrap;color:var(--muted);font-size:.78rem}.actions{justify-content:flex-start;margin-top:auto;padding-top:1rem}.action{border:1px solid var(--line);background:#071727;color:var(--text);padding:.4rem .6rem;cursor:pointer}.action[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}.empty{padding:2rem;text-align:center;border:1px dashed #3a5875;color:var(--muted)}.hint{color:var(--muted);font-size:.8rem}.hidden{display:none!important}
+@media(max-width:620px){main{margin:1.2rem auto}.composer{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:.8rem 1rem}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="../">PLANETBINTANG / GALERI</a><a href="../">KEMBALI KE BERANDA ↗</a></header>
+<main>
+<section class="intro"><div><div class="eyebrow">MEDIA • KARYA • KODE</div><h1>Galeri Digital</h1><p>Ruang publikasi gambar, video, dan berkas kode dengan halaman detail serta interaksi suka, tayangan, dan bagikan.</p></div><button class="btn" id="toggleComposer" type="button">＋ BUAT POST</button></section>
+<section class="panel hidden" id="composerPanel" aria-label="Buat post">
+<h2>Publikasikan post</h2>
+<form id="postForm" class="composer">
+<label>Judul<input name="title" maxlength="100" required placeholder="Judul publikasi"></label>
+<label>Jenis<select name="type"><option value="image">Gambar</option><option value="video">Video</option><option value="code">Berkas kode</option><option value="file">Berkas</option></select></label>
+<label class="wide">Deskripsi<textarea name="description" maxlength="600" placeholder="Ceritakan tentang publikasi ini"></textarea></label>
+<label class="wide">Pilih berkas<input name="file" type="file" required accept="image/*,video/*,.html,.css,.js,.json,.md,.txt,.py,.zip"></label>
+<div class="wide"><button class="btn" type="submit">SIMPAN POST DI PERANGKAT INI</button><p class="hint">Catatan: post yang dibuat di sini tersimpan pada browser/perangkat ini. Agar terlihat oleh semua pengunjung, berkas media dan data post perlu dipublikasikan ke repositori GitHub.</p></div>
+</form>
+</section>
+<div class="toolbar"><input id="filter" type="search" placeholder="Cari judul atau deskripsi…" aria-label="Cari post"><select id="typeFilter" class="btn" aria-label="Filter jenis"><option value="all">Semua jenis</option><option value="image">Gambar</option><option value="video">Video</option><option value="code">Kode</option><option value="file">Berkas</option></select><span id="count" class="hint">0 post</span></div>
+<section id="feed" class="grid" aria-live="polite"><div class="empty wide">Belum ada post. Gunakan tombol “BUAT POST” untuk menambahkan publikasi pertama.</div></section>
+<p class="hint">Angka suka dan tayangan saat ini dihitung secara lokal di browser. Penghitungan publik lintas pengunjung memerlukan penyimpanan/API server.</p>
+</main>
+<script>
+(()=>{'use strict';
+const KEY='planetbintang.galeri.posts.v1',feed=document.getElementById('feed'),form=document.getElementById('postForm'),panel=document.getElementById('composerPanel');
+let posts=[];try{posts=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(posts))posts=[]}catch{posts=[]}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const save=()=>localStorage.setItem(KEY,JSON.stringify(posts));
+const format=n=>new Intl.NumberFormat('id-ID').format(n||0);
+function media(p){if(p.type==='image')return '<img src="'+esc(p.url)+'" alt="'+esc(p.title)+'">';if(p.type==='video')return '<video src="'+esc(p.url)+'" controls preload="metadata"></video>';if(p.type==='code')return '<pre>'+esc(p.preview||p.name)+'</pre>';return '<span>▤ '+esc(p.name||'BERKAS')+'</span>'}
+function draw(){const q=document.getElementById('filter').value.toLowerCase(),t=document.getElementById('typeFilter').value;const list=posts.filter(p=>(t==='all'||p.type===t)&&(p.title+' '+p.description).toLowerCase().includes(q));document.getElementById('count').textContent=format(list.length)+' post';feed.innerHTML=list.length?list.map(p=>'<article class="card"><a class="media" href="#post-'+encodeURIComponent(p.id)+'">'+media(p)+'</a><div class="body"><div class="meta"><span>'+esc(p.type.toUpperCase())+'</span><span>'+esc(new Date(p.createdAt).toLocaleDateString('id-ID'))+'</span></div><h2>'+esc(p.title)+'</h2><p>'+esc(p.description)+'</p><div class="actions"><button class="action" data-like="'+esc(p.id)+'" aria-pressed="'+(p.liked?'true':'false')+'">♥ '+format(p.likes)+'</button><span class="action">◉ '+format(p.views)+'</span><button class="action" data-share="'+esc(p.id)+'">↗ BAGIKAN</button><a class="action" href="'+esc(p.url)+'" download="'+esc(p.name||'')+'">BUKA BERKAS</a></div></div></article>').join(''):'<div class="empty wide">Tidak ada post yang cocok dengan pencarian.</div>';feed.querySelectorAll('[data-like]').forEach(b=>b.addEventListener('click',()=>{const p=posts.find(x=>x.id===b.dataset.like);if(!p)return;p.liked=!p.liked;p.likes=Math.max(0,(p.likes||0)+(p.liked?1:-1));save();draw()}));feed.querySelectorAll('[data-share]').forEach(b=>b.addEventListener('click',async()=>{const p=posts.find(x=>x.id===b.dataset.share);if(!p)return;const url=location.href.split('#')[0]+'#post-'+encodeURIComponent(p.id);try{if(navigator.share)await navigator.share({title:p.title,text:p.description,url});else if(navigator.clipboard)await navigator.clipboard.writeText(url);else prompt('Salin tautan post:',url)}catch(e){if(e.name!=='AbortError')alert('Tidak dapat membagikan tautan.')} }));}
+document.getElementById('toggleComposer').addEventListener('click',()=>panel.classList.toggle('hidden'));
+document.getElementById('filter').addEventListener('input',draw);document.getElementById('typeFilter').addEventListener('change',draw);
+form.addEventListener('submit',e=>{e.preventDefault();const fd=new FormData(form),file=fd.get('file');if(!(file instanceof File)||!file.size)return;const type=fd.get('type'),url=URL.createObjectURL(file),p={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),title:fd.get('title').trim(),description:fd.get('description').trim(),type,url,name:file.name,createdAt:new Date().toISOString(),likes:0,views:0,liked:false,preview:type==='code'?'Kode · '+file.name:''};posts.unshift(p);try{save()}catch{posts.shift();alert('Penyimpanan lokal penuh. Hapus beberapa post atau gunakan berkas yang lebih kecil.');return}form.reset();panel.classList.add('hidden');draw()});
+function countView(){const id=decodeURIComponent(location.hash.replace(/^#post-/,''));if(!id||id.startsWith('post-'))return;const p=posts.find(x=>x.id===id);if(!p)return;const seen='pb.galeri.view.'+id;if(!sessionStorage.getItem(seen)){p.views=(p.views||0)+1;sessionStorage.setItem(seen,'1');save();draw()}}
+window.addEventListener('hashchange',countView);countView();draw();
+})();
+</script>
+</body></html>
