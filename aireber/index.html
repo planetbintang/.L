@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#eef7ff" />
+  <title>AI Reber · AlluniverS_OS</title>
+  <link rel="icon" href="../system-icon.png" />
+  <link rel="stylesheet" href="./reber.css?v=20261027-search-ai-unified-v1" />
+  <link rel="stylesheet" href="../shared-osmediavm-theme.css?v=20261029-shared-v1" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="appbar">
+      <a class="brand" href="../#overview" target="_top" aria-label="Kembali ke Planetbintang Root System">
+        <span class="brand-mark brand-mark-image"><img src="./reber-brand.svg" alt="" /></span><span><b>AI REBER</b><small>ALLUNIVERS_OS · LOCAL CHAT ENGINE</small></span>
+      </a>
+      <nav class="tabs" role="tablist" aria-label="Menu AI Reber">
+        <button type="button" id="tab-studio" role="tab" aria-controls="view-studio" aria-selected="true" tabindex="0" data-view-tab="studio" class="active">Studio</button>
+        <button type="button" id="tab-chat" role="tab" aria-controls="view-chat" aria-selected="false" tabindex="-1" data-view-tab="chat">Chat Reber</button>
+        <button type="button" id="tab-filesystem" role="tab" aria-controls="view-filesystem" aria-selected="false" tabindex="-1" data-view-tab="filesystem">File System</button>
+        <button type="button" id="tab-projects" role="tab" aria-controls="view-projects" aria-selected="false" tabindex="-1" data-view-tab="projects">Projects</button>
+        <button type="button" id="tab-ai-tools" role="tab" aria-controls="view-ai-tools" aria-selected="false" tabindex="-1" data-view-tab="ai-tools">50 Fitur AI</button>
+        <button type="button" id="tab-source" role="tab" aria-controls="view-source" aria-selected="false" tabindex="-1" data-view-tab="source">Source Archive</button>
+      </nav>
+      <div class="appbar-actions">
+        <a href="../#cari" target="_top" class="back-link search-system-link" aria-label="Buka sistem pencarian utama">Pencarian ↗</a>
+        <label class="theme-picker"><span>TEMA</span><select id="reberTheme" aria-label="Tema AI Reber"><option value="gelap-abstrak">Gelap Abstrak</option><option value="cahaya">Cahaya</option><option value="air">Air</option><option value="berlian">Berlian Kaca</option></select></label>
+        <span class="runtime-pill" title="Chat Reber realtime aktif (mesin lokal); model cloud/API tetap offline"><i style="background:#2fa36b"></i> CHAT REBER AKTIF · ∞</span>
+        <a href="../#overview" target="_top" class="back-link">Root System ↗</a>
+      </div>
+    </header>
+
+    <div class="system-banner">
+      <div class="reber-banner-copy"><span class="eyebrow">RE:Bersama · AI STUDIO</span><h1>Ajukan pertanyaan. Susun ide. Jelajahi sistem.</h1><p>Chat Reber memadukan mesin kata, basis pengetahuan lokal, dan file workspace. Untuk jawaban yang membutuhkan pengetahuan dunia terkini atau penalaran model umum, sambungkan backend AI yang tepercaya.</p><div class="reber-banner-actions"><button type="button" class="reber-open-chat" data-view-tab="chat">Mulai Chat Reber <span aria-hidden="true">↗</span></button><a href="../#control/media-center" target="_top">Media &amp; dokumen ↗</a></div></div>
+      <div class="reber-banner-art"><img src="./reber-brand.svg" alt="Logo AI Reber berupa burung jaringan digital" loading="eager" /></div>
+      <div class="banner-meta"><b id="kataTotal">—</b><small>virtual kata · paginasi on-demand</small></div>
+    </div>
+
+    <div class="workbench">
+      <aside class="sidebar">
+        <div class="side-label">SYSTEM TREE</div>
+        <button class="tree-link" data-path="/"><img src="../file-manager-icon.png" alt="" /> root /</button>
+        <button class="tree-link indent" data-path="/allunivers_os"><img src="../file-manager-icon.png" alt="" /> allunivers_os/</button>
+        <button class="tree-link indent-2" data-path="/allunivers_os/reber_ai"><img src="../file-manager-icon.png" alt="" /> reber_ai/</button>
+        <button class="tree-link indent-2" data-path="/allunivers_os/kata"><img src="../file-manager-icon.png" alt="" /> kata/</button>
+        <div class="side-rule"></div>
+        <div class="side-label">FILOSOFI REBER</div>
+        <div class="philosophy"><b>Re:</b> Bertindak dengan tujuan</div>
+        <div class="philosophy"><b>Be:</b> Berdua · Bersama</div>
+        <div class="philosophy"><b>Ber:</b> Bener · Mener</div>
+        <div class="philosophy"><b>Be_r:</b> Integritas</div>
+        <div class="side-rule"></div>
+        <div class="side-label">STATUS RUNTIME</div>
+        <div class="side-note"><b>Client-only + Chat Reber</b><span>Chatbot realtime aktif memakai mesin sistem AI Reber lokal (RAG kata-data). Model cloud/API tetap nonaktif pada Pages.</span></div>
+        <button type="button" class="side-open-fm" data-open-file-manager>Buka di File Manager →</button>
+      </aside>
+
+      <main class="main-area">
+        <section class="view-panel active" id="view-studio" data-view="studio" role="tabpanel" aria-labelledby="tab-studio" tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">AI STUDIO / LOCAL PROMPT DESK</p><h2 id="studioTitle">Studio Reber</h2><p>Prompt disimpan sebagai file di Workspace File Manager. Tidak dikirim ke model dan tidak ada jawaban AI yang disimulasikan.</p></div><span class="status-tag">MODEL OFFLINE</span></div>
+          <div class="studio-grid">
+            <div class="chat-panel surface">
+              <div class="panel-head"><div><b>Riwayat lokal</b><small id="promptCount">Tersimpan pada perangkat ini</small></div><button type="button" class="quiet-button" id="reloadPrompts">Muat ulang</button></div>
+              <div id="promptHistory" class="prompt-history" aria-live="polite"><div class="empty-state">Prompt tersimpan akan muncul di sini. Belum ada koneksi AI aktif.</div></div>
+            </div>
+            <form id="promptForm" class="compose-panel surface">
+              <label for="promptInput">Prompt / konteks</label>
+              <textarea id="promptInput" maxlength="5000" rows="8" placeholder="Contoh: bantu rencanakan struktur aplikasi, evaluasi kode yang saya tempel, atau susun checklist deploy. Jangan masukkan token/secret."></textarea>
+              <div class="quick-prompts"><button type="button" data-prompt="Buat rancangan struktur sistem turunan dengan file .ieje, .aeea, dan .nz.">Rancang sistem</button><button type="button" data-prompt="Bantu evaluasi teks kode ini secara statis; jangan mengeksekusi kode.">Evaluasi statis</button><button type="button" data-prompt="Buat checklist rilis GitHub Pages yang aman.">Checklist deploy</button></div>
+              <div class="compose-footer"><span id="promptStatus" aria-live="polite">Penyimpanan lokal; model tidak dipanggil.</span><button class="primary-button" type="submit">Simpan prompt lokal</button></div>
+            </form>
+          </div>
+          <div class="notice"><b>Privasi:</b> prompt yang disimpan masuk ke IndexedDB browser pada path <code>aireber/prompts/</code>. Isinya tidak diunggah ke GitHub. GitHub Pages tidak menjalankan endpoint API/AI dari source arsip.</div>
+        </section>
+
+        <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag">MESIN LOKAL AKTIF · ∞ TOKEN · 0 KREDIT</span></div>
+          <div class="chat-shell surface">
+            <div id="reberChatMessages" class="chat-log" role="log" aria-live="polite"></div>
+            <form id="reberChatForm" class="chat-compose">
+              <label for="reberChatInput" hidden>Pesan chat ke AI Reber</label>
+              <textarea id="reberChatInput" rows="2" placeholder="Tanya apa pun… contoh: jelaskan cara kerja RAG, buat komponen React, atau analisis masalah server sering crash. Perintah berkas juga jalan: daftar file / tulis file catatan.txt: isi"></textarea>
+              <button class="primary-button" type="submit">Kirim ↗</button>
+            </form>
+            <div class="chat-quick">
+              <button type="button" data-reber-chat-prompt="Buatkan komponen React dengan state dan event handler.">Buat kode React</button>
+              <button type="button" data-reber-chat-prompt="Analisis mendalam: kenapa website saya tiba-tiba lambat dan sering error 502?">Analisis masalah</button>
+              <button type="button" data-reber-chat-prompt="Apa itu RAG dan bagaimana referensi link menjadi acuan jawaban AI?">Penjelasan + referensi</button>
+              <button type="button" data-reber-chat-prompt="Buat skema database PostgreSQL untuk log kejadian beserta query analitiknya.">Buat SQL</button>
+              <button type="button" data-reber-chat-prompt="daftar file">Daftar file workspace</button>
+            </div>
+            <div class="chat-foot">
+              <span id="reberChatStatus" aria-live="polite">Siap. Tanyakan apa pun — tanpa batas token atau kredit.</span>
+              <span id="reberChatMeta">mesin: reber-chat-engine · kata: <b id="reberKataBadge">memuat…</b></span>
+              <button type="button" class="quiet-button" id="reberChatClear">Bersihkan riwayat</button>
+            </div>
+          </div>
+          <div class="notice"><b>Cara kerja:</b> setiap pertanyaan diproses oleh mesin sistem AI Reber di perangkat Anda (kata-data AlluniverS_OS + dokumen sistem), lalu jawaban dilengkapi <b>sumber acuan</b> seperti Perpustakaan Nasional RI (perpusnas.go.id), MDN, GitHub Docs, dan Stack Overflow. Riwayat tersimpan lokal; tidak ada biaya token/kredit.</div>
+        </section>
+
+        <section class="view-panel" id="view-filesystem" data-view="filesystem" role="tabpanel" aria-labelledby="tab-filesystem" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">VIRTUAL FILE SYSTEM / 01</p><h2 id="fsTitle">File Manager AlluniverS_OS</h2><p>Pohon virtual dari source Reber ditelusuri bertahap; perubahan pribadi disimpan di Workspace lokal, bukan ke source publik.</p></div><span class="status-tag" id="storageBadge">WORKSPACE LOKAL</span></div>
+          <div class="fs-toolbar surface">
+            <button type="button" class="quiet-button" id="fsRoot">Root</button><button type="button" class="quiet-button" id="fsUp">↑ Atas</button>
+            <form id="pathForm" class="path-form"><label for="pathInput">PATH</label><input id="pathInput" value="/" spellcheck="false" /><button type="submit" class="quiet-button">Buka</button></form>
+            <input id="fsSearch" type="search" placeholder="Cari pada halaman ini" aria-label="Cari pada daftar yang tampil" />
+            <select id="newFileExt" aria-label="Ekstensi file baru"><option>.ieje</option><option>.aeea</option><option>.nz</option><option>.ck</option><option>.regs</option><option>.log</option><option>.md</option><option>.txt</option><option>.json</option></select>
+            <button type="button" class="quiet-button" id="newFile">+ File</button><button type="button" class="quiet-button" id="newFolder">+ Folder</button>
+            <button type="button" class="quiet-button" id="uploadButton">Unggah</button><input id="uploadInput" type="file" multiple hidden />
+          </div>
+          <div class="crumbs" id="breadcrumbs" aria-label="Breadcrumb"></div>
+          <div class="fs-layout">
+            <div class="fs-list-panel surface"><div class="list-heading"><b id="listTitle">Isi folder</b><span id="listCount"></span></div><div id="nodeList" class="node-list"></div><div class="pager"><button type="button" id="prevPage" class="quiet-button">← Sebelumnya</button><span id="pageLabel">Halaman 1</span><button type="button" id="nextPage" class="quiet-button">Berikutnya →</button></div></div>
+            <div class="preview-panel surface"><div class="preview-head"><div><small>FILE INSPECTOR</small><b id="previewTitle">Pilih file</b><code id="previewPath">—</code></div><div class="preview-actions"><button type="button" class="quiet-button" id="saveFile" disabled>Simpan lokal</button><button type="button" class="danger-button" id="deleteFile" hidden>Hapus lokal</button></div></div><textarea id="fileEditor" spellcheck="false" placeholder="Pilih file untuk membaca atau mengedit draft lokal." disabled></textarea><p id="fileStatus" class="subtle-status">Tidak ada kode yang dieksekusi.</p></div>
+          </div>
+          <div class="notice">Path simpan lokal dipetakan ke <code>aireber/workspace/</code> pada File Manager utama. Kapasitas mengikuti kuota browser/perangkat dan tidak tersinkron antarperangkat.</div>
+        </section>
+
+        <section class="view-panel" id="view-projects" data-view="projects" role="tabpanel" aria-labelledby="tab-projects" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">PROJECTS / LOCAL REGISTRY</p><h2 id="projectsTitle">Sistem turunan</h2><p>Daftar proyek lokal dan template file. Domain di bawah hanya usulan nama, bukan domain yang telah didaftarkan.</p></div><span class="status-tag">LOCAL ONLY</span></div>
+          <form id="projectForm" class="project-form surface"><div class="form-row"><label>Nama sistem<input id="projectName" maxlength="80" placeholder="Sistem AI Saya" required /></label><label>Slug<input id="projectSlug" maxlength="50" placeholder="sistem-ai-saya" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" /></label></div><label>Deskripsi<textarea id="projectDescription" rows="3" maxlength="500" placeholder="Tujuan sistem turunan"></textarea></label><div id="domainPreview" class="domain-preview">slug.allunivers.digital · belum didaftarkan</div><div class="project-form-actions"><span id="projectStatus" aria-live="polite">Membuat metadata lokal dan template, tidak memanggil API.</span><button class="primary-button" type="submit">Buat draft lokal</button></div></form>
+          <div class="panel-head project-list-head"><div><b>Proyek lokal</b><small>Metadata di aireber/projects/; template di aireber/workspace/allunivers_os/</small></div><button type="button" class="quiet-button" data-open-file-manager>Buka di File Manager →</button></div>
+          <div id="projectList" class="project-list"><div class="empty-state">Belum ada proyek lokal.</div></div>
+        </section>
+
+        <section class="view-panel" id="view-ai-tools" data-view="ai-tools" role="tabpanel" aria-labelledby="tab-ai-tools" hidden tabindex="0"><div class="view-heading"><div><p class="eyebrow">AI FEATURE WORKSPACE / 50 × 3</p><h2>50 Fitur Utama · 150 Subfitur</h2><p>Masukkan teks atau konteks, pilih salah satu tindakan, lalu lihat hasil pemrosesan lokal. Kemampuan generatif berbasis model memerlukan backend AI yang terhubung.</p></div><span class="status-tag">150 TINDAKAN</span></div><div class="ai-tool-workspace surface"><label for="aiToolInput">MASUKAN / KONTEKS</label><textarea id="aiToolInput" rows="5" placeholder="Tempel teks, data, kode, atau konteks..."></textarea><div class="ai-tool-toolbar"><input id="aiToolSearch" type="search" placeholder="Cari fitur..." aria-label="Cari fitur AI"><span id="aiToolCount">50 fitur · 150 subfitur</span></div><div id="aiFeatureGrid" class="ai-feature-grid"></div><section class="ai-tool-result"><div><b id="aiToolResultTitle">Hasil tindakan</b><button type="button" id="aiToolCopy" class="quiet-button">Salin hasil</button></div><pre id="aiToolOutput" aria-live="polite">Pilih salah satu tindakan.</pre></section></div><div class="notice"><b>Batas runtime:</b> tindakan yang tersedia berjalan di browser. AI generatif, riset langsung, dan model besar memerlukan backend tepercaya; tidak disimulasikan sebagai layanan cloud aktif.</div></section>
+        <section class="view-panel" id="view-source" data-view="source" role="tabpanel" aria-labelledby="tab-source" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">SOURCE ARCHIVE / READ-ONLY</p><h2 id="sourceTitle">Arsip lengkap AI Reber</h2><p>Semua file source yang terlacak pada commit sumber tercatat di manifest. Source text disimpan dengan suffix <code>.source.txt</code> agar GitHub Pages tidak mengeksekusinya.</p></div><span class="status-tag">PUBLIC SOURCE</span></div>
+          <div id="sourceSummary" class="source-summary surface">Memuat indeks source…</div>
+          <div id="sourceList" class="source-list surface"></div>
+          <div class="notice"><b>Runtime boundary:</b> API routes, database schema/migrations, dan konfigurasi Netlify tersedia sebagai arsip teks. Hanya adapter browser statis ini yang dimuat; tidak ada server, model AI, atau database cloud.</div>
+        </section>
+      </main>
+    </div>
+    <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client · no API calls · local persistence only</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
+  </div>
+  <script>
+    document.querySelectorAll('.reber-open-chat').forEach(function(button){
+      button.addEventListener('click',function(){
+        var tab=document.querySelector('[data-view-tab="chat"]');
+        if(tab) tab.click();
+        var input=document.querySelector('#reberChatInput, textarea[placeholder*="Tanyakan"]');
+        if(input){input.focus({preventScroll:false});}
+      });
+    });
+  </script>
+  <script src="../local-file-store.js?v=20261026-aireber-store-v1"></script>
+  <script src="./reber-chat-engine.js?v=20261026-chatbot-v1"></script>
+  <script src="./reber-chat.js?v=20261026-chatbot-v1"></script>
+  <script type="module" src="./reber-app.js?v=20261026-pages-v2"></script>
+  <script src="./ai-feature-center.js?v=20261030-ai150-v1" defer></script>
+</body>
+</html>
