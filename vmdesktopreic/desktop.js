@@ -16,7 +16,7 @@ function installREICScreenKeyboard(){
  const panel=document.createElement('aside');panel.id='reicScreenKeyboard';panel.className='reic-screen-keyboard';panel.hidden=true;
  panel.innerHTML='<div class="rsk-head"><div><b>⌨ KEYBOARD REIC</b><small>LAYAR INPUT · OS MEDIA VM</small></div><button type="button" data-rsk-close aria-label="Tutup keyboard">×</button></div><div class="rsk-keys" id="rskKeys"></div><div class="rsk-foot"><span id="rskTarget">Pilih kolom pengetikan</span><button type="button" data-rsk-hide>SEMBUNYIKAN</button></div>';
  document.body.append(panel);
- const rows=[['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['⇧','Z','X','C','V','B','N','M','⌫'],['[',']','{','}','(',')','+','-','SPACE','↵']];
+ const rows=[['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['⇧','Z','X','C','V','B','N','M','⌫'],['[',']','{','}','(',')','+','-','.','SPACE','↵']];
  const keys=panel.querySelector('#rskKeys');keys.innerHTML=rows.map(row=>'<div class="rsk-row">'+row.map(k=>'<button type="button" data-rsk-key="'+k+'">'+(k==='SPACE'?'SPASI':k)+'</button>').join('')+'</div>').join('');
  let target=null,shift=false;
  const editable=el=>el&&((el.tagName==='INPUT'&&/^(text|search|email|url|tel|password|number)$/i.test(el.type||'text'))||el.tagName==='TEXTAREA'||el.isContentEditable);
