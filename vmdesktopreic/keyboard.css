@@ -3,3 +3,39 @@
 .reic-screen-keyboard{position:fixed;z-index:10050;left:50%;bottom:16px;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));padding:10px;background:linear-gradient(145deg,#0754c4,#031b50);border:1px solid #45caff;box-shadow:0 12px 42px #00102dcc,0 0 18px #1aaeff55;color:#eff9ff;font-family:Arial,system-ui,sans-serif}
 .reic-screen-keyboard[hidden]{display:none!important}.rsk-head,.rsk-foot{display:flex;justify-content:space-between;align-items:center;gap:12px}.rsk-head>div{display:grid;gap:3px}.rsk-head b{font-size:12px;letter-spacing:1px}.rsk-head small,.rsk-foot span{font-size:10px;color:#b9eaff}.rsk-head button,.rsk-foot button{border:1px solid #49caff;background:#073879;color:#fff;padding:6px 11px;cursor:pointer}.rsk-keys{display:grid;gap:5px;margin:9px 0}.rsk-row{display:flex;justify-content:center;gap:5px}.rsk-row button{flex:1;min-width:0;height:37px;border:1px solid #48bfff;background:linear-gradient(#1264cb,#073779);color:white;font-size:14px;font-weight:600;cursor:pointer;touch-action:manipulation}.rsk-row button:hover,.rsk-row button:active{background:#168bdc;box-shadow:0 0 9px #4bd3ff88}.rsk-row:last-child button[data-rsk-key="SPACE"]{flex:4}.rsk-row:last-child button[data-rsk-key="↵"]{flex:1.5}.rsk-foot{padding-top:7px;border-top:1px solid #ffffff30}.rsk-screen-keyboard.rsk-hidden{opacity:.5}.rsk-shift .rsk-row button{ text-transform:uppercase}
 @media(max-width:560px){.reic-screen-keyboard{bottom:6px;padding:7px;width:calc(100vw - 12px)}.rsk-row{gap:3px}.rsk-row button{height:34px;font-size:12px}.rsk-head b{font-size:10px}}
+
+/* OS MEDIA VM REIC Library composition:
+   REIC-00002 Global Design System, 00006 Adaptive Layout,
+   00008 Glass/Transparency, 00010 Precision Grid, 00014 Multi-resolution. */
+.planet-keyboard[data-reic-component="reic-00002-sistem-desain-global"]{
+ --reic-text:#edf5ff;--reic-muted:#a9bdd5;--reic-accent:#70c9ff;
+ --reic-panel:#101a2b;--reic-panel-alt:#152238;--reic-border:#38516e;--reic-input:#091525;
+ box-sizing:border-box;color:var(--reic-text);
+ background:
+  linear-gradient(rgba(95,153,207,.055) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(95,153,207,.055) 1px,transparent 1px),
+  radial-gradient(ellipse at 12% 0%,rgba(65,151,230,.18),transparent 48%),
+  linear-gradient(145deg,#101a2b,#152238 62%,#0b1728);
+ background-size:24px 24px,24px 24px,auto,auto;
+ border:1px solid var(--reic-border);border-radius:16px;
+ box-shadow:0 14px 36px #02091688,inset 0 1px #ffffff12;
+ padding:clamp(12px,2vw,22px);max-width:100%;overflow:hidden
+}
+.planet-keyboard[data-reic-component] *{box-sizing:border-box}
+.planet-keyboard .pk-overview{background:linear-gradient(115deg,#172b43dd,#203b59bb);border:1px solid #466889;border-radius:12px;box-shadow:inset 0 1px #ffffff14;backdrop-filter:blur(12px)}
+.planet-keyboard .pk-brand>span{background:linear-gradient(145deg,#244d70,#142b44);border:1px solid #6fa9d3;border-radius:10px;box-shadow:inset 0 1px #ffffff28,0 5px 16px #020a1680}
+.planet-keyboard .pk-brand small,.planet-keyboard .pk-controls label{color:#9fc8e8}
+.planet-keyboard .pk-panel{background:linear-gradient(145deg,#14243add,#0c192bdd);border:1px solid #3b5875;border-radius:12px;box-shadow:inset 0 1px #ffffff12,0 8px 20px #02091655;backdrop-filter:blur(10px)}
+.planet-keyboard .pk-keys{background:linear-gradient(145deg,#081626,#0d1d30);border:1px solid #42617e;border-radius:10px;padding:clamp(7px,1vw,12px);background-image:linear-gradient(rgba(119,165,203,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(119,165,203,.06) 1px,transparent 1px);background-size:18px 18px}
+.planet-keyboard .pk-key,.planet-keyboard .pk-extra button,.planet-keyboard .pk-symbols button{background:linear-gradient(160deg,#284b6b,#142c45);border:1px solid #6b9bc0;border-radius:6px;color:#eff7ff;box-shadow:inset 0 1px #ffffff24,0 2px 5px #02091488;transition:background .15s,border-color .15s,transform .15s}
+.planet-keyboard .pk-key:hover,.planet-keyboard .pk-extra button:hover,.planet-keyboard .pk-symbols button:hover{background:linear-gradient(160deg,#376b94,#1b4162);border-color:#a1d8ff;transform:translateY(-1px);box-shadow:0 0 12px #61bfff44}
+.planet-keyboard .pk-functions>button{background:linear-gradient(120deg,#1b3550dd,#10243bdd);border:1px solid #3f6280;border-radius:8px;box-shadow:inset 0 1px #ffffff12}
+.planet-keyboard .pk-functions>button>b{border:1px solid #6797bd;border-radius:6px;background:#1c3854}
+.planet-keyboard .pk-controls select,.planet-keyboard .pk-text-label textarea,.planet-keyboard .pk-log{background:#081626;border:1px solid #3c5c78;border-radius:7px;color:#edf5ff}
+.planet-keyboard .pk-panel-title button{background:linear-gradient(#315c7e,#1b3a57);border:1px solid #6997ba;border-radius:6px}
+.planet-keyboard .pk-status{background:#0a1829dd;border:1px solid #3a5874;border-radius:8px;color:#a9cce7}
+.reic-screen-keyboard{--reic-panel:#101a2b;--reic-panel-alt:#152238;--reic-border:#45627e;--reic-accent:#70c9ff;background:linear-gradient(rgba(100,150,190,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(100,150,190,.055) 1px,transparent 1px),linear-gradient(145deg,#101a2b,#152238);background-size:22px 22px,22px 22px,auto;border:1px solid var(--reic-border);border-radius:14px;box-shadow:0 16px 44px #000a,inset 0 1px #ffffff18;backdrop-filter:blur(18px);padding:12px}
+.reic-screen-keyboard .rsk-row button{background:linear-gradient(160deg,#284b6b,#142c45);border:1px solid #6b9bc0;border-radius:6px;box-shadow:inset 0 1px #ffffff24,0 2px 5px #02091488}
+.reic-screen-keyboard .rsk-row button:hover,.reic-screen-keyboard .rsk-row button:active{background:linear-gradient(160deg,#376b94,#1b4162);border-color:#a1d8ff}
+.reic-screen-keyboard .rsk-head button,.reic-screen-keyboard .rsk-foot button{background:#1b3550;border:1px solid #6797bd;border-radius:6px}
+@media(max-width:760px){.planet-keyboard[data-reic-component]{border-radius:10px;padding:10px}.planet-keyboard .pk-panel{border-radius:9px}}
