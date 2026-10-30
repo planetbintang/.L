@@ -1,0 +1,66 @@
+(() => {
+  'use strict';
+  const rows = [{"name":"REGISTRAR & KEPEMILIKAN DOMAIN","desc":"Pusat pengelolaan identitas domain dan siklus registrasi.","subs":["Pencarian ketersediaan domain","Informasi registrar dan IANA","Tanggal registrasi dan kedaluwarsa","Perpanjangan otomatis dan pengingat","Status transfer dan kode EPP","Riwayat perubahan kepemilikan"]},{"name":"DNS ZONE MANAGEMENT","desc":"Pengaturan zona DNS dan delegasi domain.","subs":["Daftar zona otoritatif","Editor zona DNS","Impor dan ekspor BIND","Validasi sintaks record","Riwayat revisi zona","Publikasi perubahan terjadwal"]},{"name":"DNS RECORDS","desc":"Katalog record standar untuk layanan publik.","subs":["A dan AAAA","CNAME dan ALIAS","MX dan prioritas mail","TXT dan verifikasi layanan","SRV dan CAA","NS dan delegasi subdomain"]},{"name":"PROPAGASI DNS","desc":"Pemantauan persebaran jawaban DNS lintas resolver.","subs":["Pemeriksaan resolver publik","Perbandingan jawaban regional","Deteksi cache lama","Status propagasi record","Riwayat snapshot propagasi","Ekspor hasil pemeriksaan"]},{"name":"DNSSEC & KEAMANAN","desc":"Validasi rantai kepercayaan dan perlindungan DNS.","subs":["Status DNSSEC domain","Pemeriksaan DS parent","Validasi DNSKEY KSK dan ZSK","Deteksi signature kedaluwarsa","Pemeriksaan algoritma kriptografi","Laporan rantai validasi"]},{"name":"WHOIS & RDAP","desc":"Informasi registrasi domain melalui sumber publik.","subs":["Lookup WHOIS","Lookup RDAP","Registrar dan registry","Tanggal penting domain","Status domain EPP","Kontak yang dipublikasikan"]},{"name":"SUBDOMAIN DISCOVERY","desc":"Inventarisasi nama host yang diketahui dan diizinkan.","subs":["Impor daftar subdomain","Normalisasi hostname","Validasi format FQDN","Pengelompokan berdasarkan domain","Deteksi duplikasi entri","Ekspor inventaris subdomain"]},{"name":"HOST INVENTORY","desc":"Inventaris server dan endpoint yang dikelola.","subs":["Registri hostname","Label lingkungan produksi dan staging","Alamat IPv4 dan IPv6","Pemetaan pemilik layanan","Metadata lokasi hosting","Status aset dan catatan"]},{"name":"IP ADDRESS MANAGEMENT","desc":"Pengelolaan rentang alamat dan alokasi IP.","subs":["Katalog blok IPv4","Katalog blok IPv6","Subnet dan prefix calculator","Catatan alokasi alamat","Deteksi konflik alamat","Riwayat penggunaan IP"]},{"name":"GEO DNS & ROUTING","desc":"Perancangan kebijakan jawaban DNS berdasarkan lokasi.","subs":["Kebijakan benua dan negara","Pemetaan region layanan","Aturan lokasi fallback","Dokumentasi routing geografis","Simulasi pemilihan endpoint","Audit kebijakan GeoDNS"]},{"name":"LOAD BALANCING","desc":"Distribusi trafik ke beberapa endpoint layanan.","subs":["Round-robin DNS","Weighted endpoint","Priority dan failover","Health-check endpoint","Drain dan maintenance mode","Dokumentasi pool backend"]},{"name":"FAILOVER & REDUNDANSI","desc":"Rencana pemulihan ketika endpoint utama gagal.","subs":["Primary dan secondary target","Aturan failover terdokumentasi","Ambang pemeriksaan kesehatan","Jalur pemulihan layanan","Simulasi skenario gangguan","Catatan hasil uji failover"]},{"name":"TLS & SERTIFIKAT","desc":"Inventaris dan pemantauan sertifikat koneksi.","subs":["Inventaris sertifikat TLS","Tanggal kedaluwarsa","Pemeriksaan hostname SAN","Rantai sertifikat","Status HTTPS endpoint","Pengingat pembaruan sertifikat"]},{"name":"HTTP & ENDPOINT CHECK","desc":"Pemeriksaan ketersediaan endpoint web.","subs":["Pemeriksaan status HTTP","Validasi redirect","Pemeriksaan header keamanan","Waktu respons endpoint","Pemeriksaan konten sederhana","Riwayat status pemeriksaan"]},{"name":"NETWORK TOPOLOGY","desc":"Peta relasi domain, host, IP, dan layanan.","subs":["Graf domain ke hostname","Relasi hostname ke IP","Peta dependensi layanan","Kelompok jaringan","Penanda endpoint eksternal","Ekspor diagram topologi"]},{"name":"LATENCY & PERFORMANCE","desc":"Analisis performa resolusi dan konektivitas.","subs":["Waktu resolusi DNS","Perbandingan resolver","Pengukuran TTFB endpoint","Tren latensi historis","Penanda anomali performa","Ringkasan performa regional"]},{"name":"EMAIL DNS HEALTH","desc":"Validasi konfigurasi DNS untuk layanan email.","subs":["Pemeriksaan MX","Validasi SPF","Validasi DKIM selector","Kebijakan DMARC","PTR dan reverse DNS","Ringkasan autentikasi email"]},{"name":"CLOUD & HOSTING","desc":"Pemetaan penyedia hosting dan target deployment.","subs":["Identifikasi provider dari metadata","Pemetaan origin hosting","Catatan platform CDN","Target GitHub Pages","Lingkungan cloud dan VPS","Inventaris deployment"]},{"name":"CDN & EDGE NETWORK","desc":"Dokumentasi jaringan distribusi konten.","subs":["Daftar hostname CDN","Pemetaan edge provider","Origin dan edge target","Aturan cache DNS","Pemeriksaan header CDN","Dokumentasi purge dan invalidasi"]},{"name":"MONITORING & ALERT","desc":"Pusat aturan pemantauan dan notifikasi operasional.","subs":["Daftar monitor aktif","Ambang status layanan","Aturan notifikasi email","Kebijakan eskalasi insiden","Jadwal pemeriksaan","Riwayat peringatan"]},{"name":"AUDIT & CHANGE LOG","desc":"Jejak perubahan konfigurasi jaringan dan domain.","subs":["Log perubahan record","Identitas pengubah konfigurasi","Perbandingan versi zona","Persetujuan perubahan","Catatan rollback","Ekspor laporan audit"]},{"name":"PRIVASI & AKSES","desc":"Kontrol akses serta pengurangan paparan informasi.","subs":["Pemeriksaan DNS publik","Inventaris data WHOIS publik","Kebijakan akses registrar","Pengelolaan secret terpisah","Audit izin pengguna","Panduan minimisasi data"]},{"name":"API & INTEGRASI","desc":"Konektivitas dengan penyedia DNS dan sistem eksternal.","subs":["Dokumentasi API provider","Katalog endpoint integrasi","Pengelolaan token secara aman","Webhook perubahan DNS","Sinkronisasi inventaris","Log hasil integrasi"]},{"name":"BACKUP & PEMULIHAN","desc":"Pencadangan konfigurasi dan prosedur pemulihan.","subs":["Snapshot zona DNS","Arsip konfigurasi registrar","Validasi integritas backup","Jadwal retensi arsip","Prosedur restore zona","Latihan pemulihan konfigurasi"]},{"name":"LAPORAN & ANALITIK","desc":"Ringkasan aset, status, dan kualitas infrastruktur.","subs":["Ringkasan jumlah domain","Distribusi jenis record","Inventaris host dan IP","Laporan sertifikat mendekati kedaluwarsa","Tren ketersediaan layanan","Ekspor CSV dan JSON"]}];
+  const mount = () => {
+    const section = document.getElementById('hosts');
+    const hostGrid = document.getElementById('hostGrid');
+    if (!section || !hostGrid || section.dataset.networkEnhanced === 'true') return;
+    section.dataset.networkEnhanced = 'true';
+    section.classList.add('network-map-page');
+    const intro = document.createElement('div');
+    intro.className = 'nm-intro';
+    intro.innerHTML = '<div class="nm-intro-copy"><span class="nm-kicker">PLANETBINTANG / INFRASTRUKTUR PUBLIK</span><h3>Pusat kendali domain &amp; jaringan</h3><p>Jelajahi inventaris domain, hostname, DNS, keamanan, dan observabilitas jaringan dalam satu ruang kerja.</p></div><div class="nm-intro-mark" aria-hidden="true">◎<small>NETWORK<br>INTELLIGENCE</small></div>';
+    section.insertBefore(intro, hostGrid);
+    const stats = document.createElement('div');
+    stats.className = 'nm-stats';
+    [['25','FITUR UTAMA'],['150','SUBFITUR TERSEDIA'],['06','AREA OPERASIONAL'],['DNS','KATALOG PUBLIK']].forEach(([v,l]) => {
+      const card=document.createElement('article'); card.className='nm-stat-card';
+      const value=document.createElement('strong'); value.textContent=v;
+      const label=document.createElement('span'); label.textContent=l;
+      card.append(value,label); stats.append(card);
+    });
+    section.insertBefore(stats, hostGrid);
+    const tools = document.createElement('div'); tools.className='nm-toolbar';
+    const searchWrap=document.createElement('label'); searchWrap.className='nm-search';
+    const searchIcon=document.createElement('span'); searchIcon.textContent='⌕';
+    const search=document.createElement('input'); search.type='search'; search.placeholder='Cari fitur, domain, host, DNS…'; search.setAttribute('aria-label','Cari fitur network map');
+    searchWrap.append(searchIcon,search);
+    const filter=document.createElement('select'); filter.setAttribute('aria-label','Filter kategori');
+    [['all','Semua kategori'],['domain','Domain & identitas'],['dns','DNS & resolusi'],['network','Host & jaringan'],['security','Keamanan'],['operations','Operasional']].forEach(([v,l])=>{const o=document.createElement('option');o.value=v;o.textContent=l;filter.append(o)});
+    const count=document.createElement('span'); count.className='nm-count';
+    tools.append(searchWrap,filter,count); section.insertBefore(tools,hostGrid);
+    const catalog=document.createElement('div'); catalog.className='nm-feature-grid'; catalog.id='networkFeatureGrid';
+    const categories=['domain','dns','dns','dns','security','domain','network','network','network','network','network','network','security','operations','network','operations','security','network','network','operations','operations','security','operations','operations','operations'];
+    const categoryLabels={domain:'DOMAIN',dns:'DNS',network:'NETWORK',security:'SECURITY',operations:'OPERATIONS'};
+    const icons=['◈','⌘','▤','◎','◇','⌕','⌁','▦','⇄','◉','⇆','↗','▣','↯','⌗','◷','✉','☁','▧','◌','≋','◍','⌘','▤','▥'];
+    rows.forEach((item,i)=>{
+      const card=document.createElement('article'); card.className='nm-feature-card'; card.dataset.category=categories[i];
+      const head=document.createElement('div'); head.className='nm-card-head';
+      const icon=document.createElement('span'); icon.className='nm-feature-icon'; icon.textContent=icons[i];
+      const code=document.createElement('span'); code.className='nm-feature-code'; code.textContent='NM-'+String(i+1).padStart(2,'0');
+      head.append(icon,code);
+      const title=document.createElement('h3'); title.textContent=item.name;
+      const desc=document.createElement('p'); desc.textContent=item.desc;
+      const foot=document.createElement('div'); foot.className='nm-card-foot';
+      const category=document.createElement('span'); category.textContent=categoryLabels[categories[i]];
+      const total=document.createElement('span'); total.textContent='06 SUBFITUR';
+      foot.append(category,total);
+      const details=document.createElement('details'); details.className='nm-subfeatures';
+      const summary=document.createElement('summary'); summary.textContent='Lihat 6 subfitur';
+      const list=document.createElement('ol');
+      item.subs.forEach((sub,j)=>{const li=document.createElement('li');const n=document.createElement('span');n.textContent=String(j+1).padStart(2,'0');const t=document.createElement('b');t.textContent=sub;li.append(n,t);list.append(li)});
+      details.append(summary,list); card.append(head,title,desc,foot,details); catalog.append(card);
+    });
+    section.insertBefore(catalog,hostGrid);
+    const note=document.createElement('p');note.className='nm-data-note';note.textContent='Catatan data: daftar fitur merupakan katalog kemampuan dan bukan hasil pemindaian langsung. Status domain, IP, DNS, TLS, serta ketersediaan harus berasal dari pemeriksaan aktual sebelum dinyatakan terverifikasi.';
+    section.insertBefore(note,hostGrid);
+    const update=()=>{
+      const q=search.value.trim().toLocaleLowerCase('id-ID');const cat=filter.value;let visible=0;
+      [...catalog.children].forEach(card=>{const okCat=cat==='all'||card.dataset.category===cat;const okText=card.textContent.toLocaleLowerCase('id-ID').includes(q);card.hidden=!(okCat&&okText);if(!card.hidden)visible++});
+      count.textContent=visible+' / 25 FITUR';
+    };
+    search.addEventListener('input',update);filter.addEventListener('change',update);update();
+    const date=document.getElementById('dnsUpdated'); if(date && date.textContent.includes('—')) date.textContent='KATALOG FITUR · 25 MODUL';
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mount,{once:true}); else mount();
+})();
