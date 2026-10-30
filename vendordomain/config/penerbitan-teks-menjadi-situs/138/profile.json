@@ -1,0 +1,633 @@
+{
+  "id": 138,
+  "name": "Generator Halaman Portofolio",
+  "category": "Penerbitan teks menjadi situs",
+  "version": "1.0.0",
+  "source": "reic",
+  "output": "html",
+  "layers": [
+    "layout",
+    "pilihan",
+    "penerapan",
+    "penyimpanan",
+    "sistem",
+    "konfigurasi"
+  ],
+  "submenus": [
+    {
+      "id": 1,
+      "name": "Ringkasan",
+      "layout": {
+        "mode": "grid",
+        "density": "compact",
+        "navigation": "top",
+        "layers": 3
+      },
+      "pilihan": {
+        "preset": "Teknis",
+        "format": "HTML",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "manual",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/01-ringkasan/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 1,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Konfigurasi",
+      "layout": {
+        "mode": "stack",
+        "density": "comfortable",
+        "navigation": "sidebar",
+        "layers": 4
+      },
+      "pilihan": {
+        "preset": "Kartu",
+        "format": "Markdown",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "pratinjau",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/02-konfigurasi/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 2,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Data Masuk",
+      "layout": {
+        "mode": "editor",
+        "density": "spacious",
+        "navigation": "top",
+        "layers": 5
+      },
+      "pilihan": {
+        "preset": "Profesional",
+        "format": "JSON",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "terarah",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/03-data-masuk/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 3,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Data Keluar",
+      "layout": {
+        "mode": "dashboard",
+        "density": "compact",
+        "navigation": "sidebar",
+        "layers": 6
+      },
+      "pilihan": {
+        "preset": "Editorial",
+        "format": "HTML",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "manual",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/04-data-keluar/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 4,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Validasi",
+      "layout": {
+        "mode": "split",
+        "density": "comfortable",
+        "navigation": "top",
+        "layers": 3
+      },
+      "pilihan": {
+        "preset": "Minimal",
+        "format": "Markdown",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "pratinjau",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/05-validasi/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 5,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Riwayat Aktivitas",
+      "layout": {
+        "mode": "grid",
+        "density": "spacious",
+        "navigation": "sidebar",
+        "layers": 4
+      },
+      "pilihan": {
+        "preset": "Teknis",
+        "format": "JSON",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "terarah",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/06-riwayat-aktivitas/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 6,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Pencarian",
+      "layout": {
+        "mode": "stack",
+        "density": "compact",
+        "navigation": "top",
+        "layers": 5
+      },
+      "pilihan": {
+        "preset": "Kartu",
+        "format": "HTML",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "manual",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/07-pencarian/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 7,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Filter Data",
+      "layout": {
+        "mode": "editor",
+        "density": "comfortable",
+        "navigation": "sidebar",
+        "layers": 6
+      },
+      "pilihan": {
+        "preset": "Profesional",
+        "format": "Markdown",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "pratinjau",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/08-filter-data/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 8,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Impor Berkas",
+      "layout": {
+        "mode": "dashboard",
+        "density": "spacious",
+        "navigation": "top",
+        "layers": 3
+      },
+      "pilihan": {
+        "preset": "Editorial",
+        "format": "JSON",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "terarah",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/09-impor-berkas/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 9,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Catatan Kerja",
+      "layout": {
+        "mode": "split",
+        "density": "compact",
+        "navigation": "sidebar",
+        "layers": 4
+      },
+      "pilihan": {
+        "preset": "Minimal",
+        "format": "HTML",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "manual",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/10-catatan-kerja/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 10,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Pemantauan",
+      "layout": {
+        "mode": "grid",
+        "density": "comfortable",
+        "navigation": "top",
+        "layers": 5
+      },
+      "pilihan": {
+        "preset": "Teknis",
+        "format": "Markdown",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "pratinjau",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/11-pemantauan/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 11,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Akses dan Izin",
+      "layout": {
+        "mode": "stack",
+        "density": "spacious",
+        "navigation": "sidebar",
+        "layers": 6
+      },
+      "pilihan": {
+        "preset": "Kartu",
+        "format": "JSON",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "terarah",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/12-akses-dan-izin/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 12,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Bantuan",
+      "layout": {
+        "mode": "editor",
+        "density": "compact",
+        "navigation": "top",
+        "layers": 3
+      },
+      "pilihan": {
+        "preset": "Profesional",
+        "format": "HTML",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "manual",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/13-bantuan/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 13,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Pengaturan Lanjutan",
+      "layout": {
+        "mode": "dashboard",
+        "density": "comfortable",
+        "navigation": "sidebar",
+        "layers": 4
+      },
+      "pilihan": {
+        "preset": "Editorial",
+        "format": "Markdown",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "pratinjau",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/14-pengaturan-lanjutan/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 14,
+        "access": "owner"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Pemeriksaan Sistem",
+      "layout": {
+        "mode": "split",
+        "density": "spacious",
+        "navigation": "top",
+        "layers": 5
+      },
+      "pilihan": {
+        "preset": "Minimal",
+        "format": "JSON",
+        "responsive": true
+      },
+      "penerapan": {
+        "mode": "terarah",
+        "validasi": true,
+        "persetujuan": "manual"
+      },
+      "penyimpanan": {
+        "format": "JSON",
+        "versioning": true,
+        "retention_days": 90
+      },
+      "sistem": {
+        "folder": "vendordomain/config/penerbitan-teks-menjadi-situs/138/15-pemeriksaan-sistem/",
+        "files": [
+          "layout.json",
+          "choices.json",
+          "applied.json",
+          "storage.json",
+          "config.json"
+        ]
+      },
+      "konfigurasi": {
+        "enabled": true,
+        "feature_id": 138,
+        "submenu_id": 15,
+        "access": "owner"
+      }
+    }
+  ]
+}
