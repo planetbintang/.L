@@ -1,7 +1,10 @@
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>VMDESKTOPREIC — OS MEDIA VM</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;color:#eaf4ff;font:14px system-ui,sans-serif}#desktop-root{position:relative;width:100vw;height:100vh;display:grid;place-items:center;overflow:hidden}#boot{padding:24px;color:#9fc8e8}</style></head>
-<body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat runtime OS MEDIA VM…</div></main>
+<html lang="id"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f"><title>VMDESKTOPREIC — OS MEDIA VM</title>
+<link rel="stylesheet" href="./desktop.css">
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;color:#eaf4ff;font:14px system-ui,sans-serif}#desktop-root{position:relative;width:100vw;height:100vh;display:grid;place-items:center;overflow:hidden}#boot{padding:24px;color:#9fc8e8}</style>
+</head><body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat runtime OS MEDIA VM…</div></main>
 <script>
-(async()=>{const root=document.getElementById('desktop-root');try{const [markup,css,js]=await Promise.all(['./desktop.reic','./desktop.reiccss','./desktop.reicjs'].map(async p=>{const r=await fetch(p,{cache:'no-cache'});if(!r.ok)throw Error(p+' · HTTP '+r.status);return r.text()}));root.innerHTML=markup;const style=document.createElement('style');style.textContent=css;document.head.append(style);const script=document.createElement('script');script.textContent=js;document.body.append(script);}catch(e){root.innerHTML='<pre style="padding:24px;color:#ffb6b6">Runtime gagal dimuat: '+String(e).replace(/[<>&]/g,'')+'</pre>';}}
-)();
+(async()=>{const root=document.getElementById('desktop-root');const fit=()=>root.style.setProperty('--vm-scale',String(Math.min(innerWidth/1920,innerHeight/1080)));fit();addEventListener('resize',fit,{passive:true});try{const r=await fetch('./desktop.reic',{cache:'no-cache'});if(!r.ok)throw Error('desktop.reic · HTTP '+r.status);root.innerHTML=await r.text();const s=document.createElement('script');s.src='./desktop.js';s.defer=true;s.onerror=()=>{root.innerHTML='<pre style="padding:24px;color:#ffb6b6">Runtime JavaScript gagal dimuat.</pre>';};document.body.append(s);}catch(e){root.innerHTML='<pre style="padding:24px;color:#ffb6b6">Runtime gagal dimuat: '+String(e).replace(/[<>&]/g,'')+'</pre>';}})();
 </script></body></html>
