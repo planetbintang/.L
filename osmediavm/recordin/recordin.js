@@ -8,7 +8,7 @@ const ext=f=>(f.split('.').pop()||'').toLowerCase();
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function setMode(mode){document.querySelectorAll('[data-view-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.viewMode===mode));document.querySelectorAll('[data-view-panel]').forEach(p=>p.classList.toggle('hidden',p.dataset.viewPanel!==mode))}
 function showSource(text){source.textContent=text}
-function renderHtml(text,file,meta){
+async function renderHtml(text,file,meta){
  const frame=el('iframe','reic-preview');frame.title='Pratinjau '+file;frame.setAttribute('sandbox','allow-forms allow-scripts');frame.setAttribute('referrerpolicy','no-referrer');
  const base=new URL(siteFile(file));base.pathname=base.pathname.slice(0,base.pathname.lastIndexOf('/')+1);
  let html=text;
@@ -18,7 +18,7 @@ function renderHtml(text,file,meta){
  const scriptPath=(meta.match(/^\s*script:\s*(.+)\s*$/im)||[])[1];
  if(stylePath){const link='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=/<head[^>]*>/i.test(html)?html.replace(/<head[^>]*>/i,m=>m+link):html.replace(/<html[^>]*>/i,m=>m+'<head>'+link+'</head>');}
  if(scriptPath){const script='<script src="'+esc(scriptPath.trim())+'"><\/script>';html=/<\/body>/i.test(html)?html.replace(/<\/body>/i,script+'</body>'):html+script;}
- frame.srcdoc=html;return frame
+ if(stylePath){try{const u=new URL(stylePath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const css=await r.text();const tag='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=html.replace(tag,'<style>'+css.replace(/<\\/style/gi,'<\\\\/style')+'</style>')}catch(e){html=html.replace('</body>','<p>REIC CSS gagal dimuat: '+esc(e.message)+'</p></body>')}}\n if(scriptPath){try{const u=new URL(scriptPath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const js=await r.text();const tag='<script src="'+esc(scriptPath.trim())+'"><\\/script>';html=html.replace(tag,'<script>'+js.replace(/<\\/script/gi,'<\\\\/script')+'</script>')}catch(e){html=html.replace('</body>','<p>REIC JS gagal dimuat: '+esc(e.message)+'</p></body>')}}\n frame.srcdoc=html;return frame
 }
 function renderMarkdown(text){
  const root=el('article','markdown-preview');
@@ -30,7 +30,7 @@ function renderMarkdown(text){
   root.append(el('p','',line))
  });return root
 }
-function render(text,file){
+async function render(text,file){
  const workspace=$('#componentWorkspace');workspace.replaceChildren();
  const type=ext(file),looksHtml=type==='html'||type==='htm'||/<(?:!doctype\s+html|html|body|section|main|article|div|header|nav|form|table|svg)(?:\s|>)/i.test(text);
  const header=text.match(/^---\s*REIC[^\n]*---\s*([\s\S]*?)---\s*END REIC HEADER\s*---/i);
@@ -44,7 +44,7 @@ function render(text,file){
  toolbar.append(preview,raw);workspace.append(toolbar);
  const previewPanel=el('section','runtime-panel');previewPanel.dataset.viewPanel='preview';
  const sourcePanel=el('section','runtime-panel hidden');sourcePanel.dataset.viewPanel='source';
- if(looksHtml){previewPanel.append(renderHtml(body,file,header?header[1]:''))}
+ if(looksHtml){previewPanel.append(await renderHtml(body,file,header?header[1]:''))}
  else if(type==='json'){try{const pre=el('pre','code-preview',JSON.stringify(JSON.parse(body),null,2));previewPanel.append(pre)}catch{previewPanel.append(el('pre','code-preview',body))}}
  else if(type==='md'||type==='markdown'||type==='txt'){previewPanel.append(type==='md'||type==='markdown'?renderMarkdown(body):el('pre','code-preview',body))}
  else {previewPanel.append(el('pre','code-preview',body))}
@@ -76,7 +76,7 @@ async function openFile(file){
   currentFile=file;const response=await fetch(siteFile(file),{cache:'no-cache'});
   if(!response.ok)throw Error('HTTP '+response.status+' saat membaca '+file);
   const text=await response.text();$('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');
-  history.replaceState(null,'','#'+encodeURIComponent(file));render(text,file);renderConfig(file);
+  history.replaceState(null,'','#'+encodeURIComponent(file));await render(text,file);renderConfig(file);
  }catch(e){$('#componentWorkspace').replaceChildren(el('p','runtime-error','Berkas gagal dibuka: '+e.message));view.classList.remove('hidden');list.parentElement.classList.add('hidden');showSource('Gagal membuka berkas: '+e.message)}
 }
 function draw(){
