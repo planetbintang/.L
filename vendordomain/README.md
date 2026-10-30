@@ -16,3 +16,9 @@ Untuk data persisten dan DNS live, deploy backend secara terpisah melalui HTTPS 
 ## Deployment
 
 Workflow [Deploy entire .L system to GitHub Pages](../.github/workflows/deploy-pages.yml) dipicu oleh push ke branch `io`. Setelah perubahan digabungkan, periksa Actions untuk status deployment. URL halaman dapat berbeda mengikuti konfigurasi Pages repository.
+## Pengembang dan konfigurasi inti
+
+- Semua 25 fitur modul **Pengembang dan konfigurasi inti** (ID 476–500) dibuka melalui workspace berlapis di [`developer-core/index.html`](./developer-core/index.html).
+- Setiap fitur memiliki enam lapisan: Layout, Pilihan, Penerapan, Penyimpanan, Penyimpanan Sistem Folder/File, dan Konfigurasi. Variasi layout: Rail, Split, Stack, Grid, dan Console.
+- Draft serta JSON konfigurasi dapat divalidasi, disimpan di browser, diimpor, dan diekspor. Registry fitur berada di [`config/developer-core/registry.json`](./config/developer-core/registry.json).
+- Penyimpanan browser bersifat lokal per perangkat. Penulisan ke repository, penerapan CI/CD, dan deployment sungguhan tetap memerlukan backend/API atau workflow yang terautentikasi; halaman ini tidak menjalankan perubahan produksi.
