@@ -1,16 +1,28 @@
 # OS MEDIA VM — REIC Layout Library
 
-Library ini menyediakan enam preset antarmuka: `dashboard`, `workbench`, `canvas`, `console`, `library`, dan `compact`.
+Layout Library terhubung langsung ke `recordin/components/manifest.json` dan membaca katalog 15.000 komponen REIC.
 
-## Integrasi komponen
+## Pemetaan layout otomatis
 
-1. Pilih preset pada `index.html`.
-2. Atur properti dan ekspor definisi `.reic`.
-3. Sertakan stylesheet pendamping `.reiccss` dan adapter `.reicjs` pada metadata header REIC.
-4. Tempatkan markup komponen di area modul yang mendukung runtime REIC.
+Setiap komponen dipetakan berdasarkan bidang dan kata kunci pada ID/judul:
+- Identitas & desain → Canvas Komponen
+- Desktop & navigasi → Workbench Dua Kolom
+- File Manager & data → Library Kartu
+- Server & tata kelola → Dashboard Modular
+- Keamanan, DevOps & observabilitas → Console Teknis
+- Runtime & API → Workbench Dua Kolom
+- AI & otomasi → Canvas Komponen
 
-Header REIC menggunakan metadata `style:` dan `script:` agar Explorer REIC dapat memuat aset pendamping saat pratinjau. Adapter menandai root dengan `data-reic-mounted` dan memancarkan event `reic:layout-ready`.
+Pemetaan kata kunci yang lebih spesifik dapat mengarahkan komponen ke layout yang paling sesuai. Katalog dapat dicari berdasarkan nomor, nama, atau bidang dan ditampilkan dengan pagination.
 
-Preset yang diterapkan melalui tombol **Terapkan preset** disimpan pada localStorage browser perangkat ini. Ekspor `.reic` menghasilkan definisi; file CSS/JS pendamping disediakan di direktori ini dan perlu disalin atau direferensikan sesuai struktur modul tujuan.
+## Alur integrasi
 
-GitHub Pages hanya menyajikan aset statis. Penyimpanan lintas perangkat, akun, API, dan sinkronisasi server memerlukan backend terpisah.
+1. Cari dan pilih nama komponen REIC.
+2. Layout yang sesuai dipilih otomatis dan ditampilkan pada pratinjau.
+3. Atur lebar, kepadatan, tema, navigasi samping, dan perilaku responsif.
+4. Ekspor binding `.reic` yang mencatat ID, judul, bidang, lokasi berkas sumber, serta preset layout.
+5. Hubungkan `reic-layout.reiccss` dan `reic-layout.reicjs` lalu tempatkan konten komponen sumber pada slot yang disediakan.
+
+Tombol **Terapkan preset** hanya menyimpan pilihan pada localStorage browser. Ekspor binding tidak menulis ulang 15.000 berkas sumber secara otomatis; pemasangan pada modul tujuan tetap memerlukan integrasi berkas binding dan aset pendamping.
+
+GitHub Pages menyajikan aset statis. Penyimpanan lintas perangkat, akun, API, dan sinkronisasi server memerlukan backend terpisah.
