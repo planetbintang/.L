@@ -41,3 +41,22 @@
 .vm-modal-backdrop{background:#020914d9;backdrop-filter:blur(3px)}
 /* Slide submenu memakai skala tinggi yang sama dengan tombol inti. */
 .slide-item{height:88px;min-height:88px}
+
+
+/* Submenu and secondary navigation live inside the content modal. */
+.vm-slide-panel{display:none!important}
+.vm-modal{width:min(1080px,calc(100% - 48px));max-height:84%;border-radius:0!important}
+.vm-modal-backdrop{padding:20px}
+.menu-choice-intro{padding:4px 2px 18px;border-bottom:1px solid #29445d;margin-bottom:16px}
+.menu-choice-intro>span{font-size:10px;letter-spacing:.18em;color:#83e1ff}
+.menu-choice-intro h3{margin:8px 0 5px;font-size:23px;letter-spacing:.02em}
+.menu-choice-intro p{margin:0;color:#91a8c3;font-size:12px}
+.menu-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.menu-choice{min-height:82px;display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #29445d;background:linear-gradient(110deg,#10243a,#0a1727);color:#edf5ff;text-align:left;cursor:pointer;transition:background .16s,border-color .16s,transform .16s}
+.menu-choice>span{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border:1px solid #47728e;background:#132d44;color:#83e1ff;font-size:21px}
+.menu-choice b{flex:1;font-size:13px;line-height:1.4}
+.menu-choice i{font-style:normal;color:#83e1ff;font-size:21px}
+.menu-choice:hover{background:linear-gradient(110deg,#183c57,#10243a);border-color:#83e1ff;box-shadow:inset 3px 0 0 #83e1ff;transform:translateX(2px)}
+.menu-back{margin:0 0 15px;padding:9px 12px;border:1px solid #31536b;background:#0d1a2b;color:#83e1ff;font-size:10px;letter-spacing:.1em;cursor:pointer}
+@media(max-width:760px){.menu-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vm-modal{width:calc(100% - 20px)}.vm-modal>header>b{font-size:16px}.modal-tabs{overflow-x:auto}}
+@media(max-width:480px){.menu-choice-grid{grid-template-columns:1fr}.menu-choice{min-height:66px}}
