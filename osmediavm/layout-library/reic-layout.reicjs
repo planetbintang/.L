@@ -1,0 +1,15 @@
+/* Runtime adapter for exported OS MEDIA VM REIC layout components */
+(()=>{'use strict';
+function mount(root){
+ if(!root||root.dataset.reicMounted==='true')return root;
+ const layout=root.dataset.layout||'dashboard';
+ const allowed=['dashboard','workbench','canvas','console','library','compact'];
+ root.dataset.layout=allowed.includes(layout)?layout:'dashboard';
+ root.dataset.reicMounted='true';
+ root.dispatchEvent(new CustomEvent('reic:layout-ready',{bubbles:true,detail:{layout:root.dataset.layout}}));
+ return root;
+}
+function mountAll(scope=document){scope.querySelectorAll('[data-reic-component]').forEach(mount)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>mountAll(),{once:true});else mountAll();
+window.REICLayoutLibrary=Object.freeze({mount,mountAll,version:'1.0.0'});
+})();
