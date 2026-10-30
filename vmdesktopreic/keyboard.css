@@ -1,3 +1,8 @@
+/* REIC Library: global design, adaptive layout, precision grid, multi-resolution */
+@import url("../osmediavm/recordin/components/reic-00002-sistem-desain-global/reic-00002-sistem-desain-global.css");
+@import url("../osmediavm/recordin/components/reic-00006-tata-letak-adaptif/reic-00006-tata-letak-adaptif.css");
+@import url("../osmediavm/recordin/components/reic-00010-sistem-grid-presisi/reic-00010-sistem-grid-presisi.css");
+@import url("../osmediavm/recordin/components/reic-00014-dukungan-berbagai-resolusi/reic-00014-dukungan-berbagai-resolusi.css");
 .planet-keyboard{--pk-scale:1;background:linear-gradient(145deg,#062d78,#041d50);border:1px solid #36bfff;color:#eff8ff;padding:18px;transform-origin:top left;font-family:Arial,system-ui,sans-serif}.pk-overview{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 16px;border:1px solid #168edb;background:linear-gradient(100deg,#0752b9,#052a70)}.pk-brand{display:flex;align-items:center;gap:14px}.pk-brand>span{font-size:32px;padding:12px;background:#087ed4;border:1px solid #7cddff}.pk-brand small{font-size:10px;letter-spacing:1px;color:#9fe7ff}.pk-brand h2{margin:3px 0;font-size:24px}.pk-brand p{margin:0;color:#bfe5ff;font-size:12px}.pk-controls{display:flex;gap:10px}.pk-controls label{display:grid;gap:5px;font-size:11px;color:#bceaff}.pk-controls select{min-width:120px;padding:9px;background:#031e52;color:white;border:1px solid #37baff}.pk-main{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(220px,.85fr);gap:12px;margin-top:12px}.pk-panel{min-width:0;padding:13px;border:1px solid #168edb;background:linear-gradient(145deg,#052d76,#031d50)}.pk-panel h3{margin:0 0 12px;font-size:13px;letter-spacing:.04em}.pk-keys{display:grid;gap:5px;padding:10px;background:#031944;border:1px solid #126fbc}.pk-row{display:flex;gap:5px;justify-content:center}.pk-key,.pk-extra button,.pk-symbols button{min-width:0;flex:1;height:39px;border:1px solid #24baff;background:linear-gradient(#0751b3,#032d76);color:white;font-size:17px;box-shadow:inset 0 0 0 1px #ffffff14;cursor:pointer}.pk-key:hover,.pk-extra button:hover,.pk-symbols button:hover{background:#087fda;box-shadow:0 0 10px #16baff88}.pk-row-2 .pk-key:first-child{max-width:42px}.pk-row-4 .pk-key:nth-child(8){flex:1.8;font-size:12px}.pk-extra{display:flex;gap:5px;margin-top:8px}.pk-extra button{height:34px}.pk-functions{grid-column:2;grid-row:1 / span 2}.pk-functions>button{width:100%;display:flex;align-items:center;gap:12px;padding:10px;margin:0 0 6px;border:1px solid #167fca;background:#052a6a;color:white;text-align:left;cursor:pointer}.pk-functions>button>b{width:40px;height:38px;display:grid;place-items:center;border:1px solid #39baff;font-size:21px}.pk-functions>button span{display:grid;gap:3px;flex:1}.pk-functions>button strong{font-size:11px}.pk-functions>button small{font-size:10px;color:#b7e3ff}.pk-functions>button i{font-size:20px;color:#70d8ff}.pk-output{grid-column:1}.pk-panel-title{display:flex;justify-content:space-between;align-items:center}.pk-panel-title button{padding:7px 10px;border:1px solid #3abaff;background:#06458f;color:white;cursor:pointer;font-size:10px}.pk-log{height:112px;overflow:auto;padding:8px;background:#021638;border:1px solid #126fbc;font:12px/1.7 ui-monospace,monospace;color:#aee6ff}.pk-text-label{display:block;margin-top:8px;font-size:10px;color:#bceaff}.pk-text-label textarea{width:100%;min-height:52px;margin-top:5px;padding:8px;background:#021638;border:1px solid #126fbc;color:white;resize:vertical}.pk-nurnaisli{grid-column:1 / -1}.pk-symbols{display:grid;grid-template-columns:32px 32px minmax(120px,1fr);gap:5px 8px;align-items:center;max-width:400px;margin:auto}.pk-symbols button{height:30px}.pk-symbols span{font-size:12px}.pk-status{display:flex;justify-content:space-between;gap:10px;margin-top:10px;padding:9px 12px;border:1px solid #126fbc;background:#031a45;font-size:10px;color:#aee6ff}@media(max-width:760px){.pk-overview{align-items:flex-start;flex-direction:column}.pk-controls{width:100%}.pk-controls label{flex:1}.pk-controls select{width:100%;min-width:0}.pk-main{grid-template-columns:1fr}.pk-functions,.pk-output,.pk-nurnaisli{grid-column:1;grid-row:auto}.pk-key{height:32px;font-size:13px}.pk-row{gap:3px}.pk-keys{padding:5px}.pk-status{flex-wrap:wrap}}
 /* Floating on-screen REIC keyboard: appears when a text field receives focus */
 .reic-screen-keyboard{position:fixed;z-index:10050;left:50%;bottom:16px;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));padding:10px;background:linear-gradient(145deg,#0754c4,#031b50);border:1px solid #45caff;box-shadow:0 12px 42px #00102dcc,0 0 18px #1aaeff55;color:#eff9ff;font-family:Arial,system-ui,sans-serif}
@@ -39,3 +44,58 @@
 .reic-screen-keyboard .rsk-row button:hover,.reic-screen-keyboard .rsk-row button:active{background:linear-gradient(160deg,#376b94,#1b4162);border-color:#a1d8ff}
 .reic-screen-keyboard .rsk-head button,.reic-screen-keyboard .rsk-foot button{background:#1b3550;border:1px solid #6797bd;border-radius:6px}
 @media(max-width:760px){.planet-keyboard[data-reic-component]{border-radius:10px;padding:10px}.planet-keyboard .pk-panel{border-radius:9px}}
+
+/* Keyboard REIC skin: blueprint blue, white technical lines, and resolution-aware layout */
+.planet-keyboard{
+ --reic-text:#f4fbff;--reic-muted:#d4eaff;--reic-accent:#ffffff;--reic-border:#d9efff;
+ --reic-panel:#0757e8;--reic-panel-alt:#0647c7;--reic-input:#032f91;
+ --pk-scale:1;--pk-line:rgba(231,247,255,.78);
+ position:relative;isolation:isolate;overflow:hidden;container-type:inline-size;
+ width:100%;max-width:100%;min-width:0;box-sizing:border-box;
+ color:#f5fbff!important;
+ background-color:#0758ed!important;
+ background-image:
+  linear-gradient(90deg,transparent 0 23px,rgba(255,255,255,.055) 24px,transparent 25px),
+  linear-gradient(0deg,transparent 0 23px,rgba(255,255,255,.045) 24px,transparent 25px),
+  repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 1px,transparent 1px 8px),
+  linear-gradient(145deg,#0864f5 0%,#0752df 52%,#0343bd 100%)!important;
+ border:2px solid #d9efff!important;border-radius:0!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.24),0 12px 32px rgba(0,25,92,.28)!important;
+ padding:clamp(10px,2.1cqi,22px)!important;
+ font-size:calc(14px * var(--pk-scale));font-family:Arial,system-ui,sans-serif
+}
+.planet-keyboard:before{content:"";position:absolute;inset:7px;z-index:-1;pointer-events:none;border:1px solid rgba(255,255,255,.2);background:repeating-linear-gradient(0deg,transparent 0 31px,rgba(255,255,255,.025) 32px),repeating-linear-gradient(90deg,transparent 0 31px,rgba(255,255,255,.025) 32px)}
+.planet-keyboard *{box-sizing:border-box}
+.planet-keyboard .pk-overview,.planet-keyboard .pk-panel{border:1px solid var(--pk-line)!important;border-radius:0!important;background:linear-gradient(135deg,rgba(2,44,151,.28),rgba(0,36,125,.18))!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)!important}
+.planet-keyboard .pk-overview{padding:clamp(10px,1.8cqi,18px)}
+.planet-keyboard .pk-brand>span{background:rgba(0,35,140,.36);border:1px solid white;border-radius:0}
+.planet-keyboard .pk-controls select,.planet-keyboard .pk-text-label textarea,.planet-keyboard .pk-log{border:1px solid white!important;border-radius:0!important;background:rgba(0,30,112,.65)!important;color:#fff!important}
+.planet-keyboard .pk-key,.planet-keyboard .pk-extra button,.planet-keyboard .pk-symbols button,.planet-keyboard .pk-functions>button,.planet-keyboard .pk-panel-title button{
+ border:1px solid rgba(255,255,255,.92)!important;border-radius:0!important;
+ background:rgba(0,53,166,.34)!important;color:#fff!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)!important;
+}
+.planet-keyboard .pk-key{height:clamp(30px,4.4cqi,46px);font-size:clamp(12px,1.8cqi,20px);padding:2px}
+.planet-keyboard .pk-key:hover,.planet-keyboard .pk-extra button:hover,.planet-keyboard .pk-symbols button:hover,.planet-keyboard .pk-functions>button:hover{background:rgba(126,203,255,.35)!important;box-shadow:0 0 0 1px white,0 0 14px rgba(188,231,255,.45)!important}
+.planet-keyboard .pk-keys{border:1px solid rgba(255,255,255,.65);border-radius:0;background:rgba(0,37,139,.18);padding:clamp(5px,1.2cqi,12px)}
+.planet-keyboard .pk-row{gap:clamp(3px,.65cqi,7px)}
+.planet-keyboard .pk-panel h3,.planet-keyboard .pk-brand h2,.planet-keyboard .pk-brand p,.planet-keyboard .pk-brand small,.planet-keyboard .pk-functions small,.planet-keyboard .pk-controls label,.planet-keyboard .pk-text-label,.planet-keyboard .pk-symbols span{color:#fff!important}
+.planet-keyboard .pk-status{border:1px solid white;border-radius:0;background:rgba(0,32,119,.5);color:#fff}
+.planet-keyboard .pk-symbols button{height:clamp(28px,3.2cqi,36px)}
+.planet-keyboard .pk-functions>button{margin-bottom:clamp(4px,.6cqi,7px);padding:clamp(7px,1.2cqi,12px)}
+.planet-keyboard .pk-functions>button>b{border:1px solid white;border-radius:0}
+@container (max-width:680px){
+ .planet-keyboard .pk-main{grid-template-columns:minmax(0,1fr)}
+ .planet-keyboard .pk-functions,.planet-keyboard .pk-output,.planet-keyboard .pk-nurnaisli{grid-column:1;grid-row:auto}
+ .planet-keyboard .pk-functions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ .planet-keyboard .pk-functions h3{grid-column:1/-1}
+ .planet-keyboard .pk-functions>button{margin:0;min-width:0}
+}
+@media(max-width:560px){
+ .planet-keyboard{padding:8px!important}
+ .planet-keyboard .pk-overview{gap:10px}
+ .planet-keyboard .pk-brand h2{font-size:19px}
+ .planet-keyboard .pk-controls{gap:6px}
+ .planet-keyboard .pk-controls select{min-width:0;width:100%}
+ .planet-keyboard .pk-status{font-size:9px;flex-wrap:wrap}
+}
