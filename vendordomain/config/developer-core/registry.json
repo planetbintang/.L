@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Pengembang dan konfigurasi inti",
+  "branch": "io",
+  "features": [
+    {
+      "id": 476,
+      "name": "Koneksi Repositori Git",
+      "layout": "rail",
+      "entry": "../developer-core/index.html?featureId=476"
+    },
+    {
+      "id": 477,
+      "name": "Integrasi GitHub",
+      "layout": "split",
+      "entry": "../developer-core/index.html?featureId=477"
+    },
+    {
+      "id": 478,
+      "name": "Pemilihan Cabang",
+      "layout": "stack",
+      "entry": "../developer-core/index.html?featureId=478"
+    },
+    {
+      "id": 479,
+      "name": "Pemicu Deployment",
+      "layout": "grid",
+      "entry": "../developer-core/index.html?featureId=479"
+    },
+    {
+      "id": 480,
+      "name": "Build Otomatis",
+      "layout": "console",
+      "entry": "../developer-core/index.html?featureId=480"
+    },
+    {
+      "id": 481,
+      "name": "Build Manual",
+      "layout": "rail",
+      "entry": "../developer-core/index.html?featureId=481"
+    },
+    {
+      "id": 482,
+      "name": "Pratinjau Pull Request",
+      "layout": "split",
+      "entry": "../developer-core/index.html?featureId=482"
+    },
+    {
+      "id": 483,
+      "name": "Deployment Produksi",
+      "layout": "stack",
+      "entry": "../developer-core/index.html?featureId=483"
+    },
+    {
+      "id": 484,
+      "name": "Deployment Staging",
+      "layout": "grid",
+      "entry": "../developer-core/index.html?featureId=484"
+    },
+    {
+      "id": 485,
+      "name": "Deployment Pengembangan",
+      "layout": "console",
+      "entry": "../developer-core/index.html?featureId=485"
+    },
+    {
+      "id": 486,
+      "name": "Variabel Lingkungan per Tahap",
+      "layout": "rail",
+      "entry": "../developer-core/index.html?featureId=486"
+    },
+    {
+      "id": 487,
+      "name": "Log Build",
+      "layout": "split",
+      "entry": "../developer-core/index.html?featureId=487"
+    },
+    {
+      "id": 488,
+      "name": "Status Deployment",
+      "layout": "stack",
+      "entry": "../developer-core/index.html?featureId=488"
+    },
+    {
+      "id": 489,
+      "name": "Riwayat Deployment",
+      "layout": "grid",
+      "entry": "../developer-core/index.html?featureId=489"
+    },
+    {
+      "id": 490,
+      "name": "Rollback Rilis",
+      "layout": "console",
+      "entry": "../developer-core/index.html?featureId=490"
+    },
+    {
+      "id": 491,
+      "name": "Tag Versi Rilis",
+      "layout": "rail",
+      "entry": "../developer-core/index.html?featureId=491"
+    },
+    {
+      "id": 492,
+      "name": "Pemeriksaan Build Gagal",
+      "layout": "split",
+      "entry": "../developer-core/index.html?featureId=492"
+    },
+    {
+      "id": 493,
+      "name": "Pengujian Otomatis",
+      "layout": "stack",
+      "entry": "../developer-core/index.html?featureId=493"
+    },
+    {
+      "id": 494,
+      "name": "Pemeriksaan Kode",
+      "layout": "grid",
+      "entry": "../developer-core/index.html?featureId=494"
+    },
+    {
+      "id": 495,
+      "name": "Migrasi Database",
+      "layout": "console",
+      "entry": "../developer-core/index.html?featureId=495"
+    },
+    {
+      "id": 496,
+      "name": "Pengaturan Domain Preview",
+      "layout": "rail",
+      "entry": "../developer-core/index.html?featureId=496"
+    },
+    {
+      "id": 497,
+      "name": "Deployment Berdasarkan Commit",
+      "layout": "split",
+      "entry": "../developer-core/index.html?featureId=497"
+    },
+    {
+      "id": 498,
+      "name": "Notifikasi Hasil Build",
+      "layout": "stack",
+      "entry": "../developer-core/index.html?featureId=498"
+    },
+    {
+      "id": 499,
+      "name": "Pipeline CI/CD",
+      "layout": "grid",
+      "entry": "../developer-core/index.html?featureId=499"
+    },
+    {
+      "id": 500,
+      "name": "Pusat Konfigurasi Sistem Inti",
+      "layout": "console",
+      "entry": "../developer-core/index.html?featureId=500"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layout",
+      "label": "LAYOUT"
+    },
+    {
+      "id": "pilihan",
+      "label": "PILIHAN"
+    },
+    {
+      "id": "penerapan",
+      "label": "PENERAPAN"
+    },
+    {
+      "id": "penyimpanan",
+      "label": "PENYIMPANAN"
+    },
+    {
+      "id": "folder-file",
+      "label": "PENYIMPANAN SISTEM FOLDER/FILE"
+    },
+    {
+      "id": "konfigurasi",
+      "label": "KONFIGURASI"
+    }
+  ],
+  "persistence": {
+    "draft": "localStorage browser",
+    "export": "JSON",
+    "repositoryWrite": "requires authenticated backend or explicit GitHub API integration"
+  },
+  "note": "GitHub Pages is static. Applying this configuration previews/saves locally and does not trigger production deployment."
+}
