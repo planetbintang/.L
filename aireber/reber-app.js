@@ -98,12 +98,12 @@ function setStatus(selector, text) { const target = $(selector); if (target) tar
 
 const THEME_KEY = 'planetbintang.aireber.theme.v1';
 function applyTheme(theme) {
-  const value = ['cahaya', 'air', 'berlian'].includes(theme) ? theme : 'cahaya';
+  const value = ['gelap-abstrak', 'cahaya', 'air', 'berlian'].includes(theme) ? theme : 'gelap-abstrak';
   document.documentElement.dataset.theme = value;
   const picker = $('#reberTheme'); if (picker) picker.value = value;
   try { localStorage.setItem(THEME_KEY, value); } catch { /* theme tetap berlaku dalam tab ini */ }
 }
-try { applyTheme(localStorage.getItem(THEME_KEY) || 'cahaya'); } catch { applyTheme('cahaya'); }
+try { applyTheme(localStorage.getItem(THEME_KEY) || 'gelap-abstrak'); } catch { applyTheme('cahaya'); }
 $('#reberTheme')?.addEventListener('change', (event) => applyTheme(event.target.value));
 // Sinkron dua arah dengan tampilan utama Planetbintang (planetbintang-themes.js
 // memakai THEME_KEY yang sama) — mis. saat kembali dari navigasi lintas halaman.
@@ -112,7 +112,7 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) { tr
 // Kabari pemilih tema pada tampilan utama Planetbintang agar ikut tersinkron.
 document.addEventListener('planetbintang:theme-change', (event) => {
   const picker = $('#reberTheme');
-  if (picker && ['cahaya', 'air', 'berlian'].includes(event.detail?.theme)) picker.value = event.detail.theme;
+  if (picker && ['gelap-abstrak', 'cahaya', 'air', 'berlian'].includes(event.detail?.theme)) picker.value = event.detail.theme;
 });
 
 function setView(view) {
