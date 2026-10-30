@@ -1,214 +1,62 @@
 (() => {
   'use strict';
-  const $ = (s, r = document) => r.querySelector(s);
-  const topForm = $('#topbarSearchForm'), topInput = $('#topbarSearchInput');
-  const homeForm = $('#homeSearchForm'), homeInput = $('#homeSearchInput');
-  const section = $('#searchPage');
-  if (!section) return;
-  let form = $('#globalSearchForm'), input = $('#globalSearchInput');
-  if (!form || !input) {
-    const toolbar = document.createElement('form');
-    toolbar.id = 'globalSearchForm'; toolbar.className = 'toolbar'; toolbar.setAttribute('role','search');
-    toolbar.setAttribute('aria-label','Cari repositori, folder, domain, atau Google');
-    const field = document.createElement('input'); field.id = 'globalSearchInput'; field.type = 'search';
-    field.placeholder = 'Cari domain, isi path, repo, atau Google…'; field.autocomplete = 'off';
-    field.setAttribute('aria-label','Cari domain, path, repositori, atau Google');
-    const submit = document.createElement('button'); submit.type = 'submit'; submit.className = 'repo-action primary'; submit.textContent = 'Cari';
-    toolbar.append(field,submit);
-    const statusNode = document.createElement('p'); statusNode.id = 'globalSearchStatus'; statusNode.setAttribute('aria-live','polite');
-    const resultsNode = document.createElement('div'); resultsNode.id = 'globalSearchResults'; resultsNode.className = 'repo-grid';
-    const source = $('.search-source-view',section);
-    section.insertBefore(toolbar,source || null);
-    section.insertBefore(statusNode,source || null);
-    section.insertBefore(resultsNode,source || null);
-    form = toolbar; input = field;
+  const searchInput = document.getElementById('globalSearchInput');
+  const startInput = document.getElementById('safariStartInput');
+  const topForm = document.getElementById('topbarSearchForm');
+  const topInput = document.getElementById('topbarSearchInput');
+  const homeForm = document.getElementById('homeSearchForm');
+  const homeInput = document.getElementById('homeSearchInput');
+
+  // Kedua kolom pada halaman Safari memakai kueri yang sama.
+  function sync(source, target) {
+    if (source && target) source.addEventListener('input', () => { target.value = source.value; });
   }
-  const results = $('#globalSearchResults'), status = $('#globalSearchStatus');
-  if (!form || !input || !results || !status) return;
-  const stylesheet = document.createElement('link');
-  stylesheet.rel = 'stylesheet'; stylesheet.href = './search-page.css?v=20261027-search-actions-v3';
-  document.head.append(stylesheet);
-  let repositories = [], treeIndexes = new Map(), activeType = 'all', requestToken = 0;
-  const text = value => String(value ?? '');
-  const slugify = value => text(value).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
-  const normalize = value => text(value).toLocaleLowerCase('id');
-  const cleanQuery = value => normalize(value).trim()
-    .replace(/^https?:\/\//, '').replace(/^www\./, '')
-    .replace(/\.planetbintang\.com(?=\/|$)/, '')
-    .replace(/\/+$/, '').trim();
-  let domainCatalogPromise = null;
-  async function loadDomainCatalog() {
-    if (domainCatalogPromise) return domainCatalogPromise;
-    const base = 'https://raw.githubusercontent.com/planetbintang/al.l/io/data.media/';
-    domainCatalogPromise = Promise.all([
-      fetch(base + 'domain-000001.media', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => ''),
-      fetch(base + 'domain-seeds.txt', {cache:'force-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => ''),
-      fetch('./data/domain-registry.nz', {cache:'no-cache',credentials:'omit'}).then(r => r.ok ? r.text() : '').catch(() => '')
-    ]).then(([jsonl,seeds,systemNz]) => {
-      const found = new Map();
-      jsonl.split(/\r?\n/).forEach(line => {
-        try {
-          const record = JSON.parse(line);
-          const domain = text(record.domain).trim().toLowerCase();
-          if (domain && /^[a-z0-9.-]+$/.test(domain)) found.set(domain, {domain, status:text(record.status || 'tercatat'), source:'domain-000001.media'});
-        } catch (_) {}
-      });
-      systemNz.split(/\r?\n/).forEach(line => {
-        try { const record = JSON.parse(line); const domain = text(record.domain).trim().toLowerCase(); if (domain && /^[a-z0-9.-]+$/.test(domain)) found.set(domain, {domain,status:text(record.status || 'sistem .NZ'),source:'data/domain-registry.nz'}); } catch (_) {}
-      });
-      seeds.split(/\r?\n/).forEach(line => {
-        const domain = line.trim().toLowerCase();
-        if (domain && /^[a-z0-9.-]+$/.test(domain) && !found.has(domain)) found.set(domain, {domain,status:'seed',source:'domain-seeds.txt'});
-      });
-      return [...found.values()];
-    });
-    return domainCatalogPromise;
-  }
-  function card({title, description, href, label, kind, path = '', repo = null}) {
-    const article = document.createElement('article'); article.className = 'repo-card global-search-card';
-    const badge = document.createElement('span'); badge.className = 'global-search-result-kind'; badge.textContent = kind;
-    const heading = document.createElement('h3'); heading.textContent = title;
-    const desc = document.createElement('p'); desc.textContent = description;
-    article.append(badge, heading, desc);
-    if (path) { const p = document.createElement('p'); p.className = 'global-search-result-path'; p.textContent = path; article.append(p); }
-    if (repo) { const domain = document.createElement('p'); domain.className = 'global-search-domain'; domain.textContent = 'Domain rencana: ' + (slugify(repo.name) ? 'https://' + slugify(repo.name) + '.planetbintang.com' : 'belum tersedia') + ' (perlu DNS dan hosting).'; article.append(domain); }
-    const a = document.createElement('a'); a.className = 'repo-action primary'; a.href = href; a.textContent = label; article.append(a);
-    return article;
-  }
-  function setupLayout() {
-    const section = $('#searchPage');
-    if (!section || $('.global-search-layout', section)) return;
-    const toolbar = $('#globalSearchForm')?.closest('.toolbar');
-    const statusNode = $('#globalSearchStatus'), resultsNode = $('#globalSearchResults');
-    const layout = document.createElement('div'); layout.className = 'global-search-layout';
-    const aside = document.createElement('aside'); aside.className = 'global-search-sidebar';
-    const h = document.createElement('h3'); h.textContent = 'JENIS PENCARIAN'; aside.append(h);
-    const filterBox = document.createElement('div'); filterBox.id = 'globalSearchFilters'; filterBox.className = 'global-search-filters'; aside.append(filterBox);
-    const main = document.createElement('div'); main.className = 'global-search-main';
-    if (toolbar) main.append(toolbar); main.append(statusNode, resultsNode);
-    layout.append(aside, main);
-    const sourceView = $('.search-source-view', section);
-    section.insertBefore(layout, sourceView || null);
-  }
-  setupLayout();
-  const filterBox = $('#globalSearchFilters');
-  function renderFilters(counts = {}) {
-    if (!filterBox) return;
-    filterBox.replaceChildren();
-    [['all','Semua hasil',counts.all || 0],['repository','Repositori',counts.repository || 0],['folder','Folder & path',counts.folder || 0],['domain','Domain & Internet',counts.domain || 0]].forEach(([type,label,count]) => {
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'global-search-filter'; b.setAttribute('aria-pressed', String(activeType === type));
-      const name = document.createElement('span'); name.textContent = label; const total = document.createElement('small'); total.textContent = String(count);
-      b.append(name,total); b.addEventListener('click', () => { activeType = type; render(input.value); }); filterBox.append(b);
-    });
-  }
-  async function loadTree(repo) {
-    if (!repo?.tree?.indexUrl) return null;
-    const key = repo.fullName || repo.name;
-    if (treeIndexes.has(key)) return treeIndexes.get(key);
-    const promise = fetch('./' + repo.tree.indexUrl.replace(/^\.\//,''), {cache:'force-cache',credentials:'omit'})
-      .then(r => { if (!r.ok) throw new Error('Index pohon tidak tersedia'); return r.json(); }).catch(() => null);
-    treeIndexes.set(key,promise); return promise;
-  }
-  async function collectFolderResults(q, token) {
-    const output = [], candidates = repositories.filter(r => r.tree?.indexUrl && r.tree?.state !== 'unavailable');
-    for (let i=0; i<candidates.length; i+=6) {
-      if (token !== requestToken) return output;
-      const batch = await Promise.all(candidates.slice(i,i+6).map(async repo => ({repo,index:await loadTree(repo)})));
-      for (const {repo,index} of batch) {
-        if (!index?.directories) continue;
-        Object.keys(index.directories).forEach(path => {
-          if (path && (normalize(path).includes(q) || normalize((repo.fullName || repo.name) + '/' + path).includes(q))) output.push({repo,path});
-        });
-      }
-    }
-    return output.slice(0,150);
-  }
-  async function fetchWebResults(query) {
-    const q = text(query).trim(); if (!q) return [];
-    try {
-      const url = 'https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=' + encodeURIComponent(q) + '&gsrnamespace=0&gsrlimit=8&prop=pageimages%7Cextracts&piprop=thumbnail&pithumbsize=240&exintro=1&explaintext=1&exsentences=2&format=json&origin=*';
-      const response = await fetch(url, {credentials:'omit'}); if (!response.ok) return [];
-      const data = await response.json();
-      return Object.values(data.query?.pages || {}).sort((a,b) => (a.index||999)-(b.index||999)).map(page => ({title:page.title,description:page.extract || 'Artikel ensiklopedia terkait pencarian.',path:'wikipedia.org/wiki/' + String(page.title).replace(/ /g,'_'),href:'https://en.wikipedia.org/?curid=' + page.pageid,label:'Buka hasil web ↗',kind:'HASIL INTERNET'}));
-    } catch (_) { return []; }
-  }
-  async function render(query) {
-    const token = ++requestToken, q = cleanQuery(query); results.replaceChildren();
-    const layout = $('.global-search-layout', section), sourceView = $('.search-source-view', section);
-    if (!q) {
-      if (layout) layout.hidden = true;
-      if (sourceView) sourceView.hidden = false;
-      status.textContent = 'Mesin pencari siap. Cari domain, repositori, direktori sistem, dan hasil internet.';
-      renderFilters({all:repositories.length,repository:repositories.length,folder:0,domain:0});
-      return;
-    }
-    if (layout) layout.hidden = false;
-    if (sourceView) sourceView.hidden = true;
-    status.textContent = 'Mencari repositori, direktori, katalog domain sistem .NZ, dan hasil internet…';
-    const repoMatches = repositories.filter(repo => [repo.name,repo.fullName,repo.description,repo.language,repo.appType,repo.host,repo.homepage,repo.pagesUrl,...(repo.languages||[]).map(x=>x.name)].some(v=>normalize(v).includes(q))).slice(0,100);
-    const [folderMatches, allDomains, webMatches] = await Promise.all([collectFolderResults(q,token), loadDomainCatalog(), fetchWebResults(text(query).trim())]);
-    if (token !== requestToken) return;
-    const domainMatches = allDomains.filter(item => normalize(item.domain).includes(q)).slice(0,100);
-    const siteMatches = [];
-    if (['planetbintang.com','www.planetbintang.com','planetbintang','planetbintang.github.io/.l','index.html'].some(term => q.includes(term) || term.includes(q))) {
-      siteMatches.push({title:'planetbintang.com · halaman utama .L',description:'Domain utama yang dipetakan ke halaman GitHub Pages .L. DNS dan domain custom harus aktif di pengelola domain.',path:'planetbintang/planetbintang.com/index.html',href:'https://planetbintang.github.io/.L/',label:'Buka halaman .L',kind:'SITUS UTAMA'});
-    }
-    const utilityMatches = [
-      {title:'Google Search',description:'Cari “' + text(query).trim() + '” langsung di Google.',path:'google.com/search',href:'https://www.google.com/search?q=' + encodeURIComponent(text(query).trim()),label:'Cari di Google ↗',kind:'MESIN PENCARI'}
-    ];
-    const allCount = repoMatches.length + folderMatches.length + domainMatches.length + siteMatches.length + utilityMatches.length + webMatches.length + webMatches.length;
-    renderFilters({all:allCount,repository:repoMatches.length,folder:folderMatches.length,domain:domainMatches.length + siteMatches.length + utilityMatches.length});
-    const items = [];
-    if (activeType === 'all' || activeType === 'repository') repoMatches.forEach(repo => {
-      const name = text(repo.name || repo.fullName || 'Repositori');
-      const desc = [repo.fullName || '',repo.appType || '',repo.branch ? 'branch ' + repo.branch : ''].filter(Boolean).join(' · ');
-      const item = card({title:name,description:desc,href:'#fileManager',label:'Buka di File Manager',kind:'REPOSITORI',repo});
-      item.querySelector('a').addEventListener('click', () => { try { sessionStorage.setItem('pb-search-repo',text(repo.fullName||repo.name)); sessionStorage.setItem('pb-search-path',''); } catch (_) {} });
-      items.push(item);
-    });
-    if (activeType === 'all' || activeType === 'folder') folderMatches.forEach(({repo,path}) => {
-      const item = card({title:path.split('/').pop() || '/',description:repo.fullName || repo.name || 'Repositori',path:'/' + path,href:'#fileManager/' + path.split('/').map(encodeURIComponent).join('/'),label:'Buka folder',kind:'FOLDER'});
-      item.querySelector('a').addEventListener('click', () => { try { sessionStorage.setItem('pb-search-repo',text(repo.fullName||repo.name)); sessionStorage.setItem('pb-search-path',path); } catch (_) {} });
-      items.push(item);
-    });
-    if (activeType === 'all' || activeType === 'domain') domainMatches.forEach(({domain,status:domainStatus,source}) => {
-      const item = card({title:domain,description:'Katalog domain al.l/data.media · status: ' + domainStatus,path:source,href:'https://' + domain,label:'Buka situs',kind:'DOMAIN'});
-      item.querySelector('a').target = '_blank'; item.querySelector('a').rel = 'noopener noreferrer';
-      items.push(item);
-    });
-    if (activeType === 'all' || activeType === 'domain') {
-      siteMatches.forEach(match => items.push(card(match)));
-      utilityMatches.forEach(match => {
-        const item = card(match); const link = item.querySelector('a'); link.target = '_blank'; link.rel = 'noopener noreferrer'; items.push(item);
-      });
-      webMatches.forEach(match => { const item = card(match); const link = item.querySelector('a'); link.target = '_blank'; link.rel = 'noopener noreferrer'; items.push(item); });
-    }
-    items.forEach(item=>results.append(item));
-    status.textContent = allCount + ' hasil ditemukan: ' + repoMatches.length + ' repositori, ' + folderMatches.length + ' folder, ' + domainMatches.length + ' domain, ' + webMatches.length + ' hasil internet.';
-    if (!items.length) { const empty=document.createElement('p'); empty.className='global-search-empty'; empty.textContent='Tidak ada hasil cocok pada jenis pencarian ini.'; results.append(empty); }
-  }
-  function openGlobalSearch(value) {
-    const query = text(value).trim();
-    if (input) { input.value = query; }
-    try { sessionStorage.setItem('pb-global-search-query', query); } catch (_) {}
+  sync(searchInput, startInput);
+  sync(startInput, searchInput);
+  sync(topInput, searchInput);
+  sync(homeInput, searchInput);
+  sync(topInput, homeInput);
+  sync(homeInput, topInput);
+
+  function openSafariSearch(value) {
+    const query = String(value || '').trim();
+    if (searchInput) searchInput.value = query;
+    if (startInput) startInput.value = query;
     if (location.hash !== '#cari') location.hash = '#cari';
-    const run = () => { if (input) { input.value = query; render(query); } };
-    window.setTimeout(run, 80);
-    window.setTimeout(run, 260);
+    // Biarkan navigasi sistem selesai sebelum fokus dipindahkan ke kolom Safari.
+    window.setTimeout(() => {
+      if (searchInput) {
+        searchInput.value = query;
+        searchInput.focus();
+      }
+    }, 120);
   }
-  form.addEventListener('submit', e => { e.preventDefault(); render(input.value); });
-  input.addEventListener('input', () => render(input.value));
-  if (topForm && topInput) topForm.addEventListener('submit', e => { e.preventDefault(); openGlobalSearch(topInput.value); });
-  if (homeForm && homeInput) homeForm.addEventListener('submit', e => { e.preventDefault(); openGlobalSearch(homeInput.value); });
-  if (topInput && homeInput) {
-    topInput.addEventListener('input', () => { if (document.activeElement === topInput) homeInput.value = topInput.value; });
-    homeInput.addEventListener('input', () => { if (document.activeElement === homeInput) topInput.value = homeInput.value; });
+
+  if (topForm && topInput) {
+    topForm.addEventListener('submit', event => {
+      event.preventDefault();
+      openSafariSearch(topInput.value);
+    });
   }
+  if (homeForm && homeInput) {
+    homeForm.addEventListener('submit', event => {
+      event.preventDefault();
+      openSafariSearch(homeInput.value);
+    });
+  }
+
   try {
-    const savedQuery = sessionStorage.getItem('pb-global-search-query');
-    if (savedQuery && input) { input.value = savedQuery; if (topInput) topInput.value = savedQuery; if (homeInput) homeInput.value = savedQuery; }
+    const saved = sessionStorage.getItem('pb-global-search-query');
+    if (saved && searchInput) {
+      searchInput.value = saved;
+      if (startInput) startInput.value = saved;
+    }
   } catch (_) {}
-  fetch('./data/repositories.json',{cache:'no-cache',credentials:'omit'}).then(r=>{if(!r.ok)throw new Error('Snapshot tidak tersedia');return r.json();})
-    .then(data=>{repositories=Array.isArray(data.repositories)?data.repositories:[];status.textContent='Mesin pencari siap · '+repositories.length+' entri repositori. Sumber domain sistem .NZ dan hasil internet aktif saat tersedia.';renderFilters({all:repositories.length,repository:repositories.length,folder:0});render(input.value);})
-    .catch(()=>{status.textContent='Indeks repositori belum dapat dimuat. Periksa data/repositories.json.';});
+
+  [searchInput, startInput].forEach(input => {
+    if (!input) return;
+    input.addEventListener('input', () => {
+      try { sessionStorage.setItem('pb-global-search-query', input.value); } catch (_) {}
+    });
+  });
 })();
