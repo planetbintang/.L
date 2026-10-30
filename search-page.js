@@ -1,5 +1,10 @@
 (() => {
   'use strict';
+  const css = document.createElement('link');
+  css.rel = 'stylesheet';
+  css.href = './search-page.css?v=20261030-safari-google-v1';
+  document.head.append(css);
+
   const searchInput = document.getElementById('globalSearchInput');
   const startInput = document.getElementById('safariStartInput');
   const topForm = document.getElementById('topbarSearchForm');
