@@ -1,0 +1,17 @@
+{
+  "module": "Sistem URL dan routing",
+  "root": "vendordomain/url-routing/",
+  "files": [
+    "index.html",
+    "README.md",
+    "routing.config.json"
+  ],
+  "configuration": "vendordomain/config/layout/url-routing.json",
+  "runtime": "static-ui-local-drafts",
+  "productionRequires": [
+    "server-side-validation",
+    "redirect-loop-check",
+    "authenticated-deployment",
+    "provider-or-host-routing-integration"
+  ]
+}
