@@ -99,7 +99,73 @@
     document.dispatchEvent(new CustomEvent('planetbintang:workspace-view', { detail: { view } }));
   }
   window.PBWorkspace = { showView };
-  $$('#workspaceNav [data-workspace-view]').forEach((button)=>button.addEventListener('click',()=>showView(button.dataset.workspaceView)));
+  $('#workspaceNav [data-workspace-view]').forEach((button)=>button.addEventListener('click',()=>showView(button.dataset.workspaceView)));
+  // Katalog Workspace: 25 fitur utama × 6 subfitur = 150 entri terstruktur.
+  const workspaceFeatureGroups = [
+    ['Manajemen Proyek','Rencanakan dan pantau pekerjaan lintas repositori.',['Ringkasan proyek','Papan Kanban','Daftar tugas','Prioritas pekerjaan','Target dan tenggat','Riwayat proyek']],
+    ['Manajemen Repositori','Kelola indeks dan informasi repositori PlanetBintang.',['Daftar repositori','Detail repositori','Metadata repositori','Visibilitas dan akses','Favorit repositori','Perbandingan repositori']],
+    ['File Manager','Jelajahi berkas dan direktori dalam ruang kerja.',['Penjelajah folder','Pratinjau berkas','Pencarian berkas','Pengelompokan direktori','Informasi ukuran dan tipe','Riwayat perubahan lokal']],
+    ['Editor Kode','Tinjau dan siapkan perubahan kode secara aman.',['Editor teks','Pewarnaan sintaks','Format JSON','Pemeriksaan sintaks','Draft perubahan','Unduh draft']],
+    ['Kontrol Versi','Pantau struktur dan riwayat versi kode.',['Daftar branch','Riwayat commit','Perbandingan versi','Tag dan rilis','Pemeriksaan perubahan','Catatan versi']],
+    ['Issue dan Pelacakan','Catat masalah, diskusi, dan tindak lanjut.',['Buat issue lokal','Filter issue','Label masalah','Diskusi dan komentar','Status penyelesaian','Arsip masalah']],
+    ['Kolaborasi Tim','Atur koordinasi dan pembagian pekerjaan.',['Daftar anggota','Pembagian tugas','Peran kolaborator','Catatan tim','Agenda koordinasi','Ringkasan aktivitas']],
+    ['Dokumentasi','Susun dokumentasi teknis dan panduan sistem.',['Pustaka dokumentasi','Panduan penggunaan','Catatan teknis','Template dokumen','Indeks dokumentasi','Ekspor dokumentasi']],
+    ['Analitik Sistem','Baca ringkasan data dari snapshot yang tersedia.',['Ringkasan metrik','Statistik repositori','Komposisi bahasa','Peta jenis sistem','Aktivitas workspace','Ekspor laporan']],
+    ['Pencarian Global','Temukan data dan sumber dari satu tempat.',['Cari repositori','Cari nama berkas','Cari isi kode','Cari dokumentasi','Filter hasil','Riwayat pencarian']],
+    ['Integrasi GitHub','Kelola konteks koneksi dan operasi GitHub.',['Status koneksi','Snapshot repositori','Tautan sumber GitHub','Pemeriksaan izin','Status sinkronisasi','Panduan autentikasi']],
+    ['Integrasi Sistem','Hubungkan modul internal PlanetBintang.',['Katalog modul','Peta dependensi','Status modul','Pengaturan konektor','Validasi integrasi','Log integrasi']],
+    ['Otomasi Alur Kerja','Rancang alur tugas berulang dan pemicu.',['Pemicu pekerjaan','Langkah otomatis','Jadwal proses','Aturan kondisi','Riwayat eksekusi','Validasi alur']],
+    ['Keamanan Workspace','Periksa keamanan penggunaan ruang kerja.',['Ringkasan keamanan','Audit aktivitas lokal','Pemeriksaan izin','Pengelolaan sesi','Panduan perlindungan data','Peringatan keamanan']],
+    ['Pengaturan Akun','Atur profil dan preferensi perangkat.',['Profil tampilan','Preferensi bahasa','Tema workspace','Repositori awal','Preferensi notifikasi','Pengaturan tampilan']],
+    ['Penyimpanan Data','Kelola data lokal dan hasil ekspor.',['Status penyimpanan','Data tugas lokal','Data issue lokal','Cadangan konfigurasi','Ekspor JSON','Impor cadangan']],
+    ['AI Reber','Gunakan asisten untuk bantuan dan analisis.',['Panel percakapan','Konteks repositori','Bantuan kode','Ringkasan dokumentasi','Riwayat permintaan','Batasan dan keamanan AI']],
+    ['Pusat Notifikasi','Pantau informasi dan status ruang kerja.',['Notifikasi sistem','Pemberitahuan tugas','Pemberitahuan issue','Status integrasi','Riwayat pemberitahuan','Preferensi notifikasi']],
+    ['Jadwal dan Kalender','Atur target waktu dan agenda proyek.',['Kalender proyek','Agenda mingguan','Tenggat tugas','Penanda milestone','Linimasa pekerjaan','Ekspor agenda']],
+    ['Milestone dan Roadmap','Rencanakan sasaran pengembangan jangka panjang.',['Daftar milestone','Target rilis','Peta roadmap','Progres sasaran','Ketergantungan target','Arsip milestone']],
+    ['Manajemen Media','Atur aset visual dan dokumen pendukung.',['Pustaka gambar','Koleksi video','Berkas unduhan','Metadata media','Kategori aset','Tautan media']],
+    ['Domain dan Jaringan','Pantau pemetaan domain dan informasi jaringan.',['Daftar domain','Pemetaan host','Informasi DNS','Status endpoint','Peta jaringan','Catatan konfigurasi']],
+    ['Pemantauan Sistem','Tinjau kondisi modul dan layanan.',['Status layanan','Pemeriksaan endpoint','Ringkasan performa','Pemeriksaan dependensi','Log diagnostik','Laporan kesehatan']],
+    ['Administrasi Platform','Kelola konfigurasi dan tata kelola platform.',['Konfigurasi umum','Registry sistem','Manajemen modul','Kebijakan platform','Audit konfigurasi','Informasi versi']],
+    ['Bantuan dan Dukungan','Temukan panduan dan sumber pemecahan masalah.',['Pusat bantuan','Panduan cepat','Pertanyaan umum','Pemecahan masalah','Kontak dan dukungan','Informasi platform']]
+  ];
+  const suiteGrid = $('#workspaceFeatureGrid');
+  const suiteSearch = $('#workspaceFeatureSearch');
+  const suiteStatus = $('#workspaceFeatureStatus');
+  const suiteEmpty = $('#workspaceFeatureEmpty');
+  function renderWorkspaceFeatureSuite() {
+    if (!suiteGrid) return;
+    const query = (suiteSearch?.value || '').trim().toLocaleLowerCase('id-ID');
+    suiteGrid.replaceChildren();
+    let visible = 0;
+    workspaceFeatureGroups.forEach(([name, description, items], index) => {
+      const matching = items.map((label, itemIndex) => ({label, itemIndex})).filter(x => !query || name.toLocaleLowerCase('id-ID').includes(query) || description.toLocaleLowerCase('id-ID').includes(query) || x.label.toLocaleLowerCase('id-ID').includes(query));
+      if (query && !matching.length) return;
+      visible++;
+      const card = document.createElement('article'); card.className = 'workspace-feature-card';
+      const head = document.createElement('div'); head.className = 'workspace-feature-card-head';
+      head.append(safeText('span', String(index + 1).padStart(2, '0'), 'workspace-feature-icon'));
+      const titleWrap = document.createElement('div');
+      titleWrap.append(safeText('h4', name), safeText('small', '6 SUBFITUR · KELOMPOK ' + String(index + 1).padStart(2, '0')));
+      head.append(titleWrap);
+      const desc = safeText('p', description); desc.style.cssText = 'margin:0 0 9px;color:#9dbbd2;font-size:9px;line-height:1.5';
+      const actions = document.createElement('div'); actions.className = 'workspace-feature-actions';
+      matching.forEach(({label, itemIndex}) => {
+        const button = safeText('button', String(itemIndex + 1).padStart(2, '0') + ' · ' + label);
+        button.type = 'button'; button.setAttribute('aria-pressed', 'false');
+        button.addEventListener('click', () => {
+          actions.querySelectorAll('button').forEach(b => { b.setAttribute('aria-pressed','false'); b.classList.remove('is-selected'); });
+          button.setAttribute('aria-pressed','true'); button.classList.add('is-selected');
+          suiteStatus.textContent = name + ' / ' + label + ' — ' + description + ' Subfitur dipilih pada katalog workspace; tindakan yang mengubah GitHub tetap memerlukan koneksi dan izin tersendiri.';
+        });
+        actions.append(button);
+      });
+      card.append(head, desc, actions); suiteGrid.append(card);
+    });
+    if (suiteEmpty) suiteEmpty.classList.toggle('is-visible', visible === 0);
+  }
+  if (suiteSearch) suiteSearch.addEventListener('input', renderWorkspaceFeatureSuite);
+  renderWorkspaceFeatureSuite();
+
 
   function barChart(node, entries, color = 'blue') {
     node.replaceChildren(); const max=Math.max(1,...entries.map((x)=>x.value));
