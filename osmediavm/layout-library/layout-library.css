@@ -112,3 +112,17 @@
 #preview[data-automation="queue"] .mock-cards article{border-radius:0}#preview[data-automation="approval"] .mock-heading{border-left:3px solid #83e1ff;padding-left:8px}#preview[data-automation="pipeline"] .mock-chart{background-image:repeating-linear-gradient(90deg,transparent 0 12px,#234b66 12px 13px)}
 @media(max-width:950px){.workflow-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-tools{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.workflow-gallery-grid{grid-template-columns:1fr}.workflow-tools{grid-template-columns:1fr}.workflow-summary{flex-direction:column}.workflow-two-col{grid-template-columns:1fr 1fr}}
+
+/* Complete visible index for every layout, shape, resolution and workflow type */
+.layout-type-index{margin:0 0 18px;padding:18px;border:1px solid #29425d;background:linear-gradient(145deg,#0b1d2e,#081421)}
+.type-index-group{margin:16px 0 0}.type-index-group>h3{margin:0 0 9px;color:#83e1ff;font-size:10px;letter-spacing:.13em}
+.type-index-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.type-index-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0;min-height:120px;padding:11px;text-align:left;color:#dcecff;background:linear-gradient(145deg,#11283e,#091827);border:1px solid #29445d;cursor:pointer}
+.type-index-card:hover,.type-index-card:focus-visible{border-color:#83e1ff;outline:none;box-shadow:0 6px 18px #0003}
+.type-index-meta{font-size:8px;color:#83e1ff;letter-spacing:.1em}.type-index-card>b{font-size:11px;line-height:1.35}.type-index-card>p{margin:0;color:#9db4c9;font-size:9px;line-height:1.45;flex:1}.type-index-action{font-size:8px;color:#b8edff;font-weight:800;letter-spacing:.08em}
+.workflow-type-index{padding:12px;border:1px solid #223d56;background:#091827}
+.workflow-type-index .type-index-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.workflow-type-index .type-index-card{min-height:110px}
+@media(max-width:1000px){.type-index-grid,.workflow-type-index .type-index-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.type-index-grid,.workflow-type-index .type-index-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.type-index-card{min-height:128px;padding:9px}}
+@media(max-width:390px){.type-index-grid,.workflow-type-index .type-index-grid{grid-template-columns:1fr}}

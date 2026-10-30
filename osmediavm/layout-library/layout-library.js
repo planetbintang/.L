@@ -118,7 +118,7 @@ const resolutionDefs=[
 ].map(([id,name,w,h,group,device])=>({id,name,w,h,group,device}));
 const allLayoutVariants=layouts.flatMap(base=>shapeDefs.flatMap(shape=>resolutionDefs.map(res=>({id:base.id+'-'+shape.id+'-'+res.id,base,shape,res}))));
 let currentLayoutVariant=allLayoutVariants[0],variantPageIndex=0;
-const variantPageSize=18;
+const variantPageSize=36;
 let visibleLayoutVariants=allLayoutVariants;
 function filterLayoutVariants(){
  const q=($('#layoutVariantSearch').value||'').toLowerCase().trim(),s=$('#layoutShapeFilter').value,r=$('#layoutResolutionFilter').value;
@@ -180,14 +180,25 @@ const automationDefs=[
 ].map(([id,name,desc,flow])=>({id,name,desc,flow}));
 const workflowVariants=layouts.flatMap(base=>activityDefs.flatMap(activity=>storageDefs.flatMap(storage=>automationDefs.map(automation=>({id:base.id+'-'+activity.id+'-'+storage.id+'-'+automation.id,base,activity,storage,automation})))));
 let selectedWorkflow=workflowVariants[0],workflowPage=0,visibleWorkflowVariants=workflowVariants;
-const workflowPageSize=18;
+const workflowPageSize=36;
+
+function indexCard(title,desc,meta,action,label){const b=document.createElement('button');b.type='button';b.className='type-index-card';b.innerHTML='<span class="type-index-meta">'+esc(meta)+'</span><b>'+esc(title)+'</b><p>'+esc(desc)+'</p><span class="type-index-action">'+esc(label||'BUKA PROFIL ↗')+'</span>';b.addEventListener('click',action);return b}
+function renderAllTypeIndexes(){
+ const families=$('#layoutFamilyIndex');if(families)families.replaceChildren(...layouts.map(l=>{const d=layoutDetails[l.id];return indexCard(l.name,d.desc||l.desc,'192 VARIAN · '+l.type,()=>{active=l;$('#enginePattern').value=l.id;render();$('#layoutEngine').scrollIntoView({behavior:'smooth',block:'center'})},'GUNAKAN KELUARGA ↗')}));
+ const shapes=$('#layoutShapeIndex');if(shapes)shapes.replaceChildren(...shapeDefs.map(s=>indexCard(s.name,s.desc,'96 VARIAN',()=>{$('#layoutShapeFilter').value=s.id;filterLayoutVariants();$('#layoutGallery').scrollIntoView({behavior:'smooth',block:'start'})},'LIHAT BENTUK ↗')));
+ const resolutions=$('#layoutResolutionIndex');if(resolutions)resolutions.replaceChildren(...resolutionDefs.map(r=>indexCard(r.name,r.device+' · '+r.w+' × '+r.h+' piksel','72 VARIAN · '+r.group.toUpperCase(),()=>{$('#layoutVariantSearch').value=r.name;$('#layoutShapeFilter').value='';$('#layoutResolutionFilter').value='';filterLayoutVariants();$('#layoutGallery').scrollIntoView({behavior:'smooth',block:'start'})},'LIHAT RESOLUSI ↗')));
+ const activities=$('#activityTypeIndex');if(activities)activities.replaceChildren(...activityDefs.map(a=>indexCard(a.name,a.desc,'384 PROFIL · AKTIVITAS',()=>{$('#workflowActivityFilter').value=a.id;filterWorkflowVariants();$('#workflowGallery').scrollIntoView({behavior:'smooth',block:'start'})},'LIHAT AKTIVITAS ↗')));
+ const storages=$('#storageTypeIndex');if(storages)storages.replaceChildren(...storageDefs.map(s=>indexCard(s.name,s.desc+' '+s.limit,'384 PROFIL · PENYIMPANAN',()=>{$('#workflowStorageFilter').value=s.id;filterWorkflowVariants();$('#workflowGallery').scrollIntoView({behavior:'smooth',block:'start'})},'LIHAT PENYIMPANAN ↗')));
+ const automations=$('#automationTypeIndex');if(automations)automations.replaceChildren(...automationDefs.map(a=>indexCard(a.name,a.desc,'384 PROFIL · OTOMATISASI',()=>{$('#workflowAutomationFilter').value=a.id;filterWorkflowVariants();$('#workflowGallery').scrollIntoView({behavior:'smooth',block:'start'})},'LIHAT OTOMATISASI ↗')));
+}
+
 function fillWorkflowFilters(){[['workflowActivityFilter',activityDefs],['workflowStorageFilter',storageDefs],['workflowAutomationFilter',automationDefs]].forEach(([id,items])=>items.forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.name;$('#'+id).append(o)}))}
 function filterWorkflowVariants(){const q=$('#workflowSearch').value.trim().toLowerCase(),a=$('#workflowActivityFilter').value,s=$('#workflowStorageFilter').value,m=$('#workflowAutomationFilter').value;visibleWorkflowVariants=workflowVariants.filter(v=>(!a||v.activity.id===a)&&(!s||v.storage.id===s)&&(!m||v.automation.id===m)&&(!q||(v.id+' '+v.base.name+' '+v.activity.name+' '+v.activity.desc+' '+v.storage.name+' '+v.storage.desc+' '+v.automation.name+' '+v.automation.desc).toLowerCase().includes(q)));workflowPage=0;renderWorkflowGallery()}
 function chooseWorkflow(v){selectedWorkflow=v;active=v.base;$('#enginePattern').value=v.base.id;$('#engineStorage').value=v.storage.id==='browser'||v.storage.id==='indexeddb'||v.storage.id==='session'||v.storage.id==='memory'?'component':v.storage.id==='manifest'?'global':v.storage.id==='file'?'category':'component';$('#workflowSelected').textContent='AKTIF: '+v.activity.name+' · '+v.storage.name+' · '+v.automation.name;renderWorkflowGallery();render();$('#workflowGallery').scrollIntoView({behavior:'smooth',block:'center'})}
 function renderWorkflowGallery(){const host=$('#workflowGalleryGrid');if(!host)return;const start=workflowPage*workflowPageSize,items=visibleWorkflowVariants.slice(start,start+workflowPageSize);host.replaceChildren(...items.map(v=>{const b=document.createElement('article');b.className='workflow-card'+(selectedWorkflow.id===v.id?' active':'');b.innerHTML='<div class="workflow-card-top"><span>'+esc(v.base.type)+'</span><small>'+esc(v.id)+'</small></div><h3>'+esc(v.activity.name)+'</h3><p>'+esc(v.activity.desc)+'</p><div class="workflow-flow"><b>ALUR AKTIVITAS</b><span>'+esc(v.activity.flow)+'</span></div><div class="workflow-two-col"><section><b>PENYIMPANAN</b><strong>'+esc(v.storage.name)+'</strong><span>'+esc(v.storage.desc)+'</span><small>'+esc(v.storage.limit)+'</small></section><section><b>OTOMATISASI</b><strong>'+esc(v.automation.name)+'</strong><span>'+esc(v.automation.desc)+'</span><small>'+esc(v.automation.flow)+'</small></section></div><div class="workflow-blocks"><b>BLOK SISTEM</b>'+v.activity.blocks.map(x=>'<span>'+esc(x)+'</span>').join('')+v.storage.blocks.map(x=>'<span>'+esc(x)+'</span>').join('')+'</div><button type="button">TERAPKAN PROFIL ↗</button>';b.querySelector('button').addEventListener('click',()=>chooseWorkflow(v));return b}));$('#workflowCount').textContent=visibleWorkflowVariants.length.toLocaleString('id-ID')+' / '+workflowVariants.length.toLocaleString('id-ID')+' PROFIL';$('#workflowTotal').textContent=workflowVariants.length.toLocaleString('id-ID')+' PROFIL';$('#workflowPageStatus').textContent='Halaman '+(workflowPage+1)+' dari '+Math.max(1,Math.ceil(visibleWorkflowVariants.length/workflowPageSize));$('#workflowPrev').disabled=workflowPage===0;$('#workflowNext').disabled=(workflowPage+1)*workflowPageSize>=visibleWorkflowVariants.length}
 ['workflowSearch','workflowActivityFilter','workflowStorageFilter','workflowAutomationFilter'].forEach(id=>$('#'+id).addEventListener(id==='workflowSearch'?'input':'change',filterWorkflowVariants));
 $('#workflowPrev').addEventListener('click',()=>{workflowPage=Math.max(0,workflowPage-1);renderWorkflowGallery()});$('#workflowNext').addEventListener('click',()=>{if((workflowPage+1)*workflowPageSize<visibleWorkflowVariants.length)workflowPage++;renderWorkflowGallery()});
-fillWorkflowFilters();renderWorkflowGallery();
+fillWorkflowFilters();renderAllTypeIndexes();renderWorkflowGallery();
 
 render();loadCatalog();
 })();
