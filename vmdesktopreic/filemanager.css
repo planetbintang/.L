@@ -1,0 +1,24 @@
+/* File Manager REIC · Konqueror-inspired resolution 01 */
+.file-manager{background:#e7edf4;color:#172638;border:1px solid #9db5cb;min-height:510px;display:flex;flex-direction:column;font-family:Arial,sans-serif;box-shadow:0 8px 28px #071a2b33}
+.fm-menubar{height:32px;display:flex;align-items:center;gap:24px;padding:0 14px;background:linear-gradient(#f8fbff,#dce6ef);border-bottom:1px solid #b4c6d6;font-size:12px}
+.fm-menubar span{cursor:pointer}.fm-toolbar{display:flex;align-items:center;gap:7px;padding:8px 10px;background:#e4ebf2;border-bottom:1px solid #b5c7d7}
+.fm-toolbar button,.fm-tools button{border:1px solid #b4c5d5;background:linear-gradient(#fff,#dce7f0);color:#233d55;padding:7px 10px;border-radius:3px;cursor:pointer}
+.fm-toolbar button:hover,.fm-tools button:hover{background:#c8e5fa}.fm-path{flex:1;min-width:90px;padding:8px;border:1px solid #9fb5c8;background:#fff;color:#24384a}
+.fm-search{width:170px;min-width:70px;padding:8px;border:1px solid #9fb5c8;background:#fff;color:#24384a}
+.fm-main{display:grid;grid-template-columns:205px minmax(0,1fr);min-height:405px;background:#fff}
+.fm-sidebar{padding:10px 8px;border-right:1px solid #aebfd0;background:linear-gradient(90deg,#edf2f7,#e4ebf2)}
+.fm-sidebar h4{font-size:11px;color:#5b7186;text-transform:uppercase;letter-spacing:.08em;margin:8px 7px}
+.fm-tree-root,.fm-tree-item{width:100%;display:flex;align-items:center;gap:9px;padding:8px 9px;border:0;background:transparent;text-align:left;color:#24384a;cursor:pointer;font-size:12px}
+.fm-tree-item.active,.fm-tree-item:hover,.fm-tree-root:hover{background:#c9e2f7;outline:1px solid #9fc7e6}
+.fm-tree-item span{color:#3976b4;font-size:17px}.fm-content{min-width:0;display:flex;flex-direction:column}
+.fm-crumbs{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid #e0e7ee;background:#f8fafc;color:#6b8093;font-size:11px}
+.fm-crumbs button{border:0;background:none;color:#2d5e8b;cursor:pointer}.fm-items{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-content:start;gap:14px;padding:18px;min-height:300px}
+.fm-entry{min-width:0;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:8px;border:1px solid transparent;background:transparent;color:#26394b;cursor:pointer}
+.fm-entry:hover{background:#edf6fd;border-color:#c1d8eb}.fm-entry.selected{background:#d8ebfb;border-color:#82b7df}
+.fm-entry-icon{font-size:48px;line-height:1.2;filter:drop-shadow(0 2px 2px #0002)}.fm-entry b{max-width:100%;font-size:12px;font-weight:500;overflow-wrap:anywhere;text-align:center}
+.fm-items.list-mode{display:flex;flex-direction:column;gap:2px;padding:10px}.fm-items.list-mode .fm-entry{min-height:42px;flex-direction:row;justify-content:flex-start;padding:5px 10px}.fm-items.list-mode .fm-entry-icon{font-size:22px}.fm-items.list-mode .fm-entry b{flex:1;text-align:left}.fm-entry small{font-size:10px;color:#718396}
+.fm-empty{grid-column:1/-1;text-align:center;padding:70px 10px;color:#8192a2;font-size:13px}
+.fm-bottom{height:30px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#e6edf4;border-top:1px solid #b7c7d6;color:#53697d;font-size:11px}
+.fm-led{width:9px;height:9px;border-radius:50%;background:#40ae65;box-shadow:0 0 0 2px #b9e6c8}
+.fm-tools{display:flex;gap:6px;flex-wrap:wrap;padding:7px 10px;background:#eef3f7;border-bottom:1px solid #c4d0db}
+@media(max-width:650px){.file-manager{min-height:480px}.fm-main{grid-template-columns:125px minmax(0,1fr)}.fm-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:8px}.fm-sidebar{padding:6px 3px}.fm-tree-item{font-size:10px;padding:7px 4px}.fm-toolbar{flex-wrap:wrap}.fm-search{width:100%;order:4}.fm-menubar{gap:12px;font-size:10px}.fm-entry-icon{font-size:38px}}
