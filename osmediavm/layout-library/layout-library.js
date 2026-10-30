@@ -20,7 +20,8 @@ const categoryMeta={
 'devops-observabilitas':{name:'DevOps & Observabilitas',icon:'⌁',desc:'Git, CI/CD, build, deployment, rollback, log, metrik, dan tracing.',layout:'console',tag:'OPERATIONS'},
 'tata-kelola':{name:'Tata Kelola & Optimasi',icon:'◎',desc:'Ketersediaan, disaster recovery, SLA, performa, SEO, analitik, dan lisensi.',layout:'dashboard',tag:'GOVERNANCE'}
 };
-const groupLayouts={'identitas-desain':'canvas','desktop-navigasi':'workbench','file-manager':'library','server-cloud':'dashboard','keamanan-privasi':'console','runtime-api':'workbench','data-search':'library','ai-otomasi':'canvas','devops-observabilitas':'console','tata-kelola':'dashboard'};\nconst categoryBlueprint={
+const groupLayouts={'identitas-desain':'canvas','desktop-navigasi':'workbench','file-manager':'library','server-cloud':'dashboard','keamanan-privasi':'console','runtime-api':'workbench','data-search':'library','ai-otomasi':'canvas','devops-observabilitas':'console','tata-kelola':'dashboard'};
+const categoryBlueprint={
 'identitas-desain':{layout:'canvas',columns:'3',navigation:'tabs',header:'minimal',interaction:'editor',density:'spacious',palette:'category'},
 'desktop-navigasi':{layout:'workbench',columns:'2',navigation:'sidebar',header:'toolbar',interaction:'cards',density:'balanced',palette:'osmediavm'},
 'file-manager':{layout:'library',columns:'4',navigation:'category',header:'toolbar',interaction:'table',density:'compact',palette:'osmediavm'},
