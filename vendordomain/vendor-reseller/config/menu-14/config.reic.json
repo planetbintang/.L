@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Vendor dan Reseller",
+  "menuId": "14",
+  "menu": "Kuota Transaksi Vendor",
+  "layers": {
+    "layout": {
+      "type": "dashboard",
+      "density": "comfortable",
+      "navigation": "tabs"
+    },
+    "pilihan": {
+      "accent": "violet",
+      "components": "analytics"
+    },
+    "penerapan": {
+      "mode": "manual-preview",
+      "requiresConfirmation": true
+    },
+    "penyimpanan": {
+      "strategy": "per-menu",
+      "folder": "vendordomain/vendor-reseller/config/menu-14/",
+      "files": [
+        "config.reic.json",
+        "layout.json",
+        "pilihan.json",
+        "penerapan.json",
+        "storage.json"
+      ]
+    },
+    "sistem": {
+      "namespace": "pb-vendordomain-vendor-reseller-14",
+      "backendSync": "not-configured"
+    }
+  },
+  "createdFor": "VendorDomain static workspace"
+}
