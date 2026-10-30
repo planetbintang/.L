@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Vendor dan Reseller",
+  "menuId": "08",
+  "menu": "Pengaturan Margin Reseller",
+  "layers": {
+    "layout": {
+      "type": "dashboard",
+      "density": "comfortable",
+      "navigation": "breadcrumbs"
+    },
+    "pilihan": {
+      "accent": "mint",
+      "components": "records"
+    },
+    "penerapan": {
+      "mode": "manual-preview",
+      "requiresConfirmation": true
+    },
+    "penyimpanan": {
+      "strategy": "per-menu",
+      "folder": "vendordomain/vendor-reseller/config/menu-08/",
+      "files": [
+        "config.reic.json",
+        "layout.json",
+        "pilihan.json",
+        "penerapan.json",
+        "storage.json"
+      ]
+    },
+    "sistem": {
+      "namespace": "pb-vendordomain-vendor-reseller-8",
+      "backendSync": "not-configured"
+    }
+  },
+  "createdFor": "VendorDomain static workspace"
+}
