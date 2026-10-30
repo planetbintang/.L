@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261030-safari-google-v1';
+  css.href = './search-page.css?v=20261030-safari-hub-style-v2';
   document.head.append(css);
 
   const searchInput = document.getElementById('globalSearchInput');
