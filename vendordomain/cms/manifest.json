@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Konten dan CMS",
+  "moduleId": "VD-CMS-014",
+  "entry": "index.html",
+  "submenuCount": 25,
+  "layers": [
+    "layout",
+    "options",
+    "apply",
+    "storage",
+    "files",
+    "config"
+  ],
+  "storage": {
+    "mode": "browser-local-draft",
+    "key": "vd-cms-content-v1",
+    "production": "requires authenticated persistent backend"
+  },
+  "directories": {
+    "config": [
+      "default.json",
+      "permissions.json",
+      "workflow.json"
+    ],
+    "data": [
+      "README.md",
+      "articles/",
+      "pages/",
+      "categories/",
+      "tags/"
+    ],
+    "media": [
+      "README.md",
+      "images/",
+      "video/",
+      "audio/",
+      "documents/"
+    ],
+    "templates": [
+      "article/",
+      "category/",
+      "page/"
+    ],
+    "revisions": [
+      "README.md",
+      "snapshots/"
+    ],
+    "exports": [
+      "README.md",
+      "json/",
+      "xml/"
+    ]
+  },
+  "submenus": [
+    "Daftar Artikel",
+    "Kategori Konten",
+    "Tag Artikel",
+    "Editor Artikel",
+    "Editor Halaman",
+    "Pengelolaan Penulis",
+    "Profil Penulis",
+    "Alur Editorial",
+    "Status Draf",
+    "Persetujuan Editor",
+    "Penjadwalan Artikel",
+    "Penyimpanan Revisi",
+    "Riwayat Revisi",
+    "Komentar Internal",
+    "Pustaka Media",
+    "Menu Navigasi Situs",
+    "Footer Dinamis",
+    "Header Dinamis",
+    "Templat Artikel",
+    "Templat Kategori",
+    "Halaman Pencarian Konten",
+    "Pencarian Teks Penuh",
+    "RSS Feed",
+    "Sitemap XML",
+    "Ekspor Konten"
+  ]
+}
