@@ -129,6 +129,19 @@
       "default": true,
       "scope": "session",
       "description": "Periksa bidang wajib, tipe tampilan, dan status kemampuan sebelum menyimpan konfigurasi."
+    },
+    {
+      "key": "registry.configurationScope",
+      "label": "Cakupan konfigurasi registri",
+      "type": "select",
+      "default": "per-menu",
+      "options": [
+        "per-menu",
+        "per-category",
+        "all-registry"
+      ],
+      "scope": "local-browser",
+      "description": "Preferensi konfigurasi terpisah untuk setiap menu dan submenu."
     }
   ],
   "modules": [
@@ -168,9 +181,13 @@
       "config": "../pusat_registri/",
       "capabilities": [
         "registry",
-        "detail-navigation"
+        "detail-navigation",
+        "layered-configuration",
+        "per-menu-preferences",
+        "folder-file-mapping"
       ],
-      "status": "needs-validation"
+      "status": "ready",
+      "configuration_schema": "../pusat_registri/konfigurasi-berlapis.json"
     },
     {
       "id": "integration-hub",
