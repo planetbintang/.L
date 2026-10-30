@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#050a14" />
-    <meta name="deployment-revision" content="2026-10-29-pages-redeploy-0120" />
+    <meta name="deployment-revision" content="2026-10-30-nav-library-vendor-fix-01" />
     <meta name="description" content="Planetbintang Root System — workspace lintas repositori dengan logo brand standar, File Manager, dan empat animasi cahaya." />
     <link rel="icon" href="./media/brand/planetbintang-logo.svg" type="image/png" />
     <link rel="apple-touch-icon" href="./media/brand/planetbintang-logo.svg" />
@@ -110,7 +110,23 @@
       @media(max-width:640px){.vm-home-showcase{padding:1rem}.vm-home-showcase h2{font-size:clamp(1.55rem,7vw,2rem);line-height:1.16}.vm-home-showcase .vm-home-intro{font-size:.94rem;line-height:1.7}.vm-home-heading>p{padding:.85rem}.vm-home-card-body{padding:.9rem}}
     </style>
     <title>Planetbintang · Root System</title>
-</head>
+
+    <style id="primary-nav-visibility-fix">
+      /* Keep the requested destinations in the first visible part of the primary navigation. */
+      .topbar > .main-nav > [data-menu="code"] { display: none !important; }
+      .topbar > .main-nav > [data-menu="library"],
+      .topbar > .main-nav > a[href="./vendordomain/"] { flex: 0 0 auto !important; visibility: visible !important; opacity: 1 !important; }
+      .topbar > .main-nav { scroll-padding-inline: 8px; }
+      .topbar > .main-nav > [data-menu="library"] { order: -20 !important; }
+      .topbar > .main-nav > a[href="./vendordomain/"] { order: -19 !important; }
+      @media (max-width: 760px) {
+        .topbar > .main-nav { gap: 5px !important; }
+        .topbar > .main-nav > [data-menu="library"] > summary,
+        .topbar > .main-nav > a[href="./vendordomain/"] { min-height: 38px !important; padding: 7px 9px !important; }
+      }
+    </style>
+
+  </head>
   <body>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
     <header class="topbar" id="top">
@@ -120,14 +136,15 @@
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
         <a class="main-nav-link" href="./galeri/" aria-label="Buka Galeri gambar">GALERI</a>
-        <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./aktif/index.html" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
+        <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./leksikon/" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
+        <a class="main-nav-link" href="./vendordomain/" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
         <a class="main-nav-link" href="./osmediavm/" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
         <details class="nav-dropdown common-portal-dropdown" data-menu="portal"><summary>Portal</summary><div class="nav-dropdown-menu" aria-label="Menu umum situs">
           <a href="#overview" data-system-route="system"><b>Beranda</b><small>Kembali ke dashboard utama</small></a>
           <a href="#cari" data-system-route="search"><b>Pencarian</b><small>Temukan repositori dan sumber</small></a>
           <a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Jelajahi indeks proyek</small></a>
           <a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri folder dan file</small></a>
-          <a href="./aktif/index.html"><b>Perpustakaan</b><small>Kamus Digital Modern · penelusuran kata dan data IC</small></a>
+          <a href="./leksikon/"><b>Perpustakaan</b><small>Kamus Digital Modern · penelusuran kata dan data IC</small></a>
           <a href="#workspace/projects" data-system-route="projects"><b>Proyek &amp; Tugas</b><small>Kelola rencana kerja lokal</small></a>
           <a href="#workspace/analytics" data-system-route="analytics"><b>Analitik</b><small>Lihat ringkasan snapshot</small></a>
           <a href="#hosts" data-system-route="hosts"><b>Domain &amp; Host</b><small>Jelajahi domain terpetakan</small></a>
@@ -147,7 +164,7 @@
           <a href="#fileManager/airz" data-system-route="file-manager"><b>Root /airz</b><small>Repo .AIRZ · mirror folder airz/</small></a>
         </div></details>
         <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI Reber</a>
-        <a class="main-nav-link" href="./vendordomain/" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
+        
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         
         <details class="nav-dropdown main-nav-more" data-menu="lainnya"><summary>Lainnya</summary><div class="nav-dropdown-menu nav-submenu-groups" aria-label="Submenu menu utama lainnya">
