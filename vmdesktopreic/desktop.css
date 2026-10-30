@@ -127,3 +127,37 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden}
  .vm-brand{font-size:14px}
  .core-item b,.core-item:hover b,.core-item.active b{font-size:9px}
 }
+
+
+/* REGISTRI 1.500 KOMPONEN OS MEDIA VM */
+.component-registry{display:flex;flex-direction:column;gap:14px;min-height:0}
+.registry-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px;border:1px solid #31536b;background:linear-gradient(120deg,#10243a,#0a1727)}
+.registry-heading span,.registry-detail-head small{font-size:10px;letter-spacing:.16em;color:#83e1ff}
+.registry-heading h3{margin:7px 0;font-size:clamp(16px,2vw,23px)}
+.registry-heading p,.registry-detail-head p{margin:0;color:#91a8c3;font-size:12px;line-height:1.5}
+.registry-heading>strong{flex:0 0 auto;padding:10px 12px;border:1px solid #47728e;color:#83e1ff;font-size:20px}
+.registry-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,260px);gap:10px}
+.registry-controls input,.registry-controls select{width:100%;min-width:0;padding:12px;border:1px solid #31536b;background:#07111f;color:#eaf4ff}
+.registry-meta{color:#91a8c3;font-size:11px}
+.registry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.registry-item{min-width:0;min-height:90px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:12px;border:1px solid #29445d;background:linear-gradient(135deg,#10243a,#0a1727);color:#edf5ff;text-align:left;cursor:pointer}
+.registry-item:hover,.registry-item:focus-visible{border-color:#83e1ff;background:#183c57;outline:none}
+.registry-item small{font-size:9px;color:#83e1ff;letter-spacing:.08em}
+.registry-item b{font-size:12px;line-height:1.35}
+.registry-item span{margin-top:auto;color:#91a8c3;font-size:9px;letter-spacing:.06em}
+.registry-empty{grid-column:1/-1;padding:20px;border:1px dashed #31536b;color:#91a8c3}
+.registry-pager{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0}
+.registry-pager button,.registry-detail-head button{padding:9px 12px;border:1px solid #31536b;background:#0d1a2b;color:#83e1ff;cursor:pointer}
+.registry-pager button:disabled{opacity:.35;cursor:not-allowed}
+.registry-pager span{color:#91a8c3;font-size:10px;letter-spacing:.1em}
+.registry-detail{border:1px solid #47728e;background:#081422;padding:14px}
+.registry-detail-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid #29445d}
+.registry-detail-head h4{margin:6px 0;font-size:18px}
+.registry-detail-body{padding-top:12px;min-width:0}
+.registry-detail-body .reic-panel{max-width:100%;padding:16px;border:1px solid #31536b;background:#10243a;color:#edf5ff}
+.registry-detail-body .reic-form{display:grid;gap:8px}
+.registry-detail-body input,.registry-detail-body select{width:100%;padding:10px;background:#07111f;color:#edf5ff;border:1px solid #31536b}
+.registry-detail-body button{padding:10px 14px;background:#173b56;color:#edf5ff;border:1px solid #83e1ff;cursor:pointer}
+.registry-detail-body .reic-output,.registry-detail-body .reic-status{display:block;margin-top:12px;padding:10px;background:#07111f;color:#b7cce0}
+@media(max-width:900px){.registry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.registry-controls{grid-template-columns:1fr}.registry-grid{grid-template-columns:1fr}.registry-heading{flex-direction:column}.registry-heading>strong{font-size:16px}.registry-item{min-height:70px}.registry-pager button{font-size:9px;padding:8px}}
