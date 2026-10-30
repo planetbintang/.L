@@ -70,3 +70,57 @@
   #searchPage .safari-start-form{gap:.25rem;padding:.25rem}
   #searchPage #safariStartInput{min-height:42px;padding:.5rem}
 }
+
+/* Samakan kolom dan tombol pencarian Safari dengan kontrol pencarian di sebelah Hub. */
+#searchPage .safari-address-wrap,
+#searchPage .safari-start-form{
+  gap:0;
+  padding:0;
+  border:1px solid #111;
+  border-radius:0;
+  background:#fff;
+  box-shadow:none;
+}
+#searchPage .safari-address-wrap:focus-within,
+#searchPage .safari-start-form:focus-within{
+  border-color:#111;
+  box-shadow:0 0 0 2px rgba(17,17,17,.08);
+}
+#searchPage #globalSearchInput,
+#searchPage #safariStartInput{
+  min-height:40px;
+  padding:.55rem .75rem;
+  color:#111;
+  font-size:11px;
+}
+#searchPage .safari-search-submit.icon-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  flex:0 0 auto;
+  min-height:40px;
+  margin:0;
+  padding:10px 14px;
+  border:0;
+  border-left:1px solid #111;
+  border-radius:0;
+  background:#111;
+  color:#fff;
+  font:700 11px/1.2 inherit;
+  letter-spacing:0;
+  text-transform:none;
+  white-space:nowrap;
+  cursor:pointer;
+}
+#searchPage .safari-search-submit.icon-button:hover{
+  background:#303030;
+  color:#fff;
+}
+#searchPage .safari-search-submit.icon-button span{
+  font-size:17px;
+  line-height:1;
+}
+@media(max-width:700px){
+  #searchPage .safari-search-submit.icon-button{min-height:38px;padding:9px 11px;font-size:10px}
+}
