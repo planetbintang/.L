@@ -401,27 +401,33 @@
       </div>
     </section>
 
-    <section class="section-block" id="searchPage" data-system-page="search" hidden aria-label="SOURCE VIEW / CATALOGS &amp; REPOSITORIES">
-      <section class="search-source-view" aria-label="Katalog dan repositori">
-        <div class="search-source-heading">
-          <div><p class="eyebrow">SOURCE VIEW / CATALOGS &amp; REPOSITORIES</p><h3>Tampilan katalog &amp; repositori</h3><p class="section-description">Pilih sumber yang ingin ditampilkan.</p></div>
-          <div class="search-source-actions" role="group" aria-label="Pilih sumber tampilan">
-            <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/index.html" data-source-title="AL.L · index.html" aria-pressed="true">AL.L · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/vendordomain/index.html" data-source-title="Vendor Domain · index.html" aria-pressed="false">Vendor Domain · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://github.com" data-source-title="GitHub.com" aria-pressed="false">GitHub.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://github.planetbintang.com/github.com/planetbintang/.L/index.html" data-source-title="GitHub Planetbintang · mirror path" aria-pressed="false">GitHub Planetbintang · mirror</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://www.google.com/" data-source-title="Google.com" aria-pressed="false">Google.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.com/" data-source-title="Planetbintang.com" aria-pressed="false">Planetbintang.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/" data-source-title="planetbintang.com · index.html (GitHub Pages)" aria-pressed="false">planetbintang.com · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/aireber/index.html" data-source-title="AI Reber · .L/aireber/index.html" aria-pressed="false">AI Reber · .L/aireber/index.html</button>
-            <a class="text-button" id="searchSourceOpen" href="https://planetbintang.github.io/al.l/index.html" target="_blank" rel="noopener noreferrer">Buka situs ↗</a>
+    <section class="section-block safari-search-page" id="searchPage" data-system-page="search" hidden aria-label="Pencarian Safari">
+      <div class="safari-browser">
+        <header class="safari-toolbar" aria-label="Bilah pencarian Safari">
+          <div class="safari-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="safari-address-wrap">
+            <span class="safari-address-icon" aria-hidden="true">⌕</span>
+            <form id="globalSearchForm" class="safari-search-form" action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer" role="search">
+              <label class="visually-hidden" for="globalSearchInput">Cari menggunakan Google</label>
+              <input id="globalSearchInput" name="q" type="search" placeholder="Cari di Google atau masukkan alamat…" autocomplete="off" spellcheck="false" />
+              <button class="safari-search-submit" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
+            </form>
           </div>
-        </div>
-        <div class="search-source-frame-wrap">
-          <iframe id="searchSourceFrame" title="Pratinjau AL.L · index.html" src="https://planetbintang.github.io/al.l/index.html" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
-        </div>
-        <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L · index.html. Jika konten kosong atau ditolak, gunakan “Buka situs”.</p>
-      </section>
+          <span class="safari-url-label" aria-label="Mesin pencari Google">google.com</span>
+        </header>
+        <main class="safari-start-page">
+          <div class="safari-start-mark" aria-hidden="true">S</div>
+          <p class="safari-eyebrow">SAFARI · PENCARIAN WEB</p>
+          <h2>Mulai pencarian</h2>
+          <p class="safari-description">Masukkan kata kunci atau alamat situs. Semua pencarian diteruskan melalui Google.</p>
+          <form class="safari-start-form" action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer" role="search">
+            <label class="visually-hidden" for="safariStartInput">Kata kunci pencarian</label>
+            <input id="safariStartInput" name="q" type="search" placeholder="Cari di Google…" autocomplete="off" />
+            <button class="safari-search-submit" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
+          </form>
+          <p class="safari-google-caption">PENCARIAN DIDUKUNG OLEH <strong>GOOGLE.COM</strong></p>
+        </main>
+      </div>
     </section>
 
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
