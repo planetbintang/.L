@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "module": "osmediavm.registry",
+  "language": "id",
+  "layers": [
+    {
+      "id": "layout",
+      "label": "LAYOUT"
+    },
+    {
+      "id": "pilihan",
+      "label": "PILIHAN"
+    },
+    {
+      "id": "penerapan",
+      "label": "PENERAPAN"
+    },
+    {
+      "id": "penyimpanan",
+      "label": "PENYIMPANAN"
+    },
+    {
+      "id": "struktur",
+      "label": "SISTEM FOLDER & FILE"
+    },
+    {
+      "id": "inti",
+      "label": "KONFIGURASI INTI"
+    }
+  ],
+  "scope": "per-menu-and-submenu",
+  "identity_key": "menu.slug",
+  "default_storage": "browser-localStorage",
+  "repository_storage": {
+    "folder": "osmediavm/pusat_registri/konfigurasi/",
+    "note": "Pemetaan folder/berkas ditampilkan sebagai struktur tujuan; GitHub Pages statis tidak dapat menulis langsung ke repository."
+  },
+  "layout_policy": "Setiap kategori menu memiliki preset layout, tingkat lapisan, dan aksen yang dapat diubah secara terpisah.",
+  "persistence": {
+    "localStorage_key_prefix": "osmediavm.registry.config.",
+    "export_format": "JSON",
+    "remote_write": "requires-authenticated-backend-or-GitHub-API-adapter"
+  }
+}
