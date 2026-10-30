@@ -92,3 +92,23 @@
 .variant-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}.variant-spec-grid span{padding:6px;background:#091a2a;border:1px solid #263e55;font-size:8px;color:#b4c9dc;overflow-wrap:anywhere}.variant-spec-grid b{display:block;color:#83e1ff;font-size:7px;letter-spacing:.1em;margin-bottom:3px}
 #preview .mock-shell{width:min(100%,var(--target-width,1440px))}#preview[data-shape="split"] .mock-content{grid-template-columns:minmax(90px,1fr) minmax(0,2fr)}#preview[data-shape="stack"] .mock-content{grid-template-columns:1fr}#preview[data-shape="stack"] .mock-side{display:none}#preview[data-shape="table"] .mock-cards article{border-radius:0;border-style:dashed}#preview[data-shape="bento"] .mock-cards article:first-child{grid-column:span 2}#preview[data-shape="tabs"] .mock-side{flex-direction:row;flex-wrap:wrap}#preview[data-resolution^="m"] .mock-content{grid-template-columns:1fr}#preview[data-resolution^="m"] .mock-side{display:none}#preview[data-resolution^="m"] .mock-cards{grid-template-columns:1fr}
 @media(max-width:850px){.layout-variant-tools{grid-template-columns:1fr 1fr}.layout-variant-tools input{grid-column:1/-1}}@media(max-width:560px){.layout-variant-tools{grid-template-columns:1fr}.layout-variant-tools input{grid-column:auto}.variant-pagination{align-items:flex-start;flex-direction:column}.variant-detail-card{min-height:0}}
+
+/* Activity, storage and automation matrix */
+.workflow-gallery{margin:0 0 18px;padding:18px;border:1px solid #29425d;background:linear-gradient(145deg,#0b1d2e,#081421)}
+.workflow-tools{display:grid;grid-template-columns:1.3fr repeat(3,minmax(130px,.7fr));gap:8px;margin:14px 0}
+.workflow-tools input,.workflow-tools select{min-width:0;padding:10px;background:#061321;border:1px solid #31506a;color:#e8f4ff;font:inherit;font-size:10px}
+.workflow-summary{display:flex;justify-content:space-between;gap:10px;margin:8px 0 12px;color:#8fb7d2;font-size:9px}
+.workflow-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.workflow-card{display:flex;flex-direction:column;gap:9px;min-width:0;padding:13px;border:1px solid #29435b;background:linear-gradient(155deg,#10243a,#081522)}
+.workflow-card.active,.workflow-card:hover{border-color:#83e1ff;box-shadow:0 8px 22px #0003}
+.workflow-card-top{display:flex;justify-content:space-between;gap:8px;color:#83e1ff;font-size:8px;letter-spacing:.1em}.workflow-card-top small{color:#829db7;overflow-wrap:anywhere;text-align:right}
+.workflow-card h3{font-size:13px;margin:0;color:#e4f2ff}.workflow-card p{font-size:9px;line-height:1.5;color:#9bb1c6;margin:0;min-height:28px}
+.workflow-flow{display:grid;gap:5px;padding:9px;background:#091a2a;border:1px solid #294056}.workflow-flow b,.workflow-two-col b,.workflow-blocks>b{font-size:8px;letter-spacing:.1em;color:#83e1ff}.workflow-flow span{font-size:9px;line-height:1.5;color:#c2d4e4}
+.workflow-two-col{display:grid;grid-template-columns:1fr 1fr;gap:8px}.workflow-two-col section{display:grid;align-content:start;gap:5px;padding:8px;border:1px solid #294056;background:#0a1928}.workflow-two-col strong{font-size:10px;color:#e1efff}.workflow-two-col span,.workflow-two-col small{font-size:8px;line-height:1.45;color:#9eb4c9}
+.workflow-blocks{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:8px;border-top:1px solid #294056}.workflow-blocks>b{width:100%}.workflow-blocks span{padding:5px 6px;background:#0a1b2c;border:1px solid #29435b;color:#a9bfd4;font-size:8px}
+.workflow-card>button{padding:9px;border:1px solid #83e1ff;background:#b8edff;color:#061320;font-size:8px;font-weight:800;letter-spacing:.08em}
+#preview[data-activity="monitor"] .mock-chart{border-color:#6de3b2}#preview[data-activity="review"] .mock-cards article{border-style:dashed}#preview[data-activity="publish"] .mock-heading b{color:#9fe4ff}
+#preview[data-storage="manifest"] .mock-top{border-bottom:2px solid #83e1ff}#preview[data-storage="cache"] .mock-chart{opacity:.8}#preview[data-storage="file"] .mock-side{border-right:1px dashed #83e1ff}
+#preview[data-automation="queue"] .mock-cards article{border-radius:0}#preview[data-automation="approval"] .mock-heading{border-left:3px solid #83e1ff;padding-left:8px}#preview[data-automation="pipeline"] .mock-chart{background-image:repeating-linear-gradient(90deg,transparent 0 12px,#234b66 12px 13px)}
+@media(max-width:950px){.workflow-gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow-tools{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.workflow-gallery-grid{grid-template-columns:1fr}.workflow-tools{grid-template-columns:1fr}.workflow-summary{flex-direction:column}.workflow-two-col{grid-template-columns:1fr 1fr}}
