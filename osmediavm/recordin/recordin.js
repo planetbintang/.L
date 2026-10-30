@@ -54,12 +54,29 @@ function render(text,file){
  preview.addEventListener('click',()=>choose('preview'));raw.addEventListener('click',()=>choose('source'));
  showSource(text);$('#runtimeOutput').textContent=header?'Metadata REIC terdeteksi. Pratinjau berjalan dalam iframe terisolasi; kode sumber tersedia pada tab Sumber.':'Berkas dimuat. Pratinjau dipilih berdasarkan tipe konten.';
 }
+
+const configFields={
+ layout:[['Tata letak','select',['Panel berlapis','Kanvas lebar','Kartu modular','Pohon navigasi','Tabel data']],['Kepadatan','select',['Rapat','Seimbang','Lapang']],['Navigasi','select',['Sidebar kiri','Tab atas','Panel kontekstual']]],
+ pilihan:[['Tema modul','select',['Gelap OsMediaVm','Kontras tinggi','Netral','Otomatis']],['Mode kerja','select',['Visual','Teknis','Pemeliharaan']],['Akses fitur','select',['Standar','Terbatas','Lanjutan']]],
+ penerapan:[['Status penerapan','select',['Konsep','Siap diterapkan','Aktif','Ditangguhkan']],['Lingkungan','select',['Lokal','GitHub Pages','Backend eksternal']],['Versi modul','text','1.0.0']],
+ penyimpanan:[['Strategi','select',['Lokal perangkat','Ekspor JSON','Backend eksternal']],['Kunci penyimpanan','text','osmediavm.reic'],['Cadangan','select',['Manual','Setiap perubahan']]],
+ folder:[['Folder modul','text','osmediavm/recordin'],['File definisi','text','module.reic'],['File pendamping','text','module.css, module.js']],
+ konfigurasi:[['ID konfigurasi','text','reic-module'],['Catatan','textarea','Konfigurasi khusus modul'],['Validasi','select',['Periksa sebelum simpan','Peringatan saja','Nonaktif']]]
+};
+let activeConfigFile='';
+function moduleProfile(file){const n=file.toLowerCase();if(n.includes('15000'))return ['INFRASTRUKTUR / GRID TEKNIS','Tampilan bertingkat untuk komponen runtime, dependensi, dan jalur sistem.'];if(n.includes('1500'))return ['REGISTRI / POHON DATA','Tampilan pohon dan tabel untuk indeks, metadata, serta relasi berkas.'];if(n.includes('component')||n.includes('detail'))return ['KOMPONEN / KANVAS MODULAR','Tampilan kanvas dengan panel properti dan pratinjau komponen.'];return ['FITUR / KARTU MODULAR','Tampilan kartu dan panel kontekstual untuk fitur utama.'];}
+function configKey(file){return 'osmediavm:reic-config:'+file}
+function renderConfig(file){activeConfigFile=file;const [profile,desc]=moduleProfile(file);$('#layoutBadge').textContent=profile;$('#moduleDescription').textContent=desc;selectConfigTab('layout');}
+function selectConfigTab(tab){document.querySelectorAll('[data-config-tab]').forEach(b=>b.classList.toggle('selected',b.dataset.configTab===tab));const panel=$('#configPanel');if(!panel)return;panel.replaceChildren();const [profile]=moduleProfile(activeConfigFile);const card=el('div','config-card');card.append(el('h4','',tab==='layout'?'Susunan antarmuka':tab==='pilihan'?'Preferensi modul':tab==='penerapan'?'Penerapan sistem':tab==='penyimpanan'?'Strategi penyimpanan':tab==='folder'?'Struktur sistem folder & file':'Parameter konfigurasi'));card.append(el('p','',profile+' · '+activeConfigFile));const saved=(()=>{try{return JSON.parse(localStorage.getItem(configKey(activeConfigFile))||'{}')}catch{return {}}})();const fields=configFields[tab]||[];fields.forEach(([label,type,opts])=>{const wrap=el('div','config-field');wrap.append(el('label','',label));let input;if(type==='select'){input=el('select');opts.forEach(v=>{const o=el('option','',v);o.value=v;input.append(o)});input.value=saved[tab]?.[label]||opts[0]}else if(type==='textarea'){input=el('textarea');input.rows=3;input.value=saved[tab]?.[label]||opts}else{input=el('input');input.type='text';input.value=saved[tab]?.[label]||opts}input.dataset.configField=label;wrap.append(input);card.append(wrap)});if(tab==='folder'){const tree=el('div','folder-tree');['osmediavm/','recordin/','components/','manifest.json',activeConfigFile.split('/').pop(),'module.css','module.js'].forEach((v,i)=>tree.append(el('div','',((i===0||i===1||i===2)?'▸ ':'↳ ')+v)));card.append(tree)}panel.append(card)}
+document.querySelectorAll('[data-config-tab]').forEach(b=>b.addEventListener('click',()=>selectConfigTab(b.dataset.configTab)));
+$('#saveConfig')?.addEventListener('click',()=>{try{const all=(()=>{try{return JSON.parse(localStorage.getItem(configKey(activeConfigFile))||'{}')}catch{return {}}})();const tab=document.querySelector('[data-config-tab].selected')?.dataset.configTab||'layout';all[tab]={};$('#configPanel').querySelectorAll('[data-config-field]').forEach(x=>all[tab][x.dataset.configField]=x.value);localStorage.setItem(configKey(activeConfigFile),JSON.stringify(all));$('#saveStatus').textContent='Tersimpan di perangkat ini · '+new Date().toLocaleTimeString('id-ID');$('#saveStatus').classList.add('status-good')}catch(e){$('#saveStatus').textContent='Gagal menyimpan: '+e.message}});
+
 async function openFile(file){
  try{
   currentFile=file;const response=await fetch(siteFile(file),{cache:'no-cache'});
   if(!response.ok)throw Error('HTTP '+response.status+' saat membaca '+file);
   const text=await response.text();$('#viewTitle').textContent=file;view.classList.remove('hidden');list.parentElement.classList.add('hidden');
-  history.replaceState(null,'','#'+encodeURIComponent(file));render(text,file);
+  history.replaceState(null,'','#'+encodeURIComponent(file));render(text,file);renderConfig(file);
  }catch(e){$('#componentWorkspace').replaceChildren(el('p','runtime-error','Berkas gagal dibuka: '+e.message));view.classList.remove('hidden');list.parentElement.classList.add('hidden');showSource('Gagal membuka berkas: '+e.message)}
 }
 function draw(){
