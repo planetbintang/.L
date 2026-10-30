@@ -34,3 +34,16 @@
 .engine-layer-tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid #29425d;padding-bottom:10px}.engine-layer-tabs button{padding:8px 10px;border:1px solid #29425d;background:#091725;color:#a9bfd4;font-size:9px}.engine-layer-tabs button.active{border-color:#83e1ff;background:#15324b;color:#c8f2ff}
 .engine-layer-grid{padding-top:12px}.engine-layer{display:none;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end}.engine-layer.active{display:grid}.engine-layer>b{grid-column:1/-1;color:#83e1ff;font-size:9px;letter-spacing:.13em}.engine-layer label{display:grid;gap:5px;color:#9fb5ca;font-size:9px}.engine-layer select,.engine-layer input:not([type=checkbox]){width:100%;min-width:0;padding:9px;background:#061321;border:1px solid #31506a;color:#e8f4ff;font:inherit}.engine-layer .engine-check{display:flex;align-items:center;gap:8px}.engine-note{grid-column:1/-1;color:#91a8c3;font-size:9px;line-height:1.6;margin:0}.engine-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.engine-actions button{padding:9px 12px;border:1px solid #31536b;background:#10243a;color:#cfeeff;font-size:10px}.engine-actions button.primary{background:#b8edff;color:#061320;font-weight:800}.engine-actions span{font-size:9px;color:#83c8e8}
 @media(max-width:650px){.engine-layer.active{grid-template-columns:1fr 1fr}.engine-layer label{min-width:0}.engine-heading{flex-direction:column}}
+
+/* Engine settings are reflected in the live preview */
+.preview-stage .mock-cards{grid-template-columns:repeat(var(--engine-columns,3),minmax(0,1fr))}
+.preview-density-compact .mock-main{padding:9px}.preview-density-compact .mock-cards article{padding:7px}.preview-density-compact .mock-chart{margin-top:7px}
+.preview-density-spacious .mock-main{padding:24px}.preview-density-spacious .mock-cards{gap:13px}.preview-density-spacious .mock-cards article{padding:17px}
+#preview[data-navigation="none"] .mock-side{display:none}#preview[data-navigation="topbar"] .mock-side{display:none}
+#preview[data-navigation="tabs"] .mock-side{flex-direction:row;flex-wrap:wrap;align-content:start}
+#preview[data-interaction="table"] .mock-cards article{border-style:dashed}
+#preview[data-interaction="form"] .mock-cards article{border-radius:8px}
+#preview[data-interaction="monitor"] .mock-chart{border-color:#6de3b2}
+#preview[data-header="minimal"] .mock-heading small{display:none}
+#preview[data-header="toolbar"] .mock-heading b{font-size:14px}
+#preview[data-header="metrics"] .mock-heading b{color:#9fe4ff}
