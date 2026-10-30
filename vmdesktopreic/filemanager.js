@@ -1,4 +1,4 @@
-/* VMDESKTOPREIC · File Manager REIC / resolution 01 */
+/* VMDESKTOPREIC · File Manajer REIC / resolution 01 */
 (()=>{'use strict';
 const $=s=>document.querySelector(s);
 window.initPlanetFileManager=function(start='Home Folder'){
