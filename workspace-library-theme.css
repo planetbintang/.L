@@ -1,0 +1,96 @@
+/* Workspace visual system: Perpustakaan Kamus Digital Modern */
+#workspace.workspace-section{
+  position:relative;isolation:isolate;overflow:hidden;margin:0 0 64px;padding:clamp(14px,2.7vw,30px);
+  border:1px solid rgba(102,190,235,.28);background:
+    radial-gradient(ellipse at 82% 0%,rgba(31,111,157,.27),transparent 42%),
+    radial-gradient(ellipse at 8% 70%,rgba(28,75,115,.19),transparent 40%),
+    repeating-linear-gradient(128deg,rgba(119,190,230,.025) 0 1px,transparent 1px 17px),
+    linear-gradient(145deg,#071625 0%,#0a1d30 52%,#071321 100%);
+  color:#edf7ff;box-shadow:0 18px 50px rgba(0,0,0,.24)
+}
+#workspace.workspace-section:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 0 48%,rgba(88,190,231,.035) 48.2%,transparent 48.8%),radial-gradient(circle at 95% 85%,rgba(67,157,205,.09),transparent 28%)}
+#workspace .workspace-heading{padding:0 0 17px;border-bottom:1px solid rgba(115,190,230,.2)}
+#workspace .workspace-heading h2{color:#f2f9ff}
+#workspace .workspace-heading .section-description{color:#a9c2d8;line-height:1.7}
+#workspace .workspace-heading .eyebrow,#workspace .workspace-panel-heading .eyebrow{color:#70dfff}
+#workspace .workspace-identity{border:1px solid rgba(109,189,232,.27);background:linear-gradient(145deg,rgba(16,48,72,.9),rgba(7,22,37,.94));color:#eaf7ff}
+#workspace .workspace-identity b{color:#effaff}#workspace .workspace-identity small{color:#9ab6ce}
+#workspace .workspace-avatar{background:linear-gradient(145deg,#83e5ff,#187ab4);color:#062033}
+#workspace .workspace-nav{border-bottom:1px solid rgba(117,190,229,.24)}
+#workspace .workspace-nav button{color:#b5cce0;border-color:transparent}
+#workspace .workspace-nav button:hover{background:rgba(44,111,150,.2);color:#e9f8ff}
+#workspace .workspace-nav button[aria-selected="true"]{background:linear-gradient(135deg,#17618c,#0e426b);border-color:#4aa6d2;color:#fff}
+#workspace .workspace-nav .workspace-ai-tab{color:#78dcff;border-color:rgba(105,195,235,.3)}
+#workspace .workspace-panel-heading h3,#workspace .workspace-panel h3{color:#eff8ff}
+#workspace .workspace-panel-heading p:not(.eyebrow),#workspace .workspace-note{color:#9fb8ce}
+#workspace .local-badge{background:rgba(9,32,51,.8);border-color:rgba(113,188,226,.28);color:#a9cce3}
+#workspace .local-badge:before{background:#61d9ff}
+#workspace .workspace-kpis article,#workspace .analytics-kpis article,#workspace .analytics-card,
+#workspace .kanban-column,#workspace .issue-filters,#workspace .issue-list-pane,#workspace .issue-detail,
+#workspace .account-menu,#workspace .account-form,#workspace .ai-tools,#workspace .ai-compose,
+#workspace .help-cards>a,#workspace .help-cards>article{
+  background:linear-gradient(145deg,rgba(13,39,61,.96),rgba(7,23,38,.96));
+  border-color:rgba(107,174,214,.25);color:#e7f4ff
+}
+#workspace .workspace-kpis small,#workspace .analytics-kpis small{color:#8eabc4}
+#workspace .workspace-kpis b,#workspace .analytics-kpis b{color:#8be3ff}
+#workspace .workspace-kpis span{color:#9bb5cc}
+#workspace .workspace-create-form,#workspace .issue-row,#workspace .task-card,
+#workspace .issue-comments article,#workspace .account-menu a,#workspace .integration-row,
+#workspace .ai-history article{background:rgba(5,19,32,.75);border-color:rgba(105,175,218,.22);color:#e5f3ff}
+#workspace .workspace-create-form label,#workspace .issue-filters label,#workspace .code-toolbar label,
+#workspace .account-form label{color:#a8c1d7}
+#workspace .workspace-create-form input,#workspace .workspace-create-form select,#workspace .issue-filters input,
+#workspace .issue-filters select,#workspace .code-toolbar input,#workspace .code-toolbar select,
+#workspace .account-form input,#workspace .account-form select,#workspace .ai-compose select,
+#workspace .ai-compose textarea,#workspace .issue-comment-form textarea{
+  background:#061522;border-color:#31536d;color:#e9f7ff
+}
+#workspace .workspace-primary{background:linear-gradient(135deg,#176b99,#104c78);border-color:#58bce8;color:#fff}
+#workspace .workspace-secondary{background:#0b263d;border-color:#3b6684;color:#c9e9fa}
+#workspace .kanban-column>header,#workspace .issue-list-heading,#workspace .issue-detail-head,
+#workspace .issue-detail-actions,#workspace .account-form section{border-color:rgba(109,180,219,.2);color:#e6f4ff}
+#workspace .kanban-column>header span{background:#092139;border-color:#31536d;color:#a8cce2}
+#workspace .task-card{box-shadow:none}#workspace .task-card-top b,#workspace .issue-row-heading b,
+#workspace .issue-filters h4,#workspace .analytics-card h4,#workspace .account-form h4,
+#workspace .ai-tools h4,#workspace .ai-history-wrap h4{color:#eaf7ff}
+#workspace .task-card-top small,#workspace .issue-row small,#workspace .issue-list-heading small,
+#workspace .issue-meta,#workspace .workspace-empty,#workspace .workspace-empty-small{color:#8daac3}
+#workspace .issue-row:hover,#workspace .issue-row.is-selected{background:#10304a}
+#workspace .issue-row.is-selected{box-shadow:inset 3px 0 #65d8ff}
+#workspace .issue-row-heading em{background:#123a50;color:#9be6ff}
+#workspace .issue-status{background:#123d36;color:#91edc7}#workspace .issue-status.closed{background:#243748;color:#b5c7d8}
+#workspace .issue-label{background:#0d2c45;border-color:#315b79;color:#9bdcff}
+#workspace .code-toolbar,#workspace .code-status{background:#0b263d;border-color:#31536d;color:#b9d8ee}
+#workspace .code-editor{background:#04111d;border-color:#31536d;color:#d8edff}
+#workspace .analytics-card h4,#workspace .bar-label{color:#b9d2e6}
+#workspace .bar-track{background:#17364e}#workspace .bar-value{color:#a9cce2}
+#workspace .account-menu a{color:#b5cde1}#workspace .account-menu a.active{background:#12466b;color:#eaf8ff}
+#workspace .integration-row small,#workspace .integration-row em{color:#9ab6ce}
+#workspace .help-cards b,#workspace .help-cards span{color:#d7eafa}
+#workspace .ai-tools button{background:#0a2237;border-color:#31536d;color:#c4e3f5}
+#workspace .ai-safety{background:#332a17;border-color:#7b6334;color:#f4d99b}
+#workspace .workspace-toast{background:#0c3450;border-color:#52b7e6;color:#effaff}
+#workspace .workspace-note code{color:#8be3ff}
+.workspace-feature-hub{margin:0 0 20px;padding:16px;border:1px solid rgba(100,185,230,.26);background:linear-gradient(145deg,rgba(12,39,61,.93),rgba(6,21,35,.96));}
+.workspace-feature-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:13px}
+.workspace-feature-head h3{margin:3px 0;color:#f0f9ff;font-size:clamp(18px,2.2vw,25px)}
+.workspace-feature-head p{margin:4px 0 0;color:#9dbbd2;font-size:10px;line-height:1.6}
+.workspace-feature-search{width:min(100%,290px);height:38px;padding:8px 11px;background:#041522;border:1px solid #315671;color:#eaf8ff;outline-color:#67d9ff}
+.workspace-feature-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.workspace-feature-card{min-width:0;padding:12px;border:1px solid rgba(111,181,220,.25);background:linear-gradient(150deg,rgba(16,48,72,.92),rgba(7,24,40,.96));}
+.workspace-feature-card:hover{border-color:rgba(104,215,255,.7);background:linear-gradient(150deg,rgba(20,64,91,.98),rgba(7,27,45,.98))}
+.workspace-feature-card[hidden]{display:none}
+.workspace-feature-card-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.workspace-feature-icon{width:29px;height:29px;display:grid;place-items:center;border:1px solid #3a7da0;background:linear-gradient(145deg,#164d70,#0a263d);color:#8ce5ff;font-size:14px;flex:0 0 29px}
+.workspace-feature-card h4{margin:0;color:#edf8ff;font-size:11px;line-height:1.35}
+.workspace-feature-card small{display:block;color:#87a9c3;font-size:8px;margin-top:3px}
+.workspace-feature-actions{display:grid;gap:5px}
+.workspace-feature-actions button{width:100%;min-width:0;text-align:left;padding:7px 8px;border:1px solid rgba(104,163,199,.18);background:rgba(4,18,30,.7);color:#b9d8eb;font-size:9px;line-height:1.35;cursor:pointer}
+.workspace-feature-actions button:hover,.workspace-feature-actions button:focus-visible{border-color:#65d7ff;background:#103650;color:#fff;outline:none}
+.workspace-feature-empty{display:none;padding:14px;border:1px dashed #315671;color:#9bbbd2;font-size:10px}
+.workspace-feature-empty.is-visible{display:block}
+@media(max-width:1100px){.workspace-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:680px){#workspace.workspace-section{padding:12px}.workspace-feature-hub{padding:11px}.workspace-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.workspace-feature-card{padding:9px}.workspace-feature-card h4{font-size:10px}.workspace-feature-actions button{font-size:8px;padding:7px 6px}.workspace-feature-search{width:100%}}
+@media(max-width:390px){.workspace-feature-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.workspace-feature-card{transition:none}}
