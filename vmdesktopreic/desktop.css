@@ -161,3 +161,27 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden}
 .registry-detail-body .reic-output,.registry-detail-body .reic-status{display:block;margin-top:12px;padding:10px;background:#07111f;color:#b7cce0}
 @media(max-width:900px){.registry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.registry-controls{grid-template-columns:1fr}.registry-grid{grid-template-columns:1fr}.registry-heading{flex-direction:column}.registry-heading>strong{font-size:16px}.registry-item{min-height:70px}.registry-pager button{font-size:9px;padding:8px}}
+
+
+/* REGISTRY 1.500: katalog komponen OS MEDIA VM di dalam modal desktop. */
+.registry-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:4px 2px 16px;border-bottom:1px solid #29445d}
+.registry-head>div>span,.registry-kicker{font-size:10px;letter-spacing:.16em;color:#83e1ff}
+.registry-head h3{margin:7px 0;font-size:22px}
+.registry-head p{margin:0;color:#91a8c3;font-size:12px;line-height:1.5}
+.registry-head>strong{white-space:nowrap;color:#83e1ff;font-size:20px}
+.registry-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.registry-controls input{flex:1;min-width:0;padding:12px;border:1px solid #31536b;background:#07111f;color:#edf5ff}
+.registry-controls span,.registry-pager span{font-size:10px;letter-spacing:.08em;color:#91a8c3}
+.registry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.registry-card{min-width:0;min-height:96px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:12px;border:1px solid #29445d;background:linear-gradient(130deg,#10243a,#0a1727);color:#edf5ff;text-align:left;cursor:pointer}
+.registry-card:hover{border-color:#83e1ff;background:#183c57;box-shadow:inset 3px 0 #83e1ff}
+.registry-card small{font-size:9px;color:#83e1ff;letter-spacing:.05em}
+.registry-card b{font-size:12px;line-height:1.35}
+.registry-card span{margin-top:auto;font-size:9px;color:#91a8c3;letter-spacing:.08em}
+.registry-pager{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0 4px}
+.registry-pager button,.registry-source{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border:1px solid #31536b;background:#0d1a2b;color:#83e1ff;text-decoration:none;font-size:10px;letter-spacing:.06em;cursor:pointer}
+.registry-pager button:disabled{opacity:.35;cursor:not-allowed}
+.registry-detail h3{margin:8px 0 14px;font-size:22px}
+.registry-detail .action-row{flex-wrap:wrap}
+@media(max-width:760px){.registry-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.registry-head{display:block}.registry-head>strong{display:block;margin-top:10px}.registry-controls{align-items:stretch;flex-direction:column}.registry-controls span{font-size:9px}}
+@media(max-width:420px){.registry-grid{grid-template-columns:1fr}.registry-card{min-height:72px}.registry-pager button{font-size:9px;padding:8px}}
