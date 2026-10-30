@@ -1,41 +1,17 @@
 <div class="vm-shell" id="vmDesktop" data-resolution="1920x1080">
-  <div class="vm-frame vm-frame-1">
-    <header class="vm-topbar vm-layer-1">
-      <span class="layer-no">1</span>
-      <div class="vm-brand"><span class="vm-mark">PB</span><b>PLANETBINTANG <i>.L/</i></b></div>
-      <div class="vm-global-search"><span>⌕</span><span>Cari di PlanetBintang…</span><small>1:10</small></div>
-      <div class="vm-top-actions"><button aria-label="Aplikasi">▦</button><button aria-label="Notifikasi">♧</button><button aria-label="Akun">◉</button><div class="vm-time"><b id="vmClock">--:--</b><small id="vmDate">--</small></div><button class="vm-settings" data-app="settings">⚙</button><b class="layer-no">7</b></div>
-    </header>
-    <nav class="vm-main-nav vm-layer-2" aria-label="Menu utama">
-      <span class="layer-no">2</span>
-      <a class="nav-current" href="../">⌂ BERANDA</a><a href="../">◎ HUB</a><a href="../">⌘ SHELL</a><a href="../">⚙ PENGATURAN</a><a href="../">▤ PERPUSTAKAAN</a><a href="../">▥ ENTERPRISE</a><a href="../">⌕ CARI</a><a href="../osmediavm/">▣ OS MEDIA VM</a><a href="../aireber/">◈ AIREBER</a><a href="../vendordomain/">◎ VENDORDOMAIN</a><button>☰ MENU LANJUTAN⌄</button>
-    </nav>
-    <nav class="vm-sub-nav vm-layer-3" aria-label="Menu desktop">
-      <span class="layer-no">3</span>
-      <button class="selected" data-app="home">▦ APLIKASI</button><button data-app="files">▤ FILE MANAGER</button><button data-app="terminal">⌘ TERMINAL</button><button data-app="registry">▦ REGISTRI</button><button data-app="monitor">▥ MONITOR</button><button data-app="settings">⚙ PENGATURAN DESKTOP</button><button data-app="home">ⓘ BANTUAN</button><span class="vm-sub-spacer"></span><span class="layer-no">8</span>
-    </nav>
-    <main class="vm-workspace vm-layer-4">
-      <aside class="vm-dock" aria-label="Aplikasi cepat"><span class="layer-no">4</span>
-        <button class="dock-app active" data-app="home"><span>⌂</span><small>Beranda</small></button><button class="dock-app" data-app="files"><span>▤</span><small>File</small></button><button class="dock-app" data-app="registry"><span>▦</span><small>Registri</small></button><button class="dock-app" data-app="terminal"><span>⌘</span><small>Terminal</small></button><button class="dock-app" data-app="monitor"><span>▥</span><small>Monitor</small></button><button class="dock-app" data-app="settings"><span>⚙</span><small>Pengaturan</small></button><button class="dock-app" data-app="home"><span>?</span><small>Bantuan</small></button>
-      </aside>
-      <section class="vm-stage">
-        <div class="vm-inner-frame vm-layer-5">
-          <span class="layer-no">5</span>
-          <div class="vm-welcome"><p class="eyebrow">OS MEDIA VM · DESKTOP WORKSPACE</p><h1>PLANETBINTANG <em>.L/</em></h1><p>Ruang kerja VMDESKTOPREIC. Semua aplikasi dan modul berjalan melalui lapisan inti OS MEDIA VM.</p><div class="vm-command"><span>⌕</span><span>Cari aplikasi, file, atau jalankan perintah…</span><b>➜</b></div>
-          <div class="vm-desktop-grid"><button class="desktop-shortcut" data-app="files"><span>▤</span><b>File Manager</b></button><button class="desktop-shortcut" data-app="terminal"><span>⌘</span><b>Terminal</b></button><button class="desktop-shortcut" data-app="registry"><span>▦</span><b>Registri</b></button><button class="desktop-shortcut" data-app="monitor"><span>▥</span><b>Monitor</b></button><button class="desktop-shortcut" data-app="settings"><span>⚙</span><b>Pengaturan</b></button><button class="desktop-shortcut" data-app="home"><span>▦</span><b>Aplikasi</b></button></div>
-          </div>
-          <footer class="vm-inner-status"><span>10 · RUANG KERJA</span><span>16 32 64 124 248 496</span><span>OS MEDIA VM　☰</span></footer>
-        </div>
-      </section>
-      <aside class="vm-right-rail" aria-label="Panel sistem">
-        <section class="vm-info-card"><span class="layer-no">6</span><h3>▦ KALENDER</h3><b id="calendarDate">30 Oktober 2026</b><p>Jumat · Tidak ada agenda</p></section>
-        <section class="vm-info-card"><span class="layer-no">7</span><h3>▣ STATUS SISTEM</h3><label>CPU <b>12%</b></label><div class="meter"><i style="width:12%"></i></div><label>RAM <b>48%</b></label><div class="meter"><i style="width:48%"></i></div><label>DISK <b>32%</b></label><div class="meter"><i style="width:32%"></i></div></section>
-        <section class="vm-info-card"><span class="layer-no">8</span><h3>◉ JARINGAN</h3><p>↑ Upload <b>1.2 MB/s</b></p><p>↓ Download <b>3.4 MB/s</b></p></section>
-        <section class="vm-info-card"><span class="layer-no">9</span><h3>♧ NOTIFIKASI</h3><p>• Update sistem tersedia</p><p>• File baru di File Manager</p><p>• Backup berhasil</p></section>
-      </aside>
-      <section class="vm-window" id="vmWindow" hidden><header><b id="windowTitle">Beranda</b><div><button id="windowMin" aria-label="Minimalkan">—</button><button id="windowClose" aria-label="Tutup">×</button></div></header><div class="vm-window-content" id="windowContent"></div></section>
-    </main>
-    <footer class="vm-taskbar vm-layer-10"><span>10　OS MEDIA VM · REIC/1.0</span><span>1920 × 1080 · DESKTOP STATIS</span><span>RUNTIME ONLINE　●</span></footer>
-  </div>
-  <aside class="vm-side-switch" aria-label="Lapisan pintasan"><b>▣</b><i></i><i></i><i></i><i></i><i></i></aside>
+<header class="vm-header"><div class="vm-brand"><span class="vm-logo">★</span><b>PlanetBintang <i>.L/</i></b></div><div class="vm-search"><span>⌕</span><input id="desktopSearch" placeholder="Cari di PlanetBintang..."><small>⌕</small></div><div class="vm-header-tools"><button data-open="apps">▦</button><button data-open="notifications">♧</button><button data-open="account">◉</button><div class="vm-clock"><b id="vmClock">--:--</b><small id="vmDate">--</small></div><button data-open="settings">⚙</button></div></header>
+<main class="vm-desktop">
+<aside class="vm-core-menu" aria-label="Lima menu inti">
+<button class="core-item active" data-core="settings"><span>⚙</span><b>PENGATURAN</b><i>›</i></button>
+<button class="core-item" data-core="studio"><span>✧</span><b>STUDIO &amp; AI GLOBAL AGENSI</b><i>›</i></button>
+<button class="core-item" data-core="documents"><span>▤</span><b>PEMBUAT DOKUMEN</b><i>›</i></button>
+<button class="core-item" data-core="search"><span>⌕</span><b>PENCARIAN UTAMA</b><i>›</i></button>
+<button class="core-item" data-core="files"><span>▱</span><b>FOLDER FILE MANAGER</b><i>›</i></button>
+<div class="core-divider"></div><button class="core-item compact" data-core="apps"><span>▣</span><b>APLIKASI SISTEM</b><i>›</i></button>
+</aside>
+<section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
+<section class="vm-workspace" aria-label="Area desktop"><div class="vm-center-search"><span>⌕</span><input id="centerSearch" placeholder="Cari aplikasi atau konten..."></div><div class="vm-desktop-hint"><b>VMDESKTOPREIC</b><span>OS MEDIA VM · REIC WORKSPACE</span></div></section>
+<aside class="vm-mini-tools"><button data-open="status" title="Status">◉</button><button data-open="display" title="Tampilan">▣</button><button data-open="help" title="Bantuan">▤</button><button data-open="version" title="Versi">0.1</button><button data-open="power" title="Daya">◐</button></aside>
+<div class="vm-modal-backdrop" id="modalBackdrop" hidden><section class="vm-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header><span id="modalIcon">⚙</span><b id="modalTitle">Pengaturan Sistem</b><div><button id="modalMin" aria-label="Minimalkan">—</button><button id="modalMax" aria-label="Maksimalkan">□</button><button id="modalClose" aria-label="Tutup">×</button></div></header><nav class="modal-tabs" id="modalTabs"></nav><div class="modal-body" id="modalBody"></div><footer><span id="modalStatus">OS MEDIA VM · MODUL REIC</span><button id="modalSave">✓ SIMPAN</button></footer></section></div>
+</main><footer class="vm-statusbar"><span><i></i> Sistem Berjalan Normal</span><div class="status-progress"><b></b></div><span>◉　Wi-Fi　 |　 RAM 8 GB　 |　 SSD 256 GB　 |　 ▣</span></footer>
 </div>
