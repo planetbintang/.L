@@ -94,3 +94,18 @@
 @media(max-width:680px){#workspace.workspace-section{padding:12px}.workspace-feature-hub{padding:11px}.workspace-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.workspace-feature-card{padding:9px}.workspace-feature-card h4{font-size:10px}.workspace-feature-actions button{font-size:8px;padding:7px 6px}.workspace-feature-search{width:100%}}
 @media(max-width:390px){.workspace-feature-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.workspace-feature-card{transition:none}}
+
+/* Workspace feature hub: 25 feature groups × 6 subfeatures. */
+#workspace .workspace-feature-hub{
+  background-image:linear-gradient(rgba(115,207,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(115,207,255,.025) 1px,transparent 1px),radial-gradient(ellipse at 85% 0%,rgba(31,111,157,.2),transparent 48%),linear-gradient(145deg,#0c2439,#071625)!important;
+  background-size:18px 18px,18px 18px,auto,auto!important;
+  border-color:rgba(102,190,235,.32);box-shadow:inset 0 1px 0 rgba(164,222,255,.06),0 14px 34px rgba(0,0,0,.2)
+}
+#workspace .workspace-feature-summary{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 13px}
+#workspace .workspace-feature-summary span{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid rgba(111,181,220,.24);background:rgba(4,18,30,.72);color:#9dbbd2;font-size:9px;letter-spacing:.06em}
+#workspace .workspace-feature-summary b{color:#8be3ff;font-size:14px}
+#workspace .workspace-feature-card{background-image:linear-gradient(rgba(115,207,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(115,207,255,.025) 1px,transparent 1px),linear-gradient(150deg,rgba(16,48,72,.94),rgba(7,24,40,.98));background-size:18px 18px,18px 18px,auto}
+#workspace .workspace-feature-card h4{font-size:12px}
+#workspace .workspace-feature-card small{font-size:9px;line-height:1.45}
+#workspace .workspace-feature-actions button{font-size:10px;min-height:31px}
+@media(max-width:680px){#workspace .workspace-feature-actions button{font-size:9px;min-height:34px}}
