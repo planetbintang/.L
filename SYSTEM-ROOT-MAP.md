@@ -5,8 +5,8 @@ Pemetaan ini menjadi kontrak namespace root pada File Manager. Root sistem merup
 | Root | Fungsi | Kebijakan utama |
 |---|---|---|
 | `/acct` | Action, activity, activation, account | Event terstruktur, actor dan hasil; jangan simpan kredensial di log. |
-| `/sys` | Sistem inti permanen | Hanya menerima hasil rekonstruksi yang tervalidasi dari `/systsm_ext` dan `/cache`. |
-| `/systsm_ext` | Inventaris dan staging sistem/perangkat terdeteksi | Metadata minimum, izin eksplisit, tanpa secret; sumber untuk proses rekonstruksi. |
+| `/sys` | Sistem inti permanen | Hanya menerima hasil rekonstruksi yang tervalidasi dari `/system_ext` dan `/cache`. |
+| `/system_ext` | Inventaris dan staging sistem/perangkat terdeteksi | Metadata minimum, izin eksplisit, tanpa secret; sumber untuk proses rekonstruksi. |
 | `/cache` | Rekonstruksi sementara | Dapat dibersihkan, dibatasi kuota/umur, mengikuti kebijakan hemat baterai. |
 | `/config` | Konfigurasi permanen milik pemilik | Owner-only, skema tervalidasi, audit dan versi cadangan. |
 | `/media` | Aset publik hasil rilis | Hanya konten yang lolos validasi build, lisensi, keamanan, dan persetujuan publikasi. |
@@ -14,7 +14,7 @@ Pemetaan ini menjadi kontrak namespace root pada File Manager. Root sistem merup
 
 ## Alur rekonstruksi
 
-1. Deteksi/inventaris yang diizinkan masuk ke `/systsm_ext` sebagai staging.
+1. Deteksi/inventaris yang diizinkan masuk ke `/system_ext` sebagai staging.
 2. Tugas rekonstruksi diproses di `/cache`; tugas berat dapat ditunda saat mode hemat baterai aktif.
 3. Validasi skema, izin, checksum, dependensi, dan kompatibilitas dilakukan sebelum promosi.
 4. Hasil valid masuk ke `/sys` sebagai sistem inti permanen; hasil gagal dikarantina dan dicatat tanpa secret.
