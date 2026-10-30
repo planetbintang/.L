@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "module": "Vendor dan Reseller",
+  "menuId": "20",
+  "menu": "Aktivasi Reseller",
+  "layers": {
+    "layout": {
+      "type": "dashboard",
+      "density": "comfortable",
+      "navigation": "breadcrumbs"
+    },
+    "pilihan": {
+      "accent": "amber",
+      "components": "workflow"
+    },
+    "penerapan": {
+      "mode": "manual-preview",
+      "requiresConfirmation": true
+    },
+    "penyimpanan": {
+      "strategy": "per-menu",
+      "folder": "vendordomain/vendor-reseller/config/menu-20/",
+      "files": [
+        "config.reic.json",
+        "layout.json",
+        "pilihan.json",
+        "penerapan.json",
+        "storage.json"
+      ]
+    },
+    "sistem": {
+      "namespace": "pb-vendordomain-vendor-reseller-20",
+      "backendSync": "not-configured"
+    }
+  },
+  "createdFor": "VendorDomain static workspace"
+}
