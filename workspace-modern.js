@@ -13,7 +13,7 @@
     {icon:'▥',name:'Analitik Sistem',desc:'Metrik snapshot dan aktivitas',items:[['Statistik snapshot','analytics'],['Bahasa repositori','language-chart']]},
     {icon:'▧',name:'Dokumentasi',desc:'Panduan penggunaan dan katalog',items:[['Panduan workspace','help'],['Katalog fitur sistem','catalog']]},
     {icon:'✦',name:'AI & Integrasi',desc:'Asisten dan status konektor',items:[['Buka AI Reber','ai'],['Status konektor','integrations']]},
-    {icon:'⚙',name:'Pengaturan',desc:'Profil, preferensi, dan cadangan',items:[['Profil lokal','profile'],['Preferensi workspace','settings'],['Ekspor cadangan lokal','backup']]}
+    {icon:'⚙',name:'Pengaturan',desc:'Profil, preferensi, dan cadangan',items:[['Profil & preferensi','profile'],['Ekspor cadangan lokal','backup']]}
   ];
   const hub = document.createElement('section');
   hub.id = 'workspaceFeatureHub';
