@@ -1,18 +1,18 @@
 <reic id="vmdesktop-file-manager" version="1.0.0" group="file-manager" resolution="01" runtime="browser">
   <meta>
-    <title>File Manager · Konqueror Workspace</title>
-    <description>File manager desktop berbasis REIC dengan navigasi folder, tampilan ikon dan daftar, pencarian, unggah, pembuatan folder, ubah nama, dan hapus.</description>
+    <title>File Manajer · Konqueror Workspace</title>
+    <description>File manajer desktop berbasis REIC dengan navigasi folder, tampilan ikon dan daftar, pencarian, unggah, pembuatan folder, ubah nama, dan hapus.</description>
     <source>OS MEDIA VM / Library Layout REIC / Resolution 01</source>
     <reference>Konqueror file manager desktop reference</reference>
     <layout>toolbar + navigation tree + breadcrumb + icon grid + status bar</layout>
     <storage>browser-local-storage</storage>
   </meta>
-  <section class="file-manager" id="fileManagerApp" aria-label="File Manager">
+  <section class="file-manager" id="fileManagerApp" aria-label="File Manajer">
     <div class="fm-menubar"><span>BERKAS</span><span>EDIT</span><span>TAMPILAN</span><span>LOKASI</span><span>ALAT</span><span>BANTUAN</span></div>
     <div class="fm-toolbar"><button id="fmBack">←</button><button id="fmForward">→</button><button id="fmUp">↑</button><button id="fmHome">⌂</button><button id="fmRefresh">⟳</button><input class="fm-path" id="fmPath" aria-label="Lokasi folder"><input class="fm-search" id="fmSearch" placeholder="Cari berkas…"></div>
     <div class="fm-tools"><button id="fmNewFolder">＋ Folder Baru</button><button id="fmUpload">↑ Unggah</button><button id="fmRename">Ubah Nama</button><button id="fmDelete">Hapus</button><button id="fmDownload">Unduh</button><button id="fmView">Tampilan Daftar / Ikon</button><input id="fmUploadInput" type="file" multiple hidden></div>
     <div class="fm-main"><aside class="fm-sidebar"><h4>Folder Beranda</h4><div id="fmTree"></div></aside><div class="fm-content"><div class="fm-crumbs" id="fmCrumbs"></div><div class="fm-items" id="fmItems"></div></div></div>
-    <div class="fm-bottom"><span class="fm-led"></span><span id="fmCount">Memuat folder…</span><span>·</span><span id="fmStatus">File Manager REIC siap</span></div>
+    <div class="fm-bottom"><span class="fm-led"></span><span id="fmCount">Memuat folder…</span><span>·</span><span id="fmStatus">File Manajer REIC siap</span></div>
   </section>
   <runtime script="./filemanager.js" stylesheet="./filemanager.css" entry="initPlanetFileManager" />
 </reic>
