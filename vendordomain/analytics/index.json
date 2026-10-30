@@ -1,0 +1,355 @@
+{
+  "schema_version": "1.0.0",
+  "module": "Analitik dan pemantauan",
+  "module_id": 16,
+  "repository": "planetbintang/.L",
+  "description": "Indeks konfigurasi fitur VendorDomain. Data metrik tetap kosong sampai konektor sumber data/API dikonfigurasi.",
+  "storage_policy": {
+    "browser_config": "localStorage per halaman",
+    "server_metrics": "requires configured API or server collector",
+    "folder_layout": [
+      "config/",
+      "data/",
+      "logs/",
+      "index.json"
+    ]
+  },
+  "features": [
+    {
+      "id": 376,
+      "slug": "statistik-kunjungan",
+      "name": "Statistik Kunjungan",
+      "layout": "chart",
+      "page": "../pages/376-statistik-kunjungan.reic",
+      "storage": {
+        "config": "statistik-kunjungan/config/",
+        "data": "statistik-kunjungan/data/",
+        "logs": "statistik-kunjungan/logs/",
+        "index": "statistik-kunjungan/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 377,
+      "slug": "pengunjung-unik",
+      "name": "Pengunjung Unik",
+      "layout": "gauge",
+      "page": "../pages/377-pengunjung-unik.reic",
+      "storage": {
+        "config": "pengunjung-unik/config/",
+        "data": "pengunjung-unik/data/",
+        "logs": "pengunjung-unik/logs/",
+        "index": "pengunjung-unik/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 378,
+      "slug": "tampilan-halaman",
+      "name": "Tampilan Halaman",
+      "layout": "table",
+      "page": "../pages/378-tampilan-halaman.reic",
+      "storage": {
+        "config": "tampilan-halaman/config/",
+        "data": "tampilan-halaman/data/",
+        "logs": "tampilan-halaman/logs/",
+        "index": "tampilan-halaman/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 379,
+      "slug": "sumber-trafik",
+      "name": "Sumber Trafik",
+      "layout": "flow",
+      "page": "../pages/379-sumber-trafik.reic",
+      "storage": {
+        "config": "sumber-trafik/config/",
+        "data": "sumber-trafik/data/",
+        "logs": "sumber-trafik/logs/",
+        "index": "sumber-trafik/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 380,
+      "slug": "halaman-terpopuler",
+      "name": "Halaman Terpopuler",
+      "layout": "report",
+      "page": "../pages/380-halaman-terpopuler.reic",
+      "storage": {
+        "config": "halaman-terpopuler/config/",
+        "data": "halaman-terpopuler/data/",
+        "logs": "halaman-terpopuler/logs/",
+        "index": "halaman-terpopuler/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 381,
+      "slug": "negara-pengunjung",
+      "name": "Negara Pengunjung",
+      "layout": "network",
+      "page": "../pages/381-negara-pengunjung.reic",
+      "storage": {
+        "config": "negara-pengunjung/config/",
+        "data": "negara-pengunjung/data/",
+        "logs": "negara-pengunjung/logs/",
+        "index": "negara-pengunjung/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 382,
+      "slug": "perangkat-pengunjung",
+      "name": "Perangkat Pengunjung",
+      "layout": "matrix",
+      "page": "../pages/382-perangkat-pengunjung.reic",
+      "storage": {
+        "config": "perangkat-pengunjung/config/",
+        "data": "perangkat-pengunjung/data/",
+        "logs": "perangkat-pengunjung/logs/",
+        "index": "perangkat-pengunjung/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 383,
+      "slug": "browser-pengunjung",
+      "name": "Browser Pengunjung",
+      "layout": "table",
+      "page": "../pages/383-browser-pengunjung.reic",
+      "storage": {
+        "config": "browser-pengunjung/config/",
+        "data": "browser-pengunjung/data/",
+        "logs": "browser-pengunjung/logs/",
+        "index": "browser-pengunjung/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 384,
+      "slug": "kode-status-http",
+      "name": "Kode Status HTTP",
+      "layout": "terminal",
+      "page": "../pages/384-kode-status-http.reic",
+      "storage": {
+        "config": "kode-status-http/config/",
+        "data": "kode-status-http/data/",
+        "logs": "kode-status-http/logs/",
+        "index": "kode-status-http/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 385,
+      "slug": "pemantauan-uptime",
+      "name": "Pemantauan Uptime",
+      "layout": "monitor",
+      "page": "../pages/385-pemantauan-uptime.reic",
+      "storage": {
+        "config": "pemantauan-uptime/config/",
+        "data": "pemantauan-uptime/data/",
+        "logs": "pemantauan-uptime/logs/",
+        "index": "pemantauan-uptime/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 386,
+      "slug": "pemantauan-latensi",
+      "name": "Pemantauan Latensi",
+      "layout": "pulse",
+      "page": "../pages/386-pemantauan-latensi.reic",
+      "storage": {
+        "config": "pemantauan-latensi/config/",
+        "data": "pemantauan-latensi/data/",
+        "logs": "pemantauan-latensi/logs/",
+        "index": "pemantauan-latensi/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 387,
+      "slug": "pemantauan-dns",
+      "name": "Pemantauan DNS",
+      "layout": "matrix",
+      "page": "../pages/387-pemantauan-dns.reic",
+      "storage": {
+        "config": "pemantauan-dns/config/",
+        "data": "pemantauan-dns/data/",
+        "logs": "pemantauan-dns/logs/",
+        "index": "pemantauan-dns/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 388,
+      "slug": "pemantauan-sertifikat",
+      "name": "Pemantauan Sertifikat",
+      "layout": "timeline",
+      "page": "../pages/388-pemantauan-sertifikat.reic",
+      "storage": {
+        "config": "pemantauan-sertifikat/config/",
+        "data": "pemantauan-sertifikat/data/",
+        "logs": "pemantauan-sertifikat/logs/",
+        "index": "pemantauan-sertifikat/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 389,
+      "slug": "pemantauan-bandwidth",
+      "name": "Pemantauan Bandwidth",
+      "layout": "chart",
+      "page": "../pages/389-pemantauan-bandwidth.reic",
+      "storage": {
+        "config": "pemantauan-bandwidth/config/",
+        "data": "pemantauan-bandwidth/data/",
+        "logs": "pemantauan-bandwidth/logs/",
+        "index": "pemantauan-bandwidth/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 390,
+      "slug": "pemantauan-penggunaan-cpu",
+      "name": "Pemantauan Penggunaan CPU",
+      "layout": "gauge",
+      "page": "../pages/390-pemantauan-penggunaan-cpu.reic",
+      "storage": {
+        "config": "pemantauan-penggunaan-cpu/config/",
+        "data": "pemantauan-penggunaan-cpu/data/",
+        "logs": "pemantauan-penggunaan-cpu/logs/",
+        "index": "pemantauan-penggunaan-cpu/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 391,
+      "slug": "pemantauan-memori",
+      "name": "Pemantauan Memori",
+      "layout": "split",
+      "page": "../pages/391-pemantauan-memori.reic",
+      "storage": {
+        "config": "pemantauan-memori/config/",
+        "data": "pemantauan-memori/data/",
+        "logs": "pemantauan-memori/logs/",
+        "index": "pemantauan-memori/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 392,
+      "slug": "log-akses",
+      "name": "Log Akses",
+      "layout": "table",
+      "page": "../pages/392-log-akses.reic",
+      "storage": {
+        "config": "log-akses/config/",
+        "data": "log-akses/data/",
+        "logs": "log-akses/logs/",
+        "index": "log-akses/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 393,
+      "slug": "log-kesalahan",
+      "name": "Log Kesalahan",
+      "layout": "terminal",
+      "page": "../pages/393-log-kesalahan.reic",
+      "storage": {
+        "config": "log-kesalahan/config/",
+        "data": "log-kesalahan/data/",
+        "logs": "log-kesalahan/logs/",
+        "index": "log-kesalahan/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 394,
+      "slug": "pelacakan-peristiwa",
+      "name": "Pelacakan Peristiwa",
+      "layout": "flow",
+      "page": "../pages/394-pelacakan-peristiwa.reic",
+      "storage": {
+        "config": "pelacakan-peristiwa/config/",
+        "data": "pelacakan-peristiwa/data/",
+        "logs": "pelacakan-peristiwa/logs/",
+        "index": "pelacakan-peristiwa/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 395,
+      "slug": "konversi-pengunjung",
+      "name": "Konversi Pengunjung",
+      "layout": "funnel",
+      "page": "../pages/395-konversi-pengunjung.reic",
+      "storage": {
+        "config": "konversi-pengunjung/config/",
+        "data": "konversi-pengunjung/data/",
+        "logs": "konversi-pengunjung/logs/",
+        "index": "konversi-pengunjung/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 396,
+      "slug": "laporan-per-domain",
+      "name": "Laporan per Domain",
+      "layout": "report",
+      "page": "../pages/396-laporan-per-domain.reic",
+      "storage": {
+        "config": "laporan-per-domain/config/",
+        "data": "laporan-per-domain/data/",
+        "logs": "laporan-per-domain/logs/",
+        "index": "laporan-per-domain/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 397,
+      "slug": "laporan-lintas-domain",
+      "name": "Laporan Lintas Domain",
+      "layout": "network",
+      "page": "../pages/397-laporan-lintas-domain.reic",
+      "storage": {
+        "config": "laporan-lintas-domain/config/",
+        "data": "laporan-lintas-domain/data/",
+        "logs": "laporan-lintas-domain/logs/",
+        "index": "laporan-lintas-domain/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 398,
+      "slug": "ekspor-analitik",
+      "name": "Ekspor Analitik",
+      "layout": "export",
+      "page": "../pages/398-ekspor-analitik.reic",
+      "storage": {
+        "config": "ekspor-analitik/config/",
+        "data": "ekspor-analitik/data/",
+        "logs": "ekspor-analitik/logs/",
+        "index": "ekspor-analitik/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    },
+    {
+      "id": 399,
+      "slug": "peringatan-lonjakan-trafik",
+      "name": "Peringatan Lonjakan Trafik",
+      "layout": "alert",
+      "page": "../pages/399-peringatan-lonjakan-trafik.reic",
+      "storage": {
+        "config": "peringatan-lonjakan-trafik/config/",
+        "data": "peringatan-lonjakan-trafik/data/",
+        "logs": "peringatan-lonjakan-trafik/logs/",
+        "index": "peringatan-lonjakan-trafik/index.json"
+      },
+      "status": "ui-config-ready; data-connector-pending"
+    }
+  ]
+}
