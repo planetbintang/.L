@@ -1,0 +1,24 @@
+{
+  "module": "Konten dan CMS",
+  "moduleId": "VD-CMS-014",
+  "version": "1.0.0",
+  "defaults": {
+    "language": "id-ID",
+    "editorialStatus": "Draft",
+    "layout": "adaptive-per-submenu",
+    "permissions": [
+      "admin",
+      "editor",
+      "author",
+      "reader"
+    ],
+    "requireApproval": true,
+    "storage": "browser-local-draft",
+    "revisionRetention": "keep"
+  },
+  "safety": {
+    "publishRequiresBackend": true,
+    "providerSecretsInBrowser": false,
+    "externalSyncEnabled": false
+  }
+}
