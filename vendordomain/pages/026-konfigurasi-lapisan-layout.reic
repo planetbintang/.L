@@ -86,7 +86,7 @@ $('#exportSystem').onclick=()=>{sync();const pack={schema:'planetbintang.vendord
 $('#restoreConfig').onclick=()=>{const saved=localStorage.getItem(key());if(!saved){$('#storageStatus').textContent='Belum ada profil tersimpan untuk ID menu ini.';return}load(JSON.parse(saved));$('#storageStatus').textContent='Profil berhasil dipulihkan.'};
 function load(c){config={...config,...c};$('#preview').dataset.layout=config.layout;$('#accent').value=config.accent;$('#density').value=config.density;$('#surface').value=config.surface;$('#radius').value=config.radius;$('#profileName').value=config.profile;$('#layerCount').value=config.layers;$('#motion').value=config.motion;$('#menuId').value=config.menuId||'dashboard-utama';paint()}
 $('#importConfig').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{load(JSON.parse(await f.text()));$('#storageStatus').textContent='Konfigurasi berhasil diimpor. Tekan Simpan untuk menyimpannya.'}catch(err){$('#storageStatus').textContent='Berkas JSON tidak valid.'}};
-paint();show('layout');
+const requestedMenu=new URLSearchParams(location.search).get('menu');if(requestedMenu){$('#menuId').value=requestedMenu;config.menuId=requestedMenu;$('#profileName').value=requestedMenu.replaceAll('-',' ').replace(/\\b\\w/g,x=>x.toUpperCase());config.profile=$('#profileName').value;}paint();show('layout');
 })();
 </script>
 </body></html>
