@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Konfigurasi Lapisan · VendorDomain</title>
+<style>
+:root{color-scheme:dark;--bg:#080e1b;--panel:#111c30;--panel2:#172640;--line:#2b4162;--text:#edf4ff;--muted:#9fb2ce;--accent:#83b4ff;--glow:#6b8cff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#1a2a48 0,transparent 45%),linear-gradient(145deg,#080e1b,#101b2d 55%,#0a1221);color:var(--text);font:15px/1.55 system-ui,sans-serif}
+header{padding:24px clamp(16px,4vw,42px);border-bottom:1px solid var(--line);background:#0c1525d9;backdrop-filter:blur(18px)}header small,.muted{color:var(--muted)}h1{font-size:clamp(25px,4vw,38px);margin:5px 0}main{max-width:1450px;margin:auto;padding:20px clamp(12px,3vw,30px) 60px}
+.shell{display:grid;grid-template-columns:245px minmax(0,1fr);gap:16px}.rail,.panel,.layer{border:1px solid var(--line);background:linear-gradient(145deg,#172741e8,#101a2ceF);border-radius:17px;box-shadow:0 18px 50px #0003}.rail{padding:14px;height:max-content;position:sticky;top:12px}.rail button{display:block;width:100%;text-align:left;margin:5px 0}.panel{padding:18px;min-width:0}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button,.rail button,.action,select,input{border:1px solid var(--line);background:#0b1628;color:var(--text);border-radius:10px;padding:10px 12px;font:inherit}.tabs button[aria-pressed=true],.rail button[aria-current=true]{border-color:var(--accent);background:#203657;box-shadow:inset 0 0 0 1px #83b4ff55}.stack{display:grid;gap:12px}.layer{padding:15px;position:relative;overflow:hidden}.layer:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(var(--accent),transparent)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.choice{border:1px solid var(--line);background:#0b172a;border-radius:12px;padding:13px;cursor:pointer;color:var(--text);text-align:left}.choice[aria-pressed=true]{border-color:var(--accent);background:#203657}.choice b{display:block}.choice small{color:var(--muted)}label{display:grid;gap:6px;color:var(--muted);font-size:13px}input[type=color]{width:100%;height:42px;padding:3px}input[type=range]{width:100%}.preview{min-height:175px;border:1px dashed #59749c;border-radius:14px;padding:14px;background:#0a1425;display:grid;gap:10px;align-content:start}.preview[data-layout=columns]{grid-template-columns:1fr 1fr}.preview[data-layout=stack]{grid-template-columns:1fr}.preview[data-layout=grid]{grid-template-columns:repeat(3,1fr)}.preview span{display:block;padding:15px;border-radius:10px;background:linear-gradient(135deg,#29476d,#17253b);border:1px solid #4c6c95}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.action{cursor:pointer}.primary{background:#244a78;border-color:#83b4ff}.status{color:#a8ceff;min-height:24px}.hint{color:var(--muted);font-size:13px}.tree{font:13px/1.8 ui-monospace,monospace;color:#c5d7f0;background:#091321;border:1px solid var(--line);padding:12px;border-radius:10px;white-space:pre-wrap}
+body[data-density=compact] .layer{padding:9px}body[data-density=spacious] .layer{padding:23px}
+body[data-surface=glass] .layer,body[data-surface=glass] .rail,body[data-surface=glass] .panel{backdrop-filter:blur(18px);background:#182a43b8}
+body[data-surface=solid] .layer,body[data-surface=solid] .rail,body[data-surface=solid] .panel{background:#142238}
+@media(max-width:760px){.shell{grid-template-columns:1fr}.rail{position:static}.preview[data-layout=grid]{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body data-density="normal" data-surface="layered">
+<header><small>VENDORDOMAIN / DASHBOARD DAN NAVIGASI / SISTEM KONFIGURASI</small><h1>Konfigurasi Lapisan Antarmuka</h1><p class="muted">Pengaturan terpisah untuk layout, pilihan visual, penerapan, penyimpanan, dan berkas sistem.</p></header>
+<main><div class="shell">
+<aside class="rail"><b>RUANG KONFIGURASI</b><p class="hint">Pilih lapisan pengaturan</p>
+<button data-tab="layout" aria-current="true">01 · Layout</button><button data-tab="choices">02 · Pilihan</button><button data-tab="apply">03 · Penerapan</button><button data-tab="storage">04 · Penyimpanan</button><button data-tab="system">05 · Penyimpanan Sistem</button><button data-tab="advanced">06 · Konfigurasi</button>
+<hr style="border-color:var(--line)"><p class="hint">Konfigurasi aktif</p><strong id="activeName">Dashboard Utama</strong><p class="hint" id="activeMeta">Profil mandiri · belum disimpan</p>
+</aside>
+<section class="panel">
+<div class="tabs"><button data-tab="layout" aria-pressed="true">LAYOUT</button><button data-tab="choices" aria-pressed="false">PILIHAN</button><button data-tab="apply" aria-pressed="false">PENERAPAN</button><button data-tab="storage" aria-pressed="false">PENYIMPANAN</button><button data-tab="system" aria-pressed="false">PENYIMPANAN SISTEM</button><button data-tab="advanced" aria-pressed="false">KONFIGURASI</button></div>
+<section id="layout" class="stack">
+<div class="layer"><h2>01 / Struktur layout</h2><p class="hint">Setiap halaman dapat memakai susunan lapisan yang berbeda.</p><div class="grid" id="layoutChoices">
+<button class="choice" data-layout-choice="stack" aria-pressed="true"><b>Lapisan bertumpuk</b><small>Panel vertikal dengan kedalaman visual.</small></button>
+<button class="choice" data-layout-choice="columns" aria-pressed="false"><b>Dua kolom</b><small>Navigasi kiri dan ruang kerja kanan.</small></button>
+<button class="choice" data-layout-choice="grid" aria-pressed="false"><b>Grid modular</b><small>Kartu berlapis untuk modul dan widget.</small></button>
+</div></div>
+<div class="layer"><h2>Pratinjau susunan</h2><div class="preview" id="preview" data-layout="stack"><span>LAPISAN 01 · NAVIGASI</span><span>LAPISAN 02 · KONTEN</span><span>LAPISAN 03 · PANEL DATA</span></div></div>
+</section>
+<section id="choices" class="stack" hidden>
+<div class="layer"><h2>02 / Pilihan visual</h2><div class="grid">
+<label>Warna aksen<input id="accent" type="color" value="#83b4ff"></label>
+<label>Kepadatan ruang<select id="density"><option value="compact">Ringkas</option><option value="normal" selected>Normal</option><option value="spacious">Lapang</option></select></label>
+<label>Jenis permukaan<select id="surface"><option value="layered">Lapisan bertingkat</option><option value="glass">Kaca buram</option><option value="solid">Panel solid</option></select></label>
+<label>Radius sudut<select id="radius"><option value="10">10 px</option><option value="16" selected>16 px</option><option value="22">22 px</option></select></label>
+</div></div>
+</section>
+<section id="apply" class="stack" hidden>
+<div class="layer"><h2>03 / Penerapan konfigurasi</h2><p>Periksa tampilan pratinjau sebelum menerapkan pilihan ke halaman aktif.</p><div class="actions"><button class="action primary" id="applyNow">Terapkan ke halaman ini</button><button class="action" id="resetPreview">Pulihkan pratinjau</button></div><p class="status" id="applyStatus" role="status">Perubahan belum diterapkan.</p></div>
+</section>
+<section id="storage" class="stack" hidden>
+<div class="layer"><h2>04 / Penyimpanan konfigurasi</h2><label>Nama profil<input id="profileName" value="Dashboard Utama" maxlength="70"></label><div class="actions"><button class="action primary" id="saveLocal">Simpan profil di perangkat</button><button class="action" id="exportConfig">Ekspor JSON</button><label class="action">Impor JSON<input id="importConfig" type="file" accept="application/json,.json"></label><button class="action" id="restoreConfig">Pulihkan profil tersimpan</button></div><p class="status" id="storageStatus" role="status"></p><p class="hint">Penyimpanan perangkat memakai localStorage browser. Ekspor JSON menghasilkan berkas yang dapat dipindahkan ke folder sistem.</p></div>
+</section>
+<section id="system" class="stack" hidden>
+<div class="layer"><h2>05 / Struktur folder dan file sistem</h2><div class="tree">vendordomain/
+└── config/
+    └── layout/
+        ├── dashboard/
+        │   ├── layout.json
+        │   ├── choices.json
+        │   └── applied.json
+        ├── navigasi/
+        │   ├── layout.json
+        │   ├── choices.json
+        │   └── applied.json
+        └── profiles/
+            └── [nama-profil].json</div><p class="hint">Berkas JSON yang diekspor dapat disimpan pada struktur ini melalui File Manager/repository. Halaman statis tidak dapat menulis langsung ke folder repository tanpa layanan backend atau API dengan izin.</p><div class="actions"><button class="action primary" id="exportSystem">Ekspor paket konfigurasi sistem</button></div><p class="status" id="systemStatus" role="status"></p></div>
+</section>
+<section id="advanced" class="stack" hidden>
+<div class="layer"><h2>06 / Konfigurasi lanjutan</h2><div class="grid">
+<label>ID menu<input id="menuId" value="dashboard-utama"></label><label>Lapisan aktif<select id="layerCount"><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Transisi<select id="motion"><option value="soft">Lembut</option><option value="fast">Cepat</option><option value="none">Tanpa animasi</option></select></label>
+</div><p class="hint">ID menu membedakan profil penyimpanan setiap halaman sehingga konfigurasi satu submenu tidak menimpa submenu lainnya.</p></div>
+</section>
+</section></div></main>
+<script>
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], key=()=> 'pb-vendordomain-layout-v1:'+($('#menuId').value.trim()||'dashboard-utama');
+let config={layout:'stack',accent:'#83b4ff',density:'normal',surface:'layered',radius:16,profile:'Dashboard Utama',layers:3,motion:'soft'};
+function read(){config={...config,layout:$('#preview').dataset.layout,accent:$('#accent').value,density:$('#density').value,surface:$('#surface').value,radius:+$('#radius').value,profile:$('#profileName').value,layers:+$('#layerCount').value,motion:$('#motion').value,menuId:$('#menuId').value}}
+function paint(){document.documentElement.style.setProperty('--accent',config.accent);document.body.dataset.density=config.density;document.body.dataset.surface=config.surface;$$('[data-layout-choice]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.layoutChoice===config.layout)));$('#preview').dataset.layout=config.layout;$('#preview').style.borderRadius=config.radius+'px';$('#activeName').textContent=config.profile||'Profil tanpa nama';$('#activeMeta').textContent=(config.menuId||'dashboard-utama')+' · '+config.layers+' lapisan';}
+function sync(){read();paint()}
+function show(tab){$$('[data-tab]').forEach(b=>{b.setAttribute('aria-current',String(b.dataset.tab===tab));if(b.hasAttribute('aria-pressed'))b.setAttribute('aria-pressed',String(b.dataset.tab===tab))});$$('.panel>section').forEach(s=>s.hidden=s.id!==tab)}
+$$('[data-tab]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+$$('[data-layout-choice]').forEach(b=>b.addEventListener('click',()=>{config.layout=b.dataset.layoutChoice;paint()}));
+['accent','density','surface','radius','profileName','layerCount','motion','menuId'].forEach(id=>$('#'+id).addEventListener('change',sync));
+$('#applyNow').onclick=()=>{sync();$('#applyStatus').textContent='Konfigurasi diterapkan pada halaman ini.'};
+$('#resetPreview').onclick=()=>{config.layout='stack';config.accent='#83b4ff';config.density='normal';config.surface='layered';$('#accent').value=config.accent;$('#density').value=config.density;$('#surface').value=config.surface;paint();$('#applyStatus').textContent='Pratinjau dikembalikan ke nilai awal.'};
+$('#saveLocal').onclick=()=>{sync();localStorage.setItem(key(),JSON.stringify(config));$('#storageStatus').textContent='Profil '+config.profile+' disimpan pada perangkat ini.'};
+function download(obj,name){const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+$('#exportConfig').onclick=()=>{sync();download(config,(config.menuId||'menu')+'-layout.json');$('#storageStatus').textContent='Berkas konfigurasi berhasil disiapkan.'};
+$('#exportSystem').onclick=()=>{sync();const pack={schema:'planetbintang.vendordomain.layout.v1',generatedAt:new Date().toISOString(),files:{'layout.json':{layout:config.layout,layers:config.layers},'choices.json':{accent:config.accent,density:config.density,surface:config.surface,radius:config.radius},'applied.json':{profile:config.profile,menuId:config.menuId,motion:config.motion}}};download(pack,(config.menuId||'menu')+'-system-config.json');$('#systemStatus').textContent='Paket JSON sistem siap diunduh.'};
+$('#restoreConfig').onclick=()=>{const saved=localStorage.getItem(key());if(!saved){$('#storageStatus').textContent='Belum ada profil tersimpan untuk ID menu ini.';return}load(JSON.parse(saved));$('#storageStatus').textContent='Profil berhasil dipulihkan.'};
+function load(c){config={...config,...c};$('#preview').dataset.layout=config.layout;$('#accent').value=config.accent;$('#density').value=config.density;$('#surface').value=config.surface;$('#radius').value=config.radius;$('#profileName').value=config.profile;$('#layerCount').value=config.layers;$('#motion').value=config.motion;$('#menuId').value=config.menuId||'dashboard-utama';paint()}
+$('#importConfig').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{load(JSON.parse(await f.text()));$('#storageStatus').textContent='Konfigurasi berhasil diimpor. Tekan Simpan untuk menyimpannya.'}catch(err){$('#storageStatus').textContent='Berkas JSON tidak valid.'}};
+paint();show('layout');
+})();
+</script>
+</body></html>
