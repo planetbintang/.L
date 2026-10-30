@@ -1,0 +1,21 @@
+(()=>{'use strict';
+const $=s=>document.querySelector(s);
+const layouts=[
+{id:'dashboard',name:'Dashboard Modular',type:'DASHBOARD',desc:'Ringkasan status, metrik, dan aktivitas dalam panel modular.',use:'Monitoring, ringkasan sistem, pusat kendali'},
+{id:'workbench',name:'Workbench Dua Kolom',type:'WORKBENCH',desc:'Navigasi kontekstual di samping area kerja utama.',use:'Editor, konfigurasi, pengelolaan data'},
+{id:'canvas',name:'Canvas Komponen',type:'CANVAS',desc:'Kanvas luas untuk menyusun komponen visual dan properti.',use:'Perancang UI, komposisi komponen, preview'},
+{id:'console',name:'Console Teknis',type:'CONSOLE',desc:'Panel log, status, perintah, dan keluaran teknis.',use:'Debugging, operasi, pemantauan runtime'},
+{id:'library',name:'Library Kartu',type:'LIBRARY',desc:'Koleksi komponen dalam grid yang mudah dicari dan dipilih.',use:'Katalog, aset, pustaka komponen'},
+{id:'compact',name:'Layout Ringkas',type:'COMPACT',desc:'Susunan padat untuk layar kecil dan panel informasi singkat.',use:'Widget, toolbar, panel samping'}
+];
+let active=layouts[0];
+function renderList(){$('#layoutList').replaceChildren(...layouts.map(x=>{const b=document.createElement('button');b.className='layout-choice'+(x.id===active.id?' active':'');b.innerHTML='<b>'+x.name+'</b><small>'+x.use+'</small>';b.addEventListener('click',()=>{active=x;render()});return b}))}
+function snippet(){const name=($('#componentName').value.trim()||'reic-'+active.id).replace(/[^a-zA-Z0-9_-]/g,'-').toLowerCase();const props={layout:active.id,width:$('#layoutWidth').value,density:$('#density').value,theme:$('#theme').value,sidebar:$('#showSidebar').checked,responsive:$('#responsive').checked};return '--- REIC COMPONENT ---\nid: '+name+'\ntype: layout-component\nversion: 1.0.0\nlayout: '+props.layout+'\nstyle: ./'+name+'.reiccss\nscript: ./'+name+'.reicjs\nprops: '+JSON.stringify(props)+'\n--- END REIC HEADER ---\n\n<section class="reic-layout reic-layout--'+active.id+'" data-reic-component="'+name+'" data-layout="'+active.id+'">\n  <header class="reic-layout__header"><slot name="header">'+active.name+'</slot></header>\n  <div class="reic-layout__body">\n    '+(props.sidebar?'<aside class="reic-layout__sidebar"><slot name="navigation">Navigasi</slot></aside>':'')+'\n    <main class="reic-layout__content"><slot>Konten komponen</slot></main>\n  </div>\n</section>\n';}
+function render(){renderList();$('#layoutTitle').textContent=active.name;$('#layoutDescription').textContent=active.desc;$('#layoutType').textContent=active.type;$('#preview').dataset.layout=active.id;$('#preview').className='preview-stage preview-'+active.id;$('.mock-heading b').textContent=active.name;$('#reicOutput').textContent=snippet()}
+function props(){return {id:active.id,name:active.name,componentName:$('#componentName').value.trim()||'reic-'+active.id,width:$('#layoutWidth').value,density:$('#density').value,theme:$('#theme').value,sidebar:$('#showSidebar').checked,responsive:$('#responsive').checked,updatedAt:new Date().toISOString()}}
+function download(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+async function copy(){try{await navigator.clipboard.writeText(snippet());$('#actionStatus').textContent='Definisi .REIC disalin.'}catch{$('#actionStatus').textContent='Clipboard tidak tersedia. Salin teks dari panel definisi.'}}
+function apply(){const p=props();try{localStorage.setItem('osmediavm:reic-layout-preset:'+p.componentName,JSON.stringify(p));$('#actionStatus').textContent='Preset diterapkan dan disimpan di browser ini. Ekspor .REIC untuk memasang ke modul lain.'}catch(e){$('#actionStatus').textContent='Gagal menerapkan preset: '+e.message}}
+['componentName','layoutWidth','density','theme','showSidebar','responsive'].forEach(id=>$('#'+id).addEventListener('input',()=>{$('#reicOutput').textContent=snippet()}));
+$('#copyReic').addEventListener('click',copy);$('#downloadReic').addEventListener('click',()=>{const p=props();download(p.componentName+'.reic',snippet(),'text/plain;charset=utf-8');$('#actionStatus').textContent='File definisi REIC diekspor. Buat/tautkan file .reiccss dan .reicjs sesuai header.'});$('#savePreset').addEventListener('click',apply);render();
+})();
