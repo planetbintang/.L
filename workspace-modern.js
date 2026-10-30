@@ -2,7 +2,9 @@
   'use strict';
   const workspace = document.getElementById('workspace');
   const nav = document.getElementById('workspaceNav');
-  if (!workspace || !nav || document.getElementById('workspaceFeatureHub')) return;
+  if (!workspace || !nav) return;
+  const suite = workspace.querySelector('[data-workspace-panel="suite"]');
+  if (!suite) return;
 
   const V = (label, view, focus = '') => ({ label, view, focus });
   const R = (label, route) => ({ label, route });
@@ -35,18 +37,17 @@
     {icon:'?',name:'Bantuan & Dukungan',desc:'Panduan penggunaan dan pemecahan masalah',items:[V('Pusat bantuan','help'),C('Cari topik bantuan','help','helpSearch'),C('Dokumentasi sistem','help','helpCards'),R('Repositori sumber','#repositories'),R('Pusat pengembangan','#platform/features'),V('Kembali ke dashboard','projects')]}
   ];
 
-  const hub = document.createElement('section');
-  hub.id = 'workspaceFeatureHub';
-  hub.className = 'workspace-feature-hub';
-  hub.setAttribute('aria-label','Dua puluh lima fitur utama dan seratus lima puluh subfitur Workspace');
-  hub.innerHTML = '<div class="workspace-feature-head"><div><p class="eyebrow">PUSAT KENDALI / 25 FITUR · 150 SUBFITUR</p><h3>Fitur ruang kerja</h3><p>25 kelompok fungsi dengan 6 subfitur per kelompok. Pilih fungsi untuk membuka panel atau halaman terkait. Data lokal tetap tersimpan di browser ini.</p></div><input class="workspace-feature-search" id="workspaceFeatureSearch" type="search" placeholder="Cari fitur atau subfitur…" aria-label="Cari fitur workspace"></div><div class="workspace-feature-summary"><span><b>25</b> FITUR UTAMA</span><span><b>150</b> SUBFITUR</span><span><b>6</b> SUBFITUR / FITUR</span></div><div class="workspace-feature-grid" id="workspaceFeatureGrid"></div><div class="workspace-feature-empty" id="workspaceFeatureEmpty">Tidak ada fitur yang cocok dengan pencarian.</div>';
-  nav.insertAdjacentElement('afterend', hub);
-
+  const hub = suite.querySelector('.workspace-feature-hub');
+  if (!hub) return;
   const grid = hub.querySelector('#workspaceFeatureGrid');
+  const search = hub.querySelector('#workspaceFeatureSearch');
+  const empty = hub.querySelector('#workspaceFeatureEmpty');
+  const status = hub.querySelector('#workspaceFeatureStatus');
+  if (!grid || !search || !empty) return;
+
   const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   grid.innerHTML = features.map((f,i)=>'<article class="workspace-feature-card" data-feature-card><div class="workspace-feature-card-head"><span class="workspace-feature-icon" aria-hidden="true">'+f.icon+'</span><div><h4>'+esc(f.name)+'</h4><small>'+esc(f.desc)+' · '+f.items.length+' subfitur</small></div></div><div class="workspace-feature-actions">'+f.items.map((item,j)=>'<button type="button" data-feature-index="'+i+'" data-subfeature-index="'+j+'">'+esc(item.label)+' ↗</button>').join('')+'</div></article>').join('');
 
-  const search = hub.querySelector('#workspaceFeatureSearch');
   search.addEventListener('input',()=>{
     const q=search.value.trim().toLocaleLowerCase('id');
     let visible=0;
@@ -54,7 +55,7 @@
       const f=features[i],match=!q||(f.name+' '+f.desc+' '+f.items.map(x=>x.label).join(' ')).toLocaleLowerCase('id').includes(q);
       card.hidden=!match;if(match)visible++;
     });
-    hub.querySelector('#workspaceFeatureEmpty').classList.toggle('is-visible',visible===0);
+    empty.classList.toggle('is-visible',visible===0);
   });
 
   function view(name,focus){
@@ -95,11 +96,16 @@
   }
   hub.addEventListener('click',event=>{
     const button=event.target.closest('button[data-feature-index]');if(!button)return;
-    const item=features[Number(button.dataset.featureIndex)]?.items[Number(button.dataset.subfeatureIndex)];
-    if(item)activate(item);
+    const feature=features[Number(button.dataset.featureIndex)];
+    const item=feature?.items[Number(button.dataset.subfeatureIndex)];
+    if(item){
+      if(status) status.textContent='Dibuka: '+feature.name+' / '+item.label+'. Panel terkait telah dipilih; data tetap mengikuti batas penyimpanan lokal.';
+      activate(item);
+    }
   });
 
   const count=features.reduce((n,f)=>n+f.items.length,0);
-  hub.querySelector('.workspace-feature-summary').setAttribute('aria-label',features.length+' fitur utama dan '+count+' subfitur');
+  const summary=hub.querySelector('.workspace-feature-summary');
+  if(summary) summary.setAttribute('aria-label',features.length+' fitur utama dan '+count+' subfitur');
   if(features.length!==25||count!==150) console.error('Workspace feature registry count mismatch:',features.length,count);
 })();
