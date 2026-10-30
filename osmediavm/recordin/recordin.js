@@ -18,8 +18,8 @@ async function renderHtml(text,file,meta){
  const scriptPath=(meta.match(/^\s*script:\s*(.+)\s*$/im)||[])[1];
  if(stylePath){const link='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=/<head[^>]*>/i.test(html)?html.replace(/<head[^>]*>/i,m=>m+link):html.replace(/<html[^>]*>/i,m=>m+'<head>'+link+'</head>');}
  if(scriptPath){const script='<script src="'+esc(scriptPath.trim())+'"><\/script>';html=/<\/body>/i.test(html)?html.replace(/<\/body>/i,script+'</body>'):html+script;}
- if(stylePath){try{const u=new URL(stylePath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const css=await r.text();const tag='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=html.replace(tag,'<style>'+css.replace(/<\/style/gi,'<\\\\/style')+'</style>')}catch(e){html=html.replace('</body>','<p>REIC CSS gagal dimuat: '+esc(e.message)+'</p></body>')}}
- if(scriptPath){try{const u=new URL(scriptPath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const js=await r.text();const tag='<script src="'+esc(scriptPath.trim())+'"><\/script>';html=html.replace(tag,'<script>'+js.replace(/<\/script/gi,'<\\\\/script')+'</script>')}catch(e){html=html.replace('</body>','<p>REIC JS gagal dimuat: '+esc(e.message)+'</p></body>')}}
+ if(stylePath){try{const u=new URL(stylePath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const css=await r.text();const tag='<link rel="stylesheet" href="'+esc(stylePath.trim())+'">';html=html.replace(tag,'<style>'+css+'</style>')}catch(e){html=html.replace('</body>','<p>REIC CSS gagal dimuat: '+esc(e.message)+'</p></body>')}}
+ if(scriptPath){try{const u=new URL(scriptPath.trim(),base.href);const r=await fetch(u.href);if(!r.ok)throw Error('HTTP '+r.status);const js=await r.text();const tag='<script src="'+esc(scriptPath.trim())+'"><\/script>';html=html.replace(tag,'<script>'+js+'</script>')}catch(e){html=html.replace('</body>','<p>REIC JS gagal dimuat: '+esc(e.message)+'</p></body>')}}
  frame.srcdoc=html;return frame
 }
 function renderMarkdown(text){
