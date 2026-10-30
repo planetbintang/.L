@@ -283,6 +283,7 @@
       <button type="button" role="tab" data-workspace-view="help" aria-selected="false">? Bantuan</button>
       <button type="button" role="tab" data-workspace-view="ai" class="workspace-ai-tab" aria-selected="false">✦ AI</button>
       <button type="button" role="tab" data-workspace-view="features" aria-selected="false">▤ Features</button>
+      <button type="button" role="tab" data-workspace-view="suite" aria-selected="false">✦ 25 Fitur Sistem</button>
     </nav>
 
     <section class="workspace-panel" data-workspace-panel="projects" role="tabpanel">
@@ -342,6 +343,17 @@
       <div class="feature-toolbar"><label>Domain<select id="featureDomainFilter"><option value="all">Semua domain</option></select></label><label>Ekstensi<select id="featureExtensionFilter"><option value="all">Semua ekstensi</option><option value="html">.HTML</option><option value="css">.CSS</option><option value="js">.JS</option><option value="nz">.NZ</option></select></label><label class="feature-query">Cari fitur<input id="featureQuery" type="search" placeholder="domain, feature, atau nomor…" /></label><button id="featureReset" class="workspace-secondary" type="button">Reset</button></div>
       <div class="feature-kpis"><article><small>FITUR TERDAFTAR</small><b id="featureTotal">—</b><span>registry virtual</span></article><article><small>DOMAIN</small><b id="featureDomainCount">—</b><span>jenis sistem</span></article><article><small>BUCKET</small><b id="featureBucketCount">—</b><span>lazy-load</span></article><article><small>STATUS</small><b id="featureRuntimeStatus">SAFE</b><span>tidak menjalankan kode</span></article></div>
       <div class="feature-layout"><section class="feature-table-wrap"><div class="feature-table-heading"><b id="featureResultCount">Memuat fitur…</b><span id="featureSyncStatus">Manifest belum dimuat</span></div><div id="featureList" class="feature-list" role="list"></div></section><aside class="feature-inspector"><p class="eyebrow">FEATURE INSPECTOR</p><h4 id="featureInspectorTitle">Pilih fitur</h4><div id="featureInspectorData" class="feature-inspector-data">Pilih satu fitur untuk melihat path, tipe file, domain, dan preview kode.</div><pre id="featurePreview" class="feature-preview" hidden></pre><div class="feature-actions"><button id="featureSimulate" class="workspace-primary" type="button" disabled>Simulasikan</button><button id="featureOpenFs" class="workspace-secondary" type="button" disabled>Buka filesystem</button></div><p id="featureActionStatus" class="workspace-note">Mode aman: hanya membaca manifest dan membuat hasil simulasi lokal.</p></aside></div>
+    </section>
+
+    <section class="workspace-panel" data-workspace-panel="suite" role="tabpanel" hidden>
+      <div class="workspace-panel-heading"><div><p class="eyebrow">WORKSPACE SYSTEM <span>/</span> 25 × 6</p><h3>25 Fitur Utama · 150 Subfitur</h3><p>Pusat kendali ruang kerja PlanetBintang. Pilih subfitur untuk melihat ringkasan fungsi dan ruang kerja terkait.</p></div><span class="local-badge">KATALOG WORKSPACE</span></div>
+      <section class="workspace-feature-hub" aria-label="Katalog 25 fitur dan 150 subfitur">
+        <div class="workspace-feature-head"><div><p class="eyebrow">SYSTEM LIBRARY / FEATURE INDEX</p><h3>Jelajahi fitur ruang kerja</h3><p>25 kelompok fitur dengan enam subfitur terstruktur pada setiap kelompok.</p></div><input id="workspaceFeatureSearch" class="workspace-feature-search" type="search" placeholder="Cari fitur atau subfitur…" aria-label="Cari fitur dan subfitur workspace"></div>
+        <div class="workspace-feature-summary"><span><b>25</b> FITUR UTAMA</span><span><b>150</b> SUBFITUR</span><span><b>6</b> SUBFITUR / FITUR</span></div>
+        <div id="workspaceFeatureGrid" class="workspace-feature-grid"></div>
+        <p id="workspaceFeatureEmpty" class="workspace-feature-empty">Tidak ada fitur yang cocok dengan pencarian.</p>
+        <div id="workspaceFeatureStatus" class="workspace-note" role="status" aria-live="polite">Pilih salah satu subfitur untuk melihat penjelasan dan area kerjanya.</div>
+      </section>
     </section>
 
     <section class="workspace-panel" data-workspace-panel="help" role="tabpanel" hidden>
