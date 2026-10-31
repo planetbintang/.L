@@ -438,3 +438,33 @@ html,body{width:100%;height:100%;min-width:0;min-height:0;overflow:hidden}
  .vm-statusbar{min-height:54px!important;padding:0 28px!important}
  .vm-statusbar .status-progress{display:block!important}
 }
+
+
+/* FINAL VIEWPORT FIT: 1920x1080 CENTERED CANVAS */
+:root{color-scheme:dark}
+html,body{margin:0!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;overflow:hidden!important}
+#desktop-root{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+.vm-shell{box-sizing:border-box!important;width:1920px!important;height:1080px!important;min-width:1920px!important;min-height:1080px!important;max-width:none!important;max-height:none!important;flex:0 0 1920px!important;margin:0!important;padding:12px!important;gap:10px!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;transform:scale(var(--vm-scale,1))!important;transform-origin:50% 50%!important;position:relative!important;left:auto!important;top:auto!important}
+.vm-shell,.vm-shell *{box-sizing:border-box}
+.vm-header{width:100%!important;height:82px!important;min-height:82px!important;max-height:82px!important;flex:0 0 82px!important;margin:0!important}
+.vm-desktop{position:relative!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;flex:1 1 auto!important;margin:0!important;overflow:hidden!important}
+.vm-core-menu{max-height:100%!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+.vm-workspace{min-width:0!important;min-height:0!important;overflow:hidden!important}
+.vm-mini-tools{max-height:calc(100% - 48px)!important;overflow-y:auto!important}
+.vm-statusbar{width:100%!important;height:54px!important;min-height:54px!important;max-height:54px!important;flex:0 0 54px!important;margin:0!important;overflow:hidden!important}
+.vm-modal-backdrop{position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:28px!important;overflow:auto!important}
+.vm-modal{width:1480px!important;max-width:calc(100% - 56px)!important;height:auto!important;max-height:calc(100% - 56px)!important;min-height:0!important;margin:auto!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+.vm-modal .modal-body{min-height:0!important;max-height:none!important;flex:1 1 auto!important;overflow:auto!important;overscroll-behavior:contain!important}
+.vm-modal .modal-tabs{flex:0 0 auto!important;max-width:100%!important;overflow-x:auto!important}
+.vm-modal>header,.vm-modal>footer{flex:0 0 auto!important}
+.layered-component,.vm-multi-workspace{min-width:0!important;max-width:100%!important}
+.layered-workarea,.wm-layout,.wm-main,.wm-runtime,.wm-catalog,.wm-view-stage{min-width:0!important;max-width:100%!important}
+.wm-grid{min-width:0!important}
+@media(max-width:760px){
+ .vm-shell{gap:8px!important;padding:10px!important}
+ .vm-header{gap:12px!important;padding:0 14px!important}
+ .vm-brand{width:390px!important;min-width:390px!important}
+ .vm-statusbar{padding:0 14px!important}
+ .vm-modal-backdrop{padding:12px!important}
+ .vm-modal{max-width:calc(100% - 24px)!important;max-height:calc(100% - 24px)!important}
+}
