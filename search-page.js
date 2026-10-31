@@ -24,7 +24,7 @@
   let visibleResultLimit = 12;
   let searchSequence = 0;
   const RESULT_PAGE_SIZE = 12;
-  const REQUEST_TIMEOUT = 12000;
+  const REQUEST_TIMEOUT = 6500;
   async function fetchWithTimeout(url, options={}) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
@@ -54,7 +54,7 @@
     if(domainLoadPromise) return domainLoadPromise;
     domainLoadPromise=(async()=>{
       const tasks=await Promise.allSettled([
-        fetchWithTimeout(SOURCES.registry,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('registry HTTP '+r.status);return r.text();}),
+        fetchWithTimeout(SOURCES.registry,{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('registry HTTP '+r.status);return r.text();}),
         fetchWithTimeout(SOURCES.media,{mode:'cors',cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('media HTTP '+r.status);return r.text();})
       ]);
       const merged=[];
@@ -193,48 +193,39 @@
     resultsTitle.textContent='HASIL UNTUK “'+query.toLocaleUpperCase('id')+'”';
     resultsCount.textContent='MEMUAT';
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
-    try {
-      let records;
-      try { records=(type==='web'||type==='google') ? Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}) : await loadDomainRecords(); }
-      catch (_) { records=Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}); }
-      if(requestId!==searchSequence) return;
-      const explicitUrl=/^(?:https?:\/\/|www\.)/i.test(query)||/[/?#]/.test(query);
-      const direct=type==='google'?false:(explicitUrl?renderDirectUrl(query):false);
-      let domainCount=0, webCount=0;
-      if(type==='google') {
-        const googleUrl='https://www.google.com/search?q='+encodeURIComponent(query);
-        addCard({title:'Lihat hasil Google untuk: '+query,url:googleUrl,description:'Membuka halaman hasil pencarian langsung dari Google menggunakan query yang sama dari kolom CARI. Hasil live ditampilkan oleh Google pada tab baru.',icon:'G',tag:'GOOGLE',source:'GOOGLE SEARCH',external:true});
-      }
-      if(!direct && type!=='web' && type!=='google') domainCount=renderDomains(query,records);
-      if(!direct && !domainCount && type!=='web' && validDomain(cleanDomain(query))) {
-        addCard({title:cleanDomain(query),url:'https://'+cleanDomain(query),description:'Nama domain dikenali dari input, tetapi belum ditemukan pada shard katalog yang tersedia. Ini bukan verifikasi DNS atau status registrasi.',icon:'◎',tag:'DOMAIN INPUT',source:'BELUM ADA DI KATALOG'});
-        domainCount=1;
-      }
-      if(type==='all'||type==='web') {
-        try { webCount=await renderWiki(query); }
-        catch (_) { if(requestId!==searchSequence)return; resultsStatus.textContent='Referensi web tidak tersedia atau melewati batas waktu. Hasil domain lokal tetap dapat digunakan.'; }
-        if(requestId!==searchSequence)return;
-      }
-      const sourceNames=[
-        records.sources.registry?'.NZ REGISTRY':'REGISTRY TIDAK TERSEDIA',
-        records.sources.media?'AL.L DATA.MEDIA':'DATA.MEDIA TIDAK TERSEDIA'
-      ];
-      if(type==='google') resultsStatus.textContent='Query siap dikirim ke Google. Pilih tombol hasil di bawah untuk membuka hasil pencarian Google yang aktual. Google membatasi penyematan hasil pencariannya di dalam situs lain.';
-      else if(direct) resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
-      else if(domainCount||webCount) resultsStatus.textContent='Hasil ditampilkan dari sumber yang berhasil dimuat. Jika salah satu sumber gagal, hasil dari sumber lain tetap tersedia. Status domain adalah label katalog, bukan verifikasi live.';
-      else if(!records.sources.registry&&!records.sources.media&&type==='domain') resultsStatus.textContent='Katalog domain tidak dapat dimuat. Periksa koneksi lalu ulangi pencarian.';
-      else resultsStatus.textContent='Tidak ada kecocokan pada sumber data yang tersedia. Coba nama domain atau kata kunci lain.';
-      resultsCount.textContent=(type==='google'?1:(direct?1:domainCount+webCount))+' HASIL';
-      const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
-      results.append(sources);
-      applyResultLimit();
-    } catch (error) {
-      if(requestId!==searchSequence)return;
-      resultsStatus.textContent='Sumber domain gagal dimuat atau melewati batas waktu. Periksa koneksi lalu tekan CARI untuk mencoba kembali.';
-      resultsCount.textContent='SUMBER GAGAL';
+    const explicitUrl=query.toLowerCase().startsWith('http://')||query.toLowerCase().startsWith('https://')||query.toLowerCase().startsWith('www.')||/[/?#]/.test(query);
+    const direct=type==='google'?false:(explicitUrl?renderDirectUrl(query):false);
+    if(type==='google') {
+      const googleUrl='https://www.google.com/search?q='+encodeURIComponent(query);
+      addCard({title:'Lihat hasil Google untuk: '+query,url:googleUrl,description:'Membuka halaman hasil pencarian langsung dari Google menggunakan query yang sama dari kolom CARI. Hasil live ditampilkan oleh Google pada tab baru.',icon:'G',tag:'GOOGLE',source:'GOOGLE SEARCH',external:true});
+      resultsStatus.textContent='Query siap dikirim ke Google. Pilih hasil untuk membuka Google di tab baru.';
+      resultsCount.textContent='1 HASIL'; applyResultLimit(); return;
     }
+    if(direct) {
+      resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
+      resultsCount.textContent='1 HASIL'; applyResultLimit(); return;
+    }
+    const domainTask=type==='web'?Promise.resolve(Object.assign([],{sources:{registry:false,media:false,mediaCount:0}})):loadDomainRecords();
+    const wikiTask=(type==='all'||type==='web')?renderWiki(query):Promise.resolve(0);
+    const settled=await Promise.allSettled([domainTask,wikiTask]);
+    if(requestId!==searchSequence)return;
+    const records=settled[0].status==='fulfilled'?settled[0].value:Object.assign([],{sources:{registry:false,media:false,mediaCount:0}});
+    const webCount=settled[1].status==='fulfilled'?settled[1].value:0;
+    let domainCount=0;
+    if(type!=='web') domainCount=renderDomains(query,records);
+    if(!domainCount&&type!=='web'&&validDomain(cleanDomain(query))) {
+      addCard({title:cleanDomain(query),url:'https://'+cleanDomain(query),description:'Nama domain dikenali dari input, tetapi belum ditemukan pada shard katalog yang tersedia. Ini bukan verifikasi DNS atau status registrasi.',icon:'◎',tag:'DOMAIN INPUT',source:'BELUM ADA DI KATALOG'});
+      domainCount=1;
+    }
+    if(requestId!==searchSequence)return;
+    const sourceNames=[records.sources.registry?'.NZ REGISTRY':'REGISTRY TIDAK TERSEDIA',records.sources.media?'AL.L DATA.MEDIA':'DATA.MEDIA TIDAK TERSEDIA'];
+    if(domainCount||webCount) resultsStatus.textContent='Selesai. Sumber yang berhasil dimuat ditampilkan; kegagalan satu sumber tidak menghambat sumber lainnya.';
+    else if((type==='all'||type==='web')&&settled[1].status==='rejected') resultsStatus.textContent='Referensi web tidak tersedia atau melewati batas waktu. Coba lagi.';
+    else resultsStatus.textContent='Tidak ada kecocokan pada sumber data yang tersedia. Coba kata kunci lain.';
+    resultsCount.textContent=(domainCount+webCount)+' HASIL';
+    const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
+    results.append(sources); applyResultLimit();
   }
-
   function applyResultLimit() {
     if(!results) return;
     const cards=[...results.querySelectorAll('.safari-result-card')];
