@@ -509,3 +509,42 @@ html,body{margin:0!important;width:100%!important;height:100%!important;min-widt
  .wm-grid,.menu-choice-grid{grid-template-columns:1fr!important}
  .vm-modal>header>span{display:none!important}
 }
+
+/* REIC RESOLUTION LAYER SYSTEM — nested resolution planes inspired by the uploaded blueprint */
+.vm-shell{--vm-resolution-scale:1}
+.vm-shell{transform:scale(calc(var(--vm-scale,1) * var(--vm-resolution-scale,1)))!important}
+.vm-desktop{isolation:isolate}
+.vm-resolution-system{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.vm-resolution-frames{position:absolute;inset:2.5% 2.2%}
+.vm-resolution-frame{position:absolute;border:3px solid rgba(240,250,255,.8);border-radius:clamp(14px,2.2vw,42px);inset:calc(var(--n)*4.15%);opacity:calc(.94 - var(--n)*.035);box-shadow:0 0 0 1px rgba(255,255,255,.06),inset 0 0 14px rgba(255,255,255,.025)}
+.vm-resolution-frame span{position:absolute;top:10px;left:clamp(18px,3vw,58px);padding:3px 8px;background:#0754d9;color:#f5fbff;font-size:clamp(9px,.65vw,13px);letter-spacing:.08em}
+.vm-resolution-frame.frame-1{--n:0}.vm-resolution-frame.frame-2{--n:1}.vm-resolution-frame.frame-3{--n:2}.vm-resolution-frame.frame-4{--n:3}.vm-resolution-frame.frame-5{--n:4}.vm-resolution-frame.frame-6{--n:5}.vm-resolution-frame.frame-7{--n:6}.vm-resolution-frame.frame-8{--n:7}.vm-resolution-frame.frame-9{--n:8}.vm-resolution-frame.frame-10{--n:9}
+.vm-resolution-frame:nth-child(2n){border-color:rgba(210,239,255,.66)}
+.vm-resolution-console{position:absolute;z-index:8;right:18px;top:18px;width:min(340px,calc(100% - 36px));padding:12px;border:2px solid #eef9ff;background:linear-gradient(145deg,#075be9f5,#033aafF5);color:white;box-shadow:0 12px 36px #001b5d88;pointer-events:auto;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.18s}
+.vm-resolution-console.open{opacity:1;visibility:visible;transform:none}
+.vm-resolution-console-head{display:grid;gap:4px;padding-bottom:9px;border-bottom:1px solid #ffffff80}
+.vm-resolution-console-head b{font-size:12px;letter-spacing:.1em}.vm-resolution-console-head small{font-size:9px;color:#d6edff}
+.vm-resolution-levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:10px 0}
+.vm-resolution-levels button{display:grid;gap:3px;place-items:center;min-height:46px;border:1px solid #e8f7ff;background:#0750c9;color:white;cursor:pointer}
+.vm-resolution-levels button small{font-size:8px}.vm-resolution-levels button b{font-size:17px}
+.vm-resolution-levels button.active,.vm-resolution-levels button:hover{background:#fff;color:#0645bd;box-shadow:0 0 0 2px #9ee8ff}
+.vm-resolution-readout{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;font-size:9px}.vm-resolution-readout b{font-size:18px}
+.vm-resolution-ruler{height:12px;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:10px}
+.vm-resolution-ruler i{display:block;background:#d9f2ff;border:1px solid #fff}.vm-resolution-ruler i:nth-child(2n){background:#8fc8ff}
+.vm-resolution-close{width:100%;padding:8px;border:1px solid white;background:#043a9e;color:#fff;font-size:9px;cursor:pointer}
+.vm-resolution-launch{position:absolute;z-index:9;right:18px;top:18px;padding:9px 12px;border:2px solid #effaff;background:#0754d9;color:white;font-size:10px;letter-spacing:.08em;cursor:pointer;pointer-events:auto;box-shadow:0 5px 16px #001b5d66}
+.vm-resolution-console.open~.vm-resolution-launch{display:none}
+.vm-core-menu,.vm-workspace{z-index:2}
+.vm-resolution-system:after{content:"";position:absolute;left:2.5%;top:50%;width:18%;height:1px;background:linear-gradient(90deg,#fff,transparent);opacity:.35}
+.vm-shell[data-resolution-layer="2"] .vm-desktop{background-size:28px 28px,28px 28px,auto}
+.vm-shell[data-resolution-layer="3"] .vm-desktop{background-size:24px 24px,24px 24px,auto}
+.vm-shell[data-resolution-layer="4"] .vm-desktop{background-size:20px 20px,20px 20px,auto}
+.vm-shell[data-resolution-layer="5"] .vm-desktop,.vm-shell[data-resolution-layer="6"] .vm-desktop{background-size:16px 16px,16px 16px,auto}
+.vm-shell[data-resolution-layer="7"] .vm-desktop,.vm-shell[data-resolution-layer="8"] .vm-desktop,.vm-shell[data-resolution-layer="9"] .vm-desktop,.vm-shell[data-resolution-layer="10"] .vm-desktop{background-size:12px 12px,12px 12px,auto}
+@media(max-width:760px){
+ .vm-resolution-frames{inset:3% 2%}
+ .vm-resolution-frame{border-width:2px;border-radius:12px}
+ .vm-resolution-frame span{top:4px;left:8px;padding:2px 4px;font-size:7px}
+ .vm-resolution-console{right:8px;top:8px;width:min(300px,calc(100% - 16px))}
+ .vm-resolution-launch{right:8px;top:8px;font-size:8px;padding:7px}
+}
