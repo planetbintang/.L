@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-google-search-v8';
+  css.href = './search-page.css?v=20261031-search-clean-v10';
   document.head.append(css);
 
   const $ = id => document.getElementById(id);
@@ -75,13 +75,13 @@
   function addCard({title,url,description,icon='⌕',tag='HASIL',source='',external=false}) {
     const article=document.createElement('article');
     article.className='safari-result-card';
-    article.dataset.resultType = tag==='DOMAIN' || tag==='DOMAIN INPUT' ? 'domain' : tag==='REFERENSI WEB' ? 'web' : tag==='GOOGLE' ? 'google' : 'all';
+    article.dataset.resultType = tag==='DOMAIN' || tag==='DOMAIN INPUT' ? 'domain' : tag==='REFERENSI WEB' ? 'web' : 'all';
     const mark=document.createElement('span');mark.className='safari-result-icon';mark.textContent=icon;
     const body=document.createElement('div');body.className='safari-result-body';
     const meta=document.createElement('div');meta.className='safari-result-meta';
     const type=document.createElement('span');type.className='safari-result-tag';type.textContent=tag;meta.append(type);
     if(source){const src=document.createElement('span');src.className='safari-result-source';src.textContent=source;meta.append(src);}
-    const link=document.createElement('a');link.className='safari-result-link';link.href=external?url:'#cari';if(external){link.target='_blank';link.rel='noopener noreferrer';link.textContent=(title||url)+' ↗';link.setAttribute('aria-label','Buka hasil pencarian Google di tab baru');}else{link.dataset.internalUrl=url;link.dataset.internalTitle=title||url;link.setAttribute('role','button');link.setAttribute('aria-label','Tampilkan '+(title||url)+' di area CARI');link.textContent=title||url;}
+    const link=document.createElement('a');link.className='safari-result-link';link.href='#cari';link.dataset.internalUrl=url;link.dataset.internalTitle=title||url;link.setAttribute('role','button');link.setAttribute('aria-label','Tampilkan '+(title||url)+' di area CARI');link.textContent=title||url;
     const address=document.createElement('p');address.className='safari-result-url';address.textContent=url;
     const desc=document.createElement('p');desc.className='safari-result-description';desc.textContent=description||'Buka sumber ini untuk melihat informasi lebih lanjut.';
     body.append(meta,link,address,desc);article.append(mark,body);results.append(article);
@@ -194,13 +194,7 @@
     resultsCount.textContent='MEMUAT';
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
     const explicitUrl=query.toLowerCase().startsWith('http://')||query.toLowerCase().startsWith('https://')||query.toLowerCase().startsWith('www.')||/[/?#]/.test(query);
-    const direct=type==='google'?false:(explicitUrl?renderDirectUrl(query):false);
-    if(type==='google') {
-      const googleUrl='https://www.google.com/search?q='+encodeURIComponent(query);
-      addCard({title:'Lihat hasil Google untuk: '+query,url:googleUrl,description:'Membuka halaman hasil pencarian langsung dari Google menggunakan query yang sama dari kolom CARI. Hasil live ditampilkan oleh Google pada tab baru.',icon:'G',tag:'GOOGLE',source:'GOOGLE SEARCH',external:true});
-      resultsStatus.textContent='Query siap dikirim ke Google. Pilih hasil untuk membuka Google di tab baru.';
-      resultsCount.textContent='1 HASIL'; applyResultLimit(); return;
-    }
+    const direct=explicitUrl?renderDirectUrl(query):false;
     if(direct) {
       resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
       resultsCount.textContent='1 HASIL'; applyResultLimit(); return;
