@@ -117,6 +117,8 @@
       .topbar > .main-nav > [data-menu="library"],
       .topbar > .main-nav > a[href="./vendordomain/"] { flex: 0 0 auto !important; visibility: visible !important; opacity: 1 !important; }
       .topbar > .main-nav { scroll-padding-inline: 8px; }
+      .topbar > .main-nav > a[href="./galeri/"] { order: -22 !important; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -21 !important; }
       .topbar > .main-nav > [data-menu="library"] { order: -20 !important; }
       .topbar > .main-nav > a[href="./vendordomain/"] { order: -19 !important; }
       @media (max-width: 760px) {
@@ -124,7 +126,7 @@
         .topbar > .main-nav > [data-menu="library"] > summary,
         .topbar > .main-nav > a[href="./vendordomain/"] { min-height: 38px !important; padding: 7px 9px !important; }
       }
-      .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -18 !important; display: inline-flex !important; flex: 0 0 auto !important; min-width: max-content !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 2; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -21 !important; display: inline-flex !important; flex: 0 0 auto !important; min-width: max-content !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 2; }
       .topbar > .main-nav > a[href="./vmdesktopreic/"]::before,
       .topbar > .main-nav > a[href="./vmdesktopreic/"]::after { display: none !important; content: none !important; }
       @media (max-width: 760px) { .topbar > .main-nav > a[href="./vmdesktopreic/"] { min-height: 38px !important; padding: 7px 9px !important; } }
@@ -140,10 +142,11 @@
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
         <a class="main-nav-link" href="./galeri/" aria-label="Buka Galeri gambar">GALERI</a>
+        <a class="main-nav-link" href="./vmdesktopreic/" aria-label="Buka VMDESKTOPREIC">VMDESKTOPREIC</a>
         <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./leksikon/" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
         <a class="main-nav-link" href="./vendordomain/" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
         <a class="main-nav-link" href="./osmediavm/" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
-        <a class="main-nav-link" href="./vmdesktopreic/" aria-label="Buka VMDESKTOPREIC">VMDESKTOPREIC</a>
+        
         <details class="nav-dropdown common-portal-dropdown" data-menu="portal"><summary>Portal</summary><div class="nav-dropdown-menu" aria-label="Menu umum situs">
           <a href="#overview" data-system-route="system"><b>Beranda</b><small>Kembali ke dashboard utama</small></a>
           <a href="#cari" data-system-route="search"><b>Pencarian</b><small>Temukan repositori dan sumber</small></a>
