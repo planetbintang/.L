@@ -31,5 +31,6 @@
  document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const id=b.dataset.open;if(id==='settings'||id==='apps'||id==='keyboard'){e.preventDefault();e.stopImmediatePropagation();openCore(id==='keyboard'?'keyboard':id==='apps'?'studio':'settings');}},true);
  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.activeTab==='runtime'&&state.activeViews[state.core])setTab('catalog');});
  const observer=new MutationObserver(()=>{const count=modalTabs.querySelector('.wm-open-count');if(count)count.textContent=state.views.length;});observer.observe(modalTabs,{childList:true,subtree:true});
- openCore('settings');
+ // Startup ringan: jangan unduh manifest 15.000+ komponen saat desktop baru dibuka.
+ // Manifest dimuat hanya setelah pengguna memilih salah satu dari lima menu inti.
 })();
