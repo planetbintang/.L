@@ -155,3 +155,125 @@
 #searchPage .safari-result-placeholder{max-width:620px;margin:0 auto}
 #searchPage .safari-google-caption{text-align:center}
 @media(max-width:700px){#searchPage .safari-results-page{width:calc(100% - 1.2rem);padding-top:.8rem}#searchPage .safari-results{padding:.7rem}#searchPage .safari-results-heading h3{font-size:.8rem}#searchPage .safari-result-card{padding:.65rem;grid-template-columns:30px minmax(0,1fr)}#searchPage .safari-result-icon{width:28px;height:28px}#searchPage .safari-search-types{gap:.3rem}#searchPage .safari-search-types a{padding:.45rem .55rem;font-size:.62rem}}
+
+
+/* CARI — tata letak responsif terhubung ke registri domain .NZ dan AL.L. */
+#searchPage.safari-search-page{
+  inset:78px 0 0!important;height:calc(100dvh - 78px)!important;
+  overflow:auto!important;background:#07111f!important;color:#eaf3ff!important;
+  background-image:radial-gradient(ellipse at 18% 0%,rgba(30,108,157,.22),transparent 42%),linear-gradient(145deg,#07111f,#0a1626 55%,#07101d)!important;
+}
+#searchPage .safari-browser{min-height:100%;background:transparent!important;color:inherit}
+#searchPage .safari-toolbar{
+  position:sticky;top:0;z-index:5;min-height:66px;padding:10px clamp(12px,3vw,34px);
+  background:rgba(5,13,24,.92)!important;border-bottom:1px solid rgba(133,177,215,.2)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.18)!important;backdrop-filter:blur(18px);
+}
+#searchPage .safari-window-controls i{width:9px;height:9px}
+#searchPage .safari-address-wrap{
+  max-width:1040px;border:1px solid rgba(143,183,218,.32)!important;
+  border-radius:12px!important;background:rgba(13,29,47,.94)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+#searchPage .safari-address-icon{padding-left:8px;color:#8fc7ed}
+#searchPage #globalSearchInput,#searchPage #safariStartInput{
+  min-height:44px;color:#f2f7fc!important;font-size:14px!important;
+}
+#searchPage #globalSearchInput::placeholder,#searchPage #safariStartInput::placeholder{color:#8297ad}
+#searchPage .safari-search-submit.icon-button{
+  min-height:42px;margin:3px;padding:9px 17px;border:1px solid #58b9e9!important;
+  border-radius:8px!important;background:linear-gradient(135deg,#12618d,#167ca9)!important;
+  color:#fff!important;font-size:11px;font-weight:800;letter-spacing:.08em;
+}
+#searchPage .safari-search-submit.icon-button:hover{background:linear-gradient(135deg,#1879a9,#2196c8)!important}
+#searchPage .safari-url-label{color:#8fc7ed;font-size:10px;letter-spacing:.13em}
+#searchPage .safari-results-page{
+  width:min(1120px,calc(100% - 36px));margin:0 auto;padding:clamp(22px,4vw,42px) 0 56px;
+}
+#searchPage .safari-search-hero{
+  display:grid;grid-template-columns:62px minmax(0,1fr);column-gap:16px;row-gap:4px;
+  align-items:center;text-align:left;padding:8px 0 22px;
+}
+#searchPage .safari-search-hero .safari-start-mark{
+  grid-column:1;grid-row:1/4;width:58px;height:58px;margin:0;border-radius:14px!important;
+  border:1px solid rgba(110,193,237,.35);background:linear-gradient(145deg,#173c59,#0e2237)!important;
+  color:#9de0ff!important;font:800 20px/1 system-ui;letter-spacing:-.08em;
+  box-shadow:0 10px 26px rgba(0,0,0,.24);
+}
+#searchPage .safari-search-hero .safari-eyebrow{margin:0;color:#78c9f2;font-size:10px;letter-spacing:.17em}
+#searchPage .safari-search-hero h2{margin:0;color:#f2f7fc;font-size:clamp(22px,3.4vw,32px);font-weight:750;letter-spacing:-.035em}
+#searchPage .safari-description{margin:2px 0 0;color:#9eb1c5;font-size:13px;line-height:1.55}
+#searchPage .safari-start-form{
+  grid-column:1/-1;width:min(100%,900px);margin:18px auto 0;padding:4px 5px 4px 13px;
+  border:1px solid rgba(143,183,218,.35)!important;border-radius:12px!important;
+  background:rgba(14,31,50,.96)!important;box-shadow:0 14px 34px rgba(0,0,0,.2)!important;
+}
+#searchPage .safari-start-form:focus-within{border-color:#52b9ed!important;box-shadow:0 0 0 3px rgba(82,185,237,.13),0 14px 34px rgba(0,0,0,.2)!important}
+#searchPage .safari-start-form .safari-address-icon{padding:0 8px;color:#8fc7ed}
+#searchPage #safariStartInput{min-height:46px}
+#searchPage .safari-search-types{
+  grid-column:1/-1;display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:14px;
+}
+#searchPage .safari-search-types a{
+  min-width:90px;padding:9px 15px;border:1px solid rgba(134,177,215,.23)!important;
+  border-radius:8px!important;background:rgba(14,31,50,.72)!important;color:#b8cce0!important;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-decoration:none;transition:.16s ease;
+}
+#searchPage .safari-search-types a:hover,#searchPage .safari-search-types a.is-active{
+  border-color:rgba(93,194,239,.72)!important;background:rgba(21,89,126,.45)!important;color:#e8f8ff!important;
+}
+#searchPage .safari-results{
+  margin:10px 0 0;padding:clamp(14px,2.3vw,22px);
+  border:1px solid rgba(129,170,207,.2)!important;border-radius:14px!important;
+  background:linear-gradient(145deg,rgba(14,29,47,.96),rgba(9,21,36,.96))!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.18)!important;
+}
+#searchPage .safari-results-heading{padding-bottom:13px;border-color:rgba(129,170,207,.18)!important}
+#searchPage .safari-results-heading .safari-eyebrow{color:#75c7f0}
+#searchPage .safari-results-heading h3{color:#edf5fc;font-size:clamp(13px,2vw,16px);font-weight:750}
+#searchPage #safariResultsCount{color:#84c9ec;font-size:10px;letter-spacing:.12em}
+#searchPage .safari-results-status{margin:13px 0;color:#9eb2c7;font-size:12px;line-height:1.55}
+#searchPage .safari-results-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#searchPage .safari-result-card{
+  display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start;
+  min-width:0;padding:13px;border:1px solid rgba(128,172,211,.18)!important;border-radius:10px!important;
+  background:rgba(17,38,60,.72)!important;transition:border-color .16s ease,transform .16s ease;
+}
+#searchPage .safari-result-card:hover{border-color:rgba(87,190,239,.52)!important;transform:translateY(-1px)}
+#searchPage .safari-result-icon{
+  width:36px;height:36px;border:1px solid rgba(112,191,232,.25)!important;border-radius:9px!important;
+  background:linear-gradient(145deg,rgba(33,102,145,.5),rgba(18,47,72,.8))!important;color:#9cddfa!important;
+  font-size:15px;
+}
+#searchPage .safari-result-body{min-width:0}
+#searchPage .safari-result-meta{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:5px}
+#searchPage .safari-result-tag{color:#78c9f2;font-size:9px;font-weight:850;letter-spacing:.12em}
+#searchPage .safari-result-source{color:#a9c0d4;font-size:9px;font-weight:750;letter-spacing:.04em}
+#searchPage .safari-result-link{display:block;color:#e5f3ff!important;font-size:13px;font-weight:750;line-height:1.4;overflow-wrap:anywhere}
+#searchPage .safari-result-url{margin:4px 0;color:#79b99d!important;font-size:10px;overflow-wrap:anywhere}
+#searchPage .safari-result-description{margin:5px 0 0;color:#9aadc0!important;font-size:11px;line-height:1.55}
+#searchPage .safari-source-footnote{grid-column:1/-1;margin:7px 0 0;padding:11px 2px 0;border-top:1px solid rgba(129,170,207,.16);color:#819bb2;font-size:9px;line-height:1.6;letter-spacing:.07em}
+#searchPage .safari-google-caption{margin:18px 0 0;color:#718ba4;font-size:9px;letter-spacing:.12em}
+#searchPage .safari-google-caption strong{color:#8bcff1}
+@media(max-width:720px){
+  #searchPage.safari-search-page{inset:74px 0 0!important;height:calc(100dvh - 74px)!important}
+  #searchPage .safari-toolbar{min-height:58px;padding:8px 10px;gap:7px}
+  #searchPage .safari-window-controls{display:none}
+  #searchPage .safari-address-wrap{gap:3px;padding:2px 3px 2px 8px}
+  #searchPage .safari-address-icon{display:none}
+  #searchPage #globalSearchInput{min-height:42px;font-size:12px!important;padding:8px}
+  #searchPage .safari-search-submit.icon-button{min-height:38px;padding:8px 11px;font-size:10px}
+  #searchPage .safari-url-label{font-size:8px}
+  #searchPage .safari-results-page{width:calc(100% - 22px);padding:18px 0 36px}
+  #searchPage .safari-search-hero{grid-template-columns:48px minmax(0,1fr);column-gap:11px;padding:4px 0 15px}
+  #searchPage .safari-search-hero .safari-start-mark{width:46px;height:46px;font-size:16px}
+  #searchPage .safari-search-hero h2{font-size:22px}
+  #searchPage .safari-description{font-size:11px}
+  #searchPage .safari-start-form{margin-top:14px;padding:3px 4px 3px 8px}
+  #searchPage .safari-search-types{justify-content:flex-start;gap:5px}
+  #searchPage .safari-search-types a{min-width:0;padding:8px 10px;font-size:9px}
+  #searchPage .safari-results{padding:12px;border-radius:10px!important}
+  #searchPage .safari-results-list{grid-template-columns:1fr;gap:8px}
+  #searchPage .safari-result-card{padding:11px;grid-template-columns:32px minmax(0,1fr);gap:9px}
+  #searchPage .safari-result-icon{width:30px;height:30px}
+}
