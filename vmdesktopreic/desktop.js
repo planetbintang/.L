@@ -95,23 +95,57 @@ function renderFullLibrary(groupKey,term='',page=0){
  modalTabs.querySelector('[data-library-all]').onclick=()=>{$('#modalStatus').textContent=(fullComponentManifest||[]).length.toLocaleString('id-ID')+' komponen berhasil dimuat dari manifest REIC.';};
  backdrop.hidden=false;
 }
+function renderLayeredComponent(item,groupKey,term,page,base,source,css,js){
+ const esc=s=>safeHTML(s);
+ const modal=$('.vm-modal');
+ modal.dataset.component=item.id;
+ modalBody.innerHTML='<button class="menu-back" id="layeredBack">← KEMBALI KE KATALOG</button><section class="layered-component" data-active-layer="workspace"><header class="layered-topbar"><div class="layered-ident"><span class="layered-orb">'+(libraryGroups[groupKey]?.icon||'▦')+'</span><div><small>OS MEDIA VM / REIC RUNTIME</small><b>'+esc(item.title||item.id)+'</b><span>'+esc(item.id)+' · '+esc(item.group||groupKey)+'</span></div></div><div class="layered-actions"><button type="button" data-layer-action="reload">↻ MUAT ULANG</button><button type="button" data-layer-action="fullscreen">⛶ PERLUAS</button></div></header><div class="layered-workarea"><nav class="layered-rail" aria-label="Lapisan komponen"><button class="active" data-layer="workspace"><i>▣</i><span>WORKSPACE</span></button><button data-layer="properties"><i>◈</i><span>PROPERTI</span></button><button data-layer="activity"><i>◷</i><span>AKTIVITAS</span></button><button data-layer="storage"><i>▱</i><span>FILE & DATA</span></button><button data-layer="source"><i>⌘</i><span>SUMBER</span></button></nav><div class="layered-stage"><div class="layered-stage-head"><div><small>ACTIVE COMPONENT / LIVE VIEW</small><b id="layeredStageTitle">RUANG KERJA KOMPONEN</b></div><span class="layered-live"><i></i> RUNTIME AKTIF</span></div><div class="layered-frame-wrap" id="layeredFrameWrap"><iframe class="layered-runtime-frame" id="layeredRuntimeFrame" title="Runtime komponen '+esc(item.title||item.id)+'" sandbox="allow-scripts allow-forms allow-downloads allow-modals" referrerpolicy="no-referrer"></iframe></div><div class="layered-info-panel" id="layeredInfoPanel" hidden></div></div><aside class="layered-inspector"><div class="layered-inspector-head"><small>INSPEKTOR SISTEM</small><b id="layeredInspectorTitle">RINGKASAN</b></div><div class="layered-inspector-body" id="layeredInspectorBody"><div class="layered-property"><span>Identitas</span><b>'+esc(item.id)+'</b></div><div class="layered-property"><span>Kelompok</span><b>'+esc(item.group||groupKey)+'</b></div><div class="layered-property"><span>Runtime</span><b>REIC / IFRAME</b></div><div class="layered-property"><span>Isolasi</span><b>SANDBOX AKTIF</b></div><p>Komponen berjalan pada ruang terisolasi di dalam modal. Gunakan lapisan di sisi kiri untuk membuka properti, aktivitas, data, dan sumber.</p></div></aside></div><footer class="layered-runtime-foot"><span><i></i> MODUL DIMUAT DI DALAM MODAL</span><span>HTML / REIC · CSS · JAVASCRIPT</span><span id="layeredRuntimeStatus">MENYIAPKAN RUNTIME…</span></footer></section>';
+ $('#layeredBack').onclick=()=>renderFullLibrary(groupKey,term,page);
+ const frame=$('#layeredRuntimeFrame');
+ const layerButtons=modalBody.querySelectorAll('[data-layer]');
+ const inspector=$('#layeredInspectorBody');
+ const setLayer=key=>{
+  const root=modalBody.querySelector('.layered-component');root.dataset.activeLayer=key;
+  layerButtons.forEach(b=>b.classList.toggle('active',b.dataset.layer===key));
+  $('#layeredInspectorTitle').textContent=({workspace:'RINGKASAN',properties:'PROPERTI KOMPONEN',activity:'AKTIVITAS RUNTIME',storage:'FILE & DATA',source:'SUMBER KODE'})[key];
+  $('#layeredStageTitle').textContent=({workspace:'RUANG KERJA KOMPONEN',properties:'LAPISAN PROPERTI',activity:'LAPISAN AKTIVITAS',storage:'LAPISAN FILE & DATA',source:'LAPISAN SUMBER'})[key];
+  if(key==='workspace'){ $('#layeredFrameWrap').hidden=false;$('#layeredInfoPanel').hidden=true;inspector.innerHTML='<div class="layered-property"><span>Identitas</span><b>'+esc(item.id)+'</b></div><div class="layered-property"><span>Kelompok</span><b>'+esc(item.group||groupKey)+'</b></div><div class="layered-property"><span>Runtime</span><b>REIC / IFRAME</b></div><div class="layered-property"><span>Isolasi</span><b>SANDBOX AKTIF</b></div><p>Komponen berjalan pada ruang terisolasi di dalam modal.</p>'; }
+  else { $('#layeredFrameWrap').hidden=true;const info=$('#layeredInfoPanel');info.hidden=false;
+   const panels={
+    properties:'<div class="layered-info-card"><small>IDENTITAS</small><b>'+esc(item.title||item.id)+'</b><span>'+esc(item.id)+'</span></div><div class="layered-info-card"><small>KELOMPOK SISTEM</small><b>'+esc(item.group||groupKey)+'</b><span>OS MEDIA VM · COMPONENT LIBRARY</span></div><div class="layered-info-card"><small>STRUKTUR LAPISAN</small><b>REIC / PRESENTATION / INTERACTION</b><span>HTML fragment · stylesheet · runtime script</span></div><div class="layered-info-card"><small>STATUS KEAMANAN</small><b>IFRAME SANDBOX</b><span>Script dibatasi pada konteks komponen</span></div>',
+    activity:'<div class="layered-info-card"><small>STATUS RUNTIME</small><b>BERJALAN DI MODAL</b><span>Runtime browser terisolasi</span></div><div class="layered-info-card"><small>PEMROSESAN</small><b>LOKAL / CLIENT-SIDE</b><span>Interaksi komponen diproses di dalam frame</span></div><div class="layered-info-card"><small>PEMANTAUAN</small><b>SIAP DIPANTAU</b><span>Kesalahan JavaScript ditampilkan oleh runtime browser</span></div>',
+    storage:'<div class="layered-info-card"><small>BERKAS REIC</small><b>'+esc(item.id)+'.reic</b><span>Struktur tampilan dan markup komponen</span></div><div class="layered-info-card"><small>STYLESHEET</small><b>'+esc(item.id)+'.css</b><span>Tekstur, warna, grid, dan responsivitas</span></div><div class="layered-info-card"><small>RUNTIME</small><b>'+esc(item.id)+'.js</b><span>Perilaku dan event komponen</span></div><div class="layered-info-card"><small>PERSISTENSI</small><b>SESUAI ADAPTER KOMPONEN</b><span>Penyimpanan permanen memerlukan layanan yang disediakan modul</span></div>',
+    source:'<div class="layered-info-card"><small>SUMBER HTML / REIC</small><b>'+esc(base)+'.reic</b><span>Markup komponen</span></div><div class="layered-info-card"><small>SUMBER CSS</small><b>'+esc(base)+'.css</b><span>Presentasi komponen</span></div><div class="layered-info-card"><small>SUMBER JAVASCRIPT</small><b>'+esc(base)+'.js</b><span>Interaksi komponen</span></div><div class="layered-info-card"><small>PEMETAAN</small><b>MANIFEST OS MEDIA VM</b><span>'+esc(item.group||groupKey)+' / '+esc(item.id)+'</span></div>'
+   };
+   info.innerHTML=panels[key]||'';inspector.innerHTML='<p>Lapisan '+key.toUpperCase()+' untuk '+esc(item.title||item.id)+'. Semua panel berada dalam modal VMDESKTOPREIC.</p><div class="layered-property"><span>Komponen</span><b>'+esc(item.id)+'</b></div><div class="layered-property"><span>Lapisan aktif</span><b>'+key.toUpperCase()+'</b></div>';
+  }
+ };
+ layerButtons.forEach(b=>b.addEventListener('click',()=>setLayer(b.dataset.layer)));
+ modalBody.querySelector('[data-layer-action="reload"]').onclick=()=>{frame.srcdoc=frame.srcdoc;$('#layeredRuntimeStatus').textContent='RUNTIME DIMUAT ULANG';};
+ modalBody.querySelector('[data-layer-action="fullscreen"]').onclick=()=>{const stage=$('.layered-stage');stage.classList.toggle('layered-stage-expanded');};
+ const src=source.slice(source.indexOf('<section'),source.lastIndexOf('</section>')+10);
+ const safeJS=String(js||'').replace(/<\/script/gi,'<\\/script');
+ const doc='<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+new URL(base+'.reic',location.href).href.replace(/[^/]*$/,'')+'"><style>*,*::before,*::after{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#091625;color:#edf5ff;font:14px Inter,system-ui,sans-serif}body{padding:14px}'+(css||'')+'</style></head><body>'+src+'<script>'+safeJS+'<\/script></body></html>';
+ frame.srcdoc=doc;
+ frame.addEventListener('load',()=>{$('#layeredRuntimeStatus').textContent='RUNTIME AKTIF · KOMPONEN DIMUAT';$('#modalStatus').textContent='Komponen '+item.id+' berjalan pada layout berlapis dalam modal.';},{once:true});
+ setLayer('workspace');
+}
 async function openFullComponent(id,groupKey,term,page){
  const item=(fullComponentManifest||[]).find(x=>x.id===id);if(!item)return;
  modalTitle.textContent=item.title||item.id;modalIcon.textContent=libraryGroups[groupKey].icon;
- modalTabs.innerHTML='<button class="active">PRATINJAU REIC</button><button data-component-info>INFORMASI</button><button data-component-source>SUMBER</button>';
+ modalTabs.innerHTML='<button class="active">WORKSPACE BERLAPIS</button><button data-component-info>INFORMASI</button><button data-component-source>SUMBER</button>';
  const base='../osmediavm/recordin/components/'+encodeURIComponent(item.id)+'/'+encodeURIComponent(item.id);
- modalBody.innerHTML='<button class="menu-back" id="fullComponentBack">← KEMBALI KE KATALOG</button><div class="full-component-meta"><span>'+safeHTML(item.id)+'</span><b>'+safeHTML(item.group)+'</b><small>REIC · CSS · JS</small></div><div class="full-component-preview" id="fullComponentPreview">Memuat komponen dari Library OS MEDIA VM…</div>';
+ modalBody.innerHTML='<button class="menu-back" id="fullComponentBack">← KEMBALI KE KATALOG</button><div class="full-component-preview">Mengambil lapisan REIC, CSS, dan runtime JavaScript…</div>';
  $('#fullComponentBack').onclick=()=>renderFullLibrary(groupKey,term,page);
- modalTabs.querySelector('[data-component-info]').onclick=()=>{$('#modalStatus').textContent='ID '+item.id+' · kelompok '+item.group+' · komponen dari manifest utama.';};
- modalTabs.querySelector('[data-component-source]').onclick=()=>{$('#modalStatus').textContent='Sumber: '+base+'.reic · '+base+'.css · '+base+'.js';};
  try{
-  const response=await fetch(base+'.reic',{cache:'force-cache'});if(!response.ok)throw Error('REIC HTTP '+response.status);
-  const raw=await response.text(),a=raw.indexOf('<section'),b=raw.lastIndexOf('</section>');if(a<0||b<0)throw Error('Fragmen section REIC tidak ditemukan');
-  const host=$('#fullComponentPreview');host.innerHTML=raw.slice(a,b+10);
-  const sid='full-reic-style-'+item.id;if(!document.getElementById(sid)){const link=document.createElement('link');link.id=sid;link.rel='stylesheet';link.href=base+'.css';document.head.append(link);}
-  const jid='full-reic-script-'+item.id;if(!document.getElementById(jid)){const script=document.createElement('script');script.id=jid;script.src=base+'.js';script.defer=true;document.body.append(script);}
-  $('#modalStatus').textContent='Komponen '+item.id+' berhasil dimuat dari Library REIC.';
- }catch(error){$('#fullComponentPreview').textContent='Komponen terdaftar, tetapi pratinjau gagal dimuat: '+error.message;}
+  const [r,c,j]=await Promise.all([fetch(base+'.reic',{cache:'force-cache'}),fetch(base+'.css',{cache:'force-cache'}),fetch(base+'.js',{cache:'force-cache'})]);
+  if(!r.ok)throw Error('REIC HTTP '+r.status);
+  const source=await r.text(),css=c.ok?await c.text():'',js=j.ok?await j.text():'';
+  renderLayeredComponent(item,groupKey,term,page,base,source,css,js);
+  modalTabs.querySelector('[data-component-info]').onclick=()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));modalTabs.querySelector('[data-component-info]').classList.add('active');$('.layered-component').dataset.activeLayer='properties';$('#layeredInspectorTitle').textContent='PROPERTI KOMPONEN';};
+  modalTabs.querySelector('[data-component-source]').onclick=()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));modalTabs.querySelector('[data-component-source]').classList.add('active');const b=$('.layered-component [data-layer="source"]');if(b)b.click();};
+  $('#modalStatus').textContent='Tiga berkas sumber dimuat · membangun workspace berlapis.';
+ }catch(error){modalBody.innerHTML='<button class="menu-back" id="fullComponentBack">← KEMBALI KE KATALOG</button><div class="layered-error">Komponen '+safeHTML(item.id)+' tidak dapat dimuat: '+safeHTML(error.message)+'</div>';$('#fullComponentBack').onclick=()=>renderFullLibrary(groupKey,term,page);}
 }
 function selectCore(id){
  const m=menus[id]||menus.settings;currentCore=id;
