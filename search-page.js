@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261030-safari-hub-style-v2';
+  css.href = './search-page.css?v=20261031-google-results-v1';
   document.head.append(css);
 
   const searchInput = document.getElementById('globalSearchInput');
@@ -11,57 +11,123 @@
   const topInput = document.getElementById('topbarSearchInput');
   const homeForm = document.getElementById('homeSearchForm');
   const homeInput = document.getElementById('homeSearchInput');
+  const mainForm = document.getElementById('globalSearchForm');
+  const startForm = document.getElementById('safariStartForm');
+  const results = document.getElementById('safariResultsList');
+  const resultsTitle = document.getElementById('safariResultsTitle');
+  const resultsCount = document.getElementById('safariResultsCount');
+  const resultsStatus = document.getElementById('safariResultsStatus');
 
-  // Kedua kolom pada halaman Safari memakai kueri yang sama.
-  function sync(source, target) {
-    if (source && target) source.addEventListener('input', () => { target.value = source.value; });
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const googleUrl = (query, type = 'web') => {
+    const params = new URLSearchParams({q:query});
+    if (type === 'images') params.set('tbm','isch');
+    if (type === 'news') params.set('tbm','nws');
+    if (type === 'videos') params.set('tbm','vid');
+    return 'https://www.google.com/search?' + params.toString();
+  };
+  function setQuery(value) {
+    [searchInput,startInput,topInput,homeInput].forEach(input => { if (input) input.value = value; });
+    try { sessionStorage.setItem('pb-global-search-query', value); } catch (_) {}
   }
-  sync(searchInput, startInput);
-  sync(startInput, searchInput);
-  sync(topInput, searchInput);
-  sync(homeInput, searchInput);
-  sync(topInput, homeInput);
-  sync(homeInput, topInput);
-
-  function openSafariSearch(value) {
+  function addCard(item) {
+    const article = document.createElement('article');
+    article.className = 'safari-result-card';
+    const link = document.createElement('a');
+    link.className = 'safari-result-link';
+    link.href = item.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = item.title || item.url;
+    const url = document.createElement('p');
+    url.className = 'safari-result-url';
+    url.textContent = item.url;
+    const desc = document.createElement('p');
+    desc.className = 'safari-result-description';
+    desc.textContent = item.description || 'Buka tautan ini untuk melihat sumber informasi.';
+    const icon = document.createElement('span');
+    icon.className = 'safari-result-icon';
+    icon.textContent = item.icon || '↗';
+    const body = document.createElement('div');
+    body.append(link,url,desc);
+    article.append(icon,body);
+    results.append(article);
+  }
+  function addGoogleShortcuts(query) {
+    [
+      ['Hasil web Google',googleUrl(query,'web'),'Cari halaman web yang cocok dengan kata kunci ini.','G'],
+      ['Gambar terkait',googleUrl(query,'images'),'Telusuri gambar yang berkaitan dengan pencarian.','▧'],
+      ['Berita terbaru',googleUrl(query,'news'),'Lihat berita yang cocok dengan kata kunci.','▤'],
+      ['Video terkait',googleUrl(query,'videos'),'Temukan video yang relevan.','▶'],
+      ['Peta dan lokasi','https://www.google.com/maps/search/'+encodeURIComponent(query),'Cari lokasi atau tempat pada Google Maps.','⌖']
+    ].forEach(([title,url,description,icon])=>addCard({title,url,description,icon}));
+  }
+  async function runSearch(value) {
     const query = String(value || '').trim();
-    if (searchInput) searchInput.value = query;
-    if (startInput) startInput.value = query;
+    if (!query || !results) return;
+    setQuery(query);
     if (location.hash !== '#cari') location.hash = '#cari';
-    // Biarkan navigasi sistem selesai sebelum fokus dipindahkan ke kolom Safari.
-    window.setTimeout(() => {
-      if (searchInput) {
-        searchInput.value = query;
-        searchInput.focus();
+    results.replaceChildren();
+    resultsTitle.textContent = 'HASIL UNTUK “' + query.toLocaleUpperCase('id') + '”';
+    resultsCount.textContent = 'MEMUAT';
+    resultsStatus.textContent = 'Menyiapkan daftar hasil pencarian…';
+
+    const isUrl = /^(https?:\/\/|www\.)/i.test(query) || /^[\w.-]+\.[a-z]{2,}(?:\/.*)?$/i.test(query);
+    if (isUrl) {
+      const normalized = /^https?:\/\//i.test(query) ? query : 'https://' + query;
+      try {
+        const parsed = new URL(normalized);
+        addCard({title:parsed.hostname,url:parsed.href,description:'Alamat situs yang Anda masukkan. Buka tautan untuk mengunjungi situs tersebut.',icon:'↗'});
+        addGoogleShortcuts('site:' + parsed.hostname);
+      } catch (_) {
+        addGoogleShortcuts(query);
       }
-    }, 120);
-  }
-
-  if (topForm && topInput) {
-    topForm.addEventListener('submit', event => {
-      event.preventDefault();
-      openSafariSearch(topInput.value);
-    });
-  }
-  if (homeForm && homeInput) {
-    homeForm.addEventListener('submit', event => {
-      event.preventDefault();
-      openSafariSearch(homeInput.value);
-    });
-  }
-
-  try {
-    const saved = sessionStorage.getItem('pb-global-search-query');
-    if (saved && searchInput) {
-      searchInput.value = saved;
-      if (startInput) startInput.value = saved;
+      resultsStatus.textContent = 'URL dikenali. Pilih alamat situs atau telusuri hasil terkait melalui Google.';
+      resultsCount.textContent = 'URL + PINTASAN';
+      return;
     }
-  } catch (_) {}
 
-  [searchInput, startInput].forEach(input => {
-    if (!input) return;
-    input.addEventListener('input', () => {
-      try { sessionStorage.setItem('pb-global-search-query', input.value); } catch (_) {}
-    });
-  });
+    // DuckDuckGo Instant Answer menyediakan referensi publik tanpa API key; Google tetap menjadi jalur hasil web lengkap.
+    try {
+      const endpoint = 'https://api.duckduckgo.com/?q=' + encodeURIComponent(query) + '&format=json&no_html=1&skip_disambig=1';
+      const response = await fetch(endpoint, {headers:{Accept:'application/json'}});
+      if (!response.ok) throw new Error('Search provider unavailable');
+      const data = await response.json();
+      const found = [];
+      if (data.AbstractText && data.AbstractURL) found.push({title:data.Heading || query,url:data.AbstractURL,description:data.AbstractText,icon:'i'});
+      (data.Results || []).forEach(item => { if(item.FirstURL) found.push({title:item.Text || item.FirstURL,url:item.FirstURL,description:'Referensi terkait dari DuckDuckGo.',icon:'↗'}); });
+      function collect(items) {
+        (items || []).forEach(item => {
+          if (item.Topics) collect(item.Topics);
+          else if (item.FirstURL) found.push({title:item.Text || item.FirstURL,url:item.FirstURL,description:'Topik terkait dari indeks referensi web.',icon:'↗'});
+        });
+      }
+      collect(data.RelatedTopics);
+      const seen = new Set();
+      found.filter(item=>{if(seen.has(item.url))return false;seen.add(item.url);return true;}).slice(0,8).forEach(addCard);
+      resultsStatus.textContent = found.length ? 'Referensi ringkas ditampilkan di bawah. Gunakan hasil web Google untuk cakupan pencarian yang lebih luas.' : 'Belum ada ringkasan referensi untuk kata kunci ini. Hasil web Google tetap tersedia di bawah.';
+    } catch (_) {
+      resultsStatus.textContent = 'Referensi otomatis tidak tersedia pada koneksi ini. Gunakan tautan Google untuk melihat hasil web lengkap.';
+    }
+    addGoogleShortcuts(query);
+    resultsCount.textContent = results.children.length + ' TAUTAN';
+  }
+
+  function sync(source,target) { if(source&&target) source.addEventListener('input',()=>{target.value=source.value;}); }
+  sync(searchInput,startInput); sync(startInput,searchInput); sync(topInput,searchInput); sync(homeInput,searchInput);
+  sync(topInput,homeInput); sync(homeInput,topInput);
+  [mainForm,startForm].forEach(form=>form?.addEventListener('submit',event=>{event.preventDefault();runSearch((form===mainForm?searchInput:startInput)?.value);}));
+  [topForm,homeForm].forEach(form=>form?.addEventListener('submit',event=>{event.preventDefault();const value=(form===topForm?topInput:homeInput)?.value||'';runSearch(value);}));
+  document.querySelectorAll('[data-search-type]').forEach(link=>link.addEventListener('click',event=>{
+    event.preventDefault();
+    const query=searchInput?.value.trim()||startInput?.value.trim()||'';
+    if(!query){searchInput?.focus();return;}
+    window.open(googleUrl(query,link.dataset.searchType),'_blank','noopener');
+  }));
+  try {
+    const saved=sessionStorage.getItem('pb-global-search-query');
+    if(saved) setQuery(saved);
+  } catch (_) {}
+  [searchInput,startInput].forEach(input=>input?.addEventListener('input',()=>setQuery(input.value)));
+  if (location.hash === '#cari' && searchInput) searchInput.setAttribute('aria-label','Cari di Google atau masukkan URL');
 })();
