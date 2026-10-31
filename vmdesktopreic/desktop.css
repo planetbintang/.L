@@ -622,3 +622,170 @@ html,body{margin:0!important;width:100%!important;height:100%!important;min-widt
 .vmd-notes{height:100%;display:flex;flex-direction:column;gap:8px}.vmd-notes textarea{flex:1;min-height:200px;resize:none;padding:14px;border:1px solid #31536b;background:#07111f;color:#edf7ff;font:14px/1.6 system-ui}.vmd-notes small,.vmd-note{color:#91a8c3;font-size:10px}
 .vmd-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.vmd-metrics article{padding:18px;border:1px solid #31536b;background:#10243a}.vmd-metrics small{display:block;color:#83e1ff;font-size:9px}.vmd-metrics b{display:block;margin-top:10px;font-size:20px}.vmd-settings{display:flex;flex-direction:column;gap:15px}.vmd-settings label{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #29445d;font-size:12px}.vmd-settings select{padding:8px;background:#07111f;border:1px solid #31536b;color:white}
 @media(max-width:800px){.vmd-shortcuts{left:350px;grid-template-columns:repeat(2,78px);gap:6px}.vmd-shortcut{width:76px;min-height:76px}.vmd-dock{min-width:0;max-width:calc(100% - 360px);gap:4px}.vmd-dock button{width:38px;height:38px}.vmd-window{max-width:calc(100% - 360px);width:600px}.vmd-start-menu{width:min(420px,calc(100% - 360px))}}
+
+
+/* VMDESKTOPREIC FINAL RESPONSIVE FIX — fluid viewport, no fixed 1920x1080 canvas */
+html,body{
+  width:100%;height:100%;min-width:0;min-height:100%;
+  margin:0;overflow:hidden;
+}
+#desktop-root{
+  position:fixed!important;inset:0!important;
+  display:block!important;width:100%!important;height:100%!important;
+  min-height:100dvh!important;overflow:hidden!important;
+}
+.vm-shell,
+.vm-shell[data-resolution-layer]{
+  position:relative!important;
+  width:100%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;
+  max-width:none!important;max-height:none!important;
+  margin:0!important;padding:clamp(6px,1vw,14px)!important;
+  display:flex!important;flex-direction:column!important;
+  gap:clamp(6px,.7vw,10px)!important;
+  flex:1 1 auto!important;overflow:hidden!important;
+  transform:none!important;transform-origin:center!important;
+}
+.vm-header{
+  width:100%;height:auto!important;min-height:64px!important;
+  max-height:none!important;flex:0 0 auto!important;
+}
+.vm-desktop{
+  width:100%;height:auto!important;min-height:0!important;
+  flex:1 1 0!important;overflow:hidden!important;
+  position:relative!important;
+}
+.vm-statusbar{
+  width:100%;height:auto!important;min-height:42px!important;
+  max-height:none!important;flex:0 0 auto!important;
+  overflow:hidden;
+}
+.vm-core-menu{min-height:0;overflow:auto}
+.vm-workspace{min-width:0;min-height:0;overflow:hidden}
+.vm-modal-backdrop{
+  position:fixed!important;inset:0!important;z-index:99999!important;
+  padding:clamp(8px,2vw,28px)!important;
+  display:grid!important;place-items:center!important;
+}
+.vm-modal-backdrop[hidden]{display:none!important}
+.vm-modal{
+  width:min(1500px,100%)!important;height:min(900px,100%)!important;
+  max-width:100%!important;max-height:100%!important;
+  min-width:0!important;min-height:0!important;
+  overflow:hidden!important;
+}
+#modalBody{min-height:0!important;overflow:auto!important}
+.vmd-system{min-width:0;min-height:0}
+.vmd-shortcuts{max-width:calc(100% - 24px)}
+.vmd-window{
+  left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;
+  width:min(760px,calc(100% - 36px))!important;
+  height:min(520px,calc(100% - 110px))!important;
+  max-width:calc(100% - 36px)!important;max-height:calc(100% - 110px)!important;
+}
+.vmd-window.maximized{
+  left:12px!important;top:12px!important;transform:none!important;
+  width:calc(100% - 24px)!important;height:calc(100% - 100px)!important;
+  max-width:none!important;max-height:none!important;
+}
+.vmd-dock{min-width:0;max-width:calc(100% - 24px)}
+.vmd-start-menu{max-width:calc(100% - 24px)}
+@media(max-width:900px){
+  .vm-header{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:8px 10px}
+  .vm-brand{max-width:none!important;min-width:0!important;font-size:clamp(14px,2vw,20px)}
+  .vm-search{grid-column:1/-1;grid-row:2;width:100%;min-width:0;height:38px}
+  .vm-header-tools{grid-column:2;grid-row:1;min-width:0;flex-wrap:wrap;justify-content:flex-end}
+  .vm-header-tools button{width:32px;height:32px;flex:0 0 32px;font-size:16px}
+  .vm-clock{min-width:58px}
+  .vm-clock b{font-size:12px}
+  .vm-clock small{font-size:8px}
+  .vm-desktop{grid-template-columns:minmax(170px,30%) minmax(0,1fr)!important}
+  .vm-core-menu{padding:8px!important;gap:7px!important}
+  .vm-core-menu .core-item{min-height:58px!important;flex:0 0 58px!important;padding:6px!important}
+  .vm-core-menu .core-item>span{width:34px;height:34px;font-size:19px}
+  .vm-core-menu .core-item b{font-size:10px!important}
+  .vm-mini-tools{top:8px;right:8px;gap:3px;padding:3px}
+  .vm-mini-tools button{width:30px;height:30px;font-size:14px}
+  .vmd-shortcuts{left:10px;top:54px;grid-template-columns:repeat(2,minmax(58px,76px));gap:4px}
+  .vmd-shortcut{width:100%;min-height:70px}
+  .vmd-dock{height:54px;bottom:8px;padding:5px;gap:3px}
+  .vmd-dock button{width:34px;height:34px;font-size:17px}
+  .vmd-dock-clock{min-width:38px;font-size:10px}
+}
+@media(max-width:600px){
+  .vm-shell{padding:5px!important;gap:5px!important}
+  .vm-header{min-height:0!important}
+  .vm-brand{font-size:13px!important;gap:6px}
+  .vm-logo{width:30px;height:30px;flex-basis:30px;font-size:18px}
+  .vm-header-tools{gap:3px}
+  .vm-header-tools button{width:27px;height:27px;flex-basis:27px;font-size:13px}
+  .vm-clock{min-width:48px;padding:3px}
+  .vm-clock b{font-size:10px}
+  .vm-clock small{font-size:7px}
+  .vm-desktop{
+    display:flex!important;flex-direction:column!important;
+    min-height:0!important;
+  }
+  .vm-core-menu{
+    width:100%!important;height:auto!important;max-height:34%!important;
+    min-height:0!important;flex:0 0 auto!important;
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:minmax(42px,auto);gap:5px!important;
+    padding:6px!important;border-right:0!important;
+    border-bottom:1px solid #29445d;overflow:auto!important;
+  }
+  .vm-core-menu .core-item{
+    width:100%!important;min-height:42px!important;height:auto!important;
+    flex:initial!important;display:flex!important;gap:6px!important;
+    padding:5px!important;
+  }
+  .vm-core-menu .core-item>span{width:27px;height:27px;flex:0 0 27px;font-size:15px}
+  .vm-core-menu .core-item b{font-size:8px!important;line-height:1.15}
+  .vm-core-menu .core-item i{font-size:16px}
+  .vm-workspace{flex:1 1 0!important;width:100%;min-height:0!important}
+  .vm-center-search{width:calc(100% - 28px)!important;max-width:320px}
+  .vm-mini-tools{top:6px;right:6px}
+  .vm-mini-tools button{width:25px;height:25px;font-size:11px}
+  .vm-statusbar{min-height:32px!important;padding:5px 7px!important;gap:5px!important;font-size:7px!important}
+  .vm-statusbar .status-progress{width:38px!important;flex:0 0 38px!important;height:6px}
+  .vm-modal-backdrop{padding:5px!important}
+  .vm-modal{width:100%!important;height:100%!important;max-height:100%!important}
+  .vm-modal>header{height:48px!important;min-height:48px!important;padding:0 8px!important;gap:6px}
+  .vm-modal>header>b{font-size:12px!important}
+  .vm-modal>header button{width:28px;height:28px;font-size:16px}
+  .modal-tabs{padding:6px!important;gap:4px;overflow-x:auto}
+  .modal-tabs button{padding:7px 9px;font-size:10px;white-space:nowrap}
+  .modal-body{padding:10px!important}
+  .vm-modal>footer{height:42px!important;min-height:42px!important;padding:0 8px!important;font-size:8px}
+  .vm-modal>footer button{padding:7px 12px}
+  .vmd-shortcuts{left:6px;top:42px;grid-template-columns:repeat(2,54px);gap:2px}
+  .vmd-shortcut{min-height:54px;gap:3px}
+  .vmd-shortcut i{font-size:22px}
+  .vmd-shortcut b{font-size:7px}
+  .vmd-dock{height:44px;bottom:5px;max-width:calc(100% - 10px);padding:4px;gap:2px}
+  .vmd-dock button{width:27px;height:27px;font-size:14px}
+  .vmd-dock-sep{height:22px;margin:0 1px}
+  .vmd-dock-clock{min-width:30px;font-size:8px}
+  .vmd-start-menu{width:calc(100% - 12px);bottom:54px;padding:10px}
+  .vmd-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vmd-window,.vmd-window[data-window="keyboard"]{
+    left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;
+    width:calc(100% - 12px)!important;height:calc(100% - 12px)!important;
+    max-width:calc(100% - 12px)!important;max-height:calc(100% - 12px)!important;
+  }
+  .vmd-window.maximized{left:4px!important;top:4px!important;transform:none!important;width:calc(100% - 8px)!important;height:calc(100% - 8px)!important}
+  .vmd-filetree{grid-template-columns:100px minmax(0,1fr);gap:6px}
+  .vmd-files{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  .vmd-files>div{min-height:68px;padding:7px;font-size:17px}
+  .vmd-metrics{grid-template-columns:1fr}
+  .vmd-window-content{padding:8px}
+}
+@media(max-height:520px) and (min-width:601px){
+  .vm-header{min-height:48px!important;padding:4px 8px}
+  .vm-logo{width:30px;height:30px;flex-basis:30px}
+  .vm-desktop{min-height:0!important}
+  .vm-core-menu{gap:4px!important;padding:5px!important}
+  .vm-core-menu .core-item{min-height:42px!important;flex:0 0 42px!important}
+  .vm-statusbar{min-height:30px!important;padding:3px 8px!important}
+  .vmd-dock{height:48px;bottom:5px}
+}
