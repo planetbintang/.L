@@ -137,3 +137,25 @@
 .topbar > .main-nav .nav-dropdown-menu > a > b {
   text-transform: uppercase !important;
 }
+
+
+/* Pemisah vertikal antar-item MENU UTAMA */
+.topbar > .main-nav { column-gap: 1.05rem !important; }
+.topbar > .main-nav > * { position: relative; }
+.topbar > .main-nav > *:not(:last-child)::after {
+  content: "|" !important;
+  position: absolute;
+  top: 50%;
+  right: -.62rem;
+  transform: translateY(-50%);
+  display: block;
+  color: rgba(137, 190, 224, .72);
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1;
+  pointer-events: none;
+}
+@media (max-width: 760px) {
+  .topbar > .main-nav { column-gap: .78rem !important; }
+  .topbar > .main-nav > *:not(:last-child)::after { right: -.46rem; }
+}
