@@ -416,31 +416,48 @@
       </div>
     </section>
 
-    <section class="section-block safari-search-page" id="searchPage" data-system-page="search" hidden aria-label="Pencarian Safari">
+    <section class="section-block safari-search-page" id="searchPage" data-system-page="search" hidden aria-label="Mesin pencari PlanetBintang">
       <div class="safari-browser">
-        <header class="safari-toolbar" aria-label="Bilah pencarian Safari">
+        <header class="safari-toolbar" aria-label="Bilah pencarian">
           <div class="safari-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="safari-address-wrap">
             <span class="safari-address-icon" aria-hidden="true">⌕</span>
-            <form id="globalSearchForm" class="safari-search-form" action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer" role="search">
-              <label class="visually-hidden" for="globalSearchInput">Cari menggunakan Google</label>
-              <input id="globalSearchInput" name="q" type="search" placeholder="Cari di Google atau masukkan alamat…" autocomplete="off" spellcheck="false" />
-              <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> Cari</button>
+            <form id="globalSearchForm" class="safari-search-form" role="search">
+              <label class="visually-hidden" for="globalSearchInput">Kata kunci atau alamat URL</label>
+              <input id="globalSearchInput" name="q" type="search" placeholder="Cari web, masukkan URL, atau nama domain…" autocomplete="off" spellcheck="false" />
+              <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
             </form>
           </div>
-          <span class="safari-url-label" aria-label="Mesin pencari Google">google.com</span>
+          <span class="safari-url-label" aria-label="Google Search">GOOGLE</span>
         </header>
-        <main class="safari-start-page">
-          <div class="safari-start-mark" aria-hidden="true">S</div>
-          <p class="safari-eyebrow">SAFARI · PENCARIAN WEB</p>
-          <h2>Mulai pencarian</h2>
-          <p class="safari-description">Masukkan kata kunci atau alamat situs. Semua pencarian diteruskan melalui Google.</p>
-          <form class="safari-start-form" action="https://www.google.com/search" method="get" target="_blank" rel="noopener noreferrer" role="search">
-            <label class="visually-hidden" for="safariStartInput">Kata kunci pencarian</label>
-            <input id="safariStartInput" name="q" type="search" placeholder="Cari di Google…" autocomplete="off" />
-            <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> Cari</button>
-          </form>
-          <p class="safari-google-caption">PENCARIAN DIDUKUNG OLEH <strong>GOOGLE.COM</strong></p>
+        <main class="safari-results-page">
+          <section class="safari-search-hero">
+            <div class="safari-start-mark" aria-hidden="true">G</div>
+            <p class="safari-eyebrow">PLANETBINTANG · WEB SEARCH</p>
+            <h2>CARI APA SAJA</h2>
+            <p class="safari-description">Temukan situs, alamat URL, domain, informasi, gambar, berita, dan referensi web.</p>
+            <form id="safariStartForm" class="safari-start-form" role="search">
+              <label class="visually-hidden" for="safariStartInput">Kata kunci pencarian</label>
+              <span class="safari-address-icon" aria-hidden="true">⌕</span>
+              <input id="safariStartInput" name="q" type="search" placeholder="Ketik yang ingin Anda cari…" autocomplete="off" />
+              <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
+            </form>
+            <nav class="safari-search-types" aria-label="Jenis pencarian">
+              <a data-search-type="web" href="https://www.google.com/search">WEB</a>
+              <a data-search-type="images" href="https://www.google.com/search?tbm=isch">GAMBAR</a>
+              <a data-search-type="news" href="https://www.google.com/search?tbm=nws">BERITA</a>
+              <a data-search-type="maps" href="https://www.google.com/maps">PETA</a>
+              <a data-search-type="videos" href="https://www.google.com/search?tbm=vid">VIDEO</a>
+            </nav>
+          </section>
+          <section class="safari-results" aria-live="polite" aria-label="Daftar hasil pencarian">
+            <div class="safari-results-heading"><div><p class="safari-eyebrow">SEARCH RESULTS</p><h3 id="safariResultsTitle">HASIL PENCARIAN AKAN TAMPIL DI SINI</h3></div><span id="safariResultsCount">SIAP</span></div>
+            <p id="safariResultsStatus" class="safari-results-status">Masukkan kata kunci atau URL, lalu tekan tombol CARI.</p>
+            <div id="safariResultsList" class="safari-results-list">
+              <article class="safari-result-card safari-result-placeholder"><span class="safari-result-icon">⌕</span><div><strong>Mulai pencarian web</strong><p>Hasil referensi akan ditampilkan di area ini. Hasil web lengkap dapat dibuka melalui Google.</p></div></article>
+            </div>
+          </section>
+          <p class="safari-google-caption">MESIN PENCARI WEB <strong>GOOGLE.COM</strong> · REFERENSI TAMBAHAN DARI WEB</p>
         </main>
       </div>
     </section>
