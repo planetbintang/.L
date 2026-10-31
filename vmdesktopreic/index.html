@@ -36,6 +36,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;col
    root.innerHTML=await response.text();
    await loadScript('./desktop.js');
    await loadScript('./workspace.js');
+   await loadScript('./desktop-runtime.js');
    fit();
    root.classList.add('vm-ready');
    let layersLoading=false;
