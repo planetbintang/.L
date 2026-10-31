@@ -22,7 +22,15 @@
   let domainLoadPromise = null;
   let activeType = 'all';
   let visibleResultLimit = 12;
+  let searchSequence = 0;
   const RESULT_PAGE_SIZE = 12;
+  const REQUEST_TIMEOUT = 12000;
+  async function fetchWithTimeout(url, options={}) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+    try { return await fetch(url, {...options, signal: controller.signal}); }
+    finally { clearTimeout(timer); }
+  }
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const cleanDomain = value => String(value || '').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split(/[/?#]/)[0].replace(/:\d+$/,'');
@@ -46,13 +54,14 @@
     if(domainLoadPromise) return domainLoadPromise;
     domainLoadPromise=(async()=>{
       const tasks=await Promise.allSettled([
-        fetch(SOURCES.registry,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('registry');return r.text();}),
-        fetch(SOURCES.media,{mode:'cors'}).then(r=>{if(!r.ok)throw Error('media');return r.text();})
+        fetchWithTimeout(SOURCES.registry,{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('registry HTTP '+r.status);return r.text();}),
+        fetchWithTimeout(SOURCES.media,{mode:'cors',cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('media HTTP '+r.status);return r.text();})
       ]);
       const merged=[];
       if(tasks[0].status==='fulfilled') merged.push(...parseJsonl(tasks[0].value));
       if(tasks[1].status==='fulfilled') merged.push(...parseJsonl(tasks[1].value));
       const seen=new Set();
+      if(!merged.length && tasks.every(task=>task.status==='rejected')) throw Error('Semua sumber domain tidak dapat dimuat');
       domainRecords=merged.filter(item=>{if(seen.has(item.domain))return false;seen.add(item.domain);return true;});
       domainRecords.sources={
         registry:tasks[0].status==='fulfilled',
@@ -60,7 +69,7 @@
         mediaCount:tasks[1].status==='fulfilled'?parseJsonl(tasks[1].value).length:0
       };
       return domainRecords;
-    })();
+    })().catch(error=>{ domainLoadPromise=null; throw error; });
     return domainLoadPromise;
   }
   function addCard({title,url,description,icon='⌕',tag='HASIL',source=''}) {
@@ -128,6 +137,7 @@
       viewer.hidden=true;viewer.replaceChildren();
       document.querySelector('#searchPage')?.classList.remove('safari-viewer-active');
       if(resultsPage) resultsPage.hidden=false;
+      applyResultLimit();
     });
     head.append(heading,close);
     const note=document.createElement('p');note.className='safari-inline-note';
@@ -146,8 +156,8 @@
   }
   async function renderWiki(query) {
     const url=SOURCES.wiki+'?action=query&list=search&srsearch='+encodeURIComponent(query)+'&format=json&origin=*&srlimit=40';
-    const response=await fetch(url);
-    if(!response.ok) throw Error('Wikipedia unavailable');
+    const response=await fetchWithTimeout(url);
+    if(!response.ok) throw Error('Wikipedia unavailable: HTTP '+response.status);
     const data=await response.json();
     const items=data?.query?.search||[];
     items.forEach(item=>{
@@ -169,6 +179,12 @@
   async function runSearch(value,type=activeType) {
     const query=String(value||'').trim();
     if(!query||!results) return;
+    const requestId=++searchSequence;
+    const viewer=$('safariInlineViewer');
+    if(viewer){viewer.hidden=true;viewer.replaceChildren();}
+    document.querySelector('#searchPage')?.classList.remove('safari-viewer-active');
+    const resultsPage=document.querySelector('#searchPage .safari-results-page');
+    if(resultsPage) resultsPage.hidden=false;
     setQuery(query);
     if(location.hash!=='#cari') location.hash='#cari';
     updateActiveType(type);
@@ -179,6 +195,7 @@
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
     try {
       const records=await loadDomainRecords();
+      if(requestId!==searchSequence) return;
       const explicitUrl=/^(?:https?:\/\/|www\.)/i.test(query)||/[/?#]/.test(query);
       const direct=explicitUrl?renderDirectUrl(query):false;
       let domainCount=0, webCount=0;
@@ -189,7 +206,8 @@
       }
       if(type==='all'||type==='web') {
         try { webCount=await renderWiki(query); }
-        catch (_) { resultsStatus.textContent='Referensi web tidak tersedia. Hasil domain lokal tetap ditampilkan jika ada.'; }
+        catch (_) { if(requestId!==searchSequence)return; resultsStatus.textContent='Referensi web tidak tersedia atau melewati batas waktu. Hasil domain lokal tetap dapat digunakan.'; }
+        if(requestId!==searchSequence)return;
       }
       const sourceNames=[
         records.sources.registry?'.NZ REGISTRY':'REGISTRY TIDAK TERSEDIA',
@@ -202,16 +220,19 @@
       const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
       results.append(sources);
       applyResultLimit();
-    } catch (_) {
-      resultsStatus.textContent='Sumber registri tidak dapat dimuat. Periksa koneksi, lalu coba kembali.';
-      resultsCount.textContent='0 HASIL';
+    } catch (error) {
+      if(requestId!==searchSequence)return;
+      resultsStatus.textContent='Sumber domain gagal dimuat atau melewati batas waktu. Periksa koneksi lalu tekan CARI untuk mencoba kembali.';
+      resultsCount.textContent='SUMBER GAGAL';
     }
   }
 
   function applyResultLimit() {
     if(!results) return;
     const cards=[...results.querySelectorAll('.safari-result-card')];
-    cards.forEach((card,index)=>{card.hidden=index>=visibleResultLimit;});
+    const eligible=cards.filter(card=>activeType==='all'||card.dataset.resultType===activeType);
+    cards.forEach(card=>{card.hidden=true;});
+    eligible.forEach((card,index)=>{card.hidden=index>=visibleResultLimit;});
     let more=$('safariLoadMore');
     if(!more){
       more=document.createElement('button');
@@ -223,8 +244,8 @@
         applyResultLimit();
       });
     }
-    more.hidden=cards.length<=visibleResultLimit;
-    more.textContent='TAMPILKAN '+Math.min(RESULT_PAGE_SIZE,cards.length-visibleResultLimit)+' HASIL BERIKUTNYA';
+    more.hidden=eligible.length<=visibleResultLimit;
+    more.textContent='TAMPILKAN '+Math.min(RESULT_PAGE_SIZE,Math.max(0,eligible.length-visibleResultLimit))+' HASIL BERIKUTNYA';
   }
   results?.addEventListener('click',event=>{
     const link=event.target.closest('a[data-internal-url]');
