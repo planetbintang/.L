@@ -277,3 +277,26 @@
   #searchPage .safari-result-card{padding:11px;grid-template-columns:32px minmax(0,1fr);gap:9px}
   #searchPage .safari-result-icon{width:30px;height:30px}
 }
+
+/* CARI compact mode: hide the central hero/search form; retain only toolbar search. */
+#searchPage .safari-search-hero{display:none!important}
+#searchPage .safari-results-page{width:min(1180px,calc(100% - 32px))!important;margin:0 auto!important;padding:18px 0 48px!important}
+#searchPage .safari-results{margin-top:0!important}
+#searchPage .safari-search-types{display:none!important}
+#searchPage .safari-inline-viewer{display:block;margin:14px 0 0;padding:16px;border:1px solid rgba(129,170,207,.24);border-radius:14px;background:linear-gradient(145deg,rgba(14,29,47,.98),rgba(8,19,33,.98));box-shadow:0 18px 42px rgba(0,0,0,.2)}
+#searchPage .safari-inline-viewer[hidden]{display:none!important}
+#searchPage .safari-inline-viewer-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+#searchPage .safari-inline-viewer-head h3{margin:3px 0;color:#eaf4fc;font-size:16px;overflow-wrap:anywhere}
+#searchPage .safari-inline-url{margin:4px 0;color:#85c6a9;font-size:11px;overflow-wrap:anywhere}
+#searchPage .safari-inline-close{flex:0 0 auto;padding:9px 12px;border:1px solid rgba(129,190,225,.35);border-radius:8px;background:rgba(25,72,102,.6);color:#dff4ff;font-size:10px;font-weight:800;letter-spacing:.06em;cursor:pointer}
+#searchPage .safari-inline-note{margin:10px 0;color:#9db2c7;font-size:11px;line-height:1.5}
+#searchPage .safari-inline-frame{display:block;width:100%;height:min(72vh,780px);min-height:420px;border:1px solid rgba(129,170,207,.2);border-radius:9px;background:#fff}
+#searchPage .safari-result-link{cursor:pointer;text-decoration:none!important}
+#searchPage .safari-result-link:hover{text-decoration:underline!important}
+#searchPage .safari-toolbar{position:sticky!important;top:0!important}
+@media(max-width:720px){
+ #searchPage .safari-results-page{width:calc(100% - 18px)!important;padding:12px 0 30px!important}
+ #searchPage .safari-inline-viewer{padding:10px}
+ #searchPage .safari-inline-viewer-head{flex-direction:column}
+ #searchPage .safari-inline-frame{height:65vh;min-height:360px}
+}
