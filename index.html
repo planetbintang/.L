@@ -130,6 +130,30 @@
       .topbar > .main-nav > a[href="./vmdesktopreic/"]::before,
       .topbar > .main-nav > a[href="./vmdesktopreic/"]::after { display: none !important; content: none !important; }
       @media (max-width: 760px) { .topbar > .main-nav > a[href="./vmdesktopreic/"] { min-height: 38px !important; padding: 7px 9px !important; } }
+
+      /* Pemisah visual "|" untuk setiap item menu utama, termasuk dropdown. */
+      .topbar > .main-nav > * { display: inline-flex; align-items: center; }
+      .topbar > .main-nav > * + *::before {
+        content: "|";
+        display: inline-block;
+        flex: 0 0 auto;
+        margin: 0 9px 0 0;
+        color: rgba(166, 205, 238, .72);
+        font-weight: 500;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .topbar > .main-nav > * + * > summary { display: inline-flex; align-items: center; }
+      .topbar > .main-nav > a[href="./galeri/"] { order: -22 !important; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] {
+        order: -21 !important;
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        min-width: max-content !important;
+      }
+      @media (max-width: 760px) {
+        .topbar > .main-nav > * + *::before { margin-right: 6px; }
+      }
     </style>
 
   </head>
