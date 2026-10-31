@@ -257,3 +257,42 @@ html,body{width:100%;height:100%;min-height:100%;overflow:hidden}
  .full-library-pager span{font-size:8px;text-align:center}
 }
 @media(max-width:430px){.full-library-grid{grid-template-columns:1fr}.full-library-item{min-height:74px}.full-library-pager button{padding:8px;font-size:8px}.full-component-meta{flex-wrap:wrap}}
+
+
+/* 15 TATA LETAK DESKTOP MODERN ELIT UNTUK SELURUH MODAL VMDESKTOPREIC */
+#desktopLayoutToggle{height:34px!important;min-width:58px;padding:0 10px!important;margin-right:7px;border:1px solid #5a829d!important;background:linear-gradient(135deg,#214b68,#102a40)!important;color:#c8f5ff!important;font-size:10px!important;letter-spacing:.08em;white-space:nowrap}
+.desktop-layout-picker{position:absolute;z-index:80;right:126px;top:calc(100% + 10px);width:min(520px,calc(100vw - 34px));max-height:min(72vh,650px);overflow:auto;padding:14px;border:1px solid #5d819a;border-radius:14px;background:linear-gradient(145deg,#122b42f7,#071522fa);box-shadow:0 24px 70px #000b,0 0 32px #48c9ff22;backdrop-filter:blur(24px)}
+.desktop-layout-picker[hidden]{display:none}
+.desktop-layout-picker-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:3px 3px 12px;border-bottom:1px solid #35556d}
+.desktop-layout-picker-head b{font-size:11px;letter-spacing:.13em;color:#dff8ff}
+.desktop-layout-picker-head span{font-size:8px;letter-spacing:.1em;color:#86b5d0}
+.desktop-layout-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding-top:11px}
+.desktop-layout-options button{display:flex;align-items:center;gap:10px;min-width:0;min-height:62px;padding:9px;border:1px solid #2d4b63;border-radius:8px;background:linear-gradient(135deg,#132d43,#0a1b2b);color:#e8f5ff;text-align:left;cursor:pointer}
+.desktop-layout-options button:hover,.desktop-layout-options button.active{border-color:#83e1ff;background:linear-gradient(135deg,#1c4965,#102a40);box-shadow:inset 3px 0 #83e1ff,0 7px 20px #0004}
+.desktop-layout-options i{display:grid;place-items:center;flex:0 0 32px;height:32px;border:1px solid #50758d;border-radius:8px;background:#1b405b;color:#a9efff;font-style:normal;font-size:17px}
+.desktop-layout-options span{display:flex;flex-direction:column;gap:4px;min-width:0}
+.desktop-layout-options b{font-size:9px;letter-spacing:.04em}
+.desktop-layout-options small{font-size:8px;line-height:1.35;color:#91abc0}
+.vm-modal[data-layout="focus"] .modal-body{max-width:1180px;margin-inline:auto}
+.vm-modal[data-layout="split"] .modal-body{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);align-content:start;gap:14px}
+.vm-modal[data-layout="dashboard"] .modal-body{background-image:radial-gradient(circle at 85% 8%,#1b587533,transparent 32%)}
+.vm-modal[data-layout="dashboard"] .modal-body>.content-card,.vm-modal[data-layout="dashboard"] .modal-body>.full-menu-stats>div{border-radius:12px;box-shadow:0 12px 28px #0004}
+.vm-modal[data-layout="grid"] .modal-body{background-image:linear-gradient(#29445d18 1px,transparent 1px),linear-gradient(90deg,#29445d18 1px,transparent 1px);background-size:24px 24px}
+.vm-modal[data-layout="command"] .modal-body{border-left:3px solid #83e1ff;background:linear-gradient(90deg,#102a40,#071522 42%)}
+.vm-modal[data-layout="timeline"] .modal-body{border-left:2px solid #4c7894}
+.vm-modal[data-layout="timeline"] .modal-body>.content-card{border-left:3px solid #83e1ff}
+.vm-modal[data-layout="inspector"] .modal-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,32%);align-content:start;gap:12px}
+.vm-modal[data-layout="workspace"] .modal-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:12px}
+.vm-modal[data-layout="files"] .modal-body{background:linear-gradient(90deg,#10283d 0 220px,#091725 220px);border-left:1px solid #426681}
+.vm-modal[data-layout="editor"] .modal-body{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:linear-gradient(90deg,#0b1b2b 0 42px,#10243a 42px)}
+.vm-modal[data-layout="analytics"] .modal-body{background:radial-gradient(ellipse at 20% 0%,#1c627233,transparent 45%),#081725}
+.vm-modal[data-layout="analytics"] .modal-body>.full-menu-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vm-modal[data-layout="control"] .modal-body{background:linear-gradient(145deg,#102a40,#071522)}
+.vm-modal[data-layout="control"] .modal-body>.content-card,.vm-modal[data-layout="control"] .modal-body>.settings-columns>*{border:1px solid #527b96;border-radius:10px}
+.vm-modal[data-layout="cards"] .modal-body>.content-card,.vm-modal[data-layout="cards"] .modal-body>.menu-choice,.vm-modal[data-layout="cards"] .modal-body>.registry-card{border-radius:14px;box-shadow:0 12px 26px #0005}
+.vm-modal[data-layout="terminal"] .modal-body{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#050d16;color:#a8f3cb}
+.vm-modal[data-layout="terminal"] .modal-body h3,.vm-modal[data-layout="terminal"] .modal-body h4{font-family:inherit;color:#a8f3cb}
+.vm-modal[data-layout="immersive"]{width:calc(100% - 18px);height:calc(100% - 18px);max-height:none;border-radius:10px}
+.vm-modal[data-layout="immersive"] .modal-body{padding:clamp(22px,3vw,42px);background:radial-gradient(ellipse at 50% 0%,#1c527044,transparent 55%),#071522}
+.vm-modal[data-layout="split"] .modal-body>.menu-choice-intro,.vm-modal[data-layout="inspector"] .modal-body>.menu-choice-intro,.vm-modal[data-layout="workspace"] .modal-body>.menu-choice-intro{grid-column:1/-1}
+@media(max-width:700px){.desktop-layout-picker{right:8px;top:calc(100% + 6px)}.desktop-layout-options{grid-template-columns:1fr}.vm-modal[data-layout="split"] .modal-body,.vm-modal[data-layout="inspector"] .modal-body,.vm-modal[data-layout="workspace"] .modal-body{display:block}.vm-modal[data-layout="split"] .modal-body>*+*,.vm-modal[data-layout="inspector"] .modal-body>*+*,.vm-modal[data-layout="workspace"] .modal-body>*+*{margin-top:10px}}
