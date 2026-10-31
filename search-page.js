@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-google-results-v1';
+  css.href = './search-page.css?v=20261031-internal-search-v2';
   document.head.append(css);
 
   const searchInput = document.getElementById('globalSearchInput');
@@ -53,15 +53,6 @@
     article.append(icon,body);
     results.append(article);
   }
-  function addGoogleShortcuts(query) {
-    [
-      ['Hasil web Google',googleUrl(query,'web'),'Cari halaman web yang cocok dengan kata kunci ini.','G'],
-      ['Gambar terkait',googleUrl(query,'images'),'Telusuri gambar yang berkaitan dengan pencarian.','▧'],
-      ['Berita terbaru',googleUrl(query,'news'),'Lihat berita yang cocok dengan kata kunci.','▤'],
-      ['Video terkait',googleUrl(query,'videos'),'Temukan video yang relevan.','▶'],
-      ['Peta dan lokasi','https://www.google.com/maps/search/'+encodeURIComponent(query),'Cari lokasi atau tempat pada Google Maps.','⌖']
-    ].forEach(([title,url,description,icon])=>addCard({title,url,description,icon}));
-  }
   async function runSearch(value) {
     const query = String(value || '').trim();
     if (!query || !results) return;
@@ -78,11 +69,10 @@
       try {
         const parsed = new URL(normalized);
         addCard({title:parsed.hostname,url:parsed.href,description:'Alamat situs yang Anda masukkan. Buka tautan untuk mengunjungi situs tersebut.',icon:'↗'});
-        addGoogleShortcuts('site:' + parsed.hostname);
+
       } catch (_) {
-        addGoogleShortcuts(query);
-      }
-      resultsStatus.textContent = 'URL dikenali. Pilih alamat situs atau telusuri hasil terkait melalui Google.';
+        }
+      resultsStatus.textContent = 'URL dikenali. Hasil ditampilkan di halaman ini; buka tautan hanya jika ingin mengunjungi situs tujuan.';
       resultsCount.textContent = 'URL + PINTASAN';
       return;
     }
@@ -105,11 +95,10 @@
       collect(data.RelatedTopics);
       const seen = new Set();
       found.filter(item=>{if(seen.has(item.url))return false;seen.add(item.url);return true;}).slice(0,8).forEach(addCard);
-      resultsStatus.textContent = found.length ? 'Referensi ringkas ditampilkan di bawah. Gunakan hasil web Google untuk cakupan pencarian yang lebih luas.' : 'Belum ada ringkasan referensi untuk kata kunci ini. Hasil web Google tetap tersedia di bawah.';
+      resultsStatus.textContent = found.length ? 'Referensi ditemukan dan ditampilkan langsung di halaman pencarian ini.' : 'Belum ada referensi otomatis untuk kata kunci ini. Coba kata kunci yang lebih spesifik.';
     } catch (_) {
-      resultsStatus.textContent = 'Referensi otomatis tidak tersedia pada koneksi ini. Gunakan tautan Google untuk melihat hasil web lengkap.';
+      resultsStatus.textContent = 'Layanan referensi tidak merespons. Pencarian tetap berada di halaman ini; coba lagi beberapa saat.';
     }
-    addGoogleShortcuts(query);
     resultsCount.textContent = results.children.length + ' TAUTAN';
   }
 
