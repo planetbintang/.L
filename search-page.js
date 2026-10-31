@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-search-inline-v4';
+  css.href = './search-page.css?v=20261031-search-tabs-v5';
   document.head.append(css);
 
   const $ = id => document.getElementById(id);
@@ -21,6 +21,8 @@
   let domainRecords = null;
   let domainLoadPromise = null;
   let activeType = 'all';
+  let visibleResultLimit = 12;
+  const RESULT_PAGE_SIZE = 12;
 
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const cleanDomain = value => String(value || '').trim().toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split(/[/?#]/)[0].replace(/:\d+$/,'');
@@ -64,6 +66,7 @@
   function addCard({title,url,description,icon='⌕',tag='HASIL',source=''}) {
     const article=document.createElement('article');
     article.className='safari-result-card';
+    article.dataset.resultType = tag==='DOMAIN' || tag==='DOMAIN INPUT' ? 'domain' : tag==='REFERENSI WEB' ? 'web' : 'all';
     const mark=document.createElement('span');mark.className='safari-result-icon';mark.textContent=icon;
     const body=document.createElement('div');body.className='safari-result-body';
     const meta=document.createElement('div');meta.className='safari-result-meta';
@@ -129,7 +132,7 @@
     viewer.scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function renderWiki(query) {
-    const url=SOURCES.wiki+'?action=query&list=search&srsearch='+encodeURIComponent(query)+'&format=json&origin=*&srlimit=8';
+    const url=SOURCES.wiki+'?action=query&list=search&srsearch='+encodeURIComponent(query)+'&format=json&origin=*&srlimit=40';
     const response=await fetch(url);
     if(!response.ok) throw Error('Wikipedia unavailable');
     const data=await response.json();
@@ -157,6 +160,7 @@
     if(location.hash!=='#cari') location.hash='#cari';
     updateActiveType(type);
     results.replaceChildren();
+    visibleResultLimit=RESULT_PAGE_SIZE;
     resultsTitle.textContent='HASIL UNTUK “'+query.toLocaleUpperCase('id')+'”';
     resultsCount.textContent='MEMUAT';
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
@@ -184,17 +188,39 @@
       resultsCount.textContent=(direct?1:domainCount+webCount)+' HASIL';
       const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
       results.append(sources);
+      applyResultLimit();
     } catch (_) {
       resultsStatus.textContent='Sumber registri tidak dapat dimuat. Periksa koneksi, lalu coba kembali.';
       resultsCount.textContent='0 HASIL';
     }
   }
 
+  function applyResultLimit() {
+    if(!results) return;
+    const cards=[...results.querySelectorAll('.safari-result-card')];
+    cards.forEach((card,index)=>{card.hidden=index>=visibleResultLimit;});
+    let more=$('safariLoadMore');
+    if(!more){
+      more=document.createElement('button');
+      more.id='safariLoadMore';more.type='button';more.className='safari-load-more';
+      more.textContent='MUAT LEBIH BANYAK HASIL';
+      results.after(more);
+      more.addEventListener('click',()=>{
+        visibleResultLimit+=RESULT_PAGE_SIZE;
+        applyResultLimit();
+      });
+    }
+    more.hidden=cards.length<=visibleResultLimit;
+    more.textContent='TAMPILKAN '+Math.min(RESULT_PAGE_SIZE,cards.length-visibleResultLimit)+' HASIL BERIKUTNYA';
+  }
   results?.addEventListener('click',event=>{
     const link=event.target.closest('a[data-internal-url]');
     if(!link) return;
     event.preventDefault();
-    showInlineDestination(link.dataset.internalUrl,link.dataset.internalTitle||link.textContent);
+    results.querySelectorAll('.safari-result-card.is-selected').forEach(card=>card.classList.remove('is-selected'));
+    const card=link.closest('.safari-result-card');
+    card?.classList.add('is-selected');
+    resultsStatus.textContent='HASIL DIPILIH: '+(link.dataset.internalTitle||link.textContent)+'. Anda tetap berada di halaman utama CARI.';
   });
   function sync(source,target){if(source&&target)source.addEventListener('input',()=>{target.value=source.value;});}
   sync(searchInput,startInput);sync(startInput,searchInput);sync(topInput,searchInput);sync(homeInput,searchInput);sync(topInput,homeInput);sync(homeInput,topInput);
