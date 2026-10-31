@@ -43,6 +43,19 @@ async function openComponentRegistry(){
  try{const response=await fetch('../osmediavm/recordin/components/manifest.json',{cache:'force-cache'});if(!response.ok)throw Error('Manifest HTTP '+response.status);const data=await response.json();const all=Array.isArray(data.components)?data.components:[];const groups=[...new Set(all.map(x=>x.group))];items=groups.flatMap(g=>all.filter(x=>x.group===g).sort((a,b)=>Number(a.id.match(/reic-(\d+)/)?.[1]||0)-Number(b.id.match(/reic-(\d+)/)?.[1]||0)).slice(0,150)).sort((a,b)=>Number(a.id.match(/reic-(\d+)/)?.[1]||0)-Number(b.id.match(/reic-(\d+)/)?.[1]||0));if(items.length!==1500)throw Error('Subset terpilih berjumlah '+items.length+', bukan 1.500');groups.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=groupNames[g]||g;group.append(o)});$('#registryTotal').textContent=items.length.toLocaleString('id-ID');draw();search.addEventListener('input',()=>{page=0;draw()});group.addEventListener('change',()=>{page=0;draw()});$('#registryPrev').onclick=()=>{page--;draw()};$('#registryNext').onclick=()=>{page++;draw()};}catch(e){$('#registryTotal').textContent='GAGAL';meta.textContent='Registri tidak dapat dimuat: '+e.message;grid.innerHTML='<p class="registry-empty">Periksa akses ke manifes OS MEDIA VM.</p>';}
 }
 
+function installResolutionLayerSystem(){
+ const shell=$('#vmDesktop'),stage=$('.vm-desktop');if(!shell||!stage||stage.querySelector('.vm-resolution-system'))return;
+ const system=document.createElement('section');system.className='vm-resolution-system';system.setAttribute('aria-label','Sistem lapisan resolusi REIC');
+ const frames=Array.from({length:10},(_,i)=>'<div class="vm-resolution-frame frame-'+(i+1)+'"><span>'+String(i+1).padStart(2,'0')+' · 1:'+((i+1)*10)+'</span></div>').join('');
+ system.innerHTML='<div class="vm-resolution-frames" aria-hidden="true">'+frames+'</div><div class="vm-resolution-console"><div class="vm-resolution-console-head"><b>REIC RESOLUTION LAYERS</b><small>OS MEDIA VM · MULTI-LAYER DISPLAY</small></div><div class="vm-resolution-levels">'+Array.from({length:10},(_,i)=>'<button type="button" data-resolution="'+(i+1)+'" class="'+(i===0?'active':'')+'"><small>1:'+((i+1)*10)+'</small><b>'+(i+1)+'</b></button>').join('')+'</div><div class="vm-resolution-readout"><span data-resolution-name>LAYER 01 · RESOLUSI UTAMA</span><b data-resolution-scale>100%</b></div><div class="vm-resolution-ruler"><i></i><i></i><i></i><i></i><i></i><i></i></div><button class="vm-resolution-close" type="button">TUTUP PANEL ×</button></div><button class="vm-resolution-launch" type="button" aria-label="Buka kontrol lapisan resolusi">▣ RESOLUSI 01/10</button>';
+ stage.append(system);
+ const consolePanel=system.querySelector('.vm-resolution-console'),launch=system.querySelector('.vm-resolution-launch');
+ const apply=n=>{const factor=1-(n-1)*.018;shell.dataset.resolutionLayer=String(n);shell.style.setProperty('--vm-resolution-scale',String(factor));system.querySelectorAll('[data-resolution]').forEach(b=>b.classList.toggle('active',Number(b.dataset.resolution)===n));system.querySelector('[data-resolution-name]').textContent='LAYER '+String(n).padStart(2,'0')+' · '+(n===1?'RESOLUSI UTAMA':'LAPISAN ADAPTIF '+n);system.querySelector('[data-resolution-scale]').textContent=Math.round(factor*100)+'%';launch.textContent='▣ RESOLUSI '+String(n).padStart(2,'0')+'/10';$('#modalStatus')&&($('#modalStatus').textContent='Sistem resolusi REIC aktif · Layer '+n+'/10 · '+Math.round(factor*100)+'%');};
+ launch.addEventListener('click',()=>consolePanel.classList.toggle('open'));
+ system.querySelector('.vm-resolution-close').addEventListener('click',()=>consolePanel.classList.remove('open'));
+ system.querySelector('.vm-resolution-levels').addEventListener('click',e=>{const b=e.target.closest('[data-resolution]');if(b)apply(Number(b.dataset.resolution));});
+ apply(1);
+}
 function installREICScreenKeyboard(){
  if(document.getElementById('reicScreenKeyboard'))return;
  const panel=document.createElement('aside');panel.id='reicScreenKeyboard';panel.className='reic-screen-keyboard';panel.hidden=true;
@@ -59,7 +72,7 @@ function installREICScreenKeyboard(){
  panel.addEventListener('click',e=>{const b=e.target.closest('[data-rsk-key]');if(b){let k=b.dataset.rskKey;if(k==='⇧'){shift=!shift;panel.classList.toggle('rsk-shift',shift);return;}if(k==='⌫'){if(!target)return;if(target.isContentEditable){document.execCommand('delete');}else{const s=target.selectionStart??target.value.length,en=target.selectionEnd??s,start=s===en?Math.max(0,s-1):s;const proto=target.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;const setter=Object.getOwnPropertyDescriptor(proto,'value')?.set;const val=target.value.slice(0,start)+target.value.slice(en);if(setter)setter.call(target,val);else target.value=val;try{target.setSelectionRange(start,start);}catch(_){}}target.dispatchEvent(new Event('input',{bubbles:true}));return;}const value=k==='SPACE'?' ':k==='↵'?'\\n':(shift?k:k.toLowerCase());insert(value);if(shift){shift=false;panel.classList.remove('rsk-shift');}return;}if(e.target.closest('[data-rsk-close]')||e.target.closest('[data-rsk-hide]'))panel.hidden=true;});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)panel.hidden=true;});
 }
-installREICScreenKeyboard();
+installResolutionLayerSystem();installREICScreenKeyboard();
 const libraryGroups={
  'identitas-desain':{label:'IDENTITAS & DESAIN',icon:'✧',menu:'settings'},
  'desktop-navigasi':{label:'DESKTOP & NAVIGASI',icon:'▦',menu:'settings'},
