@@ -133,9 +133,14 @@
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
     try {
       const records=await loadDomainRecords();
-      const explicitUrl=/^(?:https?:\\/\\/|www\\.)/i.test(query)||/[/?#]/.test(query);\n      const direct=explicitUrl?renderDirectUrl(query):false;
+      const explicitUrl=/^(?:https?:\/\/|www\.)/i.test(query)||/[/?#]/.test(query);
+      const direct=explicitUrl?renderDirectUrl(query):false;
       let domainCount=0, webCount=0;
-      if(!direct && type!=='web') domainCount=renderDomains(query,records);\n      if(!direct && !domainCount && type!=='web' && validDomain(cleanDomain(query))) {\n        addCard({title:cleanDomain(query),url:'https://'+cleanDomain(query),description:'Nama domain dikenali dari input, tetapi belum ditemukan pada shard katalog yang tersedia. Ini bukan verifikasi DNS atau status registrasi.',icon:'◎',tag:'DOMAIN INPUT',source:'BELUM ADA DI KATALOG'});\n        domainCount=1;\n      }
+      if(!direct && type!=='web') domainCount=renderDomains(query,records);
+      if(!direct && !domainCount && type!=='web' && validDomain(cleanDomain(query))) {
+        addCard({title:cleanDomain(query),url:'https://'+cleanDomain(query),description:'Nama domain dikenali dari input, tetapi belum ditemukan pada shard katalog yang tersedia. Ini bukan verifikasi DNS atau status registrasi.',icon:'◎',tag:'DOMAIN INPUT',source:'BELUM ADA DI KATALOG'});
+        domainCount=1;
+      }
       if(type==='all'||type==='web') {
         try { webCount=await renderWiki(query); }
         catch (_) { resultsStatus.textContent='Referensi web tidak tersedia. Hasil domain lokal tetap ditampilkan jika ada.'; }
