@@ -40,3 +40,21 @@ for (let n=1;n<=total;n++) {
 }
 fs.writeFileSync(path.join(root,'manifest.json'),JSON.stringify({name:'OS MEDIA VM REIC Components',version:1,total:components.length,filesPerComponent:3,generatedAt:new Date().toISOString(),components:components.map(({id,title,group})=>({id,title,group,reic:id+'/'+id+'.reic',css:id+'/'+id+'.css',js:id+'/'+id+'.js'}))},null,2));
 console.log('Selesai: '+components.length+' komponen, '+(components.length*3)+' berkas plus manifest di '+root);
+
+// Manifest kompatibel untuk OS MEDIA VM beranda dan REIC Explorer.
+// Path memakai root repositori karena runtime Explorer menyelesaikan URL dari root GitHub Pages.
+const explorerManifest = components.map(({id,title,group}) => ({
+  id,
+  title,
+  group,
+  source: 'infrastruktur-15000',
+  type: 'reic',
+  file: 'osmediavm/recordin/components/' + id + '/' + id + '.reic',
+  css: 'osmediavm/recordin/components/' + id + '/' + id + '.css',
+  js: 'osmediavm/recordin/components/' + id + '/' + id + '.js',
+  reic: id + '/' + id + '.reic'
+}));
+fs.mkdirSync('osmediavm/recordin', {recursive:true});
+fs.writeFileSync('osmediavm/recordin/manifest.json', JSON.stringify(explorerManifest,null,2)+'\\n');
+console.log('Manifest Explorer diperbarui: '+explorerManifest.length+' komponen.');
+
