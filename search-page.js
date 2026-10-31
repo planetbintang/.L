@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-domain-index-v3';
+  css.href = './search-page.css?v=20261031-search-inline-v4';
   document.head.append(css);
 
   const $ = id => document.getElementById(id);
@@ -69,7 +69,7 @@
     const meta=document.createElement('div');meta.className='safari-result-meta';
     const type=document.createElement('span');type.className='safari-result-tag';type.textContent=tag;meta.append(type);
     if(source){const src=document.createElement('span');src.className='safari-result-source';src.textContent=source;meta.append(src);}
-    const link=document.createElement('a');link.className='safari-result-link';link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=title||url;
+    const link=document.createElement('a');link.className='safari-result-link';link.href='#cari';link.removeAttribute('target');link.dataset.internalUrl=url;link.dataset.internalTitle=title||url;link.setAttribute('role','button');link.setAttribute('aria-label','Tampilkan '+(title||url)+' di area CARI');link.textContent=title||url;
     const address=document.createElement('p');address.className='safari-result-url';address.textContent=url;
     const desc=document.createElement('p');desc.className='safari-result-description';desc.textContent=description||'Buka sumber ini untuk melihat informasi lebih lanjut.';
     body.append(meta,link,address,desc);article.append(mark,body);results.append(article);
@@ -98,6 +98,35 @@
       addCard({title:parsed.hostname,url:parsed.href,description:'URL yang Anda masukkan. Kartu ini menampilkan alamat yang diberikan, bukan hasil verifikasi koneksi.',icon:'↗',tag:'URL',source:'INPUT PENGGUNA'});
       return true;
     } catch (_) { return false; }
+  }
+  function showInlineDestination(url,title) {
+    let viewer=$('safariInlineViewer');
+    if(!viewer) {
+      viewer=document.createElement('section');
+      viewer.id='safariInlineViewer';
+      viewer.className='safari-inline-viewer';
+      viewer.setAttribute('aria-live','polite');
+      results.after(viewer);
+    }
+    viewer.replaceChildren();
+    const head=document.createElement('div');head.className='safari-inline-viewer-head';
+    const heading=document.createElement('div');
+    const label=document.createElement('p');label.className='safari-eyebrow';label.textContent='TAMPILAN DALAM CARI';
+    const name=document.createElement('h3');name.textContent=title;
+    const address=document.createElement('p');address.className='safari-inline-url';address.textContent=url;
+    heading.append(label,name,address);
+    const close=document.createElement('button');close.type='button';close.className='safari-inline-close';close.textContent='TUTUP TAMPILAN';
+    close.addEventListener('click',()=>{viewer.hidden=true;viewer.replaceChildren();});
+    head.append(heading,close);
+    const frame=document.createElement('iframe');
+    frame.className='safari-inline-frame';
+    frame.title='Tampilan '+title+' di dalam menu CARI';
+    frame.loading='lazy';frame.referrerPolicy='no-referrer';frame.src=url;
+    const note=document.createElement('p');note.className='safari-inline-note';
+    note.textContent='Situs tujuan dimuat di area ini. Jika pemilik situs melarang tampilan tertanam, halaman dapat menolak dimuat; menu CARI tetap terbuka.';
+    viewer.append(head,note,frame);
+    viewer.hidden=false;
+    viewer.scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function renderWiki(query) {
     const url=SOURCES.wiki+'?action=query&list=search&srsearch='+encodeURIComponent(query)+'&format=json&origin=*&srlimit=8';
@@ -161,6 +190,12 @@
     }
   }
 
+  results?.addEventListener('click',event=>{
+    const link=event.target.closest('a[data-internal-url]');
+    if(!link) return;
+    event.preventDefault();
+    showInlineDestination(link.dataset.internalUrl,link.dataset.internalTitle||link.textContent);
+  });
   function sync(source,target){if(source&&target)source.addEventListener('input',()=>{target.value=source.value;});}
   sync(searchInput,startInput);sync(startInput,searchInput);sync(topInput,searchInput);sync(homeInput,searchInput);sync(topInput,homeInput);sync(homeInput,topInput);
   [mainForm,startForm].forEach(form=>form?.addEventListener('submit',event=>{event.preventDefault();runSearch((form===mainForm?searchInput:startInput)?.value);}));
