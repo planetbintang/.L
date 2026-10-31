@@ -70,3 +70,5 @@ jobs:
           if git diff --cached --quiet; then echo "Katalog sudah mutakhir"; exit 0; fi
           git commit -m "Bangun katalog 15.000 komponen REIC"
           git push origin HEAD:io
+
+# Trigger ulang pembuatan katalog REIC untuk publikasi GitHub Pages.
