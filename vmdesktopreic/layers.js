@@ -5,7 +5,7 @@
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const read=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch(_){return {}}};
   const write=data=>{try{localStorage.setItem(STORE,JSON.stringify(data));return true}catch(_){return false}};
-  const defaults=title=>({name:title||'MENU BARU',shape:'panel',blocks:[{id:'b1',type:'heading',label:'JUDUL KONTEN',value:'Ruang kerja REIC'},{id:'b2',type:'text',label:'DESKRIPSI',value:'Klik UBAH untuk mengisi konten menu ini.'}]});
+  const regionDefaults=()=>({sidebar:'SIDEBAR',header:'HEADER',body:'BODY',center:'CENTER',dropdown:'DROPDOWN'});\n  const defaults=(title,main)=>({name:title||'MENU BARU',mainMenu:main||'MENU UTAMA',shape:'panel',regions:regionDefaults(),blocks:[{id:'b1',type:'heading',region:'body',label:'JUDUL KONTEN',value:'Ruang kerja REIC'},{id:'b2',type:'text',region:'body',label:'DESKRIPSI',value:'Klik UBAH untuk mengisi konten menu ini.'}]});
   const css=`
   .reic-layer-editor{margin:0 0 18px;border:1px solid #426783;background:linear-gradient(145deg,#10263a,#081522);color:#eaf5ff;box-shadow:0 14px 34px #0004}
   .reic-le-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid #35556d;background:linear-gradient(100deg,#1a3c56,#0b1c2b)}
@@ -28,7 +28,7 @@
   .reic-le-canvas[data-shape="grid"]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background-image:linear-gradient(#35556d33 1px,transparent 1px),linear-gradient(90deg,#35556d33 1px,transparent 1px);background-size:20px 20px}
   .reic-le-canvas[data-shape="split"]{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .reic-le-canvas[data-shape="tabs"]{border-radius:12px}
-  .reic-le-canvas[data-shape="sidebar"]{border-left:5px solid #83e1ff}
+  .reic-le-canvas[data-shape="sidebar"]{border-left:5px solid #83e1ff}\n  .reic-le-regions{display:grid;grid-template-columns:minmax(90px,.7fr) minmax(0,2fr);grid-template-areas:"side head" "side body" "side center" "side drop";gap:7px;margin-bottom:10px}.reic-le-region{padding:8px;border:1px solid #527b96;background:#0a1b2b;min-width:0}.reic-le-region b{display:block;color:#83e1ff;font-size:8px;letter-spacing:.12em}.reic-le-region small{color:#91b5ce;font-size:8px}.reic-le-region[data-region="sidebar"]{grid-area:side}.reic-le-region[data-region="header"]{grid-area:head}.reic-le-region[data-region="body"]{grid-area:body}.reic-le-region[data-region="center"]{grid-area:center}.reic-le-region[data-region="dropdown"]{grid-area:drop}.reic-le-edit select{box-sizing:border-box;width:100%;padding:9px;background:#071522;color:#edf7ff;border:1px solid #35556d}
   .reic-le-block{position:relative;min-width:0;padding:12px;margin-bottom:8px;border:1px solid #426783;background:linear-gradient(145deg,#18354d,#0b1b2b)}
   .reic-le-block:last-child{margin-bottom:0}.reic-le-block h4{margin:0 0 7px;font-size:11px;color:#dff8ff}
   .reic-le-block p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:#aac1d4;font-size:10px;line-height:1.55}
@@ -52,18 +52,18 @@
       <div class="reic-le-head"><div><strong>▧ EDITOR LAPISAN REIC</strong><small>BENTUK MENU · NAMA · BLOK KONTEN · PROPERTI · PENYIMPANAN</small></div><div class="reic-le-actions"><button type="button" data-action="save">✓ SIMPAN LAPISAN</button><button type="button" data-action="reset">↺ ATUR ULANG</button></div></div>
       <div class="reic-le-grid">
         <aside class="reic-le-rail">
-          <div class="reic-le-field"><label class="reic-le-label">NAMA MENU / MODUL</label><input data-field="name" maxlength="80"></div>
+          <div class="reic-le-field"><label class="reic-le-label">MENU UTAMA</label><input data-field="mainMenu" maxlength="80"></div><div class="reic-le-field"><label class="reic-le-label">NAMA MENU / SUBMENU</label><input data-field="name" maxlength="80"></div><label class="reic-le-label">NAMA BAGIAN MODAL</label><div class="reic-le-field"><label class="reic-le-label">SIDEBAR</label><input data-region-name="sidebar" maxlength="60"></div><div class="reic-le-field"><label class="reic-le-label">HEADER</label><input data-region-name="header" maxlength="60"></div><div class="reic-le-field"><label class="reic-le-label">BODY</label><input data-region-name="body" maxlength="60"></div><div class="reic-le-field"><label class="reic-le-label">CENTER</label><input data-region-name="center" maxlength="60"></div><div class="reic-le-field"><label class="reic-le-label">DROPDOWN</label><input data-region-name="dropdown" maxlength="60"></div>
           <div class="reic-le-field"><label class="reic-le-label">BENTUK LAYOUT</label><select data-field="shape"><option value="panel">PANEL BERLAPIS</option><option value="cards">KARTU MODULAR</option><option value="grid">KISI KOMPONEN</option><option value="split">DUA KOLOM</option><option value="tabs">TAB KONTEN</option><option value="sidebar">SIDEBAR + KONTEN</option></select></div>
           <label class="reic-le-label">STRUKTUR LAPISAN</label><div class="reic-le-layer-list" data-layer-list></div>
         </aside>
         <div class="reic-le-stage"><div class="reic-le-stagebar"><b>PRATINJAU BLOK KONTEN</b><span data-count></span></div><div class="reic-le-canvas" data-canvas></div>
-          <div class="reic-le-edit" data-editor><b style="font-size:10px">PROPERTI BLOK TERPILIH</b><label class="reic-le-label">JUDUL / LABEL</label><input data-edit="label" placeholder="Nama blok"><label class="reic-le-label">ISI KONTEN</label><textarea data-edit="value" placeholder="Tulis atau isi konten di sini…"></textarea><button class="reic-le-btn" type="button" data-action="apply">TERAPKAN PERUBAHAN BLOK</button></div>
+          <div class="reic-le-edit" data-editor><b style="font-size:10px">PROPERTI BLOK TERPILIH</b><label class="reic-le-label">JUDUL / LABEL</label><input data-edit="label" placeholder="Nama blok"><label class="reic-le-label">BAGIAN / LAPISAN</label><select data-edit="region"><option value="sidebar">SIDEBAR</option><option value="header">HEADER</option><option value="body">BODY</option><option value="center">CENTER</option><option value="dropdown">DROPDOWN</option></select><label class="reic-le-label">ISI KONTEN</label><textarea data-edit="value" placeholder="Tulis atau isi konten di sini…"></textarea><button class="reic-le-btn" type="button" data-action="apply">TERAPKAN PERUBAHAN BLOK</button></div>
           <div class="reic-le-add"><button class="reic-le-btn" type="button" data-add="heading">＋ JUDUL</button><button class="reic-le-btn" type="button" data-add="text">＋ TEKS</button><button class="reic-le-btn" type="button" data-add="input">＋ FORMULIR</button><button class="reic-le-btn" type="button" data-add="table">＋ TABEL</button><button class="reic-le-btn" type="button" data-add="image">＋ AREA GAMBAR</button><button class="reic-le-btn" type="button" data-add="space">＋ AREA KOSONG</button></div>
         </div>
       </div><div class="reic-le-status" data-status>Siap mengedit · perubahan disimpan pada perangkat ini.</div>`;
     body.prepend(root);
     const $=s=>root.querySelector(s);let selected=model.blocks[0]?.id||null;
-    $('[data-field="name"]').value=model.name;$('[data-field="shape"]').value=model.shape||'panel';
+    $('[data-field="name"]').value=model.name;$('[data-field="mainMenu"]').value=model.mainMenu;$('[data-field="shape"]').value=model.shape||'panel';root.querySelectorAll('[data-region-name]').forEach(el=>el.value=model.regions[el.dataset.regionName]||el.dataset.regionName.toUpperCase());
     const blockName=b=>({heading:'JUDUL',text:'TEKS',input:'FORMULIR',table:'TABEL',image:'GAMBAR',space:'AREA KOSONG'}[b.type]||'BLOK');
     function persist(){data[key]=model;const ok=write(data);$('[data-status]').textContent=ok?'Tersimpan di penyimpanan lokal perangkat · '+new Date().toLocaleTimeString('id-ID'):'Penyimpanan lokal tidak tersedia.';}
     function render(){
@@ -74,16 +74,16 @@
       }).join('')||'<div style="padding:30px;text-align:center;color:#91a8c3;font-size:10px">AREA KONTEN KOSONG · TAMBAHKAN BLOK DI BAWAH</div>';
       $('[data-layer-list]').innerHTML=model.blocks.map((b,i)=>'<button type="button" class="'+(b.id===selected?'active':'')+'" data-select="'+esc(b.id)+'">'+String(i+1).padStart(2,'0')+' · '+blockName(b)+' — '+esc(b.label||b.value||'Baru').slice(0,22)+'</button>').join('')||'<small style="color:#91a8c3">Belum ada lapisan konten</small>';
       $('[data-count]').textContent=model.blocks.length+' BLOK AKTIF';
-      const b=model.blocks.find(x=>x.id===selected);$('[data-edit="label"]').value=b?.label||'';$('[data-edit="value"]').value=b?.value||'';
+      const b=model.blocks.find(x=>x.id===selected);$('[data-edit="label"]').value=b?.label||'';$('[data-edit="value"]').value=b?.value||'';$('[data-edit="region"]').value=b?.region||'body';
     }
     root.addEventListener('click',e=>{
-      const add=e.target.closest('[data-add]');if(add){const type=add.dataset.add;const b={id:'b'+Date.now().toString(36),type,label:blockName({type})+' BARU',value:type==='heading'?'Judul baru':type==='text'?'Isi konten baru':''};model.blocks.push(b);selected=b.id;render();return;}
+      const add=e.target.closest('[data-add]');if(add){const type=add.dataset.add;const b={id:'b'+Date.now().toString(36),type,region:'body',label:blockName({type})+' BARU',value:type==='heading'?'Judul baru':type==='text'?'Isi konten baru':''};model.blocks.push(b);selected=b.id;render();return;}
       const pick=e.target.closest('[data-select]');if(pick){selected=pick.dataset.select;render();return;}
       const del=e.target.closest('[data-delete]');if(del){model.blocks=model.blocks.filter(b=>b.id!==del.dataset.delete);selected=model.blocks[0]?.id||null;render();persist();return;}
       const move=e.target.closest('[data-move]');if(move){const i=model.blocks.findIndex(b=>b.id===move.dataset.id),j=i+Number(move.dataset.move);if(i>=0&&j>=0&&j<model.blocks.length){[model.blocks[i],model.blocks[j]]=[model.blocks[j],model.blocks[i]];render();persist();}return;}
-      const action=e.target.closest('[data-action]')?.dataset.action;if(action==='apply'){const b=model.blocks.find(x=>x.id===selected);if(b){b.label=$('[data-edit="label"]').value;b.value=$('[data-edit="value"]').value;render();persist();}}else if(action==='save'){model.name=$('[data-field="name"]').value;model.shape=$('[data-field="shape"]').value;persist();}else if(action==='reset'){if(confirm('Atur ulang lapisan menu ini?')){delete data[key];write(data);root.remove();mount();}}
+      const action=e.target.closest('[data-action]')?.dataset.action;if(action==='apply'){const b=model.blocks.find(x=>x.id===selected);if(b){b.label=$('[data-edit="label"]').value;b.value=$('[data-edit="value"]').value;b.region=$('[data-edit="region"]').value;render();persist();}}else if(action==='save'){model.name=$('[data-field="name"]').value;model.mainMenu=$('[data-field="mainMenu"]').value;model.shape=$('[data-field="shape"]').value;persist();}else if(action==='reset'){if(confirm('Atur ulang lapisan menu ini?')){delete data[key];write(data);root.remove();mount();}}
     });
-    $('[data-field="name"]').addEventListener('change',()=>{model.name=$('[data-field="name"]').value;persist();});
+    $('[data-field="name"]').addEventListener('change',()=>{model.name=$('[data-field="name"]').value;persist();});$('[data-field="mainMenu"]').addEventListener('change',()=>{model.mainMenu=$('[data-field="mainMenu"]').value;persist();});root.querySelectorAll('[data-region-name]').forEach(el=>el.addEventListener('change',()=>{model.regions[el.dataset.regionName]=el.value||el.dataset.regionName.toUpperCase();persist();}));
     $('[data-field="shape"]').addEventListener('change',()=>{model.shape=$('[data-field="shape"]').value;render();persist();});
     render();
   }
