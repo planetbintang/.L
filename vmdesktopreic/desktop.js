@@ -28,7 +28,72 @@ function installREICScreenKeyboard(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)panel.hidden=true;});
 }
 installREICScreenKeyboard();
-function selectCore(id){const m=menus[id]||menus.settings;currentCore=id;document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));panel.classList.remove('open');modalTitle.textContent=m.title;modalIcon.textContent=m.icon;modalTabs.innerHTML='<button class="active" data-tab="Pilihan Menu">PILIHAN MENU</button><button data-tab="Kategori">KATEGORI</button>';modalBody.innerHTML='<div class="menu-choice-intro"><span>OS MEDIA VM · MENU LANJUTAN</span><h3>Pilih jenis menu '+m.title+'</h3><p>Seluruh submenu ditampilkan sebagai pilihan di dalam modal konten.</p></div><div class="menu-choice-grid">'+m.items.map((name,i)=>'<button class="menu-choice" data-choice="'+encodeURIComponent(name)+'"><span>'+(['▣','▤','◈','⌘','⚙','◎'][i%6])+'</span><b>'+name+'</b><i>›</i></button>').join('')+'</div>';backdrop.hidden=false;modalBody.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{const name=decodeURIComponent(b.dataset.choice);if(id==='apps'&&name==='Registri 1.500 Komponen')openComponentRegistry();else openContent(name,id);}));modalTabs.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(b.dataset.tab==='Kategori'){modalBody.querySelector('.menu-choice-intro p').textContent='Kategori '+m.title+' · pilih salah satu jenis menu di bawah ini.';}else{modalBody.querySelector('.menu-choice-intro p').textContent='Seluruh submenu ditampilkan sebagai pilihan di dalam modal konten.';}}));}
+const libraryGroups={
+ 'identitas-desain':{label:'IDENTITAS & DESAIN',icon:'✧',menu:'settings'},
+ 'desktop-navigasi':{label:'DESKTOP & NAVIGASI',icon:'▦',menu:'settings'},
+ 'keamanan-privasi':{label:'KEAMANAN & PRIVASI',icon:'◈',menu:'settings'},
+ 'ai-otomasi':{label:'AI & OTOMATISASI',icon:'✧',menu:'studio'},
+ 'runtime-api':{label:'RUNTIME & API',icon:'⌘',menu:'studio'},
+ 'data-search':{label:'DATA & PENCARIAN',icon:'⌕',menu:'documents'},
+ 'tata-kelola':{label:'TATA KELOLA',icon:'▤',menu:'documents'},
+ 'devops-observabilitas':{label:'DEVOPS & OBSERVABILITAS',icon:'◉',menu:'search'},
+ 'server-cloud':{label:'SERVER & CLOUD',icon:'☁',menu:'search'},
+ 'file-manager':{label:'FILE MANAGER',icon:'▱',menu:'files'}
+};
+let fullComponentManifest=null, fullManifestPromise=null;
+const safeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function getFullComponentManifest(){
+ if(fullComponentManifest)return fullComponentManifest;
+ if(!fullManifestPromise)fullManifestPromise=fetch('../osmediavm/recordin/components/manifest.json',{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error('Manifest HTTP '+r.status);return r.json();}).then(data=>{const rows=Array.isArray(data.components)?data.components:[];if(rows.length<15000)throw Error('Manifest berisi '+rows.length+' komponen; target minimal 15.000.');fullComponentManifest=rows;return rows;});
+ return fullManifestPromise;
+}
+function renderFullLibrary(groupKey,term='',page=0){
+ const group=libraryGroups[groupKey];if(!group)return;
+ const rows=(fullComponentManifest||[]).filter(x=>x.group===groupKey&&(String(x.title||'')+' '+String(x.id||'')).toLocaleLowerCase('id').includes(term.trim().toLocaleLowerCase('id')));
+ const size=48,pages=Math.max(1,Math.ceil(rows.length/size));page=Math.max(0,Math.min(page,pages-1));
+ modalTitle.textContent=group.label;modalIcon.textContent=group.icon;
+ modalTabs.innerHTML='<button class="active">KOMPONEN</button><button data-library-overview>IKHTISAR</button><button data-library-all>SEMUA 15.000+</button>';
+ modalBody.innerHTML='<button class="menu-back" id="libraryBack">← KEMBALI KE 5 MENU UTAMA</button><div class="full-library-head"><div><span>OS MEDIA VM / REIC COMPONENT LIBRARY</span><h3>'+group.label+'</h3><p>Seluruh komponen pada kelompok ini dipetakan ke ruang kerja VMDESKTOPREIC. Pilih komponen untuk membuka berkas REIC, stylesheet, dan runtime JavaScript sumber.</p></div><strong>'+rows.length.toLocaleString('id-ID')+'<small> KOMPONEN</small></strong></div><div class="full-library-controls"><input id="fullLibrarySearch" type="search" value="'+safeHTML(term)+'" placeholder="Cari nama atau ID komponen…"><span>MANIFEST ASLI · '+(fullComponentManifest||[]).length.toLocaleString('id-ID')+' KOMPONEN</span></div><div class="full-library-grid">'+rows.slice(page*size,(page+1)*size).map(x=>'<button class="full-library-item" data-full-id="'+safeHTML(x.id)+'"><small>'+safeHTML(x.id)+'</small><b>'+safeHTML(x.title||x.id)+'</b><span>BUKA MODUL ↗</span></button>').join('')+'</div><div class="full-library-pager"><button id="fullPrev" '+(page===0?'disabled':'')+'>← SEBELUMNYA</button><span>HALAMAN '+(page+1)+' / '+pages+' · '+rows.length.toLocaleString('id-ID')+' KOMPONEN</span><button id="fullNext" '+(page>=pages-1?'disabled':'')+'>BERIKUTNYA →</button></div>';
+ $('#libraryBack').onclick=()=>selectCore(currentCore);
+ $('#fullLibrarySearch').addEventListener('input',e=>renderFullLibrary(groupKey,e.target.value,0));
+ $('#fullPrev').onclick=()=>renderFullLibrary(groupKey,term,page-1);
+ $('#fullNext').onclick=()=>renderFullLibrary(groupKey,term,page+1);
+ modalBody.querySelectorAll('[data-full-id]').forEach(b=>b.addEventListener('click',()=>openFullComponent(b.dataset.fullId,groupKey,term,page)));
+ modalTabs.querySelector('[data-library-overview]').onclick=()=>{$('#modalStatus').textContent=rows.length.toLocaleString('id-ID')+' komponen pada kelompok '+group.label+'.';};
+ modalTabs.querySelector('[data-library-all]').onclick=()=>{$('#modalStatus').textContent=(fullComponentManifest||[]).length.toLocaleString('id-ID')+' komponen berhasil dimuat dari manifest REIC.';};
+ backdrop.hidden=false;
+}
+async function openFullComponent(id,groupKey,term,page){
+ const item=(fullComponentManifest||[]).find(x=>x.id===id);if(!item)return;
+ modalTitle.textContent=item.title||item.id;modalIcon.textContent=libraryGroups[groupKey].icon;
+ modalTabs.innerHTML='<button class="active">PRATINJAU REIC</button><button data-component-info>INFORMASI</button><button data-component-source>SUMBER</button>';
+ const base='../osmediavm/recordin/components/'+encodeURIComponent(item.id)+'/'+encodeURIComponent(item.id);
+ modalBody.innerHTML='<button class="menu-back" id="fullComponentBack">← KEMBALI KE KATALOG</button><div class="full-component-meta"><span>'+safeHTML(item.id)+'</span><b>'+safeHTML(item.group)+'</b><small>REIC · CSS · JS</small></div><div class="full-component-preview" id="fullComponentPreview">Memuat komponen dari Library OS MEDIA VM…</div>';
+ $('#fullComponentBack').onclick=()=>renderFullLibrary(groupKey,term,page);
+ modalTabs.querySelector('[data-component-info]').onclick=()=>{$('#modalStatus').textContent='ID '+item.id+' · kelompok '+item.group+' · komponen dari manifest utama.';};
+ modalTabs.querySelector('[data-component-source]').onclick=()=>{$('#modalStatus').textContent='Sumber: '+base+'.reic · '+base+'.css · '+base+'.js';};
+ try{
+  const response=await fetch(base+'.reic',{cache:'force-cache'});if(!response.ok)throw Error('REIC HTTP '+response.status);
+  const raw=await response.text(),a=raw.indexOf('<section'),b=raw.lastIndexOf('</section>');if(a<0||b<0)throw Error('Fragmen section REIC tidak ditemukan');
+  const host=$('#fullComponentPreview');host.innerHTML=raw.slice(a,b+10);
+  const sid='full-reic-style-'+item.id;if(!document.getElementById(sid)){const link=document.createElement('link');link.id=sid;link.rel='stylesheet';link.href=base+'.css';document.head.append(link);}
+  const jid='full-reic-script-'+item.id;if(!document.getElementById(jid)){const script=document.createElement('script');script.id=jid;script.src=base+'.js';script.defer=true;document.body.append(script);}
+  $('#modalStatus').textContent='Komponen '+item.id+' berhasil dimuat dari Library REIC.';
+ }catch(error){$('#fullComponentPreview').textContent='Komponen terdaftar, tetapi pratinjau gagal dimuat: '+error.message;}
+}
+function selectCore(id){
+ const m=menus[id]||menus.settings;currentCore=id;
+ document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));
+ panel.classList.remove('open');modalTitle.textContent=m.title;modalIcon.textContent=m.icon;
+ if(id==='keyboard'){openContent('Keyboard Independent','keyboard');return;}
+ const keys=Object.keys(libraryGroups).filter(k=>libraryGroups[k].menu===id);
+ modalTabs.innerHTML='<button class="active">5 MENU UTAMA</button><button data-menu-status>STATUS LIBRARY</button>';
+ modalBody.innerHTML='<div class="menu-choice-intro"><span>OS MEDIA VM · 15.000+ REIC COMPONENTS</span><h3>'+m.title+'</h3><p>Lima ruang kerja utama memetakan seluruh kelompok Library REIC. Keyboard tetap menjadi menu utilitas terpisah.</p></div><div class="full-menu-stats"><div><b>15.000+</b><span>KOMPONEN TERDAFTAR</span></div><div><b>10</b><span>KELOMPOK SISTEM</span></div><div><b>5</b><span>RUANG KERJA UTAMA</span></div></div><div class="menu-choice-grid">'+keys.map(k=>'<button class="menu-choice full-menu-choice" data-library-group="'+k+'"><span>'+libraryGroups[k].icon+'</span><b>'+libraryGroups[k].label+'</b><i>›</i></button>').join('')+'</div><div class="full-library-loading" id="fullLibraryStatus">Menghubungkan manifest komponen OS MEDIA VM…</div>';
+ modalBody.querySelectorAll('[data-library-group]').forEach(b=>b.addEventListener('click',async()=>{const groupKey=b.dataset.libraryGroup;$('#modalStatus').textContent='Memuat '+libraryGroups[groupKey].label+'…';try{await getFullComponentManifest();renderFullLibrary(groupKey);}catch(e){$('#fullLibraryStatus').textContent='Manifest tidak dapat dimuat: '+e.message;}}));
+ modalTabs.querySelector('[data-menu-status]').onclick=async()=>{try{const rows=await getFullComponentManifest();$('#fullLibraryStatus').textContent=rows.length.toLocaleString('id-ID')+' komponen berhasil dimuat dan dipetakan ke lima menu utama.';}catch(e){$('#fullLibraryStatus').textContent='Status manifest: '+e.message;}};
+ backdrop.hidden=false;
+ getFullComponentManifest().then(rows=>{const status=$('#fullLibraryStatus');if(status)status.textContent=rows.length.toLocaleString('id-ID')+' komponen aktif · 10 kelompok · 5 menu utama.';}).catch(e=>{const status=$('#fullLibraryStatus');if(status)status.textContent='Manifest belum dapat dimuat: '+e.message;});
+}
 
 function renderRegistry(page=0,term=''){const pageSize=30,needle=term.trim().toLocaleLowerCase('id'),rows=componentRegistry.filter(x=>(x.title+' '+x.category+' '+x.id+' '+x.file).toLocaleLowerCase('id').includes(needle)),pages=Math.max(1,Math.ceil(rows.length/pageSize)),safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));page=Math.min(Math.max(0,page),pages-1);modalTitle.textContent='REGISTRI SISTEM · 1.500 KOMPONEN';modalIcon.textContent='▦';modalTabs.innerHTML='<button class="active">KOMPONEN UTAMA</button><button data-registry-info>SUMBER OS MEDIA VM</button>';modalBody.innerHTML='<div class="registry-head"><div><span>OS MEDIA VM / SYSTEM REGISTRY</span><h3>1.500 komponen sistem utama</h3><p>Daftar komponen diambil dari registri infrastruktur OS MEDIA VM. Pilih item untuk membuka detail dan spesifikasi sumbernya.</p></div><strong>'+rows.length.toLocaleString('id-ID')+' / 1.500</strong></div><div class="registry-controls"><input id="registrySearch" type="search" value="'+safe(term)+'" placeholder="Cari nama, kategori, ID komponen…"><span>MENAMPILKAN '+(rows.length? page*pageSize+1:0)+'–'+Math.min((page+1)*pageSize,rows.length)+' DARI '+rows.length+'</span></div><div class="registry-grid">'+rows.slice(page*pageSize,(page+1)*pageSize).map(x=>'<button class="registry-card" data-registry-id="'+safe(x.id)+'"><small>'+safe(x.id)+' · '+safe(x.category)+'</small><b>'+safe(x.title)+'</b><span>LIHAT KOMPONEN ↗</span></button>').join('')+'</div><div class="registry-pager"><button id="registryPrev" '+(page===0?'disabled':'')+'>← SEBELUMNYA</button><span>HALAMAN '+(page+1)+' / '+pages+'</span><button id="registryNext" '+(page>=pages-1?'disabled':'')+'>BERIKUTNYA →</button></div>';$('#registrySearch').addEventListener('input',e=>renderRegistry(0,e.target.value));$('#registryPrev').addEventListener('click',()=>renderRegistry(page-1,term));$('#registryNext').addEventListener('click',()=>renderRegistry(page+1,term));modalBody.querySelectorAll('[data-registry-id]').forEach(b=>b.addEventListener('click',()=>{const item=componentRegistry.find(x=>x.id===b.dataset.registryId);if(item)showRegistryItem(item,term,page);}));const info=modalTabs.querySelector('[data-registry-info]');info.addEventListener('click',()=>{$('#modalStatus').textContent='Sumber data: OS MEDIA VM · infrastruktur-1500 · spesifikasi komponen statis.';});backdrop.hidden=false;}
 function showRegistryItem(item,term='',page=0){const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));modalTitle.textContent=item.title;modalIcon.textContent='▦';modalTabs.innerHTML='<button class="active">RINGKASAN</button><button>ARSITEKTUR</button><button>FILE & PENYIMPANAN</button>';const href='../osmediavm/infrastruktur-1500/'+item.href.replace(/^\.\//,'');modalBody.innerHTML='<button class="menu-back" id="registryBack">← KEMBALI KE REGISTRI</button><div class="content-card registry-detail"><span class="registry-kicker">KOMPONEN '+safe(item.id)+'</span><h3>'+safe(item.title)+'</h3><p>Kategori sistem: '+safe(item.category)+'</p><div class="info-row"><span>ID komponen</span><b>'+safe(item.id)+'</b></div><div class="info-row"><span>Sumber</span><b>OS MEDIA VM · 1.500</b></div><div class="info-row"><span>Spesifikasi</span><b>'+safe(item.file)+'</b></div><div class="info-row"><span>Status</span><b>TERDAFTAR · FRONTEND</b></div><p>Komponen ini terhubung ke spesifikasi sumber OS MEDIA VM. Integrasi backend atau operasi sistem persisten memerlukan adapter layanan yang sesuai.</p><div class="action-row"><a class="registry-source" href="'+safe(href)+'" target="_blank" rel="noopener">BUKA SPESIFIKASI SUMBER ↗</a><button id="registryReturn">KEMBALI KE DAFTAR</button></div></div>';$('#registryBack').addEventListener('click',()=>renderRegistry(page,term));$('#registryReturn').addEventListener('click',()=>renderRegistry(page,term));backdrop.hidden=false;}
