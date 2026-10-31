@@ -1357,4 +1357,59 @@ Isi dari panel provider yang dipilih:
   window.addEventListener('planetbintang:workspace-files-changed', () => window.PBFileManager?.refreshWorkspace());
   if (window.PBSystemSnapshot?.subscribe) window.PBSystemSnapshot.subscribe('file-manager', (data) => init(data, true));
   else loadTreeIndex();
+
+  // File Manager dibuka sebagai modal berukuran sedang; konten halaman yang sama
+  // dipindahkan ke dialog agar seluruh fungsi pohon file tetap digunakan.
+  let fileManagerDialog = null;
+  function ensureFileManagerDialog() {
+    if (fileManagerDialog) return fileManagerDialog;
+    const section = $('#fileManager');
+    if (!section) return null;
+    const dialog = document.createElement('dialog');
+    dialog.id = 'pbFileManagerModal';
+    dialog.className = 'pb-file-manager-modal';
+    dialog.setAttribute('aria-labelledby', 'pbFileManagerModalTitle');
+    dialog.innerHTML = `
+      <div class="pb-file-manager-modal-shell">
+        <header class="pb-file-manager-modal-header">
+          <div><span class="pb-file-manager-modal-kicker">PLANETBINTANG · FILE SYSTEM</span><h2 id="pbFileManagerModalTitle">BERANDA FILE</h2></div>
+          <button type="button" class="pb-file-manager-modal-close" aria-label="Tutup Beranda File">×</button>
+        </header>
+        <div class="pb-file-manager-modal-content"></div>
+      </div>`;
+    const style = document.createElement('style');
+    style.id = 'pb-file-manager-modal-style';
+    style.textContent = `
+      .pb-file-manager-modal{width:min(1180px,94vw);max-width:94vw;max-height:88vh;padding:0;border:1px solid #47718f;background:#071321;color:#edf5ff;box-shadow:0 24px 90px #000b;overflow:hidden}
+      .pb-file-manager-modal::backdrop{background:rgba(1,7,15,.76);backdrop-filter:blur(7px)}
+      .pb-file-manager-modal-shell{display:flex;flex-direction:column;max-height:88vh;min-height:0}
+      .pb-file-manager-modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 18px;background:linear-gradient(110deg,#10243a,#0a1727);border-bottom:1px solid #31536b}
+      .pb-file-manager-modal-kicker{font-size:9px;letter-spacing:.16em;color:#83e1ff;font-weight:800}
+      .pb-file-manager-modal-header h2{margin:3px 0 0;font:800 17px/1.2 system-ui,sans-serif;letter-spacing:.08em;color:#edf8ff}
+      .pb-file-manager-modal-close{width:36px;height:36px;border:1px solid #47718f;background:#102b42;color:#eaf8ff;font-size:25px;line-height:1;cursor:pointer}
+      .pb-file-manager-modal-close:hover{background:#1b4866;border-color:#83e1ff}
+      .pb-file-manager-modal-content{min-height:0;overflow:auto;padding:12px;background:#071321}
+      .pb-file-manager-modal-content>#fileManager{display:block!important;visibility:visible!important;width:100%;max-width:none;margin:0;padding:0;max-height:none;overflow:visible}
+      .pb-file-manager-modal-content>#fileManager[hidden]{display:block!important}
+      @media(max-width:640px){.pb-file-manager-modal{width:96vw;max-width:96vw;max-height:90vh}.pb-file-manager-modal-shell{max-height:90vh}.pb-file-manager-modal-content{padding:7px}.pb-file-manager-modal-header{padding:10px 12px}}
+    `;
+    document.head.append(style);
+    document.body.append(dialog);
+    dialog.querySelector('.pb-file-manager-modal-content').append(section);
+    dialog.querySelector('.pb-file-manager-modal-close').addEventListener('click', () => window.PBSystemNavigation?.navigate('system'));
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => {
+      if (document.body.dataset.systemRoute === 'file-manager') window.PBSystemNavigation?.navigate('system');
+    });
+    fileManagerDialog = dialog;
+    return dialog;
+  }
+  document.addEventListener('planetbintang:route-change', (event) => {
+    const dialog = ensureFileManagerDialog();
+    if (!dialog) return;
+    if (event.detail?.group === 'file-manager') {
+      if (!dialog.open) dialog.showModal();
+      dialog.querySelector('.pb-file-manager-modal-close')?.focus();
+    } else if (dialog.open) dialog.close();
+  });
 })();
