@@ -548,3 +548,14 @@ html,body{margin:0!important;width:100%!important;height:100%!important;min-widt
  .vm-resolution-console{right:8px;top:8px;width:min(300px,calc(100% - 16px))}
  .vm-resolution-launch{right:8px;top:8px;font-size:8px;padding:7px}
 }
+
+/* FINAL OVERRIDE — fixed logical canvas 1920×1080; viewport only scales the canvas for fit */
+#desktop-root{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+.vm-shell{width:1920px!important;height:1080px!important;min-width:1920px!important;min-height:1080px!important;max-width:none!important;max-height:none!important;flex:0 0 1920px!important;position:relative!important;margin:0!important;transform:scale(var(--vm-scale,1))!important;transform-origin:50% 50%!important}
+.vm-shell[data-resolution-layer]{transform:scale(var(--vm-scale,1))!important}
+.vm-header{height:82px!important;min-height:82px!important;max-height:82px!important;flex:0 0 82px!important}
+.vm-desktop{flex:1 1 auto!important;min-height:0!important;height:auto!important;overflow:hidden!important}
+.vm-statusbar{height:54px!important;min-height:54px!important;max-height:54px!important;flex:0 0 54px!important}
+.vm-modal-backdrop{position:fixed!important;inset:0!important;z-index:9999!important}
+.vm-modal{max-width:calc(100% - 56px)!important;max-height:calc(100% - 56px)!important}
+#desktop-root:not(.vm-ready) #boot{font-size:14px;letter-spacing:.04em}
