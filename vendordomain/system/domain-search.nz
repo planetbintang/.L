@@ -1,7 +1,15 @@
-# Domain Search System (.NZ)
-# Purpose: runtime logic specification for the PlanetBintang global search.
-# Live browser implementation: ../search-page.js
-# Data source: ../data/domain-registry.nz plus available al.l data.media domain shards.
-# Internet results use the public Wikipedia API; Google Search remains available as an external search link.
-# Records must be one JSON object per line: {"domain":"example.tld","status":"source/status"}
-# Never label an unverified domain as live, registered, or reachable.
+# PLANETBINTANG DOMAIN SEARCH SYSTEM (.NZ)
+# Role: canonical runtime specification for the global CARI page.
+# UI: ../index.html section #searchPage; layout: ../search-page.css; runtime: ../search-page.js
+# Primary local source: ../data/domain-registry.nz (JSON Lines, one domain record per line).
+# Shared domain catalog: https://github.com/planetbintang/al.l/tree/io/data.media
+# Published shard: data.media/domain-000001.jsonl (JSONL records: domain, status, sumber, shard, urutan).
+# Catalog manifest: data.media/manifest.json; seed list: data.media/domain-seeds.txt.
+# Browser loader reads the local registry and the published AL.L shard; it does not crawl 500,000 virtual target shards.
+# Search modes: all (domain + web references), domain (registry only), web (Wikipedia search API).
+# Results render inside #safariResultsList; submitting a query must not redirect the page to another search provider.
+# A user may open a result link explicitly; that is separate from submitting a search.
+# Status values are catalog metadata only; never present them as DNS, registration, uptime, or reachability verification.
+# Unknown domains may be shown as unlisted input candidates, not as registered or active domains.
+# Record format: {"domain":"example.tld","status":"source/status"}
+# Keep this specification synchronized with search-page.js and data/domain-registry.nz.
