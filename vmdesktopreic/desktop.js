@@ -142,7 +142,7 @@ async function openFullComponent(id,groupKey,term,page){
   if(!r.ok)throw Error('REIC HTTP '+r.status);
   const source=await r.text(),css=c.ok?await c.text():'',js=j.ok?await j.text():'';
   renderLayeredComponent(item,groupKey,term,page,base,source,css,js);
-  modalTabs.querySelector('[data-component-info]').onclick=()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));modalTabs.querySelector('[data-component-info]').classList.add('active');$('.layered-component').dataset.activeLayer='properties';$('#layeredInspectorTitle').textContent='PROPERTI KOMPONEN';};
+  modalTabs.querySelector('[data-component-info]').onclick=()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));modalTabs.querySelector('[data-component-info]').classList.add('active');const b=$('.layered-component [data-layer="properties"]');if(b)b.click();};
   modalTabs.querySelector('[data-component-source]').onclick=()=>{modalTabs.querySelectorAll('button').forEach(x=>x.classList.remove('active'));modalTabs.querySelector('[data-component-source]').classList.add('active');const b=$('.layered-component [data-layer="source"]');if(b)b.click();};
   $('#modalStatus').textContent='Tiga berkas sumber dimuat · membangun workspace berlapis.';
  }catch(error){modalBody.innerHTML='<button class="menu-back" id="fullComponentBack">← KEMBALI KE KATALOG</button><div class="layered-error">Komponen '+safeHTML(item.id)+' tidak dapat dimuat: '+safeHTML(error.message)+'</div>';$('#fullComponentBack').onclick=()=>renderFullLibrary(groupKey,term,page);}
