@@ -55,8 +55,8 @@
   background:#fff;box-shadow:0 8px 26px rgba(35,52,74,.09);
 }
 #searchPage .safari-start-form:focus-within{border-color:#7da8d6;box-shadow:0 0 0 3px rgba(73,135,198,.13),0 8px 26px rgba(35,52,74,.09)}
-#searchPage .safari-google-caption{margin:1.1rem 0 0;color:#8793a2;font-size:.65rem;letter-spacing:.12em}
-#searchPage .safari-google-caption strong{color:#596b82}
+#searchPage .safari-search-caption{margin:1.1rem 0 0;color:#8793a2;font-size:.65rem;letter-spacing:.12em}
+#searchPage .safari-search-caption strong{color:#596b82}
 #searchPage .visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media(max-width:700px){
   #searchPage.safari-search-page{inset:74px 0 0;height:calc(100dvh - 74px)}
@@ -153,7 +153,7 @@
 #searchPage .safari-result-url{margin:.18rem 0;color:#63815f;font-size:.68rem;overflow-wrap:anywhere}
 #searchPage .safari-result-description{margin:.25rem 0 0;color:#657386;font-size:.77rem;line-height:1.55}
 #searchPage .safari-result-placeholder{max-width:620px;margin:0 auto}
-#searchPage .safari-google-caption{text-align:center}
+#searchPage .safari-search-caption{text-align:center}
 @media(max-width:700px){#searchPage .safari-results-page{width:calc(100% - 1.2rem);padding-top:.8rem}#searchPage .safari-results{padding:.7rem}#searchPage .safari-results-heading h3{font-size:.8rem}#searchPage .safari-result-card{padding:.65rem;grid-template-columns:30px minmax(0,1fr)}#searchPage .safari-result-icon{width:28px;height:28px}#searchPage .safari-search-types{gap:.3rem}#searchPage .safari-search-types a{padding:.45rem .55rem;font-size:.62rem}}
 
 
@@ -253,8 +253,8 @@
 #searchPage .safari-result-url{margin:4px 0;color:#79b99d!important;font-size:10px;overflow-wrap:anywhere}
 #searchPage .safari-result-description{margin:5px 0 0;color:#9aadc0!important;font-size:11px;line-height:1.55}
 #searchPage .safari-source-footnote{grid-column:1/-1;margin:7px 0 0;padding:11px 2px 0;border-top:1px solid rgba(129,170,207,.16);color:#819bb2;font-size:9px;line-height:1.6;letter-spacing:.07em}
-#searchPage .safari-google-caption{margin:18px 0 0;color:#718ba4;font-size:9px;letter-spacing:.12em}
-#searchPage .safari-google-caption strong{color:#8bcff1}
+#searchPage .safari-search-caption{margin:18px 0 0;color:#718ba4;font-size:9px;letter-spacing:.12em}
+#searchPage .safari-search-caption strong{color:#8bcff1}
 @media(max-width:720px){
   #searchPage.safari-search-page{inset:74px 0 0!important;height:calc(100dvh - 74px)!important}
   #searchPage .safari-toolbar{min-height:58px;padding:8px 10px;gap:7px}
