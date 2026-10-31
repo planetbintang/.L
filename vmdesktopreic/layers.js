@@ -5,7 +5,8 @@
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const read=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch(_){return {}}};
   const write=data=>{try{localStorage.setItem(STORE,JSON.stringify(data));return true}catch(_){return false}};
-  const regionDefaults=()=>({sidebar:'SIDEBAR',header:'HEADER',body:'BODY',center:'CENTER',dropdown:'DROPDOWN'});\n  const defaults=(title,main)=>({name:title||'MENU BARU',mainMenu:main||'MENU UTAMA',shape:'panel',regions:regionDefaults(),blocks:[{id:'b1',type:'heading',region:'body',label:'JUDUL KONTEN',value:'Ruang kerja REIC'},{id:'b2',type:'text',region:'body',label:'DESKRIPSI',value:'Klik UBAH untuk mengisi konten menu ini.'}]});
+  const regionDefaults=()=>({sidebar:'SIDEBAR',header:'HEADER',body:'BODY',center:'CENTER',dropdown:'DROPDOWN'});
+  const defaults=(title,main)=>({name:title||'MENU BARU',mainMenu:main||'MENU UTAMA',shape:'panel',regions:regionDefaults(),blocks:[{id:'b1',type:'heading',region:'body',label:'JUDUL KONTEN',value:'Ruang kerja REIC'},{id:'b2',type:'text',region:'body',label:'DESKRIPSI',value:'Klik UBAH untuk mengisi konten menu ini.'}]});
   const css=`
   .reic-layer-editor{margin:0 0 18px;border:1px solid #426783;background:linear-gradient(145deg,#10263a,#081522);color:#eaf5ff;box-shadow:0 14px 34px #0004}
   .reic-le-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid #35556d;background:linear-gradient(100deg,#1a3c56,#0b1c2b)}
@@ -45,8 +46,11 @@
   function mount(){
     const body=document.querySelector('#modalBody');if(!body||body.querySelector('.reic-layer-editor'))return;
     const title=document.querySelector('#modalTitle')?.textContent?.trim()||'MENU REIC';
-    const key=title.toLocaleLowerCase('id').replace(/[^a-z0-9]+/g,'-');
-    const data=read();const model=data[key]||defaults(title);if(!model.blocks)model.blocks=[];
+    const activeCore=document.querySelector('.core-item.active');
+    const mainName=(activeCore?.textContent||'MENU UTAMA').trim().replace(/\\s+/g,' ');
+    const key=(mainName+'--'+title).toLocaleLowerCase('id').replace(/[^a-z0-9]+/g,'-');
+    const data=read();const model=data[key]||defaults(title,mainName);if(!model.blocks)model.blocks=[];
+    model.mainMenu=model.mainMenu||mainName;model.regions={...regionDefaults(),...(model.regions||{})};model.blocks.forEach(b=>{if(!b.region)b.region='body';});
     const root=document.createElement('section');root.className='reic-layer-editor';root.dataset.key=key;
     root.innerHTML=`
       <div class="reic-le-head"><div><strong>▧ EDITOR LAPISAN REIC</strong><small>BENTUK MENU · NAMA · BLOK KONTEN · PROPERTI · PENYIMPANAN</small></div><div class="reic-le-actions"><button type="button" data-action="save">✓ SIMPAN LAPISAN</button><button type="button" data-action="reset">↺ ATUR ULANG</button></div></div>
@@ -74,7 +78,7 @@
       }).join('')||'<div style="padding:30px;text-align:center;color:#91a8c3;font-size:10px">AREA KONTEN KOSONG · TAMBAHKAN BLOK DI BAWAH</div>';
       $('[data-layer-list]').innerHTML=model.blocks.map((b,i)=>'<button type="button" class="'+(b.id===selected?'active':'')+'" data-select="'+esc(b.id)+'">'+String(i+1).padStart(2,'0')+' · '+blockName(b)+' — '+esc(b.label||b.value||'Baru').slice(0,22)+'</button>').join('')||'<small style="color:#91a8c3">Belum ada lapisan konten</small>';
       $('[data-count]').textContent=model.blocks.length+' BLOK AKTIF';
-      const b=model.blocks.find(x=>x.id===selected);$('[data-edit="label"]').value=b?.label||'';$('[data-edit="value"]').value=b?.value||'';$('[data-edit="region"]').value=b?.region||'body';
+      const b=model.blocks.find(x=>x.id===selected);$('[data-edit="label"]').value=b?.label||'';$('[data-edit="value"]').value=b?.value||'';$('[data-edit="region"]').value=b?.region||'body';$('[data-edit="region"]').value=b?.region||'body';
     }
     root.addEventListener('click',e=>{
       const add=e.target.closest('[data-add]');if(add){const type=add.dataset.add;const b={id:'b'+Date.now().toString(36),type,region:'body',label:blockName({type})+' BARU',value:type==='heading'?'Judul baru':type==='text'?'Isi konten baru':''};model.blocks.push(b);selected=b.id;render();return;}
@@ -83,7 +87,10 @@
       const move=e.target.closest('[data-move]');if(move){const i=model.blocks.findIndex(b=>b.id===move.dataset.id),j=i+Number(move.dataset.move);if(i>=0&&j>=0&&j<model.blocks.length){[model.blocks[i],model.blocks[j]]=[model.blocks[j],model.blocks[i]];render();persist();}return;}
       const action=e.target.closest('[data-action]')?.dataset.action;if(action==='apply'){const b=model.blocks.find(x=>x.id===selected);if(b){b.label=$('[data-edit="label"]').value;b.value=$('[data-edit="value"]').value;b.region=$('[data-edit="region"]').value;render();persist();}}else if(action==='save'){model.name=$('[data-field="name"]').value;model.mainMenu=$('[data-field="mainMenu"]').value;model.shape=$('[data-field="shape"]').value;persist();}else if(action==='reset'){if(confirm('Atur ulang lapisan menu ini?')){delete data[key];write(data);root.remove();mount();}}
     });
-    $('[data-field="name"]').addEventListener('change',()=>{model.name=$('[data-field="name"]').value;persist();});$('[data-field="mainMenu"]').addEventListener('change',()=>{model.mainMenu=$('[data-field="mainMenu"]').value;persist();});root.querySelectorAll('[data-region-name]').forEach(el=>el.addEventListener('change',()=>{model.regions[el.dataset.regionName]=el.value||el.dataset.regionName.toUpperCase();persist();}));
+    $('[data-field="name"]').addEventListener('change',()=>{model.name=$('[data-field="name"]').value;persist();});
+    $('[data-field="mainMenu"]').value=model.mainMenu;
+    $('[data-field="mainMenu"]').addEventListener('change',()=>{model.mainMenu=$('[data-field="mainMenu"]').value;persist();});
+    root.querySelectorAll('[data-region-name]').forEach(el=>{el.value=model.regions[el.dataset.regionName];el.addEventListener('change',()=>{model.regions[el.dataset.regionName]=el.value;persist();});});$('[data-field="mainMenu"]').addEventListener('change',()=>{model.mainMenu=$('[data-field="mainMenu"]').value;persist();});root.querySelectorAll('[data-region-name]').forEach(el=>el.addEventListener('change',()=>{model.regions[el.dataset.regionName]=el.value||el.dataset.regionName.toUpperCase();persist();}));
     $('[data-field="shape"]').addEventListener('change',()=>{model.shape=$('[data-field="shape"]').value;render();persist();});
     render();
   }
