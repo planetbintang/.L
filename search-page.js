@@ -194,7 +194,9 @@
     resultsCount.textContent='MEMUAT';
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
     try {
-      const records=await loadDomainRecords();
+      let records;
+      try { records=type==='web' ? Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}) : await loadDomainRecords(); }
+      catch (_) { records=Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}); }
       if(requestId!==searchSequence) return;
       const explicitUrl=/^(?:https?:\/\/|www\.)/i.test(query)||/[/?#]/.test(query);
       const direct=explicitUrl?renderDirectUrl(query):false;
@@ -214,7 +216,8 @@
         records.sources.media?'AL.L DATA.MEDIA':'DATA.MEDIA TIDAK TERSEDIA'
       ];
       if(direct) resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
-      else if(domainCount||webCount) resultsStatus.textContent='Hasil ditampilkan dari katalog domain dan referensi web. Status domain adalah label katalog, bukan verifikasi live.';
+      else if(domainCount||webCount) resultsStatus.textContent='Hasil ditampilkan dari sumber yang berhasil dimuat. Jika salah satu sumber gagal, hasil dari sumber lain tetap tersedia. Status domain adalah label katalog, bukan verifikasi live.';
+      else if(!records.sources.registry&&!records.sources.media&&type==='domain') resultsStatus.textContent='Katalog domain tidak dapat dimuat. Periksa koneksi lalu ulangi pencarian.';
       else resultsStatus.textContent='Tidak ada kecocokan pada sumber data yang tersedia. Coba nama domain atau kata kunci lain.';
       resultsCount.textContent=(direct?1:domainCount+webCount)+' HASIL';
       const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
