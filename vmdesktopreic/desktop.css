@@ -582,3 +582,43 @@ html,body{margin:0!important;width:100%!important;height:100%!important;min-widt
 .vm-multi-workspace .wm-view-stage{min-height:0!important;flex:1 1 auto!important}
 .vm-multi-workspace .wm-view-pane,.vm-multi-workspace .wm-view-pane iframe{height:100%!important;min-height:100%!important}
 @media(max-width:900px){.vm-modal{width:calc(100% - 28px)!important;height:calc(100% - 28px)!important}.vm-multi-workspace .wm-layout{height:auto!important;min-height:0!important}.vm-multi-workspace .wm-view-stage{min-height:360px!important}}
+
+/* VMDESKTOPREIC · DESKTOP ENVIRONMENT, APP LAUNCHER, DOCK & WINDOW MANAGER */
+.vmd-system{position:absolute;inset:0;z-index:2;pointer-events:none;color:#edf5ff;font-family:Arial,system-ui,sans-serif}
+.vmd-shortcuts{position:absolute;left:390px;top:108px;display:grid;grid-template-columns:repeat(2,104px);gap:18px;pointer-events:auto}
+.vmd-shortcut{width:100px;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;background:transparent;color:#edf5ff;cursor:pointer;text-shadow:0 2px 6px #000}
+.vmd-shortcut:hover{background:#83e1ff18;border-color:#83e1ff66}
+.vmd-shortcut i{font-style:normal;font-size:36px;filter:drop-shadow(0 5px 8px #0009)}
+.vmd-shortcut b{font-size:10px;letter-spacing:.06em;text-align:center}
+.vmd-dock{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);height:70px;min-width:490px;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #47728e;background:#07111fe8;box-shadow:0 12px 36px #0009;backdrop-filter:blur(18px);pointer-events:auto}
+.vmd-dock button{width:48px;height:48px;border:1px solid #29445d;background:#10243a;color:#eaf7ff;font-size:23px;cursor:pointer}
+.vmd-dock button:hover{border-color:#83e1ff;background:#183c57}
+.vmd-dock .vmd-start{background:#173b56;color:#83e1ff;font-size:27px}
+.vmd-dock-sep{height:36px;width:1px;background:#31536b;margin:0 4px}
+.vmd-dock-spacer{flex:1}
+.vmd-dock-clock{min-width:54px;color:#c8eaff;font-size:13px;text-align:center}
+.vmd-start-menu{position:absolute;z-index:40;bottom:100px;left:50%;transform:translateX(-50%);width:430px;padding:18px;border:1px solid #47728e;background:#0b1a2aF5;box-shadow:0 20px 70px #000c;backdrop-filter:blur(20px);pointer-events:auto}
+.vmd-start-menu[hidden]{display:none}
+.vmd-start-menu>header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#edf7ff}
+.vmd-start-menu>header small,.vmd-start-menu footer{color:#83e1ff;font-size:9px;letter-spacing:.12em}
+.vmd-app-search{width:100%;height:38px;margin-bottom:14px;padding:0 12px;border:1px solid #31536b;background:#07111f;color:white;outline:0}
+.vmd-start-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.vmd-start-grid button{min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid #29445d;background:#10243a;color:#eaf7ff;cursor:pointer}
+.vmd-start-grid button:hover{border-color:#83e1ff;background:#183c57}
+.vmd-start-grid i{font-style:normal;font-size:24px}.vmd-start-grid b{font-size:9px}
+.vmd-start-menu footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid #29445d}
+.vmd-start-menu footer button{border:1px solid #31536b;background:#10243a;color:#eaf7ff;padding:7px 12px;cursor:pointer}
+.vmd-window-layer{position:absolute;inset:0;pointer-events:none}
+.vmd-window{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:760px;height:520px;max-width:calc(100% - 470px);max-height:calc(100% - 150px);display:flex;flex-direction:column;border:1px solid #47728e;background:#091625;box-shadow:0 24px 80px #000b;pointer-events:auto}
+.vmd-window.minimized{display:none}.vmd-window.maximized{left:350px!important;top:12px!important;transform:none;width:calc(100% - 390px);height:calc(100% - 110px);max-width:none;max-height:none}
+.vmd-window-head{height:48px;flex:0 0 48px;display:flex;align-items:center;gap:10px;padding:0 12px;background:#132d44;border-bottom:1px solid #31536b;cursor:move}
+.vmd-window-head>span{font-size:18px}.vmd-window-head>b{flex:1;font-size:12px;letter-spacing:.08em}
+.vmd-window-head div{display:flex;gap:5px}.vmd-window-head button{width:30px;height:28px;border:1px solid #31536b;background:#0b1c2c;color:#eaf7ff;cursor:pointer}
+.vmd-window-head button:last-child:hover{background:#923f4b}
+.vmd-window-content{flex:1;min-height:0;overflow:auto;padding:18px;background:linear-gradient(145deg,#0d1d2e,#081421)}
+.vmd-window>footer{height:28px;flex:0 0 28px;padding:7px 12px;border-top:1px solid #29445d;color:#83e1ff;font-size:8px;letter-spacing:.12em}
+.vmd-filetree{display:grid;grid-template-columns:170px 1fr;gap:14px;height:100%}.vmd-filetree aside{display:flex;flex-direction:column;gap:6px;padding:10px;background:#0a1727;border:1px solid #29445d}.vmd-filetree aside b{color:#83e1ff;font-size:10px;margin-bottom:8px}.vmd-filetree aside button{padding:9px;border:0;background:#10243a;color:#dcefff;text-align:left;font-size:11px}.vmd-filetree section h3{margin:0 0 16px;font-size:14px}.vmd-files{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.vmd-files>div{min-height:95px;padding:14px;border:1px solid #29445d;background:#10243a;font-size:23px}.vmd-files b{font-size:11px}.vmd-files small{display:block;margin:8px 0 0 30px;color:#91a8c3;font-size:9px}
+.vmd-terminal{height:100%;padding:14px;background:#030a12;color:#9df2ca;font:12px ui-monospace,monospace}.vmd-terminal p{color:#b5c9d8}.vmd-terminal label{display:block;margin-top:22px}.vmd-command{width:70%;border:0;outline:0;background:transparent;color:#eafff2;font:inherit}.vmd-terminal-output{white-space:pre-wrap;color:#83e1ff}
+.vmd-notes{height:100%;display:flex;flex-direction:column;gap:8px}.vmd-notes textarea{flex:1;min-height:200px;resize:none;padding:14px;border:1px solid #31536b;background:#07111f;color:#edf7ff;font:14px/1.6 system-ui}.vmd-notes small,.vmd-note{color:#91a8c3;font-size:10px}
+.vmd-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.vmd-metrics article{padding:18px;border:1px solid #31536b;background:#10243a}.vmd-metrics small{display:block;color:#83e1ff;font-size:9px}.vmd-metrics b{display:block;margin-top:10px;font-size:20px}.vmd-settings{display:flex;flex-direction:column;gap:15px}.vmd-settings label{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #29445d;font-size:12px}.vmd-settings select{padding:8px;background:#07111f;border:1px solid #31536b;color:white}
+@media(max-width:800px){.vmd-shortcuts{left:350px;grid-template-columns:repeat(2,78px);gap:6px}.vmd-shortcut{width:76px;min-height:76px}.vmd-dock{min-width:0;max-width:calc(100% - 360px);gap:4px}.vmd-dock button{width:38px;height:38px}.vmd-window{max-width:calc(100% - 360px);width:600px}.vmd-start-menu{width:min(420px,calc(100% - 360px))}}
