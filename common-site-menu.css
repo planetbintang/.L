@@ -129,3 +129,11 @@
 @media (prefers-reduced-motion: reduce) {
   .common-site-menu-card { transition: none; }
 }
+
+/* MAIN MENU: tampilkan seluruh label menu dan item dropdown dalam huruf kapital. */
+.topbar > .main-nav > a,
+.topbar > .main-nav > .nav-dropdown > summary,
+.topbar > .main-nav .nav-dropdown-menu > a,
+.topbar > .main-nav .nav-dropdown-menu > a > b {
+  text-transform: uppercase !important;
+}
