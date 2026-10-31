@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-search-tabs-v5';
+  css.href = './search-page.css?v=20261031-search-viewer-v6';
   document.head.append(css);
 
   const $ = id => document.getElementById(id);
@@ -103,32 +103,45 @@
     } catch (_) { return false; }
   }
   function showInlineDestination(url,title) {
+    let parsed;
+    try { parsed=new URL(url,location.href); } catch (_) { return; }
+    if(!['http:','https:'].includes(parsed.protocol)) return;
     let viewer=$('safariInlineViewer');
+    const toolbar=document.querySelector('#searchPage .safari-toolbar');
+    const resultsPage=document.querySelector('#searchPage .safari-results-page');
     if(!viewer) {
       viewer=document.createElement('section');
       viewer.id='safariInlineViewer';
       viewer.className='safari-inline-viewer';
       viewer.setAttribute('aria-live','polite');
-      results.after(viewer);
+      toolbar?.after(viewer);
     }
     viewer.replaceChildren();
     const head=document.createElement('div');head.className='safari-inline-viewer-head';
     const heading=document.createElement('div');
-    const label=document.createElement('p');label.className='safari-eyebrow';label.textContent='TAMPILAN DALAM CARI';
-    const name=document.createElement('h3');name.textContent=title;
-    const address=document.createElement('p');address.className='safari-inline-url';address.textContent=url;
+    const label=document.createElement('p');label.className='safari-eyebrow';label.textContent='TAMPILAN DALAM CARI · HASIL TERPILIH';
+    const name=document.createElement('h2');name.textContent=title;
+    const address=document.createElement('p');address.className='safari-inline-url';address.textContent=parsed.href;
     heading.append(label,name,address);
-    const close=document.createElement('button');close.type='button';close.className='safari-inline-close';close.textContent='TUTUP TAMPILAN';
-    close.addEventListener('click',()=>{viewer.hidden=true;viewer.replaceChildren();});
+    const close=document.createElement('button');close.type='button';close.className='safari-inline-close';close.textContent='KEMBALI KE HASIL';
+    close.addEventListener('click',()=>{
+      viewer.hidden=true;viewer.replaceChildren();
+      document.querySelector('#searchPage')?.classList.remove('safari-viewer-active');
+      if(resultsPage) resultsPage.hidden=false;
+    });
     head.append(heading,close);
+    const note=document.createElement('p');note.className='safari-inline-note';
+    note.textContent='Hanya hasil yang Anda pilih sedang ditampilkan. Jika situs tujuan melarang iframe, kontennya mungkin tidak dapat dimuat di dalam CARI.';
     const frame=document.createElement('iframe');
     frame.className='safari-inline-frame';
-    frame.title='Tampilan '+title+' di dalam menu CARI';
-    frame.loading='lazy';frame.referrerPolicy='no-referrer';frame.src=url;
-    const note=document.createElement('p');note.className='safari-inline-note';
-    note.textContent='Situs tujuan dimuat di area ini. Jika pemilik situs melarang tampilan tertanam, halaman dapat menolak dimuat; menu CARI tetap terbuka.';
+    frame.title='Tampilan '+title+' di dalam halaman CARI';
+    frame.loading='eager';frame.referrerPolicy='strict-origin-when-cross-origin';
+    frame.allow='clipboard-read; clipboard-write; fullscreen';
+    frame.src=parsed.href;
     viewer.append(head,note,frame);
     viewer.hidden=false;
+    if(resultsPage) resultsPage.hidden=true;
+    document.querySelector('#searchPage')?.classList.add('safari-viewer-active');
     viewer.scrollIntoView({behavior:'smooth',block:'start'});
   }
   async function renderWiki(query) {
@@ -217,10 +230,11 @@
     const link=event.target.closest('a[data-internal-url]');
     if(!link) return;
     event.preventDefault();
-    results.querySelectorAll('.safari-result-card.is-selected').forEach(card=>card.classList.remove('is-selected'));
     const card=link.closest('.safari-result-card');
-    card?.classList.add('is-selected');
-    resultsStatus.textContent='HASIL DIPILIH: '+(link.dataset.internalTitle||link.textContent)+'. Anda tetap berada di halaman utama CARI.';
+    const title=link.dataset.internalTitle||link.textContent;
+    results.querySelectorAll('.safari-result-card').forEach(item=>{item.hidden=item!==card;});
+    resultsStatus.textContent='MENAMPILKAN HASIL TERPILIH: '+title;
+    showInlineDestination(link.dataset.internalUrl,title);
   });
   function sync(source,target){if(source&&target)source.addEventListener('input',()=>{target.value=source.value;});}
   sync(searchInput,startInput);sync(startInput,searchInput);sync(topInput,searchInput);sync(homeInput,searchInput);sync(topInput,homeInput);sync(homeInput,topInput);
