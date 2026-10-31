@@ -28,7 +28,7 @@
  async function loadManifest(id){try{await getManifest();if(state.core!==id)return;renderCatalog();modalTabs.querySelector('.wm-open-count').textContent=state.views.filter(v=>v.core===id).length;modalStatus.textContent=state.manifest.length.toLocaleString('id-ID')+' KOMPONEN MANIFEST TERSEDIA · '+menus[id].title;}catch(e){const grid=$('.wm-grid');if(grid)grid.innerHTML='<div class="wm-empty"><div><b>MANIFEST TIDAK TERSEDIA</b>'+esc(e.message)+'</div></div>';modalStatus.textContent='MANIFEST ERROR · '+e.message;}}
  function openCore(id){if(!menus[id])return;renderShell(id);if(id==='keyboard'){renderKeyboard();return;}loadManifest(id);}
  document.addEventListener('click',e=>{const b=e.target.closest('.core-item[data-core]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();openCore(b.dataset.core);},true);
- document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const id=b.dataset.open;if(id==='settings'||id==='apps'){e.preventDefault();e.stopImmediatePropagation();openCore(id==='apps'?'studio':'settings');}},true);
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const id=b.dataset.open;if(id==='settings'||id==='apps'||id==='keyboard'){e.preventDefault();e.stopImmediatePropagation();openCore(id==='keyboard'?'keyboard':id==='apps'?'studio':'settings');}},true);
  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.activeTab==='runtime'&&state.activeViews[state.core])setTab('catalog');});
  const observer=new MutationObserver(()=>{const count=modalTabs.querySelector('.wm-open-count');if(count)count.textContent=state.views.length;});observer.observe(modalTabs,{childList:true,subtree:true});
  openCore('settings');
