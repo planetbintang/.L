@@ -2,7 +2,7 @@
   'use strict';
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = './search-page.css?v=20261031-search-viewer-v6';
+  css.href = './search-page.css?v=20261031-google-search-v8';
   document.head.append(css);
 
   const $ = id => document.getElementById(id);
@@ -72,16 +72,16 @@
     })().catch(error=>{ domainLoadPromise=null; throw error; });
     return domainLoadPromise;
   }
-  function addCard({title,url,description,icon='⌕',tag='HASIL',source=''}) {
+  function addCard({title,url,description,icon='⌕',tag='HASIL',source='',external=false}) {
     const article=document.createElement('article');
     article.className='safari-result-card';
-    article.dataset.resultType = tag==='DOMAIN' || tag==='DOMAIN INPUT' ? 'domain' : tag==='REFERENSI WEB' ? 'web' : 'all';
+    article.dataset.resultType = tag==='DOMAIN' || tag==='DOMAIN INPUT' ? 'domain' : tag==='REFERENSI WEB' ? 'web' : tag==='GOOGLE' ? 'google' : 'all';
     const mark=document.createElement('span');mark.className='safari-result-icon';mark.textContent=icon;
     const body=document.createElement('div');body.className='safari-result-body';
     const meta=document.createElement('div');meta.className='safari-result-meta';
     const type=document.createElement('span');type.className='safari-result-tag';type.textContent=tag;meta.append(type);
     if(source){const src=document.createElement('span');src.className='safari-result-source';src.textContent=source;meta.append(src);}
-    const link=document.createElement('a');link.className='safari-result-link';link.href='#cari';link.removeAttribute('target');link.dataset.internalUrl=url;link.dataset.internalTitle=title||url;link.setAttribute('role','button');link.setAttribute('aria-label','Tampilkan '+(title||url)+' di area CARI');link.textContent=title||url;
+    const link=document.createElement('a');link.className='safari-result-link';link.href=external?url:'#cari';if(external){link.target='_blank';link.rel='noopener noreferrer';link.textContent=(title||url)+' ↗';link.setAttribute('aria-label','Buka hasil pencarian Google di tab baru');}else{link.dataset.internalUrl=url;link.dataset.internalTitle=title||url;link.setAttribute('role','button');link.setAttribute('aria-label','Tampilkan '+(title||url)+' di area CARI');link.textContent=title||url;}
     const address=document.createElement('p');address.className='safari-result-url';address.textContent=url;
     const desc=document.createElement('p');desc.className='safari-result-description';desc.textContent=description||'Buka sumber ini untuk melihat informasi lebih lanjut.';
     body.append(meta,link,address,desc);article.append(mark,body);results.append(article);
@@ -195,13 +195,17 @@
     resultsStatus.textContent='Menghubungkan registri .NZ dan katalog domain AL.L…';
     try {
       let records;
-      try { records=type==='web' ? Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}) : await loadDomainRecords(); }
+      try { records=(type==='web'||type==='google') ? Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}) : await loadDomainRecords(); }
       catch (_) { records=Object.assign([],{sources:{registry:false,media:false,mediaCount:0}}); }
       if(requestId!==searchSequence) return;
       const explicitUrl=/^(?:https?:\/\/|www\.)/i.test(query)||/[/?#]/.test(query);
-      const direct=explicitUrl?renderDirectUrl(query):false;
+      const direct=type==='google'?false:(explicitUrl?renderDirectUrl(query):false);
       let domainCount=0, webCount=0;
-      if(!direct && type!=='web') domainCount=renderDomains(query,records);
+      if(type==='google') {
+        const googleUrl='https://www.google.com/search?q='+encodeURIComponent(query);
+        addCard({title:'Lihat hasil Google untuk: '+query,url:googleUrl,description:'Membuka halaman hasil pencarian langsung dari Google menggunakan query yang sama dari kolom CARI. Hasil live ditampilkan oleh Google pada tab baru.',icon:'G',tag:'GOOGLE',source:'GOOGLE SEARCH',external:true});
+      }
+      if(!direct && type!=='web' && type!=='google') domainCount=renderDomains(query,records);
       if(!direct && !domainCount && type!=='web' && validDomain(cleanDomain(query))) {
         addCard({title:cleanDomain(query),url:'https://'+cleanDomain(query),description:'Nama domain dikenali dari input, tetapi belum ditemukan pada shard katalog yang tersedia. Ini bukan verifikasi DNS atau status registrasi.',icon:'◎',tag:'DOMAIN INPUT',source:'BELUM ADA DI KATALOG'});
         domainCount=1;
@@ -215,11 +219,12 @@
         records.sources.registry?'.NZ REGISTRY':'REGISTRY TIDAK TERSEDIA',
         records.sources.media?'AL.L DATA.MEDIA':'DATA.MEDIA TIDAK TERSEDIA'
       ];
-      if(direct) resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
+      if(type==='google') resultsStatus.textContent='Query siap dikirim ke Google. Pilih tombol hasil di bawah untuk membuka hasil pencarian Google yang aktual. Google membatasi penyematan hasil pencariannya di dalam situs lain.';
+      else if(direct) resultsStatus.textContent='URL ditampilkan dari input Anda. Tidak ada pemeriksaan DNS atau status live yang dilakukan.';
       else if(domainCount||webCount) resultsStatus.textContent='Hasil ditampilkan dari sumber yang berhasil dimuat. Jika salah satu sumber gagal, hasil dari sumber lain tetap tersedia. Status domain adalah label katalog, bukan verifikasi live.';
       else if(!records.sources.registry&&!records.sources.media&&type==='domain') resultsStatus.textContent='Katalog domain tidak dapat dimuat. Periksa koneksi lalu ulangi pencarian.';
       else resultsStatus.textContent='Tidak ada kecocokan pada sumber data yang tersedia. Coba nama domain atau kata kunci lain.';
-      resultsCount.textContent=(direct?1:domainCount+webCount)+' HASIL';
+      resultsCount.textContent=(type==='google'?1:(direct?1:domainCount+webCount))+' HASIL';
       const sources=document.createElement('p');sources.className='safari-source-footnote';sources.textContent='SUMBER DATA: '+sourceNames.join(' · ')+' · '+records.length+' ENTRI DOMAIN DIMUAT ('+records.sources.mediaCount+' DARI AL.L SHARD TERSEDIA).';
       results.append(sources);
       applyResultLimit();
