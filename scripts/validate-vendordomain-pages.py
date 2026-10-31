@@ -48,20 +48,40 @@ for feature in features:
     feature_id = feature.get("id")
     detail = feature.get("detailPath")
     require(isinstance(feature_id, int), f"feature has invalid id: {feature!r}")
-    require(isinstance(detail, str) and detail.endswith("/"), f"feature {feature_id} has invalid detailPath")
-    if not isinstance(detail, str):
+    require(isinstance(detail, str) and bool(detail), f"feature {feature_id} has invalid detailPath")
+    if not isinstance(detail, str) or not detail:
         continue
-    relative = PurePosixPath(detail)
-    require(not relative.is_absolute() and ".." not in relative.parts, f"feature {feature_id} escapes its feature directory")
-    if relative.is_absolute() or ".." in relative.parts:
-        continue
-    source_rel = f"vendordomain/features/{detail}index.reic"
-    output = VD / "features" / Path(*relative.parts) / "index.html"
-    require(source_rel in manifest_paths, f"feature {feature_id} source is not included in Pages conversion manifest: {source_rel}")
-    require(output.is_file(), f"feature {feature_id} deployment page is missing: {output.relative_to(ROOT)}")
-    if detail in seen:
-        errors.append(f"duplicate VendorDomain detailPath: {detail}")
-    seen.add(detail)
+
+    # Older entries may point directly to a .reic file in ../pages/,
+    # while newer entries use a directory containing index.reic.
+    detail_path = PurePosixPath(detail)
+    source_candidate = PurePosixPath("vendordomain/features") / detail_path
+    normalized = PurePosixPath()
+    parts = []
+    for part in source_candidate.parts:
+        if part in ("", "."):
+            continue
+        if part == "..":
+            if not parts:
+                errors.append(f"feature {feature_id} escapes repository root: {detail}")
+                break
+            parts.pop()
+        else:
+            parts.append(part)
+    else:
+        source_rel = PurePosixPath(*parts).as_posix()
+        if detail_path.suffix.lower() == ".reic":
+            output_rel = str(PurePosixPath(source_rel).with_suffix(".html"))
+        else:
+            output_rel = str(PurePosixPath(source_rel) / "index.html")
+            source_rel = str(PurePosixPath(source_rel) / "index.reic")
+
+        require(source_rel in manifest_paths, f"feature {feature_id} source is not included in Pages conversion manifest: {source_rel}")
+        output = ROOT / output_rel
+        require(output.is_file(), f"feature {feature_id} deployment page is missing: {output_rel}")
+        if detail in seen:
+            errors.append(f"duplicate VendorDomain detailPath: {detail}")
+        seen.add(detail)
 
 # Direct routes opened by the top navigation and the workspace click handler.
 required_routes = (
