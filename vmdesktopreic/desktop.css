@@ -1042,3 +1042,6 @@ html,body,#desktop-root{width:100%!important;height:100%!important;height:100dvh
 @media(prefers-reduced-motion:reduce){
   .vm-desktop::before,.vm-desktop::after{animation:none!important}
 }
+
+/* Restore the requested slide-out submenu panel; the catalog remains inside its modal after selection. */
+.vm-slide-panel{display:block!important}
