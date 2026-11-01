@@ -883,3 +883,31 @@ html,body{
   #desktop-root{place-items:center!important}
   .vm-shell{transform:scale(var(--vm-scale,1))!important}
 }
+
+/* NAVIGASI TERPADU: ikon kiri, label pada panel slide, konten melalui modal. */
+.vm-core-menu{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;padding:12px 8px!important;overflow-y:auto!important;overflow-x:hidden!important}
+.core-item,.core-item:hover,.core-item.active{width:54px!important;min-width:54px!important;max-width:54px!important;height:54px!important;min-height:54px!important;flex:0 0 54px!important;display:grid!important;place-items:center!important;position:relative!important;padding:5px!important;gap:0!important;border:1px solid rgba(105,166,205,.28)!important;background:linear-gradient(145deg,#132c43,#091727)!important;color:#dff4ff!important;cursor:pointer!important;transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease!important}
+.core-item>span{width:100%!important;height:100%!important;display:grid!important;place-items:center!important;font-size:25px!important;color:#8ce6ff!important}
+.core-item b,.core-item:hover b,.core-item.active b{display:none!important}
+.core-item i,.core-item:hover i,.core-item.active i{display:none!important}
+.core-item:hover,.core-item.active{transform:translateX(2px)!important;border-color:#83e1ff!important;box-shadow:inset 3px 0 #83e1ff,0 5px 18px rgba(0,0,0,.24)!important;background:linear-gradient(145deg,#1b4662,#10243a)!important}
+.vm-slide-panel{z-index:35!important;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .22s ease!important}
+.vm-slide-panel:not(.open){transform:translateX(-18px)!important;opacity:0!important;pointer-events:none!important}
+.vm-slide-panel.open{transform:translateX(0)!important;opacity:1!important;pointer-events:auto!important}
+.slide-items{display:grid!important;gap:8px!important;padding:12px!important}
+.slide-choice{display:flex!important;align-items:center!important;gap:12px!important;width:100%!important;min-height:48px!important;padding:10px 12px!important;border:1px solid #31536b!important;background:linear-gradient(110deg,#132e45,#0b1b2d)!important;color:#eaf4ff!important;text-align:left!important;cursor:pointer!important;transition:background .18s ease,border-color .18s ease,transform .18s ease!important}
+.slide-choice>span{color:#83e1ff!important;font-size:10px!important;letter-spacing:.08em!important}
+.slide-choice>b{flex:1!important;font-size:12px!important;line-height:1.4!important}
+.slide-choice>i{font-style:normal!important;color:#83e1ff!important;font-size:20px!important}
+.slide-choice:hover,.slide-choice:focus-visible{background:#183c57!important;border-color:#83e1ff!important;transform:translateX(3px)!important;outline:none!important}
+.vmd-dock{display:none!important}
+@media(max-width:760px){
+ .vm-desktop{grid-template-columns:62px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important}
+ .vm-core-menu{height:100%!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;border-right:1px solid #29445d!important;border-bottom:0!important;padding:8px 4px!important;gap:7px!important}
+ .core-item,.core-item:hover,.core-item.active{width:46px!important;min-width:46px!important;max-width:46px!important;height:46px!important;min-height:46px!important;flex-basis:46px!important}
+ .core-item>span{font-size:21px!important}
+ .vm-workspace{min-height:0!important}
+ .vm-slide-panel{position:absolute!important;left:62px!important;top:0!important;bottom:0!important;width:min(280px,calc(100vw - 74px))!important;max-height:100%!important;overflow:auto!important}
+ .vm-mini-tools{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.vm-slide-panel,.core-item,.slide-choice{transition:none!important}}
