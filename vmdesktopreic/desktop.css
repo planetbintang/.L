@@ -1202,3 +1202,60 @@ html,body{background:#0759ed!important}
 .modal-tabs button,.action-row button,.vm-modal>header button,.vm-modal>footer button{background:#0d1a2b!important;border-color:var(--vm-line)!important;color:#dff7ff!important}
 .modal-tabs button.active,.action-row button:hover,.vm-modal>footer button{background:#173b56!important;border-color:var(--vm-cyan)!important;color:#f4fbff!important}
 @media(max-width:760px){.vm-core-menu{background:rgba(8,20,34,.92)!important}.core-item,.core-item:hover,.core-item.active{background:linear-gradient(145deg,#10243a,#081422)!important;color:var(--vm-text)!important}.core-item>b,.core-item>i{color:var(--vm-cyan)!important}}
+
+
+/* GLOBAL RUNTIME ACCENT — desktop shell, central VM container and all REIC windows use the Version Runtime modal palette. */
+:root{
+ --vm-accent:#83e1ff;--vm-line:#47728e;--vm-ink:#07111f;--vm-panel:#10243a;--vm-panel-deep:#081422;
+ --vm-text:#edf5ff;--vm-muted:#a9bdd3;--wm-accent:var(--vm-accent)
+}
+html,body,.vm-shell{color:var(--vm-text)!important}
+.vm-shell[data-runtime-theme="version-runtime"],.vm-shell[data-vm-instance="PB-VM-CORE-001"]{
+ --accent:var(--vm-accent);--border-color:var(--vm-line);
+ background:radial-gradient(ellipse at 70% -15%,#193657 0%,transparent 48%),linear-gradient(145deg,var(--vm-panel),var(--vm-ink))!important;
+ border-color:var(--vm-line)!important;color:var(--vm-text)!important
+}
+.vm-desktop,.vm-workspace,.vm-slide-panel,.vm-core-menu,.vm-mini-tools,.vm-header,.vm-statusbar{
+ color:var(--vm-text)!important;border-color:var(--vm-line)!important
+}
+.vm-desktop{
+ background:linear-gradient(rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(131,225,255,.045) 1px,transparent 1px),radial-gradient(ellipse at 55% 45%,#183550 0%,#0a1727 65%)!important
+}
+.vm-workspace{background:transparent!important}
+.vm-center-search,.vm-desktop-hint,.vm-binary-map{--vm-accent:#83e1ff}
+.vm-center-search{background:linear-gradient(145deg,#10243a,#081422)!important;border:1px solid var(--vm-line)!important;color:var(--vm-text)!important}
+.vm-center-search span,.vm-desktop-hint b,.vm-desktop-hint span{color:var(--vm-accent)!important}
+.vm-binary-map svg g[stroke]{stroke:var(--vm-accent)!important}
+.vm-binary-map svg g[fill="#f7fcff"],.vm-binary-map svg g[fill="#d8f4ff"]{fill:var(--vm-text)!important}
+.vm-core-menu,.vm-slide-panel{background:rgba(8,20,34,.94)!important;border-color:var(--vm-line)!important}
+.core-item,.core-item:hover,.core-item.active,.core-item>span,.slide-item,.slide-item:hover{
+ background:linear-gradient(145deg,#10243a,#081422)!important;border-color:var(--vm-line)!important;color:var(--vm-text)!important
+}
+.core-item>b,.core-item>i,.slide-item i,.slide-item>span{color:var(--vm-accent)!important}
+.core-item:hover,.core-item.active,.slide-item:hover{border-color:var(--vm-accent)!important;box-shadow:inset 3px 0 var(--vm-accent)!important}
+.vm-modal,.vm-modal>header,.vm-modal>footer,.modal-tabs,.modal-tabs button,.vm-modal button{
+ --wm-accent:var(--vm-accent);border-color:var(--vm-line)!important
+}
+.vm-multi-workspace,.vm-multi-workspace[data-layout],.vm-multi-workspace[data-layout] *{
+ --wm-accent:var(--vm-accent)!important
+}
+.vm-multi-workspace .wm-head,.vm-multi-workspace .wm-count,.vm-multi-workspace .wm-side,
+.vm-multi-workspace .wm-main,.vm-multi-workspace .wm-group,.vm-multi-workspace .wm-item,
+.vm-multi-workspace .wm-view-tab,.vm-multi-workspace .wm-view-stage,.vm-multi-workspace .wm-view-pane,
+.vm-multi-workspace .wm-system-launcher,.vm-multi-workspace .wm-system-launcher button,
+.vm-multi-workspace .wm-controls input,.vm-multi-workspace .wm-controls button,
+.vm-multi-workspace .wm-pager button,.vm-multi-workspace .wm-runtime-toolbar button{
+ border-color:var(--vm-line)!important;color:var(--vm-text)!important;
+ background:linear-gradient(145deg,var(--vm-panel),var(--vm-panel-deep))!important
+}
+.vm-multi-workspace .wm-head small,.vm-multi-workspace .wm-group i,
+.vm-multi-workspace .wm-item small,.vm-multi-workspace .wm-count b,
+.vm-multi-workspace .wm-view-tab.active{color:var(--vm-accent)!important}
+.vm-multi-workspace .wm-group.active,.vm-multi-workspace .wm-group:hover,
+.vm-multi-workspace .wm-item:hover,.vm-multi-workspace .wm-view-tab.active,
+.vm-multi-workspace .wm-system-launcher button:hover,
+.vm-multi-workspace .wm-system-launcher button.active{
+ border-color:var(--vm-accent)!important;background:#173b56!important;
+ box-shadow:inset 3px 0 var(--vm-accent)!important
+}
+.wm-view-pane iframe{background:var(--vm-panel-deep)!important}
