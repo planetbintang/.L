@@ -1344,3 +1344,40 @@ html,body,.vm-shell{color:var(--vm-text)!important}
 .core-item>span{display:grid!important;width:100%!important;height:100%!important;place-items:center!important;margin:0!important;background:transparent!important;border:0!important;color:var(--vm-accent)!important;font-size:22px!important}
 .core-item>b,.core-item>i{display:none!important}
 @media(max-width:760px){.vm-slide-panel{left:56px!important;width:min(220px,calc(100% - 64px))!important}.vm-core-menu{width:50px!important;min-width:50px!important;max-width:50px!important}.core-item,.core-item:hover,.core-item.active{width:42px!important;min-width:42px!important;max-width:42px!important;height:42px!important;min-height:42px!important;max-height:42px!important;flex-basis:42px!important}}
+
+
+/* MODE TAMPILAN CONTAINER — desktop mengikuti ukuran area layar yang tersedia. */
+html,body{
+ width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+ margin:0!important;overflow:hidden!important
+}
+#desktop-root{
+ position:fixed!important;inset:0!important;
+ width:100vw!important;height:100vh!important;height:100dvh!important;
+ min-width:0!important;min-height:0!important;
+ display:grid!important;place-items:stretch!important;
+ padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important;
+ overflow:hidden!important
+}
+#desktop-root>.vm-shell{
+ position:relative!important;inset:auto!important;
+ width:100%!important;height:100%!important;
+ min-width:0!important;min-height:0!important;
+ max-width:100%!important;max-height:100%!important;
+ aspect-ratio:auto!important;
+ transform:none!important;transform-origin:center!important;
+ margin:0!important;flex:1 1 auto!important;
+ overflow:hidden!important
+}
+#desktop-root>.vm-shell>.vm-header,
+#desktop-root>.vm-shell>.vm-desktop,
+#desktop-root>.vm-shell>.vm-statusbar{
+ min-width:0!important;max-width:100%!important
+}
+#desktop-root>.vm-shell>.vm-desktop{
+ min-height:0!important;min-width:0!important;flex:1 1 0!important
+}
+@media(max-width:760px){
+ #desktop-root{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important}
+ #desktop-root>.vm-shell{width:100%!important;height:100%!important}
+}
