@@ -911,3 +911,15 @@ html,body{
  .vm-mini-tools{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){.vm-slide-panel,.core-item,.slide-choice{transition:none!important}}
+
+/* Final alignment: compact left rail and slide panel anchored beside it. */
+.vm-desktop{grid-template-columns:72px minmax(0,1fr)!important}
+.vm-core-menu{width:72px!important;min-width:72px!important}
+.vm-slide-panel{left:72px!important;top:50%!important;transform:translate(-18px,-50%)!important;width:min(330px,calc(100% - 90px))!important;max-height:78%!important;visibility:hidden!important}
+.vm-slide-panel.open{transform:translate(0,-50%)!important;visibility:visible!important}
+@media(max-width:760px){
+ .vm-desktop{grid-template-columns:62px minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important}
+ .vm-core-menu{width:62px!important;min-width:62px!important}
+ .vm-slide-panel{left:62px!important;top:0!important;bottom:0!important;width:min(280px,calc(100vw - 74px))!important;max-height:100%!important;transform:translateX(-18px)!important}
+ .vm-slide-panel.open{transform:translateX(0)!important}
+}
