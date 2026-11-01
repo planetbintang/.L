@@ -37,6 +37,12 @@
  ];
  const groupNames={'identitas-desain':'IDENTITAS & DESAIN','desktop-navigasi':'DESKTOP & NAVIGASI','keamanan-privasi':'KEAMANAN & PRIVASI','ai-otomasi':'AI & OTOMATISASI','runtime-api':'RUNTIME & API','data-search':'DATA & PENCARIAN','tata-kelola':'TATA KELOLA','devops-observabilitas':'DEVOPS & OBSERVABILITAS','server-cloud':'SERVER & CLOUD','file-manager':'FILE MANAGER'};
  const groupIcons={'identitas-desain':'✧','desktop-navigasi':'▦','keamanan-privasi':'◈','ai-otomasi':'✧','runtime-api':'⌘','data-search':'⌕','tata-kelola':'▤','devops-observabilitas':'◉','server-cloud':'☁','file-manager':'▱'};
+ // Satu identitas kontainer logis untuk seluruh workspace browser; bukan klaim hypervisor/server global.
+ const vmCore=window.__PLANETBINTANG_VM_CORE__||(window.__PLANETBINTANG_VM_CORE__={
+  id:'PB-VM-CORE-001',instanceCount:1,mode:'single-logical-container',bitWidth:10,
+  binaryRegister:['0000000001','0000000010','0000000100','0000001000','0000010000','0000100000','0001000000','0010000000','0100000000','1000000000'],
+  layers:['HOST / ROOT','HYPERVISOR','KERNEL','SYSTEM SERVICES','RUNTIME','VM CONTAINER','REIC CORE','MODULES','APPLICATIONS','INTERFACE']
+ });
  const state={core:'settings',manifest:null,group:'',query:'',page:0,pageSize:60,views:[],activeViews:{},activeTab:'catalog'};
  const groupAliases=[
   ['identitas-desain',/identitas|desain|logo|merek|warna|tipografi|ikon|tema|visual|branding|interface|antarmuka/i],
