@@ -202,3 +202,4 @@
  // Startup ringan: jangan unduh manifest 15.000+ komponen saat desktop baru dibuka.
  // Manifest dimuat hanya setelah pengguna memilih salah satu dari lima menu inti.
 })();
+const __pbAccentLock=document.createElement('style');__pbAccentLock.textContent="\n /* Final accent lock: every desktop category inherits the Version Runtime cyan accent. */\n .vm-multi-workspace[data-layout=\"dashboard\"],.vm-multi-workspace[data-layout=\"studio\"],\n .vm-multi-workspace[data-layout=\"editor\"],.vm-multi-workspace[data-layout=\"search\"],\n .vm-multi-workspace[data-layout=\"explorer\"],.vm-multi-workspace[data-layout=\"keyboard\"]{--wm-accent:#83e1ff!important}\n .vm-multi-workspace,.vm-multi-workspace *{--wm-accent:#83e1ff!important}\n .vm-multi-workspace .wm-head,.vm-multi-workspace .wm-main,.vm-multi-workspace .wm-side,\n .vm-multi-workspace .wm-view-stage,.vm-multi-workspace .wm-view-pane{border-color:#47728e!important}\n";document.head.append(__pbAccentLock);
