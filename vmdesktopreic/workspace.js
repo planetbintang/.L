@@ -111,7 +111,7 @@
   const app=appRegistry.find(x=>x.id===id);if(!app)return;
   const existing=state.views.find(x=>x.id===id&&x.core==='apps');if(existing){state.core='apps';activateView(id);return;}
   const payload=JSON.stringify({id:app.id,name:app.name,category:app.category,description:app.description,icon:app.icon}).replace(/</g,'\\u003c');
-  const appScript=\`const app=\${payload};
+  const appScript=`const app=${payload};
   const key="planetbintang.reic.app."+app.id;
   let records=[];
   try{records=JSON.parse(localStorage.getItem(key)||"[]");if(!Array.isArray(records))records=[];}catch(error){records=[];}
@@ -147,16 +147,16 @@
    const url=URL.createObjectURL(blob);const link=document.createElement("a");link.href=url;link.download=app.id+".json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   setInterval(()=>{byId("live").textContent="● RUNTIME AKTIF · "+new Date().toLocaleTimeString("id-ID");},1000);
-  render();\`;
-  const doc=\`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>\${esc(app.name)}</title>
+  render();`;
+  const doc=`<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(app.name)}</title>
   <style>*{box-sizing:border-box}body{margin:0;padding:22px;background:linear-gradient(145deg,#061a35,#0a397e);color:#eff8ff;font:14px Inter,system-ui,sans-serif;min-height:100vh}.app-head{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:17px;border:1px solid #80c8ff;border-radius:13px;background:rgba(4,34,85,.7)}.app-head small{color:#9bdcff;letter-spacing:.14em}.app-head h1{font-size:clamp(20px,4vw,30px);margin:7px 0}.live{padding:8px 12px;border:1px solid #8edbff;border-radius:20px;color:#b8edff;font-size:11px;white-space:nowrap}.app-desc{color:#c5ddf5;line-height:1.6}.panel{margin-top:15px;padding:16px;border:1px solid rgba(164,214,255,.55);border-radius:12px;background:rgba(3,25,60,.64)}.form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px}.form input,.search{width:100%;padding:12px;border:1px solid #6fb8f3;border-radius:7px;background:#061c3b;color:white;outline:none}.btn{padding:11px 15px;border:1px solid #8edbff;border-radius:7px;background:#0b62c8;color:white;font-weight:700;cursor:pointer}.btn.alt{background:transparent}.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.records{display:grid;gap:8px;margin-top:13px}.record{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid #315f91;border-radius:7px;background:rgba(12,48,93,.7);overflow-wrap:anywhere}.record-body{display:grid;gap:5px}.record small{color:#9fc9ed}.record button{flex:0 0 auto;padding:6px 9px;border:1px solid #8abfe8;border-radius:5px;background:transparent;color:white;cursor:pointer}.empty{padding:24px;text-align:center;color:#a9c8e7;border:1px dashed #5688b8;border-radius:8px}.meta{display:flex;justify-content:space-between;gap:10px;color:#a9c8e7;font-size:11px;margin-top:12px}@media(max-width:560px){body{padding:10px}.app-head{align-items:flex-start;flex-direction:column}.form{grid-template-columns:1fr}.record{align-items:flex-start}}</style></head>
-  <body><header class="app-head"><div><small>\${esc(app.id.toUpperCase())} · REIC WEB APPLICATION</small><h1>\${esc(app.icon)} \${esc(app.name)}</h1><div>\${esc(app.category)}</div></div><span class="live" id="live">● RUNTIME AKTIF</span></header>
-  <p class="app-desc">\${esc(app.description)} Aplikasi berjalan pada runtime VMDESKTOPREIC dan menyimpan data kerja di penyimpanan lokal browser.</p>
+  <body><header class="app-head"><div><small>${esc(app.id.toUpperCase())} · REIC WEB APPLICATION</small><h1>${esc(app.icon)} ${esc(app.name)}</h1><div>${esc(app.category)}</div></div><span class="live" id="live">● RUNTIME AKTIF</span></header>
+  <p class="app-desc">${esc(app.description)} Aplikasi berjalan pada runtime VMDESKTOPREIC dan menyimpan data kerja di penyimpanan lokal browser.</p>
   <section class="panel"><h2>RUANG KERJA</h2><div class="form"><input id="entry" maxlength="2000" placeholder="Masukkan data, catatan, tugas, atau item kerja…"><button class="btn" id="add">＋ TAMBAH</button></div>
   <div class="tools"><button class="btn alt" id="export">EKSPOR JSON</button><button class="btn alt" id="clear">KOSONGKAN DATA</button></div>
   <div style="margin-top:14px"><input class="search" id="filter" placeholder="Cari di data aplikasi…"></div><div class="records" id="records"></div>
   <div class="meta"><span id="count">0 ITEM</span><span id="storage">PENYIMPANAN LOKAL</span></div></section>
-  <script>\${appScript}<\/script></body></html>\`;
+  <script>${appScript}<\/script></body></html>`;
   const pane=document.createElement('section');pane.className='wm-view-pane';pane.dataset.viewPane=id;pane.hidden=true;
   const frame=document.createElement('iframe');frame.title=app.name;frame.setAttribute('sandbox','allow-scripts allow-forms allow-downloads allow-modals allow-same-origin');frame.referrerPolicy='no-referrer';pane.append(frame);
   $('.wm-view-stage').append(pane);state.views.push({id,title:app.name,group:'system-apps',core:'apps',pane,frame});frame.srcdoc=doc;state.core='apps';activateView(id);modalStatus.textContent='APLIKASI REIC BERJALAN · '+app.name+' · DATA LOKAL AKTIF';
