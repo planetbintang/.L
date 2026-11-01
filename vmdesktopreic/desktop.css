@@ -1334,3 +1334,13 @@ html,body,.vm-shell{color:var(--vm-text)!important}
 .vm-shell,.vm-shell *,.vm-shell *::before,.vm-shell *::after{
  border-radius:0!important;
 }
+
+
+/* MENU ICON RAIL + SLIDE-OUT SUBMENU; each selected destination opens inside the modal workspace. */
+.vm-slide-panel{display:block!important;position:absolute!important;left:64px!important;top:50%!important;transform:translateX(-8px) translateY(-50%)!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;z-index:70!important}
+.vm-slide-panel.open{visibility:visible!important;opacity:1!important;pointer-events:auto!important;transform:translateX(0) translateY(-50%)!important}
+.vm-core-menu{width:58px!important;min-width:58px!important;max-width:58px!important;align-items:center!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.core-item,.core-item:hover,.core-item.active{width:46px!important;min-width:46px!important;max-width:46px!important;height:46px!important;min-height:46px!important;max-height:46px!important;flex:0 0 46px!important;display:grid!important;place-items:center!important;padding:0!important}
+.core-item>span{display:grid!important;width:100%!important;height:100%!important;place-items:center!important;margin:0!important;background:transparent!important;border:0!important;color:var(--vm-accent)!important;font-size:22px!important}
+.core-item>b,.core-item>i{display:none!important}
+@media(max-width:760px){.vm-slide-panel{left:56px!important;width:min(220px,calc(100% - 64px))!important}.vm-core-menu{width:50px!important;min-width:50px!important;max-width:50px!important}.core-item,.core-item:hover,.core-item.active{width:42px!important;min-width:42px!important;max-width:42px!important;height:42px!important;min-height:42px!important;max-height:42px!important;flex-basis:42px!important}}
