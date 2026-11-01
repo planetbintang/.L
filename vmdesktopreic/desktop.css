@@ -1170,3 +1170,11 @@ html,body{background:#0759ed!important}
  .vm-binary-map{inset:5% 1% 5% 10%!important}
  .vm-center-search{width:min(290px,48vw)!important}
 }
+
+/* REIC application catalog and live app workspaces */
+.wm-app-item .wm-app-icon{display:inline-grid;place-items:center;width:27px;height:27px;margin-right:5px;border:1px solid #8edbff;border-radius:7px;background:linear-gradient(145deg,#1767c9,#0b2f68);font-size:16px;vertical-align:middle}
+.wm-app-item{border-color:rgba(126,195,255,.48)}
+.wm-app-item:hover{box-shadow:0 0 0 1px rgba(143,219,255,.25),0 8px 22px rgba(0,0,0,.18)}
+.wm-view-stage:has(.wm-view-pane:not([hidden])){min-height:430px}
+.wm-view-pane iframe{width:100%;height:100%;min-height:430px;border:0;background:#061a35}
+@media(max-width:760px){.wm-view-stage:has(.wm-view-pane:not([hidden])){min-height:380px}.wm-view-pane iframe{min-height:380px}}
