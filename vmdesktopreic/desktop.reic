@@ -15,7 +15,46 @@
 <button class="core-item" data-core="apps" title="Aplikasi Sistem" aria-label="Aplikasi Sistem"><span>▦</span><b>APLIKASI SISTEM</b><i>›</i></button>
 </aside>
 <section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
-<section class="vm-workspace" aria-label="Area desktop"><div class="vm-center-search"><span>⌕</span><input id="centerSearch" placeholder="Cari aplikasi atau konten..."></div><div class="vm-desktop-hint"><b>VMDESKTOPREIC</b><span>OS MEDIA VM · REIC WORKSPACE</span></div></section>
+<section class="vm-workspace" aria-label="Pusat kontainer VM tunggal">
+<div class="vm-binary-map" aria-label="Arsitektur satu kontainer VM dengan sepuluh lapisan biner">
+<svg viewBox="0 0 1200 700" role="img" aria-labelledby="binaryTitle binaryDesc" preserveAspectRatio="xMidYMid meet">
+<title id="binaryTitle">Satu kontainer VM pusat dengan sepuluh lapisan sistem</title>
+<desc id="binaryDesc">Diagram lapisan kontainer tunggal, jalur integrasi dan register biner 1 0.</desc>
+<g fill="none" stroke="#f4fbff" stroke-width="4" opacity=".9">
+<rect x="45" y="35" width="1110" height="625" rx="34"/>
+<rect x="85" y="75" width="1030" height="545" rx="32"/>
+<rect x="135" y="125" width="930" height="445" rx="30"/>
+<rect x="185" y="175" width="830" height="345" rx="28"/>
+<rect x="235" y="225" width="730" height="245" rx="26"/>
+<rect x="300" y="270" width="600" height="155" rx="24"/>
+<rect x="420" y="305" width="360" height="85" rx="18"/>
+<rect x="555" y="294" width="90" height="108" rx="16" fill="#0a56dc" stroke-width="5"/>
+<path d="M40 210h95m-95 36h145m-145 36h195m-195 36h245m-245 36h295m-295 36h345" stroke-width="7"/>
+<path d="M940 100L680 310M1040 145L710 350" stroke-width="5"/>
+<path d="M680 310l28-5-14 24M710 350l-5-28-20 18" stroke-width="5"/>
+</g>
+<g fill="#f7fcff" font-family="Arial, sans-serif" font-size="20" font-weight="700">
+<text x="90" y="65">01 · HOST / ROOT</text><text x="130" y="105">02 · HYPERVISOR</text>
+<text x="180" y="155">03 · KERNEL</text><text x="230" y="205">04 · SYSTEM SERVICES</text>
+<text x="280" y="255">05 · RUNTIME</text><text x="340" y="300">06 · VM CONTAINER</text>
+<text x="445" y="330">07 · REIC CORE</text><text x="585" y="358" font-size="28">1</text>
+<text x="585" y="382" font-size="15">VM</text>
+<text x="470" y="375" font-size="16">SINGLE INSTANCE</text>
+<text x="820" y="335">08 · MODULES</text><text x="980" y="405">09 · APPS</text>
+<text x="1030" y="55">10 · INTERFACE</text>
+<text x="70" y="590" font-size="17">BINARY REGISTER</text>
+<text x="70" y="620" font-size="17">0001 · 0010 · 0100 · 1000</text>
+<text x="825" y="600" font-size="17">16  32  64  128  256  512</text>
+</g>
+<g fill="#d8f4ff" font-family="monospace" font-size="18" font-weight="700">
+<text x="35" y="200">1:0</text><text x="35" y="236">1:0</text><text x="35" y="272">1:0</text><text x="35" y="308">1:0</text><text x="35" y="344">1:0</text>
+<text x="35" y="380">1:0</text><text x="35" y="416">1:0</text>
+</g>
+</svg>
+</div>
+<div class="vm-center-search"><span>⌕</span><input id="centerSearch" placeholder="CARI APLIKASI ATAU KOMPONEN REIC..."></div>
+<div class="vm-desktop-hint"><b>ONE VM · ONE GLOBAL CORE</b><span>10 LAPISAN SISTEM · BINARY CONTROL · OS MEDIA VM / REIC</span></div>
+</section>
 <aside class="vm-mini-tools"><button data-open="status" title="Status">◉</button><button data-open="display" title="Tampilan">▣</button><button data-open="help" title="Bantuan">▤</button><button data-open="version" title="Versi">0.1</button><button data-open="power" title="Daya">◐</button></aside>
 <div class="vm-modal-backdrop" id="modalBackdrop" hidden><section class="vm-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header><span id="modalIcon">⚙</span><b id="modalTitle">Pengaturan Sistem</b><div><button id="modalMin" aria-label="Minimalkan">—</button><button id="modalMax" aria-label="Maksimalkan">□</button><button id="modalClose" aria-label="Tutup">×</button></div></header><nav class="modal-tabs" id="modalTabs"></nav><div class="modal-body" id="modalBody"></div><footer><span id="modalStatus">OS MEDIA VM · MODUL REIC</span><button id="modalSave">✓ SIMPAN</button></footer></section></div>
 </main><footer class="vm-statusbar"><span><i></i> Sistem Berjalan Normal</span><div class="status-progress"><b></b></div><span>◉　Wi-Fi　 |　 RAM 8 GB　 |　 SSD 256 GB　 |　 ▣</span></footer>
