@@ -1327,3 +1327,10 @@ html,body,.vm-shell{color:var(--vm-text)!important}
  .vm-slide-panel>header{height:38px!important;min-height:38px!important}
  .slide-item,.slide-item:hover{height:36px!important;min-height:36px!important}
 }
+
+
+/* FINAL GLOBAL SQUARE-CORNER LOCK — every element, nested component and pseudo-element in VMDESKTOPREIC. */
+#desktop-root,#desktop-root * ,#desktop-root *::before,#desktop-root *::after,
+.vm-shell,.vm-shell *,.vm-shell *::before,.vm-shell *::after{
+ border-radius:0!important;
+}
