@@ -1178,3 +1178,27 @@ html,body{background:#0759ed!important}
 .wm-view-stage:has(.wm-view-pane:not([hidden])){min-height:430px}
 .wm-view-pane iframe{width:100%;height:100%;min-height:430px;border:0;background:#061a35}
 @media(max-width:760px){.wm-view-stage:has(.wm-view-pane:not([hidden])){min-height:380px}.wm-view-pane iframe{min-height:380px}}
+
+
+/* Unified modal-runtime theme: desktop, central VM core, navigation and system windows share one accent system. */
+:root{--vm-ink:#07111f;--vm-panel:#10243a;--vm-panel-deep:#081422;--vm-line:#47728e;--vm-cyan:#83e1ff;--vm-text:#edf5ff;--vm-muted:#a9bdd3}
+.vm-shell{background-color:var(--vm-ink)!important;background-image:radial-gradient(ellipse at 70% -15%,#193657 0%,transparent 48%),linear-gradient(135deg,rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(45deg,rgba(131,225,255,.025) 1px,transparent 1px)!important;border-color:var(--vm-line)!important;color:var(--vm-text)!important}
+.vm-header,.vm-statusbar,.vm-desktop,.vm-mini-tools,.vm-clock,.vm-slide-panel,.vm-slide-panel>header{background-color:var(--vm-panel-deep)!important;background-image:linear-gradient(145deg,var(--vm-panel),var(--vm-panel-deep))!important;border-color:var(--vm-line)!important;color:var(--vm-text)!important}
+.vm-desktop{background-image:linear-gradient(rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(131,225,255,.045) 1px,transparent 1px),radial-gradient(ellipse at 55% 45%,#183550 0%,#0a1727 65%)!important}
+.vm-header-tools button,.vm-mini-tools button,.core-item,.core-item:hover,.core-item.active,.core-item>span,.slide-item,.slide-item:hover,.vm-center-search{background:linear-gradient(145deg,#10243a,#081422)!important;border-color:var(--vm-line)!important;color:var(--vm-text)!important;box-shadow:none!important}
+.core-item>span,.vm-logo,.vm-slide-panel>header>span{background:#132d44!important;color:var(--vm-cyan)!important;border-color:var(--vm-line)!important}
+.core-item:hover,.core-item.active,.slide-item:hover{border-color:var(--vm-cyan)!important;box-shadow:inset 3px 0 0 var(--vm-cyan)!important}
+.core-item>b,.core-item>i,.slide-item>span,.slide-item i,.vm-brand i,.vm-clock small{color:var(--vm-cyan)!important}
+.vm-core-menu{background:rgba(8,20,34,.88)!important;border-color:var(--vm-line)!important;backdrop-filter:blur(8px)!important}
+.vm-center-search{border-width:1px!important}
+.vm-center-search input,.vm-search input{color:var(--vm-text)!important}
+.vm-center-search input::placeholder{color:var(--vm-muted)!important}
+.vm-binary-map svg g[stroke]{stroke:var(--vm-cyan)!important}
+.vm-binary-map svg g[fill="#f7fcff"],.vm-binary-map svg g[fill="#d8f4ff"]{fill:var(--vm-text)!important}
+.vm-binary-map svg{filter:drop-shadow(0 0 5px #83e1ff22)}
+.vm-modal-backdrop{background:#020914d9!important}
+.vm-modal,.vm-modal>header,.system-card,.content-card,.settings-group,.wm-main,.wm-side,.wm-head,.wm-view-stage{background:linear-gradient(145deg,#10243a,#081422)!important;border-color:var(--vm-line)!important;color:var(--vm-text)!important}
+.vm-modal>header{background:#132d44!important}
+.modal-tabs button,.action-row button,.vm-modal>header button,.vm-modal>footer button{background:#0d1a2b!important;border-color:var(--vm-line)!important;color:#dff7ff!important}
+.modal-tabs button.active,.action-row button:hover,.vm-modal>footer button{background:#173b56!important;border-color:var(--vm-cyan)!important;color:#f4fbff!important}
+@media(max-width:760px){.vm-core-menu{background:rgba(8,20,34,.92)!important}.core-item,.core-item:hover,.core-item.active{background:linear-gradient(145deg,#10243a,#081422)!important;color:var(--vm-text)!important}.core-item>b,.core-item>i{color:var(--vm-cyan)!important}}
