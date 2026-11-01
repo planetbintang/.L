@@ -1,14 +1,18 @@
 <div class="vm-shell" id="vmDesktop" data-resolution="1920x1080">
 <header class="vm-header"><div class="vm-brand"><span class="vm-logo">★</span><b>PlanetBintang <i>.L/</i></b></div><div class="vm-search"><span>⌕</span><input id="desktopSearch" placeholder="Cari di PlanetBintang..."><small>⌕</small></div><div class="vm-header-tools"><button data-open="apps" title="Aplikasi">▦</button><button data-open="keyboard" title="Keyboard REIC">⌨</button><button data-open="notifications">♧</button><button data-open="account">◉</button><div class="vm-clock"><b id="vmClock">--:--</b><small id="vmDate">--</small></div><button data-open="settings">⚙</button></div></header>
 <main class="vm-desktop">
-<aside class="vm-core-menu" aria-label="Enam menu inti">
-<button class="core-item active" data-core="settings"><span>⚙</span><b>PENGATURAN</b><i>›</i></button>
-<button class="core-item" data-core="studio"><span>✧</span><b>STUDIO &amp; AI GLOBAL AGENSI</b><i>›</i></button>
-<button class="core-item" data-core="documents"><span>▤</span><b>PEMBUAT DOKUMEN</b><i>›</i></button>
-<button class="core-item" data-core="search"><span>⌕</span><b>PENCARIAN UTAMA</b><i>›</i></button>
-<button class="core-item" data-core="files"><span>▱</span><b>FOLDER FILE MANAJER</b><i>›</i></button>
-<button class="core-item" data-core="keyboard"><span>⌨</span><b>KEYBOARD REIC</b><i>›</i></button>
-<button class="core-item" data-core="vmdesktopreic"><span>▣</span><b>VMDESKTOPREIC</b><i>›</i></button>
+<aside class="vm-core-menu" aria-label="Navigasi utama VMDESKTOPREIC">
+<button class="core-item active" data-core="settings" title="Pengaturan" aria-label="Pengaturan"><span>⚙</span><b>PENGATURAN</b><i>›</i></button>
+<button class="core-item" data-core="studio" title="Studio & AI" aria-label="Studio & AI"><span>✧</span><b>STUDIO &amp; AI GLOBAL AGENSI</b><i>›</i></button>
+<button class="core-item" data-core="documents" title="Pembuatan Dokumen" aria-label="Pembuatan Dokumen"><span>▤</span><b>PEMBUAT DOKUMEN</b><i>›</i></button>
+<button class="core-item" data-core="search" title="Pencarian Utama" aria-label="Pencarian Utama"><span>⌕</span><b>PENCARIAN UTAMA</b><i>›</i></button>
+<button class="core-item" data-core="files" title="File Manager" aria-label="File Manager"><span>▱</span><b>FOLDER FILE MANAJER</b><i>›</i></button>
+<button class="core-item" data-core="keyboard" title="Keyboard REIC" aria-label="Keyboard REIC"><span>⌨</span><b>KEYBOARD REIC</b><i>›</i></button>
+<button class="core-item" data-core="vmdesktopreic" title="VMDESKTOPREIC" aria-label="VMDESKTOPREIC"><span>▣</span><b>VMDESKTOPREIC</b><i>›</i></button>
+<button class="core-item" data-core="terminal" title="Terminal REIC" aria-label="Terminal REIC"><span>⌘</span><b>TERMINAL REIC</b><i>›</i></button>
+<button class="core-item" data-core="notes" title="Catatan" aria-label="Catatan"><span>▧</span><b>CATATAN</b><i>›</i></button>
+<button class="core-item" data-core="monitor" title="Monitor Sistem" aria-label="Monitor Sistem"><span>◉</span><b>MONITOR SISTEM</b><i>›</i></button>
+<button class="core-item" data-core="apps" title="Aplikasi Sistem" aria-label="Aplikasi Sistem"><span>▦</span><b>APLIKASI SISTEM</b><i>›</i></button>
 </aside>
 <section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
 <section class="vm-workspace" aria-label="Area desktop"><div class="vm-center-search"><span>⌕</span><input id="centerSearch" placeholder="Cari aplikasi atau konten..."></div><div class="vm-desktop-hint"><b>VMDESKTOPREIC</b><span>OS MEDIA VM · REIC WORKSPACE</span></div></section>
