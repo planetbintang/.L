@@ -7,7 +7,6 @@
 <title>VMDESKTOPREIC — OS MEDIA VM</title>
 <link rel="preload" href="./desktop.reic" as="fetch" crossorigin>
 <link rel="preload" href="./desktop.js" as="script">
-<link rel="preload" href="./workspace.js" as="script">
 <link rel="stylesheet" href="./desktop.css">
 <style>
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;color:#eaf4ff;font:14px system-ui,sans-serif}
@@ -35,7 +34,6 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111f;col
    if(!response.ok)throw Error('desktop.reic · HTTP '+response.status);
    root.innerHTML=await response.text();
    await loadScript('./desktop.js');
-   await loadScript('./workspace.js');
    await loadScript('./desktop-runtime.js');
    fit();
    root.classList.add('vm-ready');
