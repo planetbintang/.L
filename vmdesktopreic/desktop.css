@@ -996,3 +996,49 @@ html,body,#desktop-root{width:100%!important;height:100%!important;height:100dvh
   .vm-logo{width:30px!important;height:30px!important;flex-basis:30px!important}
   .vm-statusbar{min-height:28px!important;max-height:32px!important;padding:2px 8px!important}
 }
+
+
+/* ANIMATED WALLPAPER — layered aurora, drifting light and fine grid. */
+.vm-desktop{isolation:isolate;background-color:#081625!important;overflow:hidden!important}
+.vm-desktop::before,.vm-desktop::after{content:"";position:absolute;inset:-28%;z-index:0;pointer-events:none}
+.vm-desktop::before{
+  background:
+    radial-gradient(ellipse at 18% 34%,rgba(27,143,190,.25),transparent 34%),
+    radial-gradient(ellipse at 78% 24%,rgba(78,104,184,.22),transparent 36%),
+    radial-gradient(ellipse at 56% 78%,rgba(22,166,151,.17),transparent 38%),
+    conic-gradient(from 120deg at 52% 50%,transparent 0deg,rgba(52,143,190,.12) 70deg,transparent 150deg,rgba(112,91,180,.10) 230deg,transparent 360deg);
+  filter:blur(26px) saturate(1.18);
+  opacity:.9;
+  animation:vm-wallpaper-aurora 34s ease-in-out infinite alternate;
+}
+.vm-desktop::after{
+  inset:0;
+  background:
+    linear-gradient(rgba(131,225,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(131,225,255,.035) 1px,transparent 1px),
+    linear-gradient(115deg,transparent 35%,rgba(131,225,255,.055) 49%,transparent 62%);
+  background-size:36px 36px,36px 36px,220% 100%;
+  opacity:.65;
+  animation:vm-wallpaper-grid 48s linear infinite;
+}
+.vm-workspace{z-index:1!important}
+.vm-core-menu{z-index:3!important}
+.vm-mini-tools{z-index:4!important}
+.vm-slide-panel{z-index:35!important}
+.vm-desktop>*{pointer-events:auto}
+@keyframes vm-wallpaper-aurora{
+  0%{transform:translate3d(-3%,1%,0) rotate(-4deg) scale(1)}
+  50%{transform:translate3d(2%,-2%,0) rotate(2deg) scale(1.06)}
+  100%{transform:translate3d(4%,3%,0) rotate(6deg) scale(1.1)}
+}
+@keyframes vm-wallpaper-grid{
+  0%{background-position:0 0,0 0,100% 0}
+  100%{background-position:36px 36px,-36px 36px,-120% 0}
+}
+.vm-shell.wallpaper-paused .vm-desktop::before,
+.vm-shell.wallpaper-paused .vm-desktop::after{animation-play-state:paused!important}
+.vm-header-tools [data-wallpaper-toggle]{border-color:#47728e!important;color:#83e1ff!important;background:linear-gradient(145deg,#132d44,#0a1727)!important}
+.vm-header-tools [data-wallpaper-toggle][aria-pressed="true"]{border-color:#83e1ff!important;background:#1b4662!important}
+@media(prefers-reduced-motion:reduce){
+  .vm-desktop::before,.vm-desktop::after{animation:none!important}
+}
