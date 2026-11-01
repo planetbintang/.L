@@ -94,7 +94,7 @@ async function loadCatalog(){
  try{const r=await fetch('./manifest.json',{cache:'no-cache'});if(!r.ok)throw Error('manifest.json HTTP '+r.status);data=await r.json();}catch(e){lastError=e;}
  let files=Array.isArray(data)?data:Array.isArray(data?.files)?data.files:null;
  if(!files){
-  try{const r=await fetch(siteFile('scripts/html-reic-migration-manifest.txt'),{cache:'no-cache'});if(!r.ok)throw Error('daftar migrasi HTTP '+r.status);const txt=await r.text();files=txt.split(/\\r?\\n/).map(s=>s.trim()).filter(s=>s.toLowerCase().endsWith('.reic')).map(file=>({file,title:file.split('/').pop().replace(/\\.reic$/i,''),source:file.split('/').slice(0,-1).join('/')||'Root',type:'reic'}));}
+  try{const r=await fetch(siteFile('scripts/html-reic-migration-manifest.txt'),{cache:'no-cache'});if(!r.ok)throw Error('daftar migrasi HTTP '+r.status);const txt=await r.text();files=txt.split(/\r?\n/).map(s=>s.trim()).filter(s=>s.toLowerCase().endsWith('.reic')).map(file=>({file,title:file.split('/').pop().replace(/\.reic$/i,''),source:file.split('/').slice(0,-1).join('/')||'Root',type:'reic'}));}
   catch(e){lastError=e;}
  }
  if(!files)throw lastError||Error('Katalog REIC tidak tersedia');
