@@ -1045,3 +1045,96 @@ html,body,#desktop-root{width:100%!important;height:100%!important;height:100dvh
 
 /* Restore the requested slide-out submenu panel; the catalog remains inside its modal after selection. */
 .vm-slide-panel{display:block!important}
+
+
+/* SINGLE GLOBAL VM CONTAINER — visual language based on the supplied blue/white references. */
+:root{--vm-blue:#0759ed;--vm-line:#f4fbff;--vm-glass:rgba(2,48,150,.18)}
+html,body{background:#0759ed!important}
+.vm-shell{
+ width:100%!important;height:100dvh!important;min-width:0!important;min-height:0!important;
+ max-width:none!important;max-height:none!important;position:fixed!important;inset:0!important;
+ margin:0!important;padding:8px!important;border:3px solid var(--vm-line)!important;border-radius:24px!important;
+ background:#0759ed!important;box-shadow:inset 0 0 0 3px rgba(255,255,255,.14)!important;
+ display:flex!important;flex-direction:column!important;gap:0!important;overflow:hidden!important
+}
+.vm-header{
+ height:52px!important;min-height:52px!important;flex:0 0 52px!important;
+ padding:0 12px!important;margin:0!important;border:0!important;border-radius:0!important;
+ background:transparent!important;box-shadow:none!important;display:flex!important;justify-content:flex-end!important
+}
+.vm-brand,.vm-search,.vm-clock{display:none!important}
+.vm-header-tools{gap:5px!important;margin-left:auto!important}
+.vm-header-tools button,.vm-mini-tools button{
+ width:34px!important;height:30px!important;min-width:34px!important;
+ border:1px solid rgba(255,255,255,.7)!important;border-radius:4px!important;
+ background:rgba(170,220,255,.25)!important;color:white!important;font-size:16px!important
+}
+.vm-desktop{
+ flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;
+ margin:0!important;border:2px solid var(--vm-line)!important;border-radius:18px!important;
+ background:#0759ed!important;overflow:hidden!important;position:relative!important
+}
+.vm-desktop::before{opacity:.08!important;filter:blur(38px)!important}
+.vm-desktop::after{
+ opacity:.12!important;background-size:48px 48px,48px 48px,240% 100%!important
+}
+.vm-workspace{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+.vm-binary-map{
+ position:absolute!important;inset:2% 5% 2% 12%!important;display:grid!important;place-items:center!important;
+ width:auto!important;height:auto!important;opacity:.48!important;pointer-events:none!important;z-index:0!important
+}
+.vm-binary-map svg{display:block;width:100%!important;height:100%!important;max-width:1200px!important;max-height:760px!important;overflow:visible}
+.vm-center-search{
+ position:relative!important;z-index:2!important;width:min(390px,42vw)!important;height:42px!important;
+ margin:0!important;padding:0 15px!important;border:3px solid #f4fbff!important;border-radius:28px!important;
+ background:rgba(5,76,205,.78)!important;box-shadow:0 0 0 2px rgba(255,255,255,.08),0 8px 28px rgba(0,28,100,.16)!important
+}
+.vm-center-search span{font-size:22px!important;color:#fff!important}
+.vm-center-search input{font-size:13px!important;color:#fff!important}
+.vm-center-search input::placeholder{color:#e4f3ff!important}
+.vm-desktop-hint{
+ position:absolute!important;z-index:2!important;left:50%!important;bottom:18px!important;transform:translateX(-50%)!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;gap:5px!important;
+ color:#f4fbff!important;text-align:center!important;white-space:nowrap!important;opacity:.88!important
+}
+.vm-desktop-hint b{font-size:12px!important;letter-spacing:.16em!important}
+.vm-desktop-hint span{font-size:9px!important;letter-spacing:.12em!important}
+.vm-core-menu{
+ left:0!important;top:50%!important;bottom:auto!important;transform:translateY(-50%)!important;
+ width:72px!important;max-height:calc(100% - 30px)!important;overflow:visible!important;
+ padding:10px 7px!important;gap:9px!important;align-items:center!important;
+ border:2px solid rgba(255,255,255,.9)!important;border-left:0!important;border-radius:0 28px 28px 0!important;
+ background:rgba(0,55,173,.2)!important;backdrop-filter:blur(5px)!important
+}
+.core-item,.core-item:hover,.core-item.active{
+ width:48px!important;min-width:48px!important;max-width:48px!important;height:46px!important;
+ min-height:46px!important;flex:0 0 46px!important;padding:0!important;justify-content:center!important;gap:0!important;
+ border:2px solid #f4fbff!important;border-radius:7px!important;background:rgba(176,222,255,.25)!important;
+ box-shadow:0 0 0 1px rgba(255,255,255,.15)!important
+}
+.core-item>span{width:auto!important;font-size:23px!important;color:#fff!important}
+.core-item>b,.core-item>i{display:none!important}
+.vm-slide-panel{left:78px!important;top:50%!important;bottom:auto!important;transform:translateX(-12px) translateY(-50%)!important;
+ max-height:min(78%,680px)!important;border:2px solid #f4fbff!important;border-radius:12px!important;background:rgba(3,43,130,.96)!important}
+.vm-slide-panel.open{transform:translateX(0) translateY(-50%)!important}
+.vm-mini-tools{top:14px!important;right:16px!important;display:flex!important;gap:4px!important;z-index:6!important}
+.vm-statusbar{display:none!important}
+.vm-modal-backdrop{position:fixed!important;inset:0!important;z-index:80!important}
+.vm-modal{max-width:min(1120px,96vw)!important;max-height:92dvh!important}
+@media(max-width:760px){
+ .vm-shell{padding:4px!important;border-radius:14px!important}
+ .vm-header{height:40px!important;min-height:40px!important;flex-basis:40px!important}
+ .vm-header-tools button{width:29px!important;height:26px!important;min-width:29px!important;font-size:13px!important}
+ .vm-core-menu{width:58px!important;padding:7px 4px!important;gap:7px!important}
+ .core-item,.core-item:hover,.core-item.active{width:40px!important;min-width:40px!important;max-width:40px!important;height:39px!important;min-height:39px!important;flex-basis:39px!important}
+ .core-item>span{font-size:19px!important}
+ .vm-slide-panel{left:61px!important;width:min(265px,calc(100% - 68px))!important}
+ .vm-binary-map{inset:5% 1% 5% 6%!important;opacity:.34!important}
+ .vm-center-search{width:min(310px,58vw)!important;height:38px!important}
+ .vm-desktop-hint{bottom:12px!important;white-space:normal!important;width:80%!important}
+ .vm-desktop-hint b{font-size:10px!important}.vm-desktop-hint span{font-size:8px!important}
+ .vm-mini-tools{top:8px!important;right:8px!important}
+ .vm-mini-tools button{width:27px!important;height:25px!important;min-width:27px!important;font-size:12px!important}
+ .vm-modal{width:calc(100vw - 10px)!important;max-height:calc(100dvh - 10px)!important}
+}
+@media(prefers-reduced-motion:reduce){.vm-desktop::before,.vm-desktop::after{animation:none!important}}
