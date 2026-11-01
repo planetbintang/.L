@@ -1259,3 +1259,71 @@ html,body,.vm-shell{color:var(--vm-text)!important}
  box-shadow:inset 3px 0 var(--vm-accent)!important
 }
 .wm-view-pane iframe{background:var(--vm-panel-deep)!important}
+
+
+/* GEOMETRY REFINEMENT — square desktop corners, compact icon rail and independent slide-out menu. */
+.vm-shell,.vm-desktop,.vm-core-menu,.core-item,.core-item>span,.vm-slide-panel,
+.vm-slide-panel>header,.slide-item,.vm-mini-tools button,.vm-header-tools button,
+.vm-center-search,.vm-modal,.vm-modal>header,.vm-modal>footer,.modal-tabs button,
+.wm-head,.wm-count,.wm-side,.wm-main,.wm-group,.wm-item,.wm-view-tab,.wm-view-stage{
+ border-radius:0!important
+}
+/* Left navigation wrapper hugs the icon buttons; no wide panel around menu labels. */
+.vm-core-menu{
+ position:absolute!important;left:0!important;top:50%!important;bottom:auto!important;
+ transform:translateY(-50%)!important;width:58px!important;min-width:58px!important;
+ max-width:58px!important;height:auto!important;max-height:calc(100% - 24px)!important;
+ overflow:visible!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:flex-start!important;gap:6px!important;
+ padding:6px!important;margin:0!important;border:0!important;outline:0!important;
+ border-radius:0!important;background:transparent!important;box-shadow:none!important;
+ backdrop-filter:none!important;z-index:30!important
+}
+.core-item,.core-item:hover,.core-item.active{
+ position:relative!important;display:grid!important;place-items:center!important;
+ width:46px!important;min-width:46px!important;max-width:46px!important;
+ height:46px!important;min-height:46px!important;max-height:46px!important;
+ flex:0 0 46px!important;padding:0!important;margin:0!important;gap:0!important;
+ border:1px solid var(--vm-line)!important;border-radius:0!important;
+ background:linear-gradient(145deg,#10243a,#081422)!important;color:var(--vm-text)!important;
+ box-shadow:none!important
+}
+.core-item>span{
+ display:grid!important;place-items:center!important;width:100%!important;height:100%!important;
+ margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;
+ color:var(--vm-accent)!important;font-size:21px!important
+}
+.core-item>b,.core-item>i{display:none!important}
+/* Slide menu is a sibling overlay, never nested visually inside the left rail. */
+.vm-slide-panel{
+ position:absolute!important;left:64px!important;top:50%!important;bottom:auto!important;
+ transform:translateX(-8px) translateY(-50%)!important;
+ width:min(230px,calc(100% - 76px))!important;max-width:230px!important;
+ max-height:calc(100% - 24px)!important;height:auto!important;overflow:auto!important;
+ margin:0!important;padding:0!important;border:1px solid var(--vm-line)!important;
+ border-radius:0!important;background:linear-gradient(145deg,#10243a,#081422)!important;
+ box-shadow:0 12px 32px rgba(0,0,0,.28)!important;z-index:40!important
+}
+.vm-slide-panel.open{transform:translateX(0) translateY(-50%)!important}
+.vm-slide-panel>header{
+ min-height:42px!important;height:42px!important;padding:0 9px!important;
+ border:0!important;border-bottom:1px solid var(--vm-line)!important;border-radius:0!important
+}
+.vm-slide-panel>header>span{width:28px!important;height:28px!important;border-radius:0!important}
+.vm-slide-panel>header button{width:28px!important;height:28px!important;border-radius:0!important}
+.slide-items{display:flex!important;flex-direction:column!important;gap:4px!important;padding:6px!important}
+.slide-item,.slide-item:hover{
+ display:flex!important;align-items:center!important;min-height:38px!important;height:38px!important;
+ padding:5px 8px!important;margin:0!important;gap:8px!important;border:1px solid var(--vm-line)!important;
+ border-radius:0!important;background:linear-gradient(145deg,#10243a,#081422)!important;
+ color:var(--vm-text)!important;box-shadow:none!important
+}
+.slide-item>span{width:24px!important;min-width:24px!important;text-align:center!important}
+@media(max-width:760px){
+ .vm-core-menu{left:0!important;width:50px!important;min-width:50px!important;max-width:50px!important;padding:4px!important;gap:5px!important}
+ .core-item,.core-item:hover,.core-item.active{width:42px!important;min-width:42px!important;max-width:42px!important;height:42px!important;min-height:42px!important;max-height:42px!important;flex-basis:42px!important}
+ .core-item>span{font-size:19px!important}
+ .vm-slide-panel{left:56px!important;width:min(220px,calc(100% - 64px))!important;max-width:220px!important}
+ .vm-slide-panel>header{height:38px!important;min-height:38px!important}
+ .slide-item,.slide-item:hover{height:36px!important;min-height:36px!important}
+}
