@@ -1218,7 +1218,9 @@ Isi dari panel provider yang dipilih:
       renderBreadcrumbs(); renderAssessment(repoNow()); renderTiles();
       return;
     }
-    if (!isDirectory(path)) { $('#fileTreeStatus').textContent = `Path tidak ditemukan: /${path}`; return; }
+    // Path kosong selalu berarti root repositori; jangan tampilkan pesan 404 untuk `/`.
+    if (path && !isDirectory(path)) { $('#fileTreeStatus').textContent = `Path tidak ditemukan: /${path}`; return; }
+    $('#fileTreeStatus').textContent = '';
     state.requestId += 1; state.loading = false;
     state.path = path; state.query = ''; state.selected = null; state.entries = []; state.pageIndex = 0;
     const directory = currentDirectory(); state.pageCount = directory.pages?.length || 0;
