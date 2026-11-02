@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "identity",
+  "title": "IDENTITY & MULTI-USER ACCESS",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Identitas pengguna, autentikasi, sesi, tenant, RBAC, MFA dan audit akses.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-IDENTITY-01",
+      "slug": "user-registry",
+      "title": "Registri Pengguna",
+      "path": "user-registry.reic",
+      "action": "user.create",
+      "table": "users"
+    },
+    {
+      "id": "PB-IDENTITY-02",
+      "slug": "authentication",
+      "title": "Autentikasi",
+      "path": "authentication.reic",
+      "action": "auth.authenticate",
+      "table": "users"
+    },
+    {
+      "id": "PB-IDENTITY-03",
+      "slug": "session-management",
+      "title": "Manajemen Sesi",
+      "path": "session-management.reic",
+      "action": "session.revoke",
+      "table": "sessions"
+    },
+    {
+      "id": "PB-IDENTITY-04",
+      "slug": "tenant-membership",
+      "title": "Keanggotaan Tenant",
+      "path": "tenant-membership.reic",
+      "action": "membership.manage",
+      "table": "tenant_memberships"
+    },
+    {
+      "id": "PB-IDENTITY-05",
+      "slug": "role-permission",
+      "title": "Peran dan Izin",
+      "path": "role-permission.reic",
+      "action": "access.evaluate",
+      "table": "role_permissions"
+    },
+    {
+      "id": "PB-IDENTITY-06",
+      "slug": "mfa-recovery",
+      "title": "MFA dan Pemulihan",
+      "path": "mfa-recovery.reic",
+      "action": "mfa.verify",
+      "table": "auth_factors"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "providers",
+  "title": "DNS, DOMAIN, HOSTING & CLOUD STORAGE",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Adapter registrar, DNS, sertifikat, hosting, object storage dan provisioning cloud.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-PROVIDERS-01",
+      "slug": "registrar-adapter",
+      "title": "Adapter Registrar",
+      "path": "registrar-adapter.reic",
+      "action": "domain.registrar",
+      "table": "provider_connections"
+    },
+    {
+      "id": "PB-PROVIDERS-02",
+      "slug": "dns-zone",
+      "title": "Zona dan Record DNS",
+      "path": "dns-zone.reic",
+      "action": "dns.record",
+      "table": "dns_records"
+    },
+    {
+      "id": "PB-PROVIDERS-03",
+      "slug": "domain-lifecycle",
+      "title": "Siklus Domain",
+      "path": "domain-lifecycle.reic",
+      "action": "domain.lifecycle",
+      "table": "domains"
+    },
+    {
+      "id": "PB-PROVIDERS-04",
+      "slug": "tls-certificates",
+      "title": "Sertifikat TLS",
+      "path": "tls-certificates.reic",
+      "action": "tls.certificate",
+      "table": "tls_certificates"
+    },
+    {
+      "id": "PB-PROVIDERS-05",
+      "slug": "hosting-runtime",
+      "title": "Hosting dan Runtime",
+      "path": "hosting-runtime.reic",
+      "action": "hosting.deploy",
+      "table": "hosting_instances"
+    },
+    {
+      "id": "PB-PROVIDERS-06",
+      "slug": "cloud-object-storage",
+      "title": "Cloud Object Storage",
+      "path": "cloud-object-storage.reic",
+      "action": "storage.object",
+      "table": "storage_buckets"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}

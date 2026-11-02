@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "gateway",
+  "title": "API GATEWAY & INTER-MODULE COMMUNICATION",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Gateway, routing, autentikasi layanan, event bus, webhook dan kontrak versi.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-GATEWAY-01",
+      "slug": "gateway-routing",
+      "title": "Routing API Gateway",
+      "path": "gateway-routing.reic",
+      "action": "gateway.route",
+      "table": "gateway_routes"
+    },
+    {
+      "id": "PB-GATEWAY-02",
+      "slug": "service-identity",
+      "title": "Identitas Layanan",
+      "path": "service-identity.reic",
+      "action": "service.authenticate",
+      "table": "service_identities"
+    },
+    {
+      "id": "PB-GATEWAY-03",
+      "slug": "rate-limit",
+      "title": "Rate Limit dan Quota",
+      "path": "rate-limit.reic",
+      "action": "gateway.limit",
+      "table": "rate_limit_policies"
+    },
+    {
+      "id": "PB-GATEWAY-04",
+      "slug": "event-bus",
+      "title": "Event Bus",
+      "path": "event-bus.reic",
+      "action": "event.publish",
+      "table": "outbox_events"
+    },
+    {
+      "id": "PB-GATEWAY-05",
+      "slug": "webhook-delivery",
+      "title": "Pengiriman Webhook",
+      "path": "webhook-delivery.reic",
+      "action": "webhook.deliver",
+      "table": "webhook_endpoints"
+    },
+    {
+      "id": "PB-GATEWAY-06",
+      "slug": "module-contracts",
+      "title": "Kontrak Antarmodul",
+      "path": "module-contracts.reic",
+      "action": "module.contract",
+      "table": "module_contracts"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}

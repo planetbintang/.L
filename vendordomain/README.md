@@ -66,3 +66,8 @@ Navigasi VendorDomain sekarang memiliki pintasan **CENTRAL CLOUD** ke control pl
 - [Schema kontrak REIC](./blueprints/reic-blueprint.schema.json) dan [validator paket](./blueprints/verify-blueprints.mjs).
 
 Paket blueprint berstatus spesifikasi sampai parser/runtime, integrasi backend, sandbox, dan persetujuan Owner tersedia. Rumus tidak mengeksekusi operasi cloud secara langsung.
+
+
+## Manual REIC platform components
+
+Library [vendordomain/reic](./reic/README.md) adds 36 manual REIC components in six domains: identity and multi-user access, PostgreSQL and synchronization, API Gateway and module communication, DNS/domain/hosting/cloud storage, monitoring/backup/recovery/security, and billing/marketplace/enterprise. The contracts share OWNER governance, SNAPS policy authority, PLANETBINTANG ownership, deny-by-default, tenant isolation, idempotency and audit. Run `npm run validate:reic` from `vendordomain/backend` to validate the registry. Migration `002_platform_modules.sql` requires review and a tested backup before application.

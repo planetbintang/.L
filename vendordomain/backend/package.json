@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node server.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "validate:reic": "node ../reic/verify-reic.mjs"
   },
   "description": "Hardened VendorDomain API scaffold with persistent records, audit trail, and optional Cloudflare DNS integration"
 }

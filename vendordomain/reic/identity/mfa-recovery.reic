@@ -1,0 +1,155 @@
+{
+  "format": "PLANETBINTANG-REIC",
+  "format_version": "1.1.0",
+  "component_id": "PB-IDENTITY-06",
+  "slug": "mfa-recovery",
+  "title": "MFA dan Pemulihan",
+  "owner": "OWNER",
+  "platform": "PLANETBINTANG",
+  "policy_authority": "SNAPS",
+  "module": "identity",
+  "status": "manual-contract-ready",
+  "execution_mode": "server-adapter-required",
+  "purpose": "Mendaftarkan faktor kedua, recovery code sekali pakai dan prosedur pemulihan.",
+  "extensions": [
+    ".reic",
+    ".json",
+    ".js",
+    ".html",
+    ".css",
+    ".sql",
+    ".yaml",
+    ".md"
+  ],
+  "contract": {
+    "inputs": [
+      "user_id",
+      "factor_proof",
+      "recovery_code"
+    ],
+    "outputs": [
+      "result",
+      "resource_id",
+      "audit_event_id",
+      "correlation_id"
+    ],
+    "operations": [
+      {
+        "name": "validate",
+        "mode": "local",
+        "mutates": false
+      },
+      {
+        "name": "mfa.verify",
+        "mode": "server",
+        "mutates": true,
+        "requires_authorization": true,
+        "requires_idempotency": true
+      }
+    ],
+    "lifecycle": [
+      "RECEIVED",
+      "VALIDATED",
+      "AUTHORIZED",
+      "APPROVED",
+      "EXECUTING",
+      "COMMITTED",
+      "AUDITED"
+    ],
+    "errors": [
+      "INVALID_INPUT",
+      "UNAUTHENTICATED",
+      "FORBIDDEN",
+      "TENANT_SCOPE_MISMATCH",
+      "APPROVAL_REQUIRED",
+      "PROVIDER_UNAVAILABLE",
+      "CONFLICT",
+      "TIMEOUT"
+    ]
+  },
+  "access": {
+    "authentication_required": true,
+    "tenant_scope_required": true,
+    "default_decision": "DENY",
+    "roles": {
+      "owner": [
+        "*"
+      ],
+      "admin": [
+        "read",
+        "create",
+        "update"
+      ],
+      "operator": [
+        "read",
+        "execute"
+      ],
+      "viewer": [
+        "read"
+      ]
+    },
+    "owner_override_requires_audit": true,
+    "snaps_policy_required": true
+  },
+  "safety": {
+    "secrets_in_browser": false,
+    "provider_calls_server_side": true,
+    "destructive_action_requires_owner_approval": true,
+    "pii_redaction": true,
+    "timeout_ms": 15000,
+    "retries": "bounded-exponential-backoff",
+    "idempotency_key_required": true
+  },
+  "persistence": {
+    "engine": "PostgreSQL",
+    "table": "auth_factors",
+    "transaction": "required-for-mutation",
+    "sync": "transactional-outbox",
+    "tenant_isolation": "row-level-policy-and-query-scope"
+  },
+  "events": {
+    "published": [
+      "identity.mfa-recovery.requested",
+      "identity.mfa-recovery.completed",
+      "identity.mfa-recovery.failed"
+    ],
+    "envelope": "vendordomain/ecosystem/event-envelope.schema.json"
+  },
+  "extensions_flow": [
+    ".reic contract",
+    ".json schema and manifest",
+    ".js validator/controller",
+    ".sql migration and transaction",
+    ".yaml deployment policy",
+    ".html/.css operator console",
+    ".md runbook"
+  ],
+  "approval": {
+    "required": true,
+    "authority": [
+      "OWNER",
+      "SNAPS"
+    ],
+    "default": "DENY",
+    "approval_token": "server-issued-single-use"
+  },
+  "observability": {
+    "audit_required": true,
+    "metrics": [
+      "duration_ms",
+      "success_count",
+      "failure_count"
+    ],
+    "trace_fields": [
+      "request_id",
+      "correlation_id",
+      "tenant_id",
+      "actor_id"
+    ]
+  },
+  "rollback": {
+    "strategy": "compensating-action-or-database-rollback",
+    "manual_confirmation": true
+  },
+  "execution_note": "Kontrak manual .reic. Operasi eksternal tidak dianggap aktif sebelum adapter provider, secret server-side, migrasi, test sandbox dan persetujuan Owner dikonfigurasi."
+}

@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "enterprise",
+  "title": "BILLING, MARKETPLACE & ENTERPRISE SERVICES",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Katalog, paket, meter penggunaan, ledger, pembayaran, invoice, SLA dan tenant enterprise.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-ENTERPRISE-01",
+      "slug": "service-catalog",
+      "title": "Katalog Layanan",
+      "path": "service-catalog.reic",
+      "action": "catalog.publish",
+      "table": "service_catalog"
+    },
+    {
+      "id": "PB-ENTERPRISE-02",
+      "slug": "marketplace-listing",
+      "title": "Listing Marketplace",
+      "path": "marketplace-listing.reic",
+      "action": "marketplace.publish",
+      "table": "marketplace_listings"
+    },
+    {
+      "id": "PB-ENTERPRISE-03",
+      "slug": "usage-metering",
+      "title": "Meter Penggunaan",
+      "path": "usage-metering.reic",
+      "action": "billing.meter",
+      "table": "usage_records"
+    },
+    {
+      "id": "PB-ENTERPRISE-04",
+      "slug": "billing-ledger",
+      "title": "Ledger dan Invoice",
+      "path": "billing-ledger.reic",
+      "action": "billing.invoice",
+      "table": "billing_ledger"
+    },
+    {
+      "id": "PB-ENTERPRISE-05",
+      "slug": "payment-adapter",
+      "title": "Adapter Pembayaran",
+      "path": "payment-adapter.reic",
+      "action": "payment.execute",
+      "table": "payment_intents"
+    },
+    {
+      "id": "PB-ENTERPRISE-06",
+      "slug": "enterprise-sla",
+      "title": "Layanan Enterprise dan SLA",
+      "path": "enterprise-sla.reic",
+      "action": "enterprise.sla",
+      "table": "enterprise_contracts"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}

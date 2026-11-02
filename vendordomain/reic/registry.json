@@ -1,0 +1,65 @@
+{
+  "format": "PLANETBINTANG-REIC-REGISTRY",
+  "version": "1.0.0",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "modules": [
+    {
+      "key": "identity",
+      "title": "IDENTITY & MULTI-USER ACCESS",
+      "path": "identity/index.reic",
+      "component_count": 6
+    },
+    {
+      "key": "postgresql",
+      "title": "POSTGRESQL & DATA SYNCHRONIZATION",
+      "path": "postgresql/index.reic",
+      "component_count": 6
+    },
+    {
+      "key": "gateway",
+      "title": "API GATEWAY & INTER-MODULE COMMUNICATION",
+      "path": "gateway/index.reic",
+      "component_count": 6
+    },
+    {
+      "key": "providers",
+      "title": "DNS, DOMAIN, HOSTING & CLOUD STORAGE",
+      "path": "providers/index.reic",
+      "component_count": 6
+    },
+    {
+      "key": "operations",
+      "title": "MONITORING, BACKUP, RECOVERY & SECURITY",
+      "path": "operations/index.reic",
+      "component_count": 6
+    },
+    {
+      "key": "enterprise",
+      "title": "BILLING, MARKETPLACE & ENTERPRISE SERVICES",
+      "path": "enterprise/index.reic",
+      "component_count": 6
+    }
+  ],
+  "total_components": 36,
+  "default_policy": "DENY",
+  "extension_contract": [
+    ".reic",
+    ".json",
+    ".js",
+    ".html",
+    ".css",
+    ".sql",
+    ".yaml",
+    ".md"
+  ],
+  "activation_requirements": [
+    "PostgreSQL connection and migration",
+    "OIDC or secure authentication provider",
+    "server-side secret manager",
+    "provider sandbox credentials",
+    "CI contract tests",
+    "Owner approval and SNAPS policy review"
+  ]
+}

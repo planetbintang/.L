@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "operations",
+  "title": "MONITORING, BACKUP, RECOVERY & SECURITY",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Metrik, log, alert, backup, restore, disaster recovery, vulnerability dan incident.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-OPERATIONS-01",
+      "slug": "health-monitor",
+      "title": "Pemantauan Kesehatan",
+      "path": "health-monitor.reic",
+      "action": "monitor.health",
+      "table": "service_health"
+    },
+    {
+      "id": "PB-OPERATIONS-02",
+      "slug": "metrics-alerts",
+      "title": "Metrik dan Alert",
+      "path": "metrics-alerts.reic",
+      "action": "monitor.alert",
+      "table": "alert_rules"
+    },
+    {
+      "id": "PB-OPERATIONS-03",
+      "slug": "central-logging",
+      "title": "Log Terpusat",
+      "path": "central-logging.reic",
+      "action": "logging.ingest",
+      "table": "log_streams"
+    },
+    {
+      "id": "PB-OPERATIONS-04",
+      "slug": "backup-scheduler",
+      "title": "Penjadwal Backup",
+      "path": "backup-scheduler.reic",
+      "action": "backup.create",
+      "table": "backup_jobs"
+    },
+    {
+      "id": "PB-OPERATIONS-05",
+      "slug": "restore-drill",
+      "title": "Pemulihan dan DR",
+      "path": "restore-drill.reic",
+      "action": "recovery.restore",
+      "table": "recovery_drills"
+    },
+    {
+      "id": "PB-OPERATIONS-06",
+      "slug": "security-posture",
+      "title": "Postur Keamanan",
+      "path": "security-posture.reic",
+      "action": "security.scan",
+      "table": "security_findings"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}

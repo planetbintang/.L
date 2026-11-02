@@ -1,0 +1,68 @@
+{
+  "format": "PLANETBINTANG-REIC-MODULE",
+  "version": "1.0.0",
+  "module": "postgresql",
+  "title": "POSTGRESQL & DATA SYNCHRONIZATION",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "description": "Koneksi PostgreSQL, migrasi, transaksi, replikasi, sinkronisasi dan retensi data.",
+  "component_count": 6,
+  "components": [
+    {
+      "id": "PB-POSTGRESQL-01",
+      "slug": "postgres-connection",
+      "title": "Koneksi PostgreSQL",
+      "path": "postgres-connection.reic",
+      "action": "database.connect",
+      "table": "database_connections"
+    },
+    {
+      "id": "PB-POSTGRESQL-02",
+      "slug": "schema-migrations",
+      "title": "Migrasi Skema",
+      "path": "schema-migrations.reic",
+      "action": "database.migrate",
+      "table": "schema_migrations"
+    },
+    {
+      "id": "PB-POSTGRESQL-03",
+      "slug": "transaction-manager",
+      "title": "Manajer Transaksi",
+      "path": "transaction-manager.reic",
+      "action": "database.transaction",
+      "table": "transactions"
+    },
+    {
+      "id": "PB-POSTGRESQL-04",
+      "slug": "data-replication",
+      "title": "Replikasi Data",
+      "path": "data-replication.reic",
+      "action": "database.replica",
+      "table": "replication_targets"
+    },
+    {
+      "id": "PB-POSTGRESQL-05",
+      "slug": "sync-engine",
+      "title": "Mesin Sinkronisasi",
+      "path": "sync-engine.reic",
+      "action": "data.sync",
+      "table": "sync_jobs"
+    },
+    {
+      "id": "PB-POSTGRESQL-06",
+      "slug": "retention-privacy",
+      "title": "Retensi dan Privasi",
+      "path": "retention-privacy.reic",
+      "action": "data.retention",
+      "table": "data_policies"
+    }
+  ],
+  "defaults": {
+    "authorization": "DENY",
+    "tenant_isolation": true,
+    "audit_required": true,
+    "provider_secrets_server_only": true,
+    "owner_approval_for_destructive": true
+  }
+}
