@@ -28,3 +28,20 @@ All `/api/*` endpoints except domain-format validation require `Authorization: B
 - Browser pages must not contain `ADMIN_TOKEN` or Cloudflare secrets. Use a server-side session or secure proxy for real user-facing access; do not place admin secrets in static JavaScript.
 - JSON-file storage suits a single instance only. For multi-instance/high-availability production, use PostgreSQL or another managed database and add migrations/backups.
 - This repository contains source code, not a deployed server. The live API is not active until deployed and configured with secrets.
+
+
+## Security and ecosystem hardening
+
+The API now applies:
+- minimum 32-character configured admin token (short configured values stop startup);
+- exact-origin CORS allow-list when `ALLOWED_ORIGIN` is configured;
+- per-IP fixed-window rate limiting for API routes (`RATE_LIMIT_MAX`, default 120/minute);
+- bounded request bodies measured in bytes;
+- request IDs, no-store responses, security headers, and sanitized internal-error responses;
+- serialized atomic file writes to reduce partial-write and overlapping-write risk.
+
+Run automated integration tests with `npm test`. The tests use a temporary data directory and do not connect to a real DNS provider.
+
+## Next production boundary
+
+This single-process JSON-file backend is a development/single-instance foundation. Before multi-user production, replace file persistence with the PostgreSQL migration in `migrations/001_core.sql`, add user/session identity and tenant-scoped RBAC, managed secrets, backups, metrics, alerting, and provider-specific integration tests. Do not share the global admin token with static browser pages.

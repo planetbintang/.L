@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "platform": "SNAPS PLANETBINTANG VendorDomain",
+  "catalogVersion": "2026.11",
+  "domains": [
+    {
+      "key": "identity-access",
+      "name": "Identity & Access",
+      "status": "foundation",
+      "requires": [
+        "session-provider",
+        "tenant-rbac"
+      ]
+    },
+    {
+      "key": "domain-dns",
+      "name": "Domain & DNS",
+      "status": "partial",
+      "requires": [
+        "registrar-provider",
+        "dns-provider"
+      ]
+    },
+    {
+      "key": "hosting-compute",
+      "name": "Hosting & Compute",
+      "status": "planned",
+      "requires": [
+        "compute-provider",
+        "billing-metering"
+      ]
+    },
+    {
+      "key": "cloud-storage",
+      "name": "Cloud Storage",
+      "status": "planned",
+      "requires": [
+        "object-storage-provider"
+      ]
+    },
+    {
+      "key": "database",
+      "name": "Database Services",
+      "status": "foundation",
+      "requires": [
+        "postgresql",
+        "migration-runner",
+        "backup-policy"
+      ]
+    },
+    {
+      "key": "observability",
+      "name": "Observability",
+      "status": "foundation",
+      "requires": [
+        "metrics",
+        "logs",
+        "alerts"
+      ]
+    },
+    {
+      "key": "billing",
+      "name": "Billing & Metering",
+      "status": "planned",
+      "requires": [
+        "payment-provider",
+        "tax-rules",
+        "ledger"
+      ]
+    },
+    {
+      "key": "developer-platform",
+      "name": "Developer Platform",
+      "status": "foundation",
+      "requires": [
+        "api-gateway",
+        "service-registry",
+        "ci-cd"
+      ]
+    }
+  ],
+  "principles": [
+    "tenant isolation",
+    "least privilege",
+    "secrets server-side only",
+    "idempotent provider operations",
+    "append-only audit trail",
+    "observable service health",
+    "versioned API contracts"
+  ]
+}
