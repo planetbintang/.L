@@ -57,3 +57,12 @@ Setiap halaman menampilkan 10 lapisan: Identity & Registry, Presentation & REIC,
 - [Backend integration tests](./backend/test/server.test.mjs) — pengujian API melalui Node.js test runner; CI workflow ada di `.github/workflows/vendordomain-api-tests.yml`.
 
 Navigasi VendorDomain sekarang memiliki pintasan **CENTRAL CLOUD** ke control plane katalog layanan.
+
+
+## 51 REIC automation blueprints
+
+- [51 lembar blueprint otomasi biner SNAPS · PLANETBINTANG](./blueprints/index.html) — 51 dokumen penjelasan, 51 kontrak .reic, dan 2.601 baris rumus biner yang dapat ditinjau.
+- [Formula DSL dan batas runtime](./blueprints/FORMULA-DSL.md) — semantik operator, gerbang Owner, dan alur parser.
+- [Schema kontrak REIC](./blueprints/reic-blueprint.schema.json) dan [validator paket](./blueprints/verify-blueprints.mjs).
+
+Paket blueprint berstatus spesifikasi sampai parser/runtime, integrasi backend, sandbox, dan persetujuan Owner tersedia. Rumus tidak mengeksekusi operasi cloud secara langsung.

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planetbintang.github.io/.L/vendordomain/blueprints/reic-blueprint.schema.json",
+  "title": "PLANETBINTANG REIC Blueprint Contract",
+  "type": "object",
+  "required": [
+    "format",
+    "format_version",
+    "blueprint_id",
+    "title",
+    "owner",
+    "platform",
+    "policy_authority",
+    "status",
+    "extensions",
+    "evaluation",
+    "controls"
+  ],
+  "properties": {
+    "format": {
+      "const": "PLANETBINTANG-REIC"
+    },
+    "format_version": {
+      "type": "string"
+    },
+    "blueprint_id": {
+      "type": "string",
+      "pattern": "^PB-REIC-[0-9]{3}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "owner": {
+      "const": "OWNER"
+    },
+    "platform": {
+      "const": "PLANETBINTANG"
+    },
+    "policy_authority": {
+      "const": "SNAPS"
+    },
+    "status": {
+      "enum": [
+        "specification-only",
+        "validated",
+        "approved",
+        "active",
+        "suspended"
+      ]
+    },
+    "extensions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          ".reic",
+          ".json",
+          ".js",
+          ".html",
+          ".css",
+          ".sql",
+          ".yaml",
+          ".md"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "evaluation": {
+      "type": "object",
+      "required": [
+        "model",
+        "formula_count",
+        "formula_rows",
+        "approval_gate",
+        "default_decision",
+        "execution"
+      ],
+      "properties": {
+        "model": {
+          "const": "8-bit-vector boolean algebra"
+        },
+        "formula_count": {
+          "const": 51
+        },
+        "formula_rows": {
+          "type": "array",
+          "minItems": 51,
+          "maxItems": 51,
+          "items": {
+            "type": "string",
+            "pattern": "^r[0-9]{2}:"
+          }
+        },
+        "approval_gate": {
+          "type": "string"
+        },
+        "default_decision": {
+          "const": "DENY"
+        },
+        "execution": {
+          "type": "string"
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "required": [
+        "owner_can",
+        "snaps_policy_required",
+        "browser_secrets",
+        "server_side_provider_adapters_only",
+        "immutable_audit_required",
+        "tenant_scope_required"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
