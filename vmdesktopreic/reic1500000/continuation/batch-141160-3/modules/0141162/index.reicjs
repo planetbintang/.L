@@ -1,0 +1,4 @@
+/* REIC EVENT BRIDGE | 0141162 */
+export const reicModule=Object.freeze({id:"0141162",name:"REIC Event Bridge",events:["reic:module-event"]});
+export function emitModuleEvent(root,detail={}){if(!root)return false;const safe={moduleId:reicModule.id,kind:String(detail.kind||"status").slice(0,40),timestamp:new Date().toISOString()};root.dispatchEvent(new CustomEvent("reic:module-event",{bubbles:true,detail:safe}));return safe;}
+export function mount(root){if(!root)return false;const button=root.querySelector("[data-reic-event-send]");const log=root.querySelector("[data-reic-event-log]");if(!button||!log)return false;button.addEventListener("click",()=>{const detail=emitModuleEvent(root,{kind:"uji"});log.textContent="Event diterbitkan: "+JSON.stringify(detail);});root.dataset.reicModule=reicModule.id;return true;}

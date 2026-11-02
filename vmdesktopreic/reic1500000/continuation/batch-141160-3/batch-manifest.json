@@ -1,0 +1,51 @@
+{
+  "system": "VMDESKTOPREIC",
+  "batch": "141160-3",
+  "startModule": 141160,
+  "endModule": 141162,
+  "moduleCount": 3,
+  "componentFileCount": 9,
+  "files": [
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141160/index.reic",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141160/index.reicss",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141160/index.reicjs",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141161/index.reic",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141161/index.reicss",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141161/index.reicjs",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141162/index.reic",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141162/index.reicss",
+    "vmdesktopreic/reic1500000/continuation/batch-141160-3/modules/0141162/index.reicjs"
+  ],
+  "modules": [
+    {
+      "id": "0141160",
+      "name": "REIC RUNTIME SANDBOX",
+      "slug": "runtime-sandbox",
+      "description": "Isolasi konten komponen dan batasi kemampuan runtime.",
+      "files": 3,
+      "execution": "browser-scoped; mount(root)"
+    },
+    {
+      "id": "0141161",
+      "name": "REIC MANIFEST VALIDATOR",
+      "slug": "manifest-validator",
+      "description": "Validasi identitas, versi, dan pasangan berkas komponen.",
+      "files": 3,
+      "execution": "browser-scoped; mount(root)"
+    },
+    {
+      "id": "0141162",
+      "name": "REIC EVENT BRIDGE",
+      "slug": "event-bridge",
+      "description": "Jembatan event berbasis nama event dan payload tervalidasi.",
+      "files": 3,
+      "execution": "browser-scoped; mount(root)"
+    }
+  ],
+  "generatedAt": "2026-11-02",
+  "validation": {
+    "uniquePaths": true,
+    "threeFilesPerModule": true,
+    "unsafeEval": false
+  }
+}

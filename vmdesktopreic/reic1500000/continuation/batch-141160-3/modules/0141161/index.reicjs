@@ -1,0 +1,4 @@
+/* REIC MANIFEST VALIDATOR | 0141161 */
+export const reicModule=Object.freeze({id:"0141161",name:"REIC Manifest Validator",version:"1.0.0"});
+export function validateManifest(value){const id=String(value||"").trim();return {valid:/^\\d{7}$/.test(id),id,required:["index.reic","index.reicss","index.reicjs"]};}
+export function mount(root){if(!root)return false;const input=root.querySelector("[data-reic-manifest-id]");const button=root.querySelector("[data-reic-manifest-check]");const result=root.querySelector("[data-reic-manifest-result]");if(!input||!button||!result)return false;button.addEventListener("click",()=>{const check=validateManifest(input.value);result.textContent=check.valid?"ID valid. Pastikan tiga berkas komponen tersedia.":"ID tidak valid; gunakan tepat 7 digit.";});root.dataset.reicModule=reicModule.id;return true;}
