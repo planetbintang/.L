@@ -1,0 +1,3 @@
+/* REIC MODULE 15: COMPONENT LIBRARY */
+export const moduleInfo=Object.freeze({id:"15",name:"REIC COMPONENT LIBRARY",key:"component-library"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

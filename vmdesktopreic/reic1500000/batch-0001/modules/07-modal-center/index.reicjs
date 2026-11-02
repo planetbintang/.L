@@ -1,0 +1,3 @@
+/* REIC MODULE 07: MODAL CENTER */
+export const moduleInfo=Object.freeze({id:"07",name:"REIC MODAL CENTER",key:"modal-center"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

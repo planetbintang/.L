@@ -1,0 +1,3 @@
+/* REIC MODULE 14: LAYOUT EDITOR */
+export const moduleInfo=Object.freeze({id:"14",name:"REIC LAYOUT EDITOR",key:"layout-editor"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

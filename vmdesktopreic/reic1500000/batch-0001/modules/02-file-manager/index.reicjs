@@ -1,0 +1,3 @@
+/* REIC MODULE 02: FILE MANAGER */
+export const moduleInfo=Object.freeze({id:"02",name:"REIC FILE MANAGER",key:"file-manager"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

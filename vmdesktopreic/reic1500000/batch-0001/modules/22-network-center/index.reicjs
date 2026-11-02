@@ -1,0 +1,3 @@
+/* REIC MODULE 22: NETWORK CENTER */
+export const moduleInfo=Object.freeze({id:"22",name:"REIC NETWORK CENTER",key:"network-center"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

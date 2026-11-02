@@ -1,0 +1,3 @@
+/* REIC MODULE 11: CODE EDITOR */
+export const moduleInfo=Object.freeze({id:"11",name:"REIC CODE EDITOR",key:"code-editor"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

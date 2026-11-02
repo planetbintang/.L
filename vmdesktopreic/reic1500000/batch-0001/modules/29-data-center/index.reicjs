@@ -1,0 +1,3 @@
+/* REIC MODULE 29: DATA CENTER */
+export const moduleInfo=Object.freeze({id:"29",name:"REIC DATA CENTER",key:"data-center"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

@@ -1,0 +1,3 @@
+/* REIC MODULE 19: FONT STUDIO */
+export const moduleInfo=Object.freeze({id:"19",name:"REIC FONT STUDIO",key:"font-studio"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}

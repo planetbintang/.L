@@ -1,0 +1,3 @@
+/* REIC MODULE 25: AI CENTER */
+export const moduleInfo=Object.freeze({id:"25",name:"REIC AI CENTER",key:"ai-center"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=moduleInfo.key;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:moduleInfo}));return true;}
