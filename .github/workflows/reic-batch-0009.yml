@@ -1,0 +1,58 @@
+name: Bangun 100.000 file sistem REIC — batch 0009
+on:
+  push:
+    branches: [io]
+    paths:
+      - '.github/workflows/reic-batch-0009.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reic-physical-batch-0009
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Hasilkan 33.333 modul REIC (99.999 file komponen)
+        run: node vmdesktopreic/reic1500000/generate.mjs --start 7805 --count 33333 --out vmdesktopreic/reic1500000/batch-0009 --write
+      - name: Validasi tepat 100.000 file fisik
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const root='vmdesktopreic/reic1500000/batch-0009';
+          const manifest=JSON.parse(fs.readFileSync(path.join(root,'batch-manifest.json'),'utf8'));
+          if(manifest.batch.start!==7805 || manifest.batch.count!==33333 || manifest.batch.physicalFiles!==99999 || manifest.written!==true) throw new Error('Metadata batch tidak sesuai');
+          if(manifest.records.length!==33333) throw new Error('Jumlah modul tidak sesuai');
+          let checked=0;
+          for(const record of manifest.records){
+            if(record.files.length!==3) throw new Error('Struktur modul tidak lengkap: '+record.id);
+            for(const relative of record.files){
+              const file=path.join(root,relative);
+              if(!fs.existsSync(file) || fs.statSync(file).size===0) throw new Error('File hilang/kosong: '+file);
+              checked++;
+            }
+          }
+          if(checked!==99999) throw new Error('Jumlah komponen bukan 99.999: '+checked);
+          const all=[];
+          const walk=dir=>{for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())walk(full);else all.push(full);}};
+          walk(root);
+          if(all.length!==100000) throw new Error('Total file fisik bukan 100.000: '+all.length);
+          console.log('VALID: 33.333 modul, 99.999 komponen + 1 manifest = 100.000 file fisik.');
+          NODE
+      - name: Commit batch 0009
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vmdesktopreic/reic1500000/batch-0009
+          git commit -m "Generate 100000 physical REIC files batch 0009"
+          git push origin HEAD:io
