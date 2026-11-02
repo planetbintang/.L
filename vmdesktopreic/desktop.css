@@ -1486,3 +1486,147 @@ html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow
 @media(prefers-reduced-motion:reduce){
  #desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}
 }
+
+
+/* REFERENCE MATCH 1536x963 — integrated REIC desktop workspace */
+html,body,#desktop-root{background:#0348cf!important}
+#desktop-root{display:block!important;place-items:stretch!important}
+#desktop-root>.vm-shell{
+ width:100%!important;height:100%!important;aspect-ratio:auto!important;
+ border:3px solid #eafaff!important;border-radius:0!important;
+ background:#064bd8!important;box-shadow:inset 0 0 0 2px #ffffff65!important
+}
+#desktop-root>.vm-shell:before{
+ inset:-10%!important;opacity:1!important;
+ background:
+  radial-gradient(ellipse 46% 14% at 15% 66%,#5ceaff 0%,#12a8ff 24%,#0869ed 56%,transparent 100%),
+  radial-gradient(ellipse 58% 17% at 77% 77%,#8befff 0%,#1aa8ff 20%,#0758e8 58%,transparent 100%),
+  radial-gradient(ellipse 58% 15% at 61% 52%,#39d4ff 0%,#0877ff 34%,transparent 76%),
+  radial-gradient(ellipse 48% 16% at 93% 35%,#80edff 0%,#078aff 27%,transparent 75%),
+  radial-gradient(ellipse 85% 65% at 50% 54%,#0878f4 0%,#0754dc 62%,#0035b7 100%);
+ filter:saturate(1.12);animation:reic-wall-drift 20s ease-in-out infinite alternate
+}
+#desktop-root>.vm-shell:after{
+ opacity:.48!important;background-size:150px 130px!important;
+ background-image:radial-gradient(#e4fbff 1.4px,transparent 2.5px)!important
+}
+#desktop-root .vm-header.reic-topbar{
+ display:flex!important;position:absolute!important;z-index:8!important;
+ top:0!important;left:0!important;right:0!important;height:88px!important;
+ padding:12px 18px!important;margin:0!important;gap:16px!important;
+ align-items:flex-start!important;justify-content:space-between!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;pointer-events:none!important
+}
+#desktop-root .reic-topbar .vm-brand{
+ width:auto!important;display:flex!important;align-items:center!important;gap:15px!important;
+ font-size:20px!important;white-space:nowrap!important;pointer-events:auto!important
+}
+#desktop-root .reic-topbar .vm-logo{
+ width:62px!important;height:62px!important;display:grid!important;place-items:center!important;
+ border:2px solid #8eeaff!important;border-radius:11px!important;
+ background:linear-gradient(145deg,#25caff,#0751d9)!important;
+ box-shadow:0 0 14px #24bfff88!important;font-size:40px!important;font-weight:900!important
+}
+#desktop-root .reic-topbar .vm-brand>div{display:flex!important;flex-direction:column!important;gap:3px!important}
+#desktop-root .reic-topbar .vm-brand b{font-size:clamp(15px,1.55vw,24px)!important;line-height:1.1!important;letter-spacing:.02em!important;color:#fff!important}
+#desktop-root .reic-topbar .vm-brand small{font-size:clamp(9px,.85vw,13px)!important;letter-spacing:.38em!important;color:#e3f6ff!important}
+#desktop-root .reic-hidden-search{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+#desktop-root .reic-top-tools{
+ display:flex!important;align-items:center!important;gap:3px!important;
+ padding:3px!important;margin:0!important;pointer-events:auto!important;
+ border:2px solid #7fdcff!important;border-radius:7px!important;
+ background:linear-gradient(110deg,#0b75e9bb,#063bb9bb)!important;
+ box-shadow:0 3px 16px #001e7c66!important;backdrop-filter:blur(8px)
+}
+#desktop-root .reic-top-tools button{
+ width:47px!important;height:40px!important;display:grid!important;place-items:center!important;
+ padding:0!important;border:1px solid #61cfff88!important;border-radius:4px!important;
+ background:linear-gradient(145deg,#258df1cc,#0750c9cc)!important;color:#fff!important;
+ font-size:24px!important;box-shadow:inset 0 1px 0 #ffffff44!important
+}
+#desktop-root .reic-top-tools button:hover{background:#25aaff!important;transform:translateY(-1px)}
+#desktop-root .vm-core-menu{
+ left:10px!important;top:50%!important;transform:translateY(-50%)!important;
+ width:clamp(260px,19vw,290px)!important;gap:10px!important
+}
+#desktop-root .core-item,#desktop-root .core-item:hover,#desktop-root .core-item.active{
+ height:52px!important;min-height:52px!important;flex-basis:52px!important;
+ display:flex!important;gap:8px!important;padding:3px!important;
+ border:0!important;background:transparent!important;box-shadow:none!important
+}
+#desktop-root .core-item>span{
+ width:52px!important;height:48px!important;flex:0 0 52px!important;
+ border:2px solid #2dd5ff!important;border-radius:8px!important;
+ background:linear-gradient(145deg,#12c5ff,#0756df)!important;
+ box-shadow:0 2px 12px #002d9a88,inset 0 1px 0 #ffffff66!important;
+ font-size:29px!important
+}
+#desktop-root .core-item b{
+ height:42px!important;display:flex!important;align-items:center!important;
+ padding:0 14px!important;border:1px solid #b7eaffaa!important;border-radius:6px!important;
+ background:linear-gradient(100deg,#145dc9dd,#5ba8f0bb)!important;
+ box-shadow:inset 0 1px 0 #ffffff55,0 2px 8px #003a9a55!important;
+ color:#fff!important;font-size:clamp(11px,.86vw,14px)!important;font-weight:700!important
+}
+#desktop-root .core-item:hover>span,#desktop-root .core-item.active>span{background:linear-gradient(145deg,#5ceaff,#0871ff)!important}
+#desktop-root .core-item:hover b,#desktop-root .core-item.active b{background:linear-gradient(100deg,#267de8,#8ccaff)!important}
+#desktop-root .vm-workspace{z-index:2!important}
+#desktop-root .vm-center-search{
+ width:clamp(260px,19vw,300px)!important;height:44px!important;
+ border:3px solid #effcff!important;border-radius:30px!important;
+ background:linear-gradient(90deg,#ffffff22,#0c55cf66)!important;
+ box-shadow:0 0 12px #d7faffaa,inset 0 1px 5px #ffffff55!important
+}
+#desktop-root .vm-center-search span{color:#fff!important;font-size:22px!important}
+#desktop-root .vm-center-search input{color:#fff!important;font-size:14px!important}
+#desktop-root .vm-center-search input::placeholder{color:#ffffffaa!important}
+#desktop-root .vm-desktop-hint{display:none!important}
+#desktop-root .vm-slide-panel{
+ display:flex!important;position:absolute!important;z-index:12!important;
+ left:clamp(280px,21vw,320px)!important;top:50%!important;
+ transform:translateY(-50%)!important;width:min(340px,calc(100vw - 310px))!important;
+ max-height:72%!important;overflow:auto!important;border:1px solid #9ceaff!important;
+ border-radius:8px!important;background:#063d9bea!important;
+ box-shadow:0 12px 40px #001b6bbb!important;backdrop-filter:blur(12px)!important;
+ opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility .18s ease
+}
+#desktop-root .vm-slide-panel.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#desktop-root .vm-slide-panel>header{position:sticky!important;top:0!important;background:#0759d9!important}
+#desktop-root .slide-choice{border-radius:4px!important;background:#ffffff12!important;color:#fff!important}
+#desktop-root .slide-choice:hover{background:#138df0!important}
+#desktop-root .vm-modal-backdrop{
+ position:absolute!important;inset:0!important;z-index:30!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:clamp(10px,3vw,38px)!important;overflow:auto!important;
+ background:#001c58a8!important;backdrop-filter:blur(7px)!important
+}
+#desktop-root .vm-modal-backdrop[hidden]{display:none!important}
+#desktop-root .vm-modal{
+ position:relative!important;width:min(1040px,94%)!important;height:min(760px,88%)!important;
+ max-width:94%!important;max-height:88%!important;margin:auto!important;
+ display:flex!important;flex-direction:column!important;overflow:hidden!important;
+ border:1px solid #9ceaff!important;border-radius:10px!important;
+ background:linear-gradient(145deg,#073b91f5,#061d58f7)!important;
+ box-shadow:0 18px 65px #00123ddd!important
+}
+#desktop-root .vm-modal.expanded{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important}
+#desktop-root .vm-modal .modal-body{min-height:0!important;flex:1 1 auto!important;overflow:auto!important}
+#desktop-root .vm-statusbar{display:none!important}
+@media(max-width:700px){
+ #desktop-root .vm-header.reic-topbar{height:70px!important;padding:8px!important}
+ #desktop-root .reic-topbar .vm-logo{width:46px!important;height:46px!important;font-size:29px!important}
+ #desktop-root .reic-topbar .vm-brand{gap:8px!important}
+ #desktop-root .reic-topbar .vm-brand b{font-size:13px!important}
+ #desktop-root .reic-topbar .vm-brand small{font-size:8px!important}
+ #desktop-root .reic-top-tools{gap:1px!important}
+ #desktop-root .reic-top-tools button{width:32px!important;height:32px!important;font-size:17px!important}
+ #desktop-root .vm-core-menu{left:7px!important;width:min(235px,62vw)!important;gap:7px!important}
+ #desktop-root .core-item,#desktop-root .core-item:hover,#desktop-root .core-item.active{height:46px!important;min-height:46px!important;flex-basis:46px!important}
+ #desktop-root .core-item>span{width:44px!important;height:43px!important;flex-basis:44px!important;font-size:23px!important}
+ #desktop-root .core-item b{height:38px!important;padding:0 8px!important;font-size:9px!important}
+ #desktop-root .vm-center-search{width:210px!important;height:40px!important}
+ #desktop-root .vm-slide-panel{left:calc(7px + min(235px,62vw))!important;width:min(300px,calc(100vw - 255px))!important}
+ #desktop-root .vm-modal{width:100%!important;height:92%!important;max-width:100%!important;max-height:92%!important}
+}
+@media(prefers-reduced-motion:reduce){#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}}
