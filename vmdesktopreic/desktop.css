@@ -1630,3 +1630,22 @@ html,body,#desktop-root{background:#0348cf!important}
  #desktop-root .vm-modal{width:100%!important;height:92%!important;max-width:100%!important;max-height:92%!important}
 }
 @media(prefers-reduced-motion:reduce){#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}}
+
+
+/* REIC DESKTOP INTEGRATION — OS MEDIA VM graphite/grid wallpaper and square geometry. */
+#desktop-root>.vm-shell{
+ background-color:#07111f!important;
+ background-image:radial-gradient(ellipse at 72% -12%,rgba(31,76,112,.48),transparent 48%),linear-gradient(rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(145deg,#07111f,#0a1727 60%,#050c16)!important;
+ background-size:auto,28px 28px,28px 28px,auto!important;
+ border:1px solid #29445d!important;box-shadow:inset 0 0 0 1px rgba(131,225,255,.08)!important
+}
+#desktop-root .vm-desktop{
+ background-color:#091625!important;
+ background-image:linear-gradient(rgba(131,225,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(131,225,255,.045) 1px,transparent 1px),radial-gradient(ellipse at 55% 45%,#183550 0%,#0a1727 65%)!important;
+ background-size:28px 28px,28px 28px,auto!important;border-color:#29445d!important
+}
+#desktop-root .vm-shell :where(button,input,select,textarea,.vm-modal,.vm-modal-backdrop,.vm-logo,.core-item,.core-item>span,.vm-slide-panel,.slide-item,.vm-center-search,.vm-header-tools,.vm-header-tools button,.vm-mini-tools,.vm-mini-tools button,.modal-tabs button,.menu-choice,.menu-choice>span,.menu-back,.content-card,.system-card,.settings-group){border-radius:0!important}
+#desktop-root .vm-shell :where(button,.core-item,.slide-item,.menu-choice){border-color:#29445d!important}
+#desktop-root .vm-shell :where(button:hover,.core-item.active,.core-item:hover,.slide-item:hover,.menu-choice:hover){border-color:#83e1ff!important}
+#desktop-root .vm-shell :where(.vm-header,.vm-statusbar,.vm-modal>header,.vm-slide-panel>header){background:linear-gradient(100deg,#0d1a2b,#10243a 58%,#0a1727)!important;border-color:#29445d!important;box-shadow:none!important}
+#desktop-root .vm-shell :where(.vm-logo,.core-item>span,.vm-header-tools button,.vm-mini-tools button,.menu-choice>span){background:#132d44!important;color:#83e1ff!important;border-color:#47728e!important}
