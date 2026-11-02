@@ -4,6 +4,7 @@ on:
     branches: [io]
     paths:
       - 'vendordomain/backend/**'
+      - 'vendordomain/blueprints/**'
       - '.github/workflows/vendordomain-api-tests.yml'
   pull_request:
     paths:
@@ -19,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Validate 51 REIC blueprints and 2,601 binary formula rows
+        run: node vendordomain/blueprints/verify-blueprints.mjs
       - name: Run API integration tests
         working-directory: vendordomain/backend
         run: npm test
