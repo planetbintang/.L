@@ -1,0 +1,13 @@
+{
+  "schemaVersion":"1.0.0",
+  "system":"SNAPS PLANETBINTANG CENTRAL CLOUD",
+  "description":"Logical data model for the VendorDomain cloud control plane. This schema is documentation/configuration only; it is not a provisioned production database.",
+  "entities":{
+    "cloud_project":{"primaryKey":"id","fields":{"id":"uuid","name":"string","environment":"development|staging|production","region":"string","createdAt":"datetime"}},
+    "domain":{"primaryKey":"id","fields":{"id":"uuid","projectId":"uuid","fqdn":"string","registrar":"string","status":"draft|pending|active|expired","verifiedAt":"datetime|null"}},
+    "dns_record":{"primaryKey":"id","fields":{"id":"uuid","domainId":"uuid","type":"A|AAAA|CNAME|MX|TXT|NS|CAA|SRV","name":"string","value":"string","ttl":"integer","providerRef":"string|null"}},
+    "service_instance":{"primaryKey":"id","fields":{"id":"uuid","projectId":"uuid","service":"string","region":"string","status":"planned|provisioning|active|failed","provider":"string|null"}},
+    "audit_event":{"primaryKey":"id","fields":{"id":"uuid","actorId":"uuid|null","action":"string","resource":"string","result":"string","createdAt":"datetime"}}
+  },
+  "security":{"secrets":"server-side secret manager only","authorization":"RBAC server-side","transport":"HTTPS","audit":"append-only production store"}
+}
