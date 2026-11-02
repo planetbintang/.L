@@ -1,0 +1,29 @@
+REIC/1.0
+MODULE: REIC-0141158
+NAME: RESOURCE-INTEGRITY-CHECK
+TYPE: SYSTEM_COMPONENT
+VERSION: 1.0.0
+STATUS: ACTIVE
+PURPOSE: Memvalidasi identitas, struktur, dan kelengkapan resource REIC sebelum resource digunakan.
+INPUT:
+  - resource_id: string
+  - resource_path: string
+  - expected_hash: string
+OUTPUT:
+  - valid: boolean
+  - checks: array
+  - errors: array
+LIFECYCLE:
+  1. RECEIVE_RESOURCE
+  2. NORMALIZE_PATH
+  3. CHECK_REQUIRED_METADATA
+  4. VERIFY_CONTENT_HASH_WHEN_AVAILABLE
+  5. RETURN_VALIDATION_RESULT
+SECURITY:
+  - Tolak path traversal.
+  - Jangan mengeksekusi konten selama pemeriksaan.
+  - Jangan mengubah resource sumber.
+DEPENDENCIES: none
+STYLE: ./index.reicss
+SCRIPT: ./index.reicjs
+END
