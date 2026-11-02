@@ -1,0 +1,21 @@
+export function createEventQueue(limit = 128) {
+  const capacity = Number.isInteger(limit) && limit > 0 ? limit : 128;
+  const items = [];
+  return Object.freeze({
+    enqueue(event) {
+      if (event === null || typeof event !== "object" || Array.isArray(event)) {
+        return { accepted: false, queue_size: items.length, reason: "invalid_event" };
+      }
+      if (items.length >= capacity) {
+        return { accepted: false, queue_size: items.length, reason: "queue_full" };
+      }
+      items.push(Object.freeze({ ...event }));
+      return { accepted: true, queue_size: items.length, reason: "accepted" };
+    },
+    dequeue() {
+      return items.length ? items.shift() : null;
+    },
+    get size() { return items.length; },
+    get capacity() { return capacity; }
+  });
+}
