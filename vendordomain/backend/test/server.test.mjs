@@ -5,6 +5,7 @@ import {createServer} from 'node:net';
 import {mkdtemp,rm} from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 async function freePort(){
  const s=createServer();await new Promise((resolve,reject)=>s.listen(0,'127.0.0.1',resolve).once('error',reject));
@@ -12,7 +13,8 @@ async function freePort(){
 }
 test('VendorDomain API security and persistent record flow',async(t)=>{
  const dir=await mkdtemp(path.join(os.tmpdir(),'vd-api-')),port=await freePort(),token='test-token-with-at-least-thirty-two-characters';
- const child=spawn(process.execPath,['server.mjs'],{cwd:new URL('.',import.meta.url),env:{...process.env,PORT:String(port),HOST:'127.0.0.1',DATA_DIR:dir,ADMIN_TOKEN:token,ALLOWED_ORIGIN:'https://planetbintang.github.io',RATE_LIMIT_MAX:'100'},stdio:'ignore'});
+ const backendDir=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+ const child=spawn(process.execPath,['server.mjs'],{cwd:backendDir,env:{...process.env,PORT:String(port),HOST:'127.0.0.1',DATA_DIR:dir,ADMIN_TOKEN:token,ALLOWED_ORIGIN:'https://planetbintang.github.io',RATE_LIMIT_MAX:'100'},stdio:'ignore'});
  const base='http://127.0.0.1:'+port;
  t.after(async()=>{child.kill('SIGTERM');await rm(dir,{recursive:true,force:true});});
  let ready=false;
