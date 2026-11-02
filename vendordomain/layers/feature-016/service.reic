@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "serviceId": "vendordomain.feature.016",
+  "feature": {
+    "id": 16,
+    "code": "016",
+    "slug": "pengaturan-zona-waktu",
+    "name": "Pengaturan Zona Waktu",
+    "module": "Dashboard dan navigasi",
+    "category": "sistem"
+  },
+  "description": "Pengaturan Zona Waktu merupakan fitur dashboard dan navigasi pada VendorDomain.",
+  "executionMode": "browser-local-scaffold",
+  "backend": "requires-authenticated-https-service",
+  "layers": [
+    {
+      "id": "L01",
+      "name": "Identity & Registry",
+      "role": "Identitas, metadata fitur, dan resolusi registry.",
+      "enabled": true
+    },
+    {
+      "id": "L02",
+      "name": "Presentation & REIC",
+      "role": "Kontrak tampilan REIC dan komposisi antarmuka.",
+      "enabled": true
+    },
+    {
+      "id": "L03",
+      "name": "Service Contract",
+      "role": "Definisi layanan, input, output, dan dependensi.",
+      "enabled": true
+    },
+    {
+      "id": "L04",
+      "name": "Controller Runtime",
+      "role": "Entry point modul dan orkestrasi tindakan.",
+      "enabled": true
+    },
+    {
+      "id": "L05",
+      "name": "Validation Engine",
+      "role": "Validasi struktur data dan aturan masukan.",
+      "enabled": true
+    },
+    {
+      "id": "L06",
+      "name": "Persistence Adapter",
+      "role": "Adapter penyimpanan lokal; backend dapat ditambahkan.",
+      "enabled": true
+    },
+    {
+      "id": "L07",
+      "name": "Security Policy",
+      "role": "Batas akses, penanganan secret, dan prinsip least privilege.",
+      "enabled": true
+    },
+    {
+      "id": "L08",
+      "name": "Observability",
+      "role": "Status runtime, hasil validasi, dan pesan diagnostik.",
+      "enabled": true
+    },
+    {
+      "id": "L09",
+      "name": "API Boundary",
+      "role": "Kontrak integrasi API tanpa secret di sisi browser.",
+      "enabled": true
+    },
+    {
+      "id": "L10",
+      "name": "Deployment Metadata",
+      "role": "Metadata lingkungan dan persyaratan deployment.",
+      "enabled": true
+    }
+  ],
+  "inputs": [
+    "configuration JSON",
+    "environment"
+  ],
+  "outputs": [
+    "validation result",
+    "local configuration",
+    "exportable JSON"
+  ],
+  "dependencies": [
+    "layer-system/runtime.js",
+    "layer-system/engine.js"
+  ],
+  "security": {
+    "secretsInBrowser": false,
+    "externalMutations": false,
+    "requiresServerAuthorization": true
+  },
+  "operations": {
+    "validate": true,
+    "saveLocal": true,
+    "export": true,
+    "provision": false,
+    "registrarTransaction": false
+  }
+}

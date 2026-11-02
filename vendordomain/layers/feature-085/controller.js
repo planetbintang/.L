@@ -1,0 +1,2 @@
+import { createFeaturePanel } from '../../layer-system/engine.js';
+export default function mount(ctx){return createFeaturePanel(ctx,{"title":"Ekstensi .ai","description":"Ekstensi .ai merupakan fitur ekstensi dan tld pada VendorDomain.","featureCode":"085","module":"Ekstensi dan TLD","category":"vendor"});}
