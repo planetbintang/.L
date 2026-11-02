@@ -1,29 +1,50 @@
-# VMDESKTOPREIC — 1.500.000 FILE SYSTEM
+# VMDESKTOPREIC — target 1.500.000 file
 
-Target fisik: **1.500.000 file** yang dibagi menjadi 500.000 modul; setiap modul memiliki `index.reic`, `index.reicss`, dan `index.reicjs`.
+## Status verifikasi repositori (branch `io`)
 
-## Progres file fisik
+Target rancangan: **500.000 modul × 3 file komponen = 1.500.000 file komponen REIC**.
 
-- Batch 0001–0003: modul 1–93.
-- Batch 0004: modul 94–123 (30 modul / 90 file).
-- Batch 0005: modul 124–133 (10 modul / 30 file).
-- Batch 0006: modul 134–138 (5 modul / 15 file).
-- **Total terverifikasi: 138 modul / 414 file fisik** dari target 500.000 modul / 1.500.000 file.
-- Sisa target: 499.862 modul / 1.499.586 file.
+### File komponen yang sudah tercatat
 
-Setiap batch menyimpan manifest dan tiga berkas per modul: `.reic`, `.reicss`, dan `.reicjs`. Modul batch 0006 mencakup Pengaturan Tampilan, Pusat Tema, Pusat Wallpaper, Pusat Aksesibilitas, dan Pusat Bahasa.
+| Batch | Modul | File komponen | Status |
+|---|---:|---:|---|
+| 0001–0006 | 138 | 414 | Ada di repositori; progres awal tercatat |
+| 0007 | 5.000 | 15.000 | Workflow validasi/commit berhasil pada batch awal |
+| 0008 | 2.666 | 7.998 | Berhasil; 8.000 file fisik termasuk manifest dan catatan |
+| 0009 | 33.333 | 99.999 | Berhasil; 100.000 file fisik termasuk manifest |
+| 0010-01 | 33.333 | 99.999 | Direktori ada; validasi dan commit kelompok berhasil |
+| 0010-02 | 33.333 | 99.999 | Direktori ada; validasi dan commit kelompok berhasil |
+| 0010-03 sampai 0010-05 | — | — | Belum ada di branch; workflow batch 0010 gagal sebelum menyelesaikan semua kelompok |
+| 0011 | 33.333 | 99.999 | Berhasil; 100.000 file fisik termasuk manifest |
+
+**Jumlah komponen REIC yang dapat dihitung dari batch tercatat: 423.408 file** (141.136 modul).  
+**Sisa menuju target 1.500.000 file komponen: 1.076.592 file** (358.864 modul).
+
+Metadata batch menambah file manifest/catatan di luar hitungan komponen di atas. Angka tersebut bukan klaim bahwa target 1,5 juta telah tercapai.
+
+### Pola nama file dan isi
+
+Setiap modul batch besar memakai:
+- `modules/NNNNNNN/index.reic` — markup struktur modul REIC.
+- `modules/NNNNNNN/index.reicss` — aturan gaya CSS bertanda selektor modul.
+- `modules/NNNNNNN/index.reicjs` — ekspor metadata modul dan fungsi `mount(root)`.
+
+Sampel dari batch 0007, 0008, 0009, 0010-01, 0010-02, dan 0011 telah diperiksa. Ketiga ekstensi dan pola nama tersedia. Batch 0007–0011 memakai kerangka generik bernomor seperti `REIC MODULE 0007805`, bukan 500 ribu nama fitur unik. Konten batch tersebut masih berupa kerangka umum dan belum membuktikan implementasi fitur khusus untuk setiap modul.
+
+### Batas verifikasi
+
+- Workflow batch 0008, 0009, dan 0011 berakhir sukses dan menjalankan pemeriksaan jumlah serta keberadaan file.
+- Workflow batch 0010 berakhir gagal setelah dua kelompok pertama tersedia di branch; tiga kelompok terakhir belum tersedia.
+- Pemeriksaan sampel isi dan nama file bukan pemeriksaan byte-per-byte seluruh 423 ribu file.
+- Belum ada bukti bahwa semua modul dimuat oleh runtime VMDESKTOPREIC atau lulus pengujian browser/integrasi.
+- File `.reicjs` adalah JavaScript ESM; integrasi pemuat `.reic`/`.reicss`/`.reicjs` tetap perlu diuji di runtime.
 
 ## Generator
 
-`generate.mjs` membuat batch terbatas (maksimal 1.000 modul / 3.000 file per eksekusi) dan tidak menimpa file yang sudah ada (`flag: wx`). Contoh:
+`generate.mjs` membuat batch terbatas, dengan batas saat ini 33.333 modul per eksekusi. Contoh:
 
 ```sh
-node generate.mjs --start 1 --count 100 --write
-node generate.mjs --start 101 --count 100 --write
+node generate.mjs --start 241136 --count 1000 --out batch-next --write
 ```
 
-Jalankan dari direktori `vmdesktopreic/reic1500000` atau tentukan `--out`. Opsi `--write` wajib untuk menulis file; tanpa opsi tersebut generator hanya menampilkan rencana batch. Setiap batch perlu ditinjau, diuji, lalu dikomit terpisah. Jangan mencoba membuat seluruh 1,5 juta file sekaligus: ukuran Git, batas API, waktu build, dan performa GitHub Pages perlu dikelola.
-
-## Batas integrasi
-
-File fisik dan manifest telah ditambahkan ke repositori, tetapi keberadaan file tidak otomatis berarti modul sudah dimuat oleh desktop. Integrasi runtime, validasi browser, pengujian, dan pemeriksaan kinerja perlu dilakukan bertahap sebelum menyatakan semua modul aktif.
+Generator memakai `flag: wx` agar file yang sudah ada tidak tertimpa. Jalankan validasi dan pengujian integrasi sebelum menganggap modul aktif.
