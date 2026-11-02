@@ -165,7 +165,16 @@
       .topbar > .main-nav > details[ data-menu="lainnya" ] { display:none !important; }
     </style>
 
-  </head>
+  
+<style id="all-main-menu-cards">
+.common-site-menu-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))!important;align-items:stretch}
+.common-site-menu-card{min-height:116px}
+.common-site-menu-card .common-site-menu-copy b{text-transform:uppercase;letter-spacing:.035em}
+.common-site-menu-heading h2{text-transform:uppercase;letter-spacing:.035em}
+@media(min-width:1200px){.common-site-menu-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:640px){.common-site-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px}.common-site-menu-card{min-height:110px;padding:12px}.common-site-menu-card .common-site-menu-copy small{font-size:11px;line-height:1.45}}
+</style>
+</head>
   <body>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
     <header class="topbar" id="top">
@@ -297,7 +306,7 @@
 
       <section class="common-site-menu" data-system-page="system" aria-labelledby="commonSiteMenuTitle">
         <div class="common-site-menu-heading">
-          <div><p class="eyebrow">QUICK ACCESS <span>/</span> SITE SERVICES</p><h2 id="commonSiteMenuTitle">Menu &amp; layanan utama</h2><p>Akses langsung ke fungsi penting situs dari satu tempat. Setiap menu membuka modul yang sudah tersedia di sistem.</p></div>
+          <div><p class="eyebrow">MAIN MENU <span>/</span> ALL SERVICES</p><h2 id="commonSiteMenuTitle">SELURUH MENU UTAMA</h2><p>Semua menu utama ditampilkan langsung di halaman ini. Tidak ada kategori menu tambahan atau bagian menu lainnya.</p></div>
           <a href="#cari" data-system-route="search" class="common-site-search-link">Cari di sistem <span aria-hidden="true">↗</span></a>
         </div>
         <div class="common-site-menu-grid">
@@ -313,7 +322,25 @@
           <a class="common-site-menu-card" href="./vendordomain/pricing/"><span class="common-site-menu-icon" aria-hidden="true">₨</span><span class="common-site-menu-copy"><b>Harga dan Pembayaran</b><small>Katalog satuan REIC, estimasi harga, kebijakan OWNER, dan kanal pembayaran.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="./dokumen/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>REIC Dokumen</b><small>Pusat dokumen REIC, blueprint, spesifikasi komponen, dan referensi teknis.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
         </div>
-        <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Menu terhubung ke modul situs</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
+
+          <a class="common-site-menu-card" href="./galeri/"><span class="common-site-menu-icon" aria-hidden="true">▧</span><span class="common-site-menu-copy"><b>GALERI</b><small>Koleksi gambar dan media Planetbintang.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vmdesktopreic/"><span class="common-site-menu-icon" aria-hidden="true">▣</span><span class="common-site-menu-copy"><b>VMDESKTOPREIC</b><small>Desktop virtual REIC dan ruang kerja layar.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./leksikon/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>PERPUSTAKAAN</b><small>Kamus Digital Modern dan koleksi referensi.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vendordomain/"><span class="common-site-menu-icon" aria-hidden="true">◎</span><span class="common-site-menu-copy"><b>VENDORDOMAIN</b><small>Portal domain, layanan, dan modul platform.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./osmediavm/"><span class="common-site-menu-icon" aria-hidden="true">▦</span><span class="common-site-menu-copy"><b>OS MEDIA VM</b><small>Lingkungan sistem dan aplikasi OS MEDIA VM.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#overview" data-system-route="system"><span class="common-site-menu-icon" aria-hidden="true">⌂</span><span class="common-site-menu-copy"><b>PORTAL</b><small>Pintu utama menuju layanan dan halaman situs.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#repositories" data-system-route="repositories"><span class="common-site-menu-icon" aria-hidden="true">⌘</span><span class="common-site-menu-copy"><b>CODE</b><small>Repositori, katalog fitur, branch, dan commit.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#aircloud" data-system-route="aircloud"><span class="common-site-menu-icon" aria-hidden="true">☁</span><span class="common-site-menu-copy"><b>AIR CLOUD</b><small>Konsol cloud, compute, storage, dan jaringan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./aireber/"><span class="common-site-menu-icon" aria-hidden="true">✦</span><span class="common-site-menu-copy"><b>AI REBER</b><small>Studio asisten AI dan alat kerja.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/projects" data-system-route="projects"><span class="common-site-menu-icon" aria-hidden="true">☷</span><span class="common-site-menu-copy"><b>PLAN</b><small>Proyek, tugas, papan kerja, dan roadmap.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/pull-requests" data-system-route="pull-requests"><span class="common-site-menu-icon" aria-hidden="true">✓</span><span class="common-site-menu-copy"><b>REVIEW</b><small>Pull request, diskusi, dan antrean review.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>DELIVERY</b><small>Pipeline, deployment, rilis, dan keamanan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/integrations" data-system-route="integrations"><span class="common-site-menu-icon" aria-hidden="true">⛓</span><span class="common-site-menu-copy"><b>INTEGRASI</b><small>Konektor platform, layanan, dan SNAPS/MCP.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/analytics" data-system-route="analytics"><span class="common-site-menu-icon" aria-hidden="true">▥</span><span class="common-site-menu-copy"><b>INSIGHTS</b><small>Analitik, metrik, dan ringkasan sistem.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#manage/files" data-system-route="manage-files"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>MANAGE</b><small>Pengelolaan file, storage, akses, dan konfigurasi.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#execute/run" data-system-route="execute-run"><span class="common-site-menu-icon" aria-hidden="true">▶</span><span class="common-site-menu-copy"><b>EXECUTE</b><small>Eksekusi aksi, jobs, console, dan log.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#enterprise/map" data-system-route="enterprise-map"><span class="common-site-menu-icon" aria-hidden="true">◇</span><span class="common-site-menu-copy"><b>ENTERPRISE</b><small>Peta layanan dan arsitektur enterprise.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+        <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Seluruh menu utama tersedia pada tampilan ini</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
       </section>
 
       <style id="home-reference-images-styles">
