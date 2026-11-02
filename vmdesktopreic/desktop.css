@@ -1810,3 +1810,138 @@ html,body,#desktop-root{background:#0348cf!important}
  #desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}
  #desktop-root .vm-slide-panel{transition:none!important}
 }
+
+
+/* REIC 7D GALLERY THEME — modal, toolbar, brand and navigation */
+#desktop-root>.vm-shell{
+  background:
+    radial-gradient(ellipse at 18% 16%,rgba(42,170,255,.72),transparent 30%),
+    radial-gradient(ellipse at 82% 78%,rgba(0,225,255,.54),transparent 34%),
+    radial-gradient(ellipse at 50% 50%,rgba(20,88,220,.7),transparent 55%),
+    linear-gradient(135deg,#061a3e 0%,#0752b8 38%,#071b42 72%,#03122d 100%)!important;
+  perspective:1200px!important;
+}
+#desktop-root>.vm-shell:before{
+  width:160%!important;height:68%!important;left:-28%!important;top:27%!important;
+  transform:rotateX(58deg) rotateZ(-14deg)!important;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 24px,rgba(115,224,255,.11) 25px 26px),
+    linear-gradient(180deg,transparent 0%,rgba(28,174,255,.12) 22%,rgba(70,224,255,.68) 39%,rgba(224,250,255,.86) 41%,rgba(12,121,255,.48) 47%,transparent 72%)!important;
+  filter:blur(1.5px)!important;
+  animation:reic7d-wave-a 16s ease-in-out infinite alternate!important;
+}
+#desktop-root>.vm-shell:after{
+  width:148%!important;height:60%!important;right:-52%!important;top:12%!important;
+  transform:rotateX(62deg) rotateZ(-31deg)!important;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 31px,rgba(159,235,255,.1) 32px 33px),
+    linear-gradient(180deg,transparent 0%,rgba(34,148,255,.14) 30%,rgba(71,210,255,.72) 48%,rgba(255,255,255,.84) 50%,rgba(0,104,255,.38) 56%,transparent 78%)!important;
+  filter:blur(2px)!important;
+  animation:reic7d-wave-b 21s ease-in-out infinite alternate!important;
+}
+@keyframes reic7d-wave-a{0%{margin-left:-2%;margin-top:-2%;filter:hue-rotate(0deg) blur(1.5px)}100%{margin-left:4%;margin-top:3%;filter:hue-rotate(18deg) blur(2.5px)}}
+@keyframes reic7d-wave-b{0%{margin-right:-3%;margin-top:2%;opacity:.72}100%{margin-right:5%;margin-top:-3%;opacity:1}}
+#desktop-root .vm-header.reic-topbar{justify-content:space-between!important}
+#desktop-root .reic-topbar .vm-brand{margin-right:auto!important;order:0!important}
+#desktop-root .reic-top-tools{margin-left:auto!important;order:2!important}
+#desktop-root .vm-core-menu{left:8px!important;right:auto!important}
+#desktop-root .vm-header-tools button,
+#desktop-root .core-item,
+#desktop-root .core-item>span,
+#desktop-root .core-item b,
+#desktop-root .vm-slide-panel,
+#desktop-root .vm-slide-panel>header,
+#desktop-root .slide-choice,
+#desktop-root .reic-top-tools,
+#desktop-root .reic-top-tools button,
+#desktop-root .vm-modal,
+#desktop-root .vm-modal>header,
+#desktop-root .vm-modal>footer,
+#desktop-root .modal-tabs button,
+#desktop-root .modal-body :where(button,input,select,textarea),
+#desktop-root .modal-body :where(.content-card,.system-card,.settings-group,.menu-back,.wm-head,.wm-side,.wm-main){
+  border-radius:0!important;
+}
+#desktop-root .vm-modal-backdrop{
+  display:grid!important;place-items:center!important;
+  padding:clamp(6px,2vw,20px)!important;
+  background:rgba(3,10,22,.78)!important;
+  backdrop-filter:blur(14px) saturate(125%)!important;
+}
+#desktop-root .vm-modal{
+  width:min(1120px,96%)!important;height:min(820px,94%)!important;
+  max-width:96%!important;max-height:94%!important;
+  border:1px solid #38516c!important;
+  background:
+    radial-gradient(ellipse at 8% 0%,rgba(52,112,157,.2),transparent 42%),
+    linear-gradient(145deg,#101d30 0%,#0b1727 55%,#071321 100%)!important;
+  color:#edf5ff!important;
+  box-shadow:0 24px 80px rgba(0,0,0,.62),inset 0 1px rgba(255,255,255,.035)!important;
+}
+#desktop-root .vm-modal>header{
+  flex:0 0 68px!important;height:68px!important;
+  padding:0 20px!important;
+  border:0!important;border-bottom:1px solid #293d58!important;
+  background:linear-gradient(100deg,#14263d,#0d1a2b 62%,#101d30)!important;
+  box-shadow:none!important;
+}
+#desktop-root .vm-modal>header>span{
+  width:40px!important;height:40px!important;border:1px solid #47718f!important;
+  border-radius:0!important;background:linear-gradient(145deg,#1c4261,#0c1c30)!important;
+  color:#bceaff!important;
+}
+#desktop-root .vm-modal>header>b{font-size:clamp(15px,1.5vw,21px)!important;letter-spacing:.035em!important}
+#desktop-root .vm-modal>header button{
+  width:38px!important;height:38px!important;border:1px solid #34516d!important;
+  border-radius:0!important;background:#0b1a2b!important;color:#d9efff!important;
+}
+#desktop-root .modal-tabs{
+  flex:0 0 auto!important;display:flex!important;gap:6px!important;
+  padding:12px 18px!important;border-bottom:1px solid #293d58!important;
+  background:rgba(8,18,31,.72)!important;overflow-x:auto!important;
+}
+#desktop-root .modal-tabs button{
+  min-height:38px!important;padding:8px 13px!important;
+  border:1px solid #34516d!important;border-radius:0!important;
+  background:linear-gradient(145deg,#142a40,#0a1929)!important;
+  color:#b9cde2!important;font-size:11px!important;font-weight:750!important;
+  letter-spacing:.06em!important;white-space:nowrap!important;
+}
+#desktop-root .modal-tabs button.active,
+#desktop-root .modal-tabs button:hover{
+  border-color:#82d5ff!important;background:linear-gradient(135deg,#1c4968,#102943)!important;
+  color:#eaf7ff!important;
+}
+#desktop-root .modal-body{
+  flex:1 1 auto!important;min-height:0!important;padding:clamp(12px,2vw,22px)!important;
+  overflow:auto!important;color:#eaf2ff!important;
+  background:linear-gradient(145deg,rgba(16,29,48,.94),rgba(7,19,33,.98))!important;
+}
+#desktop-root .modal-body :where(.content-card,.system-card,.settings-group,.wm-head,.wm-side,.wm-main,.registry-heading,.registry-card,.full-library-head,.full-library-item,.layered-component){
+  border-radius:0!important;border-color:#293d58!important;
+  background:linear-gradient(145deg,#14263d,#0b192a)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+}
+#desktop-root .modal-body :where(input,select,textarea){
+  border-radius:0!important;border:1px solid #36516c!important;
+  background:#081626!important;color:#edf5ff!important;
+}
+#desktop-root .modal-body :where(button,.menu-back,.action-row button,.wm-controls button,.wm-pager button){
+  border-radius:0!important;border:1px solid #34516d!important;
+  background:linear-gradient(145deg,#15334b,#0a1a2a)!important;color:#e5f4ff!important;
+}
+#desktop-root .modal-body :where(button:hover,.menu-back:hover,.action-row button:hover){
+  border-color:#82d5ff!important;background:linear-gradient(145deg,#1b4968,#102943)!important;
+}
+#desktop-root .vm-modal>footer{
+  flex:0 0 54px!important;height:54px!important;padding:0 18px!important;
+  border:0!important;border-top:1px solid #293d58!important;
+  background:#0a1726!important;color:#9cafc7!important;
+}
+#desktop-root .vm-modal>footer button{
+  border-radius:0!important;border:1px solid #5b8eae!important;
+  background:linear-gradient(135deg,#245575,#12344d)!important;color:#eff9ff!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}
+}
