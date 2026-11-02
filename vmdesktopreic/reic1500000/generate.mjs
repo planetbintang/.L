@@ -16,7 +16,7 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((a,v,i,all)=>{
   return a;
 },[]));
 const start = Math.max(1, Number(args.start || 1));
-const count = Math.max(1, Math.min(5000, Number(args.count || 100)));
+const count = Math.max(1, Math.min(33333, Number(args.count || 100)));
 const write = args.write === true;
 const root = path.resolve(args.out || "generated");
 const pad = n => String(n).padStart(7,"0");
