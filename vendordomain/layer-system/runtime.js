@@ -1,7 +1,7 @@
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export async function mountFeatureLayer(app,feature){
  const code=String(feature.id).padStart(3,'0');
- const manifestUrl=new URL('../../layers/feature-'+code+'/manifest.json',location.href);
+ const manifestUrl=new URL('../../../layers/feature-'+code+'/manifest.json',location.href);
  const response=await fetch(manifestUrl,{cache:'no-store'});
  if(!response.ok)throw new Error('Manifest lapisan '+code+' tidak ditemukan');
  const manifest=await response.json();
