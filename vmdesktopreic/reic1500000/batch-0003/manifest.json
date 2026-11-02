@@ -1,0 +1,348 @@
+{
+  "batch": 3,
+  "moduleCount": 31,
+  "physicalFileCount": 93,
+  "modules": [
+    {
+      "id": 63,
+      "slug": "backup-center",
+      "title": "Pusat Cadangan",
+      "description": "Membuat dan memeriksa metadata cadangan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 64,
+      "slug": "restore-center",
+      "title": "Pusat Pemulihan",
+      "description": "Memvalidasi paket pemulihan sebelum digunakan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 65,
+      "slug": "file-diff",
+      "title": "Pembanding Berkas",
+      "description": "Membandingkan dua teks atau konfigurasi.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 66,
+      "slug": "hash-generator",
+      "title": "Generator Hash",
+      "description": "Menghitung sidik SHA-256 untuk teks.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 67,
+      "slug": "checksum-verifier",
+      "title": "Verifikator Checksum",
+      "description": "Memeriksa nilai checksum yang dimasukkan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 68,
+      "slug": "archive-manager",
+      "title": "Pengelola Arsip",
+      "description": "Mengelola daftar arsip dan metadata.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 69,
+      "slug": "package-manager",
+      "title": "Pengelola Paket",
+      "description": "Mencatat paket dan dependensi modul.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 70,
+      "slug": "dependency-graph",
+      "title": "Graf Dependensi",
+      "description": "Menampilkan hubungan dependensi antarmodul.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 71,
+      "slug": "plugin-center",
+      "title": "Pusat Plugin",
+      "description": "Mengelola daftar ekstensi REIC.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 72,
+      "slug": "extension-builder",
+      "title": "Pembuat Ekstensi",
+      "description": "Membuat kerangka ekstensi REIC.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 73,
+      "slug": "template-library",
+      "title": "Pustaka Templat",
+      "description": "Menyediakan templat awal komponen.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 74,
+      "slug": "component-inspector",
+      "title": "Pemeriksa Komponen",
+      "description": "Memeriksa atribut dan struktur komponen.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 75,
+      "slug": "component-builder",
+      "title": "Pembuat Komponen",
+      "description": "Menyusun komponen antarmuka dasar.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 76,
+      "slug": "widget-center",
+      "title": "Pusat Widget",
+      "description": "Mengelola widget desktop.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 77,
+      "slug": "modal-manager",
+      "title": "Pengelola Modal",
+      "description": "Menyediakan kerangka pengelolaan dialog.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 78,
+      "slug": "window-manager",
+      "title": "Pengelola Jendela",
+      "description": "Mengelola panel jendela aplikasi.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 79,
+      "slug": "dock-manager",
+      "title": "Pengelola Dock",
+      "description": "Mengelola pintasan dock desktop.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 80,
+      "slug": "panel-manager",
+      "title": "Pengelola Panel",
+      "description": "Mengelola panel antarmuka.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 81,
+      "slug": "desktop-settings",
+      "title": "Pengaturan Desktop",
+      "description": "Mengelola preferensi desktop REIC.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 82,
+      "slug": "display-settings",
+      "title": "Pengaturan Tampilan",
+      "description": "Mengatur skala dan orientasi tampilan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 83,
+      "slug": "resolution-manager",
+      "title": "Pengelola Resolusi",
+      "description": "Mencatat pilihan resolusi layar.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 84,
+      "slug": "brightness-control",
+      "title": "Kontrol Kecerahan",
+      "description": "Menyediakan kontrol kecerahan antarmuka.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 85,
+      "slug": "color-calibration",
+      "title": "Kalibrasi Warna",
+      "description": "Mengelola profil warna antarmuka.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 86,
+      "slug": "gradient-studio",
+      "title": "Studio Gradasi",
+      "description": "Menyusun preset gradasi warna.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 87,
+      "slug": "motion-settings",
+      "title": "Pengaturan Gerak",
+      "description": "Mengatur preferensi animasi antarmuka.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 88,
+      "slug": "sound-center",
+      "title": "Pusat Suara",
+      "description": "Menyediakan panel pengaturan suara.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 89,
+      "slug": "keyboard-settings",
+      "title": "Pengaturan Keyboard",
+      "description": "Mengelola preferensi tombol pintasan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 90,
+      "slug": "shortcut-manager",
+      "title": "Pengelola Pintasan",
+      "description": "Mencatat dan memeriksa pintasan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 91,
+      "slug": "input-methods",
+      "title": "Metode Input",
+      "description": "Mengelola metode masukan.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 92,
+      "slug": "clipboard-center",
+      "title": "Pusat Clipboard",
+      "description": "Menampilkan riwayat clipboard sesi.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    },
+    {
+      "id": 93,
+      "slug": "screen-capture",
+      "title": "Penangkap Layar",
+      "description": "Menyediakan kontrol permintaan tangkapan layar.",
+      "files": [
+        "index.reic",
+        "index.reicss",
+        "index.reicjs"
+      ]
+    }
+  ]
+}
