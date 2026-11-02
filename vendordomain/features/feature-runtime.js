@@ -28,7 +28,16 @@ const workflows={
 async function request(path,opts={}){const r=await fetch(base+path,{...opts,headers:{'content-type':'application/json',...(opts.headers||{})}});const j=await r.json().catch(()=>({error:'Respons API bukan JSON'}));if(!r.ok)throw Error(j.error||('HTTP '+r.status));return j}
 function slugify(v){return v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function safeDomain(v){const s=v.trim().toLowerCase().replace(/\.$/,'');return s.length<=253&&s.split('.').length>=2&&s.split('.').every(x=>x.length>0&&x.length<=63&&/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(x))}
-function render(app,f,health){
+function render(app,f,health);
+ try {
+   const layers = await import('../../layer-system/runtime.js');
+   await layers.mountFeatureLayer(app,f);
+ } catch (layerError) {
+   const note=document.createElement('p');
+   note.className='small';
+   note.textContent='Lapisan fitur tambahan belum tersedia: '+layerError.message;
+   app.appendChild(note);
+ }{
  const w=workflows[f.moduleNumber]||workflows[20],p=palettes[(f.id-1)%palettes.length];
  for(const [k,v] of [['--bg',p[0]],['--panel',p[1]],['--accent',p[2]],['--soft',p[3]],['--radius',f.id%2?'22px':'8px']])document.documentElement.style.setProperty(k,v);
  document.title=f.name+' — VendorDomain';
