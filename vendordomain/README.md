@@ -35,3 +35,14 @@ Workflow [Deploy entire .L system to GitHub Pages](../.github/workflows/deploy-p
 - Setiap fitur memiliki enam lapisan: Layout, Pilihan, Penerapan, Penyimpanan, Penyimpanan Sistem Folder/File, dan Konfigurasi. Variasi layout: Rail, Split, Stack, Grid, dan Console.
 - Draft serta JSON konfigurasi dapat divalidasi, disimpan di browser, diimpor, dan diekspor. Registry fitur berada di [`config/developer-core/registry.json`](./config/developer-core/registry.json).
 - Penyimpanan browser bersifat lokal per perangkat. Penulisan ke repository, penerapan CI/CD, dan deployment sungguhan tetap memerlukan backend/API atau workflow yang terautentikasi; halaman ini tidak menjalankan perubahan produksi.
+
+## Ribuan file lapisan runtime
+
+Layer System menambahkan 1.500 file sumber khusus untuk 500 fitur (tiga file per fitur):
+- `layers/feature-NNN/manifest.json` — entrypoint dan peta lapisan.
+- `layers/feature-NNN/service.reic` — kontrak layanan REIC dengan 10 lapisan tanggung jawab.
+- `layers/feature-NNN/controller.js` — controller ES module khusus fitur yang memanggil shared engine.
+
+Runtime bersama berada di `layer-system/`: `runtime.js` memuat manifest, kontrak, dan controller; `engine.js` membangun panel konfigurasi; `engine.css` menyediakan layout; `registry.json` mendaftarkan seluruh 500 bundle. `features/feature-runtime.js` menghubungkan setiap halaman fitur ke runtime lapisan.
+
+Setiap halaman menampilkan 10 lapisan: Identity & Registry, Presentation & REIC, Service Contract, Controller Runtime, Validation Engine, Persistence Adapter, Security Policy, Observability, API Boundary, dan Deployment Metadata. Mesin browser mendukung validasi JSON, penyimpanan lokal, serta ekspor konfigurasi. Ini merupakan scaffold runtime aktif untuk konfigurasi lokal, bukan klaim bahwa seluruh operasi provider cloud telah aktif. Provisioning, registrar, billing, database persisten, dan operasi DNS tetap memerlukan backend dan kredensial provider yang aman.
