@@ -42,8 +42,12 @@ async function walk(dir) {
       fail(full, 'gagal membaca file: ' + error.message);
       continue;
     }
-    const idMatch = body.match(/^id: REIC-(\\d{7})$/m);
-    const schemaMatch = body.match(/<script type="application\\/json" data-reic-schema>([\\s\\S]*?)<\\/script>/);
+    const idMatch = body.match(new RegExp('^id: REIC-([0-9]{7})$', 'm'));
+    const schemaOpen = '<script type="application/json" data-reic-schema>';
+    const schemaStart = body.indexOf(schemaOpen);
+    const schemaEnd = schemaStart >= 0 ? body.indexOf('</script>', schemaStart + schemaOpen.length) : -1;
+    const schemaText = schemaStart >= 0 && schemaEnd >= 0
+      ? body.slice(schemaStart + schemaOpen.length, schemaEnd) : null;
     if (!idMatch || !body.startsWith('--- REIC COMPONENT ---') ||
         !body.includes('--- END REIC HEADER ---') ||
         !body.includes('<section class="reic-module"') ||
@@ -102,6 +106,6 @@ const report = {
     duplicateIds === 0 && malformedSchemas === 0 && filenameMismatches === 0 && invalid === 0,
   verifiedAt: new Date().toISOString()
 };
-await writeFile(reportPath, JSON.stringify(report, null, 2) + '\\n', 'utf8');
+await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n', 'utf8');
 console.log(JSON.stringify(report, null, 2));
 if (!report.passed) process.exit(1);
