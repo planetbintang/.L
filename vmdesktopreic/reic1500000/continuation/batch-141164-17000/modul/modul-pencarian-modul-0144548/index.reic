@@ -1,0 +1,12 @@
+<reic-module id="0144548" name="PENCARIAN MODUL" version="1.0">
+  <metadata category="MODUL" action="PENCARIAN" locale="id-ID" />
+  <view title="PENCARIAN MODUL">
+    <section class="reic-panel">
+      <h2>PENCARIAN MODUL</h2>
+      <p>Modul pencarian modul pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

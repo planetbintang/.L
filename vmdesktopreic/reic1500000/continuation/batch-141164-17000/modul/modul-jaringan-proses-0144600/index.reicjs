@@ -1,0 +1,3 @@
+const MODULE_ID="0144600";
+export function execute(input={}){return {module:MODULE_ID,accepted:true,input,requiresAdapter:true};}
+export function mount(root){const button=root?.querySelector("[data-reic-run]");const status=root?.querySelector("[data-reic-status]");const run=()=>{if(status)status.textContent="Pemeriksaan lokal selesai; adapter layanan belum terpasang.";};button?.addEventListener("click",run);return ()=>button?.removeEventListener("click",run);}

@@ -1,0 +1,12 @@
+<reic-module id="0144355" name="KEAMANAN ARSIP" version="1.0">
+  <metadata category="ARSIP" action="KEAMANAN" locale="id-ID" />
+  <view title="KEAMANAN ARSIP">
+    <section class="reic-panel">
+      <h2>KEAMANAN ARSIP</h2>
+      <p>Modul keamanan arsip pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

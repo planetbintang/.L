@@ -1,0 +1,12 @@
+<reic-module id="0144253" name="VALIDASI KONEKSI" version="1.0">
+  <metadata category="KONEKSI" action="VALIDASI" locale="id-ID" />
+  <view title="VALIDASI KONEKSI">
+    <section class="reic-panel">
+      <h2>VALIDASI KONEKSI</h2>
+      <p>Modul validasi koneksi pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

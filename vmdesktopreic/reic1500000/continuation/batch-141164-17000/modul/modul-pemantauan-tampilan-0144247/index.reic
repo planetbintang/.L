@@ -1,0 +1,12 @@
+<reic-module id="0144247" name="PEMANTAUAN TAMPILAN" version="1.0">
+  <metadata category="TAMPILAN" action="PEMANTAUAN" locale="id-ID" />
+  <view title="PEMANTAUAN TAMPILAN">
+    <section class="reic-panel">
+      <h2>PEMANTAUAN TAMPILAN</h2>
+      <p>Modul pemantauan tampilan pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

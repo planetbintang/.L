@@ -1,0 +1,12 @@
+<reic-module id="0144062" name="KONFIGURASI DATA" version="1.0">
+  <metadata category="DATA" action="KONFIGURASI" locale="id-ID" />
+  <view title="KONFIGURASI DATA">
+    <section class="reic-panel">
+      <h2>KONFIGURASI DATA</h2>
+      <p>Modul konfigurasi data pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

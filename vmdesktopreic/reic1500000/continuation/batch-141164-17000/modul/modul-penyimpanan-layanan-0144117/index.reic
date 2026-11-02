@@ -1,0 +1,12 @@
+<reic-module id="0144117" name="PENYIMPANAN LAYANAN" version="1.0">
+  <metadata category="LAYANAN" action="PENYIMPANAN" locale="id-ID" />
+  <view title="PENYIMPANAN LAYANAN">
+    <section class="reic-panel">
+      <h2>PENYIMPANAN LAYANAN</h2>
+      <p>Modul penyimpanan layanan pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

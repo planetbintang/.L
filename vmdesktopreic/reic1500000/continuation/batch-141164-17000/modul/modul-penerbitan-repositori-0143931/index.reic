@@ -1,0 +1,12 @@
+<reic-module id="0143931" name="PENERBITAN REPOSITORI" version="1.0">
+  <metadata category="REPOSITORI" action="PENERBITAN" locale="id-ID" />
+  <view title="PENERBITAN REPOSITORI">
+    <section class="reic-panel">
+      <h2>PENERBITAN REPOSITORI</h2>
+      <p>Modul penerbitan repositori pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

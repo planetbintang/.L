@@ -1,0 +1,12 @@
+<reic-module id="0144408" name="PEMROSESAN PERANGKAT" version="1.0">
+  <metadata category="PERANGKAT" action="PEMROSESAN" locale="id-ID" />
+  <view title="PEMROSESAN PERANGKAT">
+    <section class="reic-panel">
+      <h2>PEMROSESAN PERANGKAT</h2>
+      <p>Modul pemrosesan perangkat pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

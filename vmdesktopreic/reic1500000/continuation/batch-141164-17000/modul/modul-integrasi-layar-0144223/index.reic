@@ -1,0 +1,12 @@
+<reic-module id="0144223" name="INTEGRASI LAYAR" version="1.0">
+  <metadata category="LAYAR" action="INTEGRASI" locale="id-ID" />
+  <view title="INTEGRASI LAYAR">
+    <section class="reic-panel">
+      <h2>INTEGRASI LAYAR</h2>
+      <p>Modul integrasi layar pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

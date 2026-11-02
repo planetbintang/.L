@@ -1,0 +1,4 @@
+const MODULE_ID="0144222";
+const MODULE_NAME="KONFIGURASI DATA";
+export function execute(input={}){return {module:MODULE_ID,name:MODULE_NAME,accepted:true,input,requiresAdapter:true,message:"Hubungkan adapter layanan untuk operasi persisten."};}
+export function mount(root){if(!root)return ()=>{};const button=root.querySelector("[data-reic-run]");const status=root.querySelector("[data-reic-status]");const run=()=>{const result=execute();if(status)status.textContent=result.message;};button?.addEventListener("click",run);return ()=>button?.removeEventListener("click",run);}

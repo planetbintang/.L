@@ -1,0 +1,12 @@
+<reic-module id="0144561" name="PENJADWALAN SESI" version="1.0">
+  <metadata category="SESI" action="PENJADWALAN" locale="id-ID" />
+  <view title="PENJADWALAN SESI">
+    <section class="reic-panel">
+      <h2>PENJADWALAN SESI</h2>
+      <p>Modul penjadwalan sesi pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>

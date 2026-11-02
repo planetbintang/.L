@@ -1,0 +1,12 @@
+<reic-module id="0143840" name="PENGELOLAAN REGISTRI" version="1.0">
+  <metadata category="REGISTRI" action="PENGELOLAAN" locale="id-ID" />
+  <view title="PENGELOLAAN REGISTRI">
+    <section class="reic-panel">
+      <h2>PENGELOLAAN REGISTRI</h2>
+      <p>Modul pengelolaan registri pada lingkungan Desktop REIC.</p>
+      <output data-reic-status>Siap dijalankan</output>
+      <button type="button" data-reic-run>Jalankan pemeriksaan</button>
+    </section>
+  </view>
+  <runtime script="./index.reicjs" style="./index.reicss" />
+</reic-module>
