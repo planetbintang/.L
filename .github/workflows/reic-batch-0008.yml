@@ -1,0 +1,72 @@
+name: Bangun 8.000 file sistem REIC — batch 0008
+on:
+  push:
+    branches: [io]
+    paths:
+      - '.github/workflows/reic-batch-0008.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reic-physical-batch-0008
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Hasilkan 2.666 modul REIC (7.998 file)
+        run: node vmdesktopreic/reic1500000/generate.mjs --start 5139 --count 2666 --out vmdesktopreic/reic1500000/batch-0008 --write
+      - name: Tambahkan manifest dan catatan batch (total 8.000 file)
+        run: |
+          cat > vmdesktopreic/reic1500000/batch-0008/BATCH-INFO.md <<'EOF'
+          # REIC BATCH 0008
+          Target batch ini: 8.000 file fisik.
+          - 2.666 modul x 3 file = 7.998 file (.reic, .reicss, .reicjs)
+          - batch-manifest.json = 1 file
+          - BATCH-INFO.md = 1 file
+          - Total = 8.000 file.
+          Rentang modul: 005139–007804.
+          EOF
+      - name: Validasi jumlah file dan isi
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const root = 'vmdesktopreic/reic1500000/batch-0008';
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'batch-manifest.json'), 'utf8'));
+          if (manifest.batch.physicalFiles !== 7998 || manifest.batch.count !== 2666 || manifest.written !== true) {
+            throw new Error('Manifest batch tidak sesuai');
+          }
+          let modules = 0;
+          for (const record of manifest.records) {
+            if (record.files.length !== 3) throw new Error('Modul tidak memiliki tiga file: ' + record.id);
+            for (const relative of record.files) {
+              const file = path.join(root, relative);
+              if (!fs.existsSync(file) || fs.statSync(file).size === 0) throw new Error('File hilang/kosong: ' + file);
+              modules++;
+            }
+          }
+          const extras = ['batch-manifest.json', 'BATCH-INFO.md'];
+          for (const name of extras) {
+            const file = path.join(root, name);
+            if (!fs.existsSync(file) || fs.statSync(file).size === 0) throw new Error('Dokumen batch hilang/kosong: ' + name);
+          }
+          const all = fs.readdirSync(root, {recursive:true}).filter(name => fs.statSync(path.join(root,name)).isFile());
+          if (modules !== 7998 || all.length !== 8000) throw new Error('Jumlah file aktual tidak 8.000: ' + all.length);
+          console.log('Validasi berhasil: ' + all.length + ' file fisik.');
+          NODE
+      - name: Commit batch 0008
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vmdesktopreic/reic1500000/batch-0008
+          git commit -m "Generate 8000 physical REIC files batch 0008"
+          git push origin HEAD:io
