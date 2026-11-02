@@ -2,20 +2,33 @@
 
 ## Portal utama
 
+- **[SNAPS — PLANETBINTANG Central Cloud](./cloud/index.html)** — control plane cloud terpusat untuk katalog domain, DNS, compute, hosting, storage, database, network, security, API, AI, observability, billing, dan deployment. Setiap item ditautkan ke halaman fitur REIC pada registry 500 fitur.
 - **[VendorDomain — Domain & Web Services](./index.html)** — portal layanan utama dengan pemeriksaan format domain, generator nama, estimator biaya, penyimpanan catatan/keranjang lokal, draft website yang dapat diekspor sebagai HTML, koneksi health-check backend, dan pencarian seluruh 500 modul.
 - **[Workspace operasional Enterprise](./enterprise/index.html)** — 150 ruang kerja modul dengan CRUD data, pencarian/filter, ekspor/impor JSON, audit, konfigurasi API, dan DNS Manager Cloudflare.
 - **[Direktori 500 fitur](./features/index.html)** — katalog teknis dan halaman detail tiap fitur.
 - **[Backend API](./backend/README.md)** — Node.js API untuk data persisten, validasi domain, audit dan DNS Cloudflare opsional.
 
+## Sistem menu dan aset
+
+Registry `features/index.json` memuat 500 menu dengan ID, modul, kategori, deskripsi, fungsi, status integrasi, dan `detailPath` masing-masing. Halaman detail REIC berada di `features/pages/feature-NNN/index.reic`, menggunakan `feature-runtime.js` dan `api-config.js`; halaman hasil publikasi tersedia sebagai HTML melalui proses konversi REIC. Dokumentasi modul dan struktur data berada di folder masing-masing.
+
+Central Cloud menambahkan:
+- `cloud/index.reic` — sumber tampilan SNAPS / PLANETBINTANG.
+- `cloud/index.html` — halaman statis GitHub Pages.
+- `cloud/cloud.css` dan `cloud/cloud.js` — tema, katalog layanan, pencarian, filter, dan routing.
+- `cloud/database.schema.json` — skema logis proyek, domain, DNS, instance layanan, dan audit.
+- `cloud/README.md` — dokumentasi sistem.
+
 ## Batas integrasi produksi
 
 Portal dan tools lokal berjalan sebagai frontend statis di GitHub Pages. Pemeriksaan domain di portal memvalidasi sintaks saja, bukan ketersediaan registrar. Estimator adalah simulasi, bukan harga penawaran vendor. Keranjang dan draft website disimpan di browser hingga diekspor; tidak memproses pembayaran atau memublikasikan situs otomatis.
 
-Untuk data persisten dan DNS live, deploy backend secara terpisah melalui HTTPS dengan ADMIN_TOKEN, ALLOWED_ORIGIN, disk persisten, dan secret Cloudflare server-side bila diperlukan. Pendaftaran/transfer/perpanjangan domain, hosting, email, pembayaran, dan layanan vendor lain memerlukan integrasi API provider khusus dan tidak dianggap aktif sebelum dikonfigurasi serta diuji.
+Untuk data persisten dan DNS live, deploy backend secara terpisah melalui HTTPS dengan ADMIN_TOKEN, ALLOWED_ORIGIN, disk persisten, dan secret Cloudflare server-side bila diperlukan. Pendaftaran/transfer/perpanjangan domain, hosting, email, pembayaran, dan layanan vendor lain memerlukan integrasi API provider khusus dan tidak dianggap aktif sebelum dikonfigurasi serta diuji. GitHub Pages tidak menjalankan database atau layanan backend.
 
 ## Deployment
 
 Workflow [Deploy entire .L system to GitHub Pages](../.github/workflows/deploy-pages.yml) dipicu oleh push ke branch `io`. Setelah perubahan digabungkan, periksa Actions untuk status deployment. URL halaman dapat berbeda mengikuti konfigurasi Pages repository.
+
 ## Pengembang dan konfigurasi inti
 
 - Semua 25 fitur modul **Pengembang dan konfigurasi inti** (ID 476–500) dibuka melalui workspace berlapis di [`developer-core/index.html`](./developer-core/index.html).
