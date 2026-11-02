@@ -10,6 +10,7 @@ on:
   pull_request:
     paths:
       - 'vendordomain/backend/**'
+      - 'vendordomain/reic/**'
       - '.github/workflows/vendordomain-api-tests.yml'
 permissions:
   contents: read
