@@ -6,7 +6,7 @@
   "owner": "OWNER",
   "platform": "PLANETBINTANG",
   "policy_authority": "SNAPS",
-  "status": "manual-catalog-owner-pricing-required",
+  "status": "owner-controlled-price-range",
   "entrypoint": "index.html",
   "data": "pricing.json",
   "assets": [
@@ -46,5 +46,14 @@
     ".yaml",
     ".md"
   ],
-  "note": "Tidak memproses transaksi. Hubungkan provider pembayaran di backend dan isi nominal harga yang disetujui OWNER sebelum mengaktifkan checkout."
+  "note": "Tidak memproses transaksi. Hubungkan provider pembayaran di backend dan isi nominal harga yang disetujui OWNER sebelum mengaktifkan checkout.",
+  "pricing_policy": {
+    "currency": "IDR",
+    "minimum_price": 2500000,
+    "maximum_price": null,
+    "maximum_is_unbounded": true,
+    "final_price_authority": "OWNER",
+    "owner_override": true,
+    "approval_required": true
+  }
 }

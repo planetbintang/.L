@@ -1,11 +1,11 @@
 {
   "format": "PLANETBINTANG-REIC-PRICE-CATALOG",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "owner": "OWNER",
   "policy_authority": "SNAPS",
   "platform": "PLANETBINTANG",
   "currency_default": "IDR",
-  "publication_status": "draft-owner-pricing-required",
+  "publication_status": "owner-approval-required",
   "pricing_policy": {
     "price_authority": "OWNER",
     "approval_required": true,
@@ -16,7 +16,12 @@
       "tahunan"
     ],
     "quote_required_for_custom_enterprise": true,
-    "price_values_are_null_until_owner_approves": true
+    "price_values_are_null_until_owner_approves": false,
+    "minimum_price": 2500000,
+    "maximum_price": null,
+    "price_range": "IDR 2.500.000 sampai tanpa batas maksimum; harga final ditentukan OWNER",
+    "owner_may_override": true,
+    "minimum_applies_per_item_unit": true
   },
   "items": [
     {
@@ -26,7 +31,12 @@
       "price": null,
       "currency": "IDR",
       "billing": "sekali bayar",
-      "description": "Instalasi, validasi dependensi, konfigurasi awal dan pemeriksaan hasil komponen."
+      "description": "Instalasi, validasi dependensi, konfigurasi awal dan pemeriksaan hasil komponen.",
+      "minimum_price": 2500000,
+      "maximum_price": null,
+      "price_display": "Mulai Rp2.500.000 · tanpa batas maksimum",
+      "owner_override": true,
+      "approval_required": true
     },
     {
       "id": "reic-screen-container",
@@ -35,7 +45,12 @@
       "price": null,
       "currency": "IDR",
       "billing": "bulanan",
-      "description": "Hak penggunaan kontainer tampilan, kapasitas, penyimpanan konfigurasi dan dukungan runtime sesuai paket."
+      "description": "Hak penggunaan kontainer tampilan, kapasitas, penyimpanan konfigurasi dan dukungan runtime sesuai paket.",
+      "minimum_price": 2500000,
+      "maximum_price": null,
+      "price_display": "Mulai Rp2.500.000 · tanpa batas maksimum",
+      "owner_override": true,
+      "approval_required": true
     },
     {
       "id": "reic-domain",
@@ -44,7 +59,12 @@
       "price": null,
       "currency": "IDR",
       "billing": "tahunan",
-      "description": "Harga akhir bergantung ekstensi TLD, registrar, pajak, biaya registry dan biaya transfer/perpanjangan."
+      "description": "Harga akhir bergantung ekstensi TLD, registrar, pajak, biaya registry dan biaya transfer/perpanjangan.",
+      "minimum_price": 2500000,
+      "maximum_price": null,
+      "price_display": "Mulai Rp2.500.000 · tanpa batas maksimum",
+      "owner_override": true,
+      "approval_required": true
     },
     {
       "id": "reic-application",
@@ -53,7 +73,12 @@
       "price": null,
       "currency": "IDR",
       "billing": "paket atau lisensi",
-      "description": "Lisensi aplikasi, kuota penggunaan, dukungan, dan fitur tambahan sesuai paket."
+      "description": "Lisensi aplikasi, kuota penggunaan, dukungan, dan fitur tambahan sesuai paket.",
+      "minimum_price": 2500000,
+      "maximum_price": null,
+      "price_display": "Mulai Rp2.500.000 · tanpa batas maksimum",
+      "owner_override": true,
+      "approval_required": true
     },
     {
       "id": "reic-enterprise",
@@ -62,7 +87,12 @@
       "price": null,
       "currency": "IDR",
       "billing": "penawaran khusus",
-      "description": "Harga berdasarkan jumlah pengguna, komponen, SLA, kapasitas, wilayah dan kebutuhan integrasi."
+      "description": "Harga berdasarkan jumlah pengguna, komponen, SLA, kapasitas, wilayah dan kebutuhan integrasi.",
+      "minimum_price": 2500000,
+      "maximum_price": null,
+      "price_display": "Mulai Rp2.500.000 · tanpa batas maksimum",
+      "owner_override": true,
+      "approval_required": true
     }
   ],
   "payment_methods": {
