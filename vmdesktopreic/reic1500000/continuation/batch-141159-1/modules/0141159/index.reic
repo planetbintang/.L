@@ -1,0 +1,22 @@
+REIC/1.0
+MODULE: REIC-0141159
+NAME: EVENT-QUEUE-CONTROLLER
+TYPE: SYSTEM_COMPONENT
+VERSION: 1.0.0
+STATUS: ACTIVE
+PURPOSE: Mengelola antrean event internal dengan urutan FIFO dan batas kapasitas.
+INPUT:
+  - event: object
+  - queue_limit: integer
+OUTPUT:
+  - accepted: boolean
+  - queue_size: integer
+  - reason: string
+RULES:
+  - Terima hanya event berupa objek non-null.
+  - Batasi kapasitas antrean pada nilai positif.
+  - Jangan menjalankan event saat enqueue.
+  - Keluarkan event melalui operasi dequeue terpisah.
+STYLE: ./index.reicss
+SCRIPT: ./index.reicjs
+END
