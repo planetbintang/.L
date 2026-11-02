@@ -2,7 +2,7 @@ name: Generate complete REIC system (1.5 million files)
 on:
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   generate-in-order:
     runs-on: ubuntu-latest
@@ -76,12 +76,12 @@ jobs:
         run: node scripts/generate-reic-batch.mjs --start 1456100 --count 43900
       - name: Verify all 1,500,000 files
         run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 1500000 --start 0
-      - name: Package verified REIC files
-        run: tar -czf planetbintang-reic-1500000.tar.gz -C osmediavm/recordin generated
-      - name: Upload verified REIC archive
-        uses: actions/upload-artifact@v4
-        with:
-          name: planetbintang-reic-1500000
-          path: planetbintang-reic-1500000.tar.gz
-          if-no-files-found: error
-          retention-days: 30
+      - name: Commit all physical REIC files to branch io
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add osmediavm/recordin/generated/
+          git commit -m "Generate and verify 1,500,000 physical REIC files"
+          git push origin HEAD:io
