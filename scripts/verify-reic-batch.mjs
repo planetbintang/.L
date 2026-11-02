@@ -47,7 +47,7 @@ async function walk(dir) {
     if (!idMatch || !body.startsWith('--- REIC COMPONENT ---') ||
         !body.includes('--- END REIC HEADER ---') ||
         !body.includes('<section class="reic-module"') ||
-        !schemaMatch || !body.includes('runtime: planetbintang-reic')) {
+        schemaText === null || !body.includes('runtime: planetbintang-reic')) {
       fail(full, 'header atau struktur komponen REIC tidak lengkap');
       continue;
     }
@@ -67,7 +67,7 @@ async function walk(dir) {
       fail(full, 'nama file tidak sesuai dengan ID di dalam file');
     }
     try {
-      const schema = JSON.parse(schemaMatch[1]);
+      const schema = JSON.parse(schemaText);
       if (schema.id !== 'REIC-' + idMatch[1] ||
           typeof schema.title !== 'string' ||
           typeof schema.category !== 'string' ||
