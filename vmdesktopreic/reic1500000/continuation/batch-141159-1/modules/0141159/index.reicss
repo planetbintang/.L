@@ -1,0 +1,11 @@
+.reic-event-queue {
+  display: grid;
+  gap: .5rem;
+  padding: .875rem;
+  color: var(--reic-text, #e8edf5);
+  background: var(--reic-surface, #151c2b);
+  border: 1px solid var(--reic-border, #354158);
+  border-radius: .7rem;
+}
+.reic-event-queue__status { font-variant-numeric: tabular-nums; }
+.reic-event-queue[data-full="true"] { border-color: var(--reic-warning, #b88435); }
