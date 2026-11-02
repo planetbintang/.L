@@ -1668,7 +1668,7 @@ html,body,#desktop-root{background:#0348cf!important}
   box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)!important;color:#fff!important
 }
 #desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{
-  content:"";position:absolute!important;z-index:-1!important;pointer-events:none!important;
+  content:"";position:absolute!important;z-index:0!important;pointer-events:none!important;
   display:block!important;border:0!important;border-radius:50%!important;filter:blur(2px)!important
 }
 #desktop-root>.vm-shell:before{
