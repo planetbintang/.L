@@ -30,7 +30,7 @@ function slugify(v){return v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toL
 function safeDomain(v){const s=v.trim().toLowerCase().replace(/\.$/,'');return s.length<=253&&s.split('.').length>=2&&s.split('.').every(x=>x.length>0&&x.length<=63&&/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(x))}
 function render(app,f,health);
  try {
-   const layerRuntimeUrl = new URL('../../layer-system/runtime.js',location.href);
+   const layerRuntimeUrl = new URL('../../../layer-system/runtime.js',location.href);
    const layers = await import(layerRuntimeUrl.href);
    await layers.mountFeatureLayer(app,f);
  } catch (layerError) {
