@@ -24,8 +24,9 @@ const iso=()=>new Date().toISOString();
 let persistQueue=Promise.resolve();
 function persist(){
  const snapshot=JSON.stringify(db,null,2);
- persistQueue=persistQueue.then(async()=>{const tmp=DATA_FILE+'.'+crypto.randomUUID()+'.tmp';await writeFile(tmp,snapshot,{mode:0o600});await rename(tmp,DATA_FILE);});
- return persistQueue;
+ const write=persistQueue.catch(()=>{}).then(async()=>{const tmp=DATA_FILE+'.'+crypto.randomUUID()+'.tmp';await writeFile(tmp,snapshot,{mode:0o600});await rename(tmp,DATA_FILE);});
+ persistQueue=write;
+ return write;
 }
 function send(res,status,payload){res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','x-frame-options':'DENY','referrer-policy':'no-referrer','content-security-policy':"default-src 'none'; frame-ancestors 'none'",'permissions-policy':'camera=(), microphone=(), geolocation=()'});res.end(JSON.stringify(payload));}
 function cors(req,res){
