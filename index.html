@@ -155,6 +155,9 @@
       @media (max-width: 760px) {
         .topbar > .main-nav > * + *::before { margin-right: 6px; }
       }
+      .topbar > .main-nav { text-transform: uppercase; }
+      .topbar > .main-nav .nav-dropdown-menu { text-transform: none; }
+      .common-site-menu-card .common-site-menu-copy b { text-transform: uppercase; }
       /* Semua menu tingkat utama ditampilkan langsung; tidak ada wadah "Lainnya". */
       .topbar > .main-nav { display:flex !important; flex-wrap:wrap !important; align-items:center; justify-content:flex-start; overflow:visible !important; white-space:normal !important; max-height:none !important; }
       .topbar > .main-nav > * { display:inline-flex !important; flex:0 0 auto !important; visibility:visible !important; opacity:1 !important; }
@@ -201,7 +204,9 @@
           <a href="#aircloud/devops-toolchain" data-system-route="aircloud-devops-toolchain"><b>DevOps Toolchain</b><small>AC-M011 · CI/CD &amp; pipeline</small></a>
           <a href="#fileManager/airz" data-system-route="file-manager"><b>Root /airz</b><small>Repo .AIRZ · mirror folder airz/</small></a>
         </div></details>
-        <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI Reber</a>
+        <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI REBER</a>
+        <a class="main-nav-link" href="./vendordomain/pricing/" aria-label="Buka Harga dan Pembayaran">HARGA DAN PEMBAYARAN</a>
+        <a class="main-nav-link" href="./dokumen/" aria-label="Buka Dokumen">DOKUMEN</a>
         
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         
@@ -305,6 +310,8 @@
           <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>Deploy &amp; rilis</b><small>Akses ringkasan deployment dan lingkungan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/help" data-system-route="workspace-help"><span class="common-site-menu-icon" aria-hidden="true">?</span><span class="common-site-menu-copy"><b>Bantuan</b><small>Panduan penggunaan fitur dan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/account" data-system-route="workspace-account"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>Pengaturan</b><small>Preferensi dan pengaturan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vendordomain/pricing/"><span class="common-site-menu-icon" aria-hidden="true">₨</span><span class="common-site-menu-copy"><b>Harga dan Pembayaran</b><small>Daftar harga REIC, ketentuan, dan metode pembayaran.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./dokumen/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>Dokumen</b><small>Pusat panduan, dokumentasi, struktur, dan referensi sistem.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
         </div>
         <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Menu terhubung ke modul situs</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
       </section>
