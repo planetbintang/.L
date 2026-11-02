@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  color: var(--reic-text, #e8edf5);
+  background: var(--reic-surface, #151c2b);
+  font: 400 0.875rem/1.5 system-ui, sans-serif;
+}
+.reic-integrity {
+  display: grid;
+  gap: .65rem;
+  padding: 1rem;
+  border: 1px solid var(--reic-border, #354158);
+  border-radius: .75rem;
+}
+.reic-integrity[data-state="valid"] { border-color: var(--reic-success, #27865d); }
+.reic-integrity[data-state="invalid"] { border-color: var(--reic-danger, #bd4652); }
+.reic-integrity__title { margin: 0; font-weight: 650; }
+.reic-integrity__checks { margin: 0; padding-inline-start: 1.25rem; }
