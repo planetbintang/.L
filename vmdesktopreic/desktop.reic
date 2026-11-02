@@ -1,5 +1,15 @@
 <div class="vm-shell" id="vmDesktop" data-resolution="1920x1080" data-vm-instance="PB-VM-CORE-001" data-runtime-theme="version-runtime" data-vm-count="1" data-vm-bits="10">
-<header class="vm-header"><div class="vm-brand"><span class="vm-logo">★</span><b>PlanetBintang <i>.L/</i></b></div><div class="vm-search"><span>⌕</span><input id="desktopSearch" placeholder="Cari di PlanetBintang..."><small>⌕</small></div><div class="vm-header-tools"><button data-open="apps" title="Aplikasi">▦</button><button type="button" data-wallpaper-toggle aria-label="Jeda animasi wallpaper" aria-pressed="false" title="Jeda animasi wallpaper">✧</button><button data-open="keyboard" title="Keyboard REIC">⌨</button><button data-open="notifications">♧</button><button data-open="account">◉</button><div class="vm-clock"><b id="vmClock">--:--</b><small id="vmDate">--</small></div><button data-open="settings">⚙</button></div></header>
+<header class="vm-header reic-topbar">
+<div class="vm-brand"><span class="vm-logo">ℙ</span><div><b>VMDESKTOP REIC</b><small>PLANETBINTANG</small></div></div>
+<input id="desktopSearch" class="reic-hidden-search" aria-hidden="true" tabindex="-1">
+<nav class="vm-header-tools reic-top-tools" aria-label="Alat desktop">
+<button data-open="files" title="Folder File Manager" aria-label="Folder File Manager">📁</button>
+<button data-open="display" title="Galeri dan wallpaper" aria-label="Galeri dan wallpaper">▧</button>
+<button data-open="documents" title="Dokumen" aria-label="Dokumen">▤</button>
+<button data-open="settings" title="Pengaturan" aria-label="Pengaturan">⚙</button>
+<button data-open="status" title="Layar dan status VM" aria-label="Layar dan status VM">▣</button>
+<button data-open="power" title="Daya" aria-label="Daya">⏻</button>
+</nav></header>
 <main class="vm-desktop">
 <aside class="vm-core-menu" aria-label="Enam menu utama VMDESKTOPREIC">
 <button class="core-item active" data-core="settings" title="Pengaturan" aria-label="Pengaturan"><span>⚙</span><b>PENGATURAN</b></button>
@@ -50,7 +60,7 @@
 <div class="vm-center-search"><span>⌕</span><input id="centerSearch" placeholder="CARI APLIKASI ATAU KOMPONEN REIC..."></div>
 <div class="vm-desktop-hint"><b>ONE VM · ONE GLOBAL CORE</b><span>10 LAPISAN SISTEM · BINARY CONTROL · OS MEDIA VM / REIC</span></div>
 </section>
-<aside class="vm-mini-tools"><button data-open="status" title="Status">◉</button><button data-open="display" title="Tampilan">▣</button><button data-open="help" title="Bantuan">▤</button><button data-open="version" title="Versi">0.1</button><button data-open="power" title="Daya">◐</button></aside>
+<aside class="vm-mini-tools" aria-label="Alat cepat desktop"></aside>
 <div class="vm-modal-backdrop" id="modalBackdrop" hidden><section class="vm-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header><span id="modalIcon">⚙</span><b id="modalTitle">Pengaturan Sistem</b><div><button id="modalMin" aria-label="Minimalkan">—</button><button id="modalMax" aria-label="Maksimalkan">□</button><button id="modalClose" aria-label="Tutup">×</button></div></header><nav class="modal-tabs" id="modalTabs"></nav><div class="modal-body" id="modalBody"></div><footer><span id="modalStatus">OS MEDIA VM · MODUL REIC</span><button id="modalSave">✓ SIMPAN</button></footer></section></div>
 </main><footer class="vm-statusbar"><span><i></i> Sistem Berjalan Normal</span><div class="status-progress"><b></b></div><span>◉　Wi-Fi　 |　 RAM 8 GB　 |　 SSD 256 GB　 |　 ▣</span></footer>
 </div>
