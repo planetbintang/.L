@@ -1,0 +1,27 @@
+export function validateResource(resource = {}) {
+  const errors = [];
+  const checks = [];
+  const id = typeof resource.resource_id === "string" ? resource.resource_id.trim() : "";
+  const path = typeof resource.resource_path === "string" ? resource.resource_path : "";
+
+  const idValid = /^[A-Za-z0-9._-]{1,128}$/.test(id);
+  checks.push({ name: "resource_id", passed: idValid });
+  if (!idValid) errors.push("resource_id tidak valid");
+
+  const pathValid = path.length > 0 &&
+    !path.includes("\\") &&
+    !path.split("/").some(segment => segment === "..");
+  checks.push({ name: "resource_path", passed: pathValid });
+  if (!pathValid) errors.push("resource_path kosong atau mengandung traversal");
+
+  const metadataValid = resource.metadata === undefined ||
+    (resource.metadata !== null && typeof resource.metadata === "object" && !Array.isArray(resource.metadata));
+  checks.push({ name: "metadata", passed: metadataValid });
+  if (!metadataValid) errors.push("metadata harus berupa objek");
+
+  return Object.freeze({
+    valid: errors.length === 0,
+    checks: Object.freeze(checks),
+    errors: Object.freeze(errors)
+  });
+}
