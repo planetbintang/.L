@@ -206,7 +206,7 @@
         </div></details>
         <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI REBER</a>
         <a class="main-nav-link" href="./vendordomain/pricing/" aria-label="Buka Harga dan Pembayaran">HARGA DAN PEMBAYARAN</a>
-        <a class="main-nav-link" href="./dokumen/" aria-label="Buka Dokumen">DOKUMEN</a>
+        <a class="main-nav-link" href="./dokumen/" aria-label="Buka REIC Dokumen">REIC DOKUMEN</a>
         
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         
@@ -310,8 +310,8 @@
           <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>Deploy &amp; rilis</b><small>Akses ringkasan deployment dan lingkungan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/help" data-system-route="workspace-help"><span class="common-site-menu-icon" aria-hidden="true">?</span><span class="common-site-menu-copy"><b>Bantuan</b><small>Panduan penggunaan fitur dan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/account" data-system-route="workspace-account"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>Pengaturan</b><small>Preferensi dan pengaturan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
-          <a class="common-site-menu-card" href="./vendordomain/pricing/"><span class="common-site-menu-icon" aria-hidden="true">₨</span><span class="common-site-menu-copy"><b>Harga dan Pembayaran</b><small>Daftar harga REIC, ketentuan, dan metode pembayaran.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
-          <a class="common-site-menu-card" href="./dokumen/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>Dokumen</b><small>Pusat panduan, dokumentasi, struktur, dan referensi sistem.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vendordomain/pricing/"><span class="common-site-menu-icon" aria-hidden="true">₨</span><span class="common-site-menu-copy"><b>Harga dan Pembayaran</b><small>Katalog satuan REIC, estimasi harga, kebijakan OWNER, dan kanal pembayaran.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./dokumen/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>REIC Dokumen</b><small>Pusat dokumen REIC, blueprint, spesifikasi komponen, dan referensi teknis.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
         </div>
         <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Menu terhubung ke modul situs</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
       </section>
@@ -332,7 +332,20 @@
       button,input,select,textarea{max-width:100%;min-width:0}
       @media(max-width:760px){.main-content{padding-left:12px!important;padding-right:12px!important}.section-heading{gap:10px;flex-wrap:wrap}.toolbar,.fm-toolbar{flex-wrap:wrap}.fm-layout{grid-template-columns:minmax(0,1fr)!important}.fm-sidebar,.fm-inspector{min-width:0;max-width:100%}}
 
-</style>
+
+      /* Kartu akses harga dan dokumen memiliki hierarki informasi khusus, tetap serasi dengan tema SNAPS. */
+      .common-site-menu-card[href="./vendordomain/pricing/"],
+      .common-site-menu-card[href="./dokumen/"]{min-height:142px;align-items:flex-start;background:linear-gradient(145deg,rgba(17,42,66,.96),rgba(7,18,34,.98));border-color:rgba(115,207,255,.32)}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-icon{color:#ffd27d}
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-icon{color:#83d8ff}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-copy b,
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-copy b{font-size:.92rem;letter-spacing:.045em}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-copy small,
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-copy small{line-height:1.65;max-width:42ch}
+      .common-site-menu-card[href="./vendordomain/pricing/"]:hover,
+      .common-site-menu-card[href="./dokumen/"]:hover{border-color:#73cfff;background:linear-gradient(145deg,#153b5a,#0a1b2d)}
+      @media(max-width:640px){.common-site-menu-card[href="./vendordomain/pricing/"],.common-site-menu-card[href="./dokumen/"]{min-height:112px}}
+    </style>
 <section class="provider-matrix" data-system-page="system" aria-labelledby="providerMatrixTitle">
         <header><div><p>Antarmuka mengadopsi pola kerja umum tiap platform; konektor dan data live ditandai apa adanya.</p></div><span class="provider-matrix-badge">READ-ONLY ADAPTER MAP</span></header>
         <div class="provider-grid">
