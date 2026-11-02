@@ -1,4 +1,4 @@
-name: Generate REIC system batches (656.1k)
+name: Generate complete REIC system (1.5 million files)
 on:
   workflow_dispatch:
 permissions:
@@ -40,12 +40,48 @@ jobs:
         run: node scripts/generate-reic-batch.mjs --start 555080 --count 50510
       - name: Generate continuation 10/10 — 50,510 files
         run: node scripts/generate-reic-batch.mjs --start 605590 --count 50510
-      - name: Verify all 656,100 files
-        run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 656100 --start 0
-      - name: Upload verified REIC batches
+      - name: Generate continuation 1/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 656100 --count 50000
+      - name: Generate continuation 2/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 706100 --count 50000
+      - name: Generate continuation 3/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 756100 --count 50000
+      - name: Generate continuation 4/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 806100 --count 50000
+      - name: Generate continuation 5/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 856100 --count 50000
+      - name: Generate continuation 6/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 906100 --count 50000
+      - name: Generate continuation 7/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 956100 --count 50000
+      - name: Generate continuation 8/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1006100 --count 50000
+      - name: Generate continuation 9/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1056100 --count 50000
+      - name: Generate continuation 10/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1106100 --count 50000
+      - name: Generate continuation 11/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1156100 --count 50000
+      - name: Generate continuation 12/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1206100 --count 50000
+      - name: Generate continuation 13/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1256100 --count 50000
+      - name: Generate continuation 14/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1306100 --count 50000
+      - name: Generate continuation 15/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1356100 --count 50000
+      - name: Generate continuation 16/17 — 50,000 files
+        run: node scripts/generate-reic-batch.mjs --start 1406100 --count 50000
+      - name: Generate continuation 17/17 — 43,900 files
+        run: node scripts/generate-reic-batch.mjs --start 1456100 --count 43900
+      - name: Verify all 1,500,000 files
+        run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 1500000 --start 0
+      - name: Package verified REIC files
+        run: tar -czf planetbintang-reic-1500000.tar.gz -C osmediavm/recordin generated
+      - name: Upload verified REIC archive
         uses: actions/upload-artifact@v4
         with:
-          name: planetbintang-reic-656100
-          path: osmediavm/recordin/generated/
+          name: planetbintang-reic-1500000
+          path: planetbintang-reic-1500000.tar.gz
           if-no-files-found: error
           retention-days: 30
