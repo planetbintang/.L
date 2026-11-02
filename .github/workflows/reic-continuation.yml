@@ -1,0 +1,54 @@
+name: REIC continuation batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: First module number (inclusive)
+        required: true
+        type: number
+      count:
+        description: Modules in this batch (maximum 33333)
+        required: true
+        default: 1000
+        type: number
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout continuation branch
+        uses: actions/checkout@v4
+        with:
+          ref: io
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate batch range
+        env:
+          START: ${{ inputs.start }}
+          COUNT: ${{ inputs.count }}
+        run: |
+          node -e 'const s=Number(process.env.START),c=Number(process.env.COUNT);if(!Number.isInteger(s)||s<1||!Number.isInteger(c)||c<1||c>33333)process.exit(1)'
+      - name: Generate REIC component files
+        env:
+          START: ${{ inputs.start }}
+          COUNT: ${{ inputs.count }}
+        run: |
+          BATCH="batch-${START}-${COUNT}"
+          OUT="vmdesktopreic/reic1500000/continuation/${BATCH}"
+          node vmdesktopreic/reic1500000/generate.mjs --start "${START}" --count "${COUNT}" --out "${OUT}" --write
+          EXPECTED=$((COUNT * 3 + 1))
+          ACTUAL=$(find "${OUT}" -type f | wc -l)
+          test "${ACTUAL}" -eq "${EXPECTED}"
+      - name: Commit generated batch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vmdesktopreic/reic1500000/continuation/
+          git commit -m "Generate REIC continuation modules ${{ inputs.start }}-${{ inputs.start + inputs.count - 1 }}"
+          git push origin HEAD:io
