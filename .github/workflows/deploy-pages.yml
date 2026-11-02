@@ -31,15 +31,14 @@ jobs:
         with:
           enablement: true
 
-      - name: Build all browser pages from canonical REIC files
+      - name: Build and verify browser pages from canonical REIC files
         run: python3 scripts/build-reic-pages.py
 
-      - name: Validate REIC-to-HTML file circulation
+      - name: Validate root REIC and Pages markers
         run: |
           test -f index.reic
           test -f index.html
           test -f .nojekyll
-          python3 scripts/build-reic-pages.py --check
 
       - name: Upload complete static site
         uses: actions/upload-pages-artifact@v4
