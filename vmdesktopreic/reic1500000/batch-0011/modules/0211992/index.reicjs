@@ -1,0 +1,3 @@
+/* REIC MODULE 0211992 */
+export const reicModule=Object.freeze({id:"0211992",name:"REIC MODULE 0211992",version:"1.0.0"});
+export function mount(root){if(!root)return false;root.dataset.reicModule=reicModule.id;root.dispatchEvent(new CustomEvent("reic:module-ready",{bubbles:true,detail:reicModule}));return true;}
