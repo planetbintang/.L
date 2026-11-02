@@ -1,0 +1,69 @@
+{
+  "format": "REIC/1.0",
+  "id": "reic31.window-manager",
+  "title": "REIC WINDOW MANAGER",
+  "version": "1.0.0",
+  "moduleIndex": 6,
+  "group": "VMDESKTOPREIC",
+  "description": "Create, focus, resize and arrange desktop windows",
+  "runtime": {
+    "entry": "view",
+    "lifecycle": [
+      "mount",
+      "activate",
+      "deactivate",
+      "dispose"
+    ],
+    "permissions": [
+      "ui.read",
+      "ui.write",
+      "registry.read"
+    ],
+    "state": {
+      "status": "ready",
+      "active": false
+    }
+  },
+  "interface": {
+    "layout": "square-panel",
+    "controls": [
+      "open",
+      "close",
+      "refresh"
+    ],
+    "events": [
+      "ready",
+      "change",
+      "error"
+    ]
+  },
+  "actions": [
+    {
+      "id": "initialize",
+      "trigger": "mount",
+      "effect": "register-module"
+    },
+    {
+      "id": "activate",
+      "trigger": "user.open",
+      "effect": "set-active"
+    },
+    {
+      "id": "deactivate",
+      "trigger": "user.close",
+      "effect": "release-view"
+    }
+  ],
+  "validation": {
+    "required": [
+      "id",
+      "title",
+      "runtime.entry"
+    ],
+    "strict": true
+  },
+  "compatibility": {
+    "desktop": "VMDESKTOPREIC",
+    "registry": "vmdesktopreic/reic31/registry.json"
+  }
+}
