@@ -46,3 +46,14 @@ Layer System menambahkan 1.500 file sumber khusus untuk 500 fitur (tiga file per
 Runtime bersama berada di `layer-system/`: `runtime.js` memuat manifest, kontrak, dan controller; `engine.js` membangun panel konfigurasi; `engine.css` menyediakan layout; `registry.json` mendaftarkan seluruh 500 bundle. `features/feature-runtime.js` menghubungkan setiap halaman fitur ke runtime lapisan.
 
 Setiap halaman menampilkan 10 lapisan: Identity & Registry, Presentation & REIC, Service Contract, Controller Runtime, Validation Engine, Persistence Adapter, Security Policy, Observability, API Boundary, dan Deployment Metadata. Mesin browser mendukung validasi JSON, penyimpanan lokal, serta ekspor konfigurasi. Ini merupakan scaffold runtime aktif untuk konfigurasi lokal, bukan klaim bahwa seluruh operasi provider cloud telah aktif. Provisioning, registrar, billing, database persisten, dan operasi DNS tetap memerlukan backend dan kredensial provider yang aman.
+
+## Ekosistem platform dan operasi
+
+- [Service catalog](./ecosystem/service-catalog.json) — status domain layanan dan dependensi provider.
+- [Event envelope](./ecosystem/event-envelope.schema.json) — kontrak event berversi untuk integrasi asinkron.
+- [Provider adapter contract](./ecosystem/provider-adapter-contract.md) — batas aman integrasi pihak ketiga.
+- [Production readiness checklist](./ecosystem/production-readiness.md) — gerbang keamanan dan kesiapan produksi.
+- [PostgreSQL core migration](./backend/migrations/001_core.sql) — skema tenant, user, membership, project, domain, DNS, instance, dan audit.
+- [Backend integration tests](./backend/test/server.test.mjs) — pengujian API melalui Node.js test runner; CI workflow ada di `.github/workflows/vendordomain-api-tests.yml`.
+
+Navigasi VendorDomain sekarang memiliki pintasan **CENTRAL CLOUD** ke control plane katalog layanan.
