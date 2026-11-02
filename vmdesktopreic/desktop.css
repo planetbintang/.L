@@ -1381,3 +1381,108 @@ html,body{
  #desktop-root{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)!important}
  #desktop-root>.vm-shell{width:100%!important;height:100%!important}
 }
+
+
+/* VMDESKTOPREIC · REIC BLUE ANIMATED DESKTOP — full-screen reference layout */
+:root{--reic-blue:#0758ec;--reic-cyan:#61dcff;--reic-white:#f4fbff}
+html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;background:#0758ec}
+#desktop-root{position:fixed;inset:0;padding:0!important;display:block!important}
+#desktop-root>.vm-shell{
+ position:relative!important;display:block!important;width:100%!important;height:100%!important;
+ min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;
+ margin:0!important;padding:0!important;overflow:hidden!important;transform:none!important;
+ border:3px solid var(--reic-white)!important;border-radius:0!important;box-shadow:inset 0 0 0 2px #ffffff55!important;
+ background:linear-gradient(125deg,#0647d5 0%,#0864fa 46%,#0038b7 100%)!important;color:#fff
+}
+#desktop-root>.vm-shell:before{
+ content:"";position:absolute;inset:-18%;z-index:0;pointer-events:none;
+ background:
+  radial-gradient(circle at 16% 72%,#25d7ff88 0 2px,transparent 5px),
+  radial-gradient(circle at 68% 28%,#b8f7ffcc 0 3px,transparent 6px),
+  radial-gradient(circle at 83% 76%,#20baff99 0 3px,transparent 7px),
+  radial-gradient(ellipse at 25% 58%,#1c9effaa 0%,transparent 38%),
+  radial-gradient(ellipse at 76% 44%,#0069ff 0%,transparent 45%),
+  linear-gradient(150deg,transparent 42%,#08a9ff99 43%,#8cecff 44%,#0877f5 45%,transparent 56%),
+  linear-gradient(25deg,transparent 34%,#0052df 35%,#20b8ff 39%,#8cecff 40%,#0874f7 42%,transparent 58%),
+  linear-gradient(160deg,#0341c4,#0871ff 55%,#0033ad);
+ background-size:100% 100%;animation:reic-wall-drift 22s ease-in-out infinite alternate
+}
+#desktop-root>.vm-shell:after{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.28;
+ background-image:radial-gradient(#dffaff 1px,transparent 1.8px);
+ background-size:97px 83px;animation:reic-particles 28s linear infinite
+}
+@keyframes reic-wall-drift{0%{transform:translate3d(-2%,1%,0) scale(1)}100%{transform:translate3d(2%,-1%,0) scale(1.08)}}
+@keyframes reic-particles{from{background-position:0 0}to{background-position:194px -166px}}
+#desktop-root .vm-header,#desktop-root .vm-statusbar{display:none!important}
+#desktop-root .vm-desktop{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ min-height:0!important;margin:0!important;padding:0!important;display:block!important;
+ overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important
+}
+#desktop-root .vm-core-menu{
+ position:absolute!important;z-index:4!important;left:10px!important;top:50%!important;
+ transform:translateY(-50%)!important;width:clamp(230px,17vw,270px)!important;height:auto!important;
+ padding:0!important;margin:0!important;display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:center!important;gap:9px!important;
+ overflow:visible!important;border:0!important;background:transparent!important
+}
+#desktop-root .core-item,#desktop-root .core-item:hover,#desktop-root .core-item.active{
+ width:100%!important;max-width:none!important;min-width:0!important;height:54px!important;min-height:54px!important;
+ flex:0 0 54px!important;display:flex!important;align-items:center!important;gap:9px!important;
+ padding:4px!important;transform:none!important;border:2px solid #eafaff!important;border-radius:0!important;
+ background:linear-gradient(90deg,#087df2dd,#d8efff)!important;color:#0750b8!important;
+ box-shadow:0 2px 12px #002d9a55!important;text-align:left!important
+}
+#desktop-root .core-item>span{
+ width:42px!important;height:42px!important;flex:0 0 42px!important;display:grid!important;place-items:center!important;
+ border:1px solid #b8f2ff!important;border-radius:0!important;background:linear-gradient(145deg,#20caff,#0750d8)!important;
+ color:#fff!important;font-size:25px!important
+}
+#desktop-root .core-item b,#desktop-root .core-item:hover b,#desktop-root .core-item.active b{
+ display:block!important;flex:1!important;opacity:1!important;transform:none!important;
+ color:#0750b8!important;font-size:clamp(10px,.78vw,13px)!important;line-height:1.2!important;
+ white-space:normal!important;letter-spacing:.025em!important
+}
+#desktop-root .core-item i{display:none!important}
+#desktop-root .core-item:hover,#desktop-root .core-item.active{
+ background:linear-gradient(90deg,#20aaff,#f2fbff)!important;border-color:#fff!important;
+ box-shadow:0 0 18px #a4edff99!important
+}
+#desktop-root .vm-workspace{position:absolute!important;z-index:2!important;inset:0!important;display:grid!important;place-items:center!important;pointer-events:none!important}
+#desktop-root .vm-binary-map{display:none!important}
+#desktop-root .vm-center-search{
+ width:clamp(230px,19vw,300px)!important;height:48px!important;max-width:calc(100vw - 32px)!important;
+ padding:0 12px!important;border:4px solid #f5fcff!important;border-radius:28px!important;
+ background:#0756d766!important;box-shadow:0 0 16px #b7f4ff66!important;pointer-events:auto!important
+}
+#desktop-root .vm-center-search input{font-size:13px!important;color:#fff!important}
+#desktop-root .vm-mini-tools{
+ position:absolute!important;z-index:5!important;right:clamp(10px,3.5vw,54px)!important;top:clamp(10px,5vh,52px)!important;
+ display:flex!important;gap:3px!important;padding:3px!important;border:2px solid #a9eeff!important;
+ border-radius:0!important;background:#0754c9bb!important;backdrop-filter:blur(8px)
+}
+#desktop-root .vm-mini-tools button{
+ width:39px!important;height:34px!important;flex:0 0 39px!important;border:1px solid #7fdcff!important;
+ border-radius:0!important;background:#0874e8!important;color:#fff!important;font-size:17px!important
+}
+#desktop-root .vm-slide-panel{display:none!important}
+#desktop-root .vm-modal-backdrop{z-index:20!important}
+#desktop-root .vm-modal{border-radius:0!important}
+#desktop-root .vm-modal>header,#desktop-root .vm-modal>footer,
+#desktop-root .modal-tabs button,#desktop-root .menu-choice,
+#desktop-root .content-card,#desktop-root .settings-group{border-radius:0!important}
+#desktop-root .vm-shell.wallpaper-paused:before,
+#desktop-root .vm-shell.wallpaper-paused:after{animation-play-state:paused!important}
+@media(max-width:640px){
+ #desktop-root .vm-core-menu{left:6px!important;width:min(206px,54vw)!important;gap:7px!important}
+ #desktop-root .core-item,#desktop-root .core-item:hover,#desktop-root .core-item.active{height:48px!important;min-height:48px!important;flex-basis:48px!important;gap:6px!important}
+ #desktop-root .core-item>span{width:36px!important;height:36px!important;flex-basis:36px!important;font-size:21px!important}
+ #desktop-root .core-item b{font-size:9px!important}
+ #desktop-root .vm-mini-tools{right:8px!important;top:8px!important}
+ #desktop-root .vm-mini-tools button{width:30px!important;flex-basis:30px!important;height:30px!important;font-size:14px!important}
+ #desktop-root .vm-center-search{width:210px!important;height:42px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}
+}
