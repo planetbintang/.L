@@ -1,42 +1,31 @@
-name: Generate REIC batch
+name: Generate initial REIC batches (51k + 100k)
 on:
   workflow_dispatch:
-    inputs:
-      start:
-        description: "Starting REIC index (0–1499999)"
-        required: true
-        default: "0"
-        type: string
-      count:
-        description: "Number of files in this batch (maximum 100000)"
-        required: true
-        default: "100000"
-        type: string
 permissions:
   contents: read
 jobs:
-  generate:
+  generate-in-order:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: io
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Validate batch range
-        env:
-          START: ${{ inputs.start }}
-          COUNT: ${{ inputs.count }}
-        run: |
-          node -e "const s=Number(process.env.START),c=Number(process.env.COUNT);if(!Number.isSafeInteger(s)||!Number.isSafeInteger(c)||s<0||c<1||c>100000||s+c>1500000)process.exit(1)"
-      - name: Generate REIC files
-        run: node scripts/generate-reic-batch.mjs --start "${{ inputs.start }}" --count "${{ inputs.count }}"
-      - name: Upload generated batch
+      - name: Generate first batch — 51,000 files
+        run: node scripts/generate-reic-batch.mjs --start 0 --count 51000
+      - name: Generate second batch — 100,000 files
+        run: node scripts/generate-reic-batch.mjs --start 51000 --count 100000
+      - name: Verify all 151,000 files
+        run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 151000 --start 0
+      - name: Upload verified REIC batches
         uses: actions/upload-artifact@v4
         with:
-          name: reic-batch-${{ inputs.start }}-${{ inputs.count }}
+          name: planetbintang-reic-initial-151000
           path: osmediavm/recordin/generated/
           if-no-files-found: error
           retention-days: 30
