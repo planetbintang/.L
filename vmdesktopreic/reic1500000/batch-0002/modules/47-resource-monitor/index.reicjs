@@ -1,0 +1,12 @@
+export const moduleInfo = Object.freeze({ id: "47", slug: "resource-monitor", title: "Pemantau Sumber Daya", description: "Menyediakan indikator penggunaan sumber daya.", format: "REIC31" });
+export function mount(root) {
+  if (!root) throw new TypeError("REIC module requires a root element");
+  const status = root.querySelector(".reic-module__status");
+  const button = root.querySelector('[data-reic-action="inspect"]');
+  const onInspect = () => {
+    if (status) status.textContent = "PEMERIKSAAN SELESAI · " + moduleInfo.id;
+    root.dispatchEvent(new CustomEvent("reic:module-inspected", { bubbles: true, detail: moduleInfo }));
+  };
+  button?.addEventListener("click", onInspect);
+  return () => button?.removeEventListener("click", onInspect);
+}
