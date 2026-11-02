@@ -1101,6 +1101,8 @@ Isi dari panel provider yang dipilih:
       } else button.textContent = basename(item.path);
       button.addEventListener('click', () => {
         if (item.repositoryRoot) {
+          const indexed = state.data?.repositories?.some((repo) => repo.fullName === item.repositoryRoot);
+          if (!indexed && item.treeUrl) { window.open(item.treeUrl, '_blank', 'noopener,noreferrer'); return; }
           state.repo = item.repositoryRoot; state.path = ''; state.query = ''; state.selected = null;
           $('#fileSearchInput').value = '';
           const select = $('#fileRepoSelect'); if (select) select.value = state.repo;
@@ -1144,17 +1146,23 @@ Isi dari panel provider yang dipilih:
     // Semua repositori owner ditampilkan sebagai folder virtual pada root /. 
     // Folder ini membuka pohon Git repositori sumber tanpa menyalin isi repo ke .L.
     const repositoryRootEntries = (isLRepo() && !state.path)
-      ? (state.data?.repositories || [])
-          .filter((repo) => repo && repo.fullName && repo.fullName !== L_REPO && !isHiddenRepository(repo))
-          .map((repo) => ({
-            path: `@repositories/${repo.name}`,
-            name: repo.name,
-            type: 'directory',
-            mode: '040755',
-            items: Number(repo.tree?.entryCount || repo.rootItemCount || 0),
-            function: `Repositori sumber ${repo.fullName} · klik untuk menelusuri pohon Git pada cabang ${repo.branch || 'default'}`,
-            repositoryRoot: repo.fullName,
-          }))
+      ? [
+          ...(state.data?.repositories || [])
+            .filter((repo) => repo && repo.fullName && repo.fullName !== L_REPO)
+            .map((repo) => ({
+              path: `@repositories/${repo.name}`,
+              name: repo.name,
+              type: 'directory',
+              mode: '040755',
+              items: Number(repo.tree?.entryCount || repo.rootItemCount || 0),
+              function: `Repositori sumber ${repo.fullName} · klik untuk menelusuri pohon Git pada cabang ${repo.branch || 'default'}`,
+              repositoryRoot: repo.fullName,
+            })),
+          // Dua repositori yang sudah ada di katalog GitHub tetapi belum memiliki
+          // indeks pohon lokal; tetap tampilkan sebagai folder dengan tautan sumber.
+          { path: '@repositories/100.100.100.9', name: '100.100.100.9', type: 'directory', mode: '040755', function: 'Repositori sumber; buka pohon GitHub untuk menelusuri berkas', repositoryRoot: 'planetbintang/100.100.100.9', treeUrl: 'https://github.com/planetbintang/100.100.100.9/tree/io' },
+          { path: '@repositories/aireber', name: 'aireber', type: 'directory', mode: '040755', function: 'Repositori sumber; buka pohon GitHub untuk menelusuri berkas', repositoryRoot: 'planetbintang/aireber', treeUrl: 'https://github.com/planetbintang/aireber/tree/io' },
+        ]
       : [];
     const allItems = [...state.entries, ...lRootVirtual, ...repositoryRootEntries];
     // Sembunyikan folder root bernama satu digit (0–9) hanya pada tampilan File Manager.
@@ -1178,6 +1186,8 @@ Isi dari panel provider yang dipilih:
       tile.append(icon, el('span', basename(item.path), 'file-tile-name'), el('span', item.type === 'directory' ? 'FOLDER' : `${kind(item)} · ${sizeText(item)}`, 'file-tile-meta'));
       tile.addEventListener('click', () => {
         if (item.repositoryRoot) {
+          const indexed = state.data?.repositories?.some((repo) => repo.fullName === item.repositoryRoot);
+          if (!indexed && item.treeUrl) { window.open(item.treeUrl, '_blank', 'noopener,noreferrer'); return; }
           state.repo = item.repositoryRoot;
           state.path = '';
           state.query = '';
