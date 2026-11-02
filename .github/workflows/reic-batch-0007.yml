@@ -1,0 +1,55 @@
+name: Bangun 15.000 file fisik REIC — batch 0007
+on:
+  push:
+    branches: [io]
+    paths:
+      - 'vmdesktopreic/reic1500000/generate.mjs'
+      - '.github/workflows/reic-batch-0007.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: reic-physical-batch-0007
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Hasilkan 5.000 modul atau 15.000 file REIC
+        run: node vmdesktopreic/reic1500000/generate.mjs --start 139 --count 5000 --out vmdesktopreic/reic1500000/batch-0007 --write
+      - name: Validasi seluruh file batch
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const root = 'vmdesktopreic/reic1500000/batch-0007';
+          const manifest = JSON.parse(fs.readFileSync(path.join(root, 'batch-manifest.json'), 'utf8'));
+          if (manifest.batch.physicalFiles !== 15000 || manifest.batch.count !== 5000 || manifest.written !== true) {
+            throw new Error('Ringkasan batch tidak sesuai target 15.000 file');
+          }
+          let checked = 0;
+          for (const record of manifest.records) {
+            for (const relative of record.files) {
+              const file = path.join(root, relative);
+              if (!fs.existsSync(file) || fs.statSync(file).size === 0) throw new Error('File hilang/kosong: ' + file);
+              checked++;
+            }
+          }
+          if (checked !== 15000) throw new Error('Jumlah file tervalidasi: ' + checked);
+          console.log('Validasi berhasil: ' + checked + ' file fisik REIC.');
+          NODE
+      - name: Commit batch 0007
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vmdesktopreic/reic1500000/batch-0007
+          git commit -m "Generate 15000 physical REIC files batch 0007"
+          git push origin HEAD:io
