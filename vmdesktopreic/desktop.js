@@ -400,15 +400,36 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   monitor:[['STATUS RUNTIME','devops-observabilitas'],['DEVOPS & OBSERVABILITAS','devops-observabilitas'],['SERVER & CLOUD','server-cloud']]
  };
  function launchCoreMenu(id,group,target){if(slidePanel)slidePanel.classList.remove('open');const destination=target||id;if(destination==='keyboard'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Keyboard REIC','keyboard');return;}if(destination==='files'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Beranda File','files');return;}renderShell(destination);if(destination==='keyboard'){renderKeyboard();return;}if(destination==='apps'){loadApps(group||'');return;}if(group)state.group=group;loadManifest(destination);}
- function showCoreSlide(id){const menu=menus[id];if(!menu)return;let items;if(id==='vmdesktopreic'){items=systemModules.map(x=>({title:x[0],group:x[1],target:x[0]==='KEYBOARD REIC'?'keyboard':id}));}else if(id==='apps'){items=[['PENGATURAN & SISTEM','system-apps'],['DESKTOP & PRODUKTIVITAS','desktop-productivity'],['FILE & DOKUMEN','file-documents'],['INTERNET & KOMUNIKASI','internet-communication'],['DESAIN & MEDIA','design-media'],['DATA & ANALITIK','data-analytics'],['DEVELOPER & RUNTIME','developer-runtime'],['AI & OTOMASI','ai-automation'],['SERVER & JARINGAN','server-network'],['UTILITAS & AKSESIBILITAS','utilities-accessibility']].map(x=>({title:x[0],group:x[1],target:'apps'}));}else if(id==='keyboard'){items=[['KEYBOARD INDEPENDENT','keyboard'],['LAYOUT TOMBOL','keyboard'],['OUTPUT TOMBOL','keyboard'],['ALFABETA AB / TAB','keyboard'],['NURNAISLI NL / NLD / J / Z','keyboard']].map(x=>({title:x[0],group:'',target:'keyboard'}));}else{items=(slideDefinitions[id]||menu.groups.map(g=>[groupNames[g]||g,g])).map(x=>({title:x[0],group:x[1],target:x[2]||id}));}
+ function showCoreSlide(id){
+  const menu=menus[id];if(!menu)return;
+  let items;
+  if(id==='vmdesktopreic'){items=systemModules.map(x=>({title:x[0],group:x[1],target:x[0]==='KEYBOARD REIC'?'keyboard':id}));}
+  else if(id==='apps'){items=[['PENGATURAN & SISTEM','system-apps'],['DESKTOP & PRODUKTIVITAS','desktop-productivity'],['FILE & DOKUMEN','file-documents'],['INTERNET & KOMUNIKASI','internet-communication'],['DESAIN & MEDIA','design-media'],['DATA & ANALITIK','data-analytics'],['DEVELOPER & RUNTIME','developer-runtime'],['AI & OTOMASI','ai-automation'],['SERVER & JARINGAN','server-network'],['UTILITAS & AKSESIBILITAS','utilities-accessibility']].map(x=>({title:x[0],group:x[1],target:'apps'}));}
+  else if(id==='keyboard'){items=[['KEYBOARD INDEPENDENT','keyboard'],['LAYOUT TOMBOL','keyboard'],['OUTPUT TOMBOL','keyboard'],['ALFABETA AB / TAB','keyboard'],['NURNAISLI NL / NLD / J / Z','keyboard']].map(x=>({title:x[0],group:'',target:'keyboard'}));}
+  else{items=(slideDefinitions[id]||menu.groups.map(g=>[groupNames[g]||g,g])).map(x=>({title:x[0],group:x[1],target:x[2]||id}));}
   if(!slidePanel||!slideItems){launchCoreMenu(id,'');return;}
   slideTitle.textContent=menu.title;slideIcon.textContent=menu.icon;slideItems.innerHTML='';
-  items.forEach((item,index)=>{const button=document.createElement('button');button.type='button';button.className='slide-choice';button.innerHTML='<span>'+String(index+1).padStart(2,'0')+'</span><b>'+esc(item.title)+'</b><i>›</i>';button.addEventListener('click',()=>launchCoreMenu(item.target||id,item.group,item.target));slideItems.append(button);});
-  slidePanel.classList.add('open');modalStatus.textContent='PILIH SUBMENU '+menu.title+' UNTUK MEMBUKA WORKSPACE.';
+  document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));
+  items.forEach((item,index)=>{
+   const button=document.createElement('button');button.type='button';button.className='slide-choice';
+   button.dataset.target=item.target||id;button.dataset.group=item.group||'';button.dataset.menu=id;
+   button.setAttribute('aria-label','Buka '+item.title+' di modal desktop');
+   button.innerHTML='<span>'+String(index+1).padStart(2,'0')+'</span><b>'+esc(item.title)+'</b><i>›</i>';
+   slideItems.append(button);
+  });
+  slidePanel.classList.add('open');slidePanel.setAttribute('aria-hidden','false');
+  modalStatus.textContent='PILIH SUBMENU '+menu.title+' · KLIK UNTUK MEMBUKA MODAL DI DALAM DESKTOP.';
  }
  function openCore(id){if(!menus[id])return;showCoreSlide(id);}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-wallpaper-toggle]');if(!b)return;const shell=document.querySelector('.vm-shell');if(!shell)return;const paused=shell.classList.toggle('wallpaper-paused');b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'✦':'✧';b.title=paused?'Lanjutkan animasi wallpaper':'Jeda animasi wallpaper';modalStatus.textContent=paused?'ANIMASI WALLPAPER DIJEDA':'ANIMASI WALLPAPER AKTIF';});
  document.addEventListener('click',e=>{const b=e.target.closest('.core-item[data-core]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();openCore(b.dataset.core);},true);
+ document.addEventListener('click',e=>{
+  const item=e.target.closest('#slideItems .slide-choice[data-target]');if(!item)return;
+  e.preventDefault();e.stopImmediatePropagation();
+  const destination=item.dataset.target,group=item.dataset.group||'';
+  if(slidePanel){slidePanel.classList.remove('open');slidePanel.setAttribute('aria-hidden','true');}
+  launchCoreMenu(destination,group,destination);
+ },true);
  document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const id=b.dataset.open;if(id==='settings'||id==='apps'||id==='keyboard'){e.preventDefault();e.stopImmediatePropagation();openCore(id==='keyboard'?'keyboard':id==='apps'?'apps':'settings');}},true);
  window.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.activeTab==='runtime'&&state.activeViews[state.core])setTab('catalog');});
  const observer=new MutationObserver(()=>{const count=modalTabs.querySelector('.wm-open-count');if(count)count.textContent=state.views.length;});observer.observe(modalTabs,{childList:true,subtree:true});
