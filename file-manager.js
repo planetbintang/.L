@@ -1099,7 +1099,14 @@ Isi dari panel provider yang dipilih:
         const img = document.createElement('img'); img.src = './folder-3d-icon.jpg'; img.alt = ''; img.className = 'fm-shortcut-icon';
         button.append(img, el('span', basename(item.path)));
       } else button.textContent = basename(item.path);
-      button.addEventListener('click', () => goTo(item.path)); list.append(button);
+      button.addEventListener('click', () => {
+        if (item.repositoryRoot) {
+          state.repo = item.repositoryRoot; state.path = ''; state.query = ''; state.selected = null;
+          $('#fileSearchInput').value = '';
+          const select = $('#fileRepoSelect'); if (select) select.value = state.repo;
+          void loadManifest('');
+        } else goTo(item.path);
+      }); list.append(button);
     });
   }
 
@@ -1134,7 +1141,22 @@ Isi dari panel provider yang dipilih:
     const query = state.query.toLocaleLowerCase('id');
     // Root .L: sisipkan folder sistem virtual di samping entri pohon nyata.
     const lRootVirtual = (isLRepo() && !state.path) ? lVirtualEntriesFor('') : [];
-    const allItems = [...state.entries, ...lRootVirtual];
+    // Semua repositori owner ditampilkan sebagai folder virtual pada root /. 
+    // Folder ini membuka pohon Git repositori sumber tanpa menyalin isi repo ke .L.
+    const repositoryRootEntries = (isLRepo() && !state.path)
+      ? (state.data?.repositories || [])
+          .filter((repo) => repo && repo.fullName && repo.fullName !== L_REPO && !isHiddenRepository(repo))
+          .map((repo) => ({
+            path: `@repositories/${repo.name}`,
+            name: repo.name,
+            type: 'directory',
+            mode: '040755',
+            items: Number(repo.tree?.entryCount || repo.rootItemCount || 0),
+            function: `Repositori sumber ${repo.fullName} · klik untuk menelusuri pohon Git pada cabang ${repo.branch || 'default'}`,
+            repositoryRoot: repo.fullName,
+          }))
+      : [];
+    const allItems = [...state.entries, ...lRootVirtual, ...repositoryRootEntries];
     // Sembunyikan folder root bernama satu digit (0–9) hanya pada tampilan File Manager.
     const visibleItems = (isLRepo() && !state.path)
       ? allItems.filter((item) => !(item.type === 'directory' && /^[0-9]$/.test(basename(item.path))))
@@ -1155,7 +1177,15 @@ Isi dari panel provider yang dipilih:
       else icon.append(el('span', kind(item), 'file-type-mark'));
       tile.append(icon, el('span', basename(item.path), 'file-tile-name'), el('span', item.type === 'directory' ? 'FOLDER' : `${kind(item)} · ${sizeText(item)}`, 'file-tile-meta'));
       tile.addEventListener('click', () => {
-        if (item.type === 'directory') void openFolderOrIndex(item.path);
+        if (item.repositoryRoot) {
+          state.repo = item.repositoryRoot;
+          state.path = '';
+          state.query = '';
+          state.selected = null;
+          $('#fileSearchInput').value = '';
+          const select = $('#fileRepoSelect'); if (select) select.value = state.repo;
+          void loadManifest('');
+        } else if (item.type === 'directory') void openFolderOrIndex(item.path);
         else { state.selected = item.path; renderTiles(); renderSelection(item); }
       });
       pane.append(tile);
