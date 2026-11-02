@@ -1,0 +1,3 @@
+const MODULE_ID="0149574";
+export function execute(input={}){return {module:MODULE_ID,input,adapterRequired:true};}
+export function mount(root){const b=root?.querySelector("[data-run]"),o=root?.querySelector("[data-status]"),f=()=>{if(o)o.textContent="Pemeriksaan lokal selesai; adapter layanan diperlukan untuk operasi persisten.";};b?.addEventListener("click",f);return()=>b?.removeEventListener("click",f);}
