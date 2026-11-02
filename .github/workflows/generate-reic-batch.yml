@@ -1,4 +1,4 @@
-name: Generate initial REIC batches (51k + 100k)
+name: Generate REIC system batches (656.1k)
 on:
   workflow_dispatch:
 permissions:
@@ -20,12 +20,32 @@ jobs:
         run: node scripts/generate-reic-batch.mjs --start 0 --count 51000
       - name: Generate second batch — 100,000 files
         run: node scripts/generate-reic-batch.mjs --start 51000 --count 100000
-      - name: Verify all 151,000 files
-        run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 151000 --start 0
+      - name: Generate continuation 1/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 151000 --count 50510
+      - name: Generate continuation 2/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 201510 --count 50510
+      - name: Generate continuation 3/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 252020 --count 50510
+      - name: Generate continuation 4/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 302530 --count 50510
+      - name: Generate continuation 5/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 353040 --count 50510
+      - name: Generate continuation 6/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 403550 --count 50510
+      - name: Generate continuation 7/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 454060 --count 50510
+      - name: Generate continuation 8/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 504570 --count 50510
+      - name: Generate continuation 9/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 555080 --count 50510
+      - name: Generate continuation 10/10 — 50,510 files
+        run: node scripts/generate-reic-batch.mjs --start 605590 --count 50510
+      - name: Verify all 656,100 files
+        run: node scripts/verify-reic-batch.mjs --dir osmediavm/recordin/generated --expected 656100 --start 0
       - name: Upload verified REIC batches
         uses: actions/upload-artifact@v4
         with:
-          name: planetbintang-reic-initial-151000
+          name: planetbintang-reic-656100
           path: osmediavm/recordin/generated/
           if-no-files-found: error
           retention-days: 30
