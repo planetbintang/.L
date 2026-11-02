@@ -1,0 +1,50 @@
+{
+  "format": "PLANETBINTANG-REIC",
+  "format_version": "1.0.0",
+  "component_id": "PB-COMMERCE-PRICE-PAYMENT",
+  "title": "Harga dan Pembayaran REIC",
+  "owner": "OWNER",
+  "platform": "PLANETBINTANG",
+  "policy_authority": "SNAPS",
+  "status": "manual-catalog-owner-pricing-required",
+  "entrypoint": "index.html",
+  "data": "pricing.json",
+  "assets": [
+    "pricing.css",
+    "pricing.js"
+  ],
+  "capabilities": [
+    "publish-approved-price-list",
+    "display-indonesia-payment-methods",
+    "display-international-payment-methods",
+    "show-provider-activation-status"
+  ],
+  "pricing_authority": "OWNER",
+  "approval_required": true,
+  "security": {
+    "browser_must_not_receive_provider_secrets": true,
+    "checkout_server_side_only": true,
+    "webhook_signature_validation": true,
+    "idempotency_required": true,
+    "card_data_storage": false
+  },
+  "payment_status": "catalog-only-until-provider-integration-and-merchant-verification",
+  "price_items": [
+    "reic-component-installation",
+    "reic-screen-container",
+    "reic-domain",
+    "reic-application",
+    "reic-enterprise"
+  ],
+  "extensions": [
+    ".reic",
+    ".json",
+    ".js",
+    ".html",
+    ".css",
+    ".sql",
+    ".yaml",
+    ".md"
+  ],
+  "note": "Tidak memproses transaksi. Hubungkan provider pembayaran di backend dan isi nominal harga yang disetujui OWNER sebelum mengaktifkan checkout."
+}

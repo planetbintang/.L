@@ -1,0 +1,230 @@
+{
+  "format": "PLANETBINTANG-REIC-PRICE-CATALOG",
+  "version": "1.0.0",
+  "owner": "OWNER",
+  "policy_authority": "SNAPS",
+  "platform": "PLANETBINTANG",
+  "currency_default": "IDR",
+  "publication_status": "draft-owner-pricing-required",
+  "pricing_policy": {
+    "price_authority": "OWNER",
+    "approval_required": true,
+    "tax": "Ditampilkan terpisah sesuai kewajiban pajak dan konfigurasi merchant.",
+    "billing_periods": [
+      "sekali bayar",
+      "bulanan",
+      "tahunan"
+    ],
+    "quote_required_for_custom_enterprise": true,
+    "price_values_are_null_until_owner_approves": true
+  },
+  "items": [
+    {
+      "id": "reic-component-installation",
+      "name": "Instalasi komponen REIC",
+      "unit": "per komponen / instalasi berhasil",
+      "price": null,
+      "currency": "IDR",
+      "billing": "sekali bayar",
+      "description": "Instalasi, validasi dependensi, konfigurasi awal dan pemeriksaan hasil komponen."
+    },
+    {
+      "id": "reic-screen-container",
+      "name": "Kontainer layar REIC",
+      "unit": "per kontainer / bulan",
+      "price": null,
+      "currency": "IDR",
+      "billing": "bulanan",
+      "description": "Hak penggunaan kontainer tampilan, kapasitas, penyimpanan konfigurasi dan dukungan runtime sesuai paket."
+    },
+    {
+      "id": "reic-domain",
+      "name": "Domain di REIC",
+      "unit": "per domain / tahun",
+      "price": null,
+      "currency": "IDR",
+      "billing": "tahunan",
+      "description": "Harga akhir bergantung ekstensi TLD, registrar, pajak, biaya registry dan biaya transfer/perpanjangan."
+    },
+    {
+      "id": "reic-application",
+      "name": "Aplikasi REIC",
+      "unit": "per aplikasi / bulan atau lisensi",
+      "price": null,
+      "currency": "IDR",
+      "billing": "paket atau lisensi",
+      "description": "Lisensi aplikasi, kuota penggunaan, dukungan, dan fitur tambahan sesuai paket."
+    },
+    {
+      "id": "reic-enterprise",
+      "name": "Paket REIC Enterprise",
+      "unit": "per tenant / kontrak",
+      "price": null,
+      "currency": "IDR",
+      "billing": "penawaran khusus",
+      "description": "Harga berdasarkan jumlah pengguna, komponen, SLA, kapasitas, wilayah dan kebutuhan integrasi."
+    }
+  ],
+  "payment_methods": {
+    "indonesia": [
+      {
+        "id": "qris",
+        "name": "QRIS",
+        "type": "QR pembayaran",
+        "provider_examples": [
+          "Midtrans",
+          "Xendit",
+          "DOKU",
+          "Duitku"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "bank-va",
+        "name": "Virtual Account bank",
+        "type": "VA bank",
+        "provider_examples": [
+          "BCA",
+          "BNI",
+          "BRI",
+          "Mandiri",
+          "Permata",
+          "CIMB Niaga"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Transfer bank",
+        "type": "transfer manual/otomatis",
+        "provider_examples": [
+          "Bank transfer melalui bank atau payment gateway"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "ewallet",
+        "name": "Dompet digital",
+        "type": "e-wallet",
+        "provider_examples": [
+          "GoPay",
+          "OVO",
+          "DANA",
+          "ShopeePay",
+          "LinkAja"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "cards-local",
+        "name": "Kartu debit/kredit Indonesia",
+        "type": "kartu pembayaran",
+        "provider_examples": [
+          "Visa",
+          "Mastercard",
+          "JCB"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "retail",
+        "name": "Gerai retail",
+        "type": "pembayaran tunai di gerai",
+        "provider_examples": [
+          "Alfamart",
+          "Indomaret"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "direct-debit",
+        "name": "Direct debit / rekening online",
+        "type": "debit rekening",
+        "provider_examples": [
+          "Metode yang tersedia dari gateway terpilih"
+        ],
+        "status": "provider_required"
+      }
+    ],
+    "international": [
+      {
+        "id": "cards-global",
+        "name": "Kartu internasional",
+        "type": "kartu pembayaran",
+        "provider_examples": [
+          "Visa",
+          "Mastercard",
+          "American Express",
+          "JCB"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "paypal",
+        "name": "PayPal",
+        "type": "dompet dan checkout internasional",
+        "provider_examples": [
+          "PayPal"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "global-wallets",
+        "name": "Apple Pay / Google Pay",
+        "type": "dompet digital",
+        "provider_examples": [
+          "Apple Pay",
+          "Google Pay"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "swift",
+        "name": "Transfer bank internasional",
+        "type": "wire / SWIFT",
+        "provider_examples": [
+          "SWIFT transfer; biaya bank pengirim/perantara/penerima berlaku"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "sepa",
+        "name": "SEPA transfer",
+        "type": "transfer kawasan SEPA",
+        "provider_examples": [
+          "SEPA Credit Transfer; ketersediaan bergantung negara dan provider"
+        ],
+        "status": "provider_required"
+      },
+      {
+        "id": "local-methods",
+        "name": "Metode pembayaran lokal negara lain",
+        "type": "metode lokal",
+        "provider_examples": [
+          "iDEAL",
+          "Bancontact",
+          "EPS",
+          "Przelewy24 dan metode lain jika didukung provider"
+        ],
+        "status": "provider_required"
+      }
+    ]
+  },
+  "provider_policy": {
+    "examples": [
+      "Midtrans",
+      "Xendit",
+      "DOKU",
+      "Duitku",
+      "Stripe",
+      "PayPal"
+    ],
+    "not_connected": true,
+    "credentials_server_side_only": true,
+    "webhook_signature_verification_required": true,
+    "idempotency_required": true,
+    "refund_and_reconciliation_required": true,
+    "never_store_card_data": true
+  },
+  "note": "Katalog metode bukan bukti gateway sudah aktif. Metode yang muncul saat checkout harus difilter berdasarkan negara merchant, mata uang, hasil verifikasi akun, kontrak provider dan ketersediaan aktual."
+}
