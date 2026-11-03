@@ -1,0 +1,3 @@
+/* DESAIN · MENU */
+(()=>{document.querySelectorAll('.pb-design-menu [data-submenu]').forEach(b=>b.addEventListener('click',()=>{const i=Number(b.dataset.submenu);document.dispatchEvent(new CustomEvent('vmdesktopreic:design-open',{detail:{index:i}}));}));})();
+/* Navigasi submenu desain dan pemilihan ruang kerja. */
