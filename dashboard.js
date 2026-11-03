@@ -81,10 +81,11 @@
     const completeCount = Number(data.completeTreeRepositoryCount ?? repositories.filter(repo => repo.tree?.state === 'complete').length);
     const partialCount = Number(data.partialTreeRepositoryCount ?? repositories.filter(repo => repo.tree?.state === 'partial').length);
     const unavailableCount = Number(data.unavailableTreeRepositoryCount ?? repositories.filter(repo => !['complete','partial','empty'].includes(repo.tree?.state)).length);
+    const emptyCount = repositories.filter(repo => repo.tree?.state === 'empty').length;
     setText('#totalSystemFileCount', fmt.format(knownFileCount));
     const coverage = partialCount || unavailableCount
-      ? `${fmt.format(completeCount)} repositori lengkap · ${fmt.format(partialCount)} parsial · ${fmt.format(unavailableCount)} belum tersedia. Angka adalah file yang berhasil terindeks; jalur sensitif disaring.`
-      : `${fmt.format(completeCount)} repositori terindeks lengkap. Jalur sensitif disaring dari indeks publik.`;
+      ? `${fmt.format(completeCount)} repositori lengkap · ${fmt.format(partialCount)} parsial · ${fmt.format(unavailableCount)} belum tersedia · ${fmt.format(emptyCount)} kosong. Angka adalah file yang berhasil terindeks; jalur sensitif disaring.`
+      : `${fmt.format(completeCount)} repositori terindeks lengkap · ${fmt.format(emptyCount)} kosong. Jalur sensitif disaring dari indeks publik.`;
     setText('#fileCountCoverage', coverage);
 
     setText('#snapshotStatus', `Snapshot ${fmtDate(data.updatedAt)} · ${repositoryCount} repo`);
