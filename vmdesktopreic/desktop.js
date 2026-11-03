@@ -402,23 +402,16 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
  function launchCoreMenu(id,group,target){if(slidePanel)slidePanel.classList.remove('open');const destination=target||id;if(destination==='keyboard'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Keyboard REIC','keyboard');return;}if(destination==='files'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Beranda File','files');return;}renderShell(destination);if(destination==='keyboard'){renderKeyboard();return;}if(destination==='apps'){loadApps(group||'');return;}if(group)state.group=group;loadManifest(destination);}
  function showCoreSlide(id){
   const menu=menus[id];if(!menu)return;
-  let items;
-  if(id==='vmdesktopreic'){items=systemModules.map(x=>({title:x[0],group:x[1],target:x[0]==='KEYBOARD REIC'?'keyboard':id}));}
-  else if(id==='apps'){items=[['PENGATURAN & SISTEM','system-apps'],['DESKTOP & PRODUKTIVITAS','desktop-productivity'],['FILE & DOKUMEN','file-documents'],['INTERNET & KOMUNIKASI','internet-communication'],['DESAIN & MEDIA','design-media'],['DATA & ANALITIK','data-analytics'],['DEVELOPER & RUNTIME','developer-runtime'],['AI & OTOMASI','ai-automation'],['SERVER & JARINGAN','server-network'],['UTILITAS & AKSESIBILITAS','utilities-accessibility']].map(x=>({title:x[0],group:x[1],target:'apps'}));}
-  else if(id==='keyboard'){items=[['KEYBOARD INDEPENDENT','keyboard'],['LAYOUT TOMBOL','keyboard'],['OUTPUT TOMBOL','keyboard'],['ALFABETA AB / TAB','keyboard'],['NURNAISLI NL / NLD / J / Z','keyboard']].map(x=>({title:x[0],group:'',target:'keyboard'}));}
-  else{items=(slideDefinitions[id]||menu.groups.map(g=>[groupNames[g]||g,g])).map(x=>({title:x[0],group:x[1],target:x[2]||id}));}
   if(!slidePanel||!slideItems){launchCoreMenu(id,'');return;}
   slideTitle.textContent=menu.title;slideIcon.textContent=menu.icon;slideItems.innerHTML='';
   document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));
-  items.forEach((item,index)=>{
-   const button=document.createElement('button');button.type='button';button.className='slide-choice';
-   button.dataset.target=item.target||id;button.dataset.group=item.group||'';button.dataset.menu=id;
-   button.setAttribute('aria-label','Buka '+item.title+' di modal desktop');
-   button.innerHTML='<span>'+String(index+1).padStart(2,'0')+'</span><b>'+esc(item.title)+'</b><i>›</i>';
-   slideItems.append(button);
-  });
+  const button=document.createElement('button');button.type='button';button.className='slide-choice slide-menu-launch';
+  button.dataset.target=id;button.dataset.group='';button.dataset.menu=id;
+  button.setAttribute('aria-label','Buka '+menu.title+' di modal desktop');
+  button.innerHTML='<b>'+esc(menu.title)+'</b><i>›</i>';
+  slideItems.append(button);
   slidePanel.classList.add('open');slidePanel.setAttribute('aria-hidden','false');slidePanel.dataset.activeMenu=id;
-  modalStatus.textContent='PILIH SUBMENU '+menu.title+' · KLIK UNTUK MEMBUKA MODAL DI DALAM DESKTOP.';
+  modalStatus.textContent=menu.title+' · KLIK UNTUK MEMBUKA MODAL.';
  }
  function openCore(id){if(!menus[id])return;if(panel?.classList.contains('open')&&panel.dataset.activeMenu===id){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');panel.dataset.activeMenu='';document.querySelectorAll('.core-item[data-core]').forEach(b=>b.classList.remove('active'));return;}showCoreSlide(id);if(panel)panel.dataset.activeMenu=id;}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-wallpaper-toggle]');if(!b)return;const shell=document.querySelector('.vm-shell');if(!shell)return;const paused=shell.classList.toggle('wallpaper-paused');b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'✦':'✧';b.title=paused?'Lanjutkan animasi wallpaper':'Jeda animasi wallpaper';modalStatus.textContent=paused?'ANIMASI WALLPAPER DIJEDA':'ANIMASI WALLPAPER AKTIF';});
@@ -432,7 +425,7 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   const catalog=window.VMDESKTOPREIC_CATALOG;
   if(catalog){
    if(menuId==='apps'){catalog.openGroup('aplikasi');return;}
-   if(menuId==='files'&&/file|folder|berkas|unduh/i.test(item.textContent||'')){if(catalog.openByTitle('FILE MANAGER'))return;catalog.openGroup('file-data');return;}
+   if(menuId==='files'){if(catalog.openByTitle('FILE MANAGER'))return;catalog.openGroup('file-data');return;}
    const groupMap={settings:'pengaturan',studio:'studio-media',documents:'aplikasi',search:'file-data',files:'file-data'};
    if(menuId&&groupMap[menuId]){if(catalog.openByTitle(item.querySelector('b')?.textContent||''))return;catalog.openGroup(groupMap[menuId]);return;}
   }
