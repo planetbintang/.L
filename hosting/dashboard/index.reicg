@@ -1,0 +1,10 @@
+/* DASHBOARD — REICG companion module
+ * Component style tokens and action contract for dashboard/index.reic.
+ * This is source metadata; production service calls belong on a trusted backend.
+ */
+export const moduleId="dashboard";
+export const moduleTitle="Dashboard";
+export const subfeatures=["Ringkasan resource","Status layanan","Penggunaan CPU/RAM","Bandwidth dan trafik","Aktivitas terbaru","Peringatan operasional"];
+export const theme={background:"#07111f",panel:"#0e1c2e",border:"#2a405a",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff",mint:"#69e0c4"};
+export function createAction(action,payload={}){if(!subfeatures.includes(action))throw new Error("Unknown dashboard action");return {module:moduleId,action,payload,mode:"preview",createdAt:new Date().toISOString()};}
+export function canExecute(context={}){return Boolean(context.authenticated&&context.permissions?.includes("dashboard:write")&&context.apiEndpoint);}
