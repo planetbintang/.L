@@ -1,0 +1,3 @@
+/* DESAIN · MANAGER */
+(()=>{const root=document.querySelector('.pb-design-manager');if(!root)return;root.addEventListener('click',e=>{const b=e.target.closest('[data-design-action]');if(!b)return;const status=root.querySelector('[data-design-status]');if(status)status.textContent='Aksi '+b.dataset.designAction+' dipilih. Penyimpanan proyek memerlukan layanan backend.';});})();
+/* Pengelolaan proyek desain dan aksi antarmuka. */
