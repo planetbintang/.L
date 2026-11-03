@@ -417,17 +417,17 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
    button.innerHTML='<span>'+String(index+1).padStart(2,'0')+'</span><b>'+esc(item.title)+'</b><i>›</i>';
    slideItems.append(button);
   });
-  slidePanel.classList.add('open');slidePanel.setAttribute('aria-hidden','false');
+  slidePanel.classList.add('open');slidePanel.setAttribute('aria-hidden','false');slidePanel.dataset.activeMenu=id;
   modalStatus.textContent='PILIH SUBMENU '+menu.title+' · KLIK UNTUK MEMBUKA MODAL DI DALAM DESKTOP.';
  }
- function openCore(id){if(!menus[id])return;showCoreSlide(id);}
+ function openCore(id){if(!menus[id])return;if(panel?.classList.contains('open')&&panel.dataset.activeMenu===id){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');panel.dataset.activeMenu='';document.querySelectorAll('.core-item[data-core]').forEach(b=>b.classList.remove('active'));return;}showCoreSlide(id);if(panel)panel.dataset.activeMenu=id;}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-wallpaper-toggle]');if(!b)return;const shell=document.querySelector('.vm-shell');if(!shell)return;const paused=shell.classList.toggle('wallpaper-paused');b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'✦':'✧';b.title=paused?'Lanjutkan animasi wallpaper':'Jeda animasi wallpaper';modalStatus.textContent=paused?'ANIMASI WALLPAPER DIJEDA':'ANIMASI WALLPAPER AKTIF';});
  document.addEventListener('click',e=>{const b=e.target.closest('.core-item[data-core]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();openCore(b.dataset.core);},true);
  document.addEventListener('click',e=>{
   const item=e.target.closest('#slideItems .slide-choice[data-target]');if(!item)return;
   e.preventDefault();e.stopImmediatePropagation();
   const destination=item.dataset.target,group=item.dataset.group||'',menuId=item.dataset.menu||'';
-  if(slidePanel){slidePanel.classList.remove('open');slidePanel.setAttribute('aria-hidden','true');}
+  if(slidePanel){slidePanel.classList.remove('open');slidePanel.setAttribute('aria-hidden','true');slidePanel.dataset.activeMenu='';}
   const catalog=window.VMDESKTOPREIC_CATALOG;
   if(catalog){
    if(menuId==='apps'){catalog.openGroup('aplikasi');return;}
