@@ -1,0 +1,10 @@
+/* WEBSITES — REICG companion module
+ * Component style tokens and action contract for websites/index.reic.
+ * This is source metadata; production service calls belong on a trusted backend.
+ */
+export const moduleId="websites";
+export const moduleTitle="Websites";
+export const subfeatures=["Buat website","Kelola virtual host","Document root","Redirect dan rewrite","Halaman error","Status website"];
+export const theme={background:"#07111f",panel:"#0e1c2e",border:"#2a405a",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff",mint:"#69e0c4"};
+export function createAction(action,payload={}){if(!subfeatures.includes(action))throw new Error("Unknown websites action");return {module:moduleId,action,payload,mode:"preview",createdAt:new Date().toISOString()};}
+export function canExecute(context={}){return Boolean(context.authenticated&&context.permissions?.includes("websites:write")&&context.apiEndpoint);}
