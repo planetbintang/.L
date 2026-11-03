@@ -43,10 +43,15 @@
     if (value instanceof Node) wrapper.append(value); else wrapper.append(text('div', value, `detail-value ${className}`.trim()));
     return wrapper;
   };
+  const setText = (selector, value) => {
+    const node = $(selector);
+    if (node) node.textContent = value == null ? '—' : String(value);
+  };
   const setConnection = (label, live) => {
     const node = $('#connectionLabel');
+    if (!node) return;
     node.textContent = label;
-    node.parentElement.classList.toggle('is-live', Boolean(live));
+    if (node.parentElement) node.parentElement.classList.toggle('is-live', Boolean(live));
   };
   function announceSync(phase, detail = {}) {
     window.dispatchEvent(new CustomEvent('planetbintang:snapshot-state', { detail: { phase, ...detail } }));
@@ -64,16 +69,29 @@
   }
 
   function renderSummary(data) {
-    $('#metricTotal').textContent = fmt.format(data.repositoryCount || data.repositories.length);
-    $('#metricPublic').textContent = fmt.format(data.publicCount || 0);
-    $('#metricPrivate').textContent = fmt.format(data.privateCount || 0);
-    $('#metricPages').textContent = fmt.format(data.pagesEnabledCount || 0);
-    $('#metricHash').textContent = data.dataSha256 ? data.dataSha256.slice(0, 16) + '…' : '—';
-    $('#snapshotStatus').textContent = `Snapshot ${fmtDate(data.updatedAt)} · ${data.repositoryCount || data.repositories.length} repo`;
-    $('#footerSnapshot').textContent = `Snapshot ${fmtDate(data.updatedAt)} · ${data.repositoryCount || data.repositories.length} repositori`;
-    $('#connectorState').textContent = data.connector?.label ? `${data.connector.label} ↔ ${data.connector.owner || 'GitHub'}` : 'GitHub';
-    $('#syncState').textContent = data.connector?.sync?.toLowerCase().includes('when') ? 'MENUNGGU SECRET' : 'TERJADWAL';
-    $('#dnsUpdated').textContent = `DNS snapshot: ${fmtDate(data.dnsCheckedAt)}`;
+    const repositories = Array.isArray(data.repositories) ? data.repositories : [];
+    const repositoryCount = Number(data.repositoryCount ?? repositories.length);
+    setText('#metricTotal', fmt.format(repositoryCount));
+    setText('#metricPublic', fmt.format(data.publicCount || 0));
+    setText('#metricPrivate', fmt.format(data.privateCount || 0));
+    setText('#metricPages', fmt.format(data.pagesEnabledCount || 0));
+    setText('#metricHash', data.dataSha256 ? data.dataSha256.slice(0, 16) + '…' : '—');
+
+    const knownFileCount = Number(data.totalFileCount ?? repositories.reduce((sum, repo) => sum + Number(repo.tree?.fileCount || 0), 0));
+    const completeCount = Number(data.completeTreeRepositoryCount ?? repositories.filter(repo => repo.tree?.state === 'complete').length);
+    const partialCount = Number(data.partialTreeRepositoryCount ?? repositories.filter(repo => repo.tree?.state === 'partial').length);
+    const unavailableCount = Number(data.unavailableTreeRepositoryCount ?? repositories.filter(repo => !['complete','partial','empty'].includes(repo.tree?.state)).length);
+    setText('#totalSystemFileCount', fmt.format(knownFileCount));
+    const coverage = partialCount || unavailableCount
+      ? `${fmt.format(completeCount)} repositori lengkap · ${fmt.format(partialCount)} parsial · ${fmt.format(unavailableCount)} belum tersedia. Angka adalah file yang berhasil terindeks; jalur sensitif disaring.`
+      : `${fmt.format(completeCount)} repositori terindeks lengkap. Jalur sensitif disaring dari indeks publik.`;
+    setText('#fileCountCoverage', coverage);
+
+    setText('#snapshotStatus', `Snapshot ${fmtDate(data.updatedAt)} · ${repositoryCount} repo`);
+    setText('#footerSnapshot', `Snapshot ${fmtDate(data.updatedAt)} · ${repositoryCount} repositori`);
+    setText('#connectorState', data.connector?.label ? `${data.connector.label} ↔ ${data.connector.owner || 'GitHub'}` : 'GitHub');
+    setText('#syncState', data.connector?.sync?.toLowerCase().includes('when') ? 'MENUNGGU SECRET' : 'TERJADWAL');
+    setText('#dnsUpdated', `DNS snapshot: ${fmtDate(data.dnsCheckedAt)}`);
     setConnection('Snapshot GitHub', true);
   }
 
