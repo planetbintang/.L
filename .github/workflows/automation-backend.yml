@@ -47,7 +47,6 @@ jobs:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_REF_NAME: ${{ github.ref_name }}
-          GITHUB_STEP_SUMMARY: ${{ github.step_summary }}
         run: node scripts/run-system-automation.mjs
 
       - name: Validate JSON records
@@ -57,7 +56,7 @@ jobs:
           const files = fs.readdirSync('automation/requests').filter(name => name.endsWith('.json'));
           if (!files.length) throw new Error('Tidak ada request record yang dibuat.');
           for (const name of files) JSON.parse(fs.readFileSync('automation/requests/' + name, 'utf8'));
-          const lines = fs.readFileSync('automation/records/changes.jsonl', 'utf8').trim().split(/\\r?\\n/);
+          const lines = fs.readFileSync('automation/records/changes.jsonl', 'utf8').trim().split(/\r?\n/);
           for (const line of lines) JSON.parse(line);
           console.log('Validasi request dan change log berhasil.');
           NODE
