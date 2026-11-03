@@ -1,0 +1,149 @@
+/* HOSTING ROOT — REICG companion source
+ * Theme tokens, layout contract and interaction hooks for hosting/index.reic.
+ * Keep API credentials server-side; never embed secrets in this file.
+ */
+export const hostingTheme={background:"#07111f",panel:"#0d1a2c",line:"#29415d",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff",mint:"#69e0c4"};
+export const hostingModules=[
+  {
+    "id": "dashboard",
+    "name": "Dashboard",
+    "href": "./dashboard/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "accounts",
+    "name": "Accounts",
+    "href": "./accounts/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "domains",
+    "name": "Domains",
+    "href": "./domains/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "dns",
+    "name": "DNS",
+    "href": "./dns/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "ssl",
+    "name": "SSL",
+    "href": "./ssl/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "files",
+    "name": "Files",
+    "href": "./files/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "websites",
+    "name": "Websites",
+    "href": "./websites/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "applications",
+    "name": "Applications",
+    "href": "./applications/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "databases",
+    "name": "Databases",
+    "href": "./databases/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "email",
+    "name": "Email",
+    "href": "./email/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "security",
+    "name": "Security",
+    "href": "./security/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "deployment",
+    "name": "Deployment",
+    "href": "./deployment/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "automation",
+    "name": "Automation",
+    "href": "./automation/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "cdn",
+    "name": "CDN",
+    "href": "./cdn/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "api",
+    "name": "API",
+    "href": "./api/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "backup",
+    "name": "Backup",
+    "href": "./backup/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "billing",
+    "name": "Billing",
+    "href": "./billing/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "customers",
+    "name": "Customers",
+    "href": "./customers/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "infrastructure",
+    "name": "Infrastructure",
+    "href": "./infrastructure/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "monitoring",
+    "name": "Monitoring",
+    "href": "./monitoring/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "developer",
+    "name": "Developer",
+    "href": "./developer/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "admin",
+    "name": "Admin",
+    "href": "./admin/index.reic",
+    "subfeatures": 6
+  },
+  {
+    "id": "records",
+    "name": "Records",
+    "href": "./records/index.reic",
+    "subfeatures": 6
+  }
+];
+export function moduleCount(){return hostingModules.length}
+export function subfeatureCount(){return hostingModules.reduce((n,m)=>n+m.subfeatures,0)}
+export function validateServiceConfig(config){return Boolean(config&&typeof config==="object"&&config.provider&&config.endpoint)}
+export function createActionRequest(module,action,payload={}){return {module,action,payload,createdAt:new Date().toISOString(),mode:"preview"}}
