@@ -1,0 +1,1400 @@
+{
+  "version": "1.0.0",
+  "totalMainMenus": 150,
+  "totalSubmenus": 150,
+  "totalFeatures": 150,
+  "groups": [
+    {
+      "id": "sistem",
+      "title": "SISTEM & RUNTIME",
+      "count": 19
+    },
+    {
+      "id": "file-data",
+      "title": "FILE & DATA",
+      "count": 19
+    },
+    {
+      "id": "aplikasi",
+      "title": "APLIKASI",
+      "count": 19
+    },
+    {
+      "id": "desain-ui",
+      "title": "DESAIN UI & UX",
+      "count": 19
+    },
+    {
+      "id": "gambar-galeri",
+      "title": "GAMBAR & GALERI",
+      "count": 19
+    },
+    {
+      "id": "video-film",
+      "title": "VIDEO & FILM",
+      "count": 19
+    },
+    {
+      "id": "studio-media",
+      "title": "STUDIO MEDIA",
+      "count": 18
+    },
+    {
+      "id": "pengaturan",
+      "title": "PENGATURAN",
+      "count": 18
+    }
+  ],
+  "items": [
+    {
+      "id": "001-pusat-sistem",
+      "number": 1,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PUSAT SISTEM",
+      "submenu": "Ringkasan status sistem",
+      "kind": "dashboard"
+    },
+    {
+      "id": "002-monitor-runtime",
+      "number": 2,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "MONITOR RUNTIME",
+      "submenu": "Pantau proses dan sumber daya",
+      "kind": "dashboard"
+    },
+    {
+      "id": "003-pengelola-proses",
+      "number": 3,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PENGELOLA PROSES",
+      "submenu": "Kelola daftar proses aktif",
+      "kind": "table"
+    },
+    {
+      "id": "004-layanan-sistem",
+      "number": 4,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "LAYANAN SISTEM",
+      "submenu": "Atur layanan desktop",
+      "kind": "settings"
+    },
+    {
+      "id": "005-registri-komponen",
+      "number": 5,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "REGISTRI KOMPONEN",
+      "submenu": "Telusuri komponen REIC",
+      "kind": "table"
+    },
+    {
+      "id": "006-diagnostik-sistem",
+      "number": 6,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "DIAGNOSTIK SISTEM",
+      "submenu": "Jalankan pemeriksaan diagnostik",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "007-log-aktivitas",
+      "number": 7,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "LOG AKTIVITAS",
+      "submenu": "Cari dan tinjau catatan aktivitas",
+      "kind": "table"
+    },
+    {
+      "id": "008-terminal-perintah",
+      "number": 8,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "TERMINAL PERINTAH",
+      "submenu": "Jalankan perintah simulasi lokal",
+      "kind": "terminal"
+    },
+    {
+      "id": "009-manajer-api",
+      "number": 9,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "MANAJER API",
+      "submenu": "Kelola endpoint dan token lokal",
+      "kind": "table"
+    },
+    {
+      "id": "010-penjadwal-tugas",
+      "number": 10,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PENJADWAL TUGAS",
+      "submenu": "Atur jadwal pekerjaan",
+      "kind": "calendar"
+    },
+    {
+      "id": "011-pengelola-event",
+      "number": 11,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PENGELOLA EVENT",
+      "submenu": "Pantau event sistem",
+      "kind": "table"
+    },
+    {
+      "id": "012-cache-runtime",
+      "number": 12,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "CACHE RUNTIME",
+      "submenu": "Kelola cache sementara",
+      "kind": "settings"
+    },
+    {
+      "id": "013-paket-runtime",
+      "number": 13,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PAKET RUNTIME",
+      "submenu": "Kelola paket runtime",
+      "kind": "table"
+    },
+    {
+      "id": "014-dependensi-sistem",
+      "number": 14,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "DEPENDENSI SISTEM",
+      "submenu": "Periksa dependensi modul",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "015-variabel-lingkungan",
+      "number": 15,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "VARIABEL LINGKUNGAN",
+      "submenu": "Kelola variabel lingkungan lokal",
+      "kind": "settings"
+    },
+    {
+      "id": "016-jaringan-runtime",
+      "number": 16,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "JARINGAN RUNTIME",
+      "submenu": "Periksa koneksi runtime",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "017-pemantau-kinerja",
+      "number": 17,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PEMANTAU KINERJA",
+      "submenu": "Pantau metrik performa",
+      "kind": "dashboard"
+    },
+    {
+      "id": "018-pusat-pembaruan",
+      "number": 18,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PUSAT PEMBARUAN",
+      "submenu": "Tinjau paket pembaruan",
+      "kind": "table"
+    },
+    {
+      "id": "019-pemulihan-sistem",
+      "number": 19,
+      "group": "sistem",
+      "groupName": "SISTEM & RUNTIME",
+      "title": "PEMULIHAN SISTEM",
+      "submenu": "Buat titik pemulihan lokal",
+      "kind": "backup"
+    },
+    {
+      "id": "020-file-manager",
+      "number": 20,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "FILE MANAGER",
+      "submenu": "Jelajahi file yang dipilih pengguna",
+      "kind": "files"
+    },
+    {
+      "id": "021-manajer-folder",
+      "number": 21,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "MANAJER FOLDER",
+      "submenu": "Susun folder kerja",
+      "kind": "files"
+    },
+    {
+      "id": "022-penyimpanan-lokal",
+      "number": 22,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PENYIMPANAN LOKAL",
+      "submenu": "Pantau ruang kerja lokal",
+      "kind": "dashboard"
+    },
+    {
+      "id": "023-pusat-unggahan",
+      "number": 23,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PUSAT UNGGAHAN",
+      "submenu": "Pilih dan pratinjau berkas",
+      "kind": "upload"
+    },
+    {
+      "id": "024-pusat-unduhan",
+      "number": 24,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PUSAT UNDUHAN",
+      "submenu": "Kelola daftar unduhan sesi",
+      "kind": "table"
+    },
+    {
+      "id": "025-pencarian-berkas",
+      "number": 25,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PENCARIAN BERKAS",
+      "submenu": "Cari nama dan metadata berkas",
+      "kind": "search"
+    },
+    {
+      "id": "026-metadata-berkas",
+      "number": 26,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "METADATA BERKAS",
+      "submenu": "Lihat detail berkas terpilih",
+      "kind": "table"
+    },
+    {
+      "id": "027-penampil-dokumen",
+      "number": 27,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PENAMPIL DOKUMEN",
+      "submenu": "Baca dokumen teks lokal",
+      "kind": "editor"
+    },
+    {
+      "id": "028-editor-teks",
+      "number": 28,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "EDITOR TEKS",
+      "submenu": "Buat dan ubah catatan teks",
+      "kind": "editor"
+    },
+    {
+      "id": "029-basis-data-lokal",
+      "number": 29,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "BASIS DATA LOKAL",
+      "submenu": "Kelola catatan data lokal",
+      "kind": "database"
+    },
+    {
+      "id": "030-tabel-data",
+      "number": 30,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "TABEL DATA",
+      "submenu": "Susun data dalam tabel",
+      "kind": "table"
+    },
+    {
+      "id": "031-impor-data",
+      "number": 31,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "IMPOR DATA",
+      "submenu": "Impor CSV atau JSON",
+      "kind": "upload"
+    },
+    {
+      "id": "032-ekspor-data",
+      "number": 32,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "EKSPOR DATA",
+      "submenu": "Ekspor data menjadi JSON",
+      "kind": "export"
+    },
+    {
+      "id": "033-cadangan-data",
+      "number": 33,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "CADANGAN DATA",
+      "submenu": "Buat cadangan data sesi",
+      "kind": "backup"
+    },
+    {
+      "id": "034-pemulihan-data",
+      "number": 34,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "PEMULIHAN DATA",
+      "submenu": "Pulihkan cadangan lokal",
+      "kind": "backup"
+    },
+    {
+      "id": "035-sinkronisasi-berkas",
+      "number": 35,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "SINKRONISASI BERKAS",
+      "submenu": "Bandingkan status berkas",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "036-arsip-berkas",
+      "number": 36,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "ARSIP BERKAS",
+      "submenu": "Kelola daftar arsip",
+      "kind": "table"
+    },
+    {
+      "id": "037-berbagi-data",
+      "number": 37,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "BERBAGI DATA",
+      "submenu": "Siapkan paket berbagi lokal",
+      "kind": "export"
+    },
+    {
+      "id": "038-validasi-data",
+      "number": 38,
+      "group": "file-data",
+      "groupName": "FILE & DATA",
+      "title": "VALIDASI DATA",
+      "submenu": "Periksa kelengkapan data",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "039-katalog-aplikasi",
+      "number": 39,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "KATALOG APLIKASI",
+      "submenu": "Jelajahi aplikasi workspace",
+      "kind": "apps"
+    },
+    {
+      "id": "040-peluncur-aplikasi",
+      "number": 40,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PELUNCUR APLIKASI",
+      "submenu": "Buka alat kerja modular",
+      "kind": "apps"
+    },
+    {
+      "id": "041-manajer-aplikasi",
+      "number": 41,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "MANAJER APLIKASI",
+      "submenu": "Kelola aplikasi sesi",
+      "kind": "table"
+    },
+    {
+      "id": "042-pustaka-ekstensi",
+      "number": 42,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSTAKA EKSTENSI",
+      "submenu": "Kelola ekstensi antarmuka",
+      "kind": "table"
+    },
+    {
+      "id": "043-pusat-plugin",
+      "number": 43,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSAT PLUGIN",
+      "submenu": "Atur modul tambahan",
+      "kind": "table"
+    },
+    {
+      "id": "044-workspace-proyek",
+      "number": 44,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "WORKSPACE PROYEK",
+      "submenu": "Kelola ruang kerja proyek",
+      "kind": "kanban"
+    },
+    {
+      "id": "045-papan-tugas",
+      "number": 45,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PAPAN TUGAS",
+      "submenu": "Atur tugas dan status kerja",
+      "kind": "kanban"
+    },
+    {
+      "id": "046-catatan-cepat",
+      "number": 46,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "CATATAN CEPAT",
+      "submenu": "Tulis catatan kerja",
+      "kind": "editor"
+    },
+    {
+      "id": "047-manajer-kalender",
+      "number": 47,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "MANAJER KALENDER",
+      "submenu": "Atur agenda kerja",
+      "kind": "calendar"
+    },
+    {
+      "id": "048-pengelola-kontak",
+      "number": 48,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PENGELOLA KONTAK",
+      "submenu": "Kelola daftar kontak lokal",
+      "kind": "database"
+    },
+    {
+      "id": "049-manajer-formulir",
+      "number": 49,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "MANAJER FORMULIR",
+      "submenu": "Buat formulir sederhana",
+      "kind": "form"
+    },
+    {
+      "id": "050-pusat-notifikasi",
+      "number": 50,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSAT NOTIFIKASI",
+      "submenu": "Tinjau notifikasi sesi",
+      "kind": "table"
+    },
+    {
+      "id": "051-riwayat-aktivitas",
+      "number": 51,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "RIWAYAT AKTIVITAS",
+      "submenu": "Tinjau aktivitas aplikasi",
+      "kind": "table"
+    },
+    {
+      "id": "052-manajer-sesi",
+      "number": 52,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "MANAJER SESI",
+      "submenu": "Kelola sesi kerja",
+      "kind": "settings"
+    },
+    {
+      "id": "053-pintasan-aplikasi",
+      "number": 53,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PINTASAN APLIKASI",
+      "submenu": "Atur pintasan workspace",
+      "kind": "apps"
+    },
+    {
+      "id": "054-pusat-template",
+      "number": 54,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSAT TEMPLATE",
+      "submenu": "Pilih template kerja",
+      "kind": "apps"
+    },
+    {
+      "id": "055-manajer-versi",
+      "number": 55,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "MANAJER VERSI",
+      "submenu": "Bandingkan versi dokumen",
+      "kind": "table"
+    },
+    {
+      "id": "056-pusat-bantuan",
+      "number": 56,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSAT BANTUAN",
+      "submenu": "Cari panduan fitur",
+      "kind": "search"
+    },
+    {
+      "id": "057-pusat-integrasi",
+      "number": 57,
+      "group": "aplikasi",
+      "groupName": "APLIKASI",
+      "title": "PUSAT INTEGRASI",
+      "submenu": "Kelola konektor yang dikonfigurasi",
+      "kind": "settings"
+    },
+    {
+      "id": "058-studio-komponen",
+      "number": 58,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "STUDIO KOMPONEN",
+      "submenu": "Rakit blok antarmuka",
+      "kind": "components"
+    },
+    {
+      "id": "059-editor-layout",
+      "number": 59,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "EDITOR LAYOUT",
+      "submenu": "Susun tata letak halaman",
+      "kind": "layout"
+    },
+    {
+      "id": "060-design-system",
+      "number": 60,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "DESIGN SYSTEM",
+      "submenu": "Kelola token desain",
+      "kind": "settings"
+    },
+    {
+      "id": "061-manajer-tema",
+      "number": 61,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "MANAJER TEMA",
+      "submenu": "Ubah tema tampilan",
+      "kind": "settings"
+    },
+    {
+      "id": "062-palet-warna",
+      "number": 62,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PALET WARNA",
+      "submenu": "Uji kombinasi warna",
+      "kind": "colors"
+    },
+    {
+      "id": "063-tipografi",
+      "number": 63,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "TIPOGRAFI",
+      "submenu": "Atur skala tipografi",
+      "kind": "typography"
+    },
+    {
+      "id": "064-pustaka-ikon",
+      "number": 64,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PUSTAKA IKON",
+      "submenu": "Cari simbol antarmuka",
+      "kind": "search"
+    },
+    {
+      "id": "065-prototipe-interaktif",
+      "number": 65,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PROTOTIPE INTERAKTIF",
+      "submenu": "Rancang alur prototipe",
+      "kind": "prototype"
+    },
+    {
+      "id": "066-wireframe",
+      "number": 66,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "WIREFRAME",
+      "submenu": "Susun kerangka halaman",
+      "kind": "layout"
+    },
+    {
+      "id": "067-grid-spacing",
+      "number": 67,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "GRID & SPACING",
+      "submenu": "Atur grid dan jarak",
+      "kind": "layout"
+    },
+    {
+      "id": "068-editor-navigasi",
+      "number": 68,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "EDITOR NAVIGASI",
+      "submenu": "Susun navigasi aplikasi",
+      "kind": "components"
+    },
+    {
+      "id": "069-desain-formulir",
+      "number": 69,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "DESAIN FORMULIR",
+      "submenu": "Rancang bidang input",
+      "kind": "form"
+    },
+    {
+      "id": "070-desain-kartu",
+      "number": 70,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "DESAIN KARTU",
+      "submenu": "Atur kartu informasi",
+      "kind": "components"
+    },
+    {
+      "id": "071-pratinjau-responsif",
+      "number": 71,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PRATINJAU RESPONSIF",
+      "submenu": "Uji ukuran layar",
+      "kind": "responsive"
+    },
+    {
+      "id": "072-audit-aksesibilitas",
+      "number": 72,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "AUDIT AKSESIBILITAS",
+      "submenu": "Periksa aksesibilitas dasar",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "073-pemeriksa-kontras",
+      "number": 73,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PEMERIKSA KONTRAS",
+      "submenu": "Uji rasio kontras warna",
+      "kind": "colors"
+    },
+    {
+      "id": "074-manajer-font",
+      "number": 74,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "MANAJER FONT",
+      "submenu": "Atur pilihan font",
+      "kind": "typography"
+    },
+    {
+      "id": "075-pustaka-template-ui",
+      "number": 75,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "PUSTAKA TEMPLATE UI",
+      "submenu": "Pilih pola UI",
+      "kind": "components"
+    },
+    {
+      "id": "076-ekspor-desain",
+      "number": 76,
+      "group": "desain-ui",
+      "groupName": "DESAIN UI & UX",
+      "title": "EKSPOR DESAIN",
+      "submenu": "Ekspor spesifikasi desain",
+      "kind": "export"
+    },
+    {
+      "id": "077-galeri-gambar",
+      "number": 77,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "GALERI GAMBAR",
+      "submenu": "Jelajahi gambar yang dipilih",
+      "kind": "gallery"
+    },
+    {
+      "id": "078-penampil-gambar",
+      "number": 78,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENAMPIL GAMBAR",
+      "submenu": "Pratinjau gambar lokal",
+      "kind": "image"
+    },
+    {
+      "id": "079-editor-gambar",
+      "number": 79,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "EDITOR GAMBAR",
+      "submenu": "Atur properti gambar",
+      "kind": "image"
+    },
+    {
+      "id": "080-pemotong-gambar",
+      "number": 80,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PEMOTONG GAMBAR",
+      "submenu": "Atur area crop gambar",
+      "kind": "image"
+    },
+    {
+      "id": "081-pengubah-ukuran",
+      "number": 81,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENGUBAH UKURAN",
+      "submenu": "Ubah dimensi gambar",
+      "kind": "image"
+    },
+    {
+      "id": "082-filter-gambar",
+      "number": 82,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "FILTER GAMBAR",
+      "submenu": "Terapkan filter visual",
+      "kind": "image"
+    },
+    {
+      "id": "083-koreksi-warna",
+      "number": 83,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "KOREKSI WARNA",
+      "submenu": "Atur warna dan kecerahan",
+      "kind": "colors"
+    },
+    {
+      "id": "084-kolase-foto",
+      "number": 84,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "KOLASE FOTO",
+      "submenu": "Susun gambar menjadi kolase",
+      "kind": "gallery"
+    },
+    {
+      "id": "085-pustaka-aset",
+      "number": 85,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PUSTAKA ASET",
+      "submenu": "Kelola aset visual",
+      "kind": "gallery"
+    },
+    {
+      "id": "086-metadata-foto",
+      "number": 86,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "METADATA FOTO",
+      "submenu": "Baca metadata gambar",
+      "kind": "table"
+    },
+    {
+      "id": "087-konverter-gambar",
+      "number": 87,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "KONVERTER GAMBAR",
+      "submenu": "Siapkan konversi gambar",
+      "kind": "export"
+    },
+    {
+      "id": "088-penghapus-latar",
+      "number": 88,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENGHAPUS LATAR",
+      "submenu": "Siapkan area seleksi latar",
+      "kind": "image"
+    },
+    {
+      "id": "089-pengelola-album",
+      "number": 89,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENGELOLA ALBUM",
+      "submenu": "Kelompokkan gambar",
+      "kind": "gallery"
+    },
+    {
+      "id": "090-pencarian-visual",
+      "number": 90,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENCARIAN VISUAL",
+      "submenu": "Cari aset berdasarkan nama",
+      "kind": "search"
+    },
+    {
+      "id": "091-penanda-gambar",
+      "number": 91,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PENANDA GAMBAR",
+      "submenu": "Tambahkan label aset",
+      "kind": "editor"
+    },
+    {
+      "id": "092-perbandingan-gambar",
+      "number": 92,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "PERBANDINGAN GAMBAR",
+      "submenu": "Bandingkan dua aset",
+      "kind": "image"
+    },
+    {
+      "id": "093-anotasi-gambar",
+      "number": 93,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "ANOTASI GAMBAR",
+      "submenu": "Tambahkan catatan visual",
+      "kind": "image"
+    },
+    {
+      "id": "094-ekspor-galeri",
+      "number": 94,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "EKSPOR GALERI",
+      "submenu": "Ekspor daftar aset",
+      "kind": "export"
+    },
+    {
+      "id": "095-impor-galeri",
+      "number": 95,
+      "group": "gambar-galeri",
+      "groupName": "GAMBAR & GALERI",
+      "title": "IMPOR GALERI",
+      "submenu": "Pilih aset untuk galeri",
+      "kind": "upload"
+    },
+    {
+      "id": "096-pemutar-video",
+      "number": 96,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PEMUTAR VIDEO",
+      "submenu": "Putar video lokal yang dipilih",
+      "kind": "video"
+    },
+    {
+      "id": "097-editor-video",
+      "number": 97,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "EDITOR VIDEO",
+      "submenu": "Kelola klip video sesi",
+      "kind": "timeline"
+    },
+    {
+      "id": "098-timeline-video",
+      "number": 98,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "TIMELINE VIDEO",
+      "submenu": "Susun urutan klip",
+      "kind": "timeline"
+    },
+    {
+      "id": "099-pemotong-video",
+      "number": 99,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PEMOTONG VIDEO",
+      "submenu": "Atur titik awal dan akhir",
+      "kind": "timeline"
+    },
+    {
+      "id": "100-penggabung-klip",
+      "number": 100,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PENGGABUNG KLIP",
+      "submenu": "Susun daftar klip",
+      "kind": "timeline"
+    },
+    {
+      "id": "101-pengelola-subtitle",
+      "number": 101,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PENGELOLA SUBTITLE",
+      "submenu": "Edit teks subtitle",
+      "kind": "editor"
+    },
+    {
+      "id": "102-studio-audio",
+      "number": 102,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "STUDIO AUDIO",
+      "submenu": "Atur trek audio",
+      "kind": "audio"
+    },
+    {
+      "id": "103-perekam-suara",
+      "number": 103,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PEREKAM SUARA",
+      "submenu": "Rekam audio jika didukung browser",
+      "kind": "audio"
+    },
+    {
+      "id": "104-storyboard",
+      "number": 104,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "STORYBOARD",
+      "submenu": "Susun adegan video",
+      "kind": "kanban"
+    },
+    {
+      "id": "105-manajer-adegan",
+      "number": 105,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "MANAJER ADEGAN",
+      "submenu": "Kelola daftar adegan",
+      "kind": "table"
+    },
+    {
+      "id": "106-pustaka-transisi",
+      "number": 106,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PUSTAKA TRANSISI",
+      "submenu": "Pilih transisi klip",
+      "kind": "components"
+    },
+    {
+      "id": "107-pengatur-kecepatan",
+      "number": 107,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PENGATUR KECEPATAN",
+      "submenu": "Atur kecepatan pemutaran",
+      "kind": "video"
+    },
+    {
+      "id": "108-pratinjau-film",
+      "number": 108,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PRATINJAU FILM",
+      "submenu": "Pratinjau hasil video",
+      "kind": "video"
+    },
+    {
+      "id": "109-metadata-video",
+      "number": 109,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "METADATA VIDEO",
+      "submenu": "Lihat informasi video lokal",
+      "kind": "table"
+    },
+    {
+      "id": "110-konverter-video",
+      "number": 110,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "KONVERTER VIDEO",
+      "submenu": "Siapkan profil ekspor video",
+      "kind": "export"
+    },
+    {
+      "id": "111-pusat-render",
+      "number": 111,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PUSAT RENDER",
+      "submenu": "Pantau antrean render simulasi",
+      "kind": "dashboard"
+    },
+    {
+      "id": "112-pustaka-musik",
+      "number": 112,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PUSTAKA MUSIK",
+      "submenu": "Kelola trek audio lokal",
+      "kind": "audio"
+    },
+    {
+      "id": "113-penyelaras-audio",
+      "number": 113,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "PENYELARAS AUDIO",
+      "submenu": "Atur sinkronisasi audio",
+      "kind": "audio"
+    },
+    {
+      "id": "114-ekspor-film",
+      "number": 114,
+      "group": "video-film",
+      "groupName": "VIDEO & FILM",
+      "title": "EKSPOR FILM",
+      "submenu": "Siapkan paket ekspor film",
+      "kind": "export"
+    },
+    {
+      "id": "115-studio-konten",
+      "number": 115,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "STUDIO KONTEN",
+      "submenu": "Tulis dan susun konten",
+      "kind": "editor"
+    },
+    {
+      "id": "116-manajer-proyek-kreatif",
+      "number": 116,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "MANAJER PROYEK KREATIF",
+      "submenu": "Kelola proyek kreatif",
+      "kind": "kanban"
+    },
+    {
+      "id": "117-pustaka-aset-media",
+      "number": 117,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "PUSTAKA ASET MEDIA",
+      "submenu": "Kelola aset proyek",
+      "kind": "gallery"
+    },
+    {
+      "id": "118-template-produksi",
+      "number": 118,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "TEMPLATE PRODUKSI",
+      "submenu": "Pilih template produksi",
+      "kind": "apps"
+    },
+    {
+      "id": "119-papan-kolaborasi",
+      "number": 119,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "PAPAN KOLABORASI",
+      "submenu": "Catat pekerjaan kolaborasi",
+      "kind": "kanban"
+    },
+    {
+      "id": "120-review-konten",
+      "number": 120,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "REVIEW KONTEN",
+      "submenu": "Tinjau catatan revisi",
+      "kind": "editor"
+    },
+    {
+      "id": "121-manajer-komentar",
+      "number": 121,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "MANAJER KOMENTAR",
+      "submenu": "Kelola komentar proyek",
+      "kind": "table"
+    },
+    {
+      "id": "122-kalender-publikasi",
+      "number": 122,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "KALENDER PUBLIKASI",
+      "submenu": "Susun jadwal publikasi",
+      "kind": "calendar"
+    },
+    {
+      "id": "123-pusat-publikasi",
+      "number": 123,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "PUSAT PUBLIKASI",
+      "submenu": "Siapkan paket publikasi",
+      "kind": "export"
+    },
+    {
+      "id": "124-arsip-media",
+      "number": 124,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "ARSIP MEDIA",
+      "submenu": "Kelola arsip media",
+      "kind": "gallery"
+    },
+    {
+      "id": "125-riwayat-versi-media",
+      "number": 125,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "RIWAYAT VERSI MEDIA",
+      "submenu": "Tinjau versi aset",
+      "kind": "table"
+    },
+    {
+      "id": "126-brief-kreatif",
+      "number": 126,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "BRIEF KREATIF",
+      "submenu": "Susun brief proyek",
+      "kind": "form"
+    },
+    {
+      "id": "127-manajer-naskah",
+      "number": 127,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "MANAJER NASKAH",
+      "submenu": "Tulis naskah produksi",
+      "kind": "editor"
+    },
+    {
+      "id": "128-papan-produksi",
+      "number": 128,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "PAPAN PRODUKSI",
+      "submenu": "Pantau tahap produksi",
+      "kind": "kanban"
+    },
+    {
+      "id": "129-daftar-pemeriksaan",
+      "number": 129,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "DAFTAR PEMERIKSAAN",
+      "submenu": "Susun checklist produksi",
+      "kind": "checklist"
+    },
+    {
+      "id": "130-laporan-proyek",
+      "number": 130,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "LAPORAN PROYEK",
+      "submenu": "Ringkas progres proyek",
+      "kind": "dashboard"
+    },
+    {
+      "id": "131-paket-distribusi",
+      "number": 131,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "PAKET DISTRIBUSI",
+      "submenu": "Siapkan paket distribusi",
+      "kind": "export"
+    },
+    {
+      "id": "132-studio-presentasi",
+      "number": 132,
+      "group": "studio-media",
+      "groupName": "STUDIO MEDIA",
+      "title": "STUDIO PRESENTASI",
+      "submenu": "Susun materi presentasi",
+      "kind": "editor"
+    },
+    {
+      "id": "133-pengaturan-desktop",
+      "number": 133,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PENGATURAN DESKTOP",
+      "submenu": "Atur preferensi desktop",
+      "kind": "settings"
+    },
+    {
+      "id": "134-personalisasi",
+      "number": 134,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PERSONALISASI",
+      "submenu": "Ubah preferensi tampilan",
+      "kind": "settings"
+    },
+    {
+      "id": "135-akun-pengguna",
+      "number": 135,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "AKUN PENGGUNA",
+      "submenu": "Kelola profil lokal",
+      "kind": "form"
+    },
+    {
+      "id": "136-hak-akses",
+      "number": 136,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "HAK AKSES",
+      "submenu": "Atur peran dan izin simulasi",
+      "kind": "settings"
+    },
+    {
+      "id": "137-keamanan-sesi",
+      "number": 137,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "KEAMANAN SESI",
+      "submenu": "Atur opsi keamanan antarmuka",
+      "kind": "settings"
+    },
+    {
+      "id": "138-privasi-data",
+      "number": 138,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PRIVASI DATA",
+      "submenu": "Tinjau preferensi privasi lokal",
+      "kind": "settings"
+    },
+    {
+      "id": "139-pengaturan-jaringan",
+      "number": 139,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PENGATURAN JARINGAN",
+      "submenu": "Periksa konfigurasi jaringan",
+      "kind": "diagnostic"
+    },
+    {
+      "id": "140-perangkat-terhubung",
+      "number": 140,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PERANGKAT TERHUBUNG",
+      "submenu": "Tinjau perangkat browser",
+      "kind": "table"
+    },
+    {
+      "id": "141-preferensi-audio",
+      "number": 141,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PREFERENSI AUDIO",
+      "submenu": "Atur perangkat audio",
+      "kind": "audio"
+    },
+    {
+      "id": "142-preferensi-video",
+      "number": 142,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PREFERENSI VIDEO",
+      "submenu": "Atur kualitas pratinjau",
+      "kind": "video"
+    },
+    {
+      "id": "143-bahasa-wilayah",
+      "number": 143,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "BAHASA & WILAYAH",
+      "submenu": "Atur bahasa dan format",
+      "kind": "settings"
+    },
+    {
+      "id": "144-tanggal-waktu",
+      "number": 144,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "TANGGAL & WAKTU",
+      "submenu": "Atur format waktu",
+      "kind": "settings"
+    },
+    {
+      "id": "145-notifikasi-sistem",
+      "number": 145,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "NOTIFIKASI SISTEM",
+      "submenu": "Atur pemberitahuan",
+      "kind": "settings"
+    },
+    {
+      "id": "146-pintasan-keyboard",
+      "number": 146,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "PINTASAN KEYBOARD",
+      "submenu": "Lihat dan ubah pintasan",
+      "kind": "table"
+    },
+    {
+      "id": "147-aksesibilitas-desktop",
+      "number": 147,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "AKSESIBILITAS DESKTOP",
+      "submenu": "Atur opsi aksesibilitas",
+      "kind": "settings"
+    },
+    {
+      "id": "148-daya-performa",
+      "number": 148,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "DAYA & PERFORMA",
+      "submenu": "Tinjau pengaturan performa",
+      "kind": "dashboard"
+    },
+    {
+      "id": "149-reset-preferensi",
+      "number": 149,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "RESET PREFERENSI",
+      "submenu": "Pulihkan preferensi sesi",
+      "kind": "settings"
+    },
+    {
+      "id": "150-tentang-vmdesktopreic",
+      "number": 150,
+      "group": "pengaturan",
+      "groupName": "PENGATURAN",
+      "title": "TENTANG VMDESKTOPREIC",
+      "submenu": "Lihat informasi versi",
+      "kind": "dashboard"
+    }
+  ]
+}
