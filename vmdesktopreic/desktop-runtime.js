@@ -9,7 +9,8 @@
   if(!host.querySelector('#reic31-app'))host.insertAdjacentHTML('beforeend',markup);
   let style=document.querySelector('style[data-reic31]');if(!style){style=document.createElement('style');style.dataset.reic31='';document.head.append(style);}style.textContent=styles;
   const script=document.createElement('script');script.dataset.reic31Runtime='';script.textContent=functions;document.body.append(script);
-  host.dataset.reic31='ready';document.documentElement.dataset.reic31='ready';\n  const modalSystem=document.createElement('script');modalSystem.src='./desktop-reic-system.js?v=20261103-reic31-modal-v1';modalSystem.defer=true;document.body.append(modalSystem);
+  host.dataset.reic31='ready';document.documentElement.dataset.reic31='ready';
+  const modalSystem=document.createElement('script');modalSystem.src='./desktop-reic-system.js?v=20261103-reic31-modal-v1';modalSystem.defer=true;document.body.append(modalSystem);
  }catch(error){console.error('REIC31 tidak dapat dimuat:',error);document.documentElement.dataset.reic31='error';}})();
  document.documentElement.dataset.vmdesktopRuntime='single-core-ready';
 })();
