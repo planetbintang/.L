@@ -1,6 +1,13 @@
 name: Sync public repository dashboard
 
 on:
+  push:
+    branches: [io]
+    paths:
+      - ".github/workflows/sync-dashboard.yml"
+      - "scripts/sync-dashboard.py"
+      - "scripts/tree_index.py"
+      - "data/repository-scope.json"
   schedule:
     - cron: "17 4 * * *"
   workflow_dispatch:
