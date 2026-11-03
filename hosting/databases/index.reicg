@@ -1,0 +1,10 @@
+/* DATABASES — REICG companion module
+ * Component style tokens and action contract for databases/index.reic.
+ * This is source metadata; production service calls belong on a trusted backend.
+ */
+export const moduleId="databases";
+export const moduleTitle="Databases";
+export const subfeatures=["Buat database","Database users","Hak akses database","Backup database","Query console","Monitoring koneksi"];
+export const theme={background:"#07111f",panel:"#0e1c2e",border:"#2a405a",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff",mint:"#69e0c4"};
+export function createAction(action,payload={}){if(!subfeatures.includes(action))throw new Error("Unknown databases action");return {module:moduleId,action,payload,mode:"preview",createdAt:new Date().toISOString()};}
+export function canExecute(context={}){return Boolean(context.authenticated&&context.permissions?.includes("databases:write")&&context.apiEndpoint);}
