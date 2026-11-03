@@ -30,6 +30,52 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
 #desktop-root>.vm-shell{position:absolute!important;left:50%!important;top:48.25%!important;right:auto!important;bottom:auto!important;width:1920px!important;height:1080px!important;min-width:1920px!important;min-height:1080px!important;max-width:none!important;max-height:none!important;margin:0!important;transform:translate(-50%,-50%) scale(var(--vm-scale,1))!important;transform-origin:50% 50%!important}
 @media(prefers-reduced-motion:reduce){#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}}
 </style>
+
+<style id="vmdesktop-clean-frame-and-modal">
+/* Hanya bingkai terluar menjadi garis pembungkus desktop. */
+#desktop-root>.vm-shell{border:5px solid #83e1ff!important;box-shadow:0 0 0 1px #07111f!important}
+#vmDesktop *{box-shadow:none!important}
+#vmDesktop .vm-header,#vmDesktop .vm-desktop,#vmDesktop .vm-statusbar,
+#vmDesktop .vm-core-menu,#vmDesktop .vm-mini-tools,#vmDesktop .vm-center-search,
+#vmDesktop .vm-clock,#vmDesktop .vm-search,#vmDesktop .vm-header-tools button,
+#vmDesktop .core-item,#vmDesktop .core-item>span,
+#vmDesktop .vm-slide-panel,#vmDesktop .vm-slide-panel>header,
+#vmDesktop .slide-item,#vmDesktop .vm-statusbar .status-progress{
+ border-color:transparent!important;outline:0!important
+}
+#vmDesktop .vm-desktop{background-color:transparent!important;background-image:none!important}
+#vmDesktop .vm-binary-map svg{display:none!important}
+#vmDesktop .vm-modal-backdrop{position:absolute!important;inset:0!important;z-index:100!important;
+ display:grid!important;place-items:center!important;padding:28px!important;overflow:auto!important}
+#vmDesktop .vm-modal-backdrop[hidden]{display:none!important}
+#vmDesktop .vm-modal{position:relative!important;width:min(1500px,calc(100% - 48px))!important;
+ max-width:100%!important;height:auto!important;max-height:calc(100% - 48px)!important;
+ min-height:0!important;margin:auto!important;display:flex!important;flex-direction:column!important;
+ overflow:hidden!important;border:3px solid #83e1ff!important;background:#0b1929!important}
+#vmDesktop .vm-modal>header{height:68px!important;min-height:68px!important;flex:0 0 68px!important;
+ border:0!important;padding:0 20px!important}
+#vmDesktop .modal-tabs{flex:0 0 auto!important;max-width:100%!important;overflow-x:auto!important;
+ border:0!important;padding:10px 18px!important}
+#vmDesktop .modal-body{flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+ overflow:auto!important;overscroll-behavior:contain!important;padding:18px 22px!important}
+#vmDesktop .vm-modal>footer{height:58px!important;min-height:58px!important;flex:0 0 58px!important;border:0!important}
+#vmDesktop .modal-grid,#vmDesktop .settings-columns{min-width:0!important}
+#vmDesktop .system-card,#vmDesktop .content-card,#vmDesktop .settings-group,
+#vmDesktop .info-row,#vmDesktop .setting-row,#vmDesktop .menu-choice,
+#vmDesktop .menu-choice-intro,#vmDesktop .pb-detail-tools,#vmDesktop .pb-detail-canvas,
+#vmDesktop .pb-canvas-toolbar,#vmDesktop .pb-detail-heading{border-color:transparent!important}
+#vmDesktop .menu-choice-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important}
+#vmDesktop .pb-detail-workspace{min-height:0!important}
+#vmDesktop .pb-detail-canvas,#vmDesktop .pb-canvas-content{min-width:0!important}
+@media(max-width:760px){
+ #vmDesktop .vm-modal-backdrop{padding:8px!important}
+ #vmDesktop .vm-modal{width:100%!important;max-height:calc(100% - 16px)!important}
+ #vmDesktop .vm-modal>header{height:54px!important;min-height:54px!important;flex-basis:54px!important;padding:0 10px!important}
+ #vmDesktop .modal-body{padding:10px!important}
+ #vmDesktop .vm-modal>footer{height:48px!important;min-height:48px!important;flex-basis:48px!important}
+}
+</style>
+
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat desktop REIC full-screen…</div></main>
 <script>
