@@ -1,0 +1,9 @@
+/* VMDESKTOPREIC unified feature routing: all 150 modules share one catalog window */
+(()=>{'use strict';if(window.PB_DESKTOP_UNIFIED)return;const $=s=>document.querySelector(s);const groups={settings:'pengaturan',studio:'studio-media',documents:'aplikasi',search:'file-data',files:'file-data',apps:'aplikasi'};const groupFromMenu=id=>groups[id]||'sistem';const launch=()=>$('.pb-catalog-launch')?.click();
+function openCatalogGroup(id){const api=window.VMDESKTOPREIC_CATALOG;if(api?.openGroup){api.openGroup(id);return true;}launch();return false;}
+document.addEventListener('click',e=>{const item=e.target.closest('#slideItems .slide-choice[data-target]');if(!item)return;const menu=item.dataset.menu||'',label=item.querySelector('b')?.textContent||item.textContent||'';if(menu==='apps'){e.preventDefault();e.stopImmediatePropagation();openCatalogGroup(groupFromMenu('apps'));return;}if(menu==='files'&&/file|folder|berkas|unduh/i.test(label)){e.preventDefault();e.stopImmediatePropagation();if(window.VMDESKTOPREIC_CATALOG?.openByTitle('FILE MANAGER'))return;openCatalogGroup('file-data');return;}},true);
+document.addEventListener('click',e=>{const b=e.target.closest('[data-core=apps]');if(!b)return;/* keep the six-button slide menu; its submenu opens the unified 150-feature catalog */},true);
+document.addEventListener('click',e=>{if(!e.target.closest('.pb-cursor-ripple')&&e.button===0){const p=document.createElement('span');p.className='pb-cursor-ripple';p.style.left=e.clientX+'px';p.style.top=e.clientY+'px';document.body.append(p);setTimeout(()=>p.remove(),600);}},true);
+window.PB_DESKTOP_UNIFIED=Object.freeze({version:'1.1.0',catalogFeatures:150,groups:8,openGroup:openCatalogGroup,openFeature:id=>window.VMDESKTOPREIC_CATALOG?.open(id)});
+document.documentElement.dataset.pbDesktopUnified='ready';
+})();
