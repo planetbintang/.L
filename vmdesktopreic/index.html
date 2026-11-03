@@ -19,6 +19,14 @@ html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow
 #desktop-root>.vm-shell{width:100%;height:100%;min-width:0;min-height:0;max-width:none;max-height:none;transform:none}
 </style>
 <link rel="stylesheet" href="./menu-system/catalog.reicss?v=20261104-150-catalog-2">
+<style id="vmdesktop-page-position">
+html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;background:#07111f}
+#desktop-root{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;min-height:0!important;display:block!important;overflow:hidden!important;padding:0!important}
+#desktop-root>.vm-web-region{position:absolute!important;inset:0 0 auto!important;height:20%!important;display:block!important;pointer-events:none!important}
+#desktop-root>.vm-empty-region{position:absolute!important;inset:auto 0 0!important;height:20%!important;display:block!important;pointer-events:none!important}
+#desktop-root>.vm-shell{position:absolute!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:1920px!important;height:1080px!important;min-width:1920px!important;min-height:1080px!important;max-width:none!important;max-height:none!important;margin:0!important;transform:translate(-50%,-50%) scale(var(--vm-scale,1))!important;transform-origin:50% 50%!important}
+@media(prefers-reduced-motion:reduce){#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}}
+</style>
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat desktop REIC full-screen…</div></main>
 <script>
@@ -29,7 +37,7 @@ html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow
   resizeQueued=false;
   const w=document.documentElement.clientWidth||innerWidth;
   const h=document.documentElement.clientHeight||innerHeight;
-  const scale=Math.min(w/1920,h/1080);
+  const scale=Math.min(w/1920,(h*.60)/1080);
   root.style.setProperty('--vm-scale',String(Math.max(.05,scale)));
  };
  const scheduleFit=()=>{if(resizeQueued)return;resizeQueued=true;requestAnimationFrame(fit);};
