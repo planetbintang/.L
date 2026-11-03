@@ -287,8 +287,16 @@ def main() -> int:
     now = utc_now()
     public_count = sum(item.get("visibility") == "public" for item in repositories)
     private_count = sum(item.get("visibility") == "private" for item in repositories)
+    complete_tree_repositories = [item for item in repositories if (item.get("tree") or {}).get("state") == "complete"]
+    partial_tree_repositories = [item for item in repositories if (item.get("tree") or {}).get("state") == "partial"]
+    unavailable_tree_repositories = [
+        item for item in repositories
+        if (item.get("state") not in ("empty",) and (item.get("tree") or {}).get("state") not in ("complete", "partial"))
+    ]
+    total_file_count = sum(int((item.get("tree") or {}).get("fileCount") or 0) for item in repositories)
+
     payload = {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "root": ".",
         "connector": {
             "label": ".",
@@ -301,6 +309,11 @@ def main() -> int:
         "publicCount": public_count,
         "privateCount": private_count,
         "pagesEnabledCount": sum(bool(item.get("pagesEnabled")) for item in repositories),
+        "totalFileCount": total_file_count,
+        "completeTreeRepositoryCount": len(complete_tree_repositories),
+        "partialTreeRepositoryCount": len(partial_tree_repositories),
+        "unavailableTreeRepositoryCount": len(unavailable_tree_repositories),
+        "fileCountDefinition": "Jumlah entry bertipe file dari Git tree default branch seluruh repositori dalam scope; jalur sensitif disaring; partial tree merupakan hitungan minimum.",
         "fileTreeIndex": {
             "repositoryCount": tree_stats["repositories"],
             "visiblePathCount": tree_stats["entries"],
@@ -326,6 +339,7 @@ def main() -> int:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Updated public snapshot: {len(repositories)} repositories; {public_count} public; {private_count} private; {payload['pagesEnabledCount']} Pages-enabled.")
+    print(f"Total indexed files: {total_file_count} across {len(repositories)} repositories; complete={len(complete_tree_repositories)}, partial={len(partial_tree_repositories)}, unavailable={len(unavailable_tree_repositories)}.")
     print(f"Git tree index: {tree_stats['entries']} visible paths in {tree_stats['pages']} lazy directory pages; main snapshot excludes file entries.")
     print(f"Snapshot SHA-256: {payload['dataSha256']}")
     print("Git tree paths/SHA/modes/sizes indexed where accessible; no repository blob contents or code execution.")
