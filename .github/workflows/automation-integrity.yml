@@ -1,0 +1,55 @@
+name: PlanetBintang Automation Integrity Gate
+
+on:
+  pull_request:
+    branches: [io]
+    paths:
+      - 'automation/**'
+      - 'scripts/run-system-automation.mjs'
+      - 'scripts/validate-automation-integrity.mjs'
+      - '.github/workflows/automation-backend.yml'
+      - '.github/workflows/automation-integrity.yml'
+  push:
+    branches: [io]
+    paths:
+      - 'automation/**'
+      - 'scripts/run-system-automation.mjs'
+      - 'scripts/validate-automation-integrity.mjs'
+      - '.github/workflows/automation-backend.yml'
+      - '.github/workflows/automation-integrity.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 23 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: planetbintang-automation-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate automation contracts and audit trail
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check automation script syntax
+        run: |
+          node --check scripts/run-system-automation.mjs
+          node --check scripts/validate-automation-integrity.mjs
+      - name: Validate requests and append-only audit records
+        run: node scripts/validate-automation-integrity.mjs
+      - name: Report integrity result
+        if: always()
+        run: |
+          echo "Automation integrity gate finished for ${GITHUB_SHA}."
+          echo "This check validates stored records; it does not certify feature implementation."
