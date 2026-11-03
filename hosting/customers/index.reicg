@@ -1,0 +1,6 @@
+/* Customers REICG companion: style tokens + action functions */
+export const moduleId="customers",title="Customers";
+export const subfeatures=["Daftar pelanggan","Detail pelanggan","Paket pelanggan","Tiket dukungan","Catatan pelanggan","Aktivitas"];
+export const theme={bg:"#07111f",panel:"#102239",line:"#29415d",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff"};
+export function createAction(name,payload={}){if(!subfeatures.includes(name))throw Error("Unknown action");return {module:moduleId,name,payload,mode:"preview",at:new Date().toISOString()};}
+export function authorized(ctx={}){return !!(ctx.user&&ctx.permissions?.includes(moduleId+":write")&&ctx.apiEndpoint);}
