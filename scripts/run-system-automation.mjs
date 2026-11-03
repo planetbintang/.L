@@ -84,11 +84,11 @@ const request = {
     `Instruksi: ${summary}`,
     'Pertahankan kontrak REKONSTRUKSI-SISTEM.md, audit sebelum mengubah, tambahkan tes, dan catat bukti hasil.',
     'Jangan menganggap katalog atau file scaffold sebagai fitur selesai; verifikasi implementasi aktual.'
-  ].join('\\n'),
+  ].join('\n'),
   filesCreated: created
 };
 const requestPath = `automation/requests/${requestId}.json`;
-fs.writeFileSync(path.join(root, requestPath), JSON.stringify(request, null, 2) + '\\n', { flag: 'wx' });
+fs.writeFileSync(path.join(root, requestPath), JSON.stringify(request, null, 2) + '\n', { flag: 'wx' });
 
 const record = {
   schemaVersion: 1, eventId: requestId, timestamp: stamp, actor, branch,
@@ -99,7 +99,7 @@ const record = {
   status: 'prepared-for-review'
 };
 const logPath = path.join(recordDir, 'changes.jsonl');
-fs.appendFileSync(logPath, JSON.stringify(record) + '\\n');
+fs.appendFileSync(logPath, JSON.stringify(record) + '\n');
 
 const summaryPath = process.env.GITHUB_STEP_SUMMARY;
 if (summaryPath) {
@@ -113,6 +113,6 @@ if (summaryPath) {
     `- Change log: automation/records/changes.jsonl`,
     '',
     ...created.map(file => `- ${file.path} (${file.bytes} bytes)`)
-  ].join('\\n') + '\\n');
+  ].join('\n') + '\n');
 }
 console.log(JSON.stringify({ requestId, requestPath, created, status: record.status }, null, 2));
