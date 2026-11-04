@@ -1,0 +1,72 @@
+name: Generate REIC feature systems
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 2 * * *"
+  push:
+    branches:
+      - io
+    paths:
+      - "data/git-feature-catalog.json"
+      - "scripts/generate-reic-catalog.mjs"
+      - ".github/workflows/reic-generation.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reic-generation-io
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout project branch
+        uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate all REIC and REICG feature files
+        run: node scripts/generate-reic-catalog.mjs
+
+      - name: Verify catalog and minimum line counts
+        run: |
+          node scripts/generate-reic-catalog.mjs --check
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const manifest = JSON.parse(fs.readFileSync('system_ext/git-features/manifest.json', 'utf8'));
+          if (manifest.totalFeatures !== 1500) throw new Error('Expected 1500 features');
+          if (manifest.totalFiles !== 3000) throw new Error('Expected 3000 REIC/REICG files');
+          if (manifest.minimumLinesPerFile < 100) throw new Error('Minimum line policy is below 100');
+          if (manifest.filesVerified !== 3000) throw new Error('Not all generated files were verified');
+          for (const item of manifest.features) {
+            for (const key of ['reic', 'reicg']) {
+              const file = item[key];
+              if (!fs.existsSync(file)) throw new Error('Missing generated file: ' + file);
+              const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/).length - 1;
+              if (lines < 100) throw new Error(file + ' has only ' + lines + ' lines');
+            }
+          }
+          console.log('Verified 1,500 feature pairs / 3,000 files / 100+ lines each.');
+          NODE
+
+      - name: Commit generated systems
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add system_ext/git-features/
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+          else
+            git commit -m "Generate 1500 REIC feature systems"
+            git push origin HEAD:io
+          fi
