@@ -29,7 +29,7 @@
       <div class="appbar-actions">
         <a href="../#cari" target="_top" class="back-link search-system-link" aria-label="Buka sistem pencarian utama">Pencarian ↗</a>
         <label class="theme-picker"><span>TEMA</span><select id="reberTheme" aria-label="Tema AI Reber"><option value="gelap-abstrak">Gelap Abstrak</option><option value="cahaya">Cahaya</option><option value="air">Air</option><option value="berlian">Berlian Kaca</option></select></label>
-        <span class="runtime-pill" title="Chat Reber realtime aktif (mesin lokal); model cloud/API tetap offline"><i style="background:#2fa36b"></i> CHAT REBER AKTIF · ∞</span>
+        <span class="runtime-pill" id="reberRuntimeMode" title="Mesin lokal aktif; backend generatif tersedia saat layanan Netlify dikonfigurasi"><i style="background:#2fa36b"></i> MESIN LOKAL · BACKEND OPSIONAL</span>
         <a href="../#overview" target="_top" class="back-link">Root System ↗</a>
       </div>
     </header>
@@ -104,7 +104,7 @@
         </section>
 
         <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" hidden tabindex="0">
-          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag">MESIN LOKAL AKTIF · ∞ TOKEN · 0 KREDIT</span></div>
+          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag" id="reberRuntimeMode">MESIN LOKAL · BACKEND OPSIONAL</span></div>
           <div class="chat-shell surface">
             <div id="reberChatMessages" class="chat-log" role="log" aria-live="polite"></div>
             <form id="reberChatForm" class="chat-compose">
@@ -162,7 +162,7 @@
         </section>
       </main>
     </div>
-    <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client · no API calls · local persistence only</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
+    <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client + optional secure Netlify AI gateway · local persistence</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
   </div>
   <script>
     document.querySelectorAll('.reber-open-chat').forEach(function(button){
@@ -176,7 +176,7 @@
   </script>
   <script src="../local-file-store.js?v=20261026-aireber-store-v1"></script>
   <script src="./reber-chat-engine.js?v=20261026-chatbot-v1"></script>
-  <script src="./reber-chat.js?v=20261026-chatbot-v1"></script>
+  <script src="./reber-chat.js?v=20261104-secure-ai-gateway-v1"></script>
   <script type="module" src="./reber-app.js?v=20261026-pages-v2"></script>
   <script src="./ai-feature-center.js?v=20261030-ai150-v1" defer></script>
 </body>
