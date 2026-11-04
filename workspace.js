@@ -100,6 +100,7 @@
   }
   window.PBWorkspace = { showView };
   $('#workspaceNav [data-workspace-view]').forEach((button)=>button.addEventListener('click',()=>showView(button.dataset.workspaceView)));
+  document.querySelectorAll('[data-code-workspace-link]').forEach((link)=>link.addEventListener('click',(event)=>{event.preventDefault();showView('code',true);}));
   // Katalog Workspace: 25 fitur utama × 6 subfitur = 150 entri terstruktur.
   const workspaceFeatureGroups = [
     ['Manajemen Proyek','Rencanakan dan pantau pekerjaan lintas repositori.',['Ringkasan proyek','Papan Kanban','Daftar tugas','Prioritas pekerjaan','Target dan tenggat','Riwayat proyek']],
