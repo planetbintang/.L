@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Mass REIC generator for the 1,800,000-file target.
- * Each run generates one deterministic shard of 10,000 independent .reic files.
+ * Four-task REIC generator: 500,000 files per task, 2,000,000 total.
+ * Each run generates one deterministic shard of up to 10,000 independent .reic files.
  * Files are packaged by GitHub Actions as artifacts; they are not committed
  * individually to Git history.
  */
@@ -9,8 +9,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const CATALOG_PATH = 'data/git-feature-catalog.json';
-const TOTAL_FILES = 1_800_000;
-const FILES_PER_FEATURE = 1_200;
+const TASK_COUNT = 4;
+const FILES_PER_TASK = 500_000;
+const TOTAL_FILES = TASK_COUNT * FILES_PER_TASK;
+const TASK_INDEX = Number(process.env.REIC_TASK_INDEX || 0);
+const FILES_PER_FEATURE = Math.ceil(TOTAL_FILES / 1500);
 const SHARD_SIZE = Number(process.env.REIC_SHARD_SIZE || 10_000);
 const SHARD_INDEX = Number(process.env.REIC_SHARD_INDEX || 0);
 const OUT = process.env.REIC_OUTPUT_DIR || 'dist/reic-mass';
@@ -24,7 +27,7 @@ function slug(value) {
 }
 function makeSource(feature, globalIndex) {
   const localIndex = globalIndex % FILES_PER_FEATURE;
-  const taskId = 'REIC-' + String(globalIndex + 1).padStart(7, '0');
+  const taskId = 'TASK-' + String(Math.floor(globalIndex / FILES_PER_TASK) + 1) + '-REIC-' + String(globalIndex + 1).padStart(7, '0');
   const lines = [
     '#!REIC/1.0',
     '# PlanetBintang mass-generated system unit',
@@ -206,15 +209,17 @@ function main() {
   assert(Array.isArray(catalog.features) && catalog.features.length === 1500, 'Expected exactly 1,500 catalog features.');
   assert(Number.isInteger(SHARD_INDEX) && SHARD_INDEX >= 0, 'Invalid REIC_SHARD_INDEX.');
   assert(Number.isInteger(SHARD_SIZE) && SHARD_SIZE > 0, 'Invalid REIC_SHARD_SIZE.');
-  const shardCount = Math.ceil(TOTAL_FILES / SHARD_SIZE);
-  assert(SHARD_INDEX < shardCount, 'Shard index is outside target range.');
-  const start = SHARD_INDEX * SHARD_SIZE;
-  const end = Math.min(TOTAL_FILES, start + SHARD_SIZE);
+  assert(Number.isInteger(TASK_INDEX) && TASK_INDEX >= 0 && TASK_INDEX < TASK_COUNT, 'REIC_TASK_INDEX must be 0, 1, 2, or 3.');
+  const shardCount = Math.ceil(FILES_PER_TASK / SHARD_SIZE);
+  assert(SHARD_INDEX < shardCount, 'Shard index is outside task range.');
+  const taskStart = TASK_INDEX * FILES_PER_TASK;
+  const start = taskStart + SHARD_INDEX * SHARD_SIZE;
+  const end = Math.min(taskStart + FILES_PER_TASK, start + SHARD_SIZE);
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   const manifest = [];
   for (let index = start; index < end; index++) {
-    const feature = catalog.features[Math.floor(index / FILES_PER_FEATURE)];
+    const feature = catalog.features[index % catalog.features.length];
     assert(feature, 'No source feature for global index ' + index);
     const moduleDir = slug(feature.module);
     const name = 'task-' + String(index + 1).padStart(7, '0') + '.reic';
@@ -229,6 +234,10 @@ function main() {
   }
   const report = {
     schemaVersion: 1,
+    taskNumber: TASK_INDEX + 1,
+    taskCount: TASK_COUNT,
+    filesPerTask: FILES_PER_TASK,
+    taskTargetFiles: FILES_PER_TASK,
     targetFiles: TOTAL_FILES,
     shardIndex: SHARD_INDEX,
     shardCount,
@@ -241,6 +250,6 @@ function main() {
     files: manifest
   };
   fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(report, null, 2) + '\n');
-  console.log(JSON.stringify({ targetFiles: TOTAL_FILES, shardIndex: SHARD_INDEX, shardCount, generated: manifest.length, minimumLinesPerFile: MIN_LINES }));
+  console.log(JSON.stringify({ task: TASK_INDEX + 1, taskCount: TASK_COUNT, taskTargetFiles: FILES_PER_TASK, targetFiles: TOTAL_FILES, shardIndex: SHARD_INDEX, shardCount, generated: manifest.length, minimumLinesPerFile: MIN_LINES }));
 }
 main();
