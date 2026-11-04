@@ -38,6 +38,8 @@ footer{border-top:1px solid #193653;padding:22px 26px;color:#91a8c2;font-size:11
 .script-style{display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding:11px 12px;background:#091a2d;border:1px solid #1b4164;color:#dcecff;cursor:pointer;text-align:left}
 .script-style b{font-size:13px}.script-style small{font-size:10px;color:#9db5cf}.script-style.active{border-color:#08baff;background:#0b3151;box-shadow:inset 0 0 0 1px #08baff55}
 .script-letter{display:grid;gap:4px}.script-letter .script-cases{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;color:#8ce6ff;font-size:19px;line-height:1.35}.script-letter .script-cases span{display:inline-block;margin:0;font-size:19px}
+
+.script-output{min-height:90px;display:block;padding:14px;background:#075be8;border:1px solid #2678ff;border-radius:10px;overflow-x:auto}.script-result-line{display:flex;align-items:center;flex-wrap:wrap;gap:3px;min-height:66px}.script-glyph{height:54px;width:auto;max-width:92px;object-fit:contain}.script-space{width:18px}.script-pair{display:flex;align-items:center;justify-content:center;gap:3px;min-width:0}.script-glyph-small{height:26px;width:auto;max-width:34px;object-fit:contain}.script-letter{min-width:0}.script-letter .script-cases{display:grid;gap:5px}.script-alphabet{overflow:hidden}
 @media(max-width:520px){.script-style-picker{grid-template-columns:1fr}.script-letters{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
 @media(max-width:760px){.script-layout{grid-template-columns:1fr}.script-heading{align-items:flex-start;flex-direction:column}.script-letters{grid-template-columns:repeat(7,minmax(0,1fr))}.script-reference img{max-height:480px;object-fit:contain}}
@@ -151,24 +153,76 @@ form.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormDat
 filterItems();
 
 // Tiga set glyph kapital dan tiga set glyph kecil; tiap gaya memakai pasangan berbeda.
-const upper=[
-'Λ','Ð','Ͼ','ᗡ','Ξ','Ғ','Ɠ','Ң','Ⅰ','Ј','Ҡ','⅃','Ӎ','И','Θ','Ҏ','Ϙ','Я','Ѕ','Τ','Ц','Ѵ','Ш','Ж','Ұ','Ƶ',
-'ᗅ','Ɖ','Ↄ','ᗞ','Є','Ғ','Ɠ','Ҥ','Ӏ','Ј','Ҡ','ᒪ','Ӎ','И','Ө','Р','Ϙ','Я','Ϛ','Т','Ս','Ѵ','Ԝ','Ж','Ү','Ƶ',
-'Ɐ','Ɗ','Ↄ','ᗪ','Ɛ','Ғ','Ƣ','Ң','Ӏ','Ј','Ҡ','⅂','Ӎ','И','◉','Ҏ','Ϙ','Ʀ','Ϟ','⊤','Ս','Ѵ','Ш','Ж','Ұ','Ƶ'
-];
-const lower=[
-'λ','þ','ϲ','ɗ','ε','ƒ','ɠ','ħ','ı','ʝ','κ','ℓ','ɱ','ŋ','ο','ρ','φ','я','ѕ','τ','υ','ν','ω','χ','γ','ζ',
-'α','ƀ','ς','∂','ҽ','ʄ','ɡ','ɦ','ι','ʆ','ƙ','Ɩ','ɯ','ռ','ɵ','ƥ','ϙ','ʀ','ʂ','т','ʋ','ѵ','ш','ж','ყ','ʐ',
-'ɑ','ɓ','ɔ','ɖ','ɛ','ʛ','ɣ','ɥ','ɨ','ʝ','ʞ','ɭ','ɰ','ɲ','ø','ƥ','ҩ','ɾ','ʃ','ʈ','ʊ','ʌ','ɯ','ӿ','ʏ','ʑ'
-];
+// PB-03: glyph dirender langsung dari potongan tulisan tangan pada tabel referensi.
 const scriptInput=$('#scriptInput'),scriptOutput=$('#scriptOutput'),scriptLetters=$('#scriptLetters');
+const sourceImage=new Image();sourceImage.src='./2610231227446.jpg';
 let scriptStyle=0;
-// Gaya III dibangun sebagai ligatur: dua bentuk rujukan digabung dengan titik pengikat.
-function glyphFor(ch){const n=ch.toUpperCase().charCodeAt(0)-65;if(n<0||n>25)return ch;const isUpper=ch===ch.toUpperCase(),base=isUpper?upper[n]:lower[n],second=isUpper?upper[26+n]:lower[26+n];return scriptStyle===2?base+'·'+second:(isUpper?upper[scriptStyle*26+n]:lower[scriptStyle*26+n])}
-function convertScript(value){return [...value].map(glyphFor).join('')}
-function renderScriptAlphabet(){scriptLetters.innerHTML=Array.from({length:26},(_,i)=>{const cap=scriptStyle===2?upper[i]+'·'+upper[26+i]:upper[scriptStyle*26+i],small=scriptStyle===2?lower[i]+'·'+lower[26+i]:lower[scriptStyle*26+i];return '<div class="script-letter"><b>'+String.fromCharCode(65+i)+'</b><div class="script-cases"><span>'+cap+'</span><span>'+small+'</span></div></div>'}).join('')}
-function updateScript(){scriptOutput.textContent=convertScript(scriptInput.value)}
-$$('[data-script-style]').forEach(button=>button.addEventListener('click',()=>{scriptStyle=Number(button.dataset.scriptStyle);$$('[data-script-style]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});renderScriptAlphabet();updateScript()}));
+const glyphRows={
+ A:0,B:1,C:2,D:3,E:4,F:5,G:6,H:7,I:8,J:9,K:10,L:11,M:12,N:13,
+ O:0,P:1,Q:2,R:3,S:4,T:5,U:6,V:7,W:8,X:9,Y:10,Z:11
+};
+function glyphCell(ch,variant){
+ const upper=ch===ch.toUpperCase(),letter=ch.toUpperCase(),row=glyphRows[letter];
+ if(row===undefined)return null;
+ const right=letter>='O',baseX=right?872:292;
+ const col=upper?(variant===0?0:variant===1?2:0):(variant===0?1:variant===1?3:1);
+ const x=baseX+col*80+4;
+ const y=(row<7?76:656)+(row<7?row:row-7)*73+4;
+ return {x,y,w:70,h:64};
+}
+function paintGlyph(ctx,ch,variant,x,y,w,h){
+ const cell=glyphCell(ch,variant);
+ if(!cell){ctx.fillStyle='#fff';ctx.font='30px sans-serif';ctx.fillText(ch,x,y+h*.78);return}
+ ctx.drawImage(sourceImage,cell.x,cell.y,cell.w,cell.h,x,y,w,h);
+}
+function makeGlyphCanvas(ch,style,scale=1){
+ const c=document.createElement('canvas');c.width=style===2?104*scale:54*scale;c.height=66*scale;
+ const ctx=c.getContext('2d');
+ if(style<2){paintGlyph(ctx,ch,style,2*scale,1*scale,50*scale,62*scale)}
+ else{
+   // Bentuk III: gabungan dua varian asli dengan garis penghubung tipis dan titik sambung.
+   paintGlyph(ctx,ch,0,1*scale,4*scale,43*scale,57*scale);
+   paintGlyph(ctx,ch,1,58*scale,4*scale,43*scale,57*scale);
+   ctx.strokeStyle='#fff';ctx.fillStyle='#fff';ctx.lineWidth=2.2*scale;
+   ctx.beginPath();ctx.moveTo(42*scale,34*scale);ctx.lineTo(59*scale,34*scale);ctx.stroke();
+   ctx.beginPath();ctx.arc(51*scale,34*scale,2.3*scale,0,Math.PI*2);ctx.fill();
+ }
+ return c;
+}
+function renderScriptText(value){
+ scriptOutput.innerHTML='';
+ const line=document.createElement('div');line.className='script-result-line';
+ for(const ch of [...value]){
+  if(ch===' '){const gap=document.createElement('span');gap.className='script-space';gap.textContent=' ';line.append(gap);continue}
+  if(ch==='\n'){scriptOutput.append(line);const next=document.createElement('div');next.className='script-result-line';scriptOutput.append(next);continue}
+  const c=makeGlyphCanvas(ch,scriptStyle,1);
+  c.className='script-glyph';c.setAttribute('role','img');c.setAttribute('aria-label','Aksara '+ch);
+  line.append(c);
+ }
+ scriptOutput.append(line);
+}
+function renderScriptAlphabet(){
+ scriptLetters.innerHTML='';
+ for(let i=0;i<26;i++){
+  const letter=String.fromCharCode(65+i),card=document.createElement('div');card.className='script-letter';
+  const label=document.createElement('b');label.textContent=letter;card.append(label);
+  const cases=document.createElement('div');cases.className='script-cases';
+  for(let v=0;v<3;v++){
+   const pair=document.createElement('div');pair.className='script-pair';
+   const cap=makeGlyphCanvas(letter,v),small=makeGlyphCanvas(letter.toLowerCase(),v);
+   cap.className=small.className='script-glyph-small';
+   pair.append(cap,small);cases.append(pair);
+  }
+  card.append(cases);scriptLetters.append(card);
+ }
+}
+function updateScript(){renderScriptText(scriptInput.value)}
+$$('[data-script-style]').forEach(button=>button.addEventListener('click',()=>{
+ scriptStyle=Number(button.dataset.scriptStyle);
+ $$('[data-script-style]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});
+ renderScriptAlphabet();updateScript();
+}));
+sourceImage.onload=()=>{renderScriptAlphabet();updateScript()};
 renderScriptAlphabet();updateScript();
 $('#scriptConvert').addEventListener('click',updateScript);
 $('#scriptClear').addEventListener('click',()=>{scriptInput.value='';updateScript();scriptInput.focus()});
