@@ -185,3 +185,18 @@ html,body{background:#050505!important}
 }
 #vmDesktop .vm-desktop>*{position:relative;z-index:1}
 #vmDesktop .vm-desktop .vm-desktop-hint{background:rgba(4,42,30,.3)!important;backdrop-filter:blur(8px)!important;border:1px solid rgba(210,255,228,.18)!important}
+
+
+/* USER WALLPAPER: CLEAN GREEN LEAVES WITH MORNING DEW */
+#vmDesktop .vm-desktop{
+ background:#06452f url("./assets/wallpaper-leaf-dew.svg") center center / cover no-repeat!important;
+}
+#vmDesktop .vm-desktop:before{
+ background-image:linear-gradient(135deg,rgba(8,48,26,.08),transparent 42%,rgba(0,35,27,.12))!important;
+ opacity:1!important;filter:none!important;
+}
+#vmDesktop .vm-desktop:after{
+ background:linear-gradient(180deg,rgba(255,255,255,.08),transparent 26%,transparent 76%,rgba(0,22,24,.22))!important;
+}
+#vmDesktop .vm-desktop .pb-app-shortcut,
+#vmDesktop .vm-desktop .vm-center-search{backdrop-filter:blur(2px)}
