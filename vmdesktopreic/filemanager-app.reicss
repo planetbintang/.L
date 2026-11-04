@@ -36,11 +36,11 @@
 #vmDesktop .pb-filemanajer-window[hidden]{display:none!important}
 #vmDesktop .pb-filemanajer-window>.pfm-window{
   position:relative!important;inset:auto!important;
-  width:min(1080px,calc(100% - 48px))!important;
-  height:min(760px,82%)!important;max-width:1080px!important;
+  width:min(1180px,100%)!important;
+  height:min(760px,82%)!important;max-width:1180px!important;
   max-height:82%!important;min-height:min(460px,calc(100% - 32px))!important;
   margin:auto!important;pointer-events:auto!important;flex:0 1 auto!important;
-  border-radius:0!important;
+  border-radius:22px!important;
 }
 #vmDesktop .pfm-window>.pfm-head{cursor:move!important}
 @media(max-width:900px){
