@@ -1,0 +1,49 @@
+/* VMDESKTOPREIC · 25 application floating modal system */
+#vmDesktop{--pb25-accent:#83e1ff}
+#vmDesktop .pb25-window{position:absolute;z-index:1800;left:55px;top:55px;width:min(980px,calc(100% - 32px));height:min(650px,calc(100% - 32px));min-width:360px;min-height:280px;display:flex;flex-direction:column;overflow:hidden;box-sizing:border-box;color:#e8f5ff;background:radial-gradient(ellipse at 80% 0%,#16415d66,transparent 48%),linear-gradient(145deg,#0b1b2b,#071321);border:1px solid var(--pb25-accent);box-shadow:0 20px 55px #0009;font:13px system-ui,sans-serif}
+#vmDesktop .pb25-window.is-active{outline:1px solid var(--pb25-accent);box-shadow:0 22px 64px #000b,0 0 18px #83e1ff2b}
+#vmDesktop .pb25-head{height:58px;min-height:58px;display:flex;align-items:center;gap:12px;padding:8px 12px;background:linear-gradient(100deg,#122d43,#091827);border-bottom:1px solid #31536b;cursor:grab;touch-action:none;user-select:none}
+#vmDesktop .pb25-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid #31536b;color:var(--pb25-accent);font-size:20px}
+#vmDesktop .pb25-title{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+#vmDesktop .pb25-title b{font-size:14px;letter-spacing:.04em}
+#vmDesktop .pb25-title small,#vmDesktop .pb25-intro small,#vmDesktop .pb25-card small{font-size:9px;letter-spacing:.12em;color:var(--pb25-accent)}
+#vmDesktop .pb25-controls{display:flex;gap:5px}
+#vmDesktop .pb25-controls button,#vmDesktop .pb25-toolbar button,#vmDesktop .pb25-actions button,#vmDesktop .pb25-main button{min-height:32px;padding:5px 10px;border:1px solid #31536b;background:#10283d;color:#e6f6ff;cursor:pointer}
+#vmDesktop .pb25-controls button{width:32px;font-size:16px}
+#vmDesktop .pb25-toolbar{display:flex;gap:8px;padding:9px 12px;border-bottom:1px solid #29445d;background:#091827}
+#vmDesktop .pb25-toolbar input,#vmDesktop .pb25-field input,#vmDesktop .pb25-field select,#vmDesktop .pb25-main input,#vmDesktop .pb25-main textarea{min-width:0;padding:9px;border:1px solid #31536b;background:#061321;color:#eaf4ff;box-sizing:border-box}
+#vmDesktop .pb25-toolbar input{flex:1}
+#vmDesktop .pb25-layout{display:grid;grid-template-columns:165px minmax(0,1fr) 185px;flex:1;min-height:0}
+#vmDesktop .pb25-side{display:flex;flex-direction:column;gap:4px;padding:10px;border-right:1px solid #29445d;background:#0b1b2b;overflow:auto}
+#vmDesktop .pb25-side button{text-align:left;padding:10px 9px;border:1px solid transparent;background:transparent;color:#b9d2e5;cursor:pointer}
+#vmDesktop .pb25-side button.active,#vmDesktop .pb25-side button:hover{border-color:#31536b;background:#12334b;color:#fff}
+#vmDesktop .pb25-main{min-width:0;min-height:0;overflow:auto;padding:14px;background-image:linear-gradient(#83e1ff08 1px,transparent 1px),linear-gradient(90deg,#83e1ff08 1px,transparent 1px);background-size:24px 24px}
+#vmDesktop .pb25-crumb{padding-bottom:10px;border-bottom:1px solid #29445d;color:#9db8cc;font-size:10px;letter-spacing:.08em}
+#vmDesktop .pb25-intro{padding:14px 0 12px}
+#vmDesktop .pb25-intro h2{margin:5px 0;font-size:20px}
+#vmDesktop .pb25-intro p,#vmDesktop .pb25-card p{color:#9eb5c8;line-height:1.5}
+#vmDesktop .pb25-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}
+#vmDesktop .pb25-card{min-width:0;padding:12px;border:1px solid #294b64;background:linear-gradient(145deg,#10263a,#091827)}
+#vmDesktop .pb25-card b{display:block;margin-top:6px}
+#vmDesktop .pb25-detail{padding:12px;border-left:1px solid #29445d;background:#0a1928;color:#b8ccdc;overflow:auto}
+#vmDesktop .pb25-detail b{display:block;margin-bottom:12px;color:var(--pb25-accent);font-size:10px;letter-spacing:.12em}
+#vmDesktop .pb25-detail small{display:block;margin-top:16px;color:#66849d}
+#vmDesktop .pb25-foot{height:38px;min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 12px;border-top:1px solid #29445d;background:#081522;color:#8ba7bd;font-size:9px;letter-spacing:.07em}
+#vmDesktop .pb25-resize{position:absolute;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 48%,var(--pb25-accent) 50%,transparent 56%,transparent 68%,var(--pb25-accent) 70%,transparent 76%)}
+#vmDesktop .pb25-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+#vmDesktop .pb25-field{display:flex;flex-direction:column;gap:6px;margin:12px 0;color:var(--pb25-accent);font-size:10px}
+#vmDesktop .pb25-field input,#vmDesktop .pb25-field select{width:100%}
+#vmDesktop .pb25-editor{width:100%;height:230px;resize:vertical;font:12px ui-monospace,monospace}
+#vmDesktop .pb25-terminal{min-height:180px;padding:12px;background:#020a12;border:1px solid #31536b;color:#9de8c4;font:12px/1.6 ui-monospace,monospace;white-space:pre-wrap}
+#vmDesktop .pb25-terminal+form{display:flex;gap:8px;margin-top:8px}
+#vmDesktop .pb25-terminal+form input{flex:1}
+#vmDesktop .pb25-upload{display:inline-flex;align-items:center;gap:8px;padding:8px;border:1px solid #31536b}
+#vmDesktop .pb25-upload input{max-width:180px}
+#vmDesktop .pb25-center{left:50%;top:50%;width:min(1080px,calc(100% - 28px));height:min(760px,calc(100% - 28px));transform:translate(-50%,-50%)}
+#vmDesktop .pb25-center-body{flex:1;min-height:0;overflow:auto;padding:18px;background-image:linear-gradient(#83e1ff08 1px,transparent 1px),linear-gradient(90deg,#83e1ff08 1px,transparent 1px);background-size:24px 24px}
+#vmDesktop .pb25-launch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px}
+#vmDesktop .pb25-launch-grid button{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:110px;padding:12px;text-align:left;border:1px solid #294b64;background:linear-gradient(145deg,#10263a,#091827);color:#e8f5ff;cursor:pointer}
+#vmDesktop .pb25-launch-grid button:hover{border-color:var(--pb25-accent);background:#12334b}
+#vmDesktop .pb25-launch-grid button span{font-size:19px;color:var(--pb25-accent)}
+#vmDesktop .pb25-launch-grid button small{color:#9eb5c8;line-height:1.4}
+@media(max-width:720px){#vmDesktop .pb25-window{left:6px!important;top:6px!important;width:calc(100% - 12px)!important;height:calc(100% - 12px)!important;min-width:0}.pb25-layout{grid-template-columns:112px minmax(0,1fr)!important}#vmDesktop .pb25-detail{display:none}#vmDesktop .pb25-side{padding:5px}#vmDesktop .pb25-side button{font-size:10px;padding:8px 5px}#vmDesktop .pb25-toolbar{padding:6px;gap:4px}#vmDesktop .pb25-toolbar button{font-size:9px;padding:4px}#vmDesktop .pb25-main{padding:9px}#vmDesktop .pb25-center{width:calc(100% - 12px);height:calc(100% - 12px)}}
