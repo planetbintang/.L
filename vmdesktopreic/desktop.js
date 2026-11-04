@@ -163,18 +163,22 @@ async function openFullComponent(id,groupKey,term,page){
 function selectCore(id){
  const m=menus[id]||menus.settings;currentCore=id;
  document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));
- slideTitle.textContent=m.title;slideIcon.textContent=m.icon;slideItems.innerHTML='';
- m.items.forEach((name,index)=>{
-  const item=document.createElement('button');item.type='button';item.className='slide-choice';item.dataset.slideItem=name;
-  item.innerHTML='<span>'+String(index+1).padStart(2,'0')+'</span><b>'+safeHTML(name)+'</b><i>›</i>';
-  item.addEventListener('click',()=>{
-   panel.classList.remove('open');
-   if(id==='keyboard'){openContent('Keyboard REIC','keyboard');return;}
-   openContent(name,id);
-  });
-  slideItems.append(item);
- });
- panel.classList.add('open');
+ slideTitle.textContent=m.title;slideIcon.textContent=m.icon;
+ panel.classList.remove('open');
+ modalTitle.textContent=m.title;modalIcon.textContent=m.icon;
+ modalTabs.innerHTML='<button class="active" data-core-view="modules">MODUL</button><button data-core-view="overview">RINGKASAN</button>';
+ const renderModules=()=>{modalBody.dataset.layout='menu-grid';modalBody.innerHTML='<section class="pb-core-modal"><div class="pb-core-intro"><span>VMDESKTOPREIC / '+safeHTML(m.title)+'</span><h2>'+safeHTML(m.title)+'</h2><p>Pilih modul untuk membukanya di ruang kerja sistem. Setiap modul tetap berada dalam jendela modal terpusat.</p></div><div class="pb-core-module-grid">'+m.items.map((name,index)=>'<button type="button" class="pb-core-module" data-core-module="'+index+'"><small>MODUL '+String(index+1).padStart(2,'0')+'</small><b>'+safeHTML(name)+'</b><span>BUKA MODUL →</span></button>').join('')+'</div></section>';
+ modalBody.querySelectorAll('[data-core-module]').forEach(button=>button.addEventListener('click',()=>openContent(m.items[Number(button.dataset.coreModule)],id)));
+ };
+ renderModules();
+ modalTabs.querySelectorAll('[data-core-view]').forEach(button=>button.addEventListener('click',()=>{
+  modalTabs.querySelectorAll('button').forEach(tab=>tab.classList.toggle('active',tab===button));
+  if(button.dataset.coreView==='modules'){renderModules();return;}
+  modalBody.dataset.layout='dashboard';
+  modalBody.innerHTML='<section class="pb-menu-overview"><span>RINGKASAN SISTEM</span><h2>'+safeHTML(m.title)+'</h2><p>'+safeHTML(m.desc||'Kelola modul desktop dalam ruang kerja VMDESKTOPREIC.')+'</p><h3>'+m.items.length+' MODUL TERSEDIA</h3><ul>'+m.items.map(name=>'<li>'+safeHTML(name)+'</li>').join('')+'</ul></section>';
+ }));
+ backdrop.hidden=false;currentContent='core:'+id;
+ $('#modalStatus').textContent=m.title+' · '+m.items.length+' MODUL';
 }
 function renderRegistry(page=0,term=''){const pageSize=30,needle=term.trim().toLocaleLowerCase('id'),rows=componentRegistry.filter(x=>(x.title+' '+x.category+' '+x.id+' '+x.file).toLocaleLowerCase('id').includes(needle)),pages=Math.max(1,Math.ceil(rows.length/pageSize)),safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));page=Math.min(Math.max(0,page),pages-1);modalTitle.textContent='REGISTRI SISTEM · 1.500 KOMPONEN';modalIcon.textContent='▦';modalTabs.innerHTML='<button class="active">KOMPONEN UTAMA</button><button data-registry-info>SUMBER OS MEDIA VM</button>';modalBody.innerHTML='<div class="registry-head"><div><span>OS MEDIA VM / SYSTEM REGISTRY</span><h3>1.500 komponen sistem utama</h3><p>Daftar komponen diambil dari registri infrastruktur OS MEDIA VM. Pilih item untuk membuka detail dan spesifikasi sumbernya.</p></div><strong>'+rows.length.toLocaleString('id-ID')+' / 1.500</strong></div><div class="registry-controls"><input id="registrySearch" type="search" value="'+safe(term)+'" placeholder="Cari nama, kategori, ID komponen…"><span>MENAMPILKAN '+(rows.length? page*pageSize+1:0)+'–'+Math.min((page+1)*pageSize,rows.length)+' DARI '+rows.length+'</span></div><div class="registry-grid">'+rows.slice(page*pageSize,(page+1)*pageSize).map(x=>'<button class="registry-card" data-registry-id="'+safe(x.id)+'"><small>'+safe(x.id)+' · '+safe(x.category)+'</small><b>'+safe(x.title)+'</b><span>LIHAT KOMPONEN ↗</span></button>').join('')+'</div><div class="registry-pager"><button id="registryPrev" '+(page===0?'disabled':'')+'>← SEBELUMNYA</button><span>HALAMAN '+(page+1)+' / '+pages+'</span><button id="registryNext" '+(page>=pages-1?'disabled':'')+'>BERIKUTNYA →</button></div>';$('#registrySearch').addEventListener('input',e=>renderRegistry(0,e.target.value));$('#registryPrev').addEventListener('click',()=>renderRegistry(page-1,term));$('#registryNext').addEventListener('click',()=>renderRegistry(page+1,term));modalBody.querySelectorAll('[data-registry-id]').forEach(b=>b.addEventListener('click',()=>{const item=componentRegistry.find(x=>x.id===b.dataset.registryId);if(item)showRegistryItem(item,term,page);}));const info=modalTabs.querySelector('[data-registry-info]');info.addEventListener('click',()=>{$('#modalStatus').textContent='Sumber data: OS MEDIA VM · infrastruktur-1500 · spesifikasi komponen statis.';});backdrop.hidden=false;}
 function showRegistryItem(item,term='',page=0){const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));modalTitle.textContent=item.title;modalIcon.textContent='▦';modalTabs.innerHTML='<button class="active">RINGKASAN</button><button>ARSITEKTUR</button><button>FILE & PENYIMPANAN</button>';const href='../osmediavm/infrastruktur-1500/'+item.href.replace(/^\.\//,'');modalBody.innerHTML='<button class="menu-back" id="registryBack">← KEMBALI KE REGISTRI</button><div class="content-card registry-detail"><span class="registry-kicker">KOMPONEN '+safe(item.id)+'</span><h3>'+safe(item.title)+'</h3><p>Kategori sistem: '+safe(item.category)+'</p><div class="info-row"><span>ID komponen</span><b>'+safe(item.id)+'</b></div><div class="info-row"><span>Sumber</span><b>OS MEDIA VM · 1.500</b></div><div class="info-row"><span>Spesifikasi</span><b>'+safe(item.file)+'</b></div><div class="info-row"><span>Status</span><b>TERDAFTAR · FRONTEND</b></div><p>Komponen ini terhubung ke spesifikasi sumber OS MEDIA VM. Integrasi backend atau operasi sistem persisten memerlukan adapter layanan yang sesuai.</p><div class="action-row"><a class="registry-source" href="'+safe(href)+'" target="_blank" rel="noopener">BUKA SPESIFIKASI SUMBER ↗</a><button id="registryReturn">KEMBALI KE DAFTAR</button></div></div>';$('#registryBack').addEventListener('click',()=>renderRegistry(page,term));$('#registryReturn').addEventListener('click',()=>renderRegistry(page,term));backdrop.hidden=false;}
