@@ -90,3 +90,22 @@
   #desktop-root .vm-modal>footer{flex-basis:48px!important;min-height:48px!important;padding:6px 10px!important}
 }
 @media(prefers-reduced-motion:reduce){#desktop-root .vm-modal,#desktop-root .vm-modal-backdrop{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+
+/* Core left-menu modal workspace — cards replace the legacy slide-out submenu. */
+#desktop-root .pb-core-modal{display:flex;flex-direction:column;gap:18px;min-height:100%}
+#desktop-root .pb-core-intro{padding:clamp(14px,2vw,24px);border:1px solid #b9dceb;background:linear-gradient(120deg,rgba(255,255,255,.94),rgba(232,247,253,.82));color:#173b56}
+#desktop-root .pb-core-intro>span,#desktop-root .pb-menu-overview>span{font-size:10px;font-weight:850;letter-spacing:.16em;color:#1886b9}
+#desktop-root .pb-core-intro h2{margin:8px 0;font-size:clamp(20px,2vw,30px);color:#123b5c}
+#desktop-root .pb-core-intro p{margin:0;max-width:760px;line-height:1.6;color:#527087}
+#desktop-root .pb-core-module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+#desktop-root .pb-core-module{min-width:0;min-height:132px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px;text-align:left;border:1px solid #c5e0ec!important;background:linear-gradient(145deg,#fff,#edf7fb)!important;color:#173b56!important;box-shadow:0 7px 20px rgba(29,93,125,.08)!important;cursor:pointer}
+#desktop-root .pb-core-module small{font-size:10px;font-weight:800;letter-spacing:.12em;color:#1687bd}
+#desktop-root .pb-core-module b{font-size:15px;line-height:1.35;color:#173b56}
+#desktop-root .pb-core-module span{font-size:10px;font-weight:850;letter-spacing:.08em;color:#1687bd}
+#desktop-root .pb-core-module:hover{border-color:#168dd0!important;background:linear-gradient(145deg,#f2fbff,#dff3fc)!important;transform:translateY(-1px)}
+#desktop-root .pb-menu-overview{padding:clamp(16px,2vw,26px);border:1px solid #c5e0ec;background:#fff;color:#173b56}
+#desktop-root .pb-menu-overview h2{margin:8px 0;color:#123b5c}
+#desktop-root .pb-menu-overview ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 22px;padding-left:20px}
+#desktop-root .pb-menu-overview li{padding:7px 0;color:#31566f}
+#desktop-root .vm-slide-panel{display:none!important}
