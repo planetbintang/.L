@@ -25,6 +25,42 @@
   const LOCAL_KEY = 'planetbintang.aireber.chat.v1';
   const readLocalHistory = () => { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch { return []; } };
   const writeLocalHistory = (rows) => { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows.slice(-200))); return true; } catch { return false; } };
+  let cloudState = 'memeriksa';
+  async function askCloudModel() {
+    const history = readLocalHistory().slice(-20)
+      .filter((row) => row && ['user', 'assistant'].includes(row.role) && typeof row.text === 'string')
+      .map((row) => ({ role: row.role, content: row.text.slice(0, 8000) }));
+    if (!history.length || history[history.length - 1].role !== 'user') return null;
+    const response = await fetch('/api/reber', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history }),
+      signal: AbortSignal.timeout ? AbortSignal.timeout(50000) : undefined,
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      cloudState = response.status === 503 ? 'belum dikonfigurasi' : 'gangguan provider';
+      const status = $('#reberChatStatus');
+      if (status) status.textContent = `Backend AI ${cloudState}; beralih ke mesin lokal.`;
+      return null;
+    }
+    if (typeof data.answer !== 'string' || !data.answer.trim()) return null;
+    cloudState = 'terhubung';
+    const status = $('#reberChatStatus');
+    if (status) status.textContent = `AI model terhubung · ${data.model || 'model aktif'}.`;
+    return data.answer.trim();
+  }
+
+  async function checkCloudGateway() {
+    try {
+      const response = await fetch('/api/reber', { headers: { 'Accept': 'application/json' } });
+      const data = await response.json();
+      cloudState = data.status === 'configured' ? 'siap' : 'belum dikonfigurasi';
+    } catch { cloudState = 'mode lokal'; }
+    const badge = $('#reberRuntimeMode');
+    if (badge) badge.textContent = cloudState === 'siap' ? 'BACKEND AI SIAP' : 'MESIN LOKAL · ' + cloudState.toUpperCase();
+  }
+
 
   async function persistTurn(role, text) {
     const rows = readLocalHistory();
@@ -131,14 +167,21 @@
       const fm = fileCommand(text);
       if (fm !== null) {
         answerText = fm;
-      } else if (engine) {
-        const kataList = await loadKataList();
-        const result = engine.answer(text, { kataList });
-        answerText = result.text;
-        const meta = $('#reberChatMeta');
-        if (meta) meta.textContent = `intent: ${result.intent} · ${result.retrieved.length} referensi · ${result.ms} ms · tanpa token/kredit`;
       } else {
-        answerText = 'Mesin chat belum termuat (reber-chat-engine.js). Muat ulang halaman untuk mengaktifkan chat realtime.';
+        const cloudAnswer = await askCloudModel();
+        if (cloudAnswer) {
+          answerText = cloudAnswer;
+          const meta = $('#reberChatMeta');
+          if (meta) meta.textContent = 'model AI backend · konteks percakapan terakhir · jawaban generatif';
+        } else if (engine) {
+          const kataList = await loadKataList();
+          const result = engine.answer(text, { kataList });
+          answerText = result.text;
+          const meta = $('#reberChatMeta');
+          if (meta) meta.textContent = `mesin lokal · intent: ${result.intent} · ${result.retrieved.length} referensi · ${result.ms} ms`;
+        } else {
+          answerText = 'Mesin chat belum termuat (reber-chat-engine.js). Muat ulang halaman untuk mengaktifkan chat lokal.';
+        }
       }
     } catch (error) {
       answerText = `Mesin Reber menemui kendala internal: ${error.message}. Silakan ulangi — pemrosesan lokal tidak memakai kuota apa pun.`;
@@ -178,4 +221,5 @@
   }
   bootWelcome(true);
   void loadKataList();
+  void checkCloudGateway();
 })();
