@@ -22,12 +22,12 @@
    for(const field of ['entry','view','style','applicationStyle','engine'])if(!manifest[field])throw Error('Manifest aplikasi tidak lengkap: '+field);
    if(manifest.name!=='filemanajer'||manifest.runtime!=='VMDESKTOPREIC-REIC')throw Error('Identitas package filemanajer tidak cocok');
    const css=document.createElement('link');css.rel='stylesheet';css.href='./'+manifest.style;css.dataset.filemanajer='';document.head.append(css);
-   const appCss=document.createElement('link');appCss.rel='stylesheet';appCss.href='./'+manifest.applicationStyle;appCss.dataset.filemanajerApp='';document.head.append(appCss);
+   const appCss=document.createElement('link');appCss.rel='stylesheet';appCss.href='./'+manifest.applicationStyle+'?v=20261104-filemanajer-modal-3';appCss.dataset.filemanajerApp='';document.head.append(appCss);
    const response=await fetch('./'+manifest.view,{cache:'force-cache'});if(!response.ok)throw Error(manifest.view+' HTTP '+response.status);
    const source=await response.text(),a=source.indexOf('<section'),b=source.lastIndexOf('</section>');
    if(a<0||b<a)throw Error('Bagian aplikasi REIC tidak ditemukan');
    host.innerHTML=source.slice(a,b+10);
-   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./'+manifest.engine;s.onload=resolve;s.onerror=()=>reject(Error(manifest.engine+' gagal dimuat'));document.body.append(s);});
+   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./'+manifest.engine+'?v=20261104-code-tree-1';s.onload=resolve;s.onerror=()=>reject(Error(manifest.engine+' gagal dimuat'));document.body.append(s);});
    window.initPlanetFileManager('Beranda File');
    loaded=true;say('FILEMANAGER MOUNTED · STORAGE LOKAL');
   }catch(e){host.innerHTML='<p class="pfm-error">'+esc(e.message)+'</p>';say('LOAD ERROR · '+e.message);}
