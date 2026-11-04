@@ -115,3 +115,15 @@
 #desktop-root .vm-modal-backdrop{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important}
 #desktop-root .vm-modal-backdrop>.vm-modal{pointer-events:auto!important}
 #desktop-root .vm-modal-backdrop[hidden]{display:none!important}
+
+
+/* GEOMETRI SUDUT TEGAS VMDESKTOPREIC: seluruh modal, kontrol, dan tombol. */
+#desktop-root .vm-modal,
+#desktop-root .vm-modal *,
+#desktop-root .pb-filemanajer-window,
+#desktop-root .pfm-window,
+#desktop-root .pfm-window *,
+#desktop-root button,
+#desktop-root [role="button"]{
+  border-radius:0!important;
+}
