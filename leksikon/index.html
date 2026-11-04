@@ -93,7 +93,8 @@ function showWord(word,refresh=true){
  if(refresh)renderActive();
 }
 function renderActive(){$('dictResults').querySelectorAll('[data-word]').forEach(b=>b.classList.toggle('active',b.dataset.word===selected));}
-$('prevPage').addEventListener('click',()=>{if(page>0){page--;selected=null;renderList();}});$('nextPage').addEventListener('click',()=>{if((page+1)*30<cat().count){page++;selected=null;renderList();}});\n$('dictResults').addEventListener('click',e=>{const b=e.target.closest('[data-word]');if(b)showWord(b.dataset.word)});
+$('prevPage').addEventListener('click',()=>{if(page>0){page--;selected=null;renderList();}});$('nextPage').addEventListener('click',()=>{if((page+1)*30<cat().count){page++;selected=null;renderList();}});
+$('dictResults').addEventListener('click',e=>{const b=e.target.closest('[data-word]');if(b)showWord(b.dataset.word)});
 $('dictQuery').addEventListener('input',()=>{page=0;selected=null;renderList()});
 $('dictCategory').addEventListener('change',()=>{page=0;selected=null;renderList()});
 $('heroSearch').addEventListener('submit',e=>{e.preventDefault();$('dictQuery').value=$('globalQuery').value;$('dictCategory').value='id';page=0;selected=null;renderList();$('kamus').scrollIntoView({behavior:'smooth'});});
