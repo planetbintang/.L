@@ -1,0 +1,327 @@
+{
+  "id": "PB-REIC-25-MODALS",
+  "version": "1.0.0",
+  "runtime": "browser",
+  "entry": "25-modal-system.reicjs",
+  "style": "25-modal-system.reicss",
+  "descriptor": "25-modal-system.reic",
+  "applicationCount": 25,
+  "apps": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard Sistem",
+      "icon": "▦",
+      "description": "Ringkasan kondisi desktop dan aktivitas",
+      "submenus": [
+        "Ringkasan",
+        "Aktivitas",
+        "Runtime",
+        "Statistik"
+      ]
+    },
+    {
+      "id": "files",
+      "name": "File Manager",
+      "icon": "▱",
+      "description": "Jelajah berkas dan folder proyek",
+      "submenus": [
+        "Folder",
+        "Berkas Terbaru",
+        "Repositori",
+        "Penyimpanan"
+      ]
+    },
+    {
+      "id": "explorer",
+      "name": "REIC Explorer",
+      "icon": "◇",
+      "description": "Jelajah sumber dan struktur REIC",
+      "submenus": [
+        "Pohon REIC",
+        "Manifest",
+        "Pratinjau",
+        "Properti"
+      ]
+    },
+    {
+      "id": "editor",
+      "name": "Editor Kode",
+      "icon": "</>",
+      "description": "Editor teks dan kode lokal",
+      "submenus": [
+        "Editor",
+        "Berkas Terbuka",
+        "Pemeriksaan",
+        "Perubahan"
+      ]
+    },
+    {
+      "id": "generator",
+      "name": "Generator REIC",
+      "icon": "✧",
+      "description": "Buat paket berkas REIC",
+      "submenus": [
+        "Buat Paket",
+        "Template",
+        "Validasi",
+        "Ekspor"
+      ]
+    },
+    {
+      "id": "blocks",
+      "name": "List Blok",
+      "icon": "▤",
+      "description": "Daftar blok antarmuka",
+      "submenus": [
+        "Semua Blok",
+        "Kategori",
+        "Properti",
+        "Urutan"
+      ]
+    },
+    {
+      "id": "layouts",
+      "name": "Layout Library",
+      "icon": "▣",
+      "description": "Koleksi layout panel dan jendela",
+      "submenus": [
+        "Modal",
+        "Panel",
+        "Desktop",
+        "Favorit"
+      ]
+    },
+    {
+      "id": "infra",
+      "name": "Infrastruktur",
+      "icon": "⌘",
+      "description": "Peta modul dan dependensi sistem",
+      "submenus": [
+        "Modul",
+        "Dependensi",
+        "Registri",
+        "Diagnostik"
+      ]
+    },
+    {
+      "id": "config",
+      "name": "Konfigurasi",
+      "icon": "⚙",
+      "description": "Preferensi dan konfigurasi desktop",
+      "submenus": [
+        "Tampilan",
+        "Jendela",
+        "Penyimpanan Lokal",
+        "Preferensi"
+      ]
+    },
+    {
+      "id": "themes",
+      "name": "Tema Desktop",
+      "icon": "◈",
+      "description": "Tema, wallpaper, dan aksen visual",
+      "submenus": [
+        "Tema",
+        "Wallpaper",
+        "Warna Aksen",
+        "Pratinjau"
+      ]
+    },
+    {
+      "id": "apps",
+      "name": "Manajemen Aplikasi",
+      "icon": "▥",
+      "description": "Daftar aplikasi dan status modul",
+      "submenus": [
+        "Terpasang",
+        "Katalog",
+        "Pembaruan",
+        "Izin"
+      ]
+    },
+    {
+      "id": "notifications",
+      "name": "Pusat Notifikasi",
+      "icon": "◉",
+      "description": "Notifikasi dan catatan sistem",
+      "submenus": [
+        "Semua",
+        "Belum Dibaca",
+        "Prioritas",
+        "Riwayat"
+      ]
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal Shell",
+      "icon": ">_",
+      "description": "Konsol bantuan perintah aman",
+      "submenus": [
+        "Konsol",
+        "Perintah Bantuan",
+        "Riwayat",
+        "Runtime"
+      ]
+    },
+    {
+      "id": "monitor",
+      "name": "Monitor Sistem",
+      "icon": "▥",
+      "description": "Informasi kinerja browser dan desktop",
+      "submenus": [
+        "Ringkasan",
+        "Memori Browser",
+        "Viewport",
+        "Kinerja"
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Jaringan",
+      "icon": "⌁",
+      "description": "Status koneksi dan diagnostik jaringan",
+      "submenus": [
+        "Koneksi",
+        "Online/Offline",
+        "Diagnostik",
+        "Informasi"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Keamanan",
+      "icon": "⬡",
+      "description": "Privasi sesi dan kontrol keamanan",
+      "submenus": [
+        "Privasi",
+        "Izin Browser",
+        "Penyimpanan",
+        "Panduan"
+      ]
+    },
+    {
+      "id": "users",
+      "name": "Pengguna",
+      "icon": "♙",
+      "description": "Profil lokal dan preferensi pengguna",
+      "submenus": [
+        "Profil",
+        "Preferensi",
+        "Sesi",
+        "Akses"
+      ]
+    },
+    {
+      "id": "storage",
+      "name": "Penyimpanan",
+      "icon": "▣",
+      "description": "Ruang penyimpanan browser dan data",
+      "submenus": [
+        "Ringkasan",
+        "Data Lokal",
+        "Ekspor",
+        "Pembersihan"
+      ]
+    },
+    {
+      "id": "search",
+      "name": "Pencarian Sistem",
+      "icon": "⌕",
+      "description": "Cari aplikasi dan konten desktop",
+      "submenus": [
+        "Pencarian",
+        "Aplikasi",
+        "Berkas",
+        "Riwayat"
+      ]
+    },
+    {
+      "id": "history",
+      "name": "Riwayat Aktivitas",
+      "icon": "◷",
+      "description": "Aktivitas yang dicatat pada sesi ini",
+      "submenus": [
+        "Aktivitas",
+        "Perubahan",
+        "Ekspor Log",
+        "Filter"
+      ]
+    },
+    {
+      "id": "backup",
+      "name": "Pencadangan",
+      "icon": "⤓",
+      "description": "Ekspor dan pulihkan preferensi aplikasi",
+      "submenus": [
+        "Buat Cadangan",
+        "Pulihkan",
+        "Riwayat",
+        "Validasi"
+      ]
+    },
+    {
+      "id": "integrations",
+      "name": "Integrasi",
+      "icon": "⧉",
+      "description": "Koneksi modul dan layanan eksternal",
+      "submenus": [
+        "Modul Desktop",
+        "GitHub",
+        "Pages",
+        "Panduan API"
+      ]
+    },
+    {
+      "id": "git",
+      "name": "Git & Repositori",
+      "icon": "⑂",
+      "description": "Tautan dan panduan operasi repositori",
+      "submenus": [
+        "Repositori",
+        "Commit",
+        "Perubahan",
+        "Tindakan Git"
+      ]
+    },
+    {
+      "id": "pages",
+      "name": "Publikasi Pages",
+      "icon": "↗",
+      "description": "Konfigurasi dan tautan publikasi",
+      "submenus": [
+        "Konfigurasi",
+        "Workflow",
+        "URL Publikasi",
+        "Checklist"
+      ]
+    },
+    {
+      "id": "help",
+      "name": "Bantuan Sistem",
+      "icon": "?",
+      "description": "Dokumentasi dan panduan desktop",
+      "submenus": [
+        "Panduan Awal",
+        "Kontrol Jendela",
+        "Format REIC",
+        "Tentang"
+      ]
+    }
+  ],
+  "capabilities": [
+    "independent-windows",
+    "drag",
+    "resize",
+    "minimize",
+    "maximize",
+    "close",
+    "local-preferences",
+    "search",
+    "local-export"
+  ],
+  "notes": [
+    "GitHub actions open repository links; they are not executed by this browser module.",
+    "GitHub Pages deployment status must be verified in GitHub Actions.",
+    "Terminal supports a safe help command set, not arbitrary shell execution."
+  ]
+}
