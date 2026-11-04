@@ -1,0 +1,173 @@
+{
+  "schema": "planetbintang.reic-library.v1",
+  "title": "VMDESKTOPREIC REIC FILE SYSTEM",
+  "extensions": [
+    ".reic",
+    ".reicss",
+    ".reicjs",
+    ".reicg"
+  ],
+  "views": [
+    {
+      "id": "list-blok",
+      "title": "LIST BLOK",
+      "description": "Komponen dan blok UI yang dapat dipakai ulang.",
+      "folder": "vmdesktopreic/reic-library/list-blok/",
+      "files": [
+        {
+          "path": "vmdesktopreic/components-1500.json",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop.reic",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop.js",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop.css",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "layout-library",
+      "title": "LAYOUT LIBRARY",
+      "description": "Layout desktop, panel, modal, grid, dan workspace.",
+      "folder": "vmdesktopreic/reic-library/layout-library/",
+      "files": [
+        {
+          "path": "vmdesktopreic/desktop-elegance.css",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop-experience.css",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop-reference.css",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop-unified.css",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop-unified.js",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "reic-explorer",
+      "title": "REIC EXPLORER",
+      "description": "Penjelajah berkas REIC dan sumber sistem.",
+      "folder": "vmdesktopreic/reic-library/reic-explorer/",
+      "files": [
+        {
+          "path": "osmediavm/index.reic",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/REIC-KATALOG.md",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/recordin/manifest.json",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/reic-library/index.reicg",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "konfigurasi-infrastruktur",
+      "title": "KONFIGURASI INFRASTRUKTUR",
+      "description": "Konfigurasi layout, penyimpanan, penerapan, dan folder.",
+      "folder": "vmdesktopreic/reic-library/konfigurasi-infrastruktur/",
+      "files": [
+        {
+          "path": "osmediavm/infrastruktur.html",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/infrastruktur.css",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/infrastruktur.js",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/konfigurasi/",
+          "kind": "folder"
+        }
+      ]
+    },
+    {
+      "id": "infrastruktur-15000",
+      "title": "INFRASTRUKTUR 15.000",
+      "description": "Katalog infrastruktur REIC yang sudah tersimpan di repositori.",
+      "folder": "vmdesktopreic/reic-library/infrastruktur-15000/",
+      "files": [
+        {
+          "path": "osmediavm/infrastruktur-15000/README.md",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/infrastruktur-15000/index.reic",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/infrastruktur-15000/",
+          "kind": "folder"
+        }
+      ]
+    },
+    {
+      "id": "registri-1500",
+      "title": "REGISTRI 1.500",
+      "description": "Registri komponen desktop dengan pencarian dan detail.",
+      "folder": "vmdesktopreic/reic-library/registri-1500/",
+      "files": [
+        {
+          "path": "vmdesktopreic/components-1500.json",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/apps-250.json",
+          "kind": "file"
+        },
+        {
+          "path": "SYSTEM-FILE-REGISTRY.md",
+          "kind": "file"
+        }
+      ]
+    },
+    {
+      "id": "fitur-premium-150",
+      "title": "150 FITUR PREMIUM",
+      "description": "Katalog fitur premium dan modul operasional.",
+      "folder": "vmdesktopreic/reic-library/fitur-premium-150/",
+      "files": [
+        {
+          "path": "vmdesktopreic/desktop-reic-system.js",
+          "kind": "file"
+        },
+        {
+          "path": "vmdesktopreic/desktop-runtime.js",
+          "kind": "file"
+        },
+        {
+          "path": "osmediavm/infrastruktur.html",
+          "kind": "file"
+        }
+      ]
+    }
+  ],
+  "note": "Indeks menghubungkan file sumber yang sudah ada; file sumber tidak digandakan. Pengaturan browser tetap lokal sampai backend tersambung."
+}
