@@ -106,6 +106,7 @@ html,body{background:#050b14!important}
  #desktop-root>.vm-shell{width:min(96vw,calc(92dvh * 16 / 9))!important;max-width:96vw!important;max-height:92dvh!important}
 }
 </style>
+<link rel="stylesheet" href="./25-modal-system.reicss?v=20261105-25-modal-system-1">
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
@@ -142,6 +143,7 @@ html,body{background:#050b14!important}
     loadScript('./integration/boot.js?v=20261105-filemanager-categories-1')
    ]);
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
+   await loadScript('./25-modal-system.reicjs?v=20261105-25-modal-system-1');
    fit();
    root.classList.add('vm-ready');
    /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
