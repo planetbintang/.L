@@ -2008,3 +2008,25 @@ html,body,#desktop-root{background:#0348cf!important}
  #desktop-root .core-item.active b{font-size:clamp(6px,1.5vw,8px)!important}
  #desktop-root .vm-slide-panel{left:calc(clamp(64px,18vw,82px) + 10px)!important}
 }
+
+
+/* MODAL NON-FULLSCREEN: transparan dan membiarkan desktop tetap dapat dipilih. */
+#vmDesktop .vm-modal-backdrop{
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  pointer-events:none!important;
+}
+#vmDesktop .vm-modal-backdrop[hidden]{display:none!important}
+#vmDesktop .vm-modal{
+  position:relative!important;
+  z-index:1!important;
+  pointer-events:auto!important;
+}
+#vmDesktop .vm-modal.expanded{
+  pointer-events:auto!important;
+}
+/* Ketika modal tidak memenuhi layar, klik di luar jendela diteruskan ke desktop. */
+#vmDesktop .vm-modal-backdrop:not([hidden]) .vm-modal:not(.expanded){
+  max-width:calc(100% - 32px)!important;
+}
