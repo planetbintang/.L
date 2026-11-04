@@ -33,6 +33,28 @@ footer{border-top:1px solid #193653;padding:20px 26px;color:#91a8c2;font-size:11
 .light-mode .nav a,.light-mode .nav-tools a,.light-mode .nav-tools button,.light-mode .categories button{color:#263f59}
 .light-mode .tile p,.light-mode .section-head p,.light-mode .tile-meta{color:#52677e}
 .light-mode .categories button.active{color:#fff}
+
+/* Detail panel system */
+.overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0 22px}
+.metric{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid #1a4266;background:linear-gradient(135deg,#0a2038,#071426);min-height:82px}
+.metric-icon{width:42px;height:42px;display:grid;place-items:center;background:#087dff22;border:1px solid #147bd0;color:#61c8ff;font-size:20px;flex:0 0 auto}
+.metric strong{display:block;font-size:20px;line-height:1.1}.metric small{display:block;color:#a9bfd8;font-size:10px;margin-top:5px}
+.section-intro{color:var(--muted);font-size:12px;margin:-4px 0 13px}
+.tile{transition:transform .2s,border-color .2s,box-shadow .2s}.tile:focus-within,.tile:focus{outline:2px solid #16a5ff;outline-offset:2px}
+.tile .tile-body{position:relative}.tile-description{min-height:32px;line-height:1.45}
+.tile-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:8px;border-top:1px solid #24425e;color:#a9bfd8;font-size:10px}
+.tile-open{border:1px solid #28618d;background:#0a2541;color:#dff4ff;padding:5px 9px;font-size:10px;font-weight:750;cursor:pointer}
+.tile-open:hover{background:#087dff}
+.tag{z-index:2;box-shadow:0 3px 12px #0006}
+.library-tools{padding:12px;border:1px solid #183b5c;background:#071629}
+.library-tools input:focus,.library-tools select:focus,.composer input:focus,.composer textarea:focus,.composer select:focus{outline:2px solid #087dff;outline-offset:1px}
+.viewer{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:22px;background:#020712ed;backdrop-filter:blur(12px)}
+.viewer.open{display:flex}.viewer-card{width:min(1100px,100%);max-height:92vh;overflow:auto;background:#08182b;border:1px solid #1d5a88;box-shadow:0 25px 90px #000b}
+.viewer-media{display:grid;place-items:center;min-height:220px;background:#020813}.viewer-media img,.viewer-media video{display:block;max-width:100%;max-height:68vh;object-fit:contain}
+.viewer-info{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;padding:16px 18px}.viewer-info h2{font-size:20px;margin:0 0 5px}.viewer-info p{color:#afc3d9;font-size:12px;margin:0}.viewer-close{border:1px solid #315878;background:#0b2540;color:white;padding:8px 12px;cursor:pointer}
+.empty-state{padding:36px 16px;text-align:center;border:1px dashed #315271;color:#a8bdd3;grid-column:1/-1}
+.light-mode .metric,.light-mode .library-tools{background:#fff;color:#10243a;border-color:#c7d8e8}.light-mode .metric small,.light-mode .tile-footer{color:#52677e}.light-mode .tile-open{background:#e7f3ff;color:#0755a3}
+@media(max-width:760px){.overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.metric{padding:10px;min-height:72px}.metric-icon{width:34px;height:34px}.metric strong{font-size:17px}.viewer{padding:8px}.viewer-info{padding:12px}}
 </style>
 </head>
 <body>
@@ -47,10 +69,16 @@ footer{border-top:1px solid #193653;padding:20px 26px;color:#91a8c2;font-size:11
 <button class="hero-arrow prev" id="heroPrev" type="button" aria-label="Sorotan sebelumnya">‹</button><button class="hero-arrow next" id="heroNext" type="button" aria-label="Sorotan berikutnya">›</button><div class="hero-dots" id="heroDots"><button type="button" aria-label="Sorotan 1" aria-current="true"></button><button type="button" aria-label="Sorotan 2" aria-current="false"></button><button type="button" aria-label="Sorotan 3" aria-current="false"></button></div>
 </section>
 <main>
+<section class="overview" aria-label="Ringkasan koleksi">
+<div class="metric"><span class="metric-icon">▧</span><span><strong id="photoMetric">13</strong><small>MEDIA TERSIMPAN DI GALERI</small></span></div>
+<div class="metric"><span class="metric-icon">▶</span><span><strong id="videoMetric">0</strong><small>VIDEO &amp; FILM TERSEDIA</small></span></div>
+<div class="metric"><span class="metric-icon">▦</span><span><strong>12</strong><small>KATEGORI PENJELAJAHAN</small></span></div>
+<div class="metric"><span class="metric-icon">✧</span><span><strong>Publik</strong><small>KOLEKSI REPOSITORI</small></span></div>
+</section>
 <nav class="categories" id="categoryBar" aria-label="Kategori galeri">
 <button class="active" data-category="all">▦ Semua</button><button data-category="image">▣ Foto</button><button data-category="video">▶ Video</button><button data-category="film">▣ Film</button><button data-category="animation">★ Animasi</button><button data-category="documentary">▤ Dokumenter</button><button data-category="sport">♜ Sport</button><button data-category="music">♫ Musik</button><button data-category="technology">⚙ Teknologi</button><button data-category="nature">❧ Alam</button><button data-category="science">⚗ Sains</button><button data-category="other">••• Lainnya</button>
 </nav>
-<section aria-labelledby="featuredTitle"><div class="section-head"><div><h2 id="featuredTitle">⭐ Galeri Pilihan</h2><p>Koleksi terbaik untuk Anda</p></div><a href="#koleksi">Lihat Semua →</a></div>
+<section aria-labelledby="featuredTitle"><div class="section-head"><div><h2 id="featuredTitle">⭐ Galeri Pilihan</h2><p>Kurasi visual utama · Pilih kartu untuk melihat detail media</p></div><a href="#koleksi">Lihat Semua →</a></div>
 <div class="featured" id="featuredGrid">
 <article class="tile" data-category="image nature"><span class="tag">▣ Foto</span><img src="./1782911782.png" alt="Koleksi foto alam dan pegunungan" loading="eager"><div class="tile-body"><h3>Keindahan Alam</h3><p>Koleksi visual pilihan PlanetBintang</p><div class="tile-meta"><span>▧ Foto</span><span>◉ Galeri</span></div></div></article>
 <article class="tile" data-category="image technology"><span class="tag purple">▣ Foto</span><img src="./1782912612.png" alt="Koleksi foto kota dan teknologi" loading="lazy"><div class="tile-body"><h3>Kota Modern</h3><p>Arsitektur dan kehidupan urban</p><div class="tile-meta"><span>▧ Foto</span><span>◉ Galeri</span></div></div></article>
@@ -65,7 +93,7 @@ footer{border-top:1px solid #193653;padding:20px 26px;color:#91a8c2;font-size:11
 <article class="tile" data-category="image technology"><span class="tag purple">Foto</span><img src="./2610161643214.jpg" alt="Koleksi visual kota modern" loading="lazy"><div class="tile-body"><h3>Arsitektur Modern</h3></div></article>
 <article class="tile" data-category="image nature"><span class="tag">Foto</span><img src="./2610221551221.jpg" alt="Koleksi visual alam" loading="lazy"><div class="tile-body"><h3>Keindahan Bumi</h3></div></article>
 </section>
-<section id="koleksi"><div class="section-head"><div><h2>Jelajahi Semua Koleksi</h2><p>Telusuri media berdasarkan kategori atau kata kunci</p></div><button class="btn" id="toggleComposer" type="button">＋ Tambah Media</button></div>
+<section id="koleksi"><div class="section-head"><div><h2>Jelajahi Semua Koleksi</h2><p>Perpustakaan visual · Cari, saring, dan buka detail setiap berkas</p></div><button class="btn" id="toggleComposer" type="button">＋ Tambah Media</button></div>
 <div class="library-tools" id="search"><input id="filter" type="search" placeholder="⌕ Cari foto, video, film…" aria-label="Cari koleksi"><select id="typeFilter" aria-label="Urutkan koleksi"><option value="all">Semua jenis</option><option value="image">Foto</option><option value="video">Video</option><option value="film">Film</option><option value="animation">Animasi</option><option value="documentary">Dokumenter</option><option value="sport">Sport</option><option value="music">Musik</option><option value="technology">Teknologi</option><option value="nature">Alam</option><option value="science">Sains</option><option value="other">Lainnya</option></select><span class="count" id="count">13 item</span></div>
 <div class="library-grid" id="feed">
 <article class="tile" data-category="image nature" data-title="keindahan alam pegunungan"><img src="./1782911782.png" alt="Keindahan alam" loading="lazy"><div class="tile-body"><h3>Keindahan Alam Indonesia</h3><p>Foto · Koleksi Galeri</p></div></article>
@@ -83,16 +111,24 @@ footer{border-top:1px solid #193653;padding:20px 26px;color:#91a8c2;font-size:11
 <article class="tile" data-category="image science" data-title="sains dan teknologi"><img src="./d482119cdabc9232339169.png" alt="Sains dan teknologi" loading="lazy"><div class="tile-body"><h3>Sains dan Teknologi</h3><p>Foto · Koleksi Galeri</p></div></article>
 </div></section>
 <section class="panel hidden" id="composerPanel"><h2>Tambahkan media ke perangkat ini</h2><form id="postForm" class="composer"><label>Judul<input name="title" maxlength="100" required placeholder="Judul media"></label><label>Kategori<select name="type"><option value="image">Foto</option><option value="video">Video</option><option value="film">Film</option><option value="animation">Animasi</option><option value="documentary">Dokumenter</option><option value="sport">Sport</option><option value="music">Musik</option><option value="technology">Teknologi</option><option value="nature">Alam</option><option value="science">Sains</option><option value="other">Lainnya</option></select></label><label class="wide">Deskripsi<textarea name="description" maxlength="600" placeholder="Deskripsi media"></textarea></label><label class="wide">Pilih berkas<input name="file" type="file" required accept="image/*,video/*"></label><div class="wide"><button class="btn primary" type="submit">Simpan di perangkat ini</button><p class="hint">Media yang ditambahkan tersimpan di browser/perangkat ini dan hanya terlihat pada perangkat tersebut. Untuk publikasi bagi semua pengunjung, unggah berkas ke folder galeri pada repositori GitHub.</p></div></form></section>
-</main><footer>PlanetBintang · Galeri Multimedia · Satu pintu. Seluruh sistem.</footer>
+</main>
+<div class="viewer" id="mediaViewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><div class="viewer-card"><div class="viewer-media" id="viewerMedia"></div><div class="viewer-info"><div><h2 id="viewerTitle">Detail media</h2><p id="viewerDescription">Informasi media</p></div><button class="viewer-close" id="viewerClose" type="button">Tutup ✕</button></div></div></div>
+<footer>PlanetBintang · Galeri Multimedia · Satu pintu. Seluruh sistem.</footer>
 <script>
 (()=>{'use strict';
 const localKey='planetbintang.galeri.posts.v1',feed=document.getElementById('feed'),panel=document.getElementById('composerPanel'),form=document.getElementById('postForm');
 let localPosts=[];try{localPosts=JSON.parse(localStorage.getItem(localKey)||'[]');if(!Array.isArray(localPosts))localPosts=[]}catch{localPosts=[]}
 let activeCategory='all';
+
+const viewer=document.getElementById('mediaViewer'),viewerMedia=document.getElementById('viewerMedia'),viewerTitle=document.getElementById('viewerTitle'),viewerDescription=document.getElementById('viewerDescription');
+function openMedia(card){const media=card.querySelector('img,video');if(!media)return;const title=card.dataset.title||card.querySelector('h3')?.textContent||'Media Galeri';viewerTitle.textContent=title;viewerDescription.textContent=card.querySelector('p')?.textContent||'Koleksi multimedia PlanetBintang';viewerMedia.replaceChildren();const copy=media.cloneNode(true);copy.removeAttribute('loading');if(copy.tagName==='VIDEO'){copy.controls=true;copy.autoplay=false}viewerMedia.append(copy);viewer.classList.add('open');document.body.style.overflow='hidden';}
+function closeMedia(){viewer.classList.remove('open');viewerMedia.replaceChildren();document.body.style.overflow='';}
+document.getElementById('viewerClose').addEventListener('click',closeMedia);viewer.addEventListener('click',e=>{if(e.target===viewer)closeMedia()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMedia()});
+document.querySelectorAll('.tile').forEach(card=>{card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Lihat detail '+(card.querySelector('h3')?.textContent||'media'));card.addEventListener('click',e=>{if(e.target.closest('button,a,video'))return;openMedia(card)});card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openMedia(card)}})});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function filterItems(){const q=document.getElementById('filter').value.trim().toLowerCase(),type=document.getElementById('typeFilter').value;let shown=0;
 feed.querySelectorAll('.tile').forEach(card=>{const cats=(card.dataset.category||'').split(/\s+/),title=(card.dataset.title||card.textContent).toLowerCase(),catOK=activeCategory==='all'||cats.includes(activeCategory),typeOK=type==='all'||cats.includes(type),queryOK=!q||title.includes(q);const visible=catOK&&typeOK&&queryOK;card.classList.toggle('hidden',!visible);if(visible)shown++});
-document.getElementById('count').textContent=shown+' item';}
+document.getElementById('count').textContent=shown+' item';document.getElementById('photoMetric').textContent=feed.querySelectorAll('.tile:not(.hidden)').length;}
 document.getElementById('categoryBar').addEventListener('click',e=>{const b=e.target.closest('button[data-category]');if(!b)return;activeCategory=b.dataset.category;document.querySelectorAll('#categoryBar button').forEach(x=>x.classList.toggle('active',x===b));filterItems();document.getElementById('koleksi').scrollIntoView({behavior:'smooth',block:'start'});});
 document.getElementById('filter').addEventListener('input',filterItems);document.getElementById('typeFilter').addEventListener('change',filterItems);
 document.getElementById('toggleComposer').addEventListener('click',()=>{panel.classList.toggle('hidden');if(!panel.classList.contains('hidden'))panel.scrollIntoView({behavior:'smooth',block:'center'});});
