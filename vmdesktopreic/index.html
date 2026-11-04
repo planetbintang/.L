@@ -99,13 +99,23 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
    if(!response.ok)throw Error('desktop.reic · HTTP '+response.status);
    root.innerHTML=await response.text();
    await loadScript('./desktop.js');
-   await loadScript('./desktop-runtime.js');
-   await loadScript('./menu-system/main-menu.reicjs?v=20261104-menu-modal-v2');
-   await loadScript('./menu-system/catalog.reicjs?v=20261104-150-catalog');
-   await loadScript('./desktop-experience.js?v=20261104-launcher-keyboard-1');\n   await loadScript('./filemanager-app.js?v=20261104-filemanajer-1');
-   await loadScript('./desktop-unified.js?v=20261104-unified-1');
+   /* Muat modul inti yang independen secara paralel agar splash screen lebih singkat. */
+   await Promise.all([
+    loadScript('./desktop-runtime.js'),
+    loadScript('./menu-system/main-menu.reicjs?v=20261104-menu-modal-v2'),
+    loadScript('./menu-system/catalog.reicjs?v=20261104-150-catalog')
+   ]);
+   /* Launcher dan routing juga tidak saling menunggu. */
+   await Promise.all([
+    loadScript('./desktop-experience.js?v=20261104-launcher-keyboard-1'),
+    loadScript('./desktop-unified.js?v=20261104-unified-1')
+   ]);
    fit();
    root.classList.add('vm-ready');
+   /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
+   const loadFilemanajer=()=>loadScript('./filemanager-app.js?v=20261104-filemanajer-2').catch(error=>console.warn('Filemanajer ditunda:',error));
+   if('requestIdleCallback' in window)requestIdleCallback(loadFilemanajer,{timeout:1800});
+   else setTimeout(loadFilemanajer,900);
    let layersLoading=false;
    document.addEventListener('click',e=>{
     if(layersLoading||!e.target.closest('.core-item,[data-open],#modalTabs'))return;
