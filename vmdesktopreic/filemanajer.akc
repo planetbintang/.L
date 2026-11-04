@@ -6,13 +6,36 @@
   "applicationId": "planetbintang.vmdesktopreic.filemanajer",
   "runtime": "VMDESKTOPREIC-REIC",
   "entry": "filemanager-app.js",
-  "view": "filemanager.reic",
+  "view": "filemanajer/index.reic",
   "style": "filemanager.css",
   "applicationStyle": "filemanager-app.reicss",
   "engine": "filemanager.js",
-  "modes": ["deploy", "filter", "pipeline", "monitoring", "run", "build"],
+  "modes": [
+    "deploy",
+    "filter",
+    "pipeline",
+    "monitoring",
+    "run",
+    "build"
+  ],
   "storage": "browser-local-storage",
   "backend": "not-configured",
-  "repositoryIndex": {"provider":"github","repository":"planetbintang/.L","ref":"io","root":"CODE","recursive":true,"readOnly":true},
-  "installation": {"mount":"desktop-modal","launchers":["left-menu","desktop-center"],"entryReady":true}
+  "repositoryIndex": {
+    "provider": "github",
+    "repository": "planetbintang/.L",
+    "ref": "io",
+    "root": "vmdesktopreic/filemanajer",
+    "recursive": true,
+    "readOnly": true,
+    "indexManifest": "vmdesktopreic/filemanajer/index.reicg",
+    "sourcePolicy": "preserve-original-source-paths"
+  },
+  "installation": {
+    "mount": "desktop-modal",
+    "launchers": [
+      "left-menu",
+      "desktop-center"
+    ],
+    "entryReady": true
+  }
 }
