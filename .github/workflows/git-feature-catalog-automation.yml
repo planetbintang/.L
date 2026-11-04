@@ -1,6 +1,12 @@
 name: Git Feature Catalog Automation
 
 on:
+  push:
+    branches: [io]
+    paths:
+      - '.github/workflows/git-feature-catalog-automation.yml'
+      - 'data/git-feature-catalog.json'
+      - 'scripts/queue-git-feature-catalog.mjs'
   workflow_dispatch:
     inputs:
       module_id:
