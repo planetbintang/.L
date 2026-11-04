@@ -26,6 +26,7 @@
   const readLocalHistory = () => { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch { return []; } };
   const writeLocalHistory = (rows) => { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(rows.slice(-200))); return true; } catch { return false; } };
   let cloudState = 'memeriksa';
+  let gatewayAccessToken = '';
   async function askCloudModel() {
     const history = readLocalHistory().slice(-20)
       .filter((row) => row && ['user', 'assistant'].includes(row.role) && typeof row.text === 'string')
@@ -33,7 +34,7 @@
     if (!history.length || history[history.length - 1].role !== 'user') return null;
     const response = await fetch('/api/reber', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-reber-access': gatewayAccessToken },
       body: JSON.stringify({ messages: history }),
       signal: AbortSignal.timeout ? AbortSignal.timeout(50000) : undefined,
     });
@@ -55,7 +56,7 @@
     try {
       const response = await fetch('/api/reber', { headers: { 'Accept': 'application/json' } });
       const data = await response.json();
-      cloudState = data.status === 'configured' ? 'siap' : 'belum dikonfigurasi';
+      cloudState = data.status === 'configured' ? 'siap · kode akses diperlukan' : 'belum dikonfigurasi';
     } catch { cloudState = 'mode lokal'; }
     const badge = $('#reberRuntimeMode');
     if (badge) badge.textContent = cloudState === 'siap' ? 'BACKEND AI SIAP' : 'MESIN LOKAL · ' + cloudState.toUpperCase();
@@ -220,6 +221,12 @@
     }
   }
   bootWelcome(true);
+  $('#reberGatewaySave')?.addEventListener('click', () => {
+    gatewayAccessToken = $('#reberGatewayToken')?.value.trim() || '';
+    const note = $('#reberGatewayStatus');
+    if (note) note.textContent = gatewayAccessToken ? 'Kode akses disimpan sementara di memori halaman. Kirim pesan untuk menguji koneksi.' : 'Masukkan kode akses gateway terlebih dahulu.';
+    if ($('#reberGatewayToken')) $('#reberGatewayToken').value = '';
+  });
   void loadKataList();
   void checkCloudGateway();
 })();
