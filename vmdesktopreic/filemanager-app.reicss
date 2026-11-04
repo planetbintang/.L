@@ -17,3 +17,9 @@
 .pb-filemanajer-window{display:grid!important;place-items:center!important}
 .pfm-window{width:min(1200px,calc(100% - 64px))!important;height:min(760px,calc(100% - 64px))!important;max-width:1200px!important;max-height:calc(100% - 64px)!important;min-height:min(460px,calc(100% - 64px))!important;margin:auto!important}
 @media(max-width:900px){.pb-filemanajer-shortcut{width:88px!important;height:88px!important}.pfm-window{width:calc(100% - 14px)!important;height:calc(100% - 14px)!important;max-height:calc(100% - 14px)!important;min-height:0!important}}
+
+/* Filemanajer: jendela kotak terpusat, tanpa lapisan yang menghalangi desktop. */
+#vmDesktop .pb-filemanajer-window{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;padding:16px!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important;overflow:auto!important;z-index:140!important}
+#vmDesktop .pb-filemanajer-window[hidden]{display:none!important}
+#vmDesktop .pb-filemanajer-window>.pfm-window{position:relative!important;inset:auto!important;width:min(1180px,calc(100% - 32px))!important;height:min(760px,calc(100% - 32px))!important;max-width:1180px!important;max-height:calc(100% - 32px)!important;min-height:min(440px,calc(100% - 32px))!important;margin:auto!important;pointer-events:auto!important;flex:0 1 auto!important}
+@media(max-width:900px){#vmDesktop .pb-filemanajer-window{padding:6px!important}#vmDesktop .pb-filemanajer-window>.pfm-window{width:calc(100% - 12px)!important;height:calc(100% - 12px)!important;max-height:calc(100% - 12px)!important;min-height:0!important}}
