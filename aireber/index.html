@@ -104,7 +104,12 @@
         </section>
 
         <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" hidden tabindex="0">
-          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag" id="reberRuntimeMode">MESIN LOKAL · BACKEND OPSIONAL</span></div>
+          <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag">MESIN LOKAL · BACKEND OPSIONAL</span></div>
+          <div class="reber-gateway-access surface">
+            <div><b>Koneksi Model AI (opsional)</b><p>Untuk model generatif, deploy folder aireber/ ke Netlify dan masukkan kode akses gateway. Kode hanya disimpan di memori halaman ini.</p></div>
+            <div class="form-row"><label for="reberGatewayToken">Kode akses gateway<input id="reberGatewayToken" type="password" autocomplete="off" maxlength="256" placeholder="Masukkan kode akses dari pengelola backend" /></label><button type="button" class="quiet-button" id="reberGatewaySave">Gunakan untuk sesi ini</button></div>
+            <small id="reberGatewayStatus" aria-live="polite">Backend tidak aktif pada GitHub Pages statis; mesin lokal tetap tersedia.</small>
+          </div>
           <div class="chat-shell surface">
             <div id="reberChatMessages" class="chat-log" role="log" aria-live="polite"></div>
             <form id="reberChatForm" class="chat-compose">
