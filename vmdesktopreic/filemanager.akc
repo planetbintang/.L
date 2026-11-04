@@ -1,0 +1,16 @@
+{
+  "package": "filemanajer.akc",
+  "name": "filemanajer",
+  "displayName": "FILEMANAJER",
+  "version": "1.0.0",
+  "applicationId": "planetbintang.vmdesktopreic.filemanajer",
+  "runtime": "VMDESKTOPREIC-REIC",
+  "entry": "filemanager-app.js",
+  "view": "filemanager.reic",
+  "style": "filemanager.css",
+  "engine": "filemanager.js",
+  "modes": ["deploy", "filter", "pipeline", "monitoring", "run", "build"],
+  "capabilities": ["virtual-filesystem", "folder-navigation", "upload", "search", "pipeline-preflight", "local-run", "local-build-report"],
+  "storage": "browser-local-storage",
+  "backend": "not-configured"
+}
