@@ -1,0 +1,360 @@
+{
+  "schema": "planetbintang.vmdesktopreic.filemanager.v2",
+  "title": "VMDESKTOPREIC · FILE MANAGER REIC SYSTEM",
+  "root": "vmdesktopreic/filemanajer/",
+  "extensions": [
+    ".reic",
+    ".reicss",
+    ".reicjs",
+    ".reicg"
+  ],
+  "policy": "single-index-preserve-source-paths",
+  "description": "Pusat kategori untuk seluruh sistem desktop. Berkas sumber tetap pada lokasi aslinya agar impor dan runtime yang sudah aktif tidak rusak.",
+  "categories": [
+    {
+      "id": "system-folders",
+      "title": "FOLDER SISTEM",
+      "theme": "CORE / STORAGE",
+      "description": "Akar sistem dan penyimpanan terkelola.",
+      "folders": [
+        {
+          "name": "acct",
+          "path": "acct/",
+          "description": "Aktivitas, akun, dan aktivasi."
+        },
+        {
+          "name": "sys",
+          "path": "sys/",
+          "description": "Inti sistem dan layanan."
+        },
+        {
+          "name": "system_ext",
+          "path": "system_ext/",
+          "description": "Penyimpanan sistem eksternal."
+        },
+        {
+          "name": "cache",
+          "path": "cache/",
+          "description": "Cache dan rekonstruksi sementara."
+        },
+        {
+          "name": "config",
+          "path": "config/",
+          "description": "Konfigurasi sistem."
+        },
+        {
+          "name": "media",
+          "path": "media/",
+          "description": "Media dan aset publikasi."
+        },
+        {
+          "name": "data",
+          "path": "data/",
+          "description": "Data bersama sistem."
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": "list-blok",
+      "title": "LIST BLOK",
+      "theme": "UI / COMPONENTS",
+      "description": "Blok antarmuka dan komponen desktop yang dapat digunakan ulang.",
+      "folders": [
+        {
+          "name": "Komponen Desktop",
+          "path": "vmdesktopreic/",
+          "description": "Komponen shell, menu, panel, modal, dan workspace."
+        }
+      ],
+      "files": [
+        {
+          "path": "vmdesktopreic/desktop.reic",
+          "label": "Desktop REIC"
+        },
+        {
+          "path": "vmdesktopreic/desktop.js",
+          "label": "Desktop Runtime"
+        },
+        {
+          "path": "vmdesktopreic/components-1500.json",
+          "label": "Daftar Komponen 1.500"
+        },
+        {
+          "path": "vmdesktopreic/integration/component-registry.js",
+          "label": "Registri Komponen"
+        },
+        {
+          "path": "vmdesktopreic/integration/component-bridge.js",
+          "label": "Jembatan Integrasi"
+        }
+      ]
+    },
+    {
+      "id": "layout-library",
+      "title": "LAYOUT LIBRARY",
+      "theme": "UI / LAYOUT",
+      "description": "Koleksi layout desktop, modal, panel, dan workspace.",
+      "folders": [
+        {
+          "name": "Layout Desktop",
+          "path": "vmdesktopreic/",
+          "description": "Sumber layout dan tema desktop."
+        }
+      ],
+      "files": [
+        {
+          "path": "vmdesktopreic/desktop.css",
+          "label": "Desktop Base Layout"
+        },
+        {
+          "path": "vmdesktopreic/desktop-experience.css",
+          "label": "Desktop Experience"
+        },
+        {
+          "path": "vmdesktopreic/desktop-unified.css",
+          "label": "Unified Layout"
+        },
+        {
+          "path": "vmdesktopreic/desktop-unified.js",
+          "label": "Unified Runtime"
+        },
+        {
+          "path": "vmdesktopreic/desktop-reference.css",
+          "label": "Reference Layout"
+        },
+        {
+          "path": "vmdesktopreic/desktop-elegance.css",
+          "label": "Elegance Theme"
+        },
+        {
+          "path": "vmdesktopreic/modal-layouts.css",
+          "label": "Modal Layouts"
+        },
+        {
+          "path": "vmdesktopreic/desktop-wallpaper-theme.css",
+          "label": "Wallpaper Theme"
+        }
+      ]
+    },
+    {
+      "id": "reic-explorer",
+      "title": "REIC EXPLORER",
+      "theme": "DEVELOPMENT / FILES",
+      "description": "Penjelajah sistem dan katalog komponen REIC.",
+      "folders": [
+        {
+          "name": "REIC Explorer",
+          "path": "osmediavm/recordin/",
+          "description": "Explorer dan manifest komponen."
+        }
+      ],
+      "files": [
+        {
+          "path": "osmediavm/recordin/index.html",
+          "label": "REIC Explorer"
+        },
+        {
+          "path": "osmediavm/recordin/manifest.json",
+          "label": "Manifest Explorer"
+        },
+        {
+          "path": "vmdesktopreic/reic-library/index.reicg",
+          "label": "Manifest Library Lama"
+        }
+      ]
+    },
+    {
+      "id": "infrastructure-config",
+      "title": "KONFIGURASI INFRASTRUKTUR",
+      "theme": "SYSTEM / CONFIG",
+      "description": "Konfigurasi layanan, runtime, dan integrasi infrastruktur.",
+      "folders": [
+        {
+          "name": "Konfigurasi OS MEDIA VM",
+          "path": "osmediavm/",
+          "description": "Panel pengaturan infrastruktur."
+        }
+      ],
+      "files": [
+        {
+          "path": "osmediavm/infrastruktur.html",
+          "label": "Konfigurasi Infrastruktur"
+        },
+        {
+          "path": "osmediavm/infrastruktur.css",
+          "label": "Gaya Infrastruktur"
+        },
+        {
+          "path": "osmediavm/infrastruktur.js",
+          "label": "Runtime Infrastruktur"
+        },
+        {
+          "path": "vmdesktopreic/environment/environment.js",
+          "label": "Profil Environment"
+        },
+        {
+          "path": "vmdesktopreic/integration/boot.js",
+          "label": "Integration Boot"
+        }
+      ]
+    },
+    {
+      "id": "infrastructure-15000",
+      "title": "INFRASTRUKTUR 15.000",
+      "theme": "SYSTEM / INFRASTRUCTURE",
+      "description": "Katalog infrastruktur berskala besar dan sumber registrinya.",
+      "folders": [
+        {
+          "name": "Infrastruktur 15.000",
+          "path": "osmediavm/infrastruktur-15000/",
+          "description": "Folder katalog infrastruktur."
+        }
+      ],
+      "files": [
+        {
+          "path": "osmediavm/infrastruktur-15000/README.md",
+          "label": "Panduan Infrastruktur 15.000"
+        },
+        {
+          "path": "osmediavm/infrastruktur-15000/index.reic",
+          "label": "Indeks Infrastruktur REIC"
+        },
+        {
+          "path": "osmediavm/recordin/manifest.json",
+          "label": "Manifest Komponen"
+        }
+      ]
+    },
+    {
+      "id": "registry-1500",
+      "title": "REGISTRI 1.500",
+      "theme": "SYSTEM / REGISTRY",
+      "description": "Registri 1.500 komponen dengan sumber katalog OS MEDIA VM.",
+      "folders": [
+        {
+          "name": "Infrastruktur 1.500",
+          "path": "osmediavm/infrastruktur-1500/",
+          "description": "Sumber komponen terindeks."
+        }
+      ],
+      "files": [
+        {
+          "path": "vmdesktopreic/components-1500.json",
+          "label": "JSON Registri 1.500"
+        },
+        {
+          "path": "osmediavm/infrastruktur-1500/index.reic",
+          "label": "Indeks REIC 1.500"
+        },
+        {
+          "path": "vmdesktopreic/apps-250.json",
+          "label": "Registri Aplikasi 250"
+        }
+      ]
+    },
+    {
+      "id": "premium-150",
+      "title": "150 FITUR PREMIUM",
+      "theme": "APPLICATIONS / PREMIUM",
+      "description": "Menu sistem, katalog fitur, dan modul aplikasi desktop.",
+      "folders": [
+        {
+          "name": "Katalog Menu Sistem",
+          "path": "vmdesktopreic/menu-system/",
+          "description": "Menu utama dan modul fitur."
+        }
+      ],
+      "files": [
+        {
+          "path": "vmdesktopreic/menu-system/catalog.reic",
+          "label": "Katalog Menu REIC"
+        },
+        {
+          "path": "vmdesktopreic/menu-system/catalog.reicjs",
+          "label": "Runtime Katalog Menu"
+        },
+        {
+          "path": "vmdesktopreic/desktop-reic-system.js",
+          "label": "Sistem Modal REIC"
+        },
+        {
+          "path": "vmdesktopreic/apps-250.json",
+          "label": "Katalog Aplikasi"
+        }
+      ]
+    },
+    {
+      "id": "system-themes",
+      "title": "TEMA SISTEM DESKTOP",
+      "theme": "THEME / DESIGN TOKENS",
+      "description": "Tema bersama untuk identitas desktop, File Manager, wallpaper, dan komponen.",
+      "folders": [
+        {
+          "name": "Tema VMDESKTOPREIC",
+          "path": "vmdesktopreic/",
+          "description": "Tema dan stylesheet bersama."
+        }
+      ],
+      "files": [
+        {
+          "path": "vmdesktopreic/shared-osmediavm-theme.css",
+          "label": "Tema OS MEDIA VM"
+        },
+        {
+          "path": "vmdesktopreic/reic-theme.css",
+          "label": "Tema REIC"
+        },
+        {
+          "path": "vmdesktopreic/desktop-wallpaper-theme.css",
+          "label": "Tema Wallpaper"
+        },
+        {
+          "path": "vmdesktopreic/filemanager-app.reicss",
+          "label": "Tema File Manager"
+        },
+        {
+          "path": "vmdesktopreic/filemanager.css",
+          "label": "Gaya REIC Explorer"
+        }
+      ]
+    }
+  ],
+  "componentThemes": [
+    {
+      "id": "layout",
+      "title": "LAYOUT & SHELL",
+      "description": "Desktop shell, header, workspace, modal, panel."
+    },
+    {
+      "id": "navigation",
+      "title": "NAVIGASI & MENU",
+      "description": "Menu inti, submenu, tab, dan navigasi."
+    },
+    {
+      "id": "files",
+      "title": "FILE & STORAGE",
+      "description": "Folder, File Manager, media, dan penyimpanan."
+    },
+    {
+      "id": "registry",
+      "title": "REGISTRI & KATALOG",
+      "description": "List Blok, Registri 1.500, dan katalog 15.000."
+    },
+    {
+      "id": "infrastructure",
+      "title": "INFRASTRUKTUR & RUNTIME",
+      "description": "Environment, runtime, API, dan integrasi."
+    },
+    {
+      "id": "applications",
+      "title": "APLIKASI & FITUR PREMIUM",
+      "description": "Aplikasi desktop dan fitur sistem."
+    },
+    {
+      "id": "themes",
+      "title": "TEMA & VISUAL",
+      "description": "Wallpaper, tekstur, warna, dan tipografi."
+    }
+  ]
+}
