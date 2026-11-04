@@ -10,7 +10,10 @@
   "style": "filemanager.css",
   "engine": "filemanager.js",
   "modes": ["deploy", "filter", "pipeline", "monitoring", "run", "build"],
-  "capabilities": ["virtual-filesystem", "folder-navigation", "upload", "search", "pipeline-preflight", "local-run", "local-build-report"],
+  "capabilities": ["virtual-filesystem", "folder-navigation", "upload", "search", "pipeline-preflight", "local-run", "local-build-report", "github-public-repository-index", "system-directory-mounts"],
+  "mounts": ["/acct", "/acct/gitok.acct", "/sys", "/system_ext", "/cache", "/config", "/media", "/data", "/CODE"],
+  "repositoryIndex": "https://api.github.com/users/planetbintang/repos?per_page=100",
+  "repositoryPolicy": "public-repositories-only-without-authenticated-backend",
   "storage": "browser-local-storage",
   "backend": "not-configured"
 }
