@@ -1,0 +1,76 @@
+name: Git Feature Catalog Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      module_id:
+        description: "ID modul (kosongkan untuk semua 30 modul)"
+        required: false
+        type: string
+      start_index:
+        description: "Indeks fitur awal"
+        required: false
+        default: "1"
+        type: string
+      end_index:
+        description: "Indeks fitur akhir"
+        required: false
+        default: "1500"
+        type: string
+      batch_size:
+        description: "Jumlah fitur per batch (1-50)"
+        required: false
+        default: "50"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: git-feature-catalog-automation-io
+  cancel-in-progress: false
+
+jobs:
+  queue-catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout branch io
+        uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build and validate feature queue
+        run: |
+          node scripts/queue-git-feature-catalog.mjs
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const base = 'automation/git-catalog/runs';
+          const runs = fs.readdirSync(base).sort();
+          const latest = runs.at(-1);
+          if (!latest) throw new Error('Queue manifest tidak ditemukan.');
+          const dir = path.join(base, latest);
+          const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+          let count = 0;
+          for (const batch of manifest.batches) {
+            const data = JSON.parse(fs.readFileSync(batch.file, 'utf8'));
+            if (data.status !== 'queued-for-implementation') throw new Error('Status batch tidak valid.');
+            count += data.features.length;
+          }
+          if (count !== manifest.selectedCount) throw new Error('Jumlah fitur batch tidak cocok dengan manifest.');
+          if (manifest.catalogCount !== 1500) throw new Error('Katalog bukan 1.500 fitur.');
+          console.log(`Valid: ${count} fitur dalam ${manifest.batches.length} batch.`);
+          NODE
+      - name: Commit queue and audit trail
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/git-catalog automation/records/changes.jsonl
+          if git diff --cached --quiet; then echo "Tidak ada perubahan."; exit 0; fi
+          git commit -m "automation: queue Git feature catalog batches"
+          git push origin HEAD:io
