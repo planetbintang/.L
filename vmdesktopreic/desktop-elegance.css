@@ -1,0 +1,158 @@
+/* VMDESKTOPREIC ELEGANT MODE — shared visual layer, preserves existing runtime and menu behavior. */
+:root{
+ --vme-bg:#050b16;--vme-surface:#0a1728;--vme-surface-2:#10243a;
+ --vme-line:rgba(130,194,232,.24);--vme-text:#edf7ff;--vme-muted:#a9bfd3;
+ --vme-cyan:#7de4ff;--vme-blue:#4e9eff;--vme-violet:#9c8cff;--vme-gold:#dfc58e;
+ --vme-glow:0 0 22px rgba(66,177,255,.16),inset 0 1px rgba(255,255,255,.07);
+ --vme-panel:linear-gradient(145deg,rgba(17,39,63,.96),rgba(5,15,29,.97));
+}
+html,body,#desktop-root{background:#050b16;color:var(--vme-text)}
+#desktop-root>.vm-shell{
+ background:
+  radial-gradient(ellipse at 78% 18%,rgba(53,145,220,.23),transparent 35%),
+  radial-gradient(ellipse at 18% 82%,rgba(104,91,203,.14),transparent 38%),
+  linear-gradient(135deg,#071323 0%,#0a1c31 48%,#050b16 100%)!important;
+ border:1px solid rgba(137,207,245,.5)!important;
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.045),0 0 45px rgba(0,0,0,.35)!important;
+}
+#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{opacity:.24;filter:blur(3px);pointer-events:none}
+#desktop-root .vm-header.reic-topbar{
+ background:linear-gradient(90deg,rgba(5,15,29,.92),rgba(13,35,57,.82),rgba(5,15,29,.92))!important;
+ border-bottom:1px solid var(--vme-line)!important;
+ box-shadow:0 8px 28px rgba(0,0,0,.16)!important;
+ backdrop-filter:blur(16px) saturate(1.2);
+}
+#desktop-root .vm-brand{color:var(--vme-text);letter-spacing:.055em}
+#desktop-root .vm-brand small{color:var(--vme-muted);letter-spacing:.18em}
+#desktop-root .vm-logo{
+ border:1px solid rgba(125,228,255,.75)!important;border-radius:0!important;
+ background:linear-gradient(145deg,rgba(91,205,255,.3),rgba(82,100,204,.2))!important;
+ color:#fff!important;text-shadow:0 0 18px rgba(125,228,255,.85);
+ box-shadow:0 0 22px rgba(67,181,255,.22),inset 0 0 14px rgba(125,228,255,.15)!important;
+}
+#desktop-root .vm-header-tools button{
+ border:1px solid var(--vme-line)!important;border-radius:0!important;
+ background:linear-gradient(145deg,#173754,#0a1b2e)!important;color:#eaf7ff!important;
+ box-shadow:var(--vme-glow)!important;transition:transform .16s,border-color .16s,filter .16s;
+}
+#desktop-root .vm-header-tools button:hover{transform:translateY(-2px);border-color:var(--vme-cyan)!important;filter:brightness(1.2)}
+#desktop-root .vm-desktop{background:transparent!important}
+#desktop-root .vm-core-menu{gap:9px!important}
+#desktop-root .vm-core-menu>.core-item{min-height:54px!important}
+#desktop-root .vm-core-menu>.core-item>span{
+ border:1px solid rgba(125,228,255,.62)!important;border-radius:0!important;
+ background:linear-gradient(145deg,rgba(42,155,219,.48),rgba(49,67,150,.52))!important;
+ color:#f3fbff!important;box-shadow:0 0 17px rgba(58,176,255,.22),inset 0 1px rgba(255,255,255,.2)!important;
+ text-shadow:0 0 12px rgba(125,228,255,.65);font-size:25px!important;
+}
+#desktop-root .vm-core-menu>.core-item>b{
+ border:1px solid rgba(130,194,232,.24)!important;border-left:2px solid rgba(125,228,255,.72)!important;
+ border-radius:0!important;background:linear-gradient(100deg,rgba(15,39,63,.94),rgba(10,25,43,.84))!important;
+ color:#edf7ff!important;letter-spacing:.075em!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.055)!important;
+}
+#desktop-root .vm-core-menu>.core-item:hover>span,
+#desktop-root .vm-core-menu>.core-item.active>span{
+ background:linear-gradient(145deg,#40c9f5,#4c72d9)!important;
+ box-shadow:0 0 24px rgba(75,205,255,.48),inset 0 1px rgba(255,255,255,.35)!important;
+}
+#desktop-root .vm-core-menu>.core-item:hover>b,
+#desktop-root .vm-core-menu>.core-item.active>b{
+ border-color:rgba(125,228,255,.6)!important;
+ background:linear-gradient(100deg,rgba(24,76,111,.98),rgba(19,44,78,.96))!important;
+}
+#desktop-root .vm-slide-panel{
+ border:1px solid rgba(125,228,255,.45)!important;border-radius:0!important;
+ background:linear-gradient(155deg,rgba(13,35,58,.98),rgba(5,15,29,.985))!important;
+ box-shadow:0 20px 55px rgba(0,0,0,.42),0 0 26px rgba(67,177,255,.14)!important;
+ backdrop-filter:blur(18px) saturate(1.25);
+}
+#desktop-root .vm-slide-panel>header{
+ background:linear-gradient(100deg,#17466c,#142b4c)!important;
+ border-bottom:1px solid var(--vme-line)!important;color:var(--vme-text)!important;
+}
+#desktop-root .vm-slide-panel>header>span{
+ border:1px solid rgba(125,228,255,.5)!important;border-radius:0!important;
+ background:linear-gradient(145deg,#278fbd,#384c9a)!important;box-shadow:0 0 16px #37bfff33;
+}
+#desktop-root .slide-item{
+ border:1px solid rgba(130,194,232,.17)!important;border-radius:0!important;
+ background:linear-gradient(100deg,rgba(15,39,63,.9),rgba(8,22,39,.94))!important;
+ color:var(--vme-text)!important;transition:background .16s,border-color .16s,transform .16s;
+}
+#desktop-root .slide-item:hover{border-color:var(--vme-cyan)!important;background:linear-gradient(100deg,#17466a,#102b49)!important;transform:translateX(3px)}
+#desktop-root .vm-center-search{
+ border:1px solid rgba(125,228,255,.62)!important;border-radius:0!important;
+ background:linear-gradient(100deg,rgba(8,24,42,.92),rgba(17,53,81,.92))!important;
+ box-shadow:0 0 26px rgba(66,177,255,.18),inset 0 1px rgba(255,255,255,.1)!important;
+ backdrop-filter:blur(14px);
+}
+#desktop-root .vm-center-search input{color:#f2f9ff!important}
+#desktop-root .vm-modal-backdrop{
+ background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ pointer-events:none!important;
+}
+#desktop-root .vm-modal-backdrop[hidden]{display:none!important}
+#desktop-root .vm-modal{
+ pointer-events:auto!important;border:1px solid rgba(125,228,255,.58)!important;border-radius:0!important;
+ color:var(--vme-text)!important;
+ background:linear-gradient(145deg,rgba(13,31,51,.985),rgba(5,14,27,.99))!important;
+ box-shadow:0 24px 80px rgba(0,0,0,.48),0 0 30px rgba(69,177,255,.16),inset 0 1px rgba(255,255,255,.08)!important;
+}
+#desktop-root .vm-modal>header{
+ background:linear-gradient(100deg,#153e62,#1a5272 58%,#293d70)!important;
+ color:#f4fbff!important;border-bottom:1px solid rgba(125,228,255,.28)!important;
+}
+#desktop-root .vm-modal>header>span,#desktop-root .vm-modal>header button{
+ border:1px solid rgba(125,228,255,.42)!important;border-radius:0!important;
+ background:linear-gradient(145deg,rgba(67,170,218,.32),rgba(74,81,159,.28))!important;color:#fff!important;
+}
+#desktop-root .vm-modal .modal-tabs{
+ background:rgba(7,19,33,.94)!important;border-bottom:1px solid var(--vme-line)!important;
+}
+#desktop-root .vm-modal .modal-tabs button{
+ border:1px solid rgba(130,194,232,.24)!important;border-radius:0!important;
+ background:linear-gradient(145deg,#102840,#0a1a2d)!important;color:#cfe6f7!important;
+}
+#desktop-root .vm-modal .modal-tabs button.active{
+ border-color:var(--vme-cyan)!important;background:linear-gradient(110deg,#17618a,#354b91)!important;color:#fff!important;
+ box-shadow:0 0 16px rgba(66,177,255,.2)!important;
+}
+#desktop-root .vm-modal .modal-body{
+ background:radial-gradient(ellipse at 95% 0,rgba(40,115,161,.12),transparent 45%)!important;color:var(--vme-text)!important;
+}
+#desktop-root .vm-modal .modal-body :where(h1,h2,h3,h4,strong,b,label,dt,dd){color:#eff8ff}
+#desktop-root .vm-modal .modal-body :where(p,small,.muted,.description,.help-text){color:var(--vme-muted)}
+#desktop-root .vm-modal .modal-body :where(.system-card,.content-card,.settings-group,.info-row,.setting-row,.menu-choice,.menu-choice-intro,.pb-detail-tools,.pb-detail-canvas,.pb-canvas-toolbar,.pb-detail-heading){
+ border:1px solid rgba(130,194,232,.2)!important;border-radius:0!important;
+ background:linear-gradient(145deg,rgba(17,41,65,.92),rgba(7,20,35,.96))!important;
+ color:var(--vme-text)!important;box-shadow:inset 0 1px rgba(255,255,255,.045),0 8px 22px rgba(0,0,0,.12)!important;
+}
+#desktop-root .vm-modal .modal-body :where(button,.button,.action,.menu-choice button){
+ border-radius:0!important;border-color:rgba(125,228,255,.3)!important;
+ background:linear-gradient(110deg,#174b70,#243d73)!important;color:#f1f8ff!important;
+}
+#desktop-root .vm-modal .modal-body :where(input,select,textarea){
+ border:1px solid rgba(130,194,232,.35)!important;border-radius:0!important;
+ background:#071625!important;color:#f1f8ff!important;
+}
+#desktop-root .vm-modal>footer{
+ background:rgba(6,18,31,.97)!important;border-top:1px solid var(--vme-line)!important;color:var(--vme-muted)!important;
+}
+#desktop-root .vm-modal>footer button{
+ border:1px solid rgba(125,228,255,.35)!important;border-radius:0!important;
+ background:linear-gradient(110deg,#17618a,#354b91)!important;color:#fff!important;
+}
+#desktop-root :where(.vm-statusbar,.vm-clock,.vm-mini-tools,.vm-workspace-card,.system-card,.content-card,.settings-group){
+ border-color:var(--vme-line)!important;color:var(--vme-text)!important;
+}
+#desktop-root :where(button,a,input,select,textarea):focus-visible{outline:2px solid var(--vme-cyan)!important;outline-offset:3px!important}
+@media(max-width:760px){
+ #desktop-root .vm-core-menu{width:min(210px,42vw)!important}
+ #desktop-root .vm-core-menu>.core-item>b{font-size:10px!important;padding:0 7px!important}
+ #desktop-root .vm-modal-backdrop{padding:6px!important}
+ #desktop-root .vm-modal{max-width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #desktop-root *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
