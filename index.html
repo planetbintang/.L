@@ -476,6 +476,16 @@
 
     <section class="workspace-panel" data-workspace-panel="code" role="tabpanel" hidden>
       <div class="workspace-panel-heading"><div><p class="eyebrow">CODE WORKSPACE <span>/</span> 03</p><h3>Penampil & editor draft</h3><p>File yang tersedia pada snapshot lokal dapat dimuat. Edit disimpan sebagai draft lokal dan tidak melakukan commit/deploy.</p></div><span class="local-badge">TANPA EKSEKUSI KODE</span></div>
+      <section class="code-dashboard-overview" aria-label="Ringkasan Code Workspace">
+        <div class="code-dashboard-topline"><span class="code-live-dot"></span><span>PLANETBINTANG / CODE PLATFORM</span><span class="code-topline-rule"></span><small>DEVELOPMENT WORKSPACE</small></div>
+        <div class="code-dashboard-intro"><div><p class="code-kicker">GIT &amp; DEV PLATFORM</p><h4>Bangun, tinjau, dan kelola kode.</h4><p>Ruang kerja terpadu untuk menjelajahi repositori, membuka sumber file, menyusun draft, dan memeriksa perubahan.</p><div class="code-dashboard-links"><a href="#fileManager" data-system-route="file-manager">▣ Jelajahi File</a><a href="#repositories" data-system-route="repositories">⌘ Repositori</a><a href="#workspace/features" data-system-route="features">▤ Fitur Pengembangan</a></div></div><div class="code-hero-art" aria-hidden="true"><span>&lt;/&gt;</span><i></i><b></b><em></em></div></div>
+        <div class="code-overview-grid">
+          <article><span class="code-overview-icon">▣</span><div><small>SUMBER KODE</small><b>Repositori &amp; File</b><p>Telusuri sumber yang tersedia pada snapshot.</p></div><span class="code-state">READ</span></article>
+          <article><span class="code-overview-icon">⌘</span><div><small>EDITOR</small><b>Draft Workspace</b><p>Edit dan simpan perubahan secara lokal.</p></div><span class="code-state">LOCAL</span></article>
+          <article><span class="code-overview-icon">✓</span><div><small>PEMERIKSAAN</small><b>Validasi Kode</b><p>Periksa format JSON dan sintaks yang didukung.</p></div><span class="code-state">CHECK</span></article>
+          <article><span class="code-overview-icon">⇧</span><div><small>DELIVERY</small><b>GitHub Workflow</b><p>Gunakan GitHub untuk commit dan deployment.</p></div><span class="code-state">LINK</span></article>
+        </div>
+      </section>
       <div class="code-toolbar"><label>Repo<select id="codeRepoSelect"></select></label><label>Path file<input id="codePathInput" placeholder="Pilih file dari File Manager" readonly /></label><button id="codePickFile" type="button" class="workspace-secondary">Pilih di File Manager</button><span id="codeGithubLink" class="workspace-secondary">Snapshot lokal aktif</span></div>
       <div class="code-status" id="codeStatus" aria-live="polite">Pilih file dari File Manager. Isi repo privat mengikuti data yang tersedia pada snapshot lokal.</div>
       <label class="visually-hidden" for="codeEditor">Editor draft lokal</label><textarea id="codeEditor" class="code-editor" spellcheck="false" autocapitalize="off" placeholder="Isi file publik akan tampil di sini. Untuk file yang tidak ada di snapshot, gunakan konten lokal; editor tetap berjalan di browser."></textarea>
