@@ -1,6 +1,6 @@
 /* HOSTING ROOT — REICG companion source
- * Theme tokens, layout contract and interaction hooks for hosting/index.reic.
- * Keep API credentials server-side; never embed secrets in this file.
+ * Navigation manifest for hosting/index.reic. Keep in sync with the visible module and submenu labels.
+ * All operations remain preview-only until authenticated backend services are connected.
  */
 export const hostingTheme={background:"#07111f",panel:"#0d1a2c",line:"#29415d",text:"#edf5ff",muted:"#9cb0c9",accent:"#79b5ff",mint:"#69e0c4"};
 export const hostingModules=[
@@ -8,142 +8,303 @@ export const hostingModules=[
     "id": "dashboard",
     "name": "Dashboard",
     "href": "./dashboard/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Ringkasan resource",
+      "Status layanan",
+      "Penggunaan CPU/RAM",
+      "Bandwidth dan trafik",
+      "Aktivitas terbaru",
+      "Peringatan operasional"
+    ]
   },
   {
     "id": "accounts",
     "name": "Accounts",
     "href": "./accounts/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Profil akun",
+      "Tim dan anggota",
+      "Peran dan izin",
+      "Autentikasi akun",
+      "Preferensi akun",
+      "Riwayat aktivitas"
+    ]
   },
   {
     "id": "domains",
     "name": "Domains",
     "href": "./domains/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Registrasi domain",
+      "Transfer domain",
+      "Perpanjangan domain",
+      "Kontak pemilik",
+      "Status domain",
+      "Pemetaan website"
+    ]
   },
   {
     "id": "dns",
     "name": "DNS",
     "href": "./dns/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Zona DNS",
+      "A dan AAAA records",
+      "CNAME dan ALIAS",
+      "MX dan TXT records",
+      "Nameserver",
+      "Propagation checker"
+    ]
   },
   {
     "id": "ssl",
     "name": "SSL",
     "href": "./ssl/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Sertifikat SSL/TLS",
+      "Penerbitan sertifikat",
+      "Perpanjangan otomatis",
+      "Redirect HTTPS",
+      "Audit cipher",
+      "Riwayat sertifikat"
+    ]
   },
   {
     "id": "files",
     "name": "Files",
     "href": "./files/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "File browser",
+      "Unggah dan unduh",
+      "Editor teks",
+      "Hak akses file",
+      "Arsip dan ekstraksi",
+      "Pemakaian storage"
+    ]
   },
   {
     "id": "websites",
     "name": "Websites",
     "href": "./websites/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Buat website",
+      "Kelola virtual host",
+      "Document root",
+      "Redirect dan rewrite",
+      "Halaman error",
+      "Status website"
+    ]
   },
   {
     "id": "applications",
     "name": "Applications",
     "href": "./applications/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "App katalog",
+      "Runtime aplikasi",
+      "Environment variables",
+      "Dependency manager",
+      "Process manager",
+      "Log aplikasi"
+    ]
   },
   {
     "id": "databases",
     "name": "Databases",
     "href": "./databases/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Buat database",
+      "Database users",
+      "Hak akses database",
+      "Backup database",
+      "Query console",
+      "Monitoring koneksi"
+    ]
   },
   {
     "id": "email",
     "name": "Email",
     "href": "./email/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Mailbox",
+      "Alias dan forwarder",
+      "Mailing list",
+      "Webmail",
+      "SPF DKIM DMARC",
+      "Antrean email"
+    ]
   },
   {
     "id": "security",
     "name": "Security",
     "href": "./security/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Firewall",
+      "WAF",
+      "Malware scan",
+      "Audit kerentanan",
+      "Rate limiting",
+      "Security events"
+    ]
   },
   {
     "id": "deployment",
     "name": "Deployment",
     "href": "./deployment/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Repository",
+      "Build config",
+      "Preview deploy",
+      "Production release",
+      "Rollback",
+      "Deploy logs"
+    ]
   },
   {
     "id": "automation",
     "name": "Automation",
     "href": "./automation/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Workflow builder",
+      "Jadwal tugas",
+      "Webhook",
+      "Job queue",
+      "Retry policy",
+      "Execution history"
+    ]
   },
   {
     "id": "cdn",
     "name": "CDN",
     "href": "./cdn/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Edge delivery",
+      "Cache rules",
+      "Purge cache",
+      "Image optimization",
+      "Traffic analytics",
+      "Origin health"
+    ]
   },
   {
     "id": "api",
     "name": "API",
     "href": "./api/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "API keys",
+      "Token scopes",
+      "Endpoint catalog",
+      "Webhook endpoints",
+      "Request logs",
+      "Usage limits"
+    ]
   },
   {
     "id": "backup",
     "name": "Backup",
     "href": "./backup/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Backup schedule",
+      "Snapshot manual",
+      "Retensi",
+      "Restore files",
+      "Restore database",
+      "Disaster recovery"
+    ]
   },
   {
     "id": "billing",
     "name": "Billing",
     "href": "./billing/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Tagihan",
+      "Paket layanan",
+      "Pembayaran",
+      "Invoice",
+      "Biaya pemakaian",
+      "Transaksi"
+    ]
   },
   {
     "id": "customers",
     "name": "Customers",
     "href": "./customers/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Daftar pelanggan",
+      "Detail pelanggan",
+      "Paket pelanggan",
+      "Tiket dukungan",
+      "Catatan pelanggan",
+      "Aktivitas"
+    ]
   },
   {
     "id": "infrastructure",
     "name": "Infrastructure",
     "href": "./infrastructure/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Compute",
+      "Storage volumes",
+      "Network topology",
+      "Load balancers",
+      "Container services",
+      "Provisioning"
+    ]
   },
   {
     "id": "monitoring",
     "name": "Monitoring",
     "href": "./monitoring/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Uptime checks",
+      "Metrics explorer",
+      "Log explorer",
+      "Alert rules",
+      "Incident timeline",
+      "Service health"
+    ]
   },
   {
     "id": "developer",
     "name": "Developer",
     "href": "./developer/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "CLI tools",
+      "SDK references",
+      "API documentation",
+      "Environment manager",
+      "Test console",
+      "Developer activity"
+    ]
   },
   {
     "id": "admin",
     "name": "Admin",
     "href": "./admin/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Platform settings",
+      "User management",
+      "Role policies",
+      "Feature flags",
+      "Audit log",
+      "Maintenance"
+    ]
   },
   {
     "id": "records",
     "name": "Records",
     "href": "./records/index.reic",
-    "subfeatures": 6
+    "submenus": [
+      "Event registry",
+      "Change records",
+      "Access records",
+      "Deployment records",
+      "Billing records",
+      "Export dan retention"
+    ]
   }
 ];
-export function moduleCount(){return hostingModules.length}
-export function subfeatureCount(){return hostingModules.reduce((n,m)=>n+m.subfeatures,0)}
+export const moduleCount=()=>hostingModules.length;
+export const subfeatureCount=()=>hostingModules.reduce((n,m)=>n+m.submenus.length,0);
 export function validateServiceConfig(config){return Boolean(config&&typeof config==="object"&&config.provider&&config.endpoint)}
 export function createActionRequest(module,action,payload={}){return {module,action,payload,createdAt:new Date().toISOString(),mode:"preview"}}
