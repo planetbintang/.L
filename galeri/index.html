@@ -111,12 +111,12 @@ body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9c
       <div class="script-style-picker" role="group" aria-label="Pilih gaya aksara">
         <button type="button" class="script-style active" data-script-style="0" aria-pressed="true"><b>Gaya I</b><small>Kapital I · Kecil I</small></button>
         <button type="button" class="script-style" data-script-style="1" aria-pressed="false"><b>Gaya II</b><small>Kapital II · Kecil II</small></button>
-        <button type="button" class="script-style" data-script-style="2" aria-pressed="false"><b>Gaya III</b><small>Kapital III · Kecil III</small></button>
+        <button type="button" class="script-style" data-script-style="2" aria-pressed="false"><b>Gaya III</b><small>Ligatur titik + garis</small></button>
       </div>
       <div class="script-actions"><button class="btn primary" id="scriptConvert" type="button">Tampilkan aksara ↗</button><button class="btn" id="scriptClear" type="button">Bersihkan</button></div>
       <label for="scriptOutput">HASIL SISTEM AKSARA KETIGA</label>
       <div class="script-output" id="scriptOutput" aria-live="polite"></div>
-      <p class="script-note">Huruf kapital dan huruf kecil memiliki bentuk glyph yang berbeda. Spasi, angka, serta tanda baca dipertahankan. Pilihan gaya menentukan pasangan bentuk kapital dan kecil yang digunakan.</p>
+      <p class="script-note">Huruf kapital dan huruf kecil memiliki bentuk glyph yang berbeda. Spasi, angka, serta tanda baca dipertahankan. Pilihan gaya menentukan pasangan bentuk kapital dan kecil. Gaya III menggabungkan dua bentuk rujukan dengan titik pengikat (ligatur), sebagai rancangan baru.</p>
     </div>
   </div>
   <div class="script-alphabet"><div class="script-alphabet-title"><h3>Daftar bentuk aksara</h3><span>3 kapital + 3 huruf kecil · per karakter</span></div><div class="script-letters" id="scriptLetters"></div></div>
@@ -163,9 +163,10 @@ const lower=[
 ];
 const scriptInput=$('#scriptInput'),scriptOutput=$('#scriptOutput'),scriptLetters=$('#scriptLetters');
 let scriptStyle=0;
-function glyphFor(ch){const n=ch.toUpperCase().charCodeAt(0)-65;if(n<0||n>25)return ch;return ch===ch.toUpperCase()?upper[scriptStyle*26+n]:lower[scriptStyle*26+n]}
+// Gaya III dibangun sebagai ligatur: dua bentuk rujukan digabung dengan titik pengikat.
+function glyphFor(ch){const n=ch.toUpperCase().charCodeAt(0)-65;if(n<0||n>25)return ch;const isUpper=ch===ch.toUpperCase(),base=isUpper?upper[n]:lower[n],second=isUpper?upper[26+n]:lower[26+n];return scriptStyle===2?base+'·'+second:(isUpper?upper[scriptStyle*26+n]:lower[scriptStyle*26+n])}
 function convertScript(value){return [...value].map(glyphFor).join('')}
-function renderScriptAlphabet(){scriptLetters.innerHTML=Array.from({length:26},(_,i)=>'<div class="script-letter"><b>•</b><div class="script-cases"><span>'+upper[scriptStyle*26+i]+'</span><span>'+lower[scriptStyle*26+i]+'</span></div></div>').join('')}
+function renderScriptAlphabet(){scriptLetters.innerHTML=Array.from({length:26},(_,i)=>{const cap=scriptStyle===2?upper[i]+'·'+upper[26+i]:upper[scriptStyle*26+i],small=scriptStyle===2?lower[i]+'·'+lower[26+i]:lower[scriptStyle*26+i];return '<div class="script-letter"><b>'+String.fromCharCode(65+i)+'</b><div class="script-cases"><span>'+cap+'</span><span>'+small+'</span></div></div>'}).join('')}
 function updateScript(){scriptOutput.textContent=convertScript(scriptInput.value)}
 $$('[data-script-style]').forEach(button=>button.addEventListener('click',()=>{scriptStyle=Number(button.dataset.scriptStyle);$$('[data-script-style]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});renderScriptAlphabet();updateScript()}));
 renderScriptAlphabet();updateScript();
