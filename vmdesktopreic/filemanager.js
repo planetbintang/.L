@@ -60,6 +60,7 @@ window.initPlanetFileManager=function(start='Home Folder'){
  $('#fmPath').onkeydown=e=>{if(e.key==='Enter')go(e.target.value)};
  $('#fmRefresh').onclick=()=>draw();
  $('#fmDownload').onclick=()=>{if(!selected)return status('Pilih file untuk mengunduh.');const item=entries().find(x=>x.path===selected);status(item?.type==='file'?'File sumber lokal belum tersedia untuk diunduh ulang.':'Pilih sebuah file, bukan folder.')};
- go(start==='Beranda File'?'/':(base.includes(start)?'/'+start:'/'));\n loadRepositoryTree();
+ go(start==='Beranda File'?'/':(base.includes(start)?'/'+start:'/'));
+ loadRepositoryTree();
 };
 })();
