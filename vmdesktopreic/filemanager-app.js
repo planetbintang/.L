@@ -17,12 +17,17 @@
  async function load(){
   if(loaded)return;
   try{
-   const css=document.createElement('link');css.rel='stylesheet';css.href='./filemanager.css';css.dataset.filemanajer='';document.head.append(css);
-   const response=await fetch('./filemanager.reic',{cache:'no-cache'});if(!response.ok)throw Error('filemanager.reic HTTP '+response.status);
+   const packageResponse=await fetch('./filemanajer.akc',{cache:'force-cache'});if(!packageResponse.ok)throw Error('filemanajer.akc HTTP '+packageResponse.status);
+   const manifest=await packageResponse.json();
+   for(const field of ['entry','view','style','applicationStyle','engine'])if(!manifest[field])throw Error('Manifest aplikasi tidak lengkap: '+field);
+   if(manifest.name!=='filemanajer'||manifest.runtime!=='VMDESKTOPREIC-REIC')throw Error('Identitas package filemanajer tidak cocok');
+   const css=document.createElement('link');css.rel='stylesheet';css.href='./'+manifest.style;css.dataset.filemanajer='';document.head.append(css);
+   const appCss=document.createElement('link');appCss.rel='stylesheet';appCss.href='./'+manifest.applicationStyle;appCss.dataset.filemanajerApp='';document.head.append(appCss);
+   const response=await fetch('./'+manifest.view,{cache:'force-cache'});if(!response.ok)throw Error(manifest.view+' HTTP '+response.status);
    const source=await response.text(),a=source.indexOf('<section'),b=source.lastIndexOf('</section>');
    if(a<0||b<a)throw Error('Bagian aplikasi REIC tidak ditemukan');
    host.innerHTML=source.slice(a,b+10);
-   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./filemanager.js';s.onload=resolve;s.onerror=()=>reject(Error('filemanager.js gagal dimuat'));document.body.append(s);});
+   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./'+manifest.engine;s.onload=resolve;s.onerror=()=>reject(Error(manifest.engine+' gagal dimuat'));document.body.append(s);});
    window.initPlanetFileManager('Beranda File');
    loaded=true;say('FILEMANAGER MOUNTED · STORAGE LOKAL');
   }catch(e){host.innerHTML='<p class="pfm-error">'+esc(e.message)+'</p>';say('LOAD ERROR · '+e.message);}
@@ -72,9 +77,9 @@
   if(b.dataset.action==='refresh-monitor'){setMode('monitoring');say('MONITOR DIPERBARUI · '+(loaded?'RUNTIME AKTIF':'BELUM DIMUAT'));return;}
   if(b.dataset.action==='apply-filter'){const q=win.querySelector('#pfmFilter')?.value||'';const input=host.querySelector('#fmSearch');if(input){input.value=q;input.dispatchEvent(new Event('input',{bubbles:true}));say('FILTER DITERAPKAN');}}
  });
- const head=win.querySelector('.pfm-head');let drag=null;
- head.addEventListener('pointerdown',e=>{if(e.target.closest('button,input'))return;drag={x:e.clientX-win.offsetLeft,y:e.clientY-win.offsetTop};head.setPointerCapture(e.pointerId);});
- head.addEventListener('pointermove',e=>{if(!drag)return;const x=Math.max(0,Math.min(root.clientWidth-win.offsetWidth,e.clientX-drag.x));const y=Math.max(0,Math.min(root.clientHeight-55,e.clientY-drag.y));win.style.left=x+'px';win.style.top=y+'px';win.style.transform='none';});
+ const head=win.querySelector('.pfm-head'),frame=win.querySelector('.pfm-window');let drag=null;
+ head.addEventListener('pointerdown',e=>{if(e.target.closest('button,input'))return;const rect=frame.getBoundingClientRect();drag={x:e.clientX-rect.left,y:e.clientY-rect.top};head.setPointerCapture(e.pointerId);});
+ head.addEventListener('pointermove',e=>{if(!drag)return;const x=Math.max(0,Math.min(innerWidth-frame.offsetWidth,e.clientX-drag.x));const y=Math.max(0,Math.min(innerHeight-55,e.clientY-drag.y));frame.style.position='absolute';frame.style.left=x+'px';frame.style.top=y+'px';frame.style.margin='0';});
  head.addEventListener('pointerup',()=>drag=null);head.addEventListener('pointercancel',()=>drag=null);
  setMode('pipeline');
  window.PB_FILEMANAJER_APP=Object.freeze({open,close,run:()=>runBuild('run'),build:()=>runBuild('build'),get status(){return loaded?'ready':'not-loaded';}});
