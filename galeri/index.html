@@ -34,6 +34,12 @@ footer{border-top:1px solid #193653;padding:22px 26px;color:#91a8c2;font-size:11
 .script-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}.script-kicker{color:#49d5ff;font-size:10px;font-weight:900;letter-spacing:.2em}.script-heading h2{font-size:clamp(25px,3vw,38px);margin:8px 0;letter-spacing:-.03em}.script-heading p{max-width:720px;color:#b6cce2;margin:0;line-height:1.7}.script-code{border:1px solid #1e78b8;padding:8px 11px;color:#8ee5ff;font-size:10px;white-space:nowrap}
 .script-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:20px;align-items:stretch}.script-reference{margin:0;background:#0565ed;border:1px solid #3989f5;min-width:0}.script-reference img{display:block;width:100%;height:auto;object-fit:contain}.script-reference figcaption{padding:10px 13px;background:#04172d;color:#bcd8f4;font-size:11px}
 .script-tool{padding:18px;background:#091a2d;border:1px solid #1b4164;display:flex;flex-direction:column;gap:10px}.script-tool label{font-size:10px;font-weight:900;letter-spacing:.14em;color:#78dfff}.script-tool textarea{width:100%;resize:vertical;min-height:94px;padding:13px;border:1px solid #28557d;background:#041020;color:#f4f9ff;outline:none}.script-tool textarea:focus{border-color:#17baff;box-shadow:0 0 0 2px #08baff22}.script-actions{display:flex;gap:9px;flex-wrap:wrap}.script-output{min-height:112px;padding:18px 14px;background:#041020;border:1px solid #17649a;color:#8ce6ff;font-size:clamp(23px,3vw,36px);line-height:1.7;overflow-wrap:anywhere;letter-spacing:.08em;font-family:"Segoe UI Symbol",system-ui,sans-serif}.script-note{font-size:11px;color:#9db5cf;line-height:1.65;margin:0}.script-alphabet{margin-top:22px;border-top:1px solid #1b4164;padding-top:17px}.script-alphabet-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.script-alphabet-title h3{margin:0;font-size:15px}.script-alphabet-title span{font-size:11px;color:#9db5cf}.script-letters{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:7px}.script-letter{padding:9px 4px;text-align:center;background:#091a2d;border:1px solid #1b4164}.script-letter b{display:block;font-size:10px;color:#91aac4}.script-letter span{display:block;margin-top:3px;color:#8ce6ff;font-size:24px;line-height:1.2}
+.script-style-picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.script-style{display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding:11px 12px;background:#091a2d;border:1px solid #1b4164;color:#dcecff;cursor:pointer;text-align:left}
+.script-style b{font-size:13px}.script-style small{font-size:10px;color:#9db5cf}.script-style.active{border-color:#08baff;background:#0b3151;box-shadow:inset 0 0 0 1px #08baff55}
+.script-letter{display:grid;gap:4px}.script-letter .script-cases{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;color:#8ce6ff;font-size:19px;line-height:1.35}.script-letter .script-cases span{display:inline-block;margin:0;font-size:19px}
+@media(max-width:520px){.script-style-picker{grid-template-columns:1fr}.script-letters{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
 @media(max-width:760px){.script-layout{grid-template-columns:1fr}.script-heading{align-items:flex-start;flex-direction:column}.script-letters{grid-template-columns:repeat(7,minmax(0,1fr))}.script-reference img{max-height:480px;object-fit:contain}}
 body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9cc8ec}body.light-mode .script-heading p,body.light-mode .script-note,body.light-mode .script-reference figcaption{color:#385775}body.light-mode .script-tool,body.light-mode .script-letter{background:#f5faff;color:#10263e}body.light-mode .script-tool textarea,body.light-mode .script-output{background:#fff;color:#10263e}
 </style>
@@ -93,24 +99,28 @@ body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9c
 <div class="viewer" id="mediaViewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><div class="viewer-card"><div class="viewer-media" id="viewerMedia"></div><div class="viewer-info"><div><h2 id="viewerTitle">Detail media</h2><p id="viewerDescription">Informasi media</p></div><button class="viewer-close" id="viewerClose" type="button">Tutup ✕</button></div></div></div>
 <section class="script-studio" id="aksara" aria-labelledby="scriptTitle">
   <div class="script-heading">
-    <div><span class="script-kicker">SISTEM PENULISAN BARU · PB-01</span><h2 id="scriptTitle">Aksara Visual PlanetBintang</h2>
-    <p>Sistem grafis eksperimental yang mengubah teks Latin menjadi bentuk aksara berdasarkan tabel karakter pada referensi galeri.</p></div>
-    <span class="script-code">ALFABET 26 KARAKTER</span>
+    <div><span class="script-kicker">SISTEM PENULISAN BARU · PB-03</span><h2 id="scriptTitle">Aksara PlanetBintang · Sistem Ketiga</h2>
+    <p>Sistem aksara mandiri dengan enam bentuk untuk setiap bunyi huruf: tiga bentuk kapital dan tiga bentuk kecil. Pilih salah satu dari tiga gaya penulisan untuk menghasilkan teks aksara, bukan teks Latin.</p></div>
+    <span class="script-code">26 HURUF · 6 BENTUK / HURUF</span>
   </div>
   <div class="script-layout">
-    <figure class="script-reference"><img src="./2610231227446.jpg" alt="Tabel referensi bentuk aksara A sampai Z dengan empat variasi bentuk karakter"><figcaption>Referensi bentuk karakter A–Z · empat variasi tulisan untuk setiap huruf</figcaption></figure>
+    <figure class="script-reference"><img src="./2610231227446.jpg" alt="Referensi aksara visual dengan bentuk-bentuk karakter tulisan tangan pada kisi biru"><figcaption>Referensi visual bentuk aksara · inspirasi struktur karakter A–Z</figcaption></figure>
     <div class="script-tool">
-      <label for="scriptInput">TEKS SUMBER</label>
-      <textarea id="scriptInput" rows="4" maxlength="500" spellcheck="false">GALERI PLANETBINTANG</textarea>
-      <div class="script-actions"><button class="btn primary" id="scriptConvert" type="button">Ubah ke aksara ↗</button><button class="btn" id="scriptClear" type="button">Bersihkan</button></div>
-      <label for="scriptOutput">HASIL PENULISAN AKSARA</label>
-      <div class="script-output" id="scriptOutput" aria-live="polite">Ɔλ⅃ℝı ◎Ƨ◎Π ⅃λΠℝ⊤BıΠ⊤λΠΓ</div>
-      <p class="script-note">Spasi, angka, dan tanda baca dipertahankan. Bentuk glyph pada hasil merupakan transliterasi visual digital dari karakter referensi, bukan font Unicode resmi.</p>
+      <label for="scriptInput">MASUKKAN ISI TEKS</label>
+      <textarea id="scriptInput" rows="4" maxlength="500" spellcheck="false">PlanetBintang Galeri</textarea>
+      <div class="script-style-picker" role="group" aria-label="Pilih gaya aksara">
+        <button type="button" class="script-style active" data-script-style="0" aria-pressed="true"><b>Gaya I</b><small>Kapital I · Kecil I</small></button>
+        <button type="button" class="script-style" data-script-style="1" aria-pressed="false"><b>Gaya II</b><small>Kapital II · Kecil II</small></button>
+        <button type="button" class="script-style" data-script-style="2" aria-pressed="false"><b>Gaya III</b><small>Kapital III · Kecil III</small></button>
+      </div>
+      <div class="script-actions"><button class="btn primary" id="scriptConvert" type="button">Tampilkan aksara ↗</button><button class="btn" id="scriptClear" type="button">Bersihkan</button></div>
+      <label for="scriptOutput">HASIL SISTEM AKSARA KETIGA</label>
+      <div class="script-output" id="scriptOutput" aria-live="polite"></div>
+      <p class="script-note">Huruf kapital dan huruf kecil memiliki bentuk glyph yang berbeda. Spasi, angka, serta tanda baca dipertahankan. Pilihan gaya menentukan pasangan bentuk kapital dan kecil yang digunakan.</p>
     </div>
   </div>
-  <div class="script-alphabet"><div class="script-alphabet-title"><h3>Indeks karakter</h3><span>Latin → glyph visual</span></div><div class="script-letters" id="scriptLetters"></div></div>
+  <div class="script-alphabet"><div class="script-alphabet-title"><h3>Daftar bentuk aksara</h3><span>3 kapital + 3 huruf kecil · per karakter</span></div><div class="script-letters" id="scriptLetters"></div></div>
 </section>
-
 <footer><strong>PlanetBintang · Galeri Multimedia</strong><br>Satu pintu. Seluruh sistem. · Koleksi visual, video, dan karya digital.</footer>
 <script>
 (()=>{'use strict';
@@ -140,11 +150,24 @@ renderLocalPosts();
 form.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(form),file=fd.get('file'),status=$('#uploadStatus');if(!(file instanceof File)||!file.size)return;const max=8*1024*1024;if(file.size>max){status.textContent='Ukuran berkas melebihi 8 MB. Pilih berkas yang lebih kecil.';return}if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){status.textContent='Format berkas tidak didukung.';return}status.textContent='Memproses berkas…';const reader=new FileReader();reader.onload=()=>{const post={id:String(Date.now()),title:fd.get('title').trim(),description:fd.get('description').trim(),type:fd.get('type'),dataUrl:reader.result,fileName:file.name,createdAt:new Date().toISOString()};let posts=[];try{posts=JSON.parse(localStorage.getItem(storageKey)||'[]')}catch{}posts.unshift(post);try{localStorage.setItem(storageKey,JSON.stringify(posts))}catch{status.textContent='Penyimpanan browser tidak cukup. Hapus beberapa data lokal atau pilih berkas lebih kecil.';return}const card=document.createElement('article');card.className='tile';card.dataset.category=post.type;card.dataset.title=(post.title+' '+post.description).toLocaleLowerCase('id');const media=post.type==='video'||post.type==='film'?'<video src="'+esc(post.dataUrl)+'" preload="metadata"></video>':'<img src="'+esc(post.dataUrl)+'" alt="'+esc(post.title)+'" loading="lazy">';card.innerHTML=media+'<div class="tile-body"><h3>'+esc(post.title)+'</h3><p>'+esc(post.description||'Media lokal')+'</p><div class="tile-footer"><span>Media lokal</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div>';feed.prepend(card);wireCard(card);form.reset();status.textContent='Media berhasil disimpan pada perangkat ini.';activeCategory='all';$$('#categoryBar button').forEach(b=>b.classList.toggle('active',b.dataset.category==='all'));$('#typeFilter').value='all';filterItems()};reader.onerror=()=>status.textContent='Berkas gagal dibaca. Silakan coba kembali.';reader.readAsDataURL(file)});
 filterItems();
 
-const glyphMap={A:'λ',B:'Ð',C:'⊂',D:'Ↄ',E:'Ł',F:'Γ',G:'Ɔ',H:'⊔',I:'ı',J:'ʃ',K:'⋉',L:'⅃',M:'Π',N:'⊏',O:'◎',P:'ρ',Q:'Ϙ',R:'ℝ',S:'Ƨ',T:'⊤',U:'∪',V:'∨',W:'Ш',X:'Ж',Y:'⊢',Z:'ϟ'};
+// Tiga set glyph kapital dan tiga set glyph kecil; tiap gaya memakai pasangan berbeda.
+const upper=[
+'Λ','Ð','Ͼ','ᗡ','Ξ','Ғ','Ɠ','Ң','Ⅰ','Ј','Ҡ','⅃','Ӎ','И','Θ','Ҏ','Ϙ','Я','Ѕ','Τ','Ц','Ѵ','Ш','Ж','Ұ','Ƶ',
+'ᗅ','Ɖ','Ↄ','ᗞ','Є','Ғ','Ɠ','Ҥ','Ӏ','Ј','Ҡ','ᒪ','Ӎ','И','Ө','Р','Ϙ','Я','Ϛ','Т','Ս','Ѵ','Ԝ','Ж','Ү','Ƶ',
+'Ɐ','Ɗ','Ↄ','ᗪ','Ɛ','Ғ','Ƣ','Ң','Ӏ','Ј','Ҡ','⅂','Ӎ','И','◉','Ҏ','Ϙ','Ʀ','Ϟ','⊤','Ս','Ѵ','Ш','Ж','Ұ','Ƶ'
+];
+const lower=[
+'λ','þ','ϲ','ɗ','ε','ƒ','ɠ','ħ','ı','ʝ','κ','ℓ','ɱ','ŋ','ο','ρ','φ','я','ѕ','τ','υ','ν','ω','χ','γ','ζ',
+'α','ƀ','ς','∂','ҽ','ʄ','ɡ','ɦ','ι','ʆ','ƙ','Ɩ','ɯ','ռ','ɵ','ƥ','ϙ','ʀ','ʂ','т','ʋ','ѵ','ш','ж','ყ','ʐ',
+'ɑ','ɓ','ɔ','ɖ','ɛ','ʛ','ɣ','ɥ','ɨ','ʝ','ʞ','ɭ','ɰ','ɲ','ø','ƥ','ҩ','ɾ','ʃ','ʈ','ʊ','ʌ','ɯ','ӿ','ʏ','ʑ'
+];
 const scriptInput=$('#scriptInput'),scriptOutput=$('#scriptOutput'),scriptLetters=$('#scriptLetters');
-function convertScript(value){return [...value].map(ch=>glyphMap[ch.toLocaleUpperCase('id')]||ch).join('')}
-function renderScriptAlphabet(){scriptLetters.innerHTML=Object.entries(glyphMap).map(([latin,glyph])=>'<div class="script-letter"><b>'+latin+'</b><span>'+glyph+'</span></div>').join('')}
+let scriptStyle=0;
+function glyphFor(ch){const n=ch.toUpperCase().charCodeAt(0)-65;if(n<0||n>25)return ch;return ch===ch.toUpperCase()?upper[scriptStyle*26+n]:lower[scriptStyle*26+n]}
+function convertScript(value){return [...value].map(glyphFor).join('')}
+function renderScriptAlphabet(){scriptLetters.innerHTML=Array.from({length:26},(_,i)=>'<div class="script-letter"><b>•</b><div class="script-cases"><span>'+upper[scriptStyle*26+i]+'</span><span>'+lower[scriptStyle*26+i]+'</span></div></div>').join('')}
 function updateScript(){scriptOutput.textContent=convertScript(scriptInput.value)}
+$$('[data-script-style]').forEach(button=>button.addEventListener('click',()=>{scriptStyle=Number(button.dataset.scriptStyle);$$('[data-script-style]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});renderScriptAlphabet();updateScript()}));
 renderScriptAlphabet();updateScript();
 $('#scriptConvert').addEventListener('click',updateScript);
 $('#scriptClear').addEventListener('click',()=>{scriptInput.value='';updateScript();scriptInput.focus()});
