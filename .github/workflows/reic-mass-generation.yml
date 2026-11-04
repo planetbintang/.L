@@ -1,61 +1,36 @@
-name: Generate REIC code — 4 tasks × 500,000 files
+name: Build REIC code in one day — 4 tasks × 500,000
 
 on:
   workflow_dispatch:
-    inputs:
-      shard_size:
-        description: "Files per execution batch (100–10000)"
-        required: true
-        default: "10000"
   schedule:
-    - cron: "40 2 * * 0"
+    - cron: "0 1 * * *"
 
 permissions:
   contents: read
 
 concurrency:
-  group: reic-four-task-generation
+  group: reic-one-day-four-tasks
   cancel-in-progress: false
 
 jobs:
-  plan:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.matrix.outputs.value }}
-      shard_size: ${{ steps.matrix.outputs.shard_size }}
-    steps:
-      - id: matrix
-        shell: bash
-        env:
-          INPUT_SIZE: ${{ github.event.inputs.shard_size || '10000' }}
-        run: |
-          set -euo pipefail
-          size="$INPUT_SIZE"
-          if ! [[ "$size" =~ ^[0-9]+$ ]] || (( size < 100 || size > 10000 )); then
-            echo "shard_size must be between 100 and 10000" >&2
-            exit 1
-          fi
-          shards=$(( (500000 + size - 1) / size ))
-          matrix='{"include":['
-          comma=''
-          for task in 0 1 2 3; do
-            for shard in $(seq 0 $((shards - 1))); do
-              matrix+="$comma{\"task\":$task,\"shard\":$shard}"
-              comma=','
-            done
-          done
-          matrix+=']}'
-          echo "value=$matrix" >> "$GITHUB_OUTPUT"
-          echo "shard_size=$size" >> "$GITHUB_OUTPUT"
-
   generate:
-    needs: plan
+    name: TASK ${{ matrix.task_number }} — 500,000 REIC files
     runs-on: ubuntu-latest
     timeout-minutes: 360
     strategy:
       fail-fast: false
-      max-parallel: 12
-      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+      max-parallel: 4
+      matrix:
+        include:
+          - task_index: 0
+            task_number: 1
+          - task_index: 1
+            task_number: 2
+          - task_index: 2
+            task_number: 3
+          - task_index: 3
+            task_number: 4
+
     steps:
       - name: Checkout source catalog and generator
         uses: actions/checkout@v4
@@ -71,33 +46,45 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Generate and verify task shard
+      - name: Generate 500,000 files for this task
         env:
-          REIC_TASK_INDEX: ${{ matrix.task }}
-          REIC_SHARD_INDEX: ${{ matrix.shard }}
-          REIC_SHARD_SIZE: ${{ needs.plan.outputs.shard_size }}
+          REIC_TASK_INDEX: ${{ matrix.task_index }}
+          REIC_SHARD_INDEX: "0"
+          REIC_SHARD_SIZE: "500000"
           REIC_OUTPUT_DIR: dist/reic-mass
+        run: node scripts/generate-reic-mass.mjs
+
+      - name: Verify every file and task manifest
         run: |
-          node scripts/generate-reic-mass.mjs
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
-          const m = JSON.parse(fs.readFileSync('dist/reic-mass/manifest.json', 'utf8'));
-          if (m.taskCount !== 4 || m.taskTargetFiles !== 500000) throw new Error('Task target mismatch');
-          if (m.verifiedFiles !== m.shardSize) throw new Error('File count mismatch');
+          import path from 'node:path';
+          const root = 'dist/reic-mass';
+          const m = JSON.parse(fs.readFileSync(path.join(root, 'manifest.json'), 'utf8'));
+          if (m.taskCount !== 4 || m.taskTargetFiles !== 500000) throw new Error('Task configuration mismatch');
+          if (m.verifiedFiles !== 500000 || m.shardSize !== 500000) throw new Error('Expected exactly 500,000 files');
+          const seen = new Set();
           for (const f of m.files) {
-            const p = 'dist/reic-mass/' + f.path;
-            if (!fs.existsSync(p)) throw new Error('Missing ' + p);
-            const n = fs.readFileSync(p, 'utf8').trimEnd().split(/\r?\n/).length;
-            if (n < 100) throw new Error(p + ' has only ' + n + ' lines');
+            if (seen.has(f.path)) throw new Error('Duplicate path: ' + f.path);
+            seen.add(f.path);
+            const p = path.join(root, f.path);
+            if (!fs.existsSync(p)) throw new Error('Missing file: ' + p);
+            const lines = fs.readFileSync(p, 'utf8').trimEnd().split(/\\r?\\n/).length;
+            if (lines < 100) throw new Error(p + ' has only ' + lines + ' lines');
           }
-          console.log('Verified task ' + (m.taskNumber) + '/4, shard ' + m.shardIndex + ': ' + m.verifiedFiles + ' files, each 100+ lines.');
+          console.log('PASS: TASK ' + m.taskNumber + ' verified ' + seen.size + ' files; each has at least 100 lines.');
           NODE
 
-      - name: Package verified shard
+      - name: Package task output
+        run: |
+          mkdir -p dist/packages
+          tar -czf "dist/packages/reic-task-${{ matrix.task_number }}.tar.gz" -C dist/reic-mass .
+
+      - name: Upload completed task package
         uses: actions/upload-artifact@v4
         with:
-          name: reic-task-${{ matrix.task }}-shard-${{ matrix.shard }}
-          path: dist/reic-mass/
+          name: reic-task-${{ matrix.task_number }}-500000-files
+          path: dist/packages/reic-task-${{ matrix.task_number }}.tar.gz
           if-no-files-found: error
           retention-days: 30
-          compression-level: 6
+          compression-level: 0
