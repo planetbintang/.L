@@ -29,13 +29,16 @@ export default async (request) => {
   if (request.method === "GET") {
     return json({
       service: "AI Reber Gateway",
-      status: process.env.OPENAI_API_KEY ? "configured" : "needs_configuration",
+      status: process.env.OPENAI_API_KEY && process.env.REBER_ACCESS_TOKEN ? "configured" : "needs_configuration",
+      access_required: true,
       provider: "OpenAI-compatible",
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
     });
   }
   if (request.method !== "POST") return json({ error: "Method tidak didukung." }, 405);
   if (!process.env.OPENAI_API_KEY) return json({ error: "Backend belum dikonfigurasi. Tambahkan OPENAI_API_KEY pada environment Netlify." }, 503);
+  if (!process.env.REBER_ACCESS_TOKEN) return json({ error: "Gateway belum diamankan. Tambahkan REBER_ACCESS_TOKEN pada environment Netlify." }, 503);
+  if (request.headers.get("x-reber-access") !== process.env.REBER_ACCESS_TOKEN) return json({ error: "Kode akses AI Reber tidak valid." }, 401);
 
   let body;
   try { body = await request.json(); } catch { return json({ error: "Body JSON tidak valid." }, 400); }
