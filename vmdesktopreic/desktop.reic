@@ -22,6 +22,38 @@
 </aside>
 <section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
 <section class="vm-workspace" aria-label="Pusat kontainer VM tunggal">
+<section class="vm-app-launcher" aria-label="Aplikasi desktop">
+<button class="vm-app" data-open="browser"><span class="app-icon app-blue">🌐</span><b>Browser</b></button>
+<button class="vm-app" data-open="gallery"><span class="app-icon app-photo">🏞</span><b>Galeri</b></button>
+<button class="vm-app" data-open="music"><span class="app-icon app-pink">♫</span><b>Musik</b></button>
+<button class="vm-app" data-open="video"><span class="app-icon app-red">▶</span><b>Video</b></button>
+<button class="vm-app" data-open="image-editor"><span class="app-icon app-blue">🖌</span><b>Editor Gambar</b></button>
+<button class="vm-app" data-open="video-editor"><span class="app-icon app-purple">▣</span><b>Editor Video</b></button>
+<button class="vm-app" data-open="terminal"><span class="app-icon app-dark">›_</span><b>Terminal</b></button>
+<button class="vm-app" data-open="ai"><span class="app-icon app-green">🤖</span><b>AI Chat</b></button>
+<button class="vm-app" data-open="email"><span class="app-icon app-blue">✉</span><b>Email</b></button>
+<button class="vm-app" data-open="calendar"><span class="app-icon app-red">▦</span><b>Kalender</b></button>
+<button class="vm-app" data-open="calculator"><span class="app-icon app-blue">▦</span><b>Kalkulator</b></button>
+<button class="vm-app" data-open="notes"><span class="app-icon app-yellow">▤</span><b>Catatan</b></button>
+<button class="vm-app" data-open="todo"><span class="app-icon app-yellow">✓</span><b>To-Do</b></button>
+<button class="vm-app" data-open="contacts"><span class="app-icon app-blue">●</span><b>Kontak</b></button>
+<button class="vm-app" data-open="maps"><span class="app-icon app-green">📍</span><b>Peta</b></button>
+<button class="vm-app" data-open="weather"><span class="app-icon app-sky">🌤</span><b>Cuaca</b></button>
+<button class="vm-app" data-open="camera"><span class="app-icon app-dark">📷</span><b>Kamera</b></button>
+<button class="vm-app" data-open="recorder"><span class="app-icon app-red">🎙</span><b>Perekam</b></button>
+<button class="vm-app" data-open="radio"><span class="app-icon app-blue">📻</span><b>Radio</b></button>
+<button class="vm-app" data-open="store"><span class="app-icon app-yellow">▣</span><b>Store</b></button>
+<button class="vm-app" data-open="hosting"><span class="app-icon app-slate">▤</span><b>Hosting</b></button>
+<button class="vm-app" data-open="domain"><span class="app-icon app-blue">◎</span><b>Domain</b></button>
+<button class="vm-app" data-open="database"><span class="app-icon app-blue">▤</span><b>Database</b></button>
+<button class="vm-app" data-open="security"><span class="app-icon app-green">⬟</span><b>Keamanan</b></button>
+<button class="vm-app" data-open="cloud"><span class="app-icon app-sky">☁</span><b>Cloud</b></button>
+<button class="vm-app" data-open="vm"><span class="app-icon app-blue">▣</span><b>VM</b></button>
+<button class="vm-app" data-open="network"><span class="app-icon app-blue">⌘</span><b>Jaringan</b></button>
+<button class="vm-app" data-open="design"><span class="app-icon app-blue">🖌</span><b>Desain UI</b></button>
+<button class="vm-app" data-open="seo"><span class="app-icon app-blue">▥</span><b>SEO</b></button>
+<button class="vm-app" data-open="help"><span class="app-icon app-purple">?</span><b>Bantuan</b></button>
+</section>
 <div class="vm-binary-map" aria-label="Arsitektur satu kontainer VM dengan sepuluh lapisan biner">
 <svg viewBox="0 0 1200 700" role="img" aria-labelledby="binaryTitle binaryDesc" preserveAspectRatio="xMidYMid meet">
 <title id="binaryTitle">Satu kontainer VM pusat dengan sepuluh lapisan sistem</title>
