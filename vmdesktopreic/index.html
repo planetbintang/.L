@@ -110,7 +110,8 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
    await Promise.all([
     loadScript('./desktop-experience.js?v=20261104-launcher-keyboard-1'),
     loadScript('./desktop-unified.js?v=20261104-unified-1'),
-    loadScript('./search-center.js?v=20261104-github-provider-3')
+    loadScript('./search-center.js?v=20261104-github-provider-3'),
+    loadScript('./integration/boot.js?v=20261104-component-integration-1')
    ]);
    fit();
    root.classList.add('vm-ready');
