@@ -73,13 +73,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 </div>
 <footer><span><b>📖 PlanetBintang</b>　|　Kamus Digital &amp; Perpustakaan Digital　•　Satu Pintu, Sejuta Ilmu</span><span><a href="https://perpusnas.go.id">Bantuan</a>　|　Privasi　|　Kontak</span></footer>
 <script type="module">
-import {KATA_CATEGORIES,KATA_TOTAL,getKataList,searchKata,PERPUSNAS_REF} from '../aireber/assets/kata-data.js';
+import {KATA_CATEGORIES,KATA_TOTAL,getKataList,PERPUSNAS_REF} from '../aireber/assets/kata-data.js';
 const $=id=>document.getElementById(id);let page=0,selected=null,activeResults=[];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cat=()=>KATA_CATEGORIES.find(c=>c.id===$('dictCategory').value)||KATA_CATEGORIES[1];
 function renderList(){
  const c=cat(),q=$('dictQuery').value.trim().toLocaleLowerCase('id');
- let all=q?searchKata(q,100).filter(x=>x.category===c.id).map(x=>x.kata):getKataList(c.id,page,30);
+ let source=c.words||(c.generator?c.generator(0,Math.min(c.count,200000)):[]);let all=q?source.filter(w=>String(w).toLocaleLowerCase('id').includes(q)).slice(0,300):getKataList(c.id,page,30);
  activeResults=all.slice(0,30);
  $('dictResults').innerHTML=activeResults.map((w,i)=>'<button type="button" data-word="'+esc(w)+'" class="'+(selected===w?'active':'')+'"><b>'+esc(w)+'</b><small>'+esc(c.nameid)+' · '+(page*30+i+1)+'</small></button>').join('')||'<p style="color:#aac2dc">Tidak ada hasil pada kategori ini.</p>';
  if(!selected&&activeResults.length)showWord(activeResults[0],false);
