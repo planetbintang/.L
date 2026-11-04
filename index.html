@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="./media/brand/planetbintang-logo.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="stylesheet" href="./dashboard.css?v=20261027-home-ai-gallery-v2" />
-    <link rel="stylesheet" href="./code-workspace-theme.css?v=20261104-code-dashboard-v1" />
+    <link rel="stylesheet" href="./code-workspace-theme.css?v=20261104-code-dashboard-v2" />
     <link rel="stylesheet" href="./control-center.css?v=20261026-control-center-v2" />
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
     <link rel="stylesheet" href="./workspace-library-theme.css?v=20261030-library-texture-v2" />
@@ -490,6 +490,38 @@
       <div class="code-status" id="codeStatus" aria-live="polite">Pilih file dari File Manager. Isi repo privat mengikuti data yang tersedia pada snapshot lokal.</div>
       <label class="visually-hidden" for="codeEditor">Editor draft lokal</label><textarea id="codeEditor" class="code-editor" spellcheck="false" autocapitalize="off" placeholder="Isi file publik akan tampil di sini. Untuk file yang tidak ada di snapshot, gunakan konten lokal; editor tetap berjalan di browser."></textarea>
       <div class="code-actions"><button id="codeSaveDraft" class="workspace-primary" type="button">Simpan draft lokal</button><button id="codeRestoreSource" class="workspace-secondary" type="button">Pulihkan sumber</button><button id="codeFormatJson" class="workspace-secondary" type="button">Format JSON</button><button id="codeCheckSyntax" class="workspace-secondary" type="button">Periksa sintaks</button><button id="codeDownload" class="workspace-secondary" type="button">Unduh draft</button><span id="codeDirtyState">Belum ada perubahan</span></div>
+      <section class="code-advanced-grid" aria-label="Advanced code tools">
+        <article class="code-advanced-card code-multifile-card">
+          <header><span class="code-advanced-symbol">▤</span><div><small>WORKSPACE FILES</small><h4>Draft multi-file</h4></div><span id="codeDraftCount" class="code-advanced-count">0</span></header>
+          <p>Daftar file yang pernah disimpan sebagai draft pada browser ini. Pilih item untuk kembali mengeditnya.</p>
+          <div id="codeDraftList" class="code-draft-list"><div class="code-advanced-empty">Belum ada draft tersimpan.</div></div>
+        </article>
+        <article class="code-advanced-card code-source-card">
+          <header><span class="code-advanced-symbol">⑂</span><div><small>SOURCE CONTROL</small><h4>GitHub repository</h4></div><span class="code-advanced-count">LINK</span></header>
+          <p id="codeSourceRepoName">Pilih repositori pada toolbar editor untuk melihat pintasan GitHub.</p>
+          <div class="code-git-links" id="codeGitLinks">
+            <a data-git-link="home" href="https://github.com/planetbintang/.L" target="_blank" rel="noopener noreferrer">Repositori ↗</a>
+            <a data-git-link="branches" href="https://github.com/planetbintang/.L/branches" target="_blank" rel="noopener noreferrer">Branches ↗</a>
+            <a data-git-link="commits" href="https://github.com/planetbintang/.L/commits" target="_blank" rel="noopener noreferrer">Commit history ↗</a>
+            <a data-git-link="pulls" href="https://github.com/planetbintang/.L/pulls" target="_blank" rel="noopener noreferrer">Pull requests ↗</a>
+            <a data-git-link="actions" href="https://github.com/planetbintang/.L/actions" target="_blank" rel="noopener noreferrer">Actions / CI ↗</a>
+            <a data-git-link="releases" href="https://github.com/planetbintang/.L/releases" target="_blank" rel="noopener noreferrer">Releases ↗</a>
+          </div>
+          <div class="code-branch-info"><span>Cabang default dari snapshot</span><b id="codeDefaultBranch">Belum diketahui</b></div>
+          <small class="code-advanced-footnote">Tautan membuka halaman GitHub sebenarnya. Commit, push, merge, dan pengelolaan branch dilakukan setelah login di GitHub.</small>
+        </article>
+        <article class="code-advanced-card code-terminal-card">
+          <header><span class="code-advanced-symbol">›_</span><div><small>DEVELOPER CONSOLE</small><h4>Perintah Git</h4></div><span class="code-advanced-count">REFERENCE</span></header>
+          <p>Contoh perintah untuk terminal lokal. Salin sesuai kebutuhan; panel ini tidak menjalankan perintah di server.</p>
+          <div class="code-command-list">
+            <label><span>Periksa status</span><code>git status</code><button type="button" data-copy-command="git status">Salin</button></label>
+            <label><span>Lihat branch</span><code>git branch --all</code><button type="button" data-copy-command="git branch --all">Salin</button></label>
+            <label><span>Riwayat commit</span><code>git log --oneline -10</code><button type="button" data-copy-command="git log --oneline -10">Salin</button></label>
+            <label><span>Periksa perubahan</span><code>git diff</code><button type="button" data-copy-command="git diff">Salin</button></label>
+          </div>
+          <div id="codeCommandStatus" class="code-command-status" aria-live="polite">Perintah hanya sebagai referensi terminal lokal.</div>
+        </article>
+      </section>
       <p class="workspace-note">Draft disimpan hanya pada browser perangkat ini. Tidak ada file privat yang diambil dari server publik; tidak ada tombol tulis, run, atau deploy otomatis. Perubahan tetap tersimpan sebagai draft lokal.</p>
     </section>
 
@@ -771,6 +803,7 @@
     </script>
     <script src="./file-manager.js?v=20261102-all-repositories-root-v2" defer></script>
     <script src="./workspace.js?v=20261023-ice-platform-v1" defer></script>
+    <script src="./code-workspace-advanced.js?v=20261104-advanced-v1" defer></script>
     <script src="./feature-catalog.js?v=20261025-feature-registry-v1" defer></script>
     <script src="./ai-chat.js?v=20261026-ai-reber-local-v1" defer></script>
     <script src="./platform-view.js?v=20261023-platform-view-v1" defer></script>
