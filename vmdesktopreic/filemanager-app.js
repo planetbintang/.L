@@ -6,12 +6,8 @@
  const launcher=document.createElement('button');
  launcher.type='button';launcher.id='pbFilemanajerShortcut';launcher.className='pb-filemanajer-shortcut';
  launcher.innerHTML='<span>▱</span><b>FILEMANAJER</b>';launcher.title='Buka aplikasi Filemanajer';launcher.setAttribute('aria-label','Buka aplikasi Filemanajer');
- const desktopApps=document.querySelector('#pbDesktopApps');
- if(desktopApps){
-  const app=document.createElement('button');app.type='button';app.className='pb-app-shortcut';app.dataset.appId='app-filemanajer';app.draggable=true;
-  app.innerHTML='<span class="pb-app-icon">▱</span><small>Filemanajer</small>';
-  app.addEventListener('dblclick',open);desktopApps.append(app);
- }else root.append(launcher);
+ root.querySelector('.vm-desktop')?.append(launcher);
+ const shortcutStyle=document.createElement('link');shortcutStyle.rel='stylesheet';shortcutStyle.href='./filemanager-app.reicss';document.head.append(shortcutStyle);
  const win=document.createElement('section');win.id='pbFilemanajerWindow';win.className='pb-filemanajer-window';win.hidden=true;
  win.innerHTML='<header class="pfm-head"><span class="pfm-mark">▱</span><div class="pfm-brand"><b>FILEMANAJER</b><small>VMDESKTOPREIC · PACKAGE filemanajer.akc</small></div><div class="pfm-modes"><button data-mode="deploy">DEPLOY</button><button data-mode="filter">FILTER</button><button data-mode="pipeline">PIPELINE</button><button data-mode="monitoring">MONITORING</button></div><button class="pfm-run" data-action="run">▶ RUN</button><button class="pfm-build" data-action="build">BUILD</button><button class="pfm-min" aria-label="Minimalkan">—</button><button class="pfm-close" aria-label="Tutup">×</button></header><div class="pfm-body"><div class="pfm-app-host"><div class="pfm-loading">Memuat aplikasi Filemanajer…</div></div><aside class="pfm-sidepanel"><b id="pfmPanelTitle">PIPELINE CONTROL</b><div id="pfmPanelContent"><p>RUN dan BUILD menjalankan pemeriksaan lokal terhadap ruang kerja Filemanajer.</p></div><div class="pfm-log" id="pfmLog" aria-live="polite">RUNTIME SIAP · MENUNGGU PERINTAH</div></aside></div><footer class="pfm-foot"><span id="pfmState">APPLICATION READY</span><span>LOCAL REIC RUNTIME · BACKEND CONNECTOR BELUM DIKONFIGURASI</span></footer>';
  root.append(win);
