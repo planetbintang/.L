@@ -10,3 +10,9 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/reber"
+  to = "/.netlify/functions/reber"
+  status = 200
+  force = true
