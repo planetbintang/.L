@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Four-task REIC generator: 500,000 files per task, 2,000,000 total.
- * Each run generates one deterministic shard of up to 10,000 independent .reic files.
+ * Each task can generate 500,000 independent .reic files in one execution.
  * Files are packaged by GitHub Actions as artifacts; they are not committed
  * individually to Git history.
  */
