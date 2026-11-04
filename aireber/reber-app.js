@@ -130,7 +130,7 @@ function setView(view) {
 $$('[data-view-tab]').forEach((button) => {
   button.addEventListener('click', () => setView(button.dataset.viewTab));
   button.addEventListener('keydown', (event) => {
-    const tabs = $$('[data-view-tab]'); const index = tabs.indexOf(button);
+    const tabs = $('.tabs [data-view-tab]'); const index = tabs.indexOf(button);
     const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length
       : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length
       : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
