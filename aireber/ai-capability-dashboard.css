@@ -1,0 +1,21 @@
+/* AI Reber capability dashboard — presentation layer only; all actions route to existing app views. */
+.ai-capability-dashboard{margin:14px 0 16px;padding:16px;border:1px solid rgba(35,151,255,.38);background:linear-gradient(135deg,rgba(4,20,47,.96),rgba(3,37,72,.82));color:#eaf4ff;box-shadow:0 12px 32px rgba(0,80,190,.13)}
+.ai-capability-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:13px}
+.ai-capability-heading .eyebrow{margin:0 0 4px;color:#36d7ff;font-size:9px;font-weight:800;letter-spacing:.16em}
+.ai-capability-heading h2{margin:0;font-size:clamp(17px,2.2vw,23px);letter-spacing:-.025em}
+.ai-capability-heading p{margin:5px 0 0;color:#a9c6e5;font-size:11px;line-height:1.55;max-width:70ch}
+.ai-capability-state{flex:0 0 auto;padding:6px 8px;border:1px solid rgba(0,205,255,.35);color:#74e4ff;background:rgba(0,125,210,.12);font-size:9px;font-weight:800;letter-spacing:.08em}
+.ai-capability-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ai-capability-card{display:flex;min-width:0;min-height:104px;flex-direction:column;align-items:flex-start;gap:7px;padding:11px;border:1px solid rgba(81,157,235,.28);background:linear-gradient(145deg,rgba(8,35,74,.94),rgba(4,19,42,.96));color:#eaf4ff;text-align:left;cursor:pointer;transition:border-color .18s,transform .18s,background .18s}
+.ai-capability-card:hover,.ai-capability-card:focus-visible{border-color:#26cfff;background:rgba(8,58,108,.96);transform:translateY(-2px);outline:none}
+.ai-capability-icon{display:grid;place-items:center;width:29px;height:29px;border:1px solid rgba(55,197,255,.35);background:rgba(0,125,255,.16);color:#66dcff;font-size:16px}
+.ai-capability-card b{font-size:11px;line-height:1.35}
+.ai-capability-card small{color:#a7c3e3;font-size:9px;line-height:1.45}
+.ai-capability-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:11px;padding-top:9px;border-top:1px solid rgba(81,157,235,.2);color:#94b5d8;font-size:9px}
+.ai-capability-foot strong{color:#66dfff;font-weight:700}
+@media(max-width:1050px){.ai-capability-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){.ai-capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ai-capability-heading{align-items:flex-start;flex-direction:column}.ai-capability-state{align-self:flex-start}}
+@media(max-width:380px){.ai-capability-card{min-height:96px;padding:9px}.ai-capability-card small{font-size:8px}}
+:root[data-theme="cahaya"] .ai-capability-dashboard{background:linear-gradient(135deg,#fff,#eaf4ff);color:#102b4d}
+:root[data-theme="cahaya"] .ai-capability-heading p,:root[data-theme="cahaya"] .ai-capability-card small,:root[data-theme="cahaya"] .ai-capability-foot{color:#627891}
+:root[data-theme="cahaya"] .ai-capability-card{background:linear-gradient(145deg,#fff,#e8f3ff);color:#102b4d}
