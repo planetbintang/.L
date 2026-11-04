@@ -109,3 +109,9 @@
 #desktop-root .pb-menu-overview ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 22px;padding-left:20px}
 #desktop-root .pb-menu-overview li{padding:7px 0;color:#31566f}
 #desktop-root .vm-slide-panel{display:none!important}
+
+
+/* Modal non-fullscreen: konten desktop tetap terlihat dan dapat dipilih di belakangnya. */
+#desktop-root .vm-modal-backdrop{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;pointer-events:none!important}
+#desktop-root .vm-modal-backdrop>.vm-modal{pointer-events:auto!important}
+#desktop-root .vm-modal-backdrop[hidden]{display:none!important}
