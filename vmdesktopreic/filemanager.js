@@ -14,27 +14,24 @@ window.initPlanetFileManager=function(start='Home Folder'){
  if(store.folders?.some(f=>String(f.path||'').startsWith('/home/martin/'))){const oldFolders=store.folders;const roots=[],personal=[];oldFolders.forEach(f=>{const n=f.name;f.path=systemRoots.includes(n)?'/'+n:'/home/'+n;(systemRoots.includes(n)?roots:personal).push(f)});const oldFiles=store.files||[];oldFiles.forEach(f=>f.path='/home/'+f.name);store.folders=[...roots,{name:'home',type:'folder',path:'/home',children:personal,files:oldFiles}];store.files=[];try{localStorage.setItem(key,JSON.stringify(store))}catch(e){}}
  let path='/',selected=null,query='',mode='icons',history=[path],historyAt=0;
  let repoTreeLoading=false,repoTreeReady=false,repoTreeError='';
- const repoRoot={name:'CODE',type:'folder',path:'/CODE',children:[],files:[],source:'github'};
+ const repoRoot={name:'CODE',type:'folder',path:'/CODE',children:[],files:[],source:'github',loaded:true};
  async function loadRepositoryTree(){
-  if(repoTreeLoading||repoTreeReady)return;repoTreeLoading=true;status('Mengindeks folder dan file repositori GitHub planetbintang/.L…');
+  if(repoTreeLoading||repoTreeReady)return;repoTreeLoading=true;status('Mengindeks daftar repositori publik PlanetBintang…');
   try{
-   const response=await fetch('https://api.github.com/repos/planetbintang/.L/git/trees/io?recursive=1',{headers:{Accept:'application/vnd.github+json'},cache:'force-cache'});
-   if(!response.ok)throw Error('GitHub API HTTP '+response.status);
-   const data=await response.json();if(data.truncated)throw Error('Indeks GitHub terpotong; tampilkan struktur parsial.');
-   const dirs=new Map([['',repoRoot]]);
-   const rows=Array.isArray(data.tree)?data.tree:[];
-   rows.filter(x=>x.type==='tree').sort((a,b)=>a.path.split('/').length-b.path.split('/').length).forEach(x=>{
-    const parts=x.path.split('/'),name=parts.pop(),parentPath=parts.join('/'),parent=dirs.get(parentPath);
-    if(!parent)return;const folder={name,type:'folder',path:'/CODE/'+x.path,children:[],files:[],source:'github'};parent.children.push(folder);dirs.set(x.path,folder);
-   });
-   rows.filter(x=>x.type==='blob').forEach(x=>{
-    const parts=x.path.split('/'),name=parts.pop(),parent=dirs.get(parts.join('/'));if(!parent)return;
-    parent.files.push({name,type:'file',size:x.size||0,path:'/CODE/'+x.path,kind:/\\.(png|jpe?g|gif|webp|svg)$/i.test(name)?'image':'file',sha:x.sha,sourceUrl:'https://github.com/planetbintang/.L/blob/io/'+x.path});
-   });
-   repoRoot.children.sort((a,b)=>a.name.localeCompare(b.name));store.folders=store.folders.filter(x=>x.name!=='CODE');store.folders.push(repoRoot);repoTreeReady=true;
-   status(rows.length.toLocaleString('id-ID')+' entri repositori berhasil dimuat ke CODE.');draw();
-  }catch(error){repoTreeError=error.message;status('Indeks CODE belum dapat dimuat: '+error.message);draw();}
-  finally{repoTreeLoading=false;}
+   const repos=[];for(let page=1;page<=5;page++){const response=await fetch('https://api.github.com/users/planetbintang/repos?per_page=100&page='+page+'&sort=updated',{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});if(!response.ok)throw Error('GitHub API HTTP '+response.status);const batch=await response.json();if(!Array.isArray(batch)||!batch.length)break;repos.push(...batch);if(batch.length<100)break;}
+   repoRoot.children=repos.filter(r=>!r.fork||r.name==='.L').sort((a,b)=>a.name.localeCompare(b.name)).map(r=>({name:r.name,type:'folder',path:'/CODE/'+r.name,children:[],files:[],source:'github',repoFullName:r.full_name,branch:r.name==='.L'?'io':(r.default_branch||'main'),loaded:false,repoUrl:r.html_url}));
+   if(!repoRoot.children.some(r=>r.name==='.L'))repoRoot.children.unshift({name:'.L',type:'folder',path:'/CODE/.L',children:[],files:[],source:'github',repoFullName:'planetbintang/.L',branch:'io',loaded:false,repoUrl:'https://github.com/planetbintang/.L'});
+   store.folders=store.folders.filter(x=>x.name!=='CODE');store.folders.push(repoRoot);repoTreeReady=true;status(repos.length+' repositori publik ditemukan. Pilih CODE untuk melihat daftar.');draw();
+  }catch(error){repoTreeError=error.message;status('Daftar repositori gagal dimuat: '+error.message);draw();}finally{repoTreeLoading=false;}
+ }
+ async function loadRepositoryContents(folder){
+  if(!folder||folder.loaded||folder.loading)return;folder.loading=true;status('Mengindeks '+folder.repoFullName+'…');draw();
+  try{const ref=folder.branch;const response=await fetch('https://api.github.com/repos/'+folder.repoFullName+'/git/trees/'+encodeURIComponent(ref)+'?recursive=1',{headers:{Accept:'application/vnd.github+json'},cache:'force-cache'});if(!response.ok)throw Error('GitHub API HTTP '+response.status);const data=await response.json();if(data.truncated)throw Error('GitHub membatasi hasil pohon repositori ini.');
+   const dirs=new Map([['',folder]]),rows=Array.isArray(data.tree)?data.tree:[];
+   rows.filter(x=>x.type==='tree').sort((x,y)=>x.path.split('/').length-y.path.split('/').length).forEach(x=>{const parts=x.path.split('/'),name=parts.pop(),parent=dirs.get(parts.join('/'));if(!parent)return;const node={name,type:'folder',path:folder.path+'/'+x.path,children:[],files:[],source:'github'};parent.children.push(node);dirs.set(x.path,node)});
+   rows.filter(x=>x.type==='blob').forEach(x=>{const parts=x.path.split('/'),name=parts.pop(),parent=dirs.get(parts.join('/'));if(!parent)return;parent.files.push({name,type:'file',size:x.size||0,path:folder.path+'/'+x.path,kind:/\\.(png|jpe?g|gif|webp|svg)$/i.test(name)?'image':'file',sha:x.sha,sourceUrl:'https://github.com/'+folder.repoFullName+'/blob/'+ref+'/'+x.path})});
+   folder.children.sort((x,y)=>x.name.localeCompare(y.name));folder.loaded=true;status(rows.length+' entri dimuat dari '+folder.repoFullName+'.');
+  }catch(error){folder.loadError=error.message;status('Gagal memuat '+folder.repoFullName+': '+error.message);}finally{folder.loading=false;draw();}
  }
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const persist=()=>{try{localStorage.setItem(key,JSON.stringify(store));status('Perubahan disimpan pada penyimpanan lokal browser.')}catch(e){status('Penyimpanan lokal penuh atau tidak tersedia.')}};
