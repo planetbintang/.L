@@ -189,7 +189,7 @@
     }
     appendMessage('assistant', answerText);
     void persistTurn('assistant', answerText);
-    if (status) status.textContent = 'Siap. Tanyakan apa pun — tanpa batas token atau kredit.';
+    if (status) status.textContent = 'Siap. Mesin lokal tersedia; backend generatif aktif bila koneksi dan kode akses valid.';
     busy = false;
     input.focus();
   }
