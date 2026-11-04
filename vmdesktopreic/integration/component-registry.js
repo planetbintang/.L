@@ -12,7 +12,18 @@
   {id:'center-search',selector:'.vm-center-search',group:'utility',description:'Pencarian aplikasi dan komponen'},
   {id:'modal',selector:'.vm-modal',group:'overlay',description:'Jendela kerja modal'},
   {id:'file-manager',selector:'[data-app="filemanager"],.filemanager-app',group:'application',description:'Aplikasi pengelola berkas'},
-  {id:'statusbar',selector:'.vm-statusbar',group:'system',description:'Status runtime desktop'}
+  {id:'statusbar',selector:'.vm-statusbar',group:'system',description:'Status runtime desktop'},
+  {id:'filemanager-window',selector:'.pb-filemanajer-window',group:'files',description:'Jendela File Manager pusat'},
+  {id:'filemanager-explorer',selector:'#reic-filemanager-app',group:'files',description:'Penjelajah folder dan file REIC'},
+  {id:'filemanager-categories',selector:'[data-reic-category]',group:'registry',description:'Kategori sistem yang terintegrasi'},
+  {id:'list-blok-library',selector:'[data-reic-category="list-blok"]',group:'components',description:'List Blok dan komponen UI'},
+  {id:'layout-library',selector:'[data-reic-category="layout-library"]',group:'layout',description:'Layout Library desktop'},
+  {id:'reic-explorer',selector:'[data-reic-category="reic-explorer"]',group:'files',description:'REIC Explorer'},
+  {id:'infrastructure-config',selector:'[data-reic-category="infrastructure-config"]',group:'infrastructure',description:'Konfigurasi Infrastruktur'},
+  {id:'infrastructure-15000',selector:'[data-reic-category="infrastructure-15000"]',group:'infrastructure',description:'Infrastruktur 15.000'},
+  {id:'registry-1500',selector:'[data-reic-category="registry-1500"]',group:'registry',description:'Registri 1.500'},
+  {id:'premium-150',selector:'[data-reic-category="premium-150"]',group:'applications',description:'150 Fitur Premium'},
+  {id:'desktop-system-themes',selector:'[data-reic-category="system-themes"]',group:'themes',description:'Tema sistem desktop'}
  ];
  for(const item of definitions){
   if(!registry.has(item.id))registry.set(item.id,Object.freeze({...item}));
