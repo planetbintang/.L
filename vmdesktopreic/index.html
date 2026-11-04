@@ -80,6 +80,32 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
 <link rel="stylesheet" href="./modal-layouts.css?v=20261104-transparent-modal-2">
 <link rel="stylesheet" href="./desktop-elegance.css?v=20261104-elegant-mode-v1">
 <link rel="stylesheet" href="./desktop-reference.css?v=20261104-reference-layout-v1">\n<link rel="stylesheet" href="./desktop-wallpaper-theme.css?v=20261105-planetbintang-reic-portrait-1">
+
+<style id="vmdesktop-centered-boundary">
+/* VMDESKTOPREIC berada di tengah viewport, di dalam satu garis bingkai. */
+html,body{background:#050b14!important}
+#desktop-root{
+ position:fixed!important;inset:0!important;display:grid!important;place-items:center!important;
+ width:100vw!important;height:100vh!important;height:100dvh!important;
+ padding:3vh 2vw!important;overflow:hidden!important;
+ background:radial-gradient(ellipse at 50% 45%,rgba(23,75,112,.2),transparent 62%),#050b14!important;
+}
+#desktop-root:before,#desktop-root:after{display:none!important}
+#desktop-root>.vm-web-region,#desktop-root>.vm-empty-region{display:none!important}
+#desktop-root>.vm-shell{
+ position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+ width:min(96vw,1600px,calc(90dvh * 16 / 9))!important;height:auto!important;aspect-ratio:16/9!important;
+ min-width:0!important;min-height:0!important;max-width:96vw!important;max-height:90dvh!important;
+ margin:0!important;padding:clamp(5px,.7vw,12px)!important;transform:none!important;
+ transform-origin:center!important;border:2px solid #83e1ff!important;
+ box-shadow:0 0 0 1px #83e1ff55,0 0 34px #168bd344,inset 0 0 0 1px #ffffff18!important;
+ overflow:hidden!important;
+}
+@media(max-width:600px){
+ #desktop-root{padding:2vh 2vw!important}
+ #desktop-root>.vm-shell{width:min(96vw,calc(92dvh * 16 / 9))!important;max-width:96vw!important;max-height:92dvh!important}
+}
+</style>
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
