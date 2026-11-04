@@ -114,6 +114,7 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
     loadScript('./search-center.js?v=20261104-github-provider-3'),
     loadScript('./integration/boot.js?v=20261104-component-integration-1')
    ]);
+   await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
    fit();
    root.classList.add('vm-ready');
    /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
