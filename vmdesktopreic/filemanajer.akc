@@ -12,5 +12,7 @@
   "engine": "filemanager.js",
   "modes": ["deploy", "filter", "pipeline", "monitoring", "run", "build"],
   "storage": "browser-local-storage",
-  "backend": "not-configured"
+  "backend": "not-configured",
+  "repositoryIndex": {"provider":"github","repository":"planetbintang/.L","ref":"io","root":"CODE","recursive":true,"readOnly":true},
+  "installation": {"mount":"desktop-modal","launchers":["left-menu","desktop-center"],"entryReady":true}
 }
