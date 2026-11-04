@@ -42,7 +42,7 @@ function makeDraggable(win,handle,container){
   if(e.button!==undefined&&e.button!==0)return;
   if(e.target.closest('button,a,input,select,textarea,[contenteditable=true]'))return;
   const p=container.getBoundingClientRect(),r=win.getBoundingClientRect();
-  if(!win.dataset.floatPositioned){win.style.left=(r.left-p.left)+'px';win.style.top=(r.top-p.top)+'px';win.style.transform='none';win.dataset.floatPositioned='1';}
+  if(win.dataset.floatPositioned!=='1'){win.style.left=(r.left-p.left)+'px';win.style.top=(r.top-p.top)+'px';win.style.transform='none';win.dataset.floatPositioned='1';}
   const startX=e.clientX,startY=e.clientY,left=parseFloat(win.style.left)||0,top=parseFloat(win.style.top)||0;
   const move=ev=>{const maxX=Math.max(0,container.clientWidth-win.offsetWidth),maxY=Math.max(0,container.clientHeight-win.offsetHeight);win.style.left=clamp(left+ev.clientX-startX,-win.offsetWidth+90,maxX)+'px';win.style.top=clamp(top+ev.clientY-startY,0,maxY)+'px';};
   const end=()=>{document.removeEventListener('pointermove',move);document.removeEventListener('pointerup',end);document.removeEventListener('pointercancel',end);};
