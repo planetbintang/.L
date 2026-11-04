@@ -29,6 +29,11 @@
  }
  function open(){win.hidden=false;win.classList.add('is-open');load();say('APLIKASI DIBUKA');}
  function close(){win.hidden=true;win.classList.remove('is-open');}
+ launcher.style.left='405px';launcher.style.top='115px';
+ let iconDrag=null;
+ launcher.addEventListener('pointerdown',e=>{if(e.button!==0)return;const rect=launcher.getBoundingClientRect();const scale=root.getBoundingClientRect().width/(root.offsetWidth||1920);iconDrag={x:e.clientX-rect.left,y:e.clientY-rect.top,scale:scale||1};launcher.setPointerCapture(e.pointerId);});
+ launcher.addEventListener('pointermove',e=>{if(!iconDrag)return;const bounds=root.querySelector('.vm-desktop').getBoundingClientRect();const x=(e.clientX-bounds.left-iconDrag.x)/iconDrag.scale;const y=(e.clientY-bounds.top-iconDrag.y)/iconDrag.scale;launcher.style.left=Math.max(0,Math.min(1800,x))+'px';launcher.style.top=Math.max(0,Math.min(900,y))+'px';});
+ launcher.addEventListener('pointerup',()=>iconDrag=null);launcher.addEventListener('pointercancel',()=>iconDrag=null);
  launcher.addEventListener('click',open);
  document.addEventListener('click',e=>{
   const b=e.target.closest('[data-core="files"]');
