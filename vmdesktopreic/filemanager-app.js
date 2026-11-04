@@ -17,7 +17,7 @@
  async function load(){
   if(loaded)return;
   try{
-   const packageResponse=await fetch('./filemanajer.akc',{cache:'force-cache'});if(!packageResponse.ok)throw Error('filemanajer.akc HTTP '+packageResponse.status);
+   const packageResponse=await fetch('./filemanajer.akc?v=20261105-central-filemanager-1',{cache:'force-cache'});if(!packageResponse.ok)throw Error('filemanajer.akc HTTP '+packageResponse.status);
    const manifest=await packageResponse.json();
    for(const field of ['entry','view','style','applicationStyle','engine'])if(!manifest[field])throw Error('Manifest aplikasi tidak lengkap: '+field);
    if(manifest.name!=='filemanajer'||manifest.runtime!=='VMDESKTOPREIC-REIC')throw Error('Identitas package filemanajer tidak cocok');
@@ -27,7 +27,7 @@
    const source=await response.text(),a=source.indexOf('<section'),b=source.lastIndexOf('</section>');
    if(a<0||b<a)throw Error('Bagian aplikasi REIC tidak ditemukan');
    host.innerHTML=source.slice(a,b+10);
-   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./'+manifest.engine+'?v=20261104-code-tree-2';s.onload=resolve;s.onerror=()=>reject(Error(manifest.engine+' gagal dimuat'));document.body.append(s);});
+   await new Promise((resolve,reject)=>{if(window.initPlanetFileManager)return resolve();const s=document.createElement('script');s.src='./'+manifest.engine+'?v=20261105-central-filemanager-1';s.onload=resolve;s.onerror=()=>reject(Error(manifest.engine+' gagal dimuat'));document.body.append(s);});
    window.initPlanetFileManager('Beranda File');
    loaded=true;say('FILEMANAGER MOUNTED · STORAGE LOKAL');
   }catch(e){host.innerHTML='<p class="pfm-error">'+esc(e.message)+'</p>';say('LOAD ERROR · '+e.message);}
