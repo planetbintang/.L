@@ -22,7 +22,7 @@
    for(const field of ['entry','view','style','applicationStyle','engine'])if(!manifest[field])throw Error('Manifest aplikasi tidak lengkap: '+field);
    if(manifest.name!=='filemanajer'||manifest.runtime!=='VMDESKTOPREIC-REIC')throw Error('Identitas package filemanajer tidak cocok');
    const css=document.createElement('link');css.rel='stylesheet';css.href='./'+manifest.style;css.dataset.filemanajer='';document.head.append(css);
-   const appCss=document.createElement('link');appCss.rel='stylesheet';appCss.href='./'+manifest.applicationStyle+'?v=20261104-filemanajer-modal-3';appCss.dataset.filemanajerApp='';document.head.append(appCss);
+   const appCss=document.createElement('link');appCss.rel='stylesheet';appCss.href='./'+manifest.applicationStyle+'?v=20261104-filemanajer-modal-5';appCss.dataset.filemanajerApp='';document.head.append(appCss);
    const response=await fetch('./'+manifest.view,{cache:'force-cache'});if(!response.ok)throw Error(manifest.view+' HTTP '+response.status);
    const source=await response.text(),a=source.indexOf('<section'),b=source.lastIndexOf('</section>');
    if(a<0||b<a)throw Error('Bagian aplikasi REIC tidak ditemukan');
