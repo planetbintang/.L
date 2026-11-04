@@ -114,7 +114,7 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
    fit();
    root.classList.add('vm-ready');
    /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
-   const loadFilemanajer=()=>loadScript('./filemanager-app.js?v=20261104-filemanajer-3').catch(error=>console.warn('Filemanajer ditunda:',error));
+   const loadFilemanajer=()=>loadScript('./filemanager-app.js?v=20261104-filemanajer-6').catch(error=>console.warn('Filemanajer ditunda:',error));
    if('requestIdleCallback' in window)requestIdleCallback(loadFilemanajer,{timeout:1800});
    else setTimeout(loadFilemanajer,900);
    let layersLoading=false;
