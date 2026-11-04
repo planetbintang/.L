@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#050a14" />
-    <meta name="deployment-revision" content="2026-10-29-pages-redeploy-0120" />
+    <meta name="deployment-revision" content="2026-10-30-nav-library-vendor-fix-01" />
     <meta name="description" content="Planetbintang Root System — workspace lintas repositori dengan logo brand standar, File Manager, dan empat animasi cahaya." />
     <link rel="icon" href="./media/brand/planetbintang-logo.svg" type="image/png" />
     <link rel="apple-touch-icon" href="./media/brand/planetbintang-logo.svg" />
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./dashboard.css?v=20261027-home-ai-gallery-v2" />
     <link rel="stylesheet" href="./control-center.css?v=20261026-control-center-v2" />
     <link rel="stylesheet" href="./workspace.css?v=20261023-ice-platform-v1" />
-    <link rel="stylesheet" href="./workspace-library-theme.css?v=20261030-library-texture-v1" />
+    <link rel="stylesheet" href="./workspace-library-theme.css?v=20261030-library-texture-v2" />
     <link rel="stylesheet" href="./platform-ui.css?v=20261026-header-harmony-v2" />
     <link rel="stylesheet" href="./reic-theme.css?v=20261026-header-harmony-v2" />
     <link rel="stylesheet" href="./enterprise-map.css?v=20261026-enterprise-pages-v1" />
@@ -108,11 +108,72 @@
       .home-ai-gallery .home-ai-card{border-radius:0!important}
       @media(max-width:960px){.vm-home-heading{grid-template-columns:1fr}.vm-home-showcase h2{max-width:30ch}.vm-home-heading>p{max-width:75ch}}
       @media(max-width:640px){.vm-home-showcase{padding:1rem}.vm-home-showcase h2{font-size:clamp(1.55rem,7vw,2rem);line-height:1.16}.vm-home-showcase .vm-home-intro{font-size:.94rem;line-height:1.7}.vm-home-heading>p{padding:.85rem}.vm-home-card-body{padding:.9rem}}
-    
-      /* KAPITALISASI LABEL NAVIGASI UTAMA DAN SELURUH SUBMENU */
-      .main-nav .main-nav-link,.main-nav .nav-dropdown>summary,.main-nav .nav-dropdown-menu>a b,.main-nav .nav-dropdown-menu>button b,.main-nav .nav-dropdown-menu>details>summary,.common-site-menu-card b,.common-site-menu-search-link,.main-nav-more .nav-dropdown-menu a b { text-transform: uppercase; letter-spacing: .035em; }
-</style>
+    </style>
     <title>Planetbintang · Root System</title>
+
+    <style id="primary-nav-visibility-fix">
+      /* Keep the requested destinations in the first visible part of the primary navigation. */
+      .topbar > .main-nav > [data-menu="library"],
+      .topbar > .main-nav > a[href="./vendordomain/"] { flex: 0 0 auto !important; visibility: visible !important; opacity: 1 !important; }
+      .topbar > .main-nav { scroll-padding-inline: 8px; }
+      .topbar > .main-nav > a[href="./galeri/"] { order: -22 !important; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -21 !important; }
+      .topbar > .main-nav > [data-menu="library"] { order: -20 !important; }
+      .topbar > .main-nav > a[href="./vendordomain/"] { order: -19 !important; }
+      .topbar > .main-nav > a[href="./osmediavm/"] { order: -18 !important; }
+      .topbar > .main-nav > [data-menu="portal"] { order: -17 !important; }
+      @media (max-width: 760px) {
+        .topbar > .main-nav { gap: 5px !important; }
+        .topbar > .main-nav > [data-menu="library"] > summary,
+        .topbar > .main-nav > a[href="./vendordomain/"] { min-height: 38px !important; padding: 7px 9px !important; }
+      }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -21 !important; display: inline-flex !important; flex: 0 0 auto !important; min-width: max-content !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 2; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"]::before,
+      .topbar > .main-nav > a[href="./vmdesktopreic/"]::after { display: none !important; content: none !important; }
+      @media (max-width: 760px) { .topbar > .main-nav > a[href="./vmdesktopreic/"] { min-height: 38px !important; padding: 7px 9px !important; } }
+
+      /* Pemisah visual "|" untuk setiap item menu utama, termasuk dropdown. */
+      .topbar > .main-nav > * { display: inline-flex; align-items: center; }
+      .topbar > .main-nav > * + *::before {
+        content: "|";
+        display: inline-block;
+        flex: 0 0 auto;
+        margin: 0 9px 0 0;
+        color: rgba(166, 205, 238, .72);
+        font-weight: 500;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .topbar > .main-nav > * + * > summary { display: inline-flex; align-items: center; }
+      .topbar > .main-nav > a[href="./galeri/"] { order: -22 !important; }
+      .topbar > .main-nav > a[href="./vmdesktopreic/"] {
+        order: -21 !important;
+        display: inline-flex !important;
+        flex: 0 0 auto !important;
+        min-width: max-content !important;
+      }
+      @media (max-width: 760px) {
+        .topbar > .main-nav > * + *::before { margin-right: 6px; }
+      }
+      .topbar > .main-nav { text-transform: uppercase; }
+      .topbar > .main-nav .nav-dropdown-menu { text-transform: none; }
+      .common-site-menu-card .common-site-menu-copy b { text-transform: uppercase; }
+      /* Semua menu tingkat utama ditampilkan langsung; tidak ada wadah "Lainnya". */
+      .topbar > .main-nav { display:flex !important; flex-wrap:wrap !important; align-items:center; justify-content:flex-start; overflow:visible !important; white-space:normal !important; max-height:none !important; }
+      .topbar > .main-nav > * { display:inline-flex !important; flex:0 0 auto !important; visibility:visible !important; opacity:1 !important; }
+      .topbar > .main-nav > details > summary { cursor:pointer; }
+      .topbar > .main-nav > details[ data-menu="lainnya" ] { display:none !important; }
+    </style>
+
+  
+<style id="all-main-menu-cards">
+.common-site-menu-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,245px),1fr))!important;align-items:stretch}
+.common-site-menu-card{min-height:116px}
+.common-site-menu-card .common-site-menu-copy b{text-transform:uppercase;letter-spacing:.035em}
+.common-site-menu-heading h2{text-transform:uppercase;letter-spacing:.035em}
+@media(min-width:1200px){.common-site-menu-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:640px){.common-site-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px}.common-site-menu-card{min-height:110px;padding:12px}.common-site-menu-card .common-site-menu-copy small{font-size:11px;line-height:1.45}}
+</style>
 </head>
   <body>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
@@ -122,15 +183,19 @@
         <span class="brand-wordmark"><strong>PLANETBINTANG</strong><small>ROOT SYSTEM <b>.</b></small></span>
       </a>
       <nav class="main-nav" aria-label="Menu utama platform">
-        <a class="main-nav-link" href="./galeri.html" aria-label="Buka Galeri gambar">Galeri</a>
-        <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./aktif/index.html" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
-        <a class="main-nav-link" href="./osmediavm/index.html" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
+        <a class="main-nav-link" href="./galeri/" aria-label="Buka Galeri gambar">GALERI</a>
+        <a class="main-nav-link" href="./vmdesktopreic/" aria-label="Buka VMDESKTOPREIC">VMDESKTOPREIC</a>
+        <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./leksikon/" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
+        <a class="main-nav-link" href="./vendordomain/" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
+        <a class="main-nav-link" href="./hosting/" aria-label="Buka dashboard Hosting">HOSTING</a>
+        <a class="main-nav-link" href="./osmediavm/" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
+        
         <details class="nav-dropdown common-portal-dropdown" data-menu="portal"><summary>Portal</summary><div class="nav-dropdown-menu" aria-label="Menu umum situs">
           <a href="#overview" data-system-route="system"><b>Beranda</b><small>Kembali ke dashboard utama</small></a>
           <a href="#cari" data-system-route="search"><b>Pencarian</b><small>Temukan repositori dan sumber</small></a>
           <a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Jelajahi indeks proyek</small></a>
           <a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri folder dan file</small></a>
-          <a href="./aktif/index.html"><b>Perpustakaan</b><small>Kamus Digital Modern · penelusuran kata dan data IC</small></a>
+          <a href="./leksikon/"><b>Perpustakaan</b><small>Kamus Digital Modern · penelusuran kata dan data IC</small></a>
           <a href="#workspace/projects" data-system-route="projects"><b>Proyek &amp; Tugas</b><small>Kelola rencana kerja lokal</small></a>
           <a href="#workspace/analytics" data-system-route="analytics"><b>Analitik</b><small>Lihat ringkasan snapshot</small></a>
           <a href="#hosts" data-system-route="hosts"><b>Domain &amp; Host</b><small>Jelajahi domain terpetakan</small></a>
@@ -138,7 +203,7 @@
           <a href="#workspace/account" data-system-route="workspace-account"><b>Pengaturan</b><small>Preferensi workspace</small></a>
           <a href="#workspace/help" data-system-route="workspace-help"><b>Bantuan</b><small>Panduan dan dukungan</small></a>
         </div></details>
-        <details class="nav-dropdown" data-menu="development"><summary>Pusat Pengembangan</summary><div class="nav-dropdown-menu" aria-label="Pusat Pengembangan"><a href="./pusat-pengembangan/index.html"><b>Katalog &amp; Fitur</b><small>1.500 spesifikasi dan halaman fitur khusus</small></a><a href="./git-feature-catalog.html"><b>Katalog Fitur Git</b><small>Pencarian dan spesifikasi fitur</small></a><a href="./feature-workbench.html"><b>Ruang Kerja Implementasi</b><small>Checklist dan verifikasi</small></a><a href="./github-operations.html"><b>Operasi GitHub</b><small>Panel operasi provider</small></a><a href="#repositories" data-system-route="repositories"><b>Repositori</b><small>Indeks dan metadata source</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags &amp; releases</b><small>Buka tag pada provider sumber</small></a></div></details>
+        <details class="nav-dropdown" data-menu="code"><summary>Code</summary><div class="nav-dropdown-menu" aria-label="Menu Code"><a href="./domain-catalog.html"><b>Katalog Domain</b><small>Indeks domain dari al.l/data.media</small></a><a href="#fileManager" data-system-route="file-manager"><b>File Manager</b><small>Telusuri root path /</small></a><a href="#workspace/features" data-system-route="features"><b>Feature Registry</b><small>12.288 fitur virtual per file</small></a><a href="./git-feature-catalog.html"><b>Katalog 1.500 Fitur Git</b><small>Spesifikasi, detail, dan prompt implementasi</small></a>\n          <a href="./feature-workbench.html"><b>Ruang Kerja Implementasi</b><small>Kelola pekerjaan, checklist, bukti, dan verifikasi fitur</small></a><a href="./github-operations.html"><b>GitHub Operations</b><small>Repositori, branch, commit, issue, PR, dan Actions dari API GitHub</small></a><a href="#platform/branches" data-system-route="branches"><b>Branches</b><small>Branch dan HEAD snapshot</small></a><a href="#platform/commits" data-system-route="commits"><b>Commits</b><small>SHA dan commit terakhir</small></a><a href="#platform/tags" data-system-route="tags"><b>Tags & releases</b><small>Buka tag pada provider sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="aircloud"><summary>Air Cloud</summary><div class="nav-dropdown-menu" aria-label="Menu Air Cloud">
           <a href="#aircloud" data-system-route="aircloud"><b>Air Cloud Console</b><small>Konsol cloud · registry 4.394 halaman menu</small></a>
           <a href="#aircloud/compute" data-system-route="aircloud-compute"><b>Compute</b><small>AC-M001 · virtual server &amp; instance</small></a>
@@ -149,15 +214,17 @@
           <a href="#aircloud/devops-toolchain" data-system-route="aircloud-devops-toolchain"><b>DevOps Toolchain</b><small>AC-M011 · CI/CD &amp; pipeline</small></a>
           <a href="#fileManager/airz" data-system-route="file-manager"><b>Root /airz</b><small>Repo .AIRZ · mirror folder airz/</small></a>
         </div></details>
-        <a class="main-nav-link" href="./aireber/index.html" aria-label="Buka AI Reber static studio">AI Reber</a>
-        <a class="main-nav-link" href="./vendordomain/index.html" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
+        <a class="main-nav-link" href="./aireber/" aria-label="Buka AI Reber static studio">AI REBER</a>
+        <a class="main-nav-link" href="./vendordomain/pricing/" aria-label="Buka Harga dan Pembayaran">HARGA DAN PEMBAYARAN</a>
+        <a class="main-nav-link" href="./dokumen/" aria-label="Buka REIC Dokumen">REIC DOKUMEN</a>
+        
         <details class="nav-dropdown" data-menu="plan"><summary>Plan</summary><div class="nav-dropdown-menu" aria-label="Menu perencanaan"><a href="#workspace/projects" data-system-route="projects"><b>Projects</b><small>Papan kerja lokal lintas repo</small></a><a href="#workspace/issues" data-system-route="issues"><b>Issues</b><small>Pelacak masalah lokal</small></a><a href="#workspace/projects" data-system-route="projects"><b>Boards</b><small>Kanban proyek dan status tugas</small></a><a href="#platform/milestones" data-system-route="milestones"><b>Milestones</b><small>Target lokal per repositori</small></a><a href="#platform/roadmap" data-system-route="roadmap"><b>Roadmap</b><small>Rencana tanggal lokal</small></a></div></details>
         
-        <details class="nav-dropdown main-nav-more" data-menu="lainnya"><summary>Lainnya</summary><div class="nav-dropdown-menu nav-submenu-groups" aria-label="Submenu menu utama lainnya">
+        
 <details class="nav-dropdown" data-menu="review"><summary>Review</summary><div class="nav-dropdown-menu" aria-label="Menu review dan kolaborasi"><a href="#platform/pull-requests" data-system-route="pull-requests"><b>Pull Requests</b><small>Review dari GitHub</small></a><a href="#platform/merge-requests" data-system-route="merge-requests"><b>Merge Requests</b><small>Alur lintas provider</small></a><a href="#platform/review-queue" data-system-route="review-queue"><b>Review queue</b><small>Antrian review per repo</small></a><a href="#platform/discussions" data-system-route="discussions"><b>Discussions</b><small>Diskusi provider</small></a><a href="#platform/activity" data-system-route="activity"><b>Activity</b><small>Aktivitas commit snapshot</small></a></div></details>
         <details class="nav-dropdown" data-menu="delivery"><summary>Delivery</summary><div class="nav-dropdown-menu" aria-label="Menu delivery"><a href="#platform/pipelines" data-system-route="pipelines"><b>Pipelines</b><small>GitHub Actions dan CI</small></a><a href="#platform/deployments" data-system-route="deployments"><b>Deployments</b><small>Pages dan deployment</small></a><a href="#platform/environments" data-system-route="environments"><b>Environments</b><small>Target deployment provider</small></a><a href="#platform/packages" data-system-route="packages"><b>Packages</b><small>Registry source</small></a><a href="#platform/security" data-system-route="security"><b>Security</b><small>Status pemindaian sumber</small></a></div></details>
         <details class="nav-dropdown" data-menu="integrations"><summary>Integrasi</summary><div class="nav-dropdown-menu" aria-label="Menu integrasi"><a href="#snaps" data-system-route="snaps"><b>Pusat Integrasi SNAPS / MCP</b><small>Hubungkan MCP, Git, AI, token, dan sumber RAG</small></a><a href="#platform/integrations" data-system-route="integrations"><b>Konektor Platform</b><small>GitHub, GitLab, Bitbucket, dan layanan lain</small></a><a href="#control/system-integration"><b>Peta Integrasi Sistem</b><small>Ringkasan layanan dan konektor</small></a></div></details>
-        <details class="nav-dropdown" data-menu="insights"><summary>Insights</summary><div class="nav-dropdown-menu" aria-label="Menu insights"><a href="#workspace/analytics" data-system-route="analytics"><b>Analytics</b><small>Metrik snapshot agregat</small></a><a href="#platform/integrations" data-system-route="integrations"><b>Integrations</b><small>GitHub, GitLab, Bitbucket</small></a><a href="#hosts" data-system-route="hosts"><b>Domains & hosts</b><small>Domain publik terpetakan</small></a><a href="#workspace/ai" data-system-route="ai"><b>AI Assistant</b><small>Ruang kerja AI lokal</small></a><button type="button" data-sync-hub-trigger><b>Snapshot Hub</b><small>Refresh snapshot bersama</small></button><a href="./aireber/index.html" class="nav-aireber-link"><b>AI Reber</b><small>Studio statis · simpan lokal</small></a></div></details>
+        <details class="nav-dropdown" data-menu="insights"><summary>Insights</summary><div class="nav-dropdown-menu" aria-label="Menu insights"><a href="#workspace/analytics" data-system-route="analytics"><b>Analytics</b><small>Metrik snapshot agregat</small></a><a href="#platform/integrations" data-system-route="integrations"><b>Integrations</b><small>GitHub, GitLab, Bitbucket</small></a><a href="#hosts" data-system-route="hosts"><b>Domains & hosts</b><small>Domain publik terpetakan</small></a><a href="#workspace/ai" data-system-route="ai"><b>AI Assistant</b><small>Ruang kerja AI lokal</small></a><button type="button" data-sync-hub-trigger><b>Snapshot Hub</b><small>Refresh snapshot bersama</small></button><a href="./aireber/" class="nav-aireber-link"><b>AI Reber</b><small>Studio statis · simpan lokal</small></a></div></details>
         <details class="nav-dropdown" data-menu="manage"><summary>Manage</summary><div class="nav-dropdown-menu" aria-label="Menu pengelolaan"><a href="#manage/files" data-system-route="manage-files"><b>Files</b><small>Baca, tulis, tambah, edit, hapus</small></a><a href="#manage/storage" data-system-route="manage-storage"><b>Storage</b><small>Cadangan dan katalog workspace</small></a><a href="#manage/settings" data-system-route="manage-settings"><b>Settings</b><small>Preferensi penyimpanan lokal</small></a><a href="#manage/access" data-system-route="manage-access"><b>Access</b><small>Kebijakan baca dan tulis</small></a><a href="#manage/activity" data-system-route="manage-activity"><b>Activity</b><small>Riwayat perubahan File Manager</small></a>
           <a href="#control/repository-hub"><b>Repository Hub</b><small>Katalog dan status snapshot</small></a>
           <a href="#control/media-center"><b>Media &amp; Document Center</b><small>File gambar, video, film, dan dokumen</small></a>
@@ -181,7 +248,6 @@
           <a href="#fileManager/sys/enterprise" data-system-route="file-manager"><b>Registry Filesystem</b><small>/sys/enterprise · shard JSON per menu</small></a>
         </div></details>
       
-        </div></details>
       </nav>
       <div class="topbar-actions">
       <div class="topbar-search-wrap">
@@ -221,7 +287,7 @@
           <h1 id="heroTitle">Satu pintu.<br /><em>Seluruh sistem.</em></h1>
           <p class="hero-description">Satu pintu untuk seluruh sistem Planetbintang—repositori, file, media, proyek, delivery, dan AI Reber. Mulai dari chat Reber atau jelajahi identitas AI Global dan Negara AI.</p>
           <div class="hero-meta"><span class="root-chip"><b>.</b> / planetbintang</span><span class="sync-chip" id="snapshotStatus">Menyiapkan data snapshot…</span></div>
-          <div class="home-ai-actions"><a class="home-ai-primary" href="./aireber/index.html"><span class="home-ai-spark">✦</span><span><b>Buka AI Reber</b><small>Chat · File System · Workspace</small></span><span class="home-ai-arrow">↗</span></a><a class="home-ai-secondary" href="#fileManager" data-system-route="file-manager">Buka File Manager</a></div>
+          <div class="home-ai-actions"><a class="home-ai-primary" href="./aireber/"><span class="home-ai-spark">✦</span><span><b>Buka AI Reber</b><small>Chat · File System · Workspace</small></span><span class="home-ai-arrow">↗</span></a><a class="home-ai-secondary" href="#fileManager" data-system-route="file-manager">Buka File Manager</a></div>
         </div>
         <button class="hero-logo" id="logoEntry" type="button" aria-label="Kembali ke halaman utama" data-system-route="system">
           <span class="logo-outline"><img src="./media/brand/planetbintang-logo.svg" alt="" /></span>
@@ -229,6 +295,54 @@
         </button>
         <div class="hero-corner" aria-hidden="true">PB <span>001</span></div>
       </section>
+
+      <section class="system-file-count" id="systemFileCountPanel" data-system-page="system" aria-label="Jumlah seluruh file sistem Planetbintang">
+        <div class="system-file-count-main">
+          <p class="eyebrow">PLANETBINTANG <span>/</span> SYSTEM INVENTORY</p>
+          <h2>JUMLAH SELURUH FILE SISTEM</h2>
+          <strong id="totalSystemFileCount" aria-live="polite">—</strong>
+          <p id="fileCountCoverage">Menunggu data indeks seluruh repositori…</p>
+        </div>
+        <aside class="system-development-warning" role="note" aria-label="Peringatan pengembangan">
+          <b>PERINGATAN PENGEMBANGAN</b>
+          <p>DILARANG SEMBARANGAN MENDOWNLOAD KODE REPOSITORI SEBELUM RILIS PRODUKSI. SISTEM SEDANG DALAM PENGEMBANGAN BESAR.</p>
+        </aside>
+      </section>
+      <style id="system-file-count-styles">
+        .system-file-count{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:1rem;margin:0 0 1.25rem;padding:1rem;background:linear-gradient(135deg,rgba(13,30,53,.96),rgba(5,12,25,.98));border:1px solid rgba(119,174,225,.28);color:#eaf4ff}
+        .system-file-count-main,.system-development-warning{min-width:0;padding:.8rem}
+        .system-file-count h2{margin:.3rem 0 .5rem;font-size:clamp(1rem,2vw,1.25rem);letter-spacing:.04em}
+        .system-file-count-main>strong{display:block;font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#83d8ff}
+        .system-file-count-main>p:last-child{margin:.55rem 0 0;color:#a9bfd6;font-size:.8rem;line-height:1.55}
+        .system-development-warning{display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(255,184,91,.55);background:linear-gradient(135deg,rgba(89,48,13,.38),rgba(39,22,12,.45))}
+        .system-development-warning>b{color:#ffd18a;font-size:.76rem;letter-spacing:.12em}
+        .system-development-warning p{margin:.55rem 0 0;color:#fff0d5;font-size:clamp(.9rem,1.5vw,1.05rem);font-weight:800;line-height:1.65;overflow-wrap:anywhere}
+        @media(max-width:680px){.system-file-count{grid-template-columns:1fr;gap:.5rem;padding:.7rem}.system-file-count-main,.system-development-warning{padding:.7rem}}
+      </style>
+
+
+      <section class="reic-engine-feature" data-system-page="system" aria-labelledby="reicEngineTitle">
+        <a class="reic-engine-image-link" href="./vmdesktopreic/" aria-label="Buka Mesin Virtual REIC">
+          <img src="./galeri/d482119cdabc9232339169.png" alt="Visual Mesin Virtual REIC" loading="eager" decoding="async" />
+        </a>
+        <div class="reic-engine-copy">
+          <p class="eyebrow">VMDESKTOPREIC <span>/</span> VIRTUAL SYSTEM</p>
+          <h2 id="reicEngineTitle">MESIN VIRTUAL REIC</h2>
+          <p>Ruang kerja desktop virtual REIC untuk menjalankan tampilan, komponen, dan sistem dalam satu lingkungan terpadu.</p>
+          <a class="reic-engine-open" href="./vmdesktopreic/">BUKA MESIN VIRTUAL REIC <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <style id="reic-engine-feature-styles">
+        .reic-engine-feature{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:clamp(1rem,3vw,2rem);align-items:center;width:100%;margin:0 0 1.5rem;padding:clamp(1rem,2.5vw,1.5rem);box-sizing:border-box;background:linear-gradient(135deg,rgba(13,30,53,.96),rgba(5,12,25,.98));border:1px solid rgba(119,174,225,.24);color:#eaf4ff}
+        .reic-engine-image-link{display:block;min-width:0;overflow:hidden;background:#071222}
+        .reic-engine-image-link img{display:block;width:100%;height:auto;max-height:460px;aspect-ratio:16/9;object-fit:cover}
+        .reic-engine-copy{min-width:0}
+        .reic-engine-copy h2{margin:.5rem 0 .75rem;font-size:clamp(1.6rem,3.2vw,2.5rem);line-height:1.12;letter-spacing:.015em}
+        .reic-engine-copy p:not(.eyebrow){margin:0;color:#b7cbe0;line-height:1.75}
+        .reic-engine-open{display:inline-flex;gap:.8rem;align-items:center;margin-top:1.1rem;padding:.8rem 1rem;background:#123b5c;border:1px solid rgba(115,221,255,.45);color:#eaf8ff;text-decoration:none;font-size:.78rem;font-weight:800;letter-spacing:.06em}
+        .reic-engine-open:hover{background:#185477}
+        @media(max-width:720px){.reic-engine-feature{grid-template-columns:1fr;gap:1rem;padding:1rem}.reic-engine-image-link img{aspect-ratio:16/9;max-height:none}.reic-engine-copy h2{font-size:clamp(1.55rem,7vw,2rem)}}
+      </style>
 
       <section class="home-search-strip" data-system-page="system" aria-label="Pencarian utama Planetbintang">
         <div class="home-search-copy"><p class="eyebrow">SNAPS / GLOBAL DISCOVERY</p><h2>Temukan dan buka sistem</h2><p>Cari repositori, folder, path, atau aplikasi yang sudah terpetakan.</p></div>
@@ -241,24 +355,73 @@
 
       <section class="common-site-menu" data-system-page="system" aria-labelledby="commonSiteMenuTitle">
         <div class="common-site-menu-heading">
-          <div><p class="eyebrow">QUICK ACCESS <span>/</span> SITE SERVICES</p><h2 id="commonSiteMenuTitle">Menu &amp; layanan utama</h2><p>Akses langsung ke fungsi penting situs dari satu tempat. Setiap menu membuka modul yang sudah tersedia di sistem.</p></div>
+          <div><p class="eyebrow">MAIN MENU <span>/</span> ALL SERVICES</p><h2 id="commonSiteMenuTitle">SELURUH MENU UTAMA</h2><p>Semua menu utama ditampilkan langsung di halaman ini. Tidak ada kategori menu tambahan atau bagian menu lainnya.</p></div>
           <a href="#cari" data-system-route="search" class="common-site-search-link">Cari di sistem <span aria-hidden="true">↗</span></a>
         </div>
         <div class="common-site-menu-grid">
           <a class="common-site-menu-card" href="#repositories" data-system-route="repositories"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>Repositori</b><small>Indeks proyek, metadata, dan tautan sumber.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#fileManager" data-system-route="file-manager"><span class="common-site-menu-icon" aria-hidden="true">▣</span><span class="common-site-menu-copy"><b>File Manager</b><small>Jelajahi path, folder, dan berkas yang terindeks.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
-          <a class="common-site-menu-card" href="./aireber/index.html"><span class="common-site-menu-icon" aria-hidden="true">✦</span><span class="common-site-menu-copy"><b>AI Reber</b><small>Studio asisten AI dan alat kerja Reber.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./aireber/"><span class="common-site-menu-icon" aria-hidden="true">✦</span><span class="common-site-menu-copy"><b>AI Reber</b><small>Studio asisten AI dan alat kerja Reber.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/projects" data-system-route="projects"><span class="common-site-menu-icon" aria-hidden="true">☷</span><span class="common-site-menu-copy"><b>Proyek &amp; tugas</b><small>Kelola papan kerja dan daftar masalah lokal.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/analytics" data-system-route="analytics"><span class="common-site-menu-icon" aria-hidden="true">▥</span><span class="common-site-menu-copy"><b>Analitik</b><small>Ringkasan metrik dan kondisi snapshot.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#hosts" data-system-route="hosts"><span class="common-site-menu-icon" aria-hidden="true">◎</span><span class="common-site-menu-copy"><b>Domain &amp; host</b><small>Telusuri daftar domain dan host terpetakan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>Deploy &amp; rilis</b><small>Akses ringkasan deployment dan lingkungan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/help" data-system-route="workspace-help"><span class="common-site-menu-icon" aria-hidden="true">?</span><span class="common-site-menu-copy"><b>Bantuan</b><small>Panduan penggunaan fitur dan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#workspace/account" data-system-route="workspace-account"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>Pengaturan</b><small>Preferensi dan pengaturan workspace.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vendordomain/pricing/"><span class="common-site-menu-icon" aria-hidden="true">₨</span><span class="common-site-menu-copy"><b>Harga dan Pembayaran</b><small>Katalog satuan REIC, estimasi harga, kebijakan OWNER, dan kanal pembayaran.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./dokumen/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>REIC Dokumen</b><small>Pusat dokumen REIC, blueprint, spesifikasi komponen, dan referensi teknis.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
         </div>
-        <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Menu terhubung ke modul situs</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
+
+          <a class="common-site-menu-card" href="./galeri/"><span class="common-site-menu-icon" aria-hidden="true">▧</span><span class="common-site-menu-copy"><b>GALERI</b><small>Koleksi gambar dan media Planetbintang.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vmdesktopreic/"><span class="common-site-menu-icon" aria-hidden="true">▣</span><span class="common-site-menu-copy"><b>VMDESKTOPREIC</b><small>Desktop virtual REIC dan ruang kerja layar.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./leksikon/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>PERPUSTAKAAN</b><small>Kamus Digital Modern dan koleksi referensi.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./vendordomain/"><span class="common-site-menu-icon" aria-hidden="true">◎</span><span class="common-site-menu-copy"><b>VENDORDOMAIN</b><small>Portal domain, layanan, dan modul platform.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./osmediavm/"><span class="common-site-menu-icon" aria-hidden="true">▦</span><span class="common-site-menu-copy"><b>OS MEDIA VM</b><small>Lingkungan sistem dan aplikasi OS MEDIA VM.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#overview" data-system-route="system"><span class="common-site-menu-icon" aria-hidden="true">⌂</span><span class="common-site-menu-copy"><b>PORTAL</b><small>Pintu utama menuju layanan dan halaman situs.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#repositories" data-system-route="repositories"><span class="common-site-menu-icon" aria-hidden="true">⌘</span><span class="common-site-menu-copy"><b>CODE</b><small>Repositori, katalog fitur, branch, dan commit.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#aircloud" data-system-route="aircloud"><span class="common-site-menu-icon" aria-hidden="true">☁</span><span class="common-site-menu-copy"><b>AIR CLOUD</b><small>Konsol cloud, compute, storage, dan jaringan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./aireber/"><span class="common-site-menu-icon" aria-hidden="true">✦</span><span class="common-site-menu-copy"><b>AI REBER</b><small>Studio asisten AI dan alat kerja.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/projects" data-system-route="projects"><span class="common-site-menu-icon" aria-hidden="true">☷</span><span class="common-site-menu-copy"><b>PLAN</b><small>Proyek, tugas, papan kerja, dan roadmap.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/pull-requests" data-system-route="pull-requests"><span class="common-site-menu-icon" aria-hidden="true">✓</span><span class="common-site-menu-copy"><b>REVIEW</b><small>Pull request, diskusi, dan antrean review.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/deployments" data-system-route="deployments"><span class="common-site-menu-icon" aria-hidden="true">⇧</span><span class="common-site-menu-copy"><b>DELIVERY</b><small>Pipeline, deployment, rilis, dan keamanan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#platform/integrations" data-system-route="integrations"><span class="common-site-menu-icon" aria-hidden="true">⛓</span><span class="common-site-menu-copy"><b>INTEGRASI</b><small>Konektor platform, layanan, dan SNAPS/MCP.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#workspace/analytics" data-system-route="analytics"><span class="common-site-menu-icon" aria-hidden="true">▥</span><span class="common-site-menu-copy"><b>INSIGHTS</b><small>Analitik, metrik, dan ringkasan sistem.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#manage/files" data-system-route="manage-files"><span class="common-site-menu-icon" aria-hidden="true">⚙</span><span class="common-site-menu-copy"><b>MANAGE</b><small>Pengelolaan file, storage, akses, dan konfigurasi.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#execute/run" data-system-route="execute-run"><span class="common-site-menu-icon" aria-hidden="true">▶</span><span class="common-site-menu-copy"><b>EXECUTE</b><small>Eksekusi aksi, jobs, console, dan log.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="#enterprise/map" data-system-route="enterprise-map"><span class="common-site-menu-icon" aria-hidden="true">◇</span><span class="common-site-menu-copy"><b>ENTERPRISE</b><small>Peta layanan dan arsitektur enterprise.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+        <div class="common-site-menu-footer"><span><i aria-hidden="true"></i> Seluruh menu utama tersedia pada tampilan ini</span><button type="button" data-sync-hub-trigger>Perbarui snapshot <span aria-hidden="true">↻</span></button></div>
       </section>
 
-      <!-- Blok dan CSS galeri dua gambar OS/virtual machine di halaman utama dihapus sesuai permintaan. -->
+      <style id="home-reference-images-styles">
+        }
+      
+      /* Production homepage: hide only the floating OS MEDIA VM / REIC shortcuts, never the main PlanetBintang content. */
+      #osmediavm-reic-launcher,#osmediavm-reic-shell,[id*="osmediavm-reic-launcher"],[class*="osmediavm-reic-launcher"],[id*="osmediavm"][id*="reic"][class*="float"],[class*="osmediavm"][class*="reic"][class*="float"],[data-osmediavm-reic-launcher],[data-floating-osmediavm]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+      /* Keep the homepage in its normal document flow: no floating OS launcher, no artificial right-side blank area. */
+      body{overflow-x:hidden}
+      #overview,#repositories,#metricsOverview,.main-content{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+      .main-content{margin-left:auto;margin-right:auto}
+      .vm-home-showcase,.home-ai-gallery,.home-reference-images{position:relative;inset:auto;float:none;max-width:100%;box-sizing:border-box}
+      html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+      main,.main-content,.app-shell,.section-block,.platform-page,.enterprise-page,.tools-page,.snaps-page,.aircloud-page{max-width:100%;min-width:0;box-sizing:border-box}
+      img,iframe,video,canvas,svg{max-width:100%}
+      button,input,select,textarea{max-width:100%;min-width:0}
+      @media(max-width:760px){.main-content{padding-left:12px!important;padding-right:12px!important}.section-heading{gap:10px;flex-wrap:wrap}.toolbar,.fm-toolbar{flex-wrap:wrap}.fm-layout{grid-template-columns:minmax(0,1fr)!important}.fm-sidebar,.fm-inspector{min-width:0;max-width:100%}}
+
+
+      /* Kartu akses harga dan dokumen memiliki hierarki informasi khusus, tetap serasi dengan tema SNAPS. */
+      .common-site-menu-card[href="./vendordomain/pricing/"],
+      .common-site-menu-card[href="./dokumen/"]{min-height:142px;align-items:flex-start;background:linear-gradient(145deg,rgba(17,42,66,.96),rgba(7,18,34,.98));border-color:rgba(115,207,255,.32)}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-icon{color:#ffd27d}
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-icon{color:#83d8ff}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-copy b,
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-copy b{font-size:.92rem;letter-spacing:.045em}
+      .common-site-menu-card[href="./vendordomain/pricing/"] .common-site-menu-copy small,
+      .common-site-menu-card[href="./dokumen/"] .common-site-menu-copy small{line-height:1.65;max-width:42ch}
+      .common-site-menu-card[href="./vendordomain/pricing/"]:hover,
+      .common-site-menu-card[href="./dokumen/"]:hover{border-color:#73cfff;background:linear-gradient(145deg,#153b5a,#0a1b2d)}
+      @media(max-width:640px){.common-site-menu-card[href="./vendordomain/pricing/"],.common-site-menu-card[href="./dokumen/"]{min-height:112px}}
+    </style>
 <section class="provider-matrix" data-system-page="system" aria-labelledby="providerMatrixTitle">
         <header><div><p>Antarmuka mengadopsi pola kerja umum tiap platform; konektor dan data live ditandai apa adanya.</p></div><span class="provider-matrix-badge">READ-ONLY ADAPTER MAP</span></header>
         <div class="provider-grid">
@@ -321,7 +484,7 @@
     <section class="workspace-panel" data-workspace-panel="ai" role="tabpanel" hidden>
       <div class="workspace-panel-heading"><div><p class="eyebrow">AI REBER <span>/</span> 06</p><h3>Re:Bersama di workspace Planetbintang</h3><p>Chat Reber terpasang di dalam menu .L dan membaca workspace File Manager yang sama.</p></div><span class="local-badge">FILE MANAGER LINKED</span></div>
       <div class="reber-embedded panel">
-        <header class="reber-embedded-header"><div class="reber-embedded-brand"><span>Re</span><div><b>AI REBER</b><small>AlluniverS_OS · Planetbintang</small></div></div><a class="workspace-secondary" href="./aireber/index.html">Buka AI Studio lengkap ↗</a></header>
+        <header class="reber-embedded-header"><div class="reber-embedded-brand"><span>Re</span><div><b>AI REBER</b><small>AlluniverS_OS · Planetbintang</small></div></div><a class="workspace-secondary" href="./aireber/">Buka AI Studio lengkap ↗</a></header>
         <div class="reber-embedded-layout"><aside class="reber-embedded-context"><b>Workspace aktif</b><p id="reberWorkspaceStatus">Memeriksa File Manager…</p><small>Perintah: daftar file · baca file · tulis file · hapus file</small></aside><div class="reber-embedded-chat"><div id="reberEmbeddedMessages" class="reber-embedded-messages" role="log" aria-live="polite"><article class="reber-embedded-message assistant"><b>AI Reber</b><p>Re:Bersama. Saya siap membantu workspace File Manager Planetbintang.</p></article></div><form id="reberEmbeddedForm" class="reber-embedded-form"><textarea id="reberEmbeddedInput" rows="2" placeholder="Tanyakan sesuatu atau gunakan perintah File Manager…" aria-label="Pesan AI Reber"></textarea><button class="workspace-primary" type="submit">Kirim</button></form><div class="reber-embedded-quick"><button type="button" data-reber-prompt="daftar file">Daftar file</button><button type="button" data-reber-prompt="baca file ">Baca file</button><button type="button" data-reber-prompt="tulis file catatan.txt: ">Tulis file</button><button type="button" data-reber-prompt="hapus file ">Hapus file</button></div></div></div>
         <p class="workspace-note">Mode panel .L berjalan aman di browser dan tersinkron ke <code>/workspace</code>. Untuk streaming model AI penuh, gunakan AI Studio lengkap dengan backend server yang terhubung.</p>
       </div>
@@ -385,36 +548,57 @@
       </div>
     </section>
 
-    <section class="section-block" id="searchPage" data-system-page="search" hidden aria-label="SOURCE VIEW / CATALOGS &amp; REPOSITORIES">
-      <section class="search-source-view" aria-label="Katalog dan repositori">
-        <div class="search-source-heading">
-          <div><p class="eyebrow">SOURCE VIEW / CATALOGS &amp; REPOSITORIES</p><h3>Tampilan katalog &amp; repositori</h3><p class="section-description">Pilih sumber yang ingin ditampilkan.</p></div>
-          <div class="search-source-actions" role="group" aria-label="Pilih sumber tampilan">
-            <button type="button" class="text-button search-source-choice is-active" data-source-url="https://planetbintang.github.io/al.l/index.html" data-source-title="AL.L · index.html" aria-pressed="true">AL.L · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/vendordomain/index.html" data-source-title="Vendor Domain · index.html" aria-pressed="false">Vendor Domain · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://github.com" data-source-title="GitHub.com" aria-pressed="false">GitHub.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://github.planetbintang.com/github.com/planetbintang/.L/index.html" data-source-title="GitHub Planetbintang · mirror path" aria-pressed="false">GitHub Planetbintang · mirror</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://www.google.com/" data-source-title="Google.com" aria-pressed="false">Google.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.com/" data-source-title="Planetbintang.com" aria-pressed="false">Planetbintang.com</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/" data-source-title="planetbintang.com · index.html (GitHub Pages)" aria-pressed="false">planetbintang.com · index.html</button>
-            <button type="button" class="text-button search-source-choice" data-source-url="https://planetbintang.github.io/.L/aireber/index.html" data-source-title="AI Reber · .L/aireber/index.html" aria-pressed="false">AI Reber · .L/aireber/index.html</button>
-            <a class="text-button" id="searchSourceOpen" href="https://planetbintang.github.io/al.l/index.html" target="_blank" rel="noopener noreferrer">Buka situs ↗</a>
+    <section class="section-block safari-search-page" id="searchPage" data-system-page="search" hidden aria-label="Mesin pencari PlanetBintang">
+      <div class="safari-browser">
+        <header class="safari-toolbar" aria-label="Bilah pencarian">
+          <div class="safari-window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="safari-address-wrap">
+            <span class="safari-address-icon" aria-hidden="true">⌕</span>
+            <form id="globalSearchForm" class="safari-search-form" role="search">
+              <label class="visually-hidden" for="globalSearchInput">Kata kunci atau alamat URL</label>
+              <input id="globalSearchInput" name="q" type="search" placeholder="Masukkan domain, URL, atau kata kunci…" autocomplete="off" spellcheck="false" />
+              <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
+            </form>
           </div>
-        </div>
-        <div class="search-source-frame-wrap">
-          <iframe id="searchSourceFrame" title="Pratinjau AL.L · index.html" src="https://planetbintang.github.io/al.l/index.html" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
-        </div>
-        <p class="search-source-note" id="searchSourceStatus" aria-live="polite">Memuat pratinjau AL.L · index.html. Jika konten kosong atau ditolak, gunakan “Buka situs”.</p>
-      </section>
+          <span class="safari-url-label" aria-label="PlanetBintang Domain Index">.NZ INDEX</span>
+        </header>
+        <main class="safari-results-page">
+          <section class="safari-search-hero">
+            <div class="safari-start-mark" aria-hidden="true">PB</div>
+            <p class="safari-eyebrow">PLANETBINTANG · .NZ DOMAIN INDEX</p>
+            <h2>PENCARIAN DOMAIN &amp; WEB</h2>
+            <p class="safari-description">Telusuri registri domain PlanetBintang, katalog AL.L DATA.MEDIA, URL, dan referensi web dari satu tempat.</p>
+            <form id="safariStartForm" class="safari-start-form" role="search">
+              <label class="visually-hidden" for="safariStartInput">Kata kunci pencarian</label>
+              <span class="safari-address-icon" aria-hidden="true">⌕</span>
+              <input id="safariStartInput" name="q" type="search" placeholder="Cari domain atau masukkan kata kunci…" autocomplete="off" />
+              <button class="safari-search-submit icon-button" type="submit"><span aria-hidden="true">⌕</span> CARI</button>
+            </form>
+            <nav class="safari-search-types" aria-label="Jenis pencarian">
+              <a class="is-active" data-search-type="all" href="#cari" aria-pressed="true">SEMUA</a>
+              <a data-search-type="domain" href="#cari" aria-pressed="false">DOMAIN</a>
+              <a data-search-type="web" href="#cari" aria-pressed="false">REFERENSI WEB</a>
+            </nav>
+          </section>
+          <section class="safari-results" aria-live="polite" aria-label="Daftar hasil pencarian">
+            <div class="safari-results-heading"><div><p class="safari-eyebrow">SEARCH RESULTS</p><h3 id="safariResultsTitle">HASIL PENCARIAN DOMAIN DAN WEB</h3></div><span id="safariResultsCount">SIAP</span></div>
+            <p id="safariResultsStatus" class="safari-results-status">Ketik query atau domain pada bilah pencarian atas. Daftar hasil akan muncul di area ini.</p>
+            <div id="safariResultsList" class="safari-results-list">
+              <article class="safari-result-card safari-result-placeholder"><span class="safari-result-icon">⌕</span><div><strong>Mulai pencarian web</strong><p>Hasil dari registri .NZ dan katalog domain AL.L akan ditampilkan di area ini.</p></div></article>
+            </div>
+          </section>
+          <p class="safari-search-caption">SUMBER DATA <strong>.NZ + AL.L / DATA.MEDIA</strong> · REFERENSI WEB</p>
+        </main>
+      </div>
     </section>
 
     <section class="section-block file-manager-section" id="fileManager" data-system-page="file-manager" hidden aria-labelledby="fileManagerTitle">
         <div class="section-heading">
-          <div><p class="eyebrow">FILE SYSTEM <span>/</span> 00</p><h2 id="fileManagerTitle">File Manager</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
+          <div><p class="eyebrow">FILE SYSTEM <span>/</span> 0.1</p><h2 id="fileManagerTitle">BERANDA FILE</h2><p class="section-description">Telusuri pohon folder dan file seluruh repo terpilih dari path `/`. Kartu file berukuran 40×60 px; klik untuk memilih, folder untuk masuk.</p></div>
           <div class="file-manager-brand"><img src="./folder-3d-icon.jpg" alt="Ikon folder sistem Planetbintang" /><span>ROOT PATH <b>/</b></span></div>
         </div>
         <section class="fm-github-catalog panel" aria-labelledby="fmGithubCatalogTitle">
-          <div class="fm-github-catalog-heading"><div><p class="eyebrow">CODE <span>/</span> GITHUB INDEX</p><h3 id="fmGithubCatalogTitle">Katalog Repositori GitHub</h3><p>Repositori ditampilkan langsung di File Manager. Pilih nama untuk membuka sumber atau berkas pada cabang default.</p></div><a class="text-button" href="#fileManager" data-system-route="file-manager">Buka pohon file ↓</a></div>
+          <div class="fm-github-catalog-heading"><div><p class="eyebrow">CODE <span>/</span> GITHUB INDEX</p><h3 id="fmGithubCatalogTitle">Katalog Repositori GitHub</h3><p>Repositori ditampilkan langsung di File Manager. Pilih nama untuk membuka sumber atau telusuri berkas pada cabang default.</p></div><a class="text-button" href="#fileManager" data-system-route="file-manager">Buka pohon file ↓</a></div>
           <div class="fm-github-catalog-tools"><label><span>CARI REPOSITORI</span><input id="fmGithubRepoSearch" type="search" placeholder="Cari nama repositori…" autocomplete="off" /></label><button class="text-button" id="fmGithubRepoRefresh" type="button">Segarkan daftar</button><span id="fmGithubRepoCount" aria-live="polite">Memuat katalog…</span></div>
           <div id="fmGithubRepoCards" class="fm-github-repo-grid" aria-live="polite"></div>
         </section>
@@ -523,8 +707,8 @@
       })();
     </script>
 
-    <script src="./dashboard.js?v=20261028-all-repositories-v1" defer></script>
-    <script src="./search-page.js?v=20261027-search-actions-v3" defer></script>
+    <script src="./dashboard.js?v=20261104-total-system-files-v2" defer></script>
+    <script src="./search-page.js?v=20261031-search-fast-v9" defer></script>
     <script src="./system-shell.js?v=20261023-system-shell-blue" defer></script>
     <script src="./local-file-store.js?v=20261026-aireber-store-v1" defer></script>
     <style id="fm-github-catalog-styles">
@@ -545,26 +729,29 @@
     <script>
       (function(){
         'use strict';
-        const search=document.getElementById('fmGithubRepoSearch'),cards=document.getElementById('fmGithubRepoCards'),count=document.getElementById('fmGithubRepoCount'),refresh=document.getElementById('fmGithubRepoRefresh');
+        const search=document.getElementById('fmGithubRepoSearch');
+        const cards=document.getElementById('fmGithubRepoCards');
+        const count=document.getElementById('fmGithubRepoCount');
+        const refresh=document.getElementById('fmGithubRepoRefresh');
         if(!search||!cards||!count||!refresh)return;
         let repositories=[];
         const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
         function draw(){
           const query=search.value.trim().toLocaleLowerCase();
-          const filtered=repositories.filter(repo=>repo&&typeof repo.name==='string'&&!/^\\d+$/.test(repo.name.trim())&&repo.name.toLocaleLowerCase().includes(query));
+          const filtered=repositories.filter(repo=>repo&&typeof repo.name==='string'&&!/^\d+$/.test(repo.name.trim())&&repo.name.toLocaleLowerCase().includes(query));
           count.textContent=filtered.length+' dari '+repositories.length+' repositori';
           cards.innerHTML=filtered.length?filtered.map(repo=>'<article class="fm-github-repo-card"><h4>📦 '+escapeHtml(repo.name)+'</h4><p>planetbintang / '+escapeHtml(repo.name)+' · cabang '+escapeHtml(repo.defaultBranch||'default')+'</p><div class="fm-github-repo-actions"><a href="'+escapeHtml(repo.url)+'" target="_blank" rel="noopener noreferrer">Repositori ↗</a><a href="'+escapeHtml(repo.treeUrl)+'" target="_blank" rel="noopener noreferrer">Berkas ↗</a></div></article>').join(''):'<div class="fm-github-repo-empty">Tidak ada repositori yang cocok.</div>';
         }
         async function load(){
           count.textContent='Memuat katalog…';refresh.disabled=true;
-          try{const response=await fetch('./data/github-repositories.json?refresh='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();repositories=(Array.isArray(data.repositories)?data.repositories:[]).filter(repo=>repo&&typeof repo.name==='string'&&!/^\\d+$/.test(repo.name.trim()));draw();}
+          try{const response=await fetch('./data/github-repositories.json?refresh='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();repositories=(Array.isArray(data.repositories)?data.repositories:[]).filter(repo=>repo&&typeof repo.name==='string'&&!/^\d+$/.test(repo.name.trim()));draw();}
           catch(error){count.textContent='Katalog gagal dimuat. Periksa data/github-repositories.json.';cards.innerHTML='';}
           finally{refresh.disabled=false;}
         }
         search.addEventListener('input',draw);refresh.addEventListener('click',load);load();
       })();
     </script>
-    <script src="./file-manager.js?v=20261030-nested-tree-fix-v3" defer></script>
+    <script src="./file-manager.js?v=20261102-all-repositories-root-v2" defer></script>
     <script src="./workspace.js?v=20261023-ice-platform-v1" defer></script>
     <script src="./feature-catalog.js?v=20261025-feature-registry-v1" defer></script>
     <script src="./ai-chat.js?v=20261026-ai-reber-local-v1" defer></script>
@@ -585,6 +772,10 @@
     <script src="./planetbintang-themes.js?v=20261026-sync-reber-themes-v1" defer></script>
     <script src="./control-center.js?v=20261026-control-center-v2" defer></script>
     <script src="./network-map-modern.js?v=20261030-network-map-v1" defer></script>
-    <script src="./workspace-modern.js?v=20261030-workspace-10x25-v1" defer></script>
+
+<!-- PlanetBintang CODE repository browser: added without replacing existing navigation -->
+
+
+    <script src="./workspace-modern.js?v=20261030-workspace-25x150-v3" defer></script>
 </body>
 </html>
