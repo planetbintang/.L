@@ -15,6 +15,8 @@ window.initPlanetFileManager=function(start='Home Folder'){
  let path='/',selected=null,query='',mode='icons',history=[path],historyAt=0;
  let repoTreeLoading=false,repoTreeReady=false,repoTreeError='';
  const repoRoot={name:'CODE',type:'folder',path:'/CODE',children:[],files:[],source:'github',loaded:true};
+ const gitokRoot={name:'gitok.acct',type:'folder',path:'/acct/gitok.acct',children:[{name:'README-GITOK.txt',type:'file',size:0,path:'/acct/gitok.acct/README-GITOK.txt',sourceUrl:'https://github.com/planetbintang/.L/tree/io/vmdesktopreic'},{name:'REPOSITORY-INDEX.txt',type:'file',size:0,path:'/acct/gitok.acct/REPOSITORY-INDEX.txt',sourceUrl:'https://github.com/planetbintang'}],files:[],source:'system'};
+ const acctRoot=store.folders.find(x=>x.name==='acct');if(acctRoot){acctRoot.children=acctRoot.children||[];if(!acctRoot.children.some(x=>x.name==='gitok.acct'))acctRoot.children.push(gitokRoot);}
  async function loadRepositoryTree(){
   if(repoTreeLoading||repoTreeReady)return;repoTreeLoading=true;status('Mengindeks daftar repositori publik PlanetBintang…');
   try{
