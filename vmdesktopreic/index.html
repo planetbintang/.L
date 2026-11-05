@@ -18,7 +18,8 @@ html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow
 #desktop-root{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;padding:0;display:block;overflow:hidden}
 #desktop-root>.vm-shell{width:100%;height:100%;min-width:0;min-height:0;max-width:none;max-height:none;transform:none}
 </style>
-<link rel="stylesheet" href="./menu-system/catalog.reicss?v=20261104-150-catalog-2"><link rel="stylesheet" href="./desktop-experience.css?v=20261104-water-desktop-1">\n<link rel="stylesheet" href="./filemanager-app.reicss?v=20261104-modal-transparent-6">
+<link rel="stylesheet" href="./menu-system/catalog.reicss?v=20261104-150-catalog-2"><link rel="stylesheet" href="./desktop-experience.css?v=20261104-water-desktop-1">
+<link rel="stylesheet" href="./filemanager-app.reicss?v=20261104-modal-transparent-6">
 <style id="vmdesktop-page-position">
 html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;background:#050505}
 #desktop-root{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;min-height:0!important;display:block!important;overflow:hidden!important;padding:0!important;background:#050505}
@@ -79,7 +80,8 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
 <link rel="stylesheet" href="./desktop-unified.css?v=20261104-unified-1">
 <link rel="stylesheet" href="./modal-layouts.css?v=20261104-transparent-modal-2">
 <link rel="stylesheet" href="./desktop-elegance.css?v=20261104-elegant-mode-v1">
-<link rel="stylesheet" href="./desktop-reference.css?v=20261104-reference-layout-v1">\n<link rel="stylesheet" href="./desktop-wallpaper-theme.css?v=20261105-planetbintang-reic-portrait-1">
+<link rel="stylesheet" href="./desktop-reference.css?v=20261104-reference-layout-v1">
+<link rel="stylesheet" href="./desktop-wallpaper-theme.css?v=20261105-planetbintang-reic-portrait-1">
 
 <style id="vmdesktop-centered-boundary">
 /* VMDESKTOPREIC berada di tengah viewport, di dalam satu garis bingkai. */
@@ -106,7 +108,8 @@ html,body{background:#050b14!important}
  #desktop-root>.vm-shell{width:min(96vw,calc(92dvh * 16 / 9))!important;max-width:96vw!important;max-height:92dvh!important}
 }
 </style>
-<link rel="stylesheet" href="./25-modal-system.css?v=20261105-25-modal-system-1">\n<link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
+<link rel="stylesheet" href="./25-modal-system.css?v=20261105-25-modal-system-1">
+<link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
@@ -143,7 +146,8 @@ html,body{background:#050b14!important}
     loadScript('./integration/boot.js?v=20261105-filemanager-categories-1')
    ]);
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
-   await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');\n   await loadScript('./single-layer-window-manager.js?v=20261105-single-layer-1');
+   await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');
+   await loadScript('./single-layer-window-manager.js?v=20261105-single-layer-1');
    fit();
    root.classList.add('vm-ready');
    /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
