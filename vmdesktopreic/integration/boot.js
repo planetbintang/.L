@@ -16,6 +16,11 @@
  (async()=>{
   try{
    await load(base+'environment/environment.js');
+   const environmentStyle=document.createElement('link');
+   environmentStyle.rel='stylesheet';
+   environmentStyle.href=base+'environment/menu-catalog.css?v=20261106-reic-25000';
+   document.head.appendChild(environmentStyle);
+   await load(base+'environment/menu-catalog.js?v=20261106-reic-25000');
    await load(base+'integration/component-registry.js');
    await load(base+'integration/component-bridge.js');
    const discover=()=>root.discoverComponents(document);

@@ -2,7 +2,7 @@
 (()=>{'use strict';
  const open=id=>{const button=document.querySelector('.core-item[data-core="'+String(id).replace(/[^a-z0-9_-]/gi,'')+'"]');if(button){button.click();return true;}return false;};
  const desktop=()=>document.querySelector('#vmDesktop.vm-shell')||document.querySelector('.vm-shell');
- window.VMDESKTOPREIC=Object.freeze({id:'PB-VM-CORE-001',mode:'single-logical-container',open,get status(){return {ready:!!desktop(),core:window.__PLANETBINTANG_VM_CORE__?.id||'PB-VM-CORE-001',applications:250,additionalViews:31,registryCapacity:1500000,indexedFiles:423408,fileRoot:'./reic1500000/'};}});
+ window.VMDESKTOPREIC=Object.freeze({id:'PB-VM-CORE-001',mode:'single-logical-container',open,get status(){return {ready:!!desktop(),core:window.__PLANETBINTANG_VM_CORE__?.id||'PB-VM-CORE-001',applications:250,environmentMenus:25000,additionalViews:31,registryCapacity:1500000,indexedFiles:423408,fileRoot:'./reic1500000/'};}});
  (async()=>{try{
   const base='./reic31/index',host=desktop();if(!host)throw Error('Kontainer desktop #vmDesktop tidak ditemukan');
   const [markup,styles,functions]=await Promise.all(['.reic','.reicss','.reicjs'].map(ext=>fetch(base+ext,{cache:'force-cache'}).then(r=>{if(!r.ok)throw Error(ext+' HTTP '+r.status);return r.text();})));

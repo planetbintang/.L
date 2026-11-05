@@ -10,6 +10,7 @@
 <button data-open="settings" title="Pengaturan" aria-label="Pengaturan">⚙</button>
 <button data-open="status" title="Layar dan status VM" aria-label="Layar dan status VM">▣</button>
 <button data-open="power" title="Daya" aria-label="Daya">⏻</button>
+<button data-environment-menu="true" title="25.000 menu environment REIC" aria-label="25.000 menu environment REIC">⌘</button>
 </nav></header>
 <main class="vm-desktop">
 <aside class="vm-core-menu" aria-label="Enam menu utama VMDESKTOPREIC">
@@ -19,6 +20,7 @@
 <button class="core-item" data-core="search" title="Pencarian Utama" aria-label="Pencarian Utama"><span>⌕</span><b>PENCARIAN UTAMA</b></button>
 <button class="core-item" data-core="files" title="Filemanajer" aria-label="Filemanajer"><span>▱</span><b>FILEMANAJER</b></button>
 <button class="core-item" data-core="apps" title="Aplikasi Sistem" aria-label="Aplikasi Sistem"><span>▦</span><b>APLIKASI SISTEM</b></button>
+<button class="core-item" data-environment-menu="true" title="25.000 menu environment REIC" aria-label="25.000 menu environment REIC"><span>⌘</span><b>ENVIRONMENT<br>25.000 MENU</b></button>
 </aside>
 <section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
 <section class="vm-workspace" aria-label="Pusat kontainer VM tunggal">
