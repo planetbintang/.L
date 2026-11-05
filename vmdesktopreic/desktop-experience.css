@@ -77,3 +77,9 @@
 .pb-canvas-toolbar{border-bottom:1px solid #9acfee!important;color:#07509a!important}
 .pb-module-actions button{background:linear-gradient(#fff,#bde4ff)!important;color:#064783!important;border:1px solid #62b4e7!important}
 @media(max-width:700px){#desktop-root .vm-modal,#pbCatalogBackdrop .pb-catalog-window,#pbAppWindowLayer .pb-app-window{width:calc(100vw - 14px)!important;max-height:calc(100dvh - 14px)!important;min-height:calc(100dvh - 14px)!important}#desktop-root #slidePanel.vm-slide-panel{left:calc(min(46vw,230px) + 8px)!important;width:calc(100% - min(46vw,230px) - 20px)!important;max-height:70%!important}#desktop-root #slideItems{max-height:calc(70vh - 70px)!important}#desktop-root .vm-modal .modal-body,#pbCatalogBackdrop .pb-catalog-list,#pbCatalogBackdrop .pb-feature-stage,#pbAppWindowLayer .pb-app-content{padding:10px!important}}
+
+/* Ocean Blue desktop perimeter */
+#desktop-root>.vm-shell{
+  border:4px solid #0077B6!important;
+  box-shadow:inset 0 0 0 2px rgba(0,191,224,.28),0 0 0 1px #003B5C!important;
+}
