@@ -1,0 +1,123 @@
+/* REICG/1.0 — generated companion style */
+/* Scoped styles: no global resets and no third-party imports. */
+[data-reic-feature="f-desktop-0859"] {
+  --reic-bg: #0b1728;
+  --reic-panel: #10243a;
+  --reic-border: rgba(143, 190, 230, .24);
+  --reic-text: #eaf3ff;
+  --reic-muted: #9fb5cc;
+  --reic-accent: #73c9ff;
+  color: var(--reic-text);
+  background: var(--reic-bg);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  min-width: 0;
+}
+[data-reic-feature="f-desktop-0859"] .reic-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border: 1px solid var(--reic-border);
+  background: linear-gradient(135deg, var(--reic-panel), var(--reic-bg));
+}
+[data-reic-feature="f-desktop-0859"] .reic-title {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: .01em;
+}
+[data-reic-feature="f-desktop-0859"] .reic-description {
+  max-width: 72ch;
+  color: var(--reic-muted);
+  line-height: 1.65;
+}
+[data-reic-feature="f-desktop-0859"] .reic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: .75rem;
+}
+[data-reic-feature="f-desktop-0859"] .reic-panel {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--reic-border);
+  background: var(--reic-panel);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
+}
+[data-reic-feature="f-desktop-0859"] label {
+  display: grid;
+  gap: .4rem;
+  color: var(--reic-muted);
+  font-size: .82rem;
+}
+[data-reic-feature="f-desktop-0859"] input,
+[data-reic-feature="f-desktop-0859"] select,
+[data-reic-feature="f-desktop-0859"] textarea {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: .65rem .75rem;
+  color: var(--reic-text);
+  background: #071321;
+  border: 1px solid var(--reic-border);
+  border-radius: 0;
+  font: inherit;
+}
+[data-reic-feature="f-desktop-0859"] button {
+  min-height: 2.6rem;
+  padding: .6rem .9rem;
+  color: var(--reic-text);
+  background: #173653;
+  border: 1px solid var(--reic-border);
+  border-radius: 0;
+  cursor: pointer;
+  font: inherit;
+}
+[data-reic-feature="f-desktop-0859"] button:hover {
+  border-color: var(--reic-accent);
+  background: #1b4668;
+}
+[data-reic-feature="f-desktop-0859"] button:focus-visible,
+[data-reic-feature="f-desktop-0859"] input:focus-visible,
+[data-reic-feature="f-desktop-0859"] select:focus-visible,
+[data-reic-feature="f-desktop-0859"] textarea:focus-visible {
+  outline: 2px solid var(--reic-accent);
+  outline-offset: 2px;
+}
+[data-reic-feature="f-desktop-0859"] [aria-busy="true"] {
+  cursor: progress;
+  opacity: .72;
+}
+[data-reic-feature="f-desktop-0859"] .reic-status {
+  padding: .7rem .85rem;
+  border-left: 3px solid var(--reic-accent);
+  color: var(--reic-muted);
+  background: rgba(115, 201, 255, .07);
+}
+[data-reic-feature="f-desktop-0859"] .reic-code {
+  overflow: auto;
+  padding: 1rem;
+  color: #d9ecff;
+  background: #050d17;
+  border: 1px solid var(--reic-border);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  [data-reic-feature="f-desktop-0859"] .reic-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-reic-feature="f-desktop-0859"] .reic-panel {
+    padding: .75rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reic-feature="f-desktop-0859"] * {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

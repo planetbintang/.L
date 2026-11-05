@@ -1,0 +1,182 @@
+#!REIC/1.0
+# PlanetBintang feature runtime contract
+# Generated from data/git-feature-catalog.json; do not edit by hand.
+SYSTEM PlanetBintang.CODE
+FORMAT REIC
+VERSION 1.0.0
+EXECUTION disabled-by-default
+SECURITY deny-by-default
+AUDIT enabled
+FEATURE {
+  id: "F-GIT-0104"
+  title: "Penyuntingan detail — Git & Riwayat"
+  module: "Git & Riwayat"
+  module_slug: "git-riwayat"
+  action: "Penyuntingan detail"
+  source_status: "planned"
+  generated: true
+  runtime: "local-adapter-required"
+}
+CONTRACT {
+  input: "FeatureContext"
+  output: "FeatureResult"
+  errors: ["VALIDATION", "FORBIDDEN", "UNAVAILABLE", "CONFLICT"]
+  timeout_ms: 15000
+  retries: 0
+  idempotency: required-for-mutations
+}
+SCHEMA FeatureContext {
+  request_id: string required
+  actor_id: string optional
+  workspace_id: string optional
+  locale: string default "id-ID"
+  payload: object default {}
+  permissions: array default []
+  dry_run: boolean default true
+}
+SCHEMA FeatureResult {
+  ok: boolean
+  feature_id: string
+  status: string
+  message: string
+  data: object
+  errors: array
+  timestamp: datetime
+}
+STATE {
+  phase: "idle"
+  last_request: null
+  last_result: null
+  busy: false
+  error_count: 0
+  success_count: 0
+}
+POLICY {
+  require_authenticated_actor: true
+  require_explicit_permission_for_write: true
+  reject_unknown_fields: true
+  redact_secrets_in_logs: true
+  never_expose_access_tokens: true
+  external_network: disabled-until-adapter-configured
+  destructive_operations: approval-required
+}
+VALIDATE context {
+  require context.request_id
+  assert context.payload is object
+  assert context.permissions is array
+  reject payload keys matching /(token|secret|password|private_key)/i
+  return validation_result
+}
+AUTHORIZE context {
+  if context.dry_run then allow read_only_preview
+  require permission "code.feature.execute"
+  require permission scoped_to FEATURE.id
+  deny when actor_id is missing
+  return authorization_result
+}
+HANDLER preview(context) {
+  return {
+    ok: true,
+    feature_id: FEATURE.id,
+    status: "preview",
+    message: "Pratinjau aman; adapter backend belum dikonfigurasi.",
+    data: { title: FEATURE.title, action: FEATURE.action },
+    errors: [],
+    timestamp: now()
+  }
+}
+HANDLER execute(context) {
+  validate context
+  authorize context
+  require configured_service_adapter
+  begin audit_span(FEATURE.id, context.request_id)
+  set STATE.phase = "running"
+  set STATE.last_request = context.request_id
+  let result = adapter.invoke(FEATURE.id, context.payload)
+  validate result against FeatureResult
+  set STATE.last_result = result
+  set STATE.phase = result.ok ? "complete" : "failed"
+  increment STATE.success_count when result.ok
+  increment STATE.error_count when not result.ok
+  commit audit_span with redacted(result)
+  return result
+}
+HANDLER recover(error, context) {
+  set STATE.phase = "recovering"
+  classify error as VALIDATION | FORBIDDEN | UNAVAILABLE | CONFLICT
+  preserve request_id for traceability
+  do not retry non-idempotent operations
+  record sanitized error metadata
+  set STATE.phase = "idle"
+  return safe_error_result(error, context)
+}
+EVENT on_open(context) {
+  validate context
+  set STATE.phase = "ready"
+  emit "feature.ready" with FEATURE.id
+}
+EVENT on_close(context) {
+  clear transient form state
+  preserve durable audit history
+  set STATE.phase = "idle"
+}
+EVENT on_cancel(context) {
+  cancel pending preview only
+  never imply remote cancellation without adapter confirmation
+  emit "feature.cancelled" with context.request_id
+}
+VIEW layout {
+  shell: "VMDESKTOPREIC"
+  navigation: "CODE / CATALOG 1500 FITUR GIT"
+  heading: FEATURE.title
+  description: FEATURE.action
+  sections: ["overview", "inputs", "activity", "result", "audit"]
+  responsive: true
+  keyboard_accessible: true
+}
+VIEW states {
+  loading: "Memproses permintaan fitur..."
+  empty: "Belum ada data untuk fitur ini."
+  success: "Operasi terverifikasi berhasil."
+  error: "Operasi gagal; periksa rincian dan izin."
+  offline: "Adapter layanan belum tersedia."
+}
+DATA {
+  persistence: "adapter-defined"
+  schema_version: 1
+  retention: "workspace-policy"
+  encryption_at_rest: required_for_sensitive_data
+  export: "permission-gated"
+}
+INTEGRATION {
+  provider: "GitHub API or local service adapter"
+  credentials: "server-side secret store only"
+  rate_limit: "respect provider response headers"
+  pagination: "cursor-based where supported"
+  webhook: "verify signature before processing"
+  fallback: "read-only local preview"
+}
+OBSERVABILITY {
+  metrics: ["duration_ms", "success_count", "error_count"]
+  traces: ["request_id", "feature_id", "actor_scope"]
+  logs: "structured-redacted"
+  alerts: "adapter-defined thresholds"
+}
+TESTS {
+  unit: ["valid-context", "invalid-context", "secret-redaction"]
+  policy: ["anonymous-denied", "write-without-permission-denied"]
+  runtime: ["preview-safe", "adapter-missing-readonly"]
+  recovery: ["timeout", "provider-error", "malformed-response"]
+  accessibility: ["keyboard", "labels", "focus-order"]
+}
+DOCUMENTATION {
+  owner: "PlanetBintang CODE"
+  module: FEATURE.module
+  feature: FEATURE.id
+  source_catalog: "data/git-feature-catalog.json"
+  implementation_note: "Connect a reviewed backend adapter before enabling writes."
+}
+EXPORT preview(context) -> preview(context)
+EXPORT execute(context) -> execute(context)
+EXPORT recover(error, context) -> recover(error, context)
+END FEATURE
