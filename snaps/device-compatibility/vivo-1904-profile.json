@@ -1,0 +1,34 @@
+{
+  "schema": "planetbintang.snaps.device-profile.v1",
+  "target_label": "vivo 1904",
+  "reported_marketing_family": "vivo Y19 (user-confirmed target label; exact regional variant must be verified)",
+  "support_status": "probe-only",
+  "installation_ready": false,
+  "required_evidence": [
+    "Exact ro.product.model, ro.product.device and ro.product.name",
+    "SoC and board revision",
+    "CPU ABI and kernel version",
+    "Partition map and boot image format",
+    "Bootloader unlock policy and current state",
+    "Kernel source/configuration matching this exact variant",
+    "Device tree and required driver coverage",
+    "Recovery/unbrick procedure and verified backup"
+  ],
+  "known_unknowns": [
+    "Exact hardware variant and board revision",
+    "SoC/platform identification from live device",
+    "Kernel source and build configuration",
+    "Device tree and vendor firmware availability",
+    "Partition layout and boot chain",
+    "Bootloader unlock eligibility"
+  ],
+  "safety_policy": {
+    "allow_read_only_probe": true,
+    "allow_root": false,
+    "allow_unlock": false,
+    "allow_flash": false,
+    "allow_erase": false,
+    "allow_repartition": false,
+    "allow_os_replacement": false
+  }
+}
