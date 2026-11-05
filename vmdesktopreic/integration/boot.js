@@ -20,7 +20,12 @@
    environmentStyle.rel='stylesheet';
    environmentStyle.href=base+'environment/menu-catalog.css?v=20261106-reic-25000';
    document.head.appendChild(environmentStyle);
+   const codeContainerStyle=document.createElement('link');
+   codeContainerStyle.rel='stylesheet';
+   codeContainerStyle.href=base+'environment/code-container.css?v=20261106-reic-code-container-1';
+   document.head.appendChild(codeContainerStyle);
    await load(base+'environment/menu-catalog.js?v=20261106-reic-25000');
+   await load(base+'environment/code-container.js?v=20261106-reic-code-container-1');
    await load(base+'integration/component-registry.js');
    await load(base+'integration/component-bridge.js');
    const discover=()=>root.discoverComponents(document);
