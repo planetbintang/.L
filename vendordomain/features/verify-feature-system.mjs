@@ -19,6 +19,40 @@ function readJson(file, label) {
   }
 }
 
+function decodeHtml(value) {
+  return String(value).replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+}
+
+function tagTexts(source, tagName) {
+  const pattern = new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'gi');
+  return [...source.matchAll(pattern)].map((match) => decodeHtml(match[1].replace(/<[^>]*>/g, '').trim()));
+}
+
+function pageIdentityMatches(source, feature) {
+  const name = String(feature.name || '');
+  const matchesName = (value) => value === name || value.startsWith(`${name} ·`);
+  if (tagTexts(source, 'h1').some(matchesName) || tagTexts(source, 'title').some(matchesName)) return true;
+  if (tagTexts(source, 'h2').some(matchesName)) return true;
+
+  for (const attribute of ['data-feature-name', 'data-dns-module']) {
+    const pattern = new RegExp(`${attribute}="([^"]*)"`, 'gi');
+    for (const match of source.matchAll(pattern)) {
+      const value = decodeHtml(match[1]);
+      if (attribute === 'data-feature-name' && value === name) return true;
+      if (attribute === 'data-dns-module') {
+        try {
+          const metadata = JSON.parse(value);
+          if (metadata.id === feature.id && metadata.name === name && metadata.slug === feature.slug) return true;
+        } catch {
+          // Invalid embedded metadata is not an identity match.
+        }
+      }
+    }
+  }
+  return false;
+}
+
 function isInside(parent, candidate) {
   const relative = path.relative(parent, candidate);
   return relative !== '' && relative !== '..' && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
@@ -82,6 +116,29 @@ for (const feature of features) {
   ids.add(id);
   codes.add(code);
 
+  const slug = String(feature.slug || '');
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    errors.push(`Fitur ${code}: slug tidak aman atau tidak valid (${slug})`);
+  } else {
+    const pageSource = path.join(vendorRoot, 'pages', `${code}-${slug}.reic`);
+    if (!existsSync(pageSource)) {
+      errors.push(`Fitur ${code}: file sumber menu tidak cocok dengan slug (${path.relative(vendorRoot, pageSource)})`);
+    } else {
+      const pageMarkup = readFileSync(pageSource, 'utf8');
+      if (!pageIdentityMatches(pageMarkup, feature)) {
+        errors.push(`Fitur ${code}: nama menu tidak ditemukan pada judul atau metadata file ${path.relative(vendorRoot, pageSource)}`);
+      }
+      if (requireHtml) {
+        const pageHtml = pageSource.replace(/\.reic$/i, '.html');
+        if (!existsSync(pageHtml)) {
+          errors.push(`Fitur ${code}: hasil HTML menu tidak ditemukan (${path.relative(vendorRoot, pageHtml)})`);
+        } else if (!pageIdentityMatches(readFileSync(pageHtml, 'utf8'), feature)) {
+          errors.push(`Fitur ${code}: nama menu tidak cocok pada hasil HTML ${path.relative(vendorRoot, pageHtml)}`);
+        }
+      }
+    }
+  }
+
   const route = normalizedHtmlPath(feature.detailPath, id);
   if (route) {
     const sourceFile = route.resolved.replace(/\.html$/i, '.reic');
@@ -103,6 +160,20 @@ for (const feature of features) {
   const serviceFile = resolveBundleFile(bundleRoot, manifest.service, `Service ${code}`);
   if (manifest.entry !== manifest.controller) errors.push(`Manifest ${code}: entry dan controller tidak cocok`);
 
+  if (controllerFile && existsSync(controllerFile)) {
+    const controllerSource = readFileSync(controllerFile, 'utf8');
+    for (const [field, value] of Object.entries({
+      name: feature.name,
+      module: feature.module,
+      category: feature.category,
+      code,
+    })) {
+      if (!controllerSource.includes(JSON.stringify(String(value)))) {
+        errors.push(`Controller ${code}: ${field} tidak cocok dengan nama menu/registry`);
+      }
+    }
+  }
+
   const runtimeFile = typeof manifest.sharedRuntime === 'string'
     ? path.resolve(bundleRoot, manifest.sharedRuntime)
     : '';
@@ -114,8 +185,10 @@ for (const feature of features) {
   if (serviceFile && existsSync(serviceFile)) {
     const service = readJson(serviceFile, `Service ${code}`);
     if (service) {
-      if (service.feature?.id !== id || service.feature?.code !== code) {
-        errors.push(`Service ${code}: identitas tidak cocok dengan registry`);
+      for (const field of ['id', 'code', 'slug', 'name', 'module', 'category']) {
+        if (service.feature?.[field] !== feature[field]) {
+          errors.push(`Service ${code}: feature.${field} tidak cocok dengan registry`);
+        }
       }
       if (!Array.isArray(service.layers) || service.layers.length !== manifest.layerCount) {
         errors.push(`Service ${code}: jumlah layer tidak cocok dengan manifest`);
@@ -125,7 +198,12 @@ for (const feature of features) {
   if (controllerFile && !existsSync(controllerFile)) errors.push(`Controller ${code}: entry tidak ditemukan`);
 }
 
-for (const file of [path.join(featureRoot, 'feature-runtime.js'), path.join(vendorRoot, 'cloud', 'cloud.js')]) {
+for (const file of [
+  path.join(featureRoot, 'feature-runtime.js'),
+  path.join(vendorRoot, 'cloud', 'cloud.js'),
+  path.join(vendorRoot, 'layer-system', 'runtime.js'),
+  path.join(vendorRoot, 'layer-system', 'engine.js'),
+]) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   if (result.status !== 0) {
     errors.push(`Sintaks JavaScript gagal (${path.relative(vendorRoot, file)}): ${(result.stderr || result.stdout || 'unknown error').trim()}`);
