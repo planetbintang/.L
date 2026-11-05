@@ -28,17 +28,7 @@ const workflows={
 async function request(path,opts={}){const r=await fetch(base+path,{...opts,headers:{'content-type':'application/json',...(opts.headers||{})}});const j=await r.json().catch(()=>({error:'Respons API bukan JSON'}));if(!r.ok)throw Error(j.error||('HTTP '+r.status));return j}
 function slugify(v){return v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
 function safeDomain(v){const s=v.trim().toLowerCase().replace(/\.$/,'');return s.length<=253&&s.split('.').length>=2&&s.split('.').every(x=>x.length>0&&x.length<=63&&/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(x))}
-function render(app,f,health);
- try {
-   const layerRuntimeUrl = new URL('../../../layer-system/runtime.js',location.href);
-   const layers = await import(layerRuntimeUrl.href);
-   await layers.mountFeatureLayer(app,f);
- } catch (layerError) {
-   const note=document.createElement('p');
-   note.className='small';
-   note.textContent='Lapisan fitur tambahan belum tersedia: '+layerError.message;
-   app.appendChild(note);
- }{
+function render(app,f,health){
  const w=workflows[f.moduleNumber]||workflows[20],p=palettes[(f.id-1)%palettes.length];
  for(const [k,v] of [['--bg',p[0]],['--panel',p[1]],['--accent',p[2]],['--soft',p[3]],['--radius',f.id%2?'22px':'8px']])document.documentElement.style.setProperty(k,v);
  document.title=f.name+' — VendorDomain';
@@ -148,6 +138,19 @@ function render(app,f,health);
  $('#clear').addEventListener('click',()=>{a.value='';b.value='';report('Formulir dibersihkan.')});
  $('#export').addEventListener('click',()=>{const text=window.__vdExportText||out.dataset.result||'';if(!text){report('Belum ada hasil untuk diekspor.');return}const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='vendordomain-'+f.code+'-'+f.slug+'.txt';link.click();URL.revokeObjectURL(url)});
  $('#save').addEventListener('click',()=>{try{const key='vd-feature-records-'+f.id,rows=JSON.parse(localStorage.getItem(key)||'[]');rows.push({title:a.value.trim()||f.name,note:b.value.trim()||out.textContent,createdAt:new Date().toISOString()});localStorage.setItem(key,JSON.stringify(rows));report('Catatan tersimpan lokal ('+rows.length+' catatan untuk fitur ini).')}catch(e){report('Tidak dapat menyimpan catatan lokal: '+e.message)}});
+ mountFeatureLayers(app,f);
+}
+async function mountFeatureLayers(app,f){
+ try{
+  const layerRuntimeUrl=new URL('../../../layer-system/runtime.js',location.href);
+  const layers=await import(layerRuntimeUrl.href);
+  await layers.mountFeatureLayer(app,f);
+ }catch(layerError){
+  const note=document.createElement('p');
+  note.className='small';
+  note.textContent='Lapisan fitur tambahan belum tersedia: '+layerError.message;
+  app.appendChild(note);
+ }
 }
 async function start(){const m=location.pathname.match(/feature-(\d{3})/),id=Number(m?.[1]||new URLSearchParams(location.search).get('id'));const app=$('#app');
  try{const idx=await fetch('../../index.json',{cache:'no-store'});if(!idx.ok)throw Error('Indeks fitur tidak dapat dimuat');const d=await idx.json(),f=d.features.find(x=>x.id===id);if(!f)throw Error('ID fitur tidak valid');let health=base?'URL API dikonfigurasi':'URL API belum dikonfigurasi';if(base){try{const h=await request('/health');health='API '+(h.ok?'terhubung':'tidak sehat')+'; DNS provider '+(h.cloudflareConfigured?'terkonfigurasi':'belum dikonfigurasi')}catch(e){health='API tidak dapat dihubungi: '+e.message}}render(app,f,health)}

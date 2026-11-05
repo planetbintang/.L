@@ -34,6 +34,14 @@ jobs:
       - name: Build and verify browser pages from canonical REIC files
         run: python3 scripts/build-reic-pages.py
 
+      - name: Set up Node.js for VendorDomain validation
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate VendorDomain feature routes and layer bundles
+        run: node vendordomain/features/verify-feature-system.mjs --require-html
+
       - name: Validate root REIC and Pages markers
         run: |
           test -f index.reic
