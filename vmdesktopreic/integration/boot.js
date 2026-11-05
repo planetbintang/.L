@@ -30,6 +30,7 @@
    document.head.appendChild(registryStyle);
    await load(base+'environment/menu-catalog.js?v=20261106-reic-25000');
    await load(base+'environment/code-container.js?v=20261106-reic-code-container-1');
+   await load(base+'environment/registry-worker.js?v=20261106-reic-registry-worker-1');
    await load(base+'environment/registry.js?v=20261106-reic-registry-1');
    await load(base+'integration/component-registry.js');
    await load(base+'integration/component-bridge.js');

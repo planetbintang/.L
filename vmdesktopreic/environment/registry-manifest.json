@@ -6,6 +6,8 @@
   "logicalCodeUnits": 1000000,
   "physicalFiles": 0,
   "materialization": "lazy-on-preview-or-export",
+  "worker": "vmdesktopreic/environment/registry-worker.js",
+  "workerPolicy": "bounded-local-batch-max-5000-per-run",
   "domains": ["core", "runtime", "desktop", "files", "apps", "data", "network", "security", "media", "ai", "workspace", "device", "service", "policy", "extension"],
   "execution": "preview-only",
   "writePolicy": "adapter-and-permission-required",
