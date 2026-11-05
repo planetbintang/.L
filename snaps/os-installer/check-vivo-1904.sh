@@ -9,16 +9,16 @@ if ! command -v adb >/dev/null 2>&1; then
   exit 2
 fi
 
-mapfile -t DEVICES < <(adb devices | awk 'NR>1 && $2=="device" {print $1}')
-if [[ "${#DEVICES[@]}" -ne 1 ]]; then
+DEVICE_LIST="$(adb devices | awk 'NR>1 && $2=="device" {print $1}')"
+DEVICE_COUNT="$(printf '%s\n' "$DEVICE_LIST" | awk 'NF {n++} END {print n+0}')"
+if [[ "$DEVICE_COUNT" -ne 1 ]]; then
   echo "ERROR: Hubungkan tepat satu perangkat dengan status ADB 'device'." >&2
-  echo "Perangkat yang terdeteksi: ${#DEVICES[@]}" >&2
+  echo "Perangkat yang terdeteksi: $DEVICE_COUNT" >&2
   exit 3
 fi
-DEVICE="${DEVICES[0]}"
-ADB=(adb -s "$DEVICE")
+DEVICE="$(printf '%s\n' "$DEVICE_LIST" | awk 'NF {print; exit}')"
 
-getprop() { "${ADB[@]}" shell getprop "$1" 2>/dev/null | tr -d '\r'; }
+getprop() { adb -s "$DEVICE" shell getprop "$1" 2>/dev/null | tr -d '\r'; }
 MODEL="$(getprop ro.product.model)"
 MANUFACTURER="$(getprop ro.product.manufacturer)"
 DEVICE_NAME="$(getprop ro.product.device)"
@@ -31,11 +31,11 @@ BOOTLOADER="$(getprop ro.bootloader)"
 LOCKED="$(getprop ro.boot.flash.locked)"
 VERIFIED="$(getprop ro.boot.verifiedbootstate)"
 SLOT="$(getprop ro.boot.slot_suffix)"
-KERNEL="$("${ADB[@]}" shell uname -a 2>/dev/null | tr -d '\r')"
-MEMORY="$("${ADB[@]}" shell cat /proc/meminfo 2>/dev/null | head -n 5 | tr -d '\r')"
-STORAGE="$("${ADB[@]}" shell df -h /data 2>/dev/null | tr -d '\r')"
-PARTITIONS="$("${ADB[@]}" shell 'ls -1 /dev/block/by-name 2>/dev/null || ls -1 /dev/block/bootdevice/by-name 2>/dev/null || true' | tr -d '\r')"
-ANDROID="$("${ADB[@]}" shell getprop ro.build.version.release 2>/dev/null | tr -d '\r')"
+KERNEL="$(adb -s "$DEVICE" shell uname -a 2>/dev/null | tr -d '\r')"
+MEMORY="$(adb -s "$DEVICE" shell cat /proc/meminfo 2>/dev/null | head -n 5 | tr -d '\r')"
+STORAGE="$(adb -s "$DEVICE" shell df -h /data 2>/dev/null | tr -d '\r')"
+PARTITIONS="$(adb -s "$DEVICE" shell 'ls -1 /dev/block/by-name 2>/dev/null || ls -1 /dev/block/bootdevice/by-name 2>/dev/null || true' | tr -d '\r')"
+ANDROID="$(adb -s "$DEVICE" shell getprop ro.build.version.release 2>/dev/null | tr -d '\r')"
 SDK="$(getprop ro.build.version.sdk)"
 SECURITY_PATCH="$(getprop ro.build.version.security_patch)"
 
