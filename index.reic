@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="./homepage-text-4px.css?v=20261027-text-10px" />
     <link rel="stylesheet" href="./content-side-spacing.css?v=20261027-side-5px" />
     <link rel="stylesheet" href="./desktop-os-menus.css?v=20261028-desktop-os-v1" />
-    <link rel="stylesheet" href="./shared-osmediavm-theme.css?v=20261030-logo-filemanager-v2" />
+    <link rel="stylesheet" href="./shared-osmedia-theme.css?v=20261030-logo-filemanager-v2" />
     <style id="vm-home-showcase-styles">
 
       /* SOURCE VIEW menjadi ruang kerja layar penuh tepat di bawah menu utama */
@@ -120,7 +120,7 @@
       .topbar > .main-nav > a[href="./vmdesktopreic/"] { order: -21 !important; }
       .topbar > .main-nav > [data-menu="library"] { order: -20 !important; }
       .topbar > .main-nav > a[href="./vendordomain/"] { order: -19 !important; }
-      .topbar > .main-nav > a[href="./osmediavm/"] { order: -18 !important; }
+      .topbar > .main-nav > a[href="./osmedia/"] { order: -18 !important; }
       .topbar > .main-nav > [data-menu="portal"] { order: -17 !important; }
       @media (max-width: 760px) {
         .topbar > .main-nav { gap: 5px !important; }
@@ -188,7 +188,7 @@
         <details class="nav-dropdown" data-menu="library"><summary>Perpustakaan</summary><div class="nav-dropdown-menu" aria-label="Menu Perpustakaan"><a href="./leksikon/" aria-label="Buka Perpustakaan Kamus Digital Modern"><b>Kamus Digital Modern</b><small>Penelusuran kata dan data IC</small></a></div></details>
         <a class="main-nav-link" href="./vendordomain/" aria-label="Buka dashboard Vendor Domain">Vendor Domain</a>
         <a class="main-nav-link" href="./hosting/" aria-label="Buka dashboard Hosting">HOSTING</a>
-        <a class="main-nav-link" href="./osmediavm/" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
+        <a class="main-nav-link" href="./osmedia/" aria-label="Buka desktop OS MEDIA VM">OS MEDIA VM</a>
         
         <details class="nav-dropdown common-portal-dropdown" data-menu="portal"><summary>Portal</summary><div class="nav-dropdown-menu" aria-label="Menu umum situs">
           <a href="#overview" data-system-route="system"><b>Beranda</b><small>Kembali ke dashboard utama</small></a>
@@ -376,7 +376,7 @@
           <a class="common-site-menu-card" href="./vmdesktopreic/"><span class="common-site-menu-icon" aria-hidden="true">▣</span><span class="common-site-menu-copy"><b>VMDESKTOPREIC</b><small>Desktop virtual REIC dan ruang kerja layar.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="./leksikon/"><span class="common-site-menu-icon" aria-hidden="true">▤</span><span class="common-site-menu-copy"><b>PERPUSTAKAAN</b><small>Kamus Digital Modern dan koleksi referensi.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="./vendordomain/"><span class="common-site-menu-icon" aria-hidden="true">◎</span><span class="common-site-menu-copy"><b>VENDORDOMAIN</b><small>Portal domain, layanan, dan modul platform.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
-          <a class="common-site-menu-card" href="./osmediavm/"><span class="common-site-menu-icon" aria-hidden="true">▦</span><span class="common-site-menu-copy"><b>OS MEDIA VM</b><small>Lingkungan sistem dan aplikasi OS MEDIA VM.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
+          <a class="common-site-menu-card" href="./osmedia/"><span class="common-site-menu-icon" aria-hidden="true">▦</span><span class="common-site-menu-copy"><b>OS MEDIA VM</b><small>Lingkungan sistem dan aplikasi OS MEDIA VM.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#overview" data-system-route="system"><span class="common-site-menu-icon" aria-hidden="true">⌂</span><span class="common-site-menu-copy"><b>PORTAL</b><small>Pintu utama menuju layanan dan halaman situs.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#repositories" data-system-route="repositories"><span class="common-site-menu-icon" aria-hidden="true">⌘</span><span class="common-site-menu-copy"><b>CODE</b><small>Repositori, katalog fitur, branch, dan commit.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
           <a class="common-site-menu-card" href="#aircloud" data-system-route="aircloud"><span class="common-site-menu-icon" aria-hidden="true">☁</span><span class="common-site-menu-copy"><b>AIR CLOUD</b><small>Konsol cloud, compute, storage, dan jaringan.</small></span><span class="common-site-menu-arrow" aria-hidden="true">↗</span></a>
@@ -396,7 +396,7 @@
         }
       
       /* Production homepage: hide only the floating OS MEDIA VM / REIC shortcuts, never the main PlanetBintang content. */
-      #osmediavm-reic-launcher,#osmediavm-reic-shell,[id*="osmediavm-reic-launcher"],[class*="osmediavm-reic-launcher"],[id*="osmediavm"][id*="reic"][class*="float"],[class*="osmediavm"][class*="reic"][class*="float"],[data-osmediavm-reic-launcher],[data-floating-osmediavm]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+      #osmedia-reic-launcher,#osmedia-reic-shell,[id*="osmedia-reic-launcher"],[class*="osmedia-reic-launcher"],[id*="osmedia"][id*="reic"][class*="float"],[class*="osmedia"][class*="reic"][class*="float"],[data-osmedia-reic-launcher],[data-floating-osmedia]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
       /* Keep the homepage in its normal document flow: no floating OS launcher, no artificial right-side blank area. */
       body{overflow-x:hidden}
       #overview,#repositories,#metricsOverview,.main-content{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
