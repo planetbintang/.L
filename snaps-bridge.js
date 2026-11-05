@@ -276,6 +276,19 @@
         <span class="tools-badge" id="snapsBridgeBadge">MEMERIKSA JEMBATAN LOKAL…</span>
       </header>
       <div class="tools-grid" id="snapsConnectors"></div>
+      <section class="tools-card" id="snapsOsInstaller">
+        <div class="tools-card-head"><div><h3>SNAPS OS Installer · VMDESKTOPREIC</h3><p>Persiapan migrasi OS PlanetBintang untuk target vivo 1904. Tahap ini hanya menjalankan diagnostik ADB read-only dari komputer host.</p></div><span class="local-badge">DEVICE PROBE · READ ONLY</span></div>
+        <div class="snaps-os-installer-grid">
+          <div><b>Target perangkat</b><strong>vivo 1904</strong><small>Varian/codename dan SoC harus dikonfirmasi dari perangkat.</small></div>
+          <div><b>Status instalasi</b><strong class="snaps-os-blocked">BELUM SIAP FLASH</strong><small>Kernel, driver, device tree, recovery, dan boot image belum tervalidasi.</small></div>
+        </div>
+        <div class="snaps-actions">
+          <a class="workspace-primary" href="./snaps/os-installer/README.md" target="_blank" rel="noopener">Panduan SNAPS Installer ↗</a>
+          <a class="workspace-secondary" href="./snaps/os-installer/check-vivo-1904.sh" download="check-vivo-1904.sh">Unduh pemeriksa perangkat</a>
+          <a class="workspace-secondary" href="./snaps/device-compatibility/vivo-1904-profile.json" target="_blank" rel="noopener">Profil kompatibilitas JSON ↗</a>
+        </div>
+        <p class="tools-note">Pemeriksa dijalankan di komputer dengan Android Platform Tools: <code>bash snaps/os-installer/check-vivo-1904.sh</code>. Tidak ada root, unlock, flash, erase, format, atau perubahan partisi. GitHub Pages tidak dapat menjalankan perintah terminal atau memasang OS langsung pada ponsel.</p>
+      </section>
       <section class="tools-card" id="snapsDataStorage">
         <div class="tools-card-head"><div><h3>Penyimpanan Data Snaps → File Manager</h3><p>Impor file dari perangkat langsung ke penyimpanan lokal File Manager pada folder <code>/workspace/snaps/</code>. File tetap berada di browser/perangkat ini.</p></div><span class="local-badge">INDEXEDDB · FILE MANAGER</span></div>
         <form id="snapsDataUploadForm" class="tools-form-inline">
