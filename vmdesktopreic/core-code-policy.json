@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "name": "REIC Functional Code Standard",
+  "scope": "vmdesktopreic",
+  "principle": "Kode harus fungsional, dapat divalidasi, dan tidak dipanjangkan dengan filler.",
+  "lineTarget": 1000,
+  "lineTargetMeaning": "target untuk modul inti yang berkembang; bukan syarat untuk generated source, manifest, data, asset, atau minified legacy adapter",
+  "generatedRoots": ["reic1500000/", "menu-system/features/", "reic-library/"],
+  "dataExtensions": [".json", ".nz", ".svg", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".woff", ".woff2"],
+  "codeExtensions": [".js", ".css", ".html", ".reic", ".reicjs", ".reicss", ".reicg", ".akc"],
+  "coreEntryPoints": [
+    "index.html",
+    "desktop.reic",
+    "desktop.js",
+    "desktop-runtime.js",
+    "desktop-reic-system.js",
+    "filemanager-app.js",
+    "integration/boot.js",
+    "integration/component-registry.js",
+    "integration/component-bridge.js",
+    "environment/environment.js",
+    "environment/menu-catalog.js",
+    "menu-system/main-menu.reicjs"
+  ],
+  "checks": [
+    "non-empty-code",
+    "javascript-syntax",
+    "json-validity",
+    "boot-reference-integrity",
+    "generated-source-is-labeled",
+    "line-target-report"
+  ],
+  "executionPolicy": "read-only-check-by-default",
+  "paddingPolicy": "forbidden"
+}
