@@ -37,3 +37,16 @@
 .snaps-rag-result button{flex:none}
 .snaps-anchor-badge{margin-left:8px;align-self:center;font-size:8.5px;font-weight:800;letter-spacing:.12em;color:#0b3a63;background:#e6f1fc;border:1px solid #bcd6f0;border-radius:999px;padding:3px 8px}
 @media(max-width:900px){.tools-form-inline{grid-template-columns:1fr}.snaps-brand-anchor{flex-direction:column}}
+
+
+/* SNAPS OS installer panel — device inspection first, no destructive install. */
+.snaps-os-installer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.snaps-os-installer-grid>div{display:grid;gap:6px;align-content:start;padding:14px;border:1px solid #cfe0f2;background:linear-gradient(145deg,#f5faff,#fff);min-width:0}
+.snaps-os-installer-grid b{font-size:11px;color:#55718d;letter-spacing:.06em;text-transform:uppercase}
+.snaps-os-installer-grid strong{font-size:15px;color:#0b3a63;overflow-wrap:anywhere}
+.snaps-os-installer-grid small{font-size:11px;line-height:1.5;color:#617b95}
+.snaps-os-installer-grid .snaps-os-blocked{color:#9b4d13}
+#snapsOsInstaller .snaps-actions a{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;text-decoration:none;font:600 11px system-ui,sans-serif;border:1px solid #c9dcf0}
+#snapsOsInstaller .snaps-actions a.workspace-primary{background:#0b3a63;color:#fff;border-color:#0b3a63}
+#snapsOsInstaller .snaps-actions a.workspace-secondary{background:#fff;color:#234e76}
+@media(max-width:700px){.snaps-os-installer-grid{grid-template-columns:1fr}#snapsOsInstaller .snaps-actions a{width:100%;box-sizing:border-box}}
