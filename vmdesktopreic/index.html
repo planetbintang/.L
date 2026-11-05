@@ -110,7 +110,7 @@ html,body{background:#050b14!important}
 </style>
 <link rel="stylesheet" href="./25-modal-system.css?v=20261105-25-modal-system-1">
 <link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
-<link rel="stylesheet" href="./viewport-repair.css?v=20261106-desktop-home-2">
+<link rel="stylesheet" href="./viewport-repair.css?v=20261106-clean-desktop-home-1">
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
@@ -149,6 +149,26 @@ html,body{background:#050b14!important}
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
    await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');
    await loadScript('./single-layer-window-manager.js?v=20261105-single-layer-1');
+   /* Kondisi awal selalu desktop bersih: seluruh jendela/modal hanya dibuka setelah tindakan pengguna. */
+   const showDesktopHome=()=>{
+    const hiddenSelectors=['#modalBackdrop','.vm-modal-backdrop','#pbCatalogBackdrop','.pb-catalog-backdrop'];
+    hiddenSelectors.forEach(selector=>document.querySelectorAll(selector).forEach(el=>{
+     el.hidden=true;
+     el.setAttribute('aria-hidden','true');
+     el.classList.remove('open','is-open','active');
+    }));
+    document.querySelectorAll('.pb25-window,.pb-catalog-window,[data-startup-modal]').forEach(el=>{
+     el.style.display='none';
+     el.setAttribute('aria-hidden','true');
+    });
+    document.querySelectorAll('.vm-slide-panel,.vm-slide-panel.open').forEach(el=>{
+     el.classList.remove('open');
+     el.hidden=true;
+     el.setAttribute('aria-hidden','true');
+    });
+    document.querySelectorAll('.core-item.active').forEach(el=>el.classList.remove('active'));
+   };
+   showDesktopHome();
    fit();
    root.classList.add('vm-ready');
    /* Filemanajer bukan dependensi boot; muat setelah desktop tampil atau saat browser idle. */
