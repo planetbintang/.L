@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "REIC-REGISTRY-ROOT",
+  "system": "REIC",
+  "name": "REIC System Registry",
+  "logicalCodeUnits": 1000000,
+  "physicalFiles": 0,
+  "materialization": "lazy-on-preview-or-export",
+  "domains": ["core", "runtime", "desktop", "files", "apps", "data", "network", "security", "media", "ai", "workspace", "device", "service", "policy", "extension"],
+  "execution": "preview-only",
+  "writePolicy": "adapter-and-permission-required",
+  "checksum": "deterministic-per-entry",
+  "source": "vmdesktopreic/environment/registry.js"
+}

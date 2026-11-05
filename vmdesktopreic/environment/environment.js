@@ -12,8 +12,8 @@
   platform:/Android/i.test(navigator.userAgent)?'android':/iPhone|iPad|iPod/i.test(navigator.userAgent)?'ios':/Win/i.test(navigator.platform)?'windows':/Mac/i.test(navigator.platform)?'macos':'web',
   viewport:Object.freeze({width:()=>window.innerWidth,height:()=>window.innerHeight}),
   capabilities:Object.freeze({touch:coarsePointer,reducedMotion:!!reduceMotion,online:navigator.onLine!==false,storage:!!window.localStorage}),
-  paths:Object.freeze({root:'./',styles:'./',modules:'./',environment:'./environment/',integration:'./integration/',environmentMenuCatalog:'./environment/menu-catalog-25000.json'}),
-  features:Object.freeze({componentRegistry:true,eventBridge:true,environmentProfile:true,environmentMenuCatalog:true,environmentMenuCount:25000,legacyRuntimePreserved:true})
+  paths:Object.freeze({root:'./',styles:'./',modules:'./',environment:'./environment/',integration:'./integration/',environmentMenuCatalog:'./environment/menu-catalog-25000.json',systemRegistry:'./environment/registry.js'}),
+  features:Object.freeze({componentRegistry:true,eventBridge:true,environmentProfile:true,systemRegistry:true,registryLogicalCapacity:1000000,environmentMenuCatalog:true,environmentMenuCount:25000,legacyRuntimePreserved:true})
  });
  root.environment=env;
  document.documentElement.dataset.vmEnvironment=env.mode;
