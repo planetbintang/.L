@@ -2,6 +2,7 @@ import http from 'node:http';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { cancelSale, confirmSale, createSale, findSale, fulfillSale, recordSalePayment, summarizeSales } from './sales-ledger.mjs';
 
 const PORT=Number(process.env.PORT||8787);
 const HOST=process.env.HOST||'0.0.0.0';
@@ -15,11 +16,11 @@ const MAX_BODY=1024*1024;
 const RATE_WINDOW_MS=60_000;
 const RATE_LIMIT_MAX=Math.max(10,Number(process.env.RATE_LIMIT_MAX||120));
 const rateBuckets=new Map();
-let db={records:[],audit:[]};
+let db={records:[],audit:[],sales:[]};
 if(ADMIN_TOKEN && ADMIN_TOKEN.length<32)throw new Error('ADMIN_TOKEN harus minimal 32 karakter.');
 if(!ADMIN_TOKEN)console.warn('ADMIN_TOKEN belum diatur; endpoint /api/* akan menolak seluruh permintaan.');
 await mkdir(DATA_DIR,{recursive:true});
-try{db=JSON.parse(await readFile(DATA_FILE,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
+try{const loaded=JSON.parse(await readFile(DATA_FILE,'utf8'));if(!loaded||typeof loaded!=='object'||Array.isArray(loaded))throw new Error('Format file database VendorDomain tidak valid.');db={...loaded,records:Array.isArray(loaded.records)?loaded.records:[],audit:Array.isArray(loaded.audit)?loaded.audit:[],sales:Array.isArray(loaded.sales)?loaded.sales:[]};}catch(e){if(e.code!=='ENOENT')throw e;}
 const iso=()=>new Date().toISOString();
 let persistQueue=Promise.resolve();
 function persist(){
@@ -63,6 +64,38 @@ const server=http.createServer(async(req,res)=>{
 if(req.method==='GET'&&p==='/health')return send(res,200,{ok:true,service:'VendorDomain API',version:'1.0.0',storage:'persistent-file',cloudflareConfigured:Boolean(CF_TOKEN&&CF_ZONE),time:iso()});
 if(req.method==='POST'&&p==='/api/domain/validate'){const b=await body(req);return send(res,200,validateDomain(b.domain));}
 if(p.startsWith('/api/')&&!authorized(req))return send(res,401,{error:'Unauthorized. Sesi server yang valid diperlukan.',requestId});
+if(req.method==='GET'&&p==='/api/sales/summary')return send(res,200,summarizeSales(db.sales));
+if(req.method==='GET'&&p==='/api/sales')return send(res,200,{sales:db.sales});
+if(req.method==='POST'&&p==='/api/sales'){
+ const sale=createSale(db.sales,await body(req));
+ await audit('sale.create',{saleId:sale.id,total:sale.total,currency:sale.currency});
+ return send(res,201,{sale});
+}
+const saleRoute=p.match(/^\/api\/sales\/([a-f0-9-]{36})(?:\/(confirm|fulfill|payments|cancel))?$/i);
+if(saleRoute){
+ const id=saleRoute[1],action=saleRoute[2]||'';
+ if(req.method==='GET'&&!action)return send(res,200,{sale:findSale(db.sales,id)});
+ if(req.method==='POST'&&action==='confirm'){
+  const sale=confirmSale(db.sales,id);
+  await audit('sale.confirm',{saleId:sale.id,total:sale.total});
+  return send(res,200,{sale});
+ }
+ if(req.method==='POST'&&action==='fulfill'){
+  const sale=fulfillSale(db.sales,id);
+  await audit('sale.fulfill',{saleId:sale.id,total:sale.total});
+  return send(res,200,{sale});
+ }
+ if(req.method==='POST'&&action==='payments'){
+  const {sale,payment}=recordSalePayment(db.sales,id,await body(req));
+  await audit('sale.payment.record',{saleId:sale.id,paymentId:payment.id,amount:payment.amount});
+  return send(res,201,{sale,payment});
+ }
+ if(req.method==='POST'&&action==='cancel'){
+  const sale=cancelSale(db.sales,id);
+  await audit('sale.cancel',{saleId:sale.id});
+  return send(res,200,{sale});
+ }
+}
 if(req.method==='GET'&&p==='/api/records')return send(res,200,{records:db.records});
 if(req.method==='POST'&&p==='/api/records'){const b=await body(req);if(!String(b.title||'').trim())return send(res,400,{error:'title wajib diisi'});const r={id:crypto.randomUUID(),title:String(b.title).slice(0,200),type:String(b.type||'note').slice(0,60),data:b.data??{},createdAt:iso(),updatedAt:iso()};db.records.unshift(r);await audit('record.create',{id:r.id,type:r.type});await persist();return send(res,201,{record:r});}
 const rec=p.match(/^\/api\/records\/([a-f0-9-]+)$/i);

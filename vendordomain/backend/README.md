@@ -19,8 +19,29 @@ Requires Node.js 20+. Deploy this directory to a trusted server/container with p
 - `GET/POST /api/records`, `PUT/DELETE /api/records/:id` — persistent application records, protected by bearer token.
 - `GET /api/audit` — recent audit events, protected.
 - `GET/POST /api/dns/records`, `DELETE /api/dns/records/:id` — live Cloudflare DNS operations, protected.
+- `GET/POST /api/sales`, `GET /api/sales/:id` — sales-order ledger, protected.
+- `POST /api/sales/:id/confirm`, `/fulfill`, `/payments`, `/cancel` — guarded sales-state transitions and manual receipt entries, protected.
+- `GET /api/sales/summary` — IDR order pipeline, recognized revenue, recorded cash, receivables, customer advances, cost of goods sold and gross profit, protected.
 
 All `/api/*` endpoints except domain-format validation require `Authorization: Bearer <ADMIN_TOKEN>`. Use HTTPS. Configure Cloudflare least-privilege credentials and verify the target zone before issuing changes. A successful DNS request changes the real zone.
+
+## Sales ledger and asset treatment
+
+The sales ledger is an internal operational register, not a payment processor, inventory system, tax engine or statutory financial statement. Create an order with a customer label and line items containing `name`, integer `quantity`, integer `unitPrice` and integer `unitCost`; all money values are whole rupiah (IDR), before tax and discounts. New orders start as `draft`, then move through `confirmed` and `fulfilled`; unfulfilled orders do not count as recognized revenue in this ledger.
+
+The summary deliberately separates concepts: **recognized revenue is income, not an asset**. Recorded cash receipts and receivables on fulfilled orders are shown as sales-related assets. A payment recorded before fulfillment is cash received with an offsetting customer-advance liability; it is not counted as revenue until the order is marked fulfilled. Cost of goods sold and gross profit use the unit-cost values entered with each order. Receipts are manual ledger entries only: no bank, card, wallet, registrar or payment-provider transaction is initiated or independently verified.
+
+Example requests (replace the URL and use the token only from a trusted operator environment; never put it in a static browser page):
+
+```sh
+curl -X POST "$API_BASE/api/sales" \
+  -H "Authorization: Bearer $ADMIN_TOKEN" -H 'Content-Type: application/json' \
+  -d '{"customer":"Pelanggan A","currency":"IDR","items":[{"name":"Paket layanan","quantity":2,"unitPrice":120000,"unitCost":40000}]}'
+```
+
+Use the returned sale ID for `POST /api/sales/{id}/confirm`, then record a manual payment with `POST /api/sales/{id}/payments` and body `{"amount":100000,"reference":"bank-reference"}`. Mark fulfillment using `POST /api/sales/{id}/fulfill`; read the calculated figures from `GET /api/sales/summary`. A canceled or fulfilled sale is not deleted, payments cannot exceed the order total, and a paid order cannot be canceled without a separate refund procedure.
+
+This simplified recognition point is a system workflow choice, not accounting advice or a guarantee of compliance with Indonesian tax rules, PSAK, IFRS or another reporting framework. Confirm recognition, tax, returns/refunds, inventory, evidence of delivery, permissions and retention rules with the responsible accountant before production use.
 
 ## Limitations and safety
 
