@@ -1,3 +1,4 @@
+@import url('./dock-left.css?v=20261106-left-dock-1');
 /* VMDESKTOPREIC — unified responsive viewport repair (2026-11-06) */
 :root{--vm-frame:#9cecff;--vm-ink:#07345f}
 html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden}
@@ -193,5 +194,3 @@ html,body{background:#061426!important}
  #desktop-root .vm-app-launcher>.vm-app>b{font-size:6px!important}
  #desktop-root .vm-center-search{top:3%!important;left:calc(72px + (100% - 76px)/2)!important;width:min(44%,220px)!important}
 }
-
-@import url('./dock-left.css?v=20261106-left-dock-1');
