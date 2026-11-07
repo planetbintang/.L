@@ -40,7 +40,7 @@ async function openComponentRegistry(){
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function draw(){const term=search.value.trim().toLocaleLowerCase('id'),g=group.value;const rows=items.filter(x=>(!g||x.group===g)&&(!term||(x.title+' '+x.id+' '+x.group).toLocaleLowerCase('id').includes(term)));const pages=Math.max(1,Math.ceil(rows.length/pageSize));page=Math.min(page,pages-1);grid.innerHTML=rows.slice(page*pageSize,(page+1)*pageSize).map(x=>'<button class="registry-item" data-id="'+esc(x.id)+'"><small>'+esc(x.id.toUpperCase())+'</small><b>'+esc(x.title)+'</b><span>'+esc(groupNames[x.group]||x.group)+'</span></button>').join('')||'<p class="registry-empty">Tidak ada komponen yang cocok dengan pencarian.</p>';meta.textContent=rows.length.toLocaleString('id-ID')+' komponen ditemukan · '+(g?(groupNames[g]||g):'seluruh kelompok');pageLabel.textContent='HALAMAN '+(page+1)+' / '+pages;$('#registryPrev').disabled=page===0;$('#registryNext').disabled=page>=pages-1;grid.querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>loadComponent(b.dataset.id))); }
  async function loadComponent(id){const x=items.find(y=>y.id===id);if(!x)return;active=x;detail.hidden=false;detail.innerHTML='<div class="registry-detail-head"><div><small>'+esc(x.id.toUpperCase())+'</small><h4>'+esc(x.title)+'</h4><p>'+esc(groupNames[x.group]||x.group)+'</p></div><button id="registryDetailClose">TUTUP ×</button></div><div class="registry-detail-body">Memuat definisi REIC komponen…</div>';$('#registryDetailClose').onclick=()=>detail.hidden=true;detail.scrollIntoView({behavior:'smooth',block:'nearest'});try{const base='../osmedia/recordin/components/'+encodeURIComponent(x.id)+'/'+encodeURIComponent(x.id);const [r]=await Promise.all([fetch(base+'.reic',{cache:'force-cache'})]);if(!r.ok)throw Error('HTTP '+r.status);let source=await r.text();const start=source.indexOf('<section');const end=source.lastIndexOf('</section>');if(start<0||end<0)throw Error('Fragmen REIC tidak ditemukan');const host=detail.querySelector('.registry-detail-body');host.innerHTML=source.slice(start,end+10);const styleId='registry-style-'+x.id;if(!document.getElementById(styleId)){const link=document.createElement('link');link.id=styleId;link.rel='stylesheet';link.href=base+'.css';document.head.append(link);}const scriptId='registry-script-'+x.id;if(!document.getElementById(scriptId)){const script=document.createElement('script');script.id=scriptId;script.src=base+'.js';script.defer=true;document.body.append(script);}$('#modalStatus').textContent='REIC '+x.id+' dimuat · pemrosesan browser lokal';}catch(e){detail.querySelector('.registry-detail-body').textContent='Komponen terdaftar, tetapi berkas detail gagal dimuat: '+e.message;}}
- try{const response=await fetch('../osmedia/recordin/components/manifest.json',{cache:'force-cache'});if(!response.ok)throw Error('Manifest HTTP '+response.status);const data=await response.json();const all=Array.isArray(data.components)?data.components:[];const groups=[...new Set(all.map(x=>x.group))];items=all.slice().sort((a,b)=>Number(a.id.match(/reic-(\d+)/)?.[1]||0)-Number(b.id.match(/reic-(\d+)/)?.[1]||0));if(!items.length)throw Error('Tidak ada komponen sumber pada manifest REIC.');groups.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=groupNames[g]||g;group.append(o)});$('#registryTotal').textContent=items.length.toLocaleString('id-ID');draw();search.addEventListener('input',()=>{page=0;draw()});group.addEventListener('change',()=>{page=0;draw()});$('#registryPrev').onclick=()=>{page--;draw()};$('#registryNext').onclick=()=>{page++;draw()};}catch(e){$('#registryTotal').textContent='GAGAL';meta.textContent='Registri tidak dapat dimuat: '+e.message;grid.innerHTML='<p class="registry-empty">Periksa akses ke manifes OS MEDIA VM.</p>';}
+ try{const all=await getManifest();const groups=[...new Set(all.map(x=>x.group))];items=all.slice().sort((a,b)=>Number(a.id.match(/reic-(\d+)/)?.[1]||0)-Number(b.id.match(/reic-(\d+)/)?.[1]||0));if(!items.length)throw Error('Tidak ada komponen sumber pada manifest REIC.');groups.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=groupNames[g]||g;group.append(o)});$('#registryTotal').textContent=items.length.toLocaleString('id-ID');draw();search.addEventListener('input',()=>{page=0;draw()});group.addEventListener('change',()=>{page=0;draw()});$('#registryPrev').onclick=()=>{page--;draw()};$('#registryNext').onclick=()=>{page++;draw()};}catch(e){$('#registryTotal').textContent='GAGAL';meta.textContent='Registri tidak dapat dimuat: '+e.message;grid.innerHTML='<p class="registry-empty">Periksa akses ke manifes OS MEDIA VM.</p>';}
 }
 
 function installResolutionLayerSystem(){
@@ -308,14 +308,24 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   try{
    const response=await fetch(manifestURL,{cache:'no-cache'});
    if(!response.ok)throw Error('Manifest HTTP '+response.status);
-   const data=await response.json();
-   const rows=Array.isArray(data.components)?data.components:[];
-   if(!rows.length)throw Error('Manifest komponen kosong; tidak ada modul REIC yang dapat dijalankan.');
+   const index=await response.json();
+   let rows=Array.isArray(index.components)?index.components:[];
+   if(Array.isArray(index.shards)&&index.shards.length){
+    const batches=await Promise.all(index.shards.map(async shard=>{
+     const part=await fetch('../osmedia/recordin/components/'+shard,{cache:'force-cache'});
+     if(!part.ok)throw Error(shard+' HTTP '+part.status);
+     const data=await part.json();
+     return Array.isArray(data.components)?data.components:[];
+    }));
+    rows=batches.flat();
+   }
+   if(!rows.length)throw Error('Manifest tidak memiliki komponen sumber.');
+   if(Number(index.total)>0&&rows.length!==Number(index.total))throw Error('Indeks memuat '+rows.length+' dari '+index.total+' komponen.');
    state.manifest=rows;
    return rows;
   }catch(error){
    state.manifest=[];
-   modalStatus.textContent='MANIFEST REIC BELUM TERSEDIA · '+error.message+' · DATA SINTETIS DINONAKTIFKAN';
+   modalStatus.textContent='MANIFEST REIC GAGAL DIMUAT · '+error.message;
    throw error;
   }
  }
