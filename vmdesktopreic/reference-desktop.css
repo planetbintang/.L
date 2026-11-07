@@ -1,0 +1,59 @@
+:root{
+  --reic-cyan:#8feaff;
+  --reic-blue:#087ee9;
+  --reic-deep:#063d8f;
+  --reic-glass:rgba(7,94,177,.78);
+}
+html,body{background:#071426!important}
+#desktop-root>.vm-shell{
+  background:#062e54 url('./assets/wallpaper-leaf-dew.svg') center/cover no-repeat!important;
+  border:3px solid rgba(168,244,255,.96)!important;
+  box-shadow:0 0 0 1px #06447b,0 0 42px rgba(25,184,255,.5),inset 0 0 70px rgba(0,26,72,.26)!important;
+}
+#vmDesktop .vm-header{
+  min-height:68px!important;
+  background:linear-gradient(90deg,rgba(0,57,130,.96),rgba(0,112,185,.82),rgba(0,52,124,.92))!important;
+  border:2px solid rgba(143,234,255,.9)!important;
+  box-shadow:0 8px 24px rgba(0,18,70,.34)!important;
+}
+#vmDesktop .vm-brand{color:#fff;text-shadow:0 2px 5px #00315d}
+#vmDesktop .vm-logo{background:linear-gradient(145deg,#36d7ff,#0568dc)!important;border:2px solid #baf6ff!important;border-radius:14px!important;box-shadow:0 3px 12px #002b7d88!important}
+#vmDesktop .vm-header-tools button,#vmDesktop .vm-mini-tools button{
+  background:linear-gradient(145deg,rgba(12,160,231,.9),rgba(0,67,160,.92))!important;
+  border:1px solid #9eeeff!important;border-radius:10px!important;
+  box-shadow:0 3px 10px #003b7855!important;
+}
+#vmDesktop .vm-desktop{
+  border:0!important;background:linear-gradient(90deg,rgba(1,43,108,.32),rgba(0,33,90,.1),rgba(1,43,108,.22))!important;
+}
+#vmDesktop .vm-core-menu{
+  left:18px!important;top:50%!important;width:270px!important;gap:9px!important;
+}
+#vmDesktop .core-item,#vmDesktop .core-item:hover,#vmDesktop .core-item.active{
+  width:270px!important;height:58px!important;min-height:58px!important;flex:0 0 58px!important;
+  padding:5px 12px!important;gap:11px!important;transform:none!important;
+  border:1px solid rgba(155,236,255,.7)!important;border-radius:8px!important;
+  background:linear-gradient(90deg,rgba(0,105,212,.94),rgba(7,176,231,.72))!important;
+  box-shadow:0 4px 12px rgba(0,26,88,.35)!important;
+}
+#vmDesktop .core-item.active,#vmDesktop .core-item:hover{background:linear-gradient(90deg,#0b85e7,#16bee4)!important;border-color:#e3fdff!important;box-shadow:0 0 16px #00b8ff99!important}
+#vmDesktop .core-item>span{width:44px!important;height:44px!important;flex:0 0 44px!important;border:1px solid #aef5ff!important;border-radius:10px!important;background:linear-gradient(145deg,#3bdcff,#075ccf)!important;font-size:25px!important}
+#vmDesktop .core-item b,#vmDesktop .core-item:hover b,#vmDesktop .core-item.active b{opacity:1!important;transform:none!important;font-size:13px!important;letter-spacing:.02em!important;white-space:nowrap!important}
+#vmDesktop #slidePanel.vm-slide-panel{
+  display:block!important;left:300px!important;top:50%!important;width:300px!important;max-height:78%!important;
+  border:2px solid rgba(143,234,255,.9)!important;border-radius:12px!important;
+  background:linear-gradient(160deg,rgba(3,75,153,.96),rgba(1,32,78,.96))!important;
+  box-shadow:0 16px 42px #00163dcc,0 0 18px #00b9ff66!important;
+}
+#vmDesktop #slidePanel.vm-slide-panel:not(.open){opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#vmDesktop #slidePanel.vm-slide-panel.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#vmDesktop .slide-items{max-height:calc(78vh - 70px)!important;padding:8px!important;overflow:auto!important}
+#vmDesktop .slide-item,#vmDesktop .slide-choice{min-height:48px!important;margin:4px 0!important;padding:9px 11px!important;border:1px solid #50c6f599!important;border-radius:7px!important;background:rgba(4,63,133,.9)!important;color:#f0fbff!important}
+#vmDesktop .slide-item:hover,#vmDesktop .slide-choice:hover{background:#0a8fe0!important;border-color:#d9fbff!important}
+#vmDesktop .vm-app-launcher{grid-template-columns:repeat(10,minmax(50px,1fr))!important;gap:12px 18px!important;width:min(920px,58%)!important;margin-left:100px!important}
+#vmDesktop .vm-app{filter:drop-shadow(0 5px 7px #001b5a66)!important}
+#vmDesktop .vm-app .app-icon{border:1px solid #b9f5ff!important;box-shadow:0 5px 12px #003a7d77!important}
+#vmDesktop .vm-center-search{border:3px solid #a9f2ff!important;background:rgba(0,93,161,.64)!important;box-shadow:0 0 18px #00b8ff99!important}
+#vmDesktop .vm-binary-map{opacity:.14!important}
+#vmDesktop .vm-statusbar{background:linear-gradient(90deg,rgba(0,49,118,.9),rgba(0,101,167,.82))!important;border:1px solid #7ce5ff!important}
+@media(max-width:900px){#vmDesktop .vm-core-menu{left:8px!important;width:210px!important}#vmDesktop .core-item,#vmDesktop .core-item:hover,#vmDesktop .core-item.active{width:210px!important}#vmDesktop #slidePanel.vm-slide-panel{left:225px!important;width:270px!important}#vmDesktop .vm-app-launcher{width:62%!important;grid-template-columns:repeat(5,minmax(44px,1fr))!important}}

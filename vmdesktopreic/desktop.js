@@ -409,13 +409,17 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   if(!slidePanel||!slideItems){launchCoreMenu(id,'');return;}
   slideTitle.textContent=menu.title;slideIcon.textContent=menu.icon;slideItems.innerHTML='';
   document.querySelectorAll('.core-item').forEach(b=>b.classList.toggle('active',b.dataset.core===id));
-  const button=document.createElement('button');button.type='button';button.className='slide-choice slide-menu-launch';
-  button.dataset.target=id;button.dataset.group='';button.dataset.menu=id;
-  button.setAttribute('aria-label','Buka '+menu.title+' di modal desktop');
-  button.innerHTML='<b>'+esc(menu.title)+'</b><i>›</i>';
-  slideItems.append(button);
+  const items=(menu.items||[]).map((label,index)=>{
+   const button=document.createElement('button');button.type='button';button.className='slide-choice slide-item';
+   button.dataset.target=id;button.dataset.group='';button.dataset.menu=id;button.dataset.item=label;
+   button.setAttribute('aria-label','Buka '+label+' pada '+menu.title);
+   button.innerHTML='<span>'+(['⚙','✦','▤','⌕','▱','▦'][index%6])+'</span><b>'+esc(label)+'</b><i>›</i>';
+   return button;
+  });
+  if(!items.length){const button=document.createElement('button');button.type='button';button.className='slide-choice slide-item';button.dataset.target=id;button.dataset.menu=id;button.innerHTML='<span>'+menu.icon+'</span><b>'+esc(menu.title)+'</b><i>›</i>';items.push(button);}
+  items.forEach(button=>slideItems.append(button));
   slidePanel.classList.add('open');slidePanel.setAttribute('aria-hidden','false');slidePanel.dataset.activeMenu=id;
-  modalStatus.textContent=menu.title+' · KLIK UNTUK MEMBUKA MODAL.';
+  modalStatus.textContent=menu.title+' · SUBMENU AKTIF · PILIH MODUL UNTUK MEMBUKA MODAL.';
  }
  function openCore(id){if(!menus[id])return;if(panel?.classList.contains('open')&&panel.dataset.activeMenu===id){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');panel.dataset.activeMenu='';document.querySelectorAll('.core-item[data-core]').forEach(b=>b.classList.remove('active'));return;}showCoreSlide(id);if(panel)panel.dataset.activeMenu=id;}
  document.addEventListener('click',e=>{const b=e.target.closest('[data-wallpaper-toggle]');if(!b)return;const shell=document.querySelector('.vm-shell');if(!shell)return;const paused=shell.classList.toggle('wallpaper-paused');b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'✦':'✧';b.title=paused?'Lanjutkan animasi wallpaper':'Jeda animasi wallpaper';modalStatus.textContent=paused?'ANIMASI WALLPAPER DIJEDA':'ANIMASI WALLPAPER AKTIF';});
@@ -431,7 +435,7 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
    if(menuId==='apps'){catalog.openGroup('aplikasi');return;}
    if(menuId==='files'){if(catalog.openByTitle('FILE MANAGER'))return;catalog.openGroup('file-data');return;}
    const groupMap={settings:'pengaturan',studio:'studio-media',documents:'aplikasi',search:'file-data',files:'file-data'};
-   if(menuId&&groupMap[menuId]){if(catalog.openByTitle(item.querySelector('b')?.textContent||''))return;catalog.openGroup(groupMap[menuId]);return;}
+   if(menuId&&groupMap[menuId]){if(catalog.openByTitle(item.dataset.item||item.querySelector('b')?.textContent||''))return;catalog.openGroup(groupMap[menuId]);return;}
   }
   launchCoreMenu(destination,group,destination);
  },true);
