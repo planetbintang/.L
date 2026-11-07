@@ -302,7 +302,23 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
  ['tata-kelola',['High availability','Disaster recovery','Rencana kesinambungan layanan','Pengujian pemulihan berkala','Target SLA dan SLO','Pengoptimalan Core Web Vitals','Optimasi aset gambar','Strategi caching','SEO teknis','Sitemap dan robots.txt','Dukungan multibahasa','Analitik penggunaan','Pengelolaan lisensi','Dokumentasi arsitektur','Dashboard tata kelola infrastruktur']]
  ];
  function buildGeneratedManifest(){const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');const rows=[];for(let n=1;n<=15000;n++){const [group,names]=registryDefinitions[Math.floor((n-1)/1500)],base=names[(n-1)%15],title=n<=150?base:base+' — Modul '+String(Math.ceil(n/150)).padStart(3,'0')+' / Unit '+String((n-1)%150+1).padStart(3,'0'),id='reic-'+String(n).padStart(5,'0')+'-'+slug(base);rows.push({id,title,group,reic:id+'/'+id+'.reic',css:id+'/'+id+'.css',js:id+'/'+id+'.js'});}return rows;}
- async function getManifest(){if(state.manifest)return state.manifest;try{const r=await fetch('../osmedia/recordin/components/manifest.json',{cache:'force-cache'});if(r.ok){const data=await r.json();const rows=Array.isArray(data.components)?data.components:[];if(rows.length>=15000){state.manifest=rows;return rows;}}}catch(error){console.warn('Manifest REIC tidak tersedia; membangun indeks dari generator OS MEDIA VM.',error);}state.manifest=buildGeneratedManifest();modalStatus.textContent='15.000+ KOMPONEN DIREGISTRASIKAN DARI SKEMA OS MEDIA VM · MODE FALLBACK';return state.manifest;}
+ async function getManifest(){
+  if(state.manifest)return state.manifest;
+  const manifestURL='../osmedia/recordin/components/manifest.json';
+  try{
+   const response=await fetch(manifestURL,{cache:'no-cache'});
+   if(!response.ok)throw Error('Manifest HTTP '+response.status);
+   const data=await response.json();
+   const rows=Array.isArray(data.components)?data.components:[];
+   if(!rows.length)throw Error('Manifest komponen kosong; tidak ada modul REIC yang dapat dijalankan.');
+   state.manifest=rows;
+   return rows;
+  }catch(error){
+   state.manifest=[];
+   modalStatus.textContent='MANIFEST REIC BELUM TERSEDIA · '+error.message+' · DATA SINTETIS DINONAKTIFKAN';
+   throw error;
+  }
+ }
  function setTab(tab){state.activeTab=tab;const c=$('.wm-catalog'),r=$('.wm-runtime');if(c)c.hidden=tab!=='catalog';if(r)r.hidden=tab!=='runtime';modalTabs.querySelectorAll('[data-wm-tab]').forEach(b=>b.classList.toggle('active',b.dataset.wmTab===tab));}
  function renderViewTabs(){const host=$('.wm-view-tabs');if(!host)return;const current=state.views.filter(v=>v.core===state.core);host.innerHTML=current.map(v=>'<div class="wm-view-tab '+(v.id===state.activeViews[state.core]?'active':'')+'" data-view-tab="'+esc(v.id)+'"><span>'+esc(v.title.slice(0,24))+'</span><button type="button" data-view-close="'+esc(v.id)+'">×</button></div>').join('');host.querySelectorAll('[data-view-tab]').forEach(b=>b.addEventListener('click',e=>{if(!e.target.closest('[data-view-close]'))activateView(b.dataset.viewTab);}));host.querySelectorAll('[data-view-close]').forEach(b=>b.addEventListener('click',()=>closeView(b.dataset.viewClose)));const counter=modalTabs.querySelector('.wm-open-count');if(counter)counter.textContent=current.length;}
  function activateView(id){const v=state.views.find(x=>x.id===id&&x.core===state.core);if(!v)return;const stage=$('.wm-view-stage');if(stage&&v.pane.parentNode!==stage)stage.append(v.pane);state.views.filter(x=>x.core===state.core).forEach(x=>{x.pane.hidden=x.id!==id;});state.activeViews[state.core]=id;renderViewTabs();setTab('runtime');modalStatus.textContent='RUNTIME AKTIF · '+v.title+' · '+state.views.filter(x=>x.core===state.core).length+' VIEW TERBUKA';}
