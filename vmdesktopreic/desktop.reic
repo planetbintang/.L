@@ -14,19 +14,16 @@
 <button data-code-container="true" title="REIC Virtual Code Container" aria-label="REIC Virtual Code Container">&lt;/&gt;</button>
 </nav></header>
 <main class="vm-desktop">
-<aside class="vm-core-menu" aria-label="Enam menu utama VMDESKTOPREIC">
+<aside class="vm-core-menu" aria-label="Lima menu utama VMDESKTOPREIC">
+<button class="core-item" data-core="vmdesktopreic" title="Sistem REIC" aria-label="Sistem REIC"><span>▣</span><b>SISTEM REIC</b></button>
+<button class="core-item" data-core="apps" title="Aplikasi dan paket" aria-label="Aplikasi dan paket"><span>▦</span><b>APLIKASI &amp; PAKET</b></button>
+<button class="core-item" data-core="files" title="File dan kontainer" aria-label="File dan kontainer"><span>▱</span><b>FILE &amp; KONTAINER</b></button>
+<button class="core-item" data-unity-open="true" title="Unity Studio · desain desktop dan package manager" aria-label="Unity Studio"><span>✦</span><b>UNITY STUDIO</b></button>
 <button class="core-item active" data-core="settings" title="Pengaturan" aria-label="Pengaturan"><span>⚙</span><b>PENGATURAN</b></button>
-<button class="core-item" data-core="studio" title="Studio & AI Global Agensi" aria-label="Studio & AI Global Agensi"><span>✧</span><b>STUDIO &amp; AI GLOBAL AGENSI</b></button>
-<button class="core-item" data-core="documents" title="Pembuat Dokumen" aria-label="Pembuat Dokumen"><span>▤</span><b>PEMBUAT DOKUMEN</b></button>
-<button class="core-item" data-core="search" title="Pencarian Utama" aria-label="Pencarian Utama"><span>⌕</span><b>PENCARIAN UTAMA</b></button>
-<button class="core-item" data-core="files" title="Filemanajer" aria-label="Filemanajer"><span>▱</span><b>FILEMANAJER</b></button>
-<button class="core-item" data-core="apps" title="Aplikasi Sistem" aria-label="Aplikasi Sistem"><span>▦</span><b>APLIKASI SISTEM</b></button>
-<button class="core-item" data-registry="true" title="REIC System Registry · 1.000.000 unit kode" aria-label="REIC System Registry · 1.000.000 unit kode"><span>▦</span><b>REIC SYSTEM<br>REGISTRY<br>1.000.000</b></button>
-<button class="core-item" data-code-container="true" title="REIC Virtual Code Container" aria-label="REIC Virtual Code Container"><span>&lt;/&gt;</span><b>CODE<br>CONTAINER</b></button>
 </aside>
 <section class="vm-slide-panel" id="slidePanel" aria-label="Submenu pilihan"><header><span id="slideIcon">⚙</span><b id="slideTitle">PENGATURAN</b><button id="slideClose" aria-label="Tutup submenu">×</button></header><div id="slideItems" class="slide-items"></div></section>
 <section class="vm-workspace" aria-label="Pusat kontainer VM tunggal">
-<section class="vm-app-launcher" aria-label="Aplikasi desktop">
+<section class="vm-app-launcher" id="vmAppLauncher" aria-label="Aplikasi desktop">
 <button class="vm-app" data-open="browser"><span class="app-icon app-blue">🌐</span><b>Browser</b></button>
 <button class="vm-app" data-open="gallery"><span class="app-icon app-photo">🏞</span><b>Galeri</b></button>
 <button class="vm-app" data-open="music"><span class="app-icon app-pink">♫</span><b>Musik</b></button>
@@ -55,6 +52,7 @@
 <button class="vm-app" data-open="vm"><span class="app-icon app-blue">▣</span><b>VM</b></button>
 <button class="vm-app" data-open="network"><span class="app-icon app-blue">⌘</span><b>Jaringan</b></button>
 <button class="vm-app" data-open="design"><span class="app-icon app-blue">🖌</span><b>Desain UI</b></button>
+<button class="vm-app" data-open="unity-studio"><span class="app-icon app-purple">✦</span><b>Unity Studio</b></button>
 <button class="vm-app" data-open="seo"><span class="app-icon app-blue">▥</span><b>SEO</b></button>
 <button class="vm-app" data-open="help"><span class="app-icon app-purple">?</span><b>Bantuan</b></button>
 </section>

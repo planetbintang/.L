@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111f">
 <title>VMDESKTOPREIC — OS MEDIA VM</title>
+<link rel="manifest" href="./manifest.webmanifest">
 <link rel="preload" href="./desktop.reic" as="fetch" crossorigin>
 <link rel="preload" href="./desktop.js" as="script">
 <link rel="stylesheet" href="./desktop.css?v=20261104-transparent-modal-6">
@@ -111,6 +112,7 @@ html,body{background:#050b14!important}
 <link rel="stylesheet" href="./25-modal-system.css?v=20261105-25-modal-system-1">
 <link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
 <link rel="stylesheet" href="./viewport-repair.css?v=20261106-clean-desktop-home-1">
+<link rel="stylesheet" href="./unity-studio.css?v=20261107-unity-studio-1">
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
@@ -149,6 +151,7 @@ html,body{background:#050b14!important}
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
    await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');
    await loadScript('./single-layer-window-manager.js?v=20261105-single-layer-1');
+   await loadScript('./unity-studio.js?v=20261107-unity-studio-1');
    await loadScript('./desktop-click-bridge.js?v=20261106-universal-desktop-click-1');
    /* Kondisi awal selalu desktop bersih: seluruh jendela/modal hanya dibuka setelah tindakan pengguna. */
    const showDesktopHome=()=>{
