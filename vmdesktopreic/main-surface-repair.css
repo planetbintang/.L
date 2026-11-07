@@ -1,0 +1,97 @@
+/* VMDESKTOPREIC — main surface alignment with the existing REIC runtime.
+   This file is intentionally presentation-only: it does not replace module logic. */
+:root{--reic-frame:#8feaff;--reic-ink:#eaf7ff}
+html,body,#desktop-root{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden}
+#desktop-root{
+ position:fixed!important;inset:0!important;display:grid!important;place-items:center!important;
+ padding:2vh 2vw!important;overflow:hidden!important;background:#061426!important
+}
+#desktop-root>.vm-web-region,#desktop-root>.vm-empty-region{display:none!important}
+#desktop-root>.vm-shell{
+ position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+ display:flex!important;flex-direction:column!important;gap:0!important;
+ width:min(96vw,1600px,calc(92dvh * 16 / 9))!important;height:auto!important;aspect-ratio:16/9!important;
+ min-width:0!important;min-height:0!important;max-width:96vw!important;max-height:92dvh!important;
+ margin:0!important;padding:clamp(5px,.65vw,11px)!important;box-sizing:border-box!important;
+ transform:none!important;overflow:hidden!important;border:2px solid var(--reic-frame)!important;border-radius:0!important;
+ background:#062e54 url('./assets/wallpaper-leaf-dew.svg') center/cover no-repeat!important;
+ box-shadow:0 0 0 1px #83e1ff55,0 10px 40px #0008,inset 0 0 0 1px #ffffff22!important
+}
+#vmDesktop{display:flex!important;flex-direction:column!important;min-width:0!important;min-height:0!important}
+#desktop-root .vm-header.reic-topbar{
+ position:relative!important;z-index:8!important;display:flex!important;flex:0 0 clamp(42px,6.6%,68px)!important;
+ width:100%!important;height:clamp(42px,6.6%,68px)!important;min-height:0!important;
+ padding:3px clamp(5px,1vw,14px)!important;gap:8px!important;overflow:hidden!important;
+ border:0!important;border-radius:0!important;background:linear-gradient(90deg,#003982eF,#0070b9d1,#00347ce8)!important
+}
+#desktop-root .vm-brand{min-width:0!important;width:auto!important;flex:1 1 auto!important;gap:7px!important}
+#desktop-root .vm-brand b{font-size:clamp(9px,1vw,15px)!important}
+#desktop-root .vm-brand small{font-size:clamp(6px,.6vw,9px)!important}
+#desktop-root .vm-logo{width:clamp(28px,3vw,42px)!important;height:clamp(28px,3vw,42px)!important;flex:0 0 auto!important;border-radius:3px!important}
+#desktop-root .reic-top-tools{display:flex!important;flex:0 0 auto!important;gap:clamp(2px,.35vw,6px)!important}
+#desktop-root .reic-top-tools button{
+ width:clamp(25px,2.7vw,39px)!important;height:clamp(25px,2.7vw,39px)!important;min-width:0!important;min-height:0!important;
+ padding:0!important;flex:0 0 auto!important;font-size:clamp(12px,1.25vw,19px)!important;border:1px solid #b7edff!important;border-radius:2px!important
+}
+#desktop-root .vm-desktop{
+ position:relative!important;display:block!important;flex:1 1 auto!important;width:100%!important;height:auto!important;
+ min-width:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;
+ border:0!important;border-radius:0!important;background:linear-gradient(90deg,#012b6c55,#00215a12,#012b6c33)!important
+}
+#desktop-root .vm-core-menu{
+ position:absolute!important;left:clamp(4px,.65vw,10px)!important;top:50%!important;transform:translateY(-50%)!important;
+ z-index:10!important;width:clamp(68px,7vw,112px)!important;max-height:calc(100% - 10px)!important;
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:clamp(3px,.5vw,8px)!important;
+ padding:2px!important;overflow-x:hidden!important;overflow-y:auto!important;background:transparent!important
+}
+#desktop-root .vm-core-menu>.core-item[data-core]{
+ display:flex!important;flex:0 0 clamp(38px,5.2vw,66px)!important;width:100%!important;height:clamp(38px,5.2vw,66px)!important;
+ min-height:0!important;max-width:none!important;justify-content:center!important;align-items:center!important;
+ padding:2px!important;gap:2px!important;overflow:hidden!important;transform:none!important;
+ border:1px solid #9beaff!important;border-radius:2px!important;background:linear-gradient(145deg,#087ee9e8,#063d8fe8)!important;
+ box-shadow:0 4px 12px #001b5a55!important
+}
+#desktop-root .vm-core-menu>.core-item[data-core]>span{
+ width:clamp(25px,3vw,42px)!important;height:clamp(25px,3vw,42px)!important;min-width:0!important;flex:0 0 auto!important;
+ border:1px solid #baf6ff!important;border-radius:2px!important;background:linear-gradient(145deg,#36d7ff,#0568dc)!important;
+ font-size:clamp(16px,1.7vw,24px)!important
+}
+#desktop-root .vm-core-menu>.core-item[data-core]>b{
+ display:block!important;width:100%!important;min-width:0!important;padding:2px!important;
+ color:#fff!important;font-size:clamp(6px,.55vw,9px)!important;line-height:1.08!important;text-align:center!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;opacity:1!important;transform:none!important
+}
+#desktop-root .vm-core-menu>.core-item[data-core]:hover,
+#desktop-root .vm-core-menu>.core-item[data-core].active{background:linear-gradient(145deg,#16a9ed,#0752c8)!important;border-color:#e3fdff!important}
+#desktop-root .vm-core-menu>.core-item:not([data-core]):not([data-unity-open]){display:none!important}
+#desktop-root .vm-workspace{position:absolute!important;inset:0!important;z-index:2!important;pointer-events:none!important}
+#desktop-root .vm-app-launcher{display:none!important}
+#desktop-root .vm-binary-map{opacity:.07!important;pointer-events:none!important}
+#desktop-root .vm-center-search{
+ position:absolute!important;left:50%!important;top:18%!important;transform:translateX(-50%)!important;
+ width:min(38%,360px)!important;height:clamp(28px,3.4vw,42px)!important;min-width:120px!important;
+ border:1px solid #baf6ff!important;border-radius:2px!important;background:#0754c977!important;
+ box-shadow:0 0 16px #21baff55!important;pointer-events:auto!important
+}
+#desktop-root .vm-center-search input{font-size:clamp(9px,.8vw,13px)!important}
+#desktop-root .vm-slide-panel{
+ position:absolute!important;z-index:24!important;left:clamp(76px,8vw,124px)!important;top:50%!important;
+ width:min(300px,calc(100% - 145px))!important;max-height:78%!important;border-radius:2px!important
+}
+#desktop-root .vm-slide-panel:not(.open){opacity:0!important;visibility:hidden!important;pointer-events:none!important}
+#desktop-root .vm-slide-panel.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#desktop-root .vm-modal-backdrop{z-index:60!important;background:rgba(2,10,24,.24)!important;backdrop-filter:blur(2px)!important}
+#desktop-root .vm-modal{
+ width:min(1100px,calc(100% - 24px))!important;max-width:100%!important;max-height:calc(100% - 24px)!important;
+ border:0!important;border-radius:2px!important;background:rgba(7,25,43,.94)!important;box-shadow:0 18px 55px #00101f88!important
+}
+#desktop-root .vm-modal>header,#desktop-root .vm-modal>footer{border:0!important;border-radius:0!important}
+#desktop-root .vm-statusbar,#desktop-root .vm-mini-tools{display:none!important}
+@media(max-width:760px){
+ #desktop-root{padding:1vh 1vw!important}
+ #desktop-root>.vm-shell{width:min(98vw,calc(92dvh * 16 / 9))!important;max-width:98vw!important;max-height:92dvh!important}
+ #desktop-root .vm-center-search{top:10%!important;width:min(48%,300px)!important;min-width:100px!important}
+ #desktop-root .vm-slide-panel{left:clamp(72px,15vw,110px)!important;width:min(260px,calc(100% - 120px))!important}
+ #desktop-root .vm-modal-backdrop{padding:6px!important}
+ #desktop-root .vm-modal{width:100%!important;max-height:calc(100% - 12px)!important}
+}
