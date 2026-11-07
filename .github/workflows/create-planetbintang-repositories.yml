@@ -1,0 +1,51 @@
+name: Create PlanetBintang integrated repositories
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type CREATE500 to confirm creation of up to 500 public repositories
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  create-repositories:
+    if: ${{ inputs.confirm == 'CREATE500' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: io
+
+      - name: Install GitHub CLI
+        run: |
+          type -p gh >/dev/null || (sudo apt-get update && sudo apt-get install -y gh)
+
+      - name: Authenticate with repository creation token
+        env:
+          GH_TOKEN: ${{ secrets.PLANETBINTANG_TOKEN }}
+        run: |
+          test -n "$GH_TOKEN" || { echo "Missing PLANETBINTANG_TOKEN repository secret"; exit 1; }
+          gh auth status
+
+      - name: Create public repositories and publish VMDESKTOPREIC packages
+        env:
+          GH_TOKEN: ${{ secrets.PLANETBINTANG_TOKEN }}
+        run: |
+          chmod +x media/repositorycenter/createintegratedpackages.sh
+          bash media/repositorycenter/createintegratedpackages.sh
+
+      - name: Upload creation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: planetbintang-repository-creation-report
+          path: |
+            integratedpackages.log
+            packages.json
+          if-no-files-found: ignore
