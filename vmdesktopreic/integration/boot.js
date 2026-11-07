@@ -22,14 +22,14 @@
    document.head.appendChild(environmentStyle);
    const codeContainerStyle=document.createElement('link');
    codeContainerStyle.rel='stylesheet';
-   codeContainerStyle.href=base+'environment/code-container.css?v=20261106-reic-code-container-1';
+   codeContainerStyle.href=base+'environment/code-container.css?v=20261106-reic-storage-idb-1';
    document.head.appendChild(codeContainerStyle);
    const registryStyle=document.createElement('link');
    registryStyle.rel='stylesheet';
    registryStyle.href=base+'environment/registry.css?v=20261106-reic-registry-1';
    document.head.appendChild(registryStyle);
    await load(base+'environment/menu-catalog.js?v=20261106-reic-25000');
-   await load(base+'environment/code-container.js?v=20261106-reic-code-container-1');
+   await load(base+'environment/code-container.js?v=20261106-reic-storage-idb-1');
    await load(base+'environment/registry-worker.js?v=20261106-reic-registry-worker-1');
    await load(base+'environment/registry.js?v=20261106-reic-registry-1');
    await load(base+'integration/component-registry.js');

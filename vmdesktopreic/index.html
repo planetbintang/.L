@@ -132,7 +132,7 @@ html,body{background:#050b14!important}
    const response=await fetch('./desktop.reic',{cache:'force-cache'});
    if(!response.ok)throw Error('desktop.reic · HTTP '+response.status);
    root.innerHTML=await response.text();
-   await loadScript('./desktop.js?v=20261105-filemanager-categories-1');
+   await loadScript('./desktop.js?v=20261106-reic-storage-idb-1');
    /* Muat modul inti yang independen secara paralel agar splash screen lebih singkat. */
    await Promise.all([
     loadScript('./desktop-runtime.js'),
@@ -144,7 +144,7 @@ html,body{background:#050b14!important}
     loadScript('./desktop-experience.js?v=20261104-launcher-keyboard-1'),
     loadScript('./desktop-unified.js?v=20261104-unified-1'),
     loadScript('./search-center.js?v=20261104-github-provider-3'),
-    loadScript('./integration/boot.js?v=20261105-filemanager-categories-1')
+    loadScript('./integration/boot.js?v=20261106-reic-storage-idb-1')
    ]);
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
    await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');
