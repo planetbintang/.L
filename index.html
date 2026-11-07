@@ -176,6 +176,25 @@
 @media(max-width:640px){.common-site-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px}.common-site-menu-card{min-height:110px;padding:12px}.common-site-menu-card .common-site-menu-copy small{font-size:11px;line-height:1.45}}
 </style>
     <link rel="stylesheet" href="./homepage-elegance.css?v=20261104-premium-home-v1" />
+  
+    <style id="hide-catalog-and-list-only-submenus">
+      /* Sembunyikan submenu tingkat lanjut yang hanya berupa katalog atau daftar fitur/proyek. */
+      .topbar .main-nav a[href*="domain-catalog"],
+      .topbar .main-nav a[href*="git-feature-catalog"],
+      .topbar .main-nav a[href*="feature-workbench"],
+      .topbar .main-nav a[href="#workspace/features"],
+      .topbar .main-nav a[href="#workspace/projects"],
+      .topbar .main-nav a[href="#workspace/issues"],
+      .topbar .main-nav a[href="#platform/milestones"],
+      .topbar .main-nav a[href="#platform/roadmap"] {
+        display: none !important;
+      }
+      .topbar .main-nav .nav-dropdown-section:has(a[href="#workspace/projects"]),
+      .topbar .main-nav .nav-dropdown-section:has(a[href="#platform/milestones"]) {
+        display: none !important;
+      }
+    </style>
+
   </head>
   <body>
     <a class="skip-link" href="#repositories" data-system-route="repositories">Lewati ke daftar repositori</a>
