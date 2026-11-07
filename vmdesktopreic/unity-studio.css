@@ -6,7 +6,7 @@
 .vm-core-menu>.core-item[data-core]>span,.vm-core-menu>.core-item[data-unity-open]>span{width:36px!important;height:36px!important;flex:0 0 36px!important;font-size:19px!important}
 .vm-core-menu>.core-item[data-core]>b,.vm-core-menu>.core-item[data-unity-open]>b{display:block!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:11px!important;font-weight:800!important;letter-spacing:.035em!important}
 .vm-slide-panel{left:240px!important}
-.vm-core-menu>button:not([data-core]):not([data-unity-open]){display:none!important}
+#desktop-root .vm-core-menu>.core-item:not([data-core]):not([data-unity-open]){display:none!important}
 #reicUnityLayer{position:absolute;inset:0;z-index:120;display:grid;place-items:center;padding:28px;background:rgba(2,8,17,.74);backdrop-filter:blur(9px);color:#edf5ff}
 #reicUnityLayer[hidden]{display:none!important}
 .unity-window{width:min(1740px,100%);height:min(950px,100%);min-height:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid #31516a;border-radius:18px;background:#081421;box-shadow:0 28px 90px #0009;color:#edf5ff;font:14px/1.4 system-ui,sans-serif}
