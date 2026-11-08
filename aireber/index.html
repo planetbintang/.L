@@ -24,6 +24,7 @@
         <button type="button" id="tab-filesystem" role="tab" aria-controls="view-filesystem" aria-selected="false" tabindex="-1" data-view-tab="filesystem">File System</button>
         <button type="button" id="tab-projects" role="tab" aria-controls="view-projects" aria-selected="false" tabindex="-1" data-view-tab="projects">Projects</button>
         <button type="button" id="tab-ai-tools" role="tab" aria-controls="view-ai-tools" aria-selected="false" tabindex="-1" data-view-tab="ai-tools">50 Fitur AI</button>
+        <button type="button" id="tab-config" role="tab" aria-controls="view-config" aria-selected="false" tabindex="-1" data-view-tab="config">Konfigurasi AI</button>
         <button type="button" id="tab-source" role="tab" aria-controls="view-source" aria-selected="false" tabindex="-1" data-view-tab="source">Source Archive</button>
       </nav>
       <div class="appbar-actions">
@@ -165,6 +166,34 @@
           <div id="sourceList" class="source-list surface"></div>
           <div class="notice"><b>Runtime boundary:</b> API routes, database schema/migrations, dan konfigurasi Netlify tersedia sebagai arsip teks. Hanya adapter browser statis ini yang dimuat; tidak ada server, model AI, atau database cloud.</div>
         </section>
+        <section class="view-panel" id="view-config" data-view="config" role="tabpanel" aria-labelledby="tab-config" hidden tabindex="0">
+          <div class="view-heading"><div><p class="eyebrow">AI ENGINE / ROBOTICS DEVELOPMENT</p><h2>Konfigurasi Sistem AI Reber</h2><p>Atur kebijakan respons, sumber pengetahuan PlanetBintang, dan spesifikasi pengembangan mesin robotik AI. Pengaturan disimpan pada perangkat ini.</p></div><span class="status-tag">PLANETBINTANG ONLY</span></div>
+          <div class="reber-config-grid">
+            <section class="surface reber-config-card"><h3>Mesin percakapan</h3>
+              <label class="reber-config-toggle"><input id="cfgNoRag" type="checkbox" checked> Nonaktifkan RAG / retrieval</label>
+              <label class="reber-config-toggle"><input id="cfgPbOnly" type="checkbox" checked> Batasi sumber konteks ke data PlanetBintang</label>
+              <label class="reber-config-toggle"><input id="cfgNoExternal" type="checkbox" checked> Jangan mengambil referensi atau data eksternal saat menjawab</label>
+              <label for="cfgModel">Nama model / mesin AI<input id="cfgModel" maxlength="100" placeholder="Nama model yang dikonfigurasi pada backend"></label>
+              <label for="cfgEndpoint">Endpoint backend<input id="cfgEndpoint" type="url" maxlength="300" placeholder="https://domain-backend.example/api/reber"></label>
+              <p class="reber-config-note">Kunci API tetap berada di environment server, bukan di browser. Model generatif memerlukan backend aktif. Pengaturan ini membatasi instruksi dan alur retrieval, bukan menghapus pengetahuan bawaan model provider.</p>
+            </section>
+            <section class="surface reber-config-card"><h3>Pengembangan mesin robotik AI</h3>
+              <label for="robotName">Nama mesin / robot<input id="robotName" maxlength="100" placeholder="Aireber Robotics Core"></label>
+              <label for="robotPurpose">Tujuan dan tugas utama<textarea id="robotPurpose" rows="3" maxlength="3000" placeholder="Jelaskan fungsi robot, lingkungan kerja, dan jenis respons yang diharapkan."></textarea></label>
+              <label for="robotHardware">Perangkat keras / komputasi<input id="robotHardware" maxlength="1000" placeholder="CPU/GPU, board, memori, platform robot"></label>
+              <label for="robotSensors">Sensor dan input<textarea id="robotSensors" rows="2" maxlength="1500" placeholder="Kamera, lidar, mikrofon, sensor jarak, telemetri..."></textarea></label>
+              <label for="robotActuators">Aktuator dan output<textarea id="robotActuators" rows="2" maxlength="1500" placeholder="Motor, servo, speaker, layar, lengan robot..."></textarea></label>
+              <label for="robotDataset">Lokasi dataset PlanetBintang<input id="robotDataset" maxlength="1000" placeholder="Path repositori / direktori data internal PlanetBintang"></label>
+              <label for="robotSafety">Batas keselamatan<textarea id="robotSafety" rows="3" maxlength="2000" placeholder="Batas gerak, emergency stop, area aman, otorisasi operator, dan kondisi berhenti."></textarea></label>
+            </section>
+            <section class="surface reber-config-card"><h3>Pipeline pengembangan</h3>
+              <ol class="reber-pipeline"><li>Inventarisasi data dan dokumentasi PlanetBintang</li><li>Kurasi, validasi, dan pelabelan dataset internal</li><li>Rancang model bahasa / visi / kontrol sesuai perangkat</li><li>Latih atau fine-tune pada infrastruktur yang disetujui</li><li>Uji simulasi, evaluasi respons, dan keselamatan</li><li>Deploy bertahap dengan monitoring dan emergency stop</li></ol>
+              <label for="robotResponse">Standar kualitas respons<textarea id="robotResponse" rows="3" maxlength="2000" placeholder="Jawaban jelas, relevan, menyebut ketidakpastian, tidak mengarang tindakan atau status."></textarea></label>
+              <div class="reber-config-actions"><button type="button" class="primary-button" id="saveReberConfig">Simpan konfigurasi</button><button type="button" class="quiet-button" id="exportReberConfig">Ekspor JSON</button><button type="button" class="quiet-button" id="resetReberConfig">Atur ulang</button></div>
+              <p id="reberConfigStatus" class="reber-config-note" aria-live="polite">Konfigurasi belum dimuat.</p>
+            </section>
+          </div>
+        </section>
       </main>
     </div>
     <footer class="app-footer"><span>AI Reber · AlluniverS_OS</span><span>Static client + optional secure Netlify AI gateway · local persistence</span><a href="./source-index.json" target="_blank" rel="noopener">Manifest source ↗</a></footer>
@@ -181,6 +210,7 @@
   </script>
   <script src="../local-file-store.js?v=20261026-aireber-store-v1"></script>
   <script src="./reber-chat-engine.js?v=20261026-chatbot-v1"></script>
+  <script src="./reber-config.js?v=20261108-v1"></script>
   <script src="./reber-chat.js?v=20261104-secure-ai-gateway-v1"></script>
   <script type="module" src="./reber-app.js?v=20261026-pages-v2"></script>
   <script src="./ai-feature-center.js?v=20261030-ai150-v1" defer></script>
