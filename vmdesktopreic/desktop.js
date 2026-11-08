@@ -429,6 +429,7 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   notes:[['CATATAN BARU','data-search'],['DATA & PENCARIAN','data-search'],['TATA KELOLA','tata-kelola']],
   monitor:[['STATUS RUNTIME','devops-observabilitas'],['DEVOPS & OBSERVABILITAS','devops-observabilitas'],['SERVER & CLOUD','server-cloud']]
  };
+ function openOsmediaManager(){modalTitle.textContent='OSMEDIA · 15.000 FOLDER KOMPONEN';modalIcon.textContent='▱';modalTabs.innerHTML='<button type="button" class="active">FILE MANAGER · OSMEDIA</button>';modalBody.innerHTML='<section style="height:min(78vh,900px);min-height:420px;background:#07111f"><iframe title="OSMEDIA 15.000 component folders" src="../osmedia/components/" style="display:block;width:100%;height:100%;border:0;background:#07111f"></iframe></section>';backdrop.hidden=false;modalStatus.textContent='OSMEDIA FILE MANAGER · 15.000 FOLDER · 45.000 FILE SUMBER';}
  function launchCoreMenu(id,group,target){if(slidePanel)slidePanel.classList.remove('open');const destination=target||id;if(destination==='keyboard'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Keyboard REIC','keyboard');return;}if(destination==='files'&&window.VMDESKTOPREICLegacyOpenContent){window.VMDESKTOPREICLegacyOpenContent('Beranda File','files');return;}renderShell(destination);if(destination==='keyboard'){renderKeyboard();return;}if(destination==='apps'){loadApps(group||'');return;}if(group)state.group=group;loadManifest(destination);}
  function showCoreSlide(id){
   const menu=menus[id];if(!menu)return;
@@ -455,6 +456,8 @@ function openContent(name,group){const key=(group+':'+name);modalTitle.textConte
   const item=e.target.closest('#slideItems .slide-choice[data-target]');if(!item)return;
   e.preventDefault();e.stopImmediatePropagation();
   const destination=item.dataset.target,group=item.dataset.group||'',menuId=item.dataset.menu||'';
+  const itemLabel=item.dataset.item||item.querySelector('b')?.textContent||'';
+  if((menuId==='files'&&itemLabel==='OSMEDIA 15.000 Folder')||(menuId==='vmdesktopreic'&&(itemLabel==='OSMEDIA 15.000 Folder'||itemLabel==='File Manager'))){openOsmediaManager();return;}
   if(slidePanel){slidePanel.classList.remove('open');slidePanel.setAttribute('aria-hidden','true');slidePanel.dataset.activeMenu='';}
   const catalog=window.VMDESKTOPREIC_CATALOG;
   if(catalog){
