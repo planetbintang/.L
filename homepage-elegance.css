@@ -94,3 +94,7 @@ body:has(> .topbar) .shell{width:min(100%,1680px)!important;margin-inline:auto!i
  .common-site-menu-card{padding:13px!important}
 }
 @media(prefers-reduced-motion:reduce){.common-site-menu-card,.reic-engine-image-link img,#overview .home-ai-primary,#overview .home-ai-secondary{transition:none!important}}
+
+
+/* Load the unified homepage surface repair as the final presentation layer. */
+@import url('./homepage-surface-repair.css?v=20261108-home-surface-1');
