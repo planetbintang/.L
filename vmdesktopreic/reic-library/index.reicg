@@ -185,6 +185,29 @@
           "kind": "file"
         }
       ]
+    },
+    {
+      "id": "aireber-million-folders",
+      "title": "AIREBER · 1.000.000 FOLDER",
+      "description": "Satu juta folder virtual REIC, lima file per folder, beserta seluruh sumber Aireber yang sudah ada.",
+      "folder": "aireber/generated/",
+      "sourceManifest": "aireber/filesystem/manifest.json",
+      "folderCount": 1000000,
+      "filesPerFolder": 5,
+      "files": [
+        {
+          "path": "aireber/filesystem/manifest.json",
+          "kind": "file"
+        },
+        {
+          "path": "aireber/filesystem/index.html",
+          "kind": "file"
+        },
+        {
+          "path": "aireber/source-index.json",
+          "kind": "file"
+        }
+      ]
     }
   ],
   "note": "Indeks menghubungkan file sumber yang sudah ada; file sumber tidak digandakan. Pengaturan browser tetap lokal sampai backend tersambung."
