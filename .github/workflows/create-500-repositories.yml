@@ -578,8 +578,9 @@ jobs:
                 })
               });
               if (result.alreadyExists) { existing++; continue; }
-              // GitHub initializes new repositories on main; rename it to the required io branch.
-              await request(`https://api.github.com/repos/${owner}/${name}/branches/main/rename`, {
+              // Rename the repository's configured initial branch to the required io branch.
+              const initialBranch = result.default_branch || 'main';
+              if (initialBranch !== 'io') await request(`https://api.github.com/repos/${owner}/${name}/branches/${encodeURIComponent(initialBranch)}/rename`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ new_name: 'io' })
