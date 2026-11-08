@@ -119,3 +119,6 @@ html,body,#desktop-root{width:100%!important;height:100%!important;height:100dvh
 /* Keep the translucent menu plate beneath its icon and label. */
 #vmDesktop .vm-core-menu>.ref-menu-button{isolation:isolate!important}
 #vmDesktop .vm-core-menu>.ref-menu-button::before{z-index:-1}
+
+/* Unity Studio's legacy hide rule is more specific; explicitly restore the six new sidebar entries. */
+#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button,#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button:hover,#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button.active{display:flex!important}
