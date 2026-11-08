@@ -1,6 +1,6 @@
-/* REIC Desktop PWA cache. Versioned URLs prefer exact matches; basename fallback is offline-only. */
-const CACHE='vmdesktopreic-shell-20261107-v4';
-const CORE=['./','./index.html','./desktop.reic','./desktop.reic?v=20261107-five-menu-unity-2','./desktop.css','./desktop.js','./desktop-runtime.js','./desktop-experience.css','./desktop-experience.js','./desktop-unified.css','./desktop-unified.js','./unity-studio.css','./unity-studio.css?v=20261107-unity-studio-2','./unity-studio.js','./unity-studio.js?v=20261107-unity-studio-2','./apps-250.json','./manifest.webmanifest'];
+/* REIC Desktop PWA cache. Exact versioned URL wins; basename fallback is offline-only. */
+const CACHE='vmdesktopreic-shell-20261108-v5';
+const CORE=['./','./index.html','./desktop.reic','./desktop.reic?v=20261107-five-menu-unity-2','./desktop.css','./desktop.js','./desktop-runtime.js','./desktop-experience.css','./desktop-experience.js','./desktop-unified.css','./desktop-unified.js','./unity-studio.css','./unity-studio.css?v=20261107-unity-studio-2','./unity-studio.js','./unity-studio.js?v=20261107-unity-studio-2','./reference-desktop.css?v=20261108-reference-six-menu-1','./reference-desktop.js?v=20261108-six-menu-1','./reference-wallpaper.svg','./apps-250.json','./manifest.webmanifest'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('vmdesktopreic-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',event=>{

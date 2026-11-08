@@ -113,8 +113,7 @@ html,body{background:#050b14!important}
 <link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
 <link rel="stylesheet" href="./viewport-repair.css?v=20261106-clean-desktop-home-1">
 <link rel="stylesheet" href="./unity-studio.css?v=20261107-unity-studio-2">
-<link rel="stylesheet" href="./reference-desktop.css?v=20261107-reference-leaf-six-menu-1">
-<link rel="stylesheet" href="./main-surface-repair.css?v=20261108-main-surface-1">
+<link rel="stylesheet" href="./reference-desktop.css?v=20261108-reference-six-menu-1">
 </head>
 <body><main id="desktop-root"><div id="boot">VMDESKTOPREIC · Memuat ruang desktop REIC…</div></main>
 <script>
@@ -125,7 +124,7 @@ html,body{background:#050b14!important}
   resizeQueued=false;
   const w=document.documentElement.clientWidth||innerWidth;
   const h=document.documentElement.clientHeight||innerHeight;
-  const scale=Math.min((w-10)/1920,((h*.34)-12)/1080);
+	  const scale=Math.min((w-10)/1920,(h-10)/1080);
   root.style.setProperty('--vm-scale',String(Math.max(.05,scale)));
  };
  const scheduleFit=()=>{if(resizeQueued)return;resizeQueued=true;requestAnimationFrame(fit);};
@@ -153,8 +152,9 @@ html,body{background:#050b14!important}
    await loadScript('./floating-modal-windows.js?v=20261104-floating-filemanager-1');
    await loadScript('./25-modal-system.js?v=20261105-25-modal-system-1');
    await loadScript('./single-layer-window-manager.js?v=20261105-single-layer-1');
-   await loadScript('./unity-studio.js?v=20261107-unity-studio-2');
-   await loadScript('./desktop-click-bridge.js?v=20261106-universal-desktop-click-1');
+	   await loadScript('./unity-studio.js?v=20261107-unity-studio-2');
+	   await loadScript('./reference-desktop.js?v=20261108-six-menu-1');
+	   await loadScript('./desktop-click-bridge.js?v=20261106-universal-desktop-click-1');
    /* Kondisi awal selalu desktop bersih: seluruh jendela/modal hanya dibuka setelah tindakan pengguna. */
    const showDesktopHome=()=>{
     const hiddenSelectors=['#modalBackdrop','.vm-modal-backdrop','#pbCatalogBackdrop','.pb-catalog-backdrop'];

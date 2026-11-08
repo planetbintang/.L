@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#7de900"/><stop offset=".38" stop-color="#42bb08"/><stop offset=".66" stop-color="#008d25"/><stop offset="1" stop-color="#002b26"/></linearGradient>
+ <radialGradient id="sun" cx=".38" cy=".08" r=".7"><stop stop-color="#e0ff6f" stop-opacity=".95"/><stop offset=".35" stop-color="#b7f313" stop-opacity=".42"/><stop offset="1" stop-color="#9df500" stop-opacity="0"/></radialGradient>
+ <linearGradient id="leaf" x1=".1" y1=".1" x2=".85" y2=".9"><stop stop-color="#d5ff3d"/><stop offset=".25" stop-color="#57d20b"/><stop offset=".55" stop-color="#08a824"/><stop offset=".78" stop-color="#087b2d"/><stop offset="1" stop-color="#014b36"/></linearGradient>
+ <linearGradient id="vein" x2="1" y2="1"><stop stop-color="#edff87" stop-opacity=".85"/><stop offset=".5" stop-color="#81e849" stop-opacity=".5"/><stop offset="1" stop-color="#d2ff91" stop-opacity=".08"/></linearGradient>
+ <linearGradient id="water" x2="0" y2="1"><stop stop-color="#39d1a4" stop-opacity=".05"/><stop offset=".38" stop-color="#12a98f" stop-opacity=".62"/><stop offset="1" stop-color="#001e2d" stop-opacity=".96"/></linearGradient>
+ <radialGradient id="drop"><stop stop-color="#f2ffff" stop-opacity=".95"/><stop offset=".35" stop-color="#a6fff0" stop-opacity=".55"/><stop offset="1" stop-color="#48e3d8" stop-opacity="0"/></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
+ <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1920" height="1080" fill="url(#bg)"/><rect width="1920" height="1080" fill="url(#sun)"/>
+<g fill="#f5ffd5" opacity=".48" filter="url(#blur)"><circle cx="160" cy="140" r="90"/><circle cx="480" cy="70" r="62"/><circle cx="760" cy="150" r="115"/><circle cx="1040" cy="45" r="82"/><circle cx="1335" cy="220" r="75"/><circle cx="1780" cy="180" r="110"/></g>
+<g fill="#dfffaf" opacity=".48"><circle cx="156" cy="52" r="32"/><circle cx="302" cy="152" r="16"/><circle cx="580" cy="44" r="24"/><circle cx="812" cy="78" r="19"/><circle cx="1118" cy="112" r="31"/><circle cx="1454" cy="85" r="24"/><circle cx="1700" cy="275" r="28"/></g>
+<!-- A single broad, luminous macro leaf sweeping across the right half. -->
+<path d="M1920 -70 C1745 18 1590 119 1438 266 C1300 402 1188 542 1125 716 C1059 895 1050 1030 1072 1170 C1260 1032 1420 913 1560 764 C1744 569 1847 334 1920 75Z" fill="url(#leaf)" opacity=".96"/>
+<path d="M1928 -45 C1698 194 1455 433 1268 658 C1165 782 1106 927 1072 1170" fill="none" stroke="url(#vein)" stroke-width="18" opacity=".7"/>
+<g fill="none" stroke="url(#vein)" stroke-width="5" opacity=".53">
+ <path d="M1734 170 C1620 171 1514 150 1405 120"/><path d="M1621 287 C1514 272 1397 248 1307 213"/><path d="M1506 410 C1400 386 1315 354 1235 316"/><path d="M1402 533 C1322 500 1244 466 1184 422"/><path d="M1321 657 C1253 620 1191 580 1146 530"/><path d="M1247 788 C1203 750 1159 713 1123 669"/><path d="M1191 912 C1159 879 1129 844 1097 805"/>
+ <path d="M1734 170 C1769 90 1812 22 1875 -36"/><path d="M1621 287 C1669 210 1719 145 1780 91"/><path d="M1506 410 C1560 341 1613 284 1672 236"/><path d="M1402 533 C1462 471 1519 417 1575 375"/><path d="M1321 657 C1378 597 1436 550 1489 513"/><path d="M1247 788 C1305 736 1358 690 1406 653"/>
+</g>
+<path d="M0 668 C290 606 574 643 836 718 C1120 799 1454 850 1920 718 L1920 1080 L0 1080Z" fill="url(#water)"/>
+<g fill="none" stroke="#b9fff0" opacity=".34"><ellipse cx="1320" cy="894" rx="670" ry="78" stroke-width="3"/><ellipse cx="1350" cy="920" rx="520" ry="53" stroke-width="2"/><ellipse cx="1378" cy="947" rx="358" ry="33" stroke-width="2"/><ellipse cx="550" cy="880" rx="460" ry="46" stroke-width="2"/></g>
+<g opacity=".72" filter="url(#soft)"><ellipse cx="1320" cy="894" rx="620" ry="18" fill="#b9fff0"/><ellipse cx="640" cy="920" rx="480" ry="13" fill="#8dffe8"/></g>
+<path d="M278 826 C254 870 254 896 278 909 C302 896 302 870 278 826Z" fill="url(#drop)" filter="url(#glow)"/><path d="M279 908V1003" stroke="#b8fff2" stroke-width="3" opacity=".6"/><ellipse cx="279" cy="1007" rx="70" ry="9" fill="none" stroke="#c8fff0" stroke-width="3" opacity=".65"/>
+<path d="M1594 697 C1572 737 1572 762 1594 775 C1616 762 1616 737 1594 697Z" fill="url(#drop)" filter="url(#glow)"/><path d="M1595 774V834" stroke="#c7fff4" stroke-width="2" opacity=".65"/><ellipse cx="1595" cy="837" rx="45" ry="6" fill="none" stroke="#d7fff5" stroke-width="2" opacity=".62"/>
+<rect width="1920" height="1080" fill="none" stroke="#00351b" stroke-opacity=".16" stroke-width="28"/>
+</svg>
