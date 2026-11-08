@@ -231,6 +231,6 @@
     if (note) note.textContent = gatewayAccessToken ? 'Kode akses disimpan sementara di memori halaman. Kirim pesan untuk menguji koneksi.' : 'Masukkan kode akses gateway terlebih dahulu.';
     if ($('#reberGatewayToken')) $('#reberGatewayToken').value = '';
   });
-  void loadKataList();
+  if (window.AireberConfig?.get()?.cfgNoRag === false) void loadKataList();
   void checkCloudGateway();
 })();
