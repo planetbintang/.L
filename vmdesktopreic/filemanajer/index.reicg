@@ -56,6 +56,55 @@
       "files": []
     },
     {
+      "id": "allunivers-kata",
+      "title": "ALLUNIVERS OS · KATA",
+      "theme": "KNOWLEDGE / VIRTUAL FILESYSTEM",
+      "description": "Integrasi skema AlluniverS_OS dari planetbintang/aireber. Indeks virtual 1,45 juta+ node kata; setiap node menyediakan enam berkas REBER.",
+      "folders": [
+        {
+          "name": "allunivers_os",
+          "path": "allunivers_os/",
+          "description": "Root sistem AlluniverS_OS yang diadaptasi dari aireber/src/lib/virtual-fs.ts."
+        },
+        {
+          "name": "kata",
+          "path": "allunivers_os/kata/",
+          "description": "1,45 juta+ folder kata virtual, dibuka melalui generator dan pagination; bukan satu juta direktori fisik di Git."
+        },
+        {
+          "name": "reber_ai",
+          "path": "allunivers_os/reber_ai/",
+          "description": "Folder sistem AI dengan skema file REBER yang sama."
+        }
+      ],
+      "files": [
+        {
+          "path": "allunivers_os/kata/[nama-kata]/index.ieje",
+          "label": "Indeks Kata · .ieje"
+        },
+        {
+          "path": "allunivers_os/kata/[nama-kata]/style.aeea",
+          "label": "Style Kata · .aeea"
+        },
+        {
+          "path": "allunivers_os/kata/[nama-kata]/fungsi.nz",
+          "label": "Fungsi Kata · .nz"
+        },
+        {
+          "path": "allunivers_os/kata/[nama-kata]/component.ck",
+          "label": "Komponen Kata · .ck"
+        },
+        {
+          "path": "allunivers_os/kata/[nama-kata]/registry.regs",
+          "label": "Registri Kata · .regs"
+        },
+        {
+          "path": "allunivers_os/kata/[nama-kata]/activity.log",
+          "label": "Log Aktivitas · .log"
+        }
+      ]
+    },
+    {
       "id": "list-blok",
       "title": "LIST BLOK",
       "theme": "UI / COMPONENTS",
