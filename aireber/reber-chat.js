@@ -35,7 +35,7 @@
     const response = await fetch('/api/reber', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-reber-access': gatewayAccessToken },
-      body: JSON.stringify({ messages: history }),
+      body: JSON.stringify({ messages: history, policy: { retrieval: 'disabled', sourceScope: 'PlanetBintang only', externalSources: false } }),
       signal: AbortSignal.timeout ? AbortSignal.timeout(50000) : undefined,
     });
     const data = await response.json().catch(() => ({}));
@@ -174,6 +174,10 @@
           answerText = cloudAnswer;
           const meta = $('#reberChatMeta');
           if (meta) meta.textContent = 'model AI backend · konteks percakapan terakhir · jawaban generatif';
+        } else if (window.AireberConfig?.get()?.cfgNoRag !== false) {
+          answerText = 'Mode AI tanpa RAG sedang aktif. Mesin lokal tidak akan mengambil dokumen atau kata sebagai sumber jawaban. Untuk respons generatif yang lebih lengkap, hubungkan backend model pada Konfigurasi AI. Tanpa backend, Aireber hanya dapat menjalankan fitur lokal yang eksplisit seperti pengelolaan file dan pemrosesan 50 fitur AI.';
+          const meta = $('#reberChatMeta');
+          if (meta) meta.textContent = 'mode tanpa RAG · backend generatif belum terhubung';
         } else if (engine) {
           const kataList = await loadKataList();
           const result = engine.answer(text, { kataList });
@@ -217,7 +221,7 @@
     if (rows.length) {
       for (const row of rows) appendMessage(row.role === 'user' ? 'user' : 'assistant', row.text);
     } else {
-      appendMessage('assistant', '👋 **Halo, saya AI Reber.**\n\nSaya chatbot realtime yang ditenagai **mesin sistem AI Reber** — memproses pertanyaan dengan pipeline *tokenisasi → retrieval mesin kata → ranking → perangkaian jawaban → sitasi sumber*.\n\n✅ Jawab pertanyaan **apa pun** (bener & mener — benar dan mengarahkan)\n✅ **Tanpa token API, tanpa kredit, tanpa batas panjang percakapan**\n✅ Bisa **membuat kode** (JS/TS/React/CSS/HTML/Python/SQL)\n✅ Memberi **analisis mendalam** saat Anda menanyakan suatu masalah\n✅ Setiap jawaban mencantumkan **referensi/link acuan** (Perpusnas, MDN, GitHub, dsb.)\n\nPerintah berkas juga aktif: coba ketik `daftar file`.\n\nSilakan tanya apa pun — Re:Bersama! 🚀');
+      appendMessage('assistant', '👋 **Halo, saya Aireber — AI PlanetBintang.**\n\nSaya siap membantu percakapan, penalaran, penulisan, dan pengembangan kode. Mode standar menggunakan **tanpa RAG**, tanpa pencarian dokumen eksternal, dan kebijakan sumber dibatasi pada konteks PlanetBintang yang diberikan.\n\n• Studio, File System, Projects, 50 fitur AI, dan 150 tindakan tetap tersedia.\n• Hubungkan backend AI yang diamankan untuk respons generatif penuh.\n• Jika konteks PlanetBintang tidak memuat suatu fakta, saya akan menyatakan keterbatasannya.\n\nSilakan mulai percakapan.');
     }
   }
   bootWelcome(true);
