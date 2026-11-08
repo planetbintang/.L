@@ -1,17 +1,14 @@
 # Allunivers OS / Kata — Filemanajer Integration
 
-Sumber skema: `planetbintang/aireber`, branch `io`.
+Kategori kata telah diperluas dengan daftar kata dasar bahasa Indonesia yang diambil dari daftar kosakata pada sumber proyek `planetbintang/aireber` (`src/lib/kata-data.ts`, branch `io`). Kata dasar ditampilkan sebagai nama folder, bukan sekadar label katalog.
 
-Referensi sumber:
-- `src/lib/virtual-fs.ts` — struktur root virtual, penelusuran folder, pagination, dan node kata dengan enam file.
-- `src/lib/kata-data.ts` — kategori kata serta generator konten REBER.
+## Kategori folder
+- **KATA DASAR INDONESIA**: 579 nama folder kata dasar unik satu kata.
+- **KATA TURUNAN INDONESIA · GENERATOR**: kombinasi imbuhan yang dibangkitkan saat dibuka. Ini adalah hasil generator, bukan klaim bahwa setiap kombinasi merupakan lema KBBI.
+- **ANGKA**, **KATA BAHASA INGGRIS**, **HURUF**, **SIMBOL**, dan **KOMPONEN UI** tetap tersedia.
 
-## Integrasi File Manager
-
-Kategori `ALLUNIVERS OS · KATA` tersedia di File Manager pada branch `io`. Engine browser berada di:
-`vmdesktopreic/filemanajer/allunivers_os/kata/kata-engine.reicjs`
-
-Engine menyediakan kategori 1.500.000 nomor folder, kata Inggris, kata Indonesia, huruf besar/kecil, simbol, dan komponen UI. Folder dibuka dengan pagination (50 node per halaman), bukan memuat seluruh daftar sekaligus. Setiap node menyediakan enam file:
+## Isi setiap folder kata
+Setiap folder menyediakan enam berkas REBER yang dibuat on-demand:
 - `index.ieje`
 - `style.aeea`
 - `fungsi.nz`
@@ -19,10 +16,9 @@ Engine menyediakan kategori 1.500.000 nomor folder, kata Inggris, kata Indonesia
 - `registry.regs`
 - `activity.log`
 
-Ketika folder dibuka, File Manager membangkitkan konten file dari metadata kata dan menyediakan unduhan per file. Konten dibuat on-demand; tidak disimpan sebagai jutaan file fisik di Git.
+Folder ditampilkan secara bertahap melalui pagination dan nama folder di-encode aman untuk jalur URL. Konten berkas dapat dihasilkan dan diunduh satu per satu.
 
-## Batas materialisasi
+## Catatan sumber dan penyimpanan
+Daftar ini berasal dari kosakata proyek Aireber; bukan salinan atau pengesahan resmi KBBI. Folder dan berkas bersifat virtual/on-demand, bukan direktori fisik yang semuanya disimpan di GitHub. Untuk daftar KBBI resmi, sumber dan lisensi/ketentuan penggunaan Badan Bahasa perlu diverifikasi terpisah.
 
-Integrasi ini adalah filesystem virtual yang dapat ditelusuri dan diekspor per file. Engine kini menyediakan **sekurang-kurangnya 1.500.000 folder virtual angka**, ditambah kategori kata, huruf, simbol, dan komponen. Ia **tidak** membuat direktori fisik atau 9 juta file di repositori GitHub. Materialisasi massal ke GitHub Pages akan membebani ukuran repositori, proses checkout, dan deployment. Jika diperlukan arsip fisik, jalankan generator batch terpisah dan simpan hasilnya sebagai artefak/arsip terkompresi, bukan sebagai jutaan path di repositori situs.
-
-Sumber: https://github.com/planetbintang/aireber/tree/io/src/lib
+Sumber kosakata: https://github.com/planetbintang/aireber/blob/io/src/lib/kata-data.ts
