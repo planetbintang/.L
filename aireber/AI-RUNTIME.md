@@ -51,3 +51,13 @@ Setelah deploy, buka Chat Reber dan masukkan nilai `REBER_ACCESS_TOKEN` pada pan
 3. Kirim pertanyaan sederhana; jawaban generatif harus tampil dan metadata menunjukkan model backend.
 4. Uji kode akses salah; gateway harus mengembalikan 401.
 5. Nonaktifkan gateway atau buka GitHub Pages; mesin lokal harus tetap dapat menjawab.
+
+
+## Kebijakan Aireber tanpa RAG (2026-11-08)
+
+- Mode default percakapan adalah **tanpa RAG**: chat tidak mengambil kata, dokumen, indeks, atau basis pengetahuan untuk menyusun jawaban.
+- Backend mengirim system policy yang melarang retrieval, web search, dan sumber faktual eksternal. Fakta operasional dan pengetahuan khusus PlanetBintang hanya boleh berasal dari konteks PlanetBintang yang secara eksplisit dikirim pada percakapan.
+- Jika data PlanetBintang tidak tersedia, model harus menyatakan bahwa data internal belum tersedia, bukan mengarang atau menggantinya dengan fakta luar.
+- Perlu dipahami: kebijakan prompt tidak menghapus pengetahuan bawaan yang sudah ada pada bobot model provider. Ini bukan model yang dilatih eksklusif dari data PlanetBintang. Untuk model yang benar-benar eksklusif, diperlukan model open-weight yang dijalankan pada infrastruktur PlanetBintang dan proses pelatihan/fine-tuning internal yang terverifikasi.
+- Konfigurasi AI dan spesifikasi pengembangan robotik disimpan lokal di browser. Konfigurasi ini belum melatih model atau mengendalikan perangkat keras. Pelatihan membutuhkan dataset internal, GPU/komputasi, pipeline eksperimen, evaluasi, dan deployment tersendiri.
+- Keselamatan robotik wajib mencakup simulasi, validasi, batas gerak, otorisasi operator, fail-safe, dan emergency stop sebelum uji fisik.
