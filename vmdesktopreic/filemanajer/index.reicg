@@ -59,7 +59,7 @@
       "id": "allunivers-kata",
       "title": "ALLUNIVERS OS · KATA",
       "theme": "KNOWLEDGE / VIRTUAL FILESYSTEM",
-      "description": "Integrasi skema AlluniverS_OS dari planetbintang/aireber. Indeks virtual 1,45 juta+ node kata; setiap node menyediakan enam berkas REBER.",
+      "description": "Direktori virtual Allunivers OS yang diadaptasi dari skema Aireber. Menyediakan generator kata berhalaman, folder on-demand, dan enam file REBER per node; tidak menulis 1,45 juta direktori fisik ke Git.",
       "folders": [
         {
           "name": "allunivers_os",
@@ -101,6 +101,10 @@
         {
           "path": "vmdesktopreic/filemanajer/allunivers_os/kata/_template/activity.log",
           "label": "Template Log Aktivitas · .log"
+        },
+        {
+          "path": "vmdesktopreic/filemanajer/allunivers_os/kata/kata-engine.reicjs",
+          "label": "Kata Virtual Filesystem Engine · .REICJS"
         }
       ]
     },
