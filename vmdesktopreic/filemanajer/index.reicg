@@ -59,7 +59,7 @@
       "id": "allunivers-kata",
       "title": "ALLUNIVERS OS · KATA",
       "theme": "KNOWLEDGE / VIRTUAL FILESYSTEM",
-      "description": "Direktori virtual Allunivers OS yang diadaptasi dari skema Aireber. Menyediakan generator kata berhalaman, folder on-demand, dan enam file REBER per node; tidak menulis 1,45 juta direktori fisik ke Git.",
+      "description": "Integrasi skema Allunivers OS dari planetbintang/aireber. Folder kata virtual dibangkitkan per halaman; setiap node menyediakan enam berkas REBER. Jumlah node aktif dihitung langsung oleh engine.",
       "folders": [
         {
           "name": "allunivers_os",
@@ -69,7 +69,7 @@
         {
           "name": "kata",
           "path": "allunivers_os/kata/",
-          "description": "1,45 juta+ folder kata virtual, dibuka melalui generator dan pagination; bukan satu juta direktori fisik di Git."
+          "description": "Direktori kata virtual dengan pagination dan generator on-demand; bukan direktori fisik massal di Git."
         },
         {
           "name": "reber_ai",
