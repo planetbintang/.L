@@ -3,7 +3,7 @@
   'use strict';
   const KEY = 'planetbintang.aireber.system-config.v1';
   const fields = ['cfgNoRag','cfgPbOnly','cfgNoExternal','cfgModel','cfgEndpoint','robotName','robotPurpose','robotHardware','robotSensors','robotActuators','robotDataset','robotSafety','robotResponse'];
-  const defaults = {cfgNoRag:true,cfgPbOnly:true,cfgNoExternal:true,robotName:'Aireber Robotics Core',robotResponse:'Jawab jelas, terstruktur, relevan; nyatakan ketidakpastian; jangan mengarang data, sumber, atau tindakan.'};
+  const defaults = {cfgNoRag:true,cfgPbOnly:true,cfgNoExternal:true,cfgModel:'',cfgEndpoint:'/api/reber',robotName:'Aireber Robotics Core',robotPurpose:'',robotHardware:'',robotSensors:'',robotActuators:'',robotDataset:'',robotSafety:'',robotResponse:'Jawab jelas, terstruktur, relevan; nyatakan ketidakpastian; jangan mengarang data, sumber, atau tindakan.'};
   const read = () => { try { return {...defaults,...JSON.parse(localStorage.getItem(KEY)||'{}')}; } catch { return {...defaults}; } };
   const collect = () => Object.fromEntries(fields.map(id => { const el=document.getElementById(id); return [id,el ? (el.type==='checkbox'?el.checked:el.value.trim()) : defaults[id]]; }));
   const apply = value => fields.forEach(id => { const el=document.getElementById(id); if(el && value[id]!==undefined){ if(el.type==='checkbox') el.checked=Boolean(value[id]); else el.value=value[id]; }});
