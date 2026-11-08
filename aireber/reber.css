@@ -185,3 +185,17 @@ body{font-size:13px;line-height:1.5}
 .reber-pipeline{margin:0;padding-left:22px;display:grid;gap:9px;font-size:12px}
 .reber-config-actions{display:flex;flex-wrap:wrap;gap:8px}
 @media(max-width:760px){.reber-config-grid{grid-template-columns:1fr}#view-chat .chat-shell{min-height:calc(100dvh - 190px)}#view-chat .chat-log{min-height:280px;padding:16px 12px}#view-chat .chat-compose{width:calc(100% - 16px);margin-bottom:8px}#view-chat .chat-quick{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}#view-chat .chat-quick button{white-space:nowrap}}
+
+
+/* Chat is the default landing workspace; legacy tools remain in the top navigation. */
+body:has(#view-chat.active) .system-banner,
+body:has(#view-chat.active) .reber-launch-grid,
+body:has(#view-chat.active) #ai-capability-dashboard,
+body:has(#view-chat.active) .sidebar{display:none}
+body:has(#view-chat.active) .workbench{display:block;min-height:calc(100dvh - 54px)}
+body:has(#view-chat.active) .main-area{padding:0;background:transparent}
+body:has(#view-chat.active) #view-chat{min-height:calc(100dvh - 54px);padding:0 12px 10px}
+body:has(#view-chat.active) #view-chat .chat-shell{min-height:calc(100dvh - 72px);border-radius:0 0 14px 14px;border-top:0}
+body:has(#view-chat.active) #view-chat .reber-gateway-access{margin:8px auto 0;width:min(900px,100%)}
+body:has(#view-chat.active) #view-chat .notice{max-width:900px;margin:8px auto}
+@media(max-width:760px){body:has(#view-chat.active) #view-chat{padding:0 5px 6px}body:has(#view-chat.active) #view-chat .chat-shell{min-height:calc(100dvh - 122px)}}
