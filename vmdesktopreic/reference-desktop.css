@@ -122,3 +122,9 @@ html,body,#desktop-root{width:100%!important;height:100%!important;height:100dvh
 
 /* Unity Studio's legacy hide rule is more specific; explicitly restore the six new sidebar entries. */
 #desktop-root #vmDesktop .vm-core-menu>.ref-menu-button,#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button:hover,#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button.active{display:flex!important}
+
+/* Restore the reference's side-by-side icon and label after old core-item absolute positioning. */
+#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;padding:0 10px 0 0!important}
+#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button>span{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;margin:0!important}
+#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button>b{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;display:block!important;height:auto!important;min-width:0!important;flex:1!important;margin:0!important;text-align:left!important;opacity:1!important}
+@media(max-width:760px){#desktop-root #vmDesktop .vm-core-menu>.ref-menu-button>b{display:none!important}}
