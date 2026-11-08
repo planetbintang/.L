@@ -1,0 +1,18 @@
+REBER_FUNGSI v1.0
+kata: {{KATA}}
+category: {{CATEGORY}}
+logic: kata_processor
+function: semantic_parse
+input: text_string
+output: component_node
+transform: kata_to_component
+validate: schema_check
+process: reber_engine
+execute: ai_inference
+response: structured_json
+source: allunivers_os
+extension: .nz
+version: 1.0
+engine: reber_ai
+mode: active
+pipeline: kata -> parse -> validate -> render -> output
