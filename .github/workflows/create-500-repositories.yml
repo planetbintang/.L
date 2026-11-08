@@ -19,13 +19,13 @@ jobs:
     steps:
       - name: Create repositories and initialize REIC packages
         env:
-          GH_TOKEN: ${{ secrets.PLANETBINTANG_TOKEN }}
+          GH_TOKEN: ${{ secrets.IO_PLANETBINTANG }}
           OWNER: planetbintang
         shell: bash
         run: |
           set -euo pipefail
           if [[ -z "${GH_TOKEN:-}" ]]; then
-            echo "::error::Add PLANETBINTANG_TOKEN in repository Actions secrets. It needs permission to create repositories."
+            echo "::error::Add IO_PLANETBINTANG in repository Actions secrets. It needs permission to create repositories."
             exit 1
           fi
           node <<'NODE'
