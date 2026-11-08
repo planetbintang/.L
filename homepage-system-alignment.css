@@ -1,0 +1,102 @@
+/* PlanetBintang .L — system-aligned homepage layer
+   Visual hierarchy follows the actual platform: overview → inventory → VM → discovery → main modules. */
+:root{
+  --pb-ink:#102b45;--pb-muted:#607b94;--pb-line:rgba(105,157,194,.25);
+  --pb-deep:#071b2d;--pb-panel:#0d2a43;--pb-cyan:#8bdcf0;--pb-gold:#d7bd82;
+}
+body:has(> .topbar){background:linear-gradient(155deg,#f7fbff 0%,#eaf3fa 48%,#f8fbff 100%)!important}
+body:has(> .topbar) .shell{width:min(100%,1500px)!important;gap:clamp(14px,1.7vw,22px)!important}
+#overview.hero{
+  min-height:clamp(300px,31vw,420px)!important;
+  grid-template-columns:minmax(0,1.45fr) minmax(170px,.55fr)!important;
+  padding:clamp(25px,4vw,58px)!important;
+  background:
+    radial-gradient(ellipse at 83% 18%,rgba(110,216,239,.22),transparent 34%),
+    radial-gradient(ellipse at 0% 100%,rgba(76,152,197,.2),transparent 42%),
+    linear-gradient(128deg,#123a58 0%,#0a263e 56%,#061a2c 100%)!important;
+  border:1px solid rgba(129,193,224,.42)!important;
+  box-shadow:0 22px 58px rgba(17,61,96,.16),inset 0 1px rgba(255,255,255,.1)!important;
+}
+#overview .hero-copy{max-width:850px!important}
+#overview .eyebrow{letter-spacing:.19em!important}
+#overview.hero h1{font-size:clamp(39px,5.6vw,72px)!important;max-width:13ch!important}
+#overview .hero-description{font-size:clamp(.94rem,1.2vw,1.08rem)!important;max-width:66ch!important}
+#overview .hero-meta{gap:8px!important}
+#overview .root-chip,#overview .sync-chip{font-size:.72rem!important;padding:8px 11px!important}
+#overview .home-ai-actions{gap:9px!important}
+#overview .home-ai-primary{min-width:min(100%,260px)!important}
+#overview .hero-logo{align-items:center!important;justify-self:center!important}
+#overview .logo-outline{width:clamp(130px,17vw,220px)!important;aspect-ratio:1!important}
+#overview .logo-outline img{width:78%!important;height:78%!important;object-fit:contain!important}
+#systemFileCountPanel.system-file-count{
+  grid-template-columns:minmax(0,1fr) minmax(300px,.92fr)!important;
+  gap:14px!important;padding:clamp(14px,2vw,22px)!important;
+  border:1px solid rgba(116,173,208,.4)!important;
+  background:linear-gradient(125deg,#0e304b,#071b2d)!important;
+  box-shadow:0 14px 34px rgba(15,53,84,.12)!important;
+}
+#systemFileCountPanel .system-file-count-main{display:flex!important;flex-direction:column!important;justify-content:center!important}
+#systemFileCountPanel .system-development-warning{border-color:rgba(215,189,130,.48)!important;background:linear-gradient(140deg,rgba(91,67,31,.3),rgba(26,31,37,.45))!important}
+#systemFileCountPanel .system-development-warning>b{color:#e8cf9b!important}
+#systemFileCountPanel .system-development-warning p{font-size:clamp(.82rem,1.1vw,.98rem)!important}
+.reic-engine-feature{
+  grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr)!important;
+  padding:clamp(14px,2vw,22px)!important;
+  background:linear-gradient(135deg,#102f49,#071b2d)!important;
+  border:1px solid rgba(116,173,208,.38)!important;
+  box-shadow:0 14px 34px rgba(15,53,84,.12)!important;
+}
+.reic-engine-image-link{border:1px solid rgba(157,208,233,.25)!important}
+.reic-engine-image-link img{aspect-ratio:16/9!important;object-fit:cover!important}
+.reic-engine-copy h2{letter-spacing:-.025em!important}
+.reic-engine-open{min-height:44px!important;align-items:center!important;background:linear-gradient(135deg,#c4edf7,#79cfe7)!important;color:#09263d!important;border:0!important}
+.home-search-strip{
+  grid-template-columns:minmax(220px,.78fr) minmax(0,1.22fr)!important;
+  border:1px solid rgba(116,173,208,.38)!important;
+  background:linear-gradient(135deg,#102f49,#081e32)!important;
+  box-shadow:0 14px 34px rgba(15,53,84,.11)!important;
+}
+.home-search-copy h2{font-size:clamp(1.3rem,2.2vw,1.8rem)!important;letter-spacing:-.025em!important}
+.home-search-input-wrap{min-height:48px!important}
+.home-search-submit{min-height:48px!important;font-weight:800!important}
+.common-site-menu{
+  padding:clamp(17px,2.4vw,30px)!important;
+  border:1px solid rgba(116,173,208,.38)!important;
+  background:linear-gradient(135deg,#102f49,#081e32)!important;
+  box-shadow:0 16px 38px rgba(15,53,84,.13)!important;
+}
+.common-site-menu-heading{align-items:flex-end!important}
+.common-site-menu-heading h2{font-size:clamp(1.35rem,2.4vw,1.9rem)!important;letter-spacing:-.02em!important}
+.common-site-menu-heading p:not(.eyebrow){max-width:66ch!important;line-height:1.65!important}
+.common-site-menu-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+.common-site-menu-card{
+  min-height:108px!important;padding:14px!important;gap:11px!important;
+  border:1px solid rgba(151,194,222,.25)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.025))!important;
+  transition:transform .18s ease,border-color .18s ease,background .18s ease!important;
+}
+.common-site-menu-card:hover{transform:translateY(-2px)!important;border-color:rgba(139,220,240,.72)!important;background:rgba(68,145,184,.17)!important}
+.common-site-menu-icon{width:38px!important;height:38px!important;flex-basis:38px!important;border:1px solid rgba(139,220,240,.25)!important;background:rgba(139,220,240,.11)!important;color:#a7e8f5!important;font-size:1.1rem!important}
+.common-site-menu-copy b{font-size:.78rem!important;letter-spacing:.055em!important}
+.common-site-menu-copy small{font-size:.72rem!important;line-height:1.5!important}
+.common-site-menu-arrow{color:#a5dced!important}
+.common-site-menu-footer{border-color:rgba(151,194,222,.2)!important}
+.common-site-menu-footer span{color:#c2d8e8!important}
+.common-site-menu-footer button{border:1px solid rgba(139,220,240,.35)!important;background:rgba(255,255,255,.06)!important;color:#e8f7ff!important}
+.provider-matrix{display:none!important}
+#overview,#systemFileCountPanel,.reic-engine-feature,.home-search-strip,.common-site-menu{scroll-margin-top:100px}
+@media(max-width:1050px){.common-site-menu-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:760px){
+  #overview.hero{grid-template-columns:1fr!important;padding:24px 18px!important}
+  #overview .hero-logo{justify-self:start!important;flex-direction:row!important}
+  #overview .logo-outline{width:68px!important}
+  #systemFileCountPanel.system-file-count,.reic-engine-feature,.home-search-strip{grid-template-columns:1fr!important}
+  .common-site-menu-heading{align-items:flex-start!important}
+  .common-site-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .common-site-menu-card{min-height:96px!important;padding:11px!important}
+}
+@media(max-width:420px){
+  .common-site-menu-grid{grid-template-columns:1fr!important}
+  .common-site-menu-card{min-height:78px!important}
+}
+@media(prefers-reduced-motion:reduce){.common-site-menu-card{transition:none!important}.common-site-menu-card:hover{transform:none!important}}
