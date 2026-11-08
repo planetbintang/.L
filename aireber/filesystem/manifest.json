@@ -1,0 +1,596 @@
+{
+  "schema": "planetbintang.aireber.virtual-filesystem.v1",
+  "branch": "io",
+  "base": "aireber/",
+  "virtualFolderCount": 1000000,
+  "virtualFilesPerFolder": 5,
+  "virtualFileExtensions": [
+    ".NZ",
+    ".AEEI",
+    ".reic",
+    ".css",
+    ".js"
+  ],
+  "folderPattern": "aireber/generated/aireber-0000001 through aireber-1000000",
+  "generation": "deterministic-on-demand; folders and files are virtual File Manager entries, not one million physical Git directories",
+  "sourceTree": "aireber/",
+  "sourceFileCount": 94,
+  "sourceFolderCount": 21,
+  "sourceEntries": [
+    {
+      "path": "aireber/.gitignore",
+      "type": "file",
+      "size": 32
+    },
+    {
+      "path": "aireber/.nojekyll",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "aireber/404.reic",
+      "type": "file",
+      "size": 12922
+    },
+    {
+      "path": "aireber/AGENTS.md",
+      "type": "file",
+      "size": 4051
+    },
+    {
+      "path": "aireber/AI-RUNTIME.md",
+      "type": "file",
+      "size": 4839
+    },
+    {
+      "path": "aireber/CLAUDE.local.md",
+      "type": "file",
+      "size": 11
+    },
+    {
+      "path": "aireber/README.md",
+      "type": "file",
+      "size": 49
+    },
+    {
+      "path": "aireber/ai-capability-dashboard.css",
+      "type": "file",
+      "size": 4088
+    },
+    {
+      "path": "aireber/ai-feature-center.js",
+      "type": "file",
+      "size": 4442
+    },
+    {
+      "path": "aireber/assets",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/assets/highlighted-body-OFNGDK62-DLdX5lCf.js",
+      "type": "file",
+      "size": 515
+    },
+    {
+      "path": "aireber/assets/index-B-vVKZ-c.js",
+      "type": "file",
+      "size": 323429
+    },
+    {
+      "path": "aireber/assets/index-JV0jazPt.css",
+      "type": "file",
+      "size": 48374
+    },
+    {
+      "path": "aireber/assets/kata-data-BD2IDLyF.js",
+      "type": "file",
+      "size": 26279
+    },
+    {
+      "path": "aireber/assets/kata-data.js",
+      "type": "file",
+      "size": 37752
+    },
+    {
+      "path": "aireber/assets/manager-Dh9k9u3-.js",
+      "type": "file",
+      "size": 18128
+    },
+    {
+      "path": "aireber/assets/mermaid-GHXKKRXX-Bo9EVAbZ.js",
+      "type": "file",
+      "size": 541561
+    },
+    {
+      "path": "aireber/assets/projects-Bm_lYgWC.js",
+      "type": "file",
+      "size": 9539
+    },
+    {
+      "path": "aireber/assets/virtual-fs.js",
+      "type": "file",
+      "size": 7488
+    },
+    {
+      "path": "aireber/db",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/db/index.ts",
+      "type": "file",
+      "size": 129
+    },
+    {
+      "path": "aireber/db/schema.ts",
+      "type": "file",
+      "size": 1711
+    },
+    {
+      "path": "aireber/drizzle.config.ts",
+      "type": "file",
+      "size": 170
+    },
+    {
+      "path": "aireber/favicon.ico",
+      "type": "file",
+      "size": 15086
+    },
+    {
+      "path": "aireber/index.html",
+      "type": "file",
+      "size": 28232
+    },
+    {
+      "path": "aireber/index.reic",
+      "type": "file",
+      "size": 16534
+    },
+    {
+      "path": "aireber/netlify.toml",
+      "type": "file",
+      "size": 302
+    },
+    {
+      "path": "aireber/netlify",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/netlify/database",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/netlify/database/migrations",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom/migration.sql",
+      "type": "file",
+      "size": 1246
+    },
+    {
+      "path": "aireber/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom/snapshot.json",
+      "type": "file",
+      "size": 13562
+    },
+    {
+      "path": "aireber/netlify/functions",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/netlify/functions/reber.mjs",
+      "type": "file",
+      "size": 5952
+    },
+    {
+      "path": "aireber/package-lock.json",
+      "type": "file",
+      "size": 570300
+    },
+    {
+      "path": "aireber/package.json",
+      "type": "file",
+      "size": 1586
+    },
+    {
+      "path": "aireber/public",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/public/favicon.ico",
+      "type": "file",
+      "size": 15086
+    },
+    {
+      "path": "aireber/public/tanstack-circle-logo.png",
+      "type": "file",
+      "size": 265387
+    },
+    {
+      "path": "aireber/public/tanstack-word-logo-white.svg",
+      "type": "file",
+      "size": 15002
+    },
+    {
+      "path": "aireber/reber-app.js",
+      "type": "file",
+      "size": 28718
+    },
+    {
+      "path": "aireber/reber-brand.svg",
+      "type": "file",
+      "size": 2559
+    },
+    {
+      "path": "aireber/reber-chat-engine.js",
+      "type": "file",
+      "size": 30888
+    },
+    {
+      "path": "aireber/reber-chat.js",
+      "type": "file",
+      "size": 14582
+    },
+    {
+      "path": "aireber/reber-config.js",
+      "type": "file",
+      "size": 2487
+    },
+    {
+      "path": "aireber/reber-dashboard.css",
+      "type": "file",
+      "size": 8118
+    },
+    {
+      "path": "aireber/reber.css",
+      "type": "file",
+      "size": 35772
+    },
+    {
+      "path": "aireber/source-index.json",
+      "type": "file",
+      "size": 10398
+    },
+    {
+      "path": "aireber/source",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/AGENTS.md.source.txt",
+      "type": "file",
+      "size": 4051
+    },
+    {
+      "path": "aireber/source/CLAUDE.local.md.source.txt",
+      "type": "file",
+      "size": 11
+    },
+    {
+      "path": "aireber/source/README.md.source.txt",
+      "type": "file",
+      "size": 49
+    },
+    {
+      "path": "aireber/source/db",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/db/index.ts.source.txt",
+      "type": "file",
+      "size": 129
+    },
+    {
+      "path": "aireber/source/db/schema.ts.source.txt",
+      "type": "file",
+      "size": 1711
+    },
+    {
+      "path": "aireber/source/drizzle.config.ts.source.txt",
+      "type": "file",
+      "size": 170
+    },
+    {
+      "path": "aireber/source/netlify.toml.source.txt",
+      "type": "file",
+      "size": 200
+    },
+    {
+      "path": "aireber/source/netlify",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/netlify/database",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/netlify/database/migrations",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom/migration.sql.source.txt",
+      "type": "file",
+      "size": 1246
+    },
+    {
+      "path": "aireber/source/netlify/database/migrations/20260623103542_create_chat_sessions_fs_nodes_kata_custom/snapshot.json.source.txt",
+      "type": "file",
+      "size": 13562
+    },
+    {
+      "path": "aireber/source/package-lock.json.source.txt",
+      "type": "file",
+      "size": 570300
+    },
+    {
+      "path": "aireber/source/package.json.source.txt",
+      "type": "file",
+      "size": 1528
+    },
+    {
+      "path": "aireber/source/public",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/public/favicon.ico",
+      "type": "file",
+      "size": 15086
+    },
+    {
+      "path": "aireber/source/public/tanstack-circle-logo.png",
+      "type": "file",
+      "size": 265387
+    },
+    {
+      "path": "aireber/source/public/tanstack-word-logo-white.svg.source.txt",
+      "type": "file",
+      "size": 15002
+    },
+    {
+      "path": "aireber/source/src",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/src/lib",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/src/lib/ai-hook.ts.source.txt",
+      "type": "file",
+      "size": 553
+    },
+    {
+      "path": "aireber/source/src/lib/kata-data.ts.source.txt",
+      "type": "file",
+      "size": 35734
+    },
+    {
+      "path": "aireber/source/src/lib/reber-hook.ts.source.txt",
+      "type": "file",
+      "size": 517
+    },
+    {
+      "path": "aireber/source/src/lib/reber-system.ts.source.txt",
+      "type": "file",
+      "size": 8036
+    },
+    {
+      "path": "aireber/source/src/lib/virtual-fs.ts.source.txt",
+      "type": "file",
+      "size": 7051
+    },
+    {
+      "path": "aireber/source/src/lib/weather-tools.ts.source.txt",
+      "type": "file",
+      "size": 974
+    },
+    {
+      "path": "aireber/source/src/routeTree.gen.ts.source.txt",
+      "type": "file",
+      "size": 5733
+    },
+    {
+      "path": "aireber/source/src/router.tsx.source.txt",
+      "type": "file",
+      "size": 332
+    },
+    {
+      "path": "aireber/source/src/routes",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/source/src/routes/__root.tsx.source.txt",
+      "type": "file",
+      "size": 2656
+    },
+    {
+      "path": "aireber/source/src/routes/api.chat.ts.source.txt",
+      "type": "file",
+      "size": 3282
+    },
+    {
+      "path": "aireber/source/src/routes/api.filesystem.ts.source.txt",
+      "type": "file",
+      "size": 4560
+    },
+    {
+      "path": "aireber/source/src/routes/api.projects.ts.source.txt",
+      "type": "file",
+      "size": 2041
+    },
+    {
+      "path": "aireber/source/src/routes/api.reber.ts.source.txt",
+      "type": "file",
+      "size": 1965
+    },
+    {
+      "path": "aireber/source/src/routes/index.tsx.source.txt",
+      "type": "file",
+      "size": 19098
+    },
+    {
+      "path": "aireber/source/src/routes/manager.tsx.source.txt",
+      "type": "file",
+      "size": 26033
+    },
+    {
+      "path": "aireber/source/src/routes/projects.tsx.source.txt",
+      "type": "file",
+      "size": 13557
+    },
+    {
+      "path": "aireber/source/src/styles.css.source.txt",
+      "type": "file",
+      "size": 21774
+    },
+    {
+      "path": "aireber/source/tsconfig.json.source.txt",
+      "type": "file",
+      "size": 644
+    },
+    {
+      "path": "aireber/source/vite.config.ts.source.txt",
+      "type": "file",
+      "size": 517
+    },
+    {
+      "path": "aireber/src",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/src/lib",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/src/lib/ai-hook.ts",
+      "type": "file",
+      "size": 553
+    },
+    {
+      "path": "aireber/src/lib/kata-data.ts",
+      "type": "file",
+      "size": 35734
+    },
+    {
+      "path": "aireber/src/lib/planetbintang-files.ts",
+      "type": "file",
+      "size": 4600
+    },
+    {
+      "path": "aireber/src/lib/reber-hook.ts",
+      "type": "file",
+      "size": 734
+    },
+    {
+      "path": "aireber/src/lib/reber-system.ts",
+      "type": "file",
+      "size": 8679
+    },
+    {
+      "path": "aireber/src/lib/virtual-fs.ts",
+      "type": "file",
+      "size": 7051
+    },
+    {
+      "path": "aireber/src/lib/weather-tools.ts",
+      "type": "file",
+      "size": 974
+    },
+    {
+      "path": "aireber/src/routeTree.gen.ts",
+      "type": "file",
+      "size": 5733
+    },
+    {
+      "path": "aireber/src/router.tsx",
+      "type": "file",
+      "size": 398
+    },
+    {
+      "path": "aireber/src/routes",
+      "type": "folder",
+      "size": 0
+    },
+    {
+      "path": "aireber/src/routes/__root.tsx",
+      "type": "file",
+      "size": 2656
+    },
+    {
+      "path": "aireber/src/routes/api.chat.ts",
+      "type": "file",
+      "size": 3282
+    },
+    {
+      "path": "aireber/src/routes/api.filesystem.ts",
+      "type": "file",
+      "size": 4560
+    },
+    {
+      "path": "aireber/src/routes/api.projects.ts",
+      "type": "file",
+      "size": 2041
+    },
+    {
+      "path": "aireber/src/routes/api.reber.ts",
+      "type": "file",
+      "size": 1965
+    },
+    {
+      "path": "aireber/src/routes/index.tsx",
+      "type": "file",
+      "size": 19342
+    },
+    {
+      "path": "aireber/src/routes/manager.tsx",
+      "type": "file",
+      "size": 26033
+    },
+    {
+      "path": "aireber/src/routes/projects.tsx",
+      "type": "file",
+      "size": 13557
+    },
+    {
+      "path": "aireber/src/styles.css",
+      "type": "file",
+      "size": 21774
+    },
+    {
+      "path": "aireber/tsconfig.json",
+      "type": "file",
+      "size": 644
+    },
+    {
+      "path": "aireber/vite.config.ts",
+      "type": "file",
+      "size": 623
+    }
+  ]
+}
