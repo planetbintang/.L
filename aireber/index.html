@@ -174,7 +174,7 @@
               <label class="reber-config-toggle"><input id="cfgPbOnly" type="checkbox" checked> Batasi sumber konteks ke data PlanetBintang</label>
               <label class="reber-config-toggle"><input id="cfgNoExternal" type="checkbox" checked> Jangan mengambil referensi atau data eksternal saat menjawab</label>
               <label for="cfgModel">Nama model / mesin AI<input id="cfgModel" maxlength="100" placeholder="Nama model yang dikonfigurasi pada backend"></label>
-              <label for="cfgEndpoint">Endpoint backend<input id="cfgEndpoint" type="url" maxlength="300" placeholder="https://domain-backend.example/api/reber"></label>
+              <label for="cfgEndpoint">Endpoint backend (same-origin)<input id="cfgEndpoint" value="/api/reber" readonly></label>
               <p class="reber-config-note">Kunci API tetap berada di environment server, bukan di browser. Model generatif memerlukan backend aktif. Pengaturan ini membatasi instruksi dan alur retrieval, bukan menghapus pengetahuan bawaan model provider.</p>
             </section>
             <section class="surface reber-config-card"><h3>Pengembangan mesin robotik AI</h3>
