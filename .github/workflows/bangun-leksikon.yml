@@ -30,41 +30,65 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Periksa korpus sumber
+      - name: Periksa ketersediaan korpus sumber
         id: corpus
         shell: bash
         run: |
           if [ ! -f leksikon/data/lema.jsonl ]; then
-            echo "::error::Korpus leksikon/data/lema.jsonl belum tersedia. Tambahkan korpus JSONL berizin dengan minimal 250.000 lema unik; workflow tidak akan mengarang lema atau definisi."
-            exit 1
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Korpus leksikon/data/lema.jsonl belum tersedia. Pembuatan leksikon dilewati; tambahkan korpus JSONL berizin berisi minimal 250.000 lema unik untuk menjalankan build. Workflow tidak akan mengarang lema atau definisi."
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Validasi korpus sumber
+        if: steps.corpus.outputs.available == 'true'
+        shell: bash
+        run: |
           python - <<'PY'
           import json
-          seen=set()
+
+          seen = set()
           with open("leksikon/data/lema.jsonl", encoding="utf-8") as f:
-              for n,line in enumerate(f,1):
-                  if not line.strip(): continue
-                  try: row=json.loads(line)
-                  except Exception as e: raise SystemExit(f"JSONL baris {n} tidak valid: {e}")
-                  lemma=str(row.get("lemma","")).strip()
-                  if lemma: seen.add(lemma.casefold())
+              for n, line in enumerate(f, 1):
+                  if not line.strip():
+                      continue
+                  try:
+                      row = json.loads(line)
+                  except Exception as e:
+                      raise SystemExit(f"JSONL baris {n} tidak valid: {e}")
+                  lemma = str(row.get("lemma", "")).strip()
+                  if lemma:
+                      seen.add(lemma.casefold())
+
           print(f"Lema unik tersedia: {len(seen)}")
           if len(seen) < 250000:
-              raise SystemExit(f"Korpus baru berisi {len(seen)} lema unik; target minimum 250.000 belum terpenuhi.")
+              raise SystemExit(
+                  f"Korpus baru berisi {len(seen)} lema unik; target minimum 250.000 belum terpenuhi."
+              )
           PY
 
       - name: Bangun halaman per lema
+        if: steps.corpus.outputs.available == 'true'
         run: python scripts/bangun-folder-leksikon.py leksikon/data/lema.jsonl --limit 250000 --output dist/leksikon/kata
 
       - name: Sertakan halaman utama leksikon
+        if: steps.corpus.outputs.available == 'true'
         run: |
           mkdir -p dist/leksikon
           cp leksikon/index.html dist/leksikon/index.html
 
       - name: Arsipkan hasil pembangunan
+        if: steps.corpus.outputs.available == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: leksikon-250000-folder
           path: dist/leksikon/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Catat build dilewati
+        if: steps.corpus.outputs.available == 'false'
+        run: |
+          echo "## Build leksikon dilewati" >> "$GITHUB_STEP_SUMMARY"
+          echo "File \`leksikon/data/lema.jsonl\` belum tersedia, jadi tidak ada halaman yang dibuat atau diarsipkan. Tambahkan korpus berizin dengan minimal 250.000 lema unik lalu jalankan workflow kembali." >> "$GITHUB_STEP_SUMMARY"
