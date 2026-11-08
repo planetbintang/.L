@@ -19,8 +19,8 @@
         <span class="brand-mark brand-mark-image"><img src="./reber-brand.svg" alt="" /></span><span><b>AI REBER</b><small>ALLUNIVERS_OS · LOCAL CHAT ENGINE</small></span>
       </a>
       <nav class="tabs" role="tablist" aria-label="Menu AI Reber">
-        <button type="button" id="tab-studio" role="tab" aria-controls="view-studio" aria-selected="true" tabindex="0" data-view-tab="studio" class="active">Studio</button>
-        <button type="button" id="tab-chat" role="tab" aria-controls="view-chat" aria-selected="false" tabindex="-1" data-view-tab="chat">Chat Reber</button>
+        <button type="button" id="tab-studio" role="tab" aria-controls="view-studio" aria-selected="false" tabindex="-1" data-view-tab="studio">Studio</button>
+        <button type="button" id="tab-chat" role="tab" aria-controls="view-chat" aria-selected="true" tabindex="0" data-view-tab="chat" class="active">Chat Reber</button>
         <button type="button" id="tab-filesystem" role="tab" aria-controls="view-filesystem" aria-selected="false" tabindex="-1" data-view-tab="filesystem">File System</button>
         <button type="button" id="tab-projects" role="tab" aria-controls="view-projects" aria-selected="false" tabindex="-1" data-view-tab="projects">Projects</button>
         <button type="button" id="tab-ai-tools" role="tab" aria-controls="view-ai-tools" aria-selected="false" tabindex="-1" data-view-tab="ai-tools">50 Fitur AI</button>
@@ -87,7 +87,7 @@
       </aside>
 
       <main class="main-area">
-        <section class="view-panel active" id="view-studio" data-view="studio" role="tabpanel" aria-labelledby="tab-studio" tabindex="0">
+        <section class="view-panel active" id="view-studio" data-view="studio" role="tabpanel" aria-labelledby="tab-studio" hidden tabindex="0">
           <div class="view-heading"><div><p class="eyebrow">AI STUDIO / LOCAL PROMPT DESK</p><h2 id="studioTitle">Studio Reber</h2><p>Prompt disimpan sebagai file di Workspace File Manager. Tidak dikirim ke model dan tidak ada jawaban AI yang disimulasikan.</p></div><span class="status-tag">MODEL OFFLINE</span></div>
           <div class="studio-grid">
             <div class="chat-panel surface">
@@ -104,7 +104,7 @@
           <div class="notice"><b>Privasi:</b> prompt yang disimpan masuk ke IndexedDB browser pada path <code>aireber/prompts/</code>. Isinya tidak diunggah ke GitHub. GitHub Pages tidak menjalankan endpoint API/AI dari source arsip.</div>
         </section>
 
-        <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" hidden tabindex="0">
+        <section class="view-panel" id="view-chat" data-view="chat" role="tabpanel" aria-labelledby="tab-chat" class="active" tabindex="0">
           <div class="view-heading"><div><p class="eyebrow">CHATBOT REALTIME / MESIN AI REBER</p><h2 id="chatTitle">Chat Reber — tanya apa pun, dijawab bener &amp; mener</h2><p>Chatbot realtime yang mengolah mesin sistem AI Reber: pipeline tokenisasi → retrieval mesin kata AlluniverS_OS → ranking → perangkaian jawaban → sitasi referensi/link acuan. Menjawab pertanyaan jenis apa pun, bisa membuat kode, dan memberikan analisis mendalam untuk permasalahan tertentu — tanpa token API, tanpa kredit, tanpa batas panjang percakapan.</p></div><span class="status-tag">MESIN LOKAL · BACKEND OPSIONAL</span></div>
           <div class="reber-gateway-access surface">
             <div><b>Koneksi Model AI (opsional)</b><p>Untuk model generatif, deploy folder aireber/ ke Netlify dan masukkan kode akses gateway. Kode hanya disimpan di memori halaman ini.</p></div>
