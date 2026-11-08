@@ -85,29 +85,29 @@ html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;backgr
 <link rel="stylesheet" href="./desktop-wallpaper-theme.css?v=20261105-planetbintang-reic-portrait-1">
 
 <style id="vmdesktop-centered-boundary">
-/* VMDESKTOPREIC berada di tengah viewport, di dalam satu garis bingkai. */
-html,body{background:#050b14!important}
+/* Tata letak tiga bidang mengikuti garis pada referensi: desktop tepat di bidang tengah. */
+html,body{width:100%;height:100%;margin:0;overflow:hidden!important;background:#fff!important}
 #desktop-root{
- position:fixed!important;inset:0!important;display:grid!important;place-items:center!important;
- width:100vw!important;height:100vh!important;height:100dvh!important;
- padding:3vh 2vw!important;overflow:hidden!important;
- background:radial-gradient(ellipse at 50% 45%,rgba(23,75,112,.2),transparent 62%),#050b14!important;
+ position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;
+ display:block!important;padding:0!important;overflow:hidden!important;
+ background:linear-gradient(to bottom,#fff 0 31.25%,#06142b 31.25% 65.25%,#fff 65.25% 100%)!important;
 }
-#desktop-root:before,#desktop-root:after{display:none!important}
+#desktop-root:before,#desktop-root:after{
+ content:"";display:block!important;position:absolute;left:0;right:0;height:6px;
+ background:#050505;z-index:30;pointer-events:none;
+}
+#desktop-root:before{top:31.25%}
+#desktop-root:after{top:65.25%}
 #desktop-root>.vm-web-region,#desktop-root>.vm-empty-region{display:none!important}
 #desktop-root>.vm-shell{
- position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
- width:min(96vw,1600px,calc(90dvh * 16 / 9))!important;height:auto!important;aspect-ratio:16/9!important;
- min-width:0!important;min-height:0!important;max-width:96vw!important;max-height:90dvh!important;
- margin:0!important;padding:clamp(5px,.7vw,12px)!important;transform:none!important;
- transform-origin:center!important;border:2px solid #83e1ff!important;
- box-shadow:0 0 0 1px #83e1ff55,0 0 34px #168bd344,inset 0 0 0 1px #ffffff18!important;
- overflow:hidden!important;
+ position:absolute!important;left:5px!important;top:31.45%!important;right:auto!important;bottom:auto!important;
+ width:1920px!important;height:1080px!important;min-width:1920px!important;min-height:1080px!important;
+ max-width:none!important;max-height:none!important;margin:0!important;
+ transform:scale(var(--vm-scale-x,1),var(--vm-scale-y,1))!important;
+ transform-origin:top left!important;border:3px solid #83e1ff!important;border-radius:0!important;
+ box-shadow:0 0 0 1px #07111f,0 0 28px #168bd344!important;overflow:hidden!important;
 }
-@media(max-width:600px){
- #desktop-root{padding:2vh 2vw!important}
- #desktop-root>.vm-shell{width:min(96vw,calc(92dvh * 16 / 9))!important;max-width:96vw!important;max-height:92dvh!important}
-}
+@media(prefers-reduced-motion:reduce){#desktop-root>.vm-shell:before,#desktop-root>.vm-shell:after{animation:none!important}}
 </style>
 <link rel="stylesheet" href="./25-modal-system.css?v=20261105-25-modal-system-1">
 <link rel="stylesheet" href="./beos-single-layer.css?v=20261105-beos-single-layer-1">
@@ -124,8 +124,9 @@ html,body{background:#050b14!important}
   resizeQueued=false;
   const w=document.documentElement.clientWidth||innerWidth;
   const h=document.documentElement.clientHeight||innerHeight;
-	  const scale=Math.min((w-10)/1920,(h-10)/1080);
-  root.style.setProperty('--vm-scale',String(Math.max(.05,scale)));
+  const middleHeight=Math.max(1,h*(.6525-.3125)-6);
+  root.style.setProperty('--vm-scale-x',String(Math.max(.01,(w-10)/1920)));
+  root.style.setProperty('--vm-scale-y',String(Math.max(.01,middleHeight/1080)));
  };
  const scheduleFit=()=>{if(resizeQueued)return;resizeQueued=true;requestAnimationFrame(fit);};
  fit();addEventListener('resize',scheduleFit,{passive:true});addEventListener('orientationchange',scheduleFit,{passive:true});
