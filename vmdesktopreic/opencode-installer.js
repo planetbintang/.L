@@ -30,7 +30,7 @@
  }
  function render(){
   const header=$('.vm-header-tools');if(header&&!$('#opencodeLauncher')){const b=document.createElement('button');b.id='opencodeLauncher';b.type='button';b.textContent='⌘';b.title='OpenCode Installer';b.setAttribute('aria-label','OpenCode Installer');b.addEventListener('click',open);header.append(b);}
-  const launcher=$('#vmAppLauncher');if(launcher&&!launcher.querySelector('[data-open="opencode-installer"]')){const b=document.createElement('button');b.className='vm-app';b.dataset.open='opencode-installer';b.innerHTML='<span class="app-icon app-dark">⌘</span><b>OpenCode</b>';b.addEventListener('click',open);launcher.append(b);}
+  const launcher=$('#vmAppLauncher');if(launcher&&!launcher.querySelector('[data-open="opencode-installer"]')){const b=document.createElement('button');b.className='vm-app';b.dataset.vmOpencode='true';b.innerHTML='<span class="app-icon app-dark">⌘</span><b>OpenCode</b>';b.addEventListener('click',open);launcher.append(b);}
  }
  function open(){
   const backdrop=$('#modalBackdrop'),title=$('#modalTitle'),icon=$('#modalIcon'),tabs=$('#modalTabs'),body=$('#modalBody'),statusBar=$('#modalStatus');
