@@ -69,7 +69,7 @@ jobs:
             seen.add(f.path);
             const p = path.join(root, f.path);
             if (!fs.existsSync(p)) throw new Error('Missing file: ' + p);
-            const lines = fs.readFileSync(p, 'utf8').trimEnd().split(/\\r?\\n/).length;
+            const lines = fs.readFileSync(p, 'utf8').trimEnd().split(/\r?\n/).length;
             if (lines < 100) throw new Error(p + ' has only ' + lines + ' lines');
           }
           console.log('PASS: TASK ' + m.taskNumber + ' verified ' + seen.size + ' files; each has at least 100 lines.');
