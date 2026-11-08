@@ -28,14 +28,14 @@ jobs:
 
       - name: Authenticate with repository creation token
         env:
-          GH_TOKEN: ${{ secrets.PLANETBINTANG_TOKEN }}
+          GH_TOKEN: ${{ secrets.IO_PLANETBINTANG }}
         run: |
-          test -n "$GH_TOKEN" || { echo "Missing PLANETBINTANG_TOKEN repository secret"; exit 1; }
+          test -n "$GH_TOKEN" || { echo "Missing IO_PLANETBINTANG repository secret"; exit 1; }
           gh auth status
 
       - name: Create public repositories and publish VMDESKTOPREIC packages
         env:
-          GH_TOKEN: ${{ secrets.PLANETBINTANG_TOKEN }}
+          GH_TOKEN: ${{ secrets.IO_PLANETBINTANG }}
         run: |
           chmod +x media/repositorycenter/createintegratedpackages.sh
           bash media/repositorycenter/createintegratedpackages.sh
