@@ -152,3 +152,36 @@ body{font-size:13px;line-height:1.5}
 :root[data-theme="gelap-abstrak"] :where(.compose-panel textarea,.project-form input,.project-form textarea,.fs-toolbar input,.fs-toolbar select,.preview-panel textarea,.chat-compose textarea,.theme-picker select){background:#071321;color:#eaf4ff;border-color:#29415d}
 :root[data-theme="gelap-abstrak"] .chat-log,:root[data-theme="gelap-abstrak"] .prompt-history{background:#071321;border-color:#29415d}
 .ai-tool-workspace{display:grid;gap:12px}.ai-tool-workspace>label{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--accent)}#aiToolInput{width:100%;resize:vertical;min-height:110px;padding:12px;border:1px solid var(--line);border-radius:8px;background:rgba(7,19,33,.85);color:var(--ink)}.ai-tool-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px}.ai-tool-toolbar input{width:min(360px,100%);padding:9px;border:1px solid var(--line);border-radius:7px;background:#071321;color:var(--ink)}.ai-tool-toolbar span{font-size:10px;color:var(--muted)}.ai-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.ai-feature-card{min-width:0;padding:12px;border:1px solid var(--line);background:linear-gradient(145deg,#0d1b2d,#081321);box-shadow:var(--shadow)}.ai-feature-card h3{margin:0 0 4px;font-size:13px;color:var(--ink)}.ai-feature-card p{margin:0 0 9px;color:var(--muted);font-size:10px}.ai-feature-actions{display:grid;gap:5px}.ai-feature-actions button{padding:7px 9px;text-align:left;border:1px solid var(--line);background:#10243a;color:var(--ink);font-size:10px}.ai-feature-actions button:hover{border-color:var(--accent);background:#14314a}.ai-tool-result{border:1px solid var(--line);padding:12px;background:#071321}.ai-tool-result>div{display:flex;align-items:center;justify-content:space-between;gap:10px}.ai-tool-result pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;margin:10px 0 0;color:var(--ink);font:11px/1.6 ui-monospace,monospace}.ai-tool-result b{font-size:12px}@media(max-width:700px){.ai-feature-grid{grid-template-columns:1fr}.ai-tool-toolbar{align-items:stretch;flex-direction:column}}
+
+
+/* Aireber ChatGPT-inspired workspace and AI configuration */
+#view-chat{min-height:calc(100dvh - 150px);display:flex;flex-direction:column}
+#view-chat[hidden]{display:none}
+#view-chat .view-heading{display:none}
+#view-chat .reber-gateway-access{order:3;margin-top:10px;padding:10px 12px}
+#view-chat .chat-shell{order:1;display:flex;flex:1;min-height:min(690px,calc(100dvh - 170px));flex-direction:column;gap:0;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:rgba(7,19,33,.72)}
+#view-chat .chat-log{flex:1;min-height:340px;max-height:none;overflow:auto;padding:clamp(16px,4vw,42px) clamp(12px,8vw,110px);background:transparent}
+#view-chat .chat-compose{display:flex;align-items:flex-end;gap:10px;margin:0 auto 10px;width:min(900px,calc(100% - 24px));padding:10px;border:1px solid var(--line);border-radius:18px;background:#10243a;box-shadow:0 10px 35px rgba(0,0,0,.18)}
+#view-chat .chat-compose textarea{flex:1;min-height:48px;max-height:180px;resize:vertical;border:0;outline:0;background:transparent;color:var(--ink);padding:12px}
+#view-chat .chat-compose .primary-button{min-height:44px;min-width:78px;border-radius:12px}
+#view-chat .chat-quick{order:2;display:flex;flex-wrap:wrap;justify-content:center;gap:7px;padding:0 12px 12px}
+#view-chat .chat-quick button{border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:var(--soft);color:var(--ink);font-size:11px}
+#view-chat .chat-foot{order:4;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
+#view-chat .reber-chat-message{max-width:900px;margin:0 auto 22px;padding:0 0 16px;border:0;border-bottom:1px solid rgba(130,160,190,.16);background:transparent;box-shadow:none}
+#view-chat .reber-chat-message.user{max-width:760px;margin-left:auto;padding:13px 17px;border:1px solid var(--line);border-radius:18px;background:rgba(90,125,160,.12)}
+#view-chat .reber-chat-head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+#view-chat .reber-chat-avatar{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(145deg,#1b6680,#1d4268);color:#fff;font-weight:800}
+#view-chat .reber-chat-body{font-size:14px;line-height:1.75;overflow-wrap:anywhere}
+#view-chat .reber-chat-body pre{overflow:auto;max-width:100%}
+#view-chat .notice{order:5;margin-top:10px}
+.reber-config-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.reber-config-card{display:grid;align-content:start;gap:11px}
+.reber-config-card h3{margin:0;font-size:15px}
+.reber-config-card label{display:grid;gap:5px;font-size:11px;font-weight:700}
+.reber-config-card input:not([type=checkbox]),.reber-config-card textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:8px;background:#071321;color:var(--ink);font:inherit}
+.reber-config-toggle{display:flex!important;align-items:center;gap:9px;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--soft)}
+.reber-config-toggle input{width:17px;height:17px;accent-color:var(--accent)}
+.reber-config-note{margin:0;color:var(--muted);font-size:11px;line-height:1.6}
+.reber-pipeline{margin:0;padding-left:22px;display:grid;gap:9px;font-size:12px}
+.reber-config-actions{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.reber-config-grid{grid-template-columns:1fr}#view-chat .chat-shell{min-height:calc(100dvh - 190px)}#view-chat .chat-log{min-height:280px;padding:16px 12px}#view-chat .chat-compose{width:calc(100% - 16px);margin-bottom:8px}#view-chat .chat-quick{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}#view-chat .chat-quick button{white-space:nowrap}}
