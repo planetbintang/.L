@@ -139,3 +139,6 @@ repeating-linear-gradient(145deg,transparent 0 110px,rgba(0,121,255,.13) 111px 1
  .launcher button{font-size:22px}
  .launcher small{font-size:8px}
 }
+/* Use the existing original REIC cosmic artwork for the actual upper and lower desktop scenes. */
+.brand{background-image:linear-gradient(180deg,rgba(0,8,35,.08),rgba(0,8,35,.2)),url('./desktop-wallpaper.svg');background-size:100% auto;background-position:center top;background-repeat:no-repeat}
+.footer{background-image:linear-gradient(180deg,rgba(1,10,35,.08),rgba(1,8,28,.25)),url('./desktop-wallpaper.svg');background-size:100% auto;background-position:center 75%;background-repeat:no-repeat}
