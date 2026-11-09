@@ -1,0 +1,27 @@
+{
+  "name": "PlanetBintang REIC",
+  "standardVersion": "1.0.0",
+  "language": "id",
+  "extensions": {
+    ".reic": { "kind": "document", "syntax": ["html-compatible", "json-manifest"] },
+    ".reicss": { "kind": "stylesheet", "syntax": "css" },
+    ".reicjs": { "kind": "module", "syntax": "ecmascript-module" }
+  },
+  "buildAdapters": {
+    ".ts": "typescript-compiler-required",
+    ".tsx": "typescript-jsx-transpiler-required",
+    ".jsx": "jsx-transpiler-required",
+    ".php": "server-runtime-required"
+  },
+  "runtime": {
+    "entry": "./reic-language.js",
+    "styles": ["./system.reicss", "./runtime.reicss", "./infrastruktur.reicss"],
+    "scripts": ["./runtime.reicjs", "./infrastruktur.reicjs"],
+    "theme": "ocean-blue"
+  },
+  "security": {
+    "allowBrowserSecrets": false,
+    "trustedTemplatesOnly": true,
+    "serverOperationsRequireBackend": true
+  }
+}
