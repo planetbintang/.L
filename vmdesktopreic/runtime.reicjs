@@ -235,8 +235,9 @@ function openInAppBrowser(rawUrl){
  try{url=new URL(rawUrl,window.location.href);}catch{return;}
  if(!['http:','https:'].includes(url.protocol))return;
  const content='<div class="reic-inapp-browser"><form data-inapp-form><button type="button" data-inapp-back aria-label="Kembali">‹</button><button type="button" data-inapp-forward aria-label="Maju">›</button><button type="button" data-inapp-reload aria-label="Muat ulang">↻</button><input data-inapp-url type="url" aria-label="Alamat situs" spellcheck="false"><button type="submit">BUKA</button></form><div class="reic-inapp-status" data-inapp-status role="status">Membuka halaman di dalam VMDESKTOPREIC…</div><iframe data-inapp-frame title="Halaman web di dalam VMDESKTOPREIC" referrerpolicy="no-referrer" allow="fullscreen; clipboard-read; clipboard-write"></iframe><div class="reic-inapp-note">Beberapa situs memblokir tampilan di dalam frame (X-Frame-Options / CSP). Jika diblokir, halaman tidak dapat ditampilkan di sini; desktop tetap terbuka dan tidak dialihkan ke tab browser eksternal.</div></div>';
- const w=makeWindow('Browser · '+url.hostname,'◎',content);
+ const w=makeWindow('Browser · '+url.hostname,'◎',content);w.classList.add('reic-browser-window');
  const frame=$('[data-inapp-frame]',w),input=$('[data-inapp-url]',w),status=$('[data-inapp-status]',w);
+ frame.setAttribute('sandbox','allow-scripts allow-forms allow-same-origin allow-downloads');
  const history=[url.href];let index=0;
  const load=(value,push=true)=>{
   let next;try{next=new URL(value,history[index]);}catch{status.textContent='Alamat URL tidak valid.';return;}
