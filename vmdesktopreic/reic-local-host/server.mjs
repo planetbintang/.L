@@ -4,8 +4,11 @@ import { mkdir, readdir, stat, readFile } from "node:fs/promises";
 
 const PORT = Number(process.env.REIC_PORT || 8787);
 const OWNER = process.env.GITHUB_OWNER || "planetbintang";
-const TOKEN = process.env.GITHUB_TOKEN || "";\nconst BING_KEY = process.env.BING_SEARCH_KEY || "";
-const ROOT = path.resolve(process.env.REIC_STORAGE_ROOT || "./data");\nconst SEARCH_ROOTS = (process.env.REIC_SEARCH_ROOTS || [path.resolve(process.cwd(), "../.."), ROOT].join(","))\n  .split(",").map(x => path.resolve(x.trim())).filter(Boolean);
+const TOKEN = process.env.GITHUB_TOKEN || "";
+const BING_KEY = process.env.BING_SEARCH_KEY || "";
+const ROOT = path.resolve(process.env.REIC_STORAGE_ROOT || "./data");
+const SEARCH_ROOTS = (process.env.REIC_SEARCH_ROOTS || [path.resolve(process.cwd(), "../.."), ROOT].join(","))
+  .split(",").map(x => path.resolve(x.trim())).filter(Boolean);
 const ORIGINS = (process.env.REIC_ALLOWED_ORIGINS || "http://127.0.0.1:8787,http://localhost:8787,https://planetbintang.github.io")
   .split(",").map(x => x.trim()).filter(Boolean);
 
@@ -49,8 +52,8 @@ const server = http.createServer(async (req, res) => {
       if (q.length < 2) return send(res, 400, { error: "Masukkan minimal 2 karakter untuk pencarian." });
       const results = [];
       const terms = q.toLowerCase().split(/\\s+/).filter(Boolean);
-      const searchable = /\\.(md|txt|html?|css|js|mjs|reic|reicss|reicjs|json|xml|yml|yaml)$/i;
-      const ignored = /(^|\\/)(\\.git|node_modules|vendor|\\.cache|secrets?)(\\/|$)|(^|\\/)\\.env($|\\.)|(^|\\/).*\\.(pem|key)$/i;
+      const searchable = /\.(md|txt|html?|css|js|mjs|reic|reicss|reicjs|json|xml|yml|yaml)$/i;
+      const ignored = /(^|\/)(\.git|node_modules|vendor|\.cache|secrets?)(\/|$)|(^|\/)\.env($|\.)|(^|\/).*\.(pem|key)$/i;
       let scanned = 0;
       const walk = async (dir, rel = "", depth = 0) => {
         if (depth > 5 || scanned >= 700 || results.length >= 24) return;
@@ -72,7 +75,7 @@ const server = http.createServer(async (req, res) => {
               const score = terms.reduce((n, term) => n + (lower.includes(term) ? 1 : 0), 0);
               if (score) {
                 const at = lower.indexOf(terms[0]);
-                const snippet = content.replace(/\\s+/g, " ").slice(Math.max(0, at - 90), Math.max(0, at - 90) + 260);
+                const snippet = content.replace(/\s+/g, " ").slice(Math.max(0, at - 90), Math.max(0, at - 90) + 260);
                 results.push({ source: "FILE REIC", title: childRel, url: "", snippet, score });
               }
             } catch {}
