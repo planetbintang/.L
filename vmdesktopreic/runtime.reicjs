@@ -1,0 +1,106 @@
+(()=>{'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const stage=$('.desktop-stage'),apps=$('#apps'),fileWindow=$('#file-window'),items=$('#items'),pathEl=$('#path'),status=$('#status');
+const OWNER='planetbintang',API='https://api.github.com';
+let currentPath='Beranda',searchTerm='',repoCache=null,repoBusy=false,treeCache=new Map(),windowZ=20;
+const roots=['acct','sys','system_ext','cache','config','media','data','repositori','vmdesktopreic','Aireber'];
+const modules={
+'Beranda':['Ringkasan sistem','Status desktop','Aplikasi terbaru','Pusat aktivitas'],
+'File Manager':['Beranda','Repositori GitHub','File System','Indeks REIC','Pencarian file'],
+'Terminal Shell':['Terminal REIC','Riwayat perintah','Dokumentasi','Status shell'],
+'Pengaturan':['Tampilan desktop','Konfigurasi sistem','Jaringan','Keamanan','Penyimpanan'],
+'Perpustakaan':['List Blok','Layout Library','Komponen REIC','Dokumentasi'],
+'Aplikasi':['Daftar aplikasi','Aplikasi terpasang','Manajemen aplikasi'],
+'REIC Explorer':['Indeks utama','Penjelajah komponen','Manifest','Skema REIC'],
+'List Blok':['Blok UI','Blok layout','Blok navigasi','Blok formulir'],
+'Layout Library':['Desktop','Dashboard','Panel','Jendela aplikasi'],
+'Konfigurasi Infrastruktur':['Runtime','Jaringan','Penyimpanan','Integrasi GitHub'],
+'Monitor Sistem':['Status runtime','Koneksi GitHub','Aktivitas aplikasi','Informasi browser'],
+'Bantuan Sistem':['Panduan desktop','Navigasi File Manager','Tentang REIC'],
+'Browser':['PlanetBintang.L','GitHub','GitHub Pages'],
+'Dokumen':['Dokumen sistem','Dokumentasi REIC','README repositori'],
+'Galeri':['Media sistem','Wallpaper','Aset visual'],
+'Musik':['Perpustakaan media','Pemutar media'],
+'Video':['Perpustakaan video','Pemutar video'],
+'Sampah':['Item terhapus','Pemulihan item']
+};
+function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function apiHeaders(){return {'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};}
+async function getJSON(url){const r=await fetch(url,{headers:apiHeaders()});if(!r.ok)throw new Error(r.status===403?'Batas permintaan GitHub tercapai. Coba lagi beberapa saat.':r.status===404?'Data tidak ditemukan atau repositori tidak publik.':'GitHub API: HTTP '+r.status);return r.json();}
+function makeWindow(title,icon,content){
+ const w=document.createElement('section');w.className='reic-app-window';w.setAttribute('role','dialog');w.setAttribute('aria-label',title);
+ w.style.zIndex=String(++windowZ);
+ w.innerHTML='<header class="reic-app-title"><strong><span>'+safe(icon)+'</span> '+safe(title)+'</strong><div><button data-minimize aria-label="Minimalkan">−</button><button data-maximize aria-label="Maksimalkan">□</button><button data-close aria-label="Tutup">×</button></div></header><div class="reic-app-content">'+content+'</div>';
+ apps.append(w);placeWindow(w);wireWindow(w);return w;
+}
+function placeWindow(w){const bounds=apps.getBoundingClientRect();const width=Math.min(760,Math.max(280,bounds.width-24));w.style.width=width+'px';w.style.maxHeight='calc(100% - 20px)';w.style.left=Math.max(8,(bounds.width-width)/2)+'px';w.style.top=Math.max(8,Math.min(24,bounds.height*.04))+'px';}
+function wireWindow(w){
+ const bar=$('.reic-app-title',w);let drag=null;
+ w.addEventListener('pointerdown',()=>w.style.zIndex=String(++windowZ));
+ bar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=w.getBoundingClientRect(),b=apps.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top,b};bar.setPointerCapture(e.pointerId);});
+ bar.addEventListener('pointermove',e=>{if(!drag)return;const x=Math.max(0,Math.min(drag.b.width-w.offsetWidth,e.clientX-drag.b.left-drag.x));const y=Math.max(0,Math.min(drag.b.height-w.offsetHeight,e.clientY-drag.b.top-drag.y));w.style.left=x+'px';w.style.top=y+'px';});
+ bar.addEventListener('pointerup',()=>drag=null);bar.addEventListener('pointercancel',()=>drag=null);
+ $('[data-close]',w).onclick=()=>w.remove();
+ $('[data-minimize]',w).onclick=()=>{w.hidden=true;const restore=document.createElement('button');restore.className='reic-restore-chip';restore.textContent=$('.reic-app-title strong',w).textContent;restore.onclick=()=>{w.hidden=false;restore.remove();w.style.zIndex=String(++windowZ)};apps.append(restore);};
+ $('[data-maximize]',w).onclick=()=>{w.classList.toggle('is-maximized');if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{w.style.height='';placeWindow(w)}};
+}
+function openApp(name){
+ if(name==='File Manager'){fileWindow.hidden=false;fileWindow.scrollIntoView({block:'nearest'});return;}
+ const body=appContent(name);const w=makeWindow(name,iconFor(name),body);
+ if(name==='REIC Explorer'||name==='File Manager')loadRepos(w);
+ if(name==='Monitor Sistem')refreshMonitor(w);
+ if(name==='Pengaturan')wireSettings(w);
+ if(name==='Terminal Shell')wireTerminal(w);
+ if(name==='Browser')wireBrowser(w);
+ if(name==='Perpustakaan'||name==='List Blok'||name==='Layout Library')wireLibrary(w);
+}
+function iconFor(n){return ({'Beranda':'⌂','File Manager':'📁','Terminal Shell':'>_','Pengaturan':'⚙','Perpustakaan':'◫','Aplikasi':'▦','REIC Explorer':'★','List Blok':'▦','Layout Library':'▰','Konfigurasi Infrastruktur':'⚙','Monitor Sistem':'∿','Bantuan Sistem':'?','Browser':'◎','Dokumen':'▤','Galeri':'▧','Musik':'♫','Video':'▶','Sampah':'♲'})[n]||'▣';}
+function appContent(name){
+ if(name==='Beranda')return '<div class="reic-dashboard"><div class="reic-eyebrow">PLANETBINTANG · REIC DESKTOP</div><h2>Selamat datang di VMDESKTOPREIC</h2><p>Ruang kerja terpadu untuk sistem, file, komponen, dan repositori.</p><div class="reic-stat-grid"><article><b>150</b><span>Indeks utama REIC</span></article><article><b>1.000.000</b><span>Ruang sublink virtual terencana</span></article><article><b>GitHub</b><span>Integrasi repositori</span></article></div><div class="reic-action-grid">'+['File Manager','REIC Explorer','Pengaturan','Monitor Sistem'].map(n=>'<button data-launch="'+safe(n)+'">'+iconFor(n)+' '+safe(n)+'</button>').join('')+'</div></div>';
+ if(name==='File Manager'||name==='REIC Explorer')return '<div class="reic-github"><div class="reic-eyebrow">GITHUB · LIVE API</div><h2>Repositori PlanetBintang</h2><p>Daftar repositori publik dan konten direktori dimuat langsung dari GitHub.</p><div class="reic-toolbar"><input data-repo-search placeholder="Cari repositori…"><button data-refresh>↻ Muat ulang</button><a href="https://github.com/planetbintang" target="_blank" rel="noopener">Profil GitHub ↗</a></div><div data-repo-status role="status">Menyiapkan koneksi…</div><div data-repo-list class="reic-repo-list"></div></div>';
+ if(name==='Pengaturan'||name==='Konfigurasi Infrastruktur')return '<div class="reic-settings"><div class="reic-eyebrow">KONFIGURASI SISTEM</div><h2>Pengaturan VMDESKTOPREIC</h2><label class="reic-setting"><span>Animasi jendela</span><input type="checkbox" data-setting="motion" checked></label><label class="reic-setting"><span>Efek cahaya biru</span><input type="checkbox" data-setting="glow" checked></label><label class="reic-setting"><span>Skala antarmuka</span><select data-setting="scale"><option value="1">100%</option><option value="1.05">105%</option><option value="1.1">110%</option><option value=".95">95%</option></select></label><p class="reic-note">Pengaturan visual berlaku pada sesi desktop ini. Akses privat GitHub memerlukan layanan backend OAuth yang aman.</p></div>';
+ if(name==='Monitor Sistem')return '<div class="reic-monitor"><div class="reic-eyebrow">MONITOR RUNTIME</div><h2>Status Sistem</h2><div data-monitor-status>Memeriksa runtime…</div><div class="reic-stat-grid"><article><b>Online</b><span>Browser runtime</span></article><article><b>GitHub API</b><span data-api-status>Belum diperiksa</span></article><article><b>Local UI</b><span>Aktif</span></article></div></div>';
+ if(name==='Terminal Shell')return '<div class="reic-terminal"><div class="reic-eyebrow">REIC SHELL · READ ONLY</div><div class="terminal-output">PlanetBintang REIC Shell<br>Perintah bantuan: help<br>Perintah yang tersedia: help, status, repos, open [aplikasi], clear</div><form data-terminal-form><span>reic@planetbintang:~$</span><input data-terminal-input autocomplete="off" aria-label="Perintah terminal"><button>Kirim</button></form></div>';
+ if(name==='Browser')return '<div class="reic-browser"><div class="reic-eyebrow">BROWSER SHORTCUTS</div><h2>Navigasi PlanetBintang</h2><a href="https://planetbintang.github.io/.L/" target="_blank" rel="noopener">PlanetBintang.L ↗</a><a href="https://github.com/planetbintang" target="_blank" rel="noopener">GitHub · planetbintang ↗</a><a href="https://planetbintang.github.io/.L/vmdesktopreic/" target="_blank" rel="noopener">VMDESKTOPREIC Pages ↗</a></div>';
+ if(name==='Perpustakaan'||name==='List Blok'||name==='Layout Library')return '<div class="reic-library"><div class="reic-eyebrow">OS MEDIA VM · LIBRARY</div><h2>'+safe(name)+'</h2><p>Komponen dan tata letak yang tersedia di dalam paket desktop.</p><div class="reic-action-grid">'+['Panel','Kartu','Navigasi','Formulir','Dialog','Tabel','Explorer','Dashboard','Terminal','Monitor','Editor','Pengaturan'].map(x=>'<button>'+x+'</button>').join('')+'</div></div>';
+ if(name==='Aplikasi')return '<div class="reic-library"><div class="reic-eyebrow">APLIKASI DESKTOP</div><h2>Semua aplikasi</h2><div class="reic-action-grid">'+Object.keys(modules).map(n=>'<button data-launch="'+safe(n)+'">'+iconFor(n)+' '+safe(n)+'</button>').join('')+'</div></div>';
+ return '<div class="reic-library"><div class="reic-eyebrow">SISTEM REIC</div><h2>'+safe(name)+'</h2><p>Modul '+safe(name)+' pada VMDESKTOPREIC.</p><div class="reic-action-grid">'+(modules[name]||['Buka modul','Lihat dokumentasi']).map(x=>'<button>'+safe(x)+'</button>').join('')+'</div></div>';
+}
+async function loadRepos(w){
+ const list=$('[data-repo-list]',w),state=$('[data-repo-status]',w),search=$('[data-repo-search]',w);
+ if(!list||!state)return;
+ const render=(arr)=>{list.replaceChildren();arr.forEach(repo=>{const card=document.createElement('article');card.className='reic-repo-card';const a=document.createElement('a');a.href=repo.html_url;a.target='_blank';a.rel='noopener';a.textContent=repo.name+' ↗';const meta=document.createElement('small');meta.textContent=(repo.private?'Privat':'Publik')+' · '+(repo.default_branch||'main')+' · '+(repo.language||'Repositori');const desc=document.createElement('p');desc.textContent=repo.description||'Tidak ada deskripsi';const actions=document.createElement('div');actions.className='reic-repo-actions';const browse=document.createElement('button');browse.textContent='Jelajahi file';browse.onclick=()=>loadRepoTree(w,repo);const pages=document.createElement('a');pages.href=repo.homepage||'https://'+OWNER+'.github.io/'+repo.name+'/';pages.target='_blank';pages.rel='noopener';pages.textContent='GitHub Pages ↗';actions.append(browse,pages);card.append(a,meta,desc,actions);list.append(card);});};
+ try{
+ state.textContent='Menghubungkan ke GitHub API…';if(!repoCache){repoBusy=true;const all=[];for(let page=1;page<=5;page++){const part=await getJSON(API+'/users/'+OWNER+'/repos?per_page=100&sort=updated&page='+page);all.push(...part);if(part.length<100)break;}repoCache=all;repoBusy=false;}
+ const filter=()=>{const term=search.value.trim().toLowerCase();render(repoCache.filter(r=>(r.name+' '+(r.description||'')).toLowerCase().includes(term)));state.textContent=repoCache.length+' repositori publik dimuat dari GitHub · '+repoCache.filter(r=>r.private).length+' privat tidak disediakan endpoint publik.';};
+ search.addEventListener('input',filter);$('[data-refresh]',w).onclick=()=>{repoCache=null;loadRepos(w)};filter();
+ }catch(e){state.textContent='Koneksi GitHub gagal: '+e.message;list.innerHTML='<p class="reic-error">Data repositori tidak dapat dimuat. Periksa koneksi lalu tekan Muat ulang.</p>';}
+}
+async function loadRepoTree(w,repo,path=''){
+ const list=$('[data-repo-list]',w),state=$('[data-repo-status]',w);if(!list)return;
+ list.innerHTML='<p>Memuat '+safe(path||repo.name)+'…</p>';
+ try{const url=API+'/repos/'+OWNER+'/'+encodeURIComponent(repo.name)+'/contents/'+path+'?ref='+encodeURIComponent(repo.default_branch||'main');const entries=await getJSON(url);list.replaceChildren();
+ const head=document.createElement('div');head.className='reic-tree-head';const back=document.createElement('button');back.textContent='← Kembali ke repositori';back.onclick=()=>loadRepos(w);const label=document.createElement('strong');label.textContent=repo.name+'/'+path;head.append(back,label);list.append(head);
+ entries.forEach(entry=>{const row=document.createElement('article');row.className='reic-tree-row';const b=document.createElement('button');b.textContent=(entry.type==='dir'?'📁 ':'▤ ')+entry.name;b.onclick=()=>entry.type==='dir'?loadRepoTree(w,repo,entry.path):window.open(entry.html_url,'_blank','noopener');row.append(b);list.append(row);});
+ state.textContent=repo.full_name+' · '+entries.length+' item pada direktori';
+ }catch(e){state.textContent='Tidak dapat membaca direktori: '+e.message;list.innerHTML='<p class="reic-error">Repositori privat atau endpoint tidak tersedia. Buka langsung di GitHub untuk memeriksa akses.</p><a href="'+safe(repo.html_url)+'" target="_blank" rel="noopener">Buka repositori ↗</a>';}
+}
+function refreshMonitor(w){const out=$('[data-monitor-status]',w),api=$('[data-api-status]',w);out.textContent='Browser: '+navigator.userAgent.slice(0,90)+' · Online: '+(navigator.onLine?'Ya':'Tidak');getJSON(API+'/rate_limit').then(()=>api.textContent='Terhubung').catch(()=>api.textContent='Tidak tersedia');}
+function wireSettings(w){$$('[data-setting]',w).forEach(el=>el.addEventListener('change',()=>{if(el.dataset.setting==='motion')document.documentElement.classList.toggle('reic-no-motion',!el.checked);if(el.dataset.setting==='glow')document.documentElement.classList.toggle('reic-no-glow',!el.checked);if(el.dataset.setting==='scale')stage.style.setProperty('--reic-ui-scale',el.value);}));}
+function wireTerminal(w){const form=$('[data-terminal-form]',w),input=$('[data-terminal-input]',w),out=$('.terminal-output',w);form.onsubmit=e=>{e.preventDefault();const cmd=input.value.trim();let result='Perintah tidak dikenal. Ketik help.';if(cmd==='help')result='help · status · repos · open [aplikasi] · clear';else if(cmd==='status')result='Runtime browser aktif. GitHub API publik dapat digunakan.';else if(cmd==='repos')result=repoCache?repoCache.length+' repositori publik dimuat.':'Gunakan REIC Explorer untuk memuat daftar repositori.';else if(cmd.startsWith('open ')){const n=cmd.slice(5);if(Object.keys(modules).includes(n)){openApp(n);result='Membuka '+n;}else result='Nama aplikasi tidak ditemukan.';}else if(cmd==='clear'){out.textContent='';input.value='';return;}out.innerHTML+='\n$ '+safe(cmd)+'\n'+safe(result);input.value='';};}
+function wireBrowser(w){/* tautan browser menggunakan navigasi aman ke domain yang ditentukan */ }
+function wireLibrary(w){$$('.reic-action-grid button',w).forEach(b=>b.onclick=()=>{const label=b.textContent.trim();const n=Object.keys(modules).find(k=>k===label);if(n)openApp(n);else{const win=makeWindow(label,'▣','<div class="reic-library"><h2>'+safe(label)+'</h2><p>Komponen '+safe(label)+' tersedia sebagai modul pustaka REIC.</p></div>');}});}
+function drawFiles(path='Beranda'){
+ currentPath=path;pathEl.textContent='/ '+path;items.replaceChildren();
+ if(path==='repositori'){status.textContent='Mengambil daftar repositori GitHub…';items.innerHTML='<button class="file-entry" data-open-repos><b>🌐</b><span>Repositori publik</span></button>';items.firstChild.onclick=()=>openApp('REIC Explorer');return;}
+ let names=path==='Beranda'||path==='File System'?roots:path==='vmdesktopreic'?['index.html','system.reicss','system.reicjs','reference-match.css','README.md','indexes','registry']:path==='media'?['manifest.json','repositori','indeks-reic']:path==='repositori'?[]:['index.reic','manifest.json','system.reicss','system.reicjs','README.md'];
+ if(path==='Beranda'||path==='File System')names=[...roots];
+ names.filter(n=>n.toLowerCase().includes(searchTerm)).forEach(n=>{const b=document.createElement('button');b.className='file-entry';const isDir=!n.includes('.');b.innerHTML='<b>'+(isDir?'📁':n.endsWith('.reicss')?'🎨':n.endsWith('.reicjs')?'📜':'▤')+'</b><span>'+safe(n)+'</span>';b.onclick=()=>isDir?drawFiles(n):openApp(n);items.append(b);});
+ status.textContent=items.children.length+' item · File System REIC · data runtime lokal';
+}
+function wireFileManager(){if(!items)return;drawFiles();$$('[data-folder]').forEach(b=>b.onclick=()=>drawFiles(b.dataset.folder));$('#search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();drawFiles(currentPath)});$('#back').onclick=()=>drawFiles('Beranda');$('#forward').onclick=()=>drawFiles('Beranda');$('#up').onclick=()=>drawFiles('Beranda');$('#grid').onclick=()=>items.classList.remove('list-mode');$('#list').onclick=()=>items.classList.add('list-mode');$$('[data-close],[data-min]',fileWindow).forEach(b=>b.onclick=()=>fileWindow.hidden=true);$('[data-max]',fileWindow).onclick=()=>fileWindow.classList.toggle('file-window-max');}
+function wireLauncher(){ $$('[data-open]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.open)));$$('[data-launch]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.launch))); }
+function updateClock(){const el=$('#clock');if(el)el.textContent=new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date());}
+wireFileManager();wireLauncher();updateClock();setInterval(updateClock,30000);
+window.PB_REIC={version:'2.0',repositoryOwner:OWNER,githubAPI:'public-readonly',openApp,refreshRepositories:()=>{repoCache=null;},desktopBounds:()=>apps.getBoundingClientRect()};
+})();
