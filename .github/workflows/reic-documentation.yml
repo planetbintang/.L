@@ -1,0 +1,47 @@
+name: Bangun 1500 Dokumen REIC
+
+on:
+  push:
+    branches: [io]
+    paths:
+      - "scripts/generate-reic-documents.mjs"
+      - ".github/workflows/reic-documentation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reic-documentation-io
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil repositori
+        uses: actions/checkout@v4
+        with:
+          ref: io
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Hasilkan 1500 dokumen
+        run: node scripts/generate-reic-documents.mjs
+      - name: Verifikasi jumlah dan judul dokumen
+        run: |
+          test "$(find vmdesktopreic/dokumentasi-kompilasi -name 'REIC-*.md' | wc -l)" -eq 1500
+          test -f vmdesktopreic/dokumentasi-kompilasi/README.md
+          grep -q '^# Otomatisasi REIC ' vmdesktopreic/dokumentasi-kompilasi/01-persiapan-proyek/REIC-0001.md
+      - name: Simpan dokumen ke repositori
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vmdesktopreic/dokumentasi-kompilasi
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan dokumen."
+          else
+            git commit -m "Generate 1500 Indonesian REIC automation documents"
+            git push origin HEAD:io
+          fi
