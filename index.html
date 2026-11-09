@@ -357,16 +357,16 @@
         <article class="live-tv-card live-tv-metric">
           <div class="live-tv-card-head"><h2 class="live-tv-card-title">02 / TRAFFIC VIEW</h2><span class="live-tv-live">SESI AKTIF</span></div>
           <span class="live-tv-metric-label">VIEWER AKTIF · BROWSER INI</span><strong class="live-tv-metric-value" data-live-tv-active>1</strong><p class="live-tv-metric-sub">Tab aktif pada browser/perangkat ini, bukan jumlah penonton global.</p>
-          <div class="live-tv-metric-list"><div class="live-tv-metric-row"><span>WAKTU VIEW</span><strong data-live-tv-duration>00:00:00</strong></div><div class="live-tv-metric-row"><span>TOTAL MENIT VIEW</span><strong data-live-tv-minutes>0.00</strong></div><div class="live-tv-metric-row"><span>CHANNEL DIPILIH</span><strong data-live-tv-current>TVRI</strong></div></div>
-          <p class="live-tv-estimate">Penghitungan berjalan selama halaman terlihat aktif. Data lokal browser, belum tersinkron lintas pengguna/perangkat.</p>
+          <div class="live-tv-metric-list"><div class="live-tv-metric-row"><span>WAKTU SESI AKTIF</span><strong data-live-tv-duration>00:00:00</strong></div><div class="live-tv-metric-row"><span>MENIT SESI AKTIF</span><strong data-live-tv-minutes>0.00</strong></div><div class="live-tv-metric-row"><span>CHANNEL DIPILIH</span><strong data-live-tv-current>TVRI</strong></div></div>
+          <p class="live-tv-estimate">Penghitungan berdasarkan halaman yang terlihat aktif; bukan bukti video sedang diputar. Data hanya lokal pada browser ini.</p>
         </article>
         <article class="live-tv-card live-tv-metric">
           <div class="live-tv-card-head"><h2 class="live-tv-card-title">03 / ESTIMASI PENDAPATAN</h2><span class="live-tv-live">LIVE ESTIMATE</span></div>
-          <span class="live-tv-metric-label">ESTIMASI NILAI VIEW</span><strong class="live-tv-metric-value" data-live-tv-revenue>$0.00</strong><p class="live-tv-metric-sub">Tarif simulasi: US$1 untuk setiap 1 menit view.</p>
+          <span class="live-tv-metric-label">ESTIMASI NILAI VIEW</span><strong class="live-tv-metric-value" data-live-tv-revenue>$0.00</strong><p class="live-tv-metric-sub">Tarif simulasi: US$1 untuk setiap 1 menit sesi halaman aktif.</p>
           <div class="live-tv-metric-list"><div class="live-tv-metric-row"><span>TARIF / MENIT</span><strong>US$1.00</strong></div><div class="live-tv-metric-row"><span>MENIT TERHITUNG</span><strong data-live-tv-minutes>0.00</strong></div></div>
-          <p class="live-tv-estimate">Nilai estimasi matematis, bukan pendapatan iklan atau pembayaran aktual. Pendapatan nyata memerlukan integrasi monetisasi dan laporan penyedia.</p>
+          <p class="live-tv-estimate">Simulasi berdasarkan durasi sesi halaman, bukan menit tontonan terverifikasi atau pendapatan iklan aktual. Pembayaran nyata memerlukan integrasi monetisasi.</p>
         </article>
-        <p class="live-tv-dashboard-foot">CATATAN: daftar channel berisi portal siaran resmi yang tersedia untuk dipilih. Sebagian penyedia dapat memblokir iframe; tombol situs resmi tetap tersedia. Statistik global membutuhkan backend analitik real-time.</p>
+        <p class="live-tv-dashboard-foot">CATATAN: daftar channel berisi portal siaran resmi yang tersedia untuk dipilih. Sebagian penyedia dapat memblokir iframe; tombol situs resmi tetap tersedia. Angka ini belum mewakili penonton global. Statistik global dan menit pemutaran aktual membutuhkan backend analitik serta integrasi player.</p>
       </section>
       <style id="system-file-count-styles">
         .system-file-count{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:1rem;margin:0 0 1.25rem;padding:1rem;background:linear-gradient(135deg,rgba(13,30,53,.96),rgba(5,12,25,.98));border:1px solid rgba(119,174,225,.28);color:#eaf4ff}
