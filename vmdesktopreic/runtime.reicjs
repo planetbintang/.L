@@ -184,12 +184,12 @@ function wireFileManager(){
   }
  };
 }function wireLauncher(){
- $('[data-open]').forEach(b=>{
+ $$('[data-open]').forEach(b=>{
   b.type='button';b.setAttribute('aria-label',b.getAttribute('aria-label')||b.dataset.open);
   b.title=b.dataset.open;
   b.addEventListener('click',e=>{e.preventDefault();openApp(b.dataset.open);});
  });
- $('[data-launch]').forEach(b=>{b.type='button';b.addEventListener('click',()=>openApp(b.dataset.launch));});
+ $$('[data-launch]').forEach(b=>{b.type='button';b.addEventListener('click',()=>openApp(b.dataset.launch));});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){const visible=$('.reic-app-window',apps).filter(w=>!w.hidden).sort((a,b)=>Number(b.style.zIndex)-Number(a.style.zIndex))[0];if(visible){visible.remove();if(visible._restoreChip)visible._restoreChip.remove();}}});
  window.addEventListener('resize',()=>{$('.reic-app-window',apps).forEach(w=>{if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{const maxX=Math.max(0,apps.clientWidth-w.offsetWidth),maxY=Math.max(0,apps.clientHeight-w.offsetHeight);w.style.left=Math.min(parseFloat(w.style.left)||0,maxX)+'px';w.style.top=Math.min(parseFloat(w.style.top)||0,maxY)+'px';}});});
 }
