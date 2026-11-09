@@ -181,7 +181,7 @@
     <link rel="stylesheet" href="./homepage-final-polish.css?v=20261108-home-polish-v2" />
     <link rel="stylesheet" href="./homepage-system-alignment.css?v=20261108-system-alignment-v1" />
     <link rel="stylesheet" href="./ocean-blue-system.css?v=20261109-ocean-blue-v1" />
-    <link rel="stylesheet" href="./live-tv.css?v=20261110-live-tv-v1" />
+    <link rel="stylesheet" href="./live-tv.css?v=20261110-dashboard-v2" />
   
     <style id="hide-catalog-and-list-only-submenus">
       /* Sembunyikan submenu tingkat lanjut yang hanya berupa katalog atau daftar fitur/proyek. */
@@ -330,54 +330,50 @@
         <div class="hero-corner" aria-hidden="true">PB <span>001</span></div>
       </section>
 
+
       <section class="system-file-count" id="systemFileCountPanel" data-system-page="system" aria-label="Jumlah seluruh file sistem Planetbintang">
-        <div class="system-file-count-main">
-          <p class="eyebrow">PLANETBINTANG <span>/</span> SYSTEM INVENTORY</p>
-          <h2>JUMLAH SELURUH FILE SISTEM</h2>
-          <strong id="totalSystemFileCount" aria-live="polite">—</strong>
-          <p id="fileCountCoverage">Menunggu data indeks seluruh repositori…</p>
-        </div>
-        <section class="live-tv-panel" data-live-tv aria-label="Siaran televisi langsung Planetbintang">
-          <div class="live-tv-main">
-            <div class="live-tv-heading">
-              <h3 class="live-tv-title">PLANETBINTANG / LIVE TV</h3>
-              <span class="live-tv-live">LIVE CHANNEL</span>
-            </div>
-            <div class="live-tv-player">
-              <iframe data-live-tv-frame title="Siaran langsung televisi" src="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-              <div class="live-tv-player-note">Pemutaran mengikuti izin embed dari penyedia siaran resmi</div>
-            </div>
+        <div class="system-file-count-main"><p class="eyebrow">PLANETBINTANG <span>/</span> SYSTEM INVENTORY</p><h2>JUMLAH SELURUH FILE SISTEM</h2><strong id="totalSystemFileCount" aria-live="polite">—</strong><p id="fileCountCoverage">Menunggu data indeks seluruh repositori…</p></div>
+      </section>
+      <section class="live-tv-dashboard" data-live-tv-dashboard data-system-page="system" aria-label="Dashboard televisi, traffic, dan estimasi pendapatan">
+        <article class="live-tv-card live-tv-card-tv">
+          <div class="live-tv-card-head"><h2 class="live-tv-card-title">01 / PLANETBINTANG LIVE TV</h2><span class="live-tv-live">LIVE</span></div>
+          <div class="live-tv-player"><iframe data-live-tv-frame title="Portal siaran televisi langsung" src="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="live-tv-player-note">Portal resmi penyiar · pemutaran tertanam mengikuti izin penyedia</div></div>
+          <div class="live-tv-channel-meta"><span data-live-tv-status role="status" aria-live="polite">Menyiapkan channel…</span><span>CHANNEL DIRECTORY</span></div>
+          <div class="live-tv-categories" role="group" aria-label="Kategori channel">
+            <button class="live-tv-category" type="button" data-live-tv-category="Semua" aria-pressed="true">SEMUA</button><button class="live-tv-category" type="button" data-live-tv-category="Berita" aria-pressed="false">BERITA</button><button class="live-tv-category" type="button" data-live-tv-category="Nasional" aria-pressed="false">NASIONAL</button><button class="live-tv-category" type="button" data-live-tv-category="Hiburan" aria-pressed="false">HIBURAN</button>
           </div>
-          <div class="live-tv-side">
-            <p>Pilih channel untuk memuat portal siaran langsung resmi di layar ini. Jika penyedia tidak mengizinkan pemutaran tertanam, buka situs resminya.</p>
-            <div class="live-tv-channels" role="group" aria-label="Pilih channel televisi">
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" data-live-tv-name="TVRI" aria-pressed="true">TVRI</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.metrotvnews.com/live" data-live-tv-name="Metro TV" aria-pressed="false">METRO TV</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.kompas.tv/live" data-live-tv-name="Kompas TV" aria-pressed="false">KOMPAS TV</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.tvonenews.com/live" data-live-tv-name="tvOne" aria-pressed="false">tvONE</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.transtv.co.id/live" data-live-tv-name="Trans TV" aria-pressed="false">TRANS TV</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.trans7.co.id/live-streaming" data-live-tv-name="Trans7" aria-pressed="false">TRANS7</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.inews.id/streaming" data-live-tv-name="iNews" aria-pressed="false">iNEWS</button>
-              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.rctiplus.com/tv/rcti" data-live-tv-name="RCTI+" aria-pressed="false">RCTI+</button>
-            </div>
-            <p class="live-tv-status" data-live-tv-status role="status" aria-live="polite">Menyiapkan channel TVRI…</p>
-            <a class="live-tv-open" data-live-tv-open href="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" target="_blank" rel="noopener noreferrer">BUKA TVRI DI SITUS RESMI ↗</a>
+          <div class="live-tv-channels" role="group" aria-label="Daftar channel televisi">
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" data-live-tv-name="TVRI" data-live-tv-genre="Nasional" aria-pressed="true">TVRI · NASIONAL</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.metrotvnews.com/live" data-live-tv-name="Metro TV" data-live-tv-genre="Berita" aria-pressed="false">METRO TV · BERITA</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.kompas.tv/live" data-live-tv-name="Kompas TV" data-live-tv-genre="Berita" aria-pressed="false">KOMPAS TV · BERITA</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.tvonenews.com/live" data-live-tv-name="tvOne" data-live-tv-genre="Berita" aria-pressed="false">tvONE · BERITA</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.transtv.co.id/live" data-live-tv-name="Trans TV" data-live-tv-genre="Hiburan" aria-pressed="false">TRANS TV · HIBURAN</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.trans7.co.id/live-streaming" data-live-tv-name="Trans7" data-live-tv-genre="Hiburan" aria-pressed="false">TRANS7 · HIBURAN</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.inews.id/streaming" data-live-tv-name="iNews" data-live-tv-genre="Berita" aria-pressed="false">iNEWS · BERITA</button>
+            <button class="live-tv-channel" type="button" data-live-tv-url="https://www.rctiplus.com/tv/rcti" data-live-tv-name="RCTI+" data-live-tv-genre="Hiburan" aria-pressed="false">RCTI+ · HIBURAN</button>
           </div>
-        </section>
+          <a class="live-tv-open" data-live-tv-open href="https://klik.tvri.go.id/detailchannel/TVRI_CH_00" target="_blank" rel="noopener noreferrer">BUKA TVRI DI SITUS RESMI ↗</a>
+        </article>
+        <article class="live-tv-card live-tv-metric">
+          <div class="live-tv-card-head"><h2 class="live-tv-card-title">02 / TRAFFIC VIEW</h2><span class="live-tv-live">SESI AKTIF</span></div>
+          <span class="live-tv-metric-label">VIEWER AKTIF · BROWSER INI</span><strong class="live-tv-metric-value" data-live-tv-active>1</strong><p class="live-tv-metric-sub">Tab aktif pada browser/perangkat ini, bukan jumlah penonton global.</p>
+          <div class="live-tv-metric-list"><div class="live-tv-metric-row"><span>WAKTU VIEW</span><strong data-live-tv-duration>00:00:00</strong></div><div class="live-tv-metric-row"><span>TOTAL MENIT VIEW</span><strong data-live-tv-minutes>0.00</strong></div><div class="live-tv-metric-row"><span>CHANNEL DIPILIH</span><strong data-live-tv-current>TVRI</strong></div></div>
+          <p class="live-tv-estimate">Penghitungan berjalan selama halaman terlihat aktif. Data lokal browser, belum tersinkron lintas pengguna/perangkat.</p>
+        </article>
+        <article class="live-tv-card live-tv-metric">
+          <div class="live-tv-card-head"><h2 class="live-tv-card-title">03 / ESTIMASI PENDAPATAN</h2><span class="live-tv-live">LIVE ESTIMATE</span></div>
+          <span class="live-tv-metric-label">ESTIMASI NILAI VIEW</span><strong class="live-tv-metric-value" data-live-tv-revenue>$0.00</strong><p class="live-tv-metric-sub">Tarif simulasi: US$1 untuk setiap 1 menit view.</p>
+          <div class="live-tv-metric-list"><div class="live-tv-metric-row"><span>TARIF / MENIT</span><strong>US$1.00</strong></div><div class="live-tv-metric-row"><span>MENIT TERHITUNG</span><strong data-live-tv-minutes>0.00</strong></div></div>
+          <p class="live-tv-estimate">Nilai estimasi matematis, bukan pendapatan iklan atau pembayaran aktual. Pendapatan nyata memerlukan integrasi monetisasi dan laporan penyedia.</p>
+        </article>
+        <p class="live-tv-dashboard-foot">CATATAN: daftar channel berisi portal siaran resmi yang tersedia untuk dipilih. Sebagian penyedia dapat memblokir iframe; tombol situs resmi tetap tersedia. Statistik global membutuhkan backend analitik real-time.</p>
       </section>
       <style id="system-file-count-styles">
         .system-file-count{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:1rem;margin:0 0 1.25rem;padding:1rem;background:linear-gradient(135deg,rgba(13,30,53,.96),rgba(5,12,25,.98));border:1px solid rgba(119,174,225,.28);color:#eaf4ff}
-        .system-file-count-main,.system-development-warning{min-width:0;padding:.8rem}
-        .system-file-count h2{margin:.3rem 0 .5rem;font-size:clamp(1rem,2vw,1.25rem);letter-spacing:.04em}
+        .system-file-count-main{min-width:0;padding:.8rem}.system-file-count h2{margin:.3rem 0 .5rem;font-size:clamp(1rem,2vw,1.25rem);letter-spacing:.04em}
         .system-file-count-main>strong{display:block;font-size:clamp(2rem,5vw,3.5rem);line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#83d8ff}
         .system-file-count-main>p:last-child{margin:.55rem 0 0;color:#a9bfd6;font-size:.8rem;line-height:1.55}
-        .system-development-warning{display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(255,184,91,.55);background:linear-gradient(135deg,rgba(89,48,13,.38),rgba(39,22,12,.45))}
-        .system-development-warning>b{color:#ffd18a;font-size:.76rem;letter-spacing:.12em}
-        .system-development-warning p{margin:.55rem 0 0;color:#fff0d5;font-size:clamp(.9rem,1.5vw,1.05rem);font-weight:800;line-height:1.65;overflow-wrap:anywhere}
-        @media(max-width:680px){.system-file-count{grid-template-columns:1fr;gap:.5rem;padding:.7rem}.system-file-count-main,.system-development-warning{padding:.7rem}}
       </style>
-
-
       <section class="reic-engine-feature" data-system-page="system" aria-labelledby="reicEngineTitle">
         <a class="reic-engine-image-link" href="./vmdesktopreic/" aria-label="Buka Mesin Virtual REIC">
           <img src="./galeri/d482119cdabc9232339169.png" alt="Visual Mesin Virtual REIC" loading="eager" decoding="async" />
@@ -878,6 +874,6 @@
 
 
     <script src="./workspace-modern.js?v=20261030-workspace-25x150-v3" defer></script>
-    <script src="./live-tv.js?v=20261110-live-tv-v1" defer></script>
+    <script src="./live-tv.js?v=20261110-dashboard-v2" defer></script>
 </body>
 </html>
