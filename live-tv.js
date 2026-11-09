@@ -11,7 +11,7 @@
   const categoryButtons = [...root.querySelectorAll('[data-live-tv-category]')];
   const activeCount = root.querySelector('[data-live-tv-active]');
   const viewClock = root.querySelector('[data-live-tv-duration]');
-  const viewMinutes = root.querySelector('[data-live-tv-minutes]');
+  const viewMinutes = [...root.querySelectorAll('[data-live-tv-minutes]')];
   const revenue = root.querySelector('[data-live-tv-revenue]');
   const rate = 1;
   const tabId = (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : String(Date.now()) + Math.random();
@@ -45,7 +45,7 @@
     const current = elapsed + ((!document.hidden && selected) ? (Date.now()-lastTick)/1000 : 0);
     viewClock.textContent = formatTime(current);
     totalMinutes = current / 60;
-    viewMinutes.textContent = totalMinutes.toFixed(2);
+    viewMinutes.forEach(node => { node.textContent = totalMinutes.toFixed(2); });
     revenue.textContent = money(totalMinutes * rate);
   }
   function chooseChannel(button) {
