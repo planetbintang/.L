@@ -159,7 +159,7 @@ async function loadRepoTree(w,repo,path=''){
  try{
   let entries;
   if(repo.private){
-   const response=await fetch(localHostBase()+'/api/reic/github/tree?repo='+encodeURIComponent(repo.name)+'&ref='+encodeURIComponent(repo.default_branch||'main')+'&path='+encodeURIComponent(path));
+   const response=await REIC_IO.request('/api/reic/github/tree?repo='+encodeURIComponent(repo.name)+'&ref='+encodeURIComponent(repo.default_branch||'main')+'&path='+encodeURIComponent(path));
    if(!response.ok)throw new Error('Host lokal menolak akses privat: HTTP '+response.status);
    entries=await response.json();
   }else{
