@@ -116,6 +116,14 @@ function applicationWorkspace(app){
 }
 function appStorageKey(app){return 'pb-reic-app-data:'+app.id;}
 function readAppRecords(app){try{const d=JSON.parse(localStorage.getItem(appStorageKey(app))||'[]');return Array.isArray(d)?d:[];}catch{return [];}}
+function installApplicationPackage(app){
+ const required=["REIC-KERNEL >=1.0.0","REIC-CORE >=1.0.0"];
+ if(!app||!app.id||!Array.isArray(app.coreRequirements)||!required.every(x=>app.coreRequirements.includes(x)))throw new Error("Manifest AKC tidak memenuhi dependensi REIC Core/Kernel.");
+ const record={id:app.id,name:app.name,version:app.version,installedAt:new Date().toISOString(),target:"VMDESKTOPREIC browser runtime"};
+ localStorage.setItem("pb-reic-package-installed:"+app.id,"true");
+ localStorage.setItem("pb-reic-package-manifest:"+app.id,JSON.stringify(record));
+ return record;
+}
 function wireApplication(w,app){
  const root=$('.reic-product-app',w);if(!root)return;
  const form=$('[data-app-record-form]',root),title=$('[data-app-record-title]',root),detail=$('[data-app-record-detail]',root),search=$('[data-app-search]',root),list=$('[data-app-record-list]',root),count=$('[data-app-record-count]',root),status=$('[data-app-runtime-status]',root),install=$('[data-app-install]',root);
@@ -125,7 +133,7 @@ function wireApplication(w,app){
  form.addEventListener('submit',e=>{e.preventDefault();const value=title.value.trim();if(!value)return;records.unshift({id:app.id+'-'+Date.now(),title:value,detail:detail.value.trim(),createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()});persist();form.reset();render();});
  search.addEventListener('input',render);
  $('[data-app-export]',root).onclick=()=>{const payload={application:app.id,name:app.name,version:app.version,exportedAt:new Date().toISOString(),records};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=app.slug+'.json';a.click();URL.revokeObjectURL(url);status.textContent='Ekspor JSON dibuat.';};
- const key='pb-reic-package-installed:'+app.id;const sync=()=>{const ok=localStorage.getItem(key)==='true';install.textContent=ok?'Paket Terpasang ✓':'Instal Paket';install.setAttribute('aria-pressed',String(ok));};install.onclick=()=>{const ok=localStorage.getItem(key)==='true';localStorage.setItem(key,String(!ok));sync();status.textContent=!ok?'Manifest AKC dipasang ke profil runtime browser.':'Paket dilepas dari profil runtime browser.';};sync();
+ const key='pb-reic-package-installed:'+app.id;const sync=()=>{const ok=localStorage.getItem(key)==='true';install.textContent=ok?'Paket Terpasang ✓':'Instal Paket';install.setAttribute('aria-pressed',String(ok));};install.onclick=()=>{const ok=localStorage.getItem(key)==='true';if(!ok){try{installApplicationPackage(app);status.textContent='Manifest AKC tervalidasi dan dipasang pada profil runtime browser.';}catch(e){status.textContent='Instalasi ditolak: '+e.message;}}else{localStorage.setItem(key,'false');status.textContent='Status paket dilepas dari profil runtime browser.';}sync();};sync();
  const run=$('[data-app-run]',root);if(run)run.onclick=()=>{const source=$('[data-app-command]',root).value;const output=$('[data-app-output]',root);output.textContent='Pemeriksaan statis selesai.\nBaris: '+source.split('\n').length+'\nKarakter: '+source.length+'\nKode tidak dieksekusi pada host.';};
  const color=$('[data-app-color]',root);if(color)color.addEventListener('input',()=>{$('[data-app-color-value]',root).textContent=color.value.toUpperCase();root.style.setProperty('--app-accent',color.value);});
  const urlForm=$('[data-app-url-form]',root);if(urlForm)urlForm.addEventListener('submit',e=>{e.preventDefault();const value=$('[data-app-url]',root).value.trim();if(value)openInAppBrowser(value);});
@@ -135,7 +143,7 @@ async function loadApplicationCatalog(){if(APP_CATALOG)return APP_CATALOG;if(!AP
 function wireAppCatalog(w){
  const tabs=$('[data-app-category-tabs]',w),grid=$('[data-app-catalog-grid]',w),search=$('[data-app-catalog-search]',w),status=$('[data-app-catalog-status]',w);let active='Semua',data=[];
  const draw=()=>{const q=search.value.trim().toLowerCase(),visible=data.filter(app=>(active==='Semua'||app.category===active)&&(!q||(app.name+' '+app.description+' '+app.category).toLowerCase().includes(q)));grid.replaceChildren();visible.forEach(app=>{const b=document.createElement('button');b.type='button';b.className='reic-app-tile';const icon=document.createElement('span');icon.className='reic-app-tile-icon';icon.textContent=app.icon;const label=document.createElement('strong');label.textContent=app.name;const cat=document.createElement('small');cat.textContent=app.category;b.append(icon,label,cat);b.onclick=()=>openApp(app.name);grid.append(b);});status.textContent=visible.length+' dari 150 aplikasi · '+active+' · setiap aplikasi memiliki workspace dan paket terpisah.';};
- loadApplicationCatalog().then(catalog=>{data=catalog.apps;['Semua',...catalog.categories.map(c=>c.name)].forEach((name,index)=>{const b=document.createElement('button');b.type='button';b.textContent=name+(index===0?' (150)':' (30)');if(index===0)b.classList.add('is-active');b.onclick=()=>{active=name;$('button',tabs).forEach(x=>x.classList.toggle('is-active',x===b));draw();};tabs.append(b);});search.addEventListener('input',draw);draw();}).catch(e=>{status.textContent='Katalog gagal dimuat: '+e.message;});
+ loadApplicationCatalog().then(catalog=>{data=catalog.apps;const installAll=document.createElement('button');installAll.type='button';installAll.className='reic-install-all';installAll.textContent='⬇ Instal 150 Paket REIC';installAll.onclick=()=>{try{data.forEach(installApplicationPackage);status.textContent='150 manifest AKC tervalidasi dan didaftarkan pada profil runtime browser.';}catch(e){status.textContent='Instalasi katalog dihentikan: '+e.message;}};tabs.before(installAll);['Semua',...catalog.categories.map(c=>c.name)].forEach((name,index)=>{const b=document.createElement('button');b.type='button';b.textContent=name+(index===0?' (150)':' (30)');if(index===0)b.classList.add('is-active');b.onclick=()=>{active=name;$('button',tabs).forEach(x=>x.classList.toggle('is-active',x===b));draw();};tabs.append(b);});search.addEventListener('input',draw);draw();}).catch(e=>{status.textContent='Katalog gagal dimuat: '+e.message;});
 }
 
 function appContent(name){
@@ -400,5 +408,5 @@ function wireFileManager(){
 }
 function updateClock(){const el=$('#clock');if(el)el.textContent=new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date());}
 wireFileManager();wireLauncher();updateClock();setInterval(updateClock,30000);
-window.PB_REIC={version:'2.2',repositoryOwner:OWNER,githubAPI:'authenticated-local-proxy-with-public-fallback',io:REIC_IO,openApp,refreshRepositories:()=>{repoCache=null;},desktopBounds:()=>apps.getBoundingClientRect(),localHost:()=>localHostBase()};
+window.PB_REIC={version:'3.0',coreVersion:'1.0.0',kernelVersion:'1.0.0',repositoryOwner:OWNER,githubAPI:'authenticated-local-proxy-with-public-fallback',io:REIC_IO,openApp,openApplication:openApp,loadApplicationCatalog,installApplicationPackage,refreshRepositories:()=>{repoCache=null;},desktopBounds:()=>apps.getBoundingClientRect(),localHost:()=>localHostBase()};
 })();
