@@ -1,0 +1,88 @@
+{
+  "schema": "planetbintang.reic.local-host.v1",
+  "name": "REIC Local Host",
+  "language": "id-ID",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 8787,
+    "publicExposure": false
+  },
+  "storage": {
+    "driver": "filesystem",
+    "root": "./data",
+    "pathTraversalProtection": true,
+    "defaultAccess": "read-only",
+    "backupDirectory": "./backups"
+  },
+  "github": {
+    "owner": "planetbintang",
+    "repositoryVisibility": [
+      "public",
+      "private"
+    ],
+    "mode": "authenticated-server-proxy",
+    "tokenLocation": "environment:GITHUB_TOKEN",
+    "neverExposeTokenToBrowser": true
+  },
+  "webServers": {
+    "nginx": {
+      "enabled": true,
+      "config": "host-adapters/nginx/reic.conf",
+      "reverseProxy": "http://127.0.0.1:8787"
+    },
+    "apache": {
+      "enabled": true,
+      "config": "host-adapters/apache/.htaccess",
+      "proxyModules": [
+        "mod_proxy",
+        "mod_proxy_http",
+        "mod_headers"
+      ]
+    },
+    "cloudflare": {
+      "enabled": true,
+      "mode": "DNS-proxy-and-optional-worker",
+      "worker": "host-adapters/cloudflare/worker.js",
+      "secretBinding": "GITHUB_TOKEN",
+      "storage": [
+        "R2",
+        "D1 optional"
+      ],
+      "note": "Jangan menaruh token pada kode klien."
+    }
+  },
+  "domain": {
+    "dnsProvider": "Cloudflare",
+    "registryReference": "Verisign",
+    "dnsStandards": [
+      "RFC 1034",
+      "RFC 1035",
+      "RFC 4033",
+      "RFC 4034",
+      "RFC 4035"
+    ],
+    "registryProtocol": "EPP/RFC 5730 family; use accredited registrar integration",
+    "note": "Verisign adalah operator registry untuk TLD tertentu; pendaftaran domain dilakukan melalui registrar terakreditasi, bukan API registry publik generik."
+  },
+  "tls": {
+    "certificateAuthority": "GlobalCert",
+    "automation": "ACME-compatible adapter where supported",
+    "minimumTLS": "1.2",
+    "renewal": "automated-with-expiry-monitoring",
+    "privateKeyStorage": "server-only"
+  },
+  "compilation": {
+    "extensions": [
+      ".REIC",
+      ".REICSS",
+      ".REICJS"
+    ],
+    "executeUnknownFiles": false,
+    "requireManifestAllowlist": true
+  },
+  "policy": {
+    "noPublicExposureOfPrivateRepositoryNames": true,
+    "defaultPrivateRepositoryDisplay": "authenticated-session-only",
+    "noClientSideSecrets": true
+  }
+}
