@@ -7,9 +7,18 @@ export default {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(request, env) });
     if (request.method !== "GET") return json({ error: "Metode tidak diizinkan." }, 405, request, env);
     if (url.pathname === "/health") return json({ status: "aktif", service: "REIC Cloudflare Adapter" }, 200, request, env);
-    if (url.pathname !== "/api/reic/github/repos") return json({ error: "Endpoint tidak ditemukan." }, 404, request, env);
+    if (!["/api/reic/github/repos","/api/reic/github/tree"].includes(url.pathname)) return json({ error: "Endpoint tidak ditemukan." }, 404, request, env);
     if (!env.GITHUB_TOKEN) return json({ error: "Secret GITHUB_TOKEN belum dipasang." }, 503, request, env);
     const owner = env.GITHUB_OWNER || "planetbintang";
+    if (url.pathname === "/api/reic/github/tree") {
+      const name = url.searchParams.get("repo") || "";
+      const ref = url.searchParams.get("ref") || "HEAD";
+      const path = url.searchParams.get("path") || "";
+      if (!/^[A-Za-z0-9._-]+$/.test(name) || path.split("/").includes("..")) return json({ error: "Parameter repositori atau jalur tidak valid." }, 400, request, env);
+      const endpoint = `https://api.github.com/repos/${owner}/${encodeURIComponent(name)}/contents/${path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(ref)}`;
+      const upstream = await fetch(endpoint, { headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" } });
+      return new Response(await upstream.text(), { status:upstream.status, headers:{...cors(request,env),"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"} });
+    }
     const repos = [];
     for (let page = 1; page <= 10; page++) {
       const response = await fetch(`https://api.github.com/user/repos?per_page=100&sort=updated&affiliation=owner,collaborator,organization_member&page=${page}`, {
