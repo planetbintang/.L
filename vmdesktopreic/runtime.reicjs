@@ -229,7 +229,44 @@ function wireHostLocal(w){
 function refreshMonitor(w){const out=$('[data-monitor-status]',w),api=$('[data-api-status]',w);out.textContent='Browser: '+navigator.userAgent.slice(0,90)+' · Online: '+(navigator.onLine?'Ya':'Tidak');getJSON(API+'/rate_limit').then(()=>api.textContent='Terhubung').catch(()=>api.textContent='Tidak tersedia');}
 function wireSettings(w){$$('[data-setting]',w).forEach(el=>el.addEventListener('change',()=>{if(el.dataset.setting==='motion')document.documentElement.classList.toggle('reic-no-motion',!el.checked);if(el.dataset.setting==='glow')document.documentElement.classList.toggle('reic-no-glow',!el.checked);if(el.dataset.setting==='scale')stage.style.setProperty('--reic-ui-scale',el.value);}));}
 function wireTerminal(w){const form=$('[data-terminal-form]',w),input=$('[data-terminal-input]',w),out=$('.terminal-output',w);form.onsubmit=e=>{e.preventDefault();const cmd=input.value.trim();let result='Perintah tidak dikenal. Ketik help.';if(cmd==='help')result='help · status · repos · open [aplikasi] · clear';else if(cmd==='status')result='Runtime browser aktif. GitHub API publik dapat digunakan.';else if(cmd==='repos')result=repoCache?repoCache.length+' repositori dimuat pada sesi ini.':'Gunakan REIC Explorer atau Host Lokal REIC untuk memuat repositori.';else if(cmd.startsWith('open ')){const n=cmd.slice(5);if(Object.keys(modules).includes(n)){openApp(n);result='Membuka '+n;}else result='Nama aplikasi tidak ditemukan.';}else if(cmd==='clear'){out.textContent='';input.value='';return;}out.innerHTML+='\n$ '+safe(cmd)+'\n'+safe(result);input.value='';};}
-function wireBrowser(w){/* tautan browser menggunakan navigasi aman ke domain yang ditentukan */ }
+function wireBrowser(w){/* semua tautan ditangani oleh penjelajah internal desktop */ }
+function openInAppBrowser(rawUrl){
+ let url;
+ try{url=new URL(rawUrl,window.location.href);}catch{return;}
+ if(!['http:','https:'].includes(url.protocol))return;
+ const content='<div class="reic-inapp-browser"><form data-inapp-form><button type="button" data-inapp-back aria-label="Kembali">‹</button><button type="button" data-inapp-forward aria-label="Maju">›</button><button type="button" data-inapp-reload aria-label="Muat ulang">↻</button><input data-inapp-url type="url" aria-label="Alamat situs" spellcheck="false"><button type="submit">BUKA</button></form><div class="reic-inapp-status" data-inapp-status role="status">Membuka halaman di dalam VMDESKTOPREIC…</div><iframe data-inapp-frame title="Halaman web di dalam VMDESKTOPREIC" referrerpolicy="no-referrer" allow="fullscreen; clipboard-read; clipboard-write"></iframe><div class="reic-inapp-note">Beberapa situs memblokir tampilan di dalam frame (X-Frame-Options / CSP). Jika diblokir, halaman tidak dapat ditampilkan di sini; desktop tetap terbuka dan tidak dialihkan ke tab browser eksternal.</div></div>';
+ const w=makeWindow('Browser · '+url.hostname,'◎',content);
+ const frame=$('[data-inapp-frame]',w),input=$('[data-inapp-url]',w),status=$('[data-inapp-status]',w);
+ const history=[url.href];let index=0;
+ const load=(value,push=true)=>{
+  let next;try{next=new URL(value,history[index]);}catch{status.textContent='Alamat URL tidak valid.';return;}
+  if(!['http:','https:'].includes(next.protocol)){status.textContent='Hanya alamat HTTP dan HTTPS yang didukung.';return;}
+  if(push){history.splice(index+1);history.push(next.href);index=history.length-1;}
+  input.value=next.href;status.textContent='Memuat '+next.hostname+' di dalam jendela Browser…';
+  frame.src=next.href;
+ };
+ frame.addEventListener('load',()=>{status.textContent='Halaman dimuat di dalam jendela Browser. Jika konten kosong atau ditolak, situs mungkin melarang penyematan.';});
+ $('[data-inapp-form]',w).addEventListener('submit',e=>{e.preventDefault();load(input.value);});
+ $('[data-inapp-back]',w).onclick=()=>{if(index>0){index--;load(history[index],false);}};
+ $('[data-inapp-forward]',w).onclick=()=>{if(index<history.length-1){index++;load(history[index],false);}};
+ $('[data-inapp-reload]',w).onclick=()=>load(history[index],false);
+ load(url.href,false);
+}
+function wireInAppLinks(){
+ if(document.documentElement.dataset.reicInAppLinks==='1')return;
+ document.documentElement.dataset.reicInAppLinks='1';
+ document.addEventListener('click',e=>{
+  const anchor=e.target.closest&&e.target.closest('.universe a[href]');
+  if(!anchor)return;
+  const raw=anchor.getAttribute('href');
+  if(!raw||raw.startsWith('#')||/^(mailto:|tel:|javascript:)/i.test(raw))return;
+  let url;try{url=new URL(raw,window.location.href);}catch{return;}
+  if(!['http:','https:'].includes(url.protocol))return;
+  e.preventDefault();e.stopImmediatePropagation();
+  openInAppBrowser(url.href);
+ },true);
+}
+
 function wireSearch(w){const form=$('[data-reic-search-form]',w),input=$('[data-reic-search-input]',w),status=$('[data-reic-search-status]',w),results=$('[data-reic-search-results]',w),google=$('[data-google-search]',w);if(!form)return;if(pendingSearchQuery){input.value=pendingSearchQuery;pendingSearchQuery='';}const updateExternal=()=>{google.href='https://www.google.com/search?q='+encodeURIComponent(input.value.trim());};input.addEventListener('input',updateExternal);updateExternal();form.addEventListener('submit',async e=>{e.preventDefault();const q=input.value.trim();updateExternal();if(!q){status.textContent='Masukkan teks yang ingin dicari.';return;}status.textContent='REIC Local Host sedang mencari di seluruh sumber…';results.replaceChildren();try{const payload=await REIC_IO.search(q);const rows=payload.results||[];status.textContent=(payload.total??rows.length)+' hasil · '+(payload.sources||[]).join(' · ');if(!rows.length){const p=document.createElement('p');p.textContent='Tidak ada hasil. Coba kata kunci lain atau aktifkan Bing pada server.';results.append(p);}rows.forEach(item=>{const card=document.createElement('article');card.className='reic-search-result';const title=item.url?document.createElement('a'):document.createElement('button');title.textContent=item.title||'Tanpa judul';if(item.url){title.href=item.url;title.target='_blank';title.rel='noopener noreferrer';}else{title.type='button';title.className='reic-local-result-button';title.onclick=()=>makeWindow('Hasil lokal · '+(item.title||'Berkas'),'▤','<div class="reic-file-preview"><p>'+safe(item.title||'Berkas lokal')+'</p><pre>'+safe(item.snippet||'')+'</pre></div>');}const source=document.createElement('small');source.textContent=item.source||'REIC';const snippet=document.createElement('p');snippet.textContent=item.snippet||'';card.append(source,title,snippet);results.append(card);});}catch(error){status.textContent='Pencarian server gagal: '+error.message+'. Pastikan Host Lokal REIC aktif.';const links=document.createElement('p');links.textContent='Mesin pencari eksternal dapat dibuka melalui Google di atas atau Bing: ';const bing=document.createElement('a');bing.href='https://www.bing.com/search?q='+encodeURIComponent(q);bing.target='_blank';bing.rel='noopener';bing.textContent='Cari di Bing ↗';links.append(bing);results.append(links);}});}
 function wireLibrary(w){
  $('.reic-action-grid button',w).forEach(b=>b.onclick=()=>{const label=b.textContent.trim();const n=Object.keys(modules).find(k=>k===label);if(n)openApp(n);else makeWindow(label,'▣','<div class="reic-library"><h2>'+safe(label)+'</h2><p>Komponen '+safe(label)+' tersedia sebagai modul pustaka REIC.</p></div>');});
@@ -297,7 +334,8 @@ function wireFileManager(){
   b.title=b.dataset.open;
   b.addEventListener('click',e=>{e.preventDefault();openApp(b.dataset.open);});
  });
- $$('[data-launch]').forEach(b=>{b.type='button';b.addEventListener('click',()=>openApp(b.dataset.launch));});
+ $('[data-launch]').forEach(b=>{b.type='button';b.addEventListener('click',()=>openApp(b.dataset.launch));});
+ wireInAppLinks();
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){const visible=$('.reic-app-window',apps).filter(w=>!w.hidden).sort((a,b)=>Number(b.style.zIndex)-Number(a.style.zIndex))[0];if(visible){visible.remove();if(visible._restoreChip)visible._restoreChip.remove();}}});
  window.addEventListener('resize',()=>{$('.reic-app-window',apps).forEach(w=>{if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{const maxX=Math.max(0,apps.clientWidth-w.offsetWidth),maxY=Math.max(0,apps.clientHeight-w.offsetHeight);w.style.left=Math.min(parseFloat(w.style.left)||0,maxX)+'px';w.style.top=Math.min(parseFloat(w.style.top)||0,maxY)+'px';}});});
 }
