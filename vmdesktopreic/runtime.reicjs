@@ -4,7 +4,7 @@ const stage=$('.desktop-stage'),apps=$('#apps'),fileWindow=$('#file-window'),ite
 const OWNER='planetbintang',API='https://api.github.com';
 let currentPath='Beranda',searchTerm='',pendingSearchQuery='',repoCache=null,repoBusy=false,treeCache=new Map(),windowZ=20;
 let APP_CATALOG=null,APP_BY_NAME=new Map(),APP_CATALOG_PROMISE=null;
-const roots=['acct','sys','system_ext','cache','config','media','data','repositori','vmdesktopreic','Aireber'];
+const roots=['acct','sys','system_ext','cache','config','media','data','repositori','applications','vmdesktopreic','Aireber'];
 const modules={
 'Beranda':['Ringkasan sistem','Status desktop','Aplikasi terbaru','Pusat aktivitas'],
 'File Manager':['Beranda','Repositori GitHub','File System','Indeks REIC','Pencarian file'],
@@ -318,11 +318,35 @@ function wireLibrary(w){
 }
 function drawFiles(path='Beranda'){
  currentPath=path;pathEl.textContent='/ '+path;items.replaceChildren();
+ if(path==='applications'&&!APP_CATALOG){status.textContent='Memuat 150 direktori aplikasi…';loadApplicationCatalog().then(()=>drawFiles('applications')).catch(e=>status.textContent='Katalog aplikasi gagal dimuat: '+e.message);return;}
  if(path==='repositori'){status.textContent='Repositori publik dan privat tersedia melalui REIC Explorer.';const b=document.createElement('button');b.className='file-entry';b.innerHTML='<b>🌐</b><span>Buka seluruh repositori GitHub</span>';b.onclick=()=>openApp('REIC Explorer');items.append(b);return;}
- let names=path==='Beranda'||path==='File System'?roots:path==='vmdesktopreic'?['index.html','system.reicss','system.reicjs','reference-match.css','README.md','indexes','registry']:path==='media'?['manifest.json','repositori','indeks-reic']:path==='repositori'?[]:['index.reic','manifest.json','system.reicss','system.reicjs','README.md'];
- if(path==='Beranda'||path==='File System')names=[...roots];
- names.filter(n=>n.toLowerCase().includes(searchTerm)).forEach(n=>{const b=document.createElement('button');b.className='file-entry';const isDir=!n.includes('.');b.innerHTML='<b>'+(isDir?'📁':n.endsWith('.reicss')?'🎨':n.endsWith('.reicjs')?'📜':'▤')+'</b><span>'+safe(n)+'</span>';b.onclick=()=>isDir?drawFiles(n):openApp(n);items.append(b);});
- status.textContent=items.children.length+' item · File System REIC · data runtime lokal';
+ const match=path.match(/^applications\/([^/]+)(?:\/([^/]+))?$/);
+ let names;
+ if(path==='Beranda'||path==='File System')names=roots;
+ else if(path==='applications')names=(APP_CATALOG?.apps||[]).map(a=>a.slug);
+ else if(match){
+  const app=APP_CATALOG?.apps.find(a=>a.slug===match[1]);
+  const folders={core:[app?.slug+'.REIC'],ui:[app?.slug+'.REICSS'],runtime:[app?.slug+'.REICJS'],data:['schema.REIC'],config:['defaults.REIC'],docs:['README.REIC']};
+  names=match[2]?(folders[match[2]]||[]):['core','ui','runtime','data','config','docs','package.AKC'];
+ }else if(path==='vmdesktopreic')names=['index.html','system.reicss','runtime.reicss','runtime.reicjs','reference-match.css','apps-150.json','core','applications'];
+ else if(path==='media')names=['manifest.json','repositori','indeks-reic'];
+ else names=['index.reic','manifest.json','system.reicss','system.reicjs','README.md'];
+ names.filter(n=>n.toLowerCase().includes(searchTerm)).forEach(n=>{
+  const b=document.createElement('button');b.className='file-entry';const isDir=!n.includes('.');
+  b.innerHTML='<b>'+(isDir?'📁':n.endsWith('.reicss')?'🎨':n.endsWith('.reicjs')?'📜':n.endsWith('.AKC')?'📦':'▤')+'</b><span>'+safe(n)+'</span>';
+  b.onclick=()=>{
+   if(isDir){drawFiles(path==='Beranda'||path==='File System'?n:path+'/'+n);return;}
+   if(match){
+    const app=APP_CATALOG?.apps.find(a=>a.slug===match[1]);
+    const location='applications/'+match[1]+'/'+(match[2]?match[2]+'/':'')+n;
+    const content=n==='package.AKC'?JSON.stringify({id:app?.id,name:app?.name,version:app?.version,entry:'runtime/'+app?.slug+'.REICJS',dependencies:app?.coreRequirements,capabilities:app?.capabilities},null,2):'Sumber '+n+' berada pada paket '+(app?.name||match[1])+'.\nLokasi repositori: vmdesktopreic/'+location+'\nGunakan REIC Explorer untuk membuka sumber paket.';
+    const w=makeWindow('Paket · '+n,'📦','<div class="reic-file-preview"><div class="reic-eyebrow">'+safe(location)+'</div><pre></pre></div>');$('.reic-file-preview pre',w).textContent=content;return;
+   }
+   if(n==='apps-150.json')openApp('Aplikasi');else openApp(n);
+  };
+  items.append(b);
+ });
+ status.textContent=items.children.length+' item · '+(match?'paket aplikasi REIC':'File System REIC')+' · data runtime lokal';
 }
 function wireFileManager(){
  if(!items||!fileWindow)return;
