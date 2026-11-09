@@ -217,3 +217,48 @@ radial-gradient(ellipse at 50% 45%,#082d70 0%,#020b28 48%,#010411 100%)}
  .app-dock{bottom:5px;padding:5px 10px}
  .app-dock button span{width:30px;height:30px}
 }
+
+/* SINGLE FULL-VIEWPORT DESKTOP: one continuous screen and one outer frame. */
+html,body{width:100%;height:100%;min-width:0;min-height:0;margin:0;overflow:hidden}
+body{display:block;place-items:unset;background:#010719}
+.universe{
+ width:100vw!important;height:100vh!important;height:100dvh!important;
+ max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;
+ margin:0!important;padding:0!important;box-sizing:border-box;
+ display:grid!important;
+ grid-template-rows:27% 4% 53% 16%!important;
+ gap:0!important;
+ border:2px solid #19aaff!important;outline:0!important;
+ box-shadow:0 0 24px 4px rgba(0,128,255,.5),inset 0 0 22px rgba(0,124,255,.14)!important;
+ overflow:hidden!important
+}
+.universe>*{min-width:0!important;min-height:0!important}
+.brand,.system-bar,.desktop-stage,.footer{width:100%;min-width:0;min-height:0;margin:0}
+.brand{border:0!important}
+.desktop-stage{height:100%!important;padding-top:8px!important;padding-bottom:8px!important;overflow:hidden!important}
+.workspace{height:100%;min-height:0;padding-bottom:clamp(42px,6vh,68px)!important}
+.window{height:80%!important;max-height:100%;min-height:0}
+.footer{height:100%!important;min-height:0!important;overflow:hidden;padding:0 5% 2%!important}
+.footer:before{top:-48%;height:100%}
+.app-dock{bottom:clamp(5px,1vh,12px)}
+#apps{position:absolute!important;inset:0!important;pointer-events:none!important}
+@media(orientation:landscape){
+ .universe{grid-template-rows:25% 5% 54% 16%!important}
+ .desktop-stage{padding-left:2.1%!important;padding-right:2.1%!important}
+ .window{height:82%!important}
+}
+@media(max-width:650px) and (orientation:portrait){
+ .universe{grid-template-rows:25% 4% 49% 22%!important;border-width:1px!important}
+ .brand{gap:8px;padding:5px 2vw 8px}
+ .desktop-stage{grid-template-columns:44px minmax(0,1fr) 44px!important;padding:5px 3px!important;gap:3px!important}
+ .workspace{padding-bottom:40px!important}
+ .window{height:76%!important;width:100%!important}
+ .footer{padding:0 4% 4%!important}
+ .app-dock{max-width:calc(100% - 94px);bottom:4px}
+}
+@media(max-height:650px) and (orientation:landscape){
+ .universe{grid-template-rows:20% 6% 58% 16%!important}
+ .window{height:86%!important}
+ .brand-name{font-size:clamp(24px,5vw,48px)}
+ .footer{padding-bottom:1%!important}
+}
