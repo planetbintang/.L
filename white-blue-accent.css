@@ -1,0 +1,45 @@
+/* PlanetBintang · unified white-to-ocean-blue accent system */
+:root{
+  --reic-accent-gradient:linear-gradient(115deg,#ffffff 0%,#e8f5ff 24%,#a9d9ff 54%,#4b9fe8 78%,#1768bd 100%);
+  --reic-accent-gradient-soft:linear-gradient(135deg,rgba(255,255,255,.96),rgba(201,231,255,.94) 48%,rgba(73,151,224,.96));
+  --reic-accent-ink:#155b9e;
+  --reic-accent-line:rgba(126,190,244,.72);
+  --reic-accent-glow:0 5px 18px rgba(54,135,210,.18);
+}
+/* Primary controls and interactive surfaces */
+:where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],input[type="reset"],.action,.primary-action,.nav-link.is-active,.tab.is-active){
+  background-image:var(--reic-accent-gradient-soft);
+  border-color:var(--reic-accent-line);
+  color:#124f88;
+  box-shadow:var(--reic-accent-glow);
+}
+:where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]):hover{
+  background-image:linear-gradient(115deg,#fff 0%,#d9efff 38%,#78baf0 72%,#347fca 100%);
+  border-color:#65a9e7;
+  color:#083f78;
+}
+:where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]):focus-visible,
+:where(a,input,select,textarea):focus-visible{
+  outline:2px solid #78bdf4;
+  outline-offset:2px;
+}
+/* Gradient lettering for interface accents, labels, headings and icon glyphs */
+:where(.accent,.text-accent,.brand-accent,.eyebrow,.kicker,.section-kicker,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent){
+  background:var(--reic-accent-gradient);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+/* Links and active navigation use the same cool spectrum */
+:where(a,.topbar .main-nav a,.topbar .main-nav summary,.system-nav a,.menu-link){
+  text-decoration-color:rgba(74,151,221,.58);
+}
+:where(a:hover,.topbar .main-nav a:hover,.topbar .main-nav summary:hover,.system-nav a:hover,.menu-link:hover){
+  color:#2679c2;
+}
+/* Keep readable text on dark or image-backed buttons while retaining the gradient surface */
+:where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]) :where(svg){
+  color:inherit;
+  stroke:currentColor;
+}
