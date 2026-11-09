@@ -1,0 +1,70 @@
+{
+  "schema": "planetbintang.reic.desktop-components.v1",
+  "language": "id-ID",
+  "policy": {
+    "executeByDefault": false,
+    "onlyLoadDeclaredRuntime": true,
+    "previewUnknownFiles": true,
+    "requireValidation": true
+  },
+  "desktopRoots": [
+    "acct/",
+    "sys/",
+    "system_ext/",
+    "cache/",
+    "config/",
+    "media/",
+    "data/",
+    "repositori/",
+    "vmdesktopreic/",
+    "Aireber/"
+  ],
+  "coreRuntime": [
+    {
+      "path": "vmdesktopreic/reic-language.js",
+      "kind": "runtime-loader",
+      "activation": "startup",
+      "trusted": true
+    },
+    {
+      "path": "vmdesktopreic/runtime.reicjs",
+      "kind": "desktop-runtime",
+      "activation": "startup",
+      "trusted": true
+    },
+    {
+      "path": "vmdesktopreic/runtime.reicss",
+      "kind": "desktop-style",
+      "activation": "startup",
+      "trusted": true
+    },
+    {
+      "path": "vmdesktopreic/infrastruktur.reicjs",
+      "kind": "infrastructure-module",
+      "activation": "manifest-controlled",
+      "trusted": true
+    },
+    {
+      "path": "vmdesktopreic/infrastruktur.reicss",
+      "kind": "infrastructure-style",
+      "activation": "manifest-controlled",
+      "trusted": true
+    }
+  ],
+  "fileHandling": {
+    ".REIC": "parse-manifest-and-validate",
+    ".REICSS": "load-style-only-after-manifest-approval",
+    ".REICJS": "load-module-only-after-manifest-approval",
+    ".HTML": "safe-preview-or-explicit-route",
+    ".CSS": "safe-preview-or-approved-style",
+    ".JS": "safe-preview-unless-explicitly-trusted",
+    ".MD": "render-as-document",
+    ".JSON": "parse-as-data",
+    "other": "safe-preview"
+  },
+  "notes": [
+    "Folder menjadi lokasi navigasi desktop dan dapat dibuka melalui File Manager atau REIC Explorer.",
+    "Berkas menjadi item desktop; berkas kode tidak dijalankan otomatis hanya karena ditemukan.",
+    "Repositori privat hanya ditampilkan melalui host lokal atau Worker yang terautentikasi."
+  ]
+}
