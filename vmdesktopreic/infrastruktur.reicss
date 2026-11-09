@@ -1,0 +1,32 @@
+/* Infrastruktur 55 Komponen · VMDESKTOPREIC · Ocean Blue */
+#reicInfraOverlay{position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;padding:clamp(8px,2vw,28px);background:rgba(1,10,27,.78);backdrop-filter:blur(12px);color:#eaf8ff;font:14px/1.5 Inter,system-ui,sans-serif}
+#reicInfraOverlay.open{display:flex}
+#reicInfraPanel{width:min(1180px,100%);height:min(850px,94vh);display:flex;flex-direction:column;overflow:hidden;border:1px solid #4c9bc5;background:linear-gradient(145deg,#061d38 0%,#073c68 52%,#061a36 100%);box-shadow:0 28px 90px #000a}
+#reicInfraPanel *{box-sizing:border-box}
+.reic-infra-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;border-bottom:1px solid #397da5;background:linear-gradient(110deg,#0a4774,#0876a5 55%,#07385f)}
+.reic-infra-head small{display:block;color:#b6eaff;letter-spacing:.16em;font-size:10px}
+.reic-infra-head h2{margin:4px 0 0;font-size:clamp(18px,3vw,25px);letter-spacing:.04em}
+.reic-infra-close{width:42px;height:42px;border:1px solid #8edbff;background:#062d50;color:#fff;font-size:24px;cursor:pointer}
+.reic-infra-tools{display:flex;gap:10px;padding:14px 18px;border-bottom:1px solid #285a7d}
+.reic-infra-tools input{flex:1;min-width:0;padding:12px 14px;border:1px solid #559bc2;background:#031b34;color:#fff;outline:none}
+.reic-infra-tools input:focus{border-color:#a3e8ff;box-shadow:0 0 0 2px #5ac7f455}
+.reic-infra-count{align-self:center;color:#b7e4f8;font-size:12px;white-space:nowrap}
+.reic-infra-body{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:0;flex:1}
+.reic-infra-categories{overflow:auto;padding:12px;border-right:1px solid #285a7d}
+.reic-infra-categories button{display:block;width:100%;padding:12px;margin:0 0 7px;text-align:left;border:1px solid transparent;background:#0a2d4c;color:#dff5ff;cursor:pointer}
+.reic-infra-categories button[aria-pressed=true],.reic-infra-categories button:hover{border-color:#69c9ef;background:#0d527b}
+.reic-infra-list{overflow:auto;padding:18px}
+.reic-infra-list h3{margin:0 0 14px;color:#a9e5ff;font-size:15px;letter-spacing:.08em}
+.reic-infra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:10px}
+.reic-infra-card{min-height:116px;padding:14px;text-align:left;border:1px solid #326d91;background:linear-gradient(145deg,#0a2b49,#0b3c61);color:#eefaff;cursor:pointer}
+.reic-infra-card:hover,.reic-infra-card[aria-pressed=true]{border-color:#8be0ff;background:linear-gradient(145deg,#0b4770,#08628b)}
+.reic-infra-card small{display:block;color:#8fd9f7;font-size:10px;letter-spacing:.1em}
+.reic-infra-card b{display:block;margin:7px 0;font-size:14px}
+.reic-infra-card span{display:block;color:#b5d8e9;font-size:11px}
+.reic-infra-detail{margin-top:14px;padding:16px;border:1px solid #4a9ac1;background:#041e38}
+.reic-infra-detail h4{margin:0 0 8px;font-size:17px}
+.reic-infra-detail p{margin:0 0 12px;color:#c3e2f2}
+.reic-infra-files{display:flex;flex-wrap:wrap;gap:7px}
+.reic-infra-files span{padding:5px 9px;border:1px solid #4789ac;color:#b9eaff;font-size:11px}
+.reic-infra-foot{padding:10px 18px;border-top:1px solid #285a7d;color:#9fc9df;font-size:11px}
+@media(max-width:680px){#reicInfraOverlay{padding:0}#reicInfraPanel{height:100%;width:100%;border:0}.reic-infra-body{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.reic-infra-categories{display:flex;gap:7px;overflow:auto;border-right:0;border-bottom:1px solid #285a7d;padding:9px}.reic-infra-categories button{flex:0 0 190px;margin:0;padding:9px}.reic-infra-list{padding:12px}.reic-infra-tools{padding:10px}.reic-infra-count{font-size:10px}}
