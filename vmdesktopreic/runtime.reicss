@@ -250,3 +250,7 @@
 .reic-app-tool{display:grid;gap:7px;padding:10px;background:#eef6ff;border:1px solid #c0dcf5}.reic-app-tool pre{white-space:pre-wrap;background:#09264a;color:#c5e5ff;padding:9px;max-height:120px;overflow:auto;font-size:11px}
 @media(max-width:900px){.reic-app-catalog-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
 @media(max-width:560px){.reic-app-catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.reic-app-record-form{grid-template-columns:1fr}.reic-app-stats{grid-template-columns:1fr}.reic-app-work-toolbar{flex-direction:column}.reic-app-work-toolbar>*{width:100%}.reic-product-app-head{flex-direction:column}.reic-app-url-form{flex-direction:column}}
+
+.reic-app-catalog-window{width:min(94%,1480px)!important;height:88%!important;left:3%!important;top:6%!important}
+.reic-app-catalog-window .reic-app-content{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.reic-app-catalog-window .reic-app-catalog{flex:1;min-height:0}

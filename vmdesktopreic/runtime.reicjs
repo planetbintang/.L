@@ -96,7 +96,7 @@ function wireWindow(w){
 function openApp(name){
  if(name==='File Manager'){fileWindow.hidden=false;return;}
  const body=appContent(name);const w=makeWindow(name,APP_BY_NAME.get(name)?.icon||iconFor(name),body);
- if(name==='Aplikasi')wireAppCatalog(w);else if(APP_BY_NAME.has(name))wireApplication(w,APP_BY_NAME.get(name));
+ if(name==='Aplikasi'){w.classList.add('reic-app-catalog-window');wireAppCatalog(w);}else if(APP_BY_NAME.has(name))wireApplication(w,APP_BY_NAME.get(name));
  if(name==='REIC Explorer'||name==='File Manager')loadRepos(w);
  if(name==='Monitor Sistem')refreshMonitor(w);
  if(name==='Host Lokal REIC')wireHostLocal(w);
