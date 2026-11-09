@@ -1,0 +1,238 @@
+{
+  "catalogVersion": "1.0.0",
+  "name": "Katalog Bahasa PlanetBintang",
+  "languages": [
+    {
+      "id": "REIC",
+      "name": "PlanetBintang REIC",
+      "extensions": ".reic, .reicss, .reicjs",
+      "description": "Dokumen, gaya, modul runtime",
+      "execution": "native",
+      "selected": false
+    },
+    {
+      "id": "HTML",
+      "name": "HTML",
+      "extensions": ".html",
+      "description": "Struktur dokumen web",
+      "execution": "browser",
+      "selected": false
+    },
+    {
+      "id": "CSS",
+      "name": "CSS",
+      "extensions": ".css",
+      "description": "Tata letak dan gaya antarmuka",
+      "execution": "browser",
+      "selected": false
+    },
+    {
+      "id": "JavaScript",
+      "name": "JavaScript",
+      "extensions": ".js, .mjs",
+      "description": "Logika dan interaksi web",
+      "execution": "browser",
+      "selected": false
+    },
+    {
+      "id": "TypeScript",
+      "name": "TypeScript",
+      "extensions": ".ts",
+      "description": "JavaScript dengan sistem tipe",
+      "execution": "build",
+      "selected": false
+    },
+    {
+      "id": "JSX",
+      "name": "JSX",
+      "extensions": ".jsx",
+      "description": "Sintaks komponen JavaScript",
+      "execution": "build",
+      "selected": false
+    },
+    {
+      "id": "TSX",
+      "name": "TSX",
+      "extensions": ".tsx",
+      "description": "Sintaks komponen TypeScript",
+      "execution": "build",
+      "selected": false
+    },
+    {
+      "id": "PHP",
+      "name": "PHP",
+      "extensions": ".php",
+      "description": "Pemrograman sisi server",
+      "execution": "server",
+      "selected": false
+    },
+    {
+      "id": "Python",
+      "name": "Python",
+      "extensions": ".py",
+      "description": "Bahasa umum, otomasi, dan backend",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "Java",
+      "name": "Java",
+      "extensions": ".java",
+      "description": "Aplikasi dan layanan backend",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "C",
+      "name": "C",
+      "extensions": ".c, .h",
+      "description": "Pemrograman sistem",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "C++",
+      "name": "C++",
+      "extensions": ".cpp, .hpp",
+      "description": "Pemrograman sistem dan aplikasi",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "C#",
+      "name": "C Sharp",
+      "extensions": ".cs",
+      "description": "Aplikasi .NET",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "Go",
+      "name": "Go",
+      "extensions": ".go",
+      "description": "Layanan dan perangkat lunak sistem",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "Rust",
+      "name": "Rust",
+      "extensions": ".rs",
+      "description": "Pemrograman sistem berorientasi keamanan memori",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "Ruby",
+      "name": "Ruby",
+      "extensions": ".rb",
+      "description": "Aplikasi dan otomasi",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "Swift",
+      "name": "Swift",
+      "extensions": ".swift",
+      "description": "Aplikasi Apple",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "Kotlin",
+      "name": "Kotlin",
+      "extensions": ".kt, .kts",
+      "description": "Aplikasi Android dan backend",
+      "execution": "compiler",
+      "selected": false
+    },
+    {
+      "id": "SQL",
+      "name": "SQL",
+      "extensions": ".sql",
+      "description": "Bahasa kueri basis data",
+      "execution": "database",
+      "selected": false
+    },
+    {
+      "id": "JSON",
+      "name": "JSON",
+      "extensions": ".json",
+      "description": "Data dan konfigurasi terstruktur",
+      "execution": "data",
+      "selected": false
+    },
+    {
+      "id": "YAML",
+      "name": "YAML",
+      "extensions": ".yaml, .yml",
+      "description": "Konfigurasi terstruktur",
+      "execution": "data",
+      "selected": false
+    },
+    {
+      "id": "Markdown",
+      "name": "Markdown",
+      "extensions": ".md",
+      "description": "Dokumentasi dan konten",
+      "execution": "data",
+      "selected": false
+    },
+    {
+      "id": "Bash",
+      "name": "Bash",
+      "extensions": ".sh, .bash",
+      "description": "Skrip shell Unix",
+      "execution": "shell",
+      "selected": false
+    },
+    {
+      "id": "PowerShell",
+      "name": "PowerShell",
+      "extensions": ".ps1",
+      "description": "Automasi sistem Windows",
+      "execution": "shell",
+      "selected": false
+    },
+    {
+      "id": "Lua",
+      "name": "Lua",
+      "extensions": ".lua",
+      "description": "Skrip tertanam dan aplikasi",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "Dart",
+      "name": "Dart",
+      "extensions": ".dart",
+      "description": "Aplikasi Flutter dan backend",
+      "execution": "runtime",
+      "selected": false
+    },
+    {
+      "id": "XML",
+      "name": "XML",
+      "extensions": ".xml",
+      "description": "Dokumen data terstruktur",
+      "execution": "data",
+      "selected": false
+    },
+    {
+      "id": "GraphQL",
+      "name": "GraphQL",
+      "extensions": ".graphql, .gql",
+      "description": "Bahasa kueri API",
+      "execution": "api",
+      "selected": false
+    },
+    {
+      "id": "Solidity",
+      "name": "Solidity",
+      "extensions": ".sol",
+      "description": "Smart contract EVM",
+      "execution": "compiler",
+      "selected": false
+    }
+  ]
+}
