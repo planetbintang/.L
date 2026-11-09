@@ -32,3 +32,61 @@
 @media(max-width:1000px){.live-tv-dashboard{grid-template-columns:minmax(0,1fr) minmax(190px,.7fr)}.live-tv-card-tv{grid-column:1/-1}}
 @media(max-width:620px){.live-tv-dashboard{grid-template-columns:1fr;gap:.65rem}.live-tv-card-tv{grid-column:auto}.live-tv-card{padding:.8rem}.live-tv-player{min-height:150px}.live-tv-channels{max-height:180px}}
 @media(prefers-reduced-motion:reduce){.live-tv-live:before{animation:none}}
+
+
+/* REIC layered surfaces for the three live dashboard modules. */
+.live-tv-dashboard{position:relative;isolation:isolate;gap:clamp(.65rem,1.1vw,.95rem)}
+.live-tv-card.reic-layer-panel{
+  --reic-layer-edge:rgba(190,224,255,.58);
+  --reic-layer-glow:rgba(89,166,255,.18);
+  position:relative;isolation:isolate;overflow:hidden;
+  border:1px solid rgba(177,215,255,.42);
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.13),rgba(112,177,255,.035) 34%,transparent 65%),
+    linear-gradient(155deg,rgba(13,39,70,.98),rgba(4,15,31,.99));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 0 0 4px rgba(163,207,255,.045),
+    inset 0 -18px 35px rgba(34,104,181,.09),
+    0 15px 34px rgba(0,8,22,.28);
+}
+.live-tv-card.reic-layer-panel::before{
+  content:"";position:absolute;inset:6px;z-index:0;pointer-events:none;
+  border:1px solid rgba(197,225,255,.15);
+  background:linear-gradient(110deg,rgba(255,255,255,.035),transparent 38%,rgba(92,165,255,.035));
+}
+.live-tv-card.reic-layer-panel::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,#fff 0%,#d9edff 24%,#8fc9ff 62%,#397fc8 100%);
+  box-shadow:0 0 16px rgba(132,197,255,.42);
+}
+.live-tv-card.reic-layer-panel>*{position:relative;z-index:1}
+.reic-layer-heading{display:grid;gap:.24rem;min-width:0}
+.reic-layer-mark{color:#c6e4ff;font-size:.56rem;font-weight:900;letter-spacing:.2em}
+.live-tv-card.reic-layer-panel .live-tv-card-title{color:#f4f9ff;letter-spacing:.075em}
+.live-tv-card.reic-layer-panel .live-tv-metric-value{
+  color:#f3f9ff;text-shadow:0 0 22px rgba(139,198,255,.25)
+}
+.live-tv-card.reic-layer-panel .live-tv-metric-row{
+  border-top-color:rgba(190,220,255,.2)
+}
+.live-tv-card.reic-layer-panel .live-tv-metric-row strong{color:#fff}
+.live-tv-card.reic-layer-panel .live-tv-category,
+.live-tv-card.reic-layer-panel .live-tv-channel{
+  border-color:rgba(190,220,255,.24);
+  background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(61,131,202,.12));
+}
+.live-tv-card.reic-layer-panel .live-tv-category[aria-pressed="true"],
+.live-tv-card.reic-layer-panel .live-tv-channel[aria-pressed="true"]{
+  border-color:rgba(235,247,255,.8);
+  background:linear-gradient(100deg,rgba(255,255,255,.28),rgba(100,174,245,.35));
+  box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 16px rgba(108,176,255,.13);
+}
+.live-tv-card.reic-layer-panel .live-tv-open{
+  border-color:rgba(221,240,255,.52);
+  background:linear-gradient(100deg,rgba(255,255,255,.2),rgba(67,143,218,.3));
+}
+@media(prefers-reduced-motion:no-preference){
+  .live-tv-card.reic-layer-panel{transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+  .live-tv-card.reic-layer-panel:hover{border-color:rgba(223,241,255,.78);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 18px 38px rgba(0,8,22,.34),0 0 22px rgba(104,174,255,.1)}
+}
