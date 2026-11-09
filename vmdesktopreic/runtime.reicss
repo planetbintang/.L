@@ -50,3 +50,55 @@
 #items.list-mode button{min-height:36px;flex-direction:row;justify-content:flex-start;padding:5px 12px}
 .file-window-max{position:absolute!important;inset:4px!important;width:auto!important;height:auto!important;z-index:6}
 @media(max-width:600px){.reic-app-window{min-width:0}.reic-stat-grid{grid-template-columns:1fr 1fr}.reic-stat-grid article:last-child{grid-column:1/-1}.reic-app-content{padding:11px}.reic-repo-list{grid-template-columns:1fr}.reic-app-title{height:36px;flex-basis:36px}.reic-app-title button{width:25px;height:24px}}
+
+
+/* Interaction and responsive layout refinement */
+.system-bar{min-width:0;overflow:hidden}
+.system-links{display:flex;align-items:center;justify-content:center;gap:clamp(2px,.45vw,7px);flex:1;min-width:0;overflow:hidden}
+.system-links button{flex:0 1 auto;min-width:0;min-height:30px;padding:3px clamp(3px,.55vw,8px);border:0;border-right:1px solid rgba(137,205,255,.5);background:transparent;color:#f1f7ff;font-size:clamp(7px,.85vw,11px);font-weight:800;white-space:nowrap;cursor:pointer}
+.system-links button:hover,.system-links button:focus-visible{background:#0758a8;color:#fff;outline:1px solid #61caff}
+.launcher button{min-height:48px;max-width:100%;border:1px solid rgba(70,174,255,.55);border-radius:7px;background:linear-gradient(145deg,rgba(16,105,206,.92),rgba(2,24,71,.96));box-shadow:inset 0 1px 0 #b5eaff55,0 3px 12px #001a4d;color:#fff;transition:transform .15s ease,filter .15s ease}
+.launcher button:hover,.launcher button:focus-visible{transform:translateY(-2px);filter:brightness(1.2);outline:2px solid #83dcff;outline-offset:1px}
+.launcher small{padding:1px 2px}
+.window{min-width:0;min-height:0;height:min(86%,560px);max-height:100%;display:flex;flex-direction:column}
+.file-layout{min-height:0;flex:1}
+.file-nav button,.file-toolbar button,#items button,.window-title button{min-height:36px}
+.file-nav button:focus-visible,.file-toolbar button:focus-visible,#items button:focus-visible,.window-title button:focus-visible{outline:2px solid #078cff;outline-offset:1px}
+#items button{padding:6px 3px}
+#apps{position:absolute!important;inset:0!important;z-index:8!important;overflow:hidden!important;pointer-events:none!important;contain:layout paint}
+.reic-app-window{width:min(760px,calc(100% - 20px));min-width:0;min-height:0;max-height:calc(100% - 16px);border-radius:9px}
+.reic-app-title button{min-width:32px;min-height:30px;border-radius:4px;font-size:16px}
+.reic-app-content{min-width:0;max-width:100%;overflow:auto;scrollbar-gutter:stable}
+.reic-app-content button,.reic-app-content a,.reic-app-content input,.reic-app-content select{max-width:100%}
+.reic-action-grid button,.reic-toolbar button,.reic-repo-actions button,.reic-tree-head button{min-height:44px;border-radius:5px}
+.reic-repo-list{min-width:0;max-height:calc(100% - 110px);overflow:auto;overscroll-behavior:contain}
+.reic-repo-card{overflow-wrap:anywhere}
+.reic-module-detail h2{font-size:clamp(18px,3vw,26px);margin:10px 0;color:#fff}
+.reic-module-detail p{color:#c3dafa;font-size:13px;line-height:1.65}
+.reic-setting input[type=checkbox]{width:22px;height:22px;accent-color:#159bff}
+.reic-setting select{min-height:40px}
+.reic-app-window a:focus-visible,.reic-app-window button:focus-visible,.reic-app-window input:focus-visible,.reic-app-window select:focus-visible{outline:2px solid #8de6ff;outline-offset:2px}
+@media(max-width:700px){
+ .system-links{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
+ .system-links::-webkit-scrollbar{display:none}
+ .system-links button{font-size:7px;min-height:34px;padding:3px 5px}
+ .reic-stat-grid{grid-template-columns:1fr 1fr}
+ .reic-stat-grid article:last-child{grid-column:1/-1}
+ .reic-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .reic-app-window{max-width:calc(100% - 12px)}
+ .reic-app-title{padding:0 6px}
+ .reic-app-content{padding:10px}
+ .reic-repo-list{grid-template-columns:1fr;max-height:none}
+}
+@media(max-width:650px) and (orientation:portrait){
+ .system-bar{gap:4px}
+ .system-links button{font-size:6.5px;padding:2px 4px}
+ .launcher button{min-height:43px;padding:3px 0}
+ .window{height:86%;width:100%}
+ .file-nav button{min-height:34px}
+}
+@media(max-height:600px) and (orientation:landscape){
+ .reic-app-window{max-height:calc(100% - 8px)}
+ .reic-app-content{padding:8px}
+ .reic-stat-grid{margin:8px 0}
+}
