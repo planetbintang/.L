@@ -3,7 +3,7 @@
   "language": "id-ID",
   "policy": {
     "executeByDefault": false,
-    "onlyLoadDeclaredRuntime": true,
+    "onlyLoadDeclaredRuntime": true,\n    "routeAllDesktopIOThroughREIC": true,
     "previewUnknownFiles": true,
     "requireValidation": true
   },
@@ -27,7 +27,7 @@
       "trusted": true
     },
     {
-      "path": "vmdesktopreic/runtime.reicjs",
+      "path": "vmdesktopreic/runtime.reicjs",\n      "vmdesktopreic/reic-local-host/server.mjs",
       "kind": "desktop-runtime",
       "activation": "startup",
       "trusted": true
@@ -62,8 +62,8 @@
     ".JSON": "parse-as-data",
     "other": "safe-preview"
   },
-  "notes": [
-    "Folder menjadi lokasi navigasi desktop dan dapat dibuka melalui File Manager atau REIC Explorer.",
+  "ioLayer": { "name": "REIC_IO", "input": ["desktop forms", "search queries", "file manager navigation"], "output": ["local host search results", "repository metadata", "storage listings"], "transport": "localhost HTTP JSON API", "fallback": "localStorage for desktop preferences only" },\n  "notes": [\n    "Seluruh input dan output aplikasi desktop menggunakan adaptor REIC_IO; kredensial server tidak pernah disimpan di browser.",
+    "Folder menjadi lokasi navigasi desktop dan dapat dibuka melalui File Manager atau REIC Explorer.",\n    "Pencarian REIC menggabungkan indeks file lokal, Wikipedia, repositori GitHub publik, dan Bing Web bila BING_SEARCH_KEY dikonfigurasi.",
     "Berkas menjadi item desktop; berkas kode tidak dijalankan otomatis hanya karena ditemukan.",
     "Repositori privat hanya ditampilkan melalui host lokal atau Worker yang terautentikasi."
   ]
