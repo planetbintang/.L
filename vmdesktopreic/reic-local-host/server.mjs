@@ -99,6 +99,17 @@ const server = http.createServer(async (req, res) => {
           for (const item of data.query?.search || []) results.push({ source: "WIKIPEDIA", title: item.title, url: "https://id.wikipedia.org/?curid=" + item.pageid, snippet: item.snippet.replace(/<[^>]*>/g, "") });
         }
       } catch {}
+      if (TOKEN) {
+        try {
+          const response = await fetch("https://api.github.com/search/code?q=" + encodeURIComponent(q + " user:" + OWNER) + "&per_page=8", {
+            headers: { Authorization: "Bearer " + TOKEN, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" }
+          });
+          if (response.ok) {
+            const data = await response.json();
+            for (const item of data.items || []) results.push({ source: "GITHUB CODE TEROTORISASI", title: item.repository.full_name + "/" + item.path, url: item.html_url, snippet: item.text_matches?.[0]?.fragment || "Konten kode pada repositori yang dapat diakses token." });
+          }
+        } catch {}
+      }
       try {
         const response = await fetch("https://api.github.com/search/repositories?q=" + encodeURIComponent(q + " user:" + OWNER) + "&per_page=8", { headers: { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" } });
         if (response.ok) {
