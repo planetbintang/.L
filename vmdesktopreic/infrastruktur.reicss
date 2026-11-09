@@ -30,3 +30,19 @@
 .reic-infra-files span{padding:5px 9px;border:1px solid #4789ac;color:#b9eaff;font-size:11px}
 .reic-infra-foot{padding:10px 18px;border-top:1px solid #285a7d;color:#9fc9df;font-size:11px}
 @media(max-width:680px){#reicInfraOverlay{padding:0}#reicInfraPanel{height:100%;width:100%;border:0}.reic-infra-body{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.reic-infra-categories{display:flex;gap:7px;overflow:auto;border-right:0;border-bottom:1px solid #285a7d;padding:9px}.reic-infra-categories button{flex:0 0 190px;margin:0;padding:9px}.reic-infra-list{padding:12px}.reic-infra-tools{padding:10px}.reic-infra-count{font-size:10px}}
+
+/* Pintasan 55 Infrastruktur berada di area desktop, bukan bilah navigasi atas. */
+.desktop-stage>.launcher .reic-infra-desktop-shortcut{
+ width:100%;min-width:0;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+ padding:5px 2px;border:1px solid rgba(119,220,255,.8);border-radius:5px;
+ background:linear-gradient(145deg,rgba(8,112,171,.96),rgba(3,31,75,.98));
+ color:#fff;box-shadow:inset 0 1px 0 #d7f7ff55,0 3px 13px #001a4d;
+ font:700 clamp(19px,2.8vw,30px)/1 system-ui,sans-serif;cursor:pointer;
+}
+.desktop-stage>.launcher .reic-infra-desktop-shortcut small{
+ display:block;max-width:100%;font-size:clamp(8px,.9vw,11px);font-weight:800;line-height:1.1;text-align:center;overflow-wrap:anywhere;color:#effaff;
+}
+.desktop-stage>.launcher .reic-infra-desktop-shortcut:hover,
+.desktop-stage>.launcher .reic-infra-desktop-shortcut:focus-visible{
+ border-color:#c1f1ff;background:linear-gradient(145deg,#087eae,#07518a);filter:brightness(1.15);outline:2px solid #8be4ff;outline-offset:2px;
+}
