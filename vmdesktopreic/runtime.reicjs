@@ -91,7 +91,7 @@ function wireWindow(w){
  });
 }
 function openApp(name){
- if(name==='File Manager'){fileWindow.hidden=false;fileWindow.scrollIntoView({block:'nearest'});return;}
+ if(name==='File Manager'){fileWindow.hidden=false;return;}
  const body=appContent(name);const w=makeWindow(name,iconFor(name),body);
  if(name==='REIC Explorer'||name==='File Manager')loadRepos(w);
  if(name==='Monitor Sistem')refreshMonitor(w);
@@ -144,8 +144,46 @@ function drawFiles(path='Beranda'){
  names.filter(n=>n.toLowerCase().includes(searchTerm)).forEach(n=>{const b=document.createElement('button');b.className='file-entry';const isDir=!n.includes('.');b.innerHTML='<b>'+(isDir?'📁':n.endsWith('.reicss')?'🎨':n.endsWith('.reicjs')?'📜':'▤')+'</b><span>'+safe(n)+'</span>';b.onclick=()=>isDir?drawFiles(n):openApp(n);items.append(b);});
  status.textContent=items.children.length+' item · File System REIC · data runtime lokal';
 }
-function wireFileManager(){if(!items)return;drawFiles();$$('[data-folder]').forEach(b=>b.onclick=()=>drawFiles(b.dataset.folder));$('#search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();drawFiles(currentPath)});$('#back').onclick=()=>drawFiles('Beranda');$('#forward').onclick=()=>drawFiles('Beranda');$('#up').onclick=()=>drawFiles('Beranda');$('#grid').onclick=()=>items.classList.remove('list-mode');$('#list').onclick=()=>items.classList.add('list-mode');$$('[data-close],[data-min]',fileWindow).forEach(b=>b.onclick=()=>fileWindow.hidden=true);$('[data-max]',fileWindow).onclick=()=>fileWindow.classList.toggle('file-window-max');}
-function wireLauncher(){
+function wireFileManager(){
+ if(!items||!fileWindow)return;
+ drawFiles();
+ $$('[data-folder]').forEach(b=>b.onclick=()=>drawFiles(b.dataset.folder));
+ $('#search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();drawFiles(currentPath)});
+ $('#back').onclick=()=>drawFiles('Beranda');$('#forward').onclick=()=>drawFiles('Beranda');$('#up').onclick=()=>drawFiles('Beranda');
+ $('#grid').onclick=()=>items.classList.remove('list-mode');$('#list').onclick=()=>items.classList.add('list-mode');
+ const title=$('.window-title',fileWindow),workspace=$('.workspace');
+ let drag=null,restore=null,restoreChip=null;
+ title.addEventListener('pointerdown',e=>{
+  if(e.target.closest('button')||fileWindow.classList.contains('file-window-max'))return;
+  const r=fileWindow.getBoundingClientRect(),bounds=workspace.getBoundingClientRect();
+  drag={x:e.clientX-r.left,y:e.clientY-r.top,bounds};
+  title.setPointerCapture(e.pointerId);
+ });
+ title.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  const r=fileWindow.getBoundingClientRect();
+  const x=Math.max(0,Math.min(drag.bounds.width-r.width,e.clientX-drag.bounds.left-drag.x));
+  const y=Math.max(0,Math.min(drag.bounds.height-r.height,e.clientY-drag.bounds.top-drag.y));
+  fileWindow.style.position='absolute';fileWindow.style.transform='none';fileWindow.style.left=x+'px';fileWindow.style.top=y+'px';
+ });
+ const stop=()=>{drag=null;};title.addEventListener('pointerup',stop);title.addEventListener('pointercancel',stop);title.addEventListener('lostpointercapture',stop);
+ $('[data-close]',fileWindow).onclick=()=>{fileWindow.hidden=true;if(restoreChip)restoreChip.remove();restoreChip=null;};
+ $('[data-min]',fileWindow).onclick=()=>{
+  fileWindow.hidden=true;
+  if(!restoreChip){restoreChip=document.createElement('button');restoreChip.type='button';restoreChip.className='reic-restore-chip';restoreChip.textContent='📁 File Manajer';restoreChip.onclick=()=>{fileWindow.hidden=false;restoreChip.remove();restoreChip=null;};apps.append(restoreChip);}
+ };
+ $('[data-max]',fileWindow).onclick=()=>{
+  if(!fileWindow.classList.contains('file-window-max')){
+   const r=fileWindow.getBoundingClientRect(),b=workspace.getBoundingClientRect();
+   restore={left:r.left-b.left,top:r.top-b.top,width:r.width,height:r.height};
+   fileWindow.classList.add('file-window-max');fileWindow.style.transform='none';fileWindow.style.left='';fileWindow.style.top='';
+  }else{
+   fileWindow.classList.remove('file-window-max');
+   if(restore){fileWindow.style.position='absolute';fileWindow.style.left=restore.left+'px';fileWindow.style.top=restore.top+'px';fileWindow.style.width=Math.min(restore.width,workspace.clientWidth-8)+'px';fileWindow.style.height=restore.height+'px';}
+   else{fileWindow.style.position='';fileWindow.style.left='';fileWindow.style.top='';fileWindow.style.width='';fileWindow.style.height='';fileWindow.style.transform='';}
+  }
+ };
+}function wireLauncher(){
  $('[data-open]').forEach(b=>{
   b.type='button';b.setAttribute('aria-label',b.getAttribute('aria-label')||b.dataset.open);
   b.title=b.dataset.open;
