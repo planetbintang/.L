@@ -24,3 +24,11 @@ GitHub Pages adalah hosting statis. Runtime ini menggunakan endpoint GitHub REST
 
 ## Indeks
 Paket indeks REIC yang ada tetap menjadi sumber indeks sistem. Angka sublink virtual adalah ruang indeks terpaginasikan, bukan klaim bahwa jutaan file fisik sudah dibuat.
+
+## Bahasa dan format REIC
+- `reic-language.js` memuat `.reicss` melalui fetch + style injection dan `.reicjs` sebagai ECMAScript module agar tidak bergantung pada MIME khusus ekstensi di GitHub Pages.
+- `reic-language.config.json` mengatur ekstensi, urutan stylesheet/script, versi standar, dan batas keamanan.
+- `REIC-LANGUAGE.md` berisi standar struktur dokumen `.reic`, CSS `.reicss`, modul JavaScript `.reicjs`, impor/ekspor, konfigurasi, dan keamanan.
+- `.reic` dapat berupa JSON manifest atau template markup HTML-kompatibel.
+- `.reicss` menggunakan sintaks CSS; `.reicjs` menggunakan ECMAScript module.
+- JSX/TS/TSX memerlukan transpiler build-time; PHP memerlukan server/backend. Keduanya tidak dijalankan langsung oleh GitHub Pages statis.
