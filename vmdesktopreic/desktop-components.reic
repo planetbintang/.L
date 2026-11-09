@@ -3,7 +3,8 @@
   "language": "id-ID",
   "policy": {
     "executeByDefault": false,
-    "onlyLoadDeclaredRuntime": true,\n    "routeAllDesktopIOThroughREIC": true,
+    "onlyLoadDeclaredRuntime": true,
+    "routeAllDesktopIOThroughREIC": true,
     "previewUnknownFiles": true,
     "requireValidation": true
   },
@@ -27,7 +28,7 @@
       "trusted": true
     },
     {
-      "path": "vmdesktopreic/runtime.reicjs",\n      "vmdesktopreic/reic-local-host/server.mjs",
+      "path": "vmdesktopreic/runtime.reicjs",
       "kind": "desktop-runtime",
       "activation": "startup",
       "trusted": true
@@ -62,9 +63,28 @@
     ".JSON": "parse-as-data",
     "other": "safe-preview"
   },
-  "ioLayer": { "name": "REIC_IO", "input": ["desktop forms", "search queries", "file manager navigation"], "output": ["local host search results", "repository metadata", "storage listings"], "transport": "localhost HTTP JSON API", "fallback": "localStorage for desktop preferences only" },\n  "notes": [\n    "Seluruh input dan output aplikasi desktop menggunakan adaptor REIC_IO; kredensial server tidak pernah disimpan di browser.",
-    "Folder menjadi lokasi navigasi desktop dan dapat dibuka melalui File Manager atau REIC Explorer.",\n    "Pencarian REIC menggabungkan indeks file lokal, Wikipedia, repositori GitHub publik, dan Bing Web bila BING_SEARCH_KEY dikonfigurasi.",
+  "ioLayer": {
+    "name": "REIC_IO",
+    "input": [
+      "desktop search queries",
+      "host configuration",
+      "repository and file navigation"
+    ],
+    "output": [
+      "search results",
+      "repository metadata",
+      "local storage listings"
+    ],
+    "transport": "localhost HTTP JSON API",
+    "fallback": "localStorage for desktop preferences only"
+  },
+  "notes": [
+    "Input dan output yang membutuhkan data host menggunakan adaptor REIC_IO; token GitHub tetap berada di server.",
+    "Seluruh input dan output aplikasi desktop menggunakan adaptor REIC_IO; kredensial server tidak pernah disimpan di browser.",
+    "Folder menjadi lokasi navigasi desktop dan dapat dibuka melalui File Manager atau REIC Explorer.",
+    "Pencarian REIC menggabungkan indeks file lokal, Wikipedia, repositori GitHub publik, dan Bing Web bila BING_SEARCH_KEY dikonfigurasi.",
     "Berkas menjadi item desktop; berkas kode tidak dijalankan otomatis hanya karena ditemukan.",
-    "Repositori privat hanya ditampilkan melalui host lokal atau Worker yang terautentikasi."
+    "Repositori privat hanya ditampilkan melalui host lokal atau Worker yang terautentikasi.",
+    "Pencarian REIC menggabungkan indeks teks lokal, Wikipedia Indonesia, GitHub publik, dan Bing Web bila BING_SEARCH_KEY dikonfigurasi."
   ]
 }
