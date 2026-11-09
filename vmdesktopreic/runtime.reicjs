@@ -35,7 +35,15 @@ function makeWindow(title,icon,content){
 }
 function placeWindow(w){const bounds=apps.getBoundingClientRect();const width=Math.min(760,Math.max(280,bounds.width-24));w.style.width=width+'px';w.style.maxHeight='calc(100% - 20px)';w.style.left=Math.max(8,(bounds.width-width)/2)+'px';w.style.top=Math.max(8,Math.min(24,bounds.height*.04))+'px';}
 function wireWindow(w){
- w.addEventListener('click',e=>{const launch=e.target.closest('[data-launch]');if(launch)openApp(launch.dataset.launch);});
+ w.addEventListener('click',e=>{
+  const launch=e.target.closest('[data-launch]');
+  if(launch){openApp(launch.dataset.launch);return;}
+  const control=e.target.closest('button');
+  if(control && control.type!=='submit' && !control.onclick && !control.dataset.close && !control.dataset.minimize && !control.dataset.maximize){
+   const label=control.textContent.trim();
+   if(label){const child=makeWindow(label,'▣','<div class="reic-module-detail"><div class="reic-eyebrow">MODUL REIC</div><h2>'+safe(label)+'</h2><p>Panel '+safe(label)+' tersedia di ruang kerja VMDESKTOPREIC.</p><p>Gunakan navigasi File Manager, REIC Explorer, dan konfigurasi sistem untuk membuka sumber serta pengaturan terkait.</p></div>');}
+  }
+ });
  const bar=$('.reic-app-title',w);let drag=null;
  w.addEventListener('pointerdown',()=>w.style.zIndex=String(++windowZ));
  bar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=w.getBoundingClientRect(),b=apps.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top,b};bar.setPointerCapture(e.pointerId);});
