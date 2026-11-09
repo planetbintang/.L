@@ -6,10 +6,10 @@ Menyediakan host lokal REIC pada `127.0.0.1:8787`, penyimpanan lokal yang dibata
 ## Menjalankan host lokal
 1. Pasang Node.js 20 atau lebih baru.
 2. Salin `.env.example` menjadi `.env` dan isi token fine-grained GitHub.
-3. Jalankan dengan pemuatan variabel lingkungan: `node --env-file=.env server.mjs`.
-4. Uji `http://127.0.0.1:8787/health`.
-5. Buka VMDESKTOPREIC, aplikasi **Host Lokal REIC**, lalu masukkan alamat host tersebut.
-6. Berikan izin minimum: Metadata read-only dan Contents read-only untuk repositori yang dibutuhkan.
+3. Berikan izin minimum: Metadata read-only dan Contents read-only untuk repositori yang dibutuhkan; pilih semua repositori yang memang harus diakses.
+4. Jalankan dengan pemuatan variabel lingkungan: `node --env-file=.env server.mjs`.
+5. Uji `http://127.0.0.1:8787/health`.
+6. Buka VMDESKTOPREIC, aplikasi **Host Lokal REIC**, lalu masukkan alamat host tersebut.
 
 Token tidak boleh ditaruh pada HTML, JavaScript frontend, konfigurasi publik, atau commit Git. Jangan gunakan token klasik dengan cakupan luas jika token fine-grained dapat dipakai.
 
