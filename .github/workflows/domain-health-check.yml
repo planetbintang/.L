@@ -1,39 +1,64 @@
-name: Domain HTTP(S) Health Check
+name: GitHub Pages Automatic Health Check
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - io
+    paths:
+      - ".github/workflows/domain-health-check.yml"
+      - ".github/workflows/deploy-pages.yml"
+      - "vmdesktopreic/**"
   schedule:
-    - cron: "41 */6 * * *"
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
 
+concurrency:
+  group: pages-health-check
+  cancel-in-progress: true
+
 jobs:
-  check-public-hosts:
-    name: Check public domain endpoints
+  check-pages:
+    name: Verify published GitHub Pages endpoints
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - name: Check apex and www over HTTPS
+      - name: Check homepage and VMDESKTOPREIC
         shell: bash
         run: |
           set -euo pipefail
+
+          urls=(
+            "https://planetbintang.github.io/.L/"
+            "https://planetbintang.github.io/.L/vmdesktopreic/"
+          )
+
           failed=0
-          for host in planetbintang.com www.planetbintang.com; do
-            echo "Checking https://$host/"
-            if ! curl --silent --show-error --location --max-time 25 --output /dev/null --write-out 'HTTP %{http_code}; final=%{url_effective}; TLS verify=%{ssl_verify_result}\n' "https://$host/"; then
-              echo "::error::HTTPS request failed for $host. Check DNS, GitHub Pages custom domain settings, and certificate."
+          for url in "${urls[@]}"; do
+            echo "::group::Checking ${url}"
+            code="$(curl --fail --silent --show-error --location \
+              --retry 3 --retry-all-errors --retry-delay 5 \
+              --connect-timeout 15 --max-time 60 \
+              --output /tmp/pages-check.html \
+              --write-out '%{http_code}' "${url}" || true)"
+
+            if [[ ! "${code}" =~ ^2[0-9][0-9]$ ]]; then
+              echo "::error::Expected HTTP 2xx for ${url}; received ${code:-no response}."
               failed=1
-              continue
-            fi
-            code=$(curl --silent --location --max-time 25 --output /dev/null --write-out '%{http_code}' "https://$host/" || true)
-            if [[ ! "$code" =~ ^2[0-9][0-9]$ ]]; then
-              echo "::error::Expected final HTTP 2xx for $host; received $code."
+            elif [[ ! -s /tmp/pages-check.html ]]; then
+              echo "::error::Empty response body for ${url}."
               failed=1
+            else
+              echo "PASS: ${url} returned HTTP ${code} with a non-empty body."
             fi
+            echo "::endgroup::"
           done
-          if [[ "$failed" -ne 0 ]]; then
-            echo "::error::One or more domain health checks failed."
+
+          if [[ "${failed}" -ne 0 ]]; then
+            echo "::error::GitHub Pages automatic health check failed."
             exit 1
           fi
-          echo "Both HTTPS endpoints returned a final 2xx response."
+
+          echo "PASS: homepage and VMDESKTOPREIC are reachable."
