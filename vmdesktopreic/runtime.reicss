@@ -102,3 +102,40 @@
  .reic-app-content{padding:8px}
  .reic-stat-grid{margin:8px 0}
 }
+
+
+/* Final interaction pass: touch targets, keyboard focus, draggable modal chrome. */
+.system-links{overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#168dff #031638}
+.system-links button{min-height:38px;flex:0 0 auto;border-radius:3px;transition:background .16s ease,color .16s ease,box-shadow .16s ease}
+.system-links button:active{background:#0878d8;box-shadow:inset 0 0 0 1px #9ceaff}
+.launcher button{min-width:44px;min-height:56px;padding:5px 3px;touch-action:manipulation}
+.launcher button:active{transform:scale(.96);background:linear-gradient(145deg,#168eff,#05265f)}
+.launcher button:focus-visible,.system-links button:focus-visible{outline:2px solid #a6edff;outline-offset:2px;box-shadow:0 0 0 4px #087dff55}
+.reic-app-window{min-width:0;min-height:160px;max-width:calc(100% - 16px);max-height:calc(100% - 16px);overscroll-behavior:contain}
+.reic-app-title{user-select:none;-webkit-user-select:none;touch-action:none;cursor:grab}
+.reic-app-title:active{cursor:grabbing}
+.reic-app-title button{min-width:36px;min-height:34px;touch-action:manipulation}
+.reic-app-title button:hover,.reic-app-title button:focus-visible{background:#1475d2;outline:2px solid #8fe4ff;outline-offset:1px}
+.reic-app-content{overscroll-behavior:contain;overflow-x:hidden;overflow-y:auto}
+.reic-app-content button,.reic-app-content a{touch-action:manipulation}
+.reic-restore-chip{position:relative;left:auto;bottom:auto;display:inline-flex;align-items:center;min-height:40px;max-width:48%;margin:6px 0 0 6px;padding:7px 10px;border-radius:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#apps:has(.reic-restore-chip){display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;pointer-events:none}
+#apps .reic-restore-chip{pointer-events:auto;flex:0 0 auto}
+.file-nav button,.file-toolbar button,#items button,.window-title button{touch-action:manipulation}
+.file-nav button{min-height:40px}
+.file-toolbar button{min-width:36px;min-height:36px}
+#items button{min-height:76px}
+.reic-action-grid button,.reic-toolbar button,.reic-repo-actions button,.reic-tree-head button{min-height:44px;cursor:pointer;touch-action:manipulation}
+.reic-app-window button:focus-visible,.reic-app-window a:focus-visible,.reic-app-window input:focus-visible,.reic-app-window select:focus-visible{outline:2px solid #9ceaff;outline-offset:2px}
+@media(max-width:700px){
+ .system-links{justify-content:flex-start;gap:2px;padding:0 2px}
+ .system-links button{min-height:40px;padding:4px 7px;font-size:8px}
+ .launcher button{min-height:48px;font-size:clamp(20px,5vw,28px)}
+ .launcher small{font-size:clamp(7px,2vw,9px)}
+ .reic-app-window{max-width:calc(100% - 12px);max-height:calc(100% - 12px)}
+ .reic-app-title button{min-width:36px;min-height:34px}
+ .reic-app-content{padding:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .launcher button,.system-links button{transition:none}
+}
