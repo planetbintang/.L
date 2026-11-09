@@ -139,3 +139,16 @@
 @media(prefers-reduced-motion:reduce){
  .launcher button,.system-links button{transition:none}
 }
+
+
+/* Language catalog and library input */
+.reic-language-input{display:grid;gap:8px;margin:14px 0 22px;padding:14px;background:linear-gradient(145deg,#08294d,#04152f);border:1px solid #278bc2}
+.reic-language-input label,.reic-language-selected>strong{font-size:10px;letter-spacing:.12em;color:#8cddff;font-weight:800}
+.reic-language-input input,.reic-language-input select{width:100%;min-width:0;min-height:42px;padding:9px 11px;background:#03162e;border:1px solid #2877a8;color:#f4fbff;border-radius:3px}
+.reic-language-detail{padding:10px;background:#0b3761;border-left:3px solid #54caff;color:#d4edff;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.reic-language-input>[data-language-add],.reic-language-input>[data-language-export]{min-height:42px;padding:9px 12px;background:linear-gradient(100deg,#087bc1,#07508c);border:1px solid #65caff;color:#fff;text-align:left;cursor:pointer}
+.reic-language-selected{display:grid;gap:8px;padding:10px 0;border-top:1px solid #24547a}
+.reic-language-chip{display:inline-flex;align-items:center;gap:8px;margin:3px;padding:6px 8px;background:#0d4774;border:1px solid #3a9bc9;color:#effaff;font-size:11px}
+.reic-language-chip button{border:0;background:transparent;color:#fff;font-size:16px;cursor:pointer}
+.reic-language-config{max-height:220px;overflow:auto;padding:10px;background:#010d20;border:1px solid #23618d;color:#a9e6ff;white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px}
+@media(max-width:600px){.reic-language-input{padding:10px}.reic-language-chip{max-width:100%;overflow-wrap:anywhere}}
