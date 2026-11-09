@@ -1,0 +1,15 @@
+# Kalender REIC (reic-app-043)
+
+Kategori: Produktivitas
+Ikon: ☑
+Fungsi: Workspace Kalender REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/kalender-reic.REIC — kontrak komponen dan lifecycle
+- ui/kalender-reic.REICSS — gaya modul
+- runtime/kalender-reic.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

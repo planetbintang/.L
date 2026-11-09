@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-037",
+  "name": "MySQL REIC",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "📁",
+  "entry": "runtime/mysql-reic.REICJS",
+  "component": "core/mysql-reic.REIC",
+  "stylesheet": "ui/mysql-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-037"
+  }
+}

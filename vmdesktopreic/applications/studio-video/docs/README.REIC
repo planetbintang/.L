@@ -1,0 +1,15 @@
+# Studio Video (reic-app-063)
+
+Kategori: Multimedia
+Ikon: 🎙
+Fungsi: Workspace Studio Video untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/studio-video.REIC — kontrak komponen dan lifecycle
+- ui/studio-video.REICSS — gaya modul
+- runtime/studio-video.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

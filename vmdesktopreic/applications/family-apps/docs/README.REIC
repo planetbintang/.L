@@ -1,0 +1,15 @@
+# Family Apps (reic-app-077)
+
+Kategori: Multimedia
+Ikon: 🎙
+Fungsi: Workspace Family Apps untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/family-apps.REIC — kontrak komponen dan lifecycle
+- ui/family-apps.REICSS — gaya modul
+- runtime/family-apps.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

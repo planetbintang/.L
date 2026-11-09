@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-139",
+  "name": "Photo Retouch",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "Aa",
+  "entry": "runtime/photo-retouch.REICJS",
+  "component": "core/photo-retouch.REIC",
+  "stylesheet": "ui/photo-retouch.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-139"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-150",
+  "name": "Brand Studio",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "Aa",
+  "entry": "runtime/brand-studio.REICJS",
+  "component": "core/brand-studio.REIC",
+  "stylesheet": "ui/brand-studio.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-150"
+  }
+}

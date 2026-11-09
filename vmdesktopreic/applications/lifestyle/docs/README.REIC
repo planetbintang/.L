@@ -1,0 +1,15 @@
+# Lifestyle (reic-app-080)
+
+Kategori: Multimedia
+Ikon: 🧩
+Fungsi: Workspace Lifestyle untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/lifestyle.REIC — kontrak komponen dan lifecycle
+- ui/lifestyle.REICSS — gaya modul
+- runtime/lifestyle.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

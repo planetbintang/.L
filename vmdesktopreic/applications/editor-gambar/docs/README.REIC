@@ -1,0 +1,15 @@
+# Editor Gambar (reic-app-064)
+
+Kategori: Multimedia
+Ikon: ●
+Fungsi: Workspace Editor Gambar untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/editor-gambar.REIC — kontrak komponen dan lifecycle
+- ui/editor-gambar.REICSS — gaya modul
+- runtime/editor-gambar.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

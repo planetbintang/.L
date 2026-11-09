@@ -1,0 +1,9 @@
+REIC_APPLICATION "Jaringan REIC" ID "reic-app-021" VERSION "1.0.0"
+CATEGORY "Sistem" ICON "✦"
+COMPONENT "reic-component-021"
+DESCRIPTION "Workspace Jaringan REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC."
+MODE "SYSTEM"
+CAPABILITIES [runtime-status, configuration, diagnostics]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-021"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

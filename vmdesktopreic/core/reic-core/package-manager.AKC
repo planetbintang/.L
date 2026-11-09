@@ -1,0 +1,18 @@
+{
+  "format": "AKC",
+  "id": "REIC-PACKAGE-MANAGER",
+  "version": "1.0.0",
+  "type": "system-service",
+  "entry": "package-manager.REICJS",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "operations": [
+    "validate",
+    "install",
+    "uninstall",
+    "list",
+    "export"
+  ]
+}

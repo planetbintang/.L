@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-137",
+  "name": "Logo Maker",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "▦",
+  "entry": "runtime/logo-maker.REICJS",
+  "component": "core/logo-maker.REIC",
+  "stylesheet": "ui/logo-maker.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-137"
+  }
+}

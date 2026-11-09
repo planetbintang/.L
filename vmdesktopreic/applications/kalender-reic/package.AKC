@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-043",
+  "name": "Kalender REIC",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "☑",
+  "entry": "runtime/kalender-reic.REICJS",
+  "component": "core/kalender-reic.REIC",
+  "stylesheet": "ui/kalender-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-043"
+  }
+}

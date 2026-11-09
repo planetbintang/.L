@@ -1,0 +1,15 @@
+# Vector Editor (reic-app-125)
+
+Kategori: Desain
+Ikon: ✧
+Fungsi: Workspace Vector Editor untuk mengelola data, konfigurasi, dan aktivitas desain REIC.
+
+## Paket
+- core/vector-editor.REIC — kontrak komponen dan lifecycle
+- ui/vector-editor.REICSS — gaya modul
+- runtime/vector-editor.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

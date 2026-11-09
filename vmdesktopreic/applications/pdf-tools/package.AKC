@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-049",
+  "name": "PDF Tools",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "📄",
+  "entry": "runtime/pdf-tools.REICJS",
+  "component": "core/pdf-tools.REIC",
+  "stylesheet": "ui/pdf-tools.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-049"
+  }
+}

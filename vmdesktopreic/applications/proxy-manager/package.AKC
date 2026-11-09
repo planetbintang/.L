@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-024",
+  "name": "Proxy Manager",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "★",
+  "entry": "runtime/proxy-manager.REICJS",
+  "component": "core/proxy-manager.REIC",
+  "stylesheet": "ui/proxy-manager.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-024"
+  }
+}

@@ -209,3 +209,44 @@
  .reic-inapp-browser form button{min-width:30px;padding:4px;font-size:11px}
  .reic-inapp-browser form input{font-size:11px}
 }
+
+/* REIC Application Center: 150 named modules and per-app modal workspaces */
+.reic-app-catalog{display:flex;flex-direction:column;gap:10px;min-height:0;height:100%;color:#08234c}
+.reic-app-catalog h2{margin:0;color:#092b5b;font-size:clamp(19px,2.1vw,28px)}
+.reic-app-catalog-toolbar{display:flex;flex-direction:column;gap:8px}
+.reic-app-category-tabs{display:flex;gap:6px;overflow-x:auto;padding:3px 0}
+.reic-app-category-tabs button{flex:0 0 auto;border:1px solid #b8d9f5;background:linear-gradient(#f7fbff,#d9eaff);color:#092b5b;padding:8px 12px;font-weight:800;cursor:pointer}
+.reic-app-category-tabs button.is-active{background:linear-gradient(#168cff,#0561ca);color:#fff;border-color:#3cb9ff}
+.reic-app-catalog-toolbar input,.reic-app-work-toolbar input{min-width:120px;flex:1;padding:10px 12px;border:1px solid #9dc9ee;background:#f7fbff;color:#102f59}
+.reic-app-catalog-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;overflow:auto;min-height:0;padding:5px;background:linear-gradient(145deg,#f7fbffed,#d9ebf9e8);border:1px solid #acd2f2}
+.reic-app-tile{display:flex;min-width:0;min-height:76px;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 3px;border:1px solid #d3e8fa;background:linear-gradient(145deg,#fff,#e5f3ff);color:#092b58;cursor:pointer;box-shadow:0 2px 7px #0a5ca51a}
+.reic-app-tile:hover{border-color:#168dff;box-shadow:0 0 0 2px #168dff38}
+.reic-app-tile-icon{display:grid;place-items:center;width:39px;height:39px;font-size:25px;color:#0877df}
+.reic-app-tile strong{font-size:clamp(9px,.8vw,12px);line-height:1.2;text-align:center;overflow-wrap:anywhere}
+.reic-app-tile small{font-size:8px;color:#52769b;text-align:center}
+.reic-app-catalog [data-app-catalog-status]{font-size:11px;color:#365d83}
+.reic-product-app{display:flex;flex-direction:column;gap:12px;color:#102b4c}
+.reic-product-app-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.reic-product-app-head h2{margin:5px 0;color:#0759ad;font-size:clamp(21px,2.4vw,30px)}
+.reic-product-app-head p{margin:0;color:#426383;font-size:13px;line-height:1.5}
+.reic-app-ready{padding:6px 9px;background:#e0f8ed;color:#087648;border:1px solid #9bdfbd;font-size:10px;font-weight:900}
+.reic-app-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.reic-app-stats article{padding:10px;background:linear-gradient(145deg,#f3faff,#dceeff);border:1px solid #b7d8f4;min-width:0}
+.reic-app-stats b,.reic-app-stats span{display:block;overflow-wrap:anywhere}.reic-app-stats b{font-size:11px;color:#0759ad}.reic-app-stats span{font-size:10px;color:#567796;margin-top:4px}
+.reic-app-work-toolbar{display:flex;gap:7px;flex-wrap:wrap}
+.reic-app-work-toolbar button,.reic-app-record-form button,.reic-app-url-form button,.reic-app-tool button{padding:9px 12px;border:1px solid #168dff;background:linear-gradient(#168dff,#0564c8);color:#fff;font-weight:800;cursor:pointer}
+.reic-app-record-form{display:grid;grid-template-columns:1fr 1.4fr auto;gap:8px;align-items:end;padding:10px;background:#edf6ff;border:1px solid #c3def5}
+.reic-app-record-form label,.reic-app-tool label{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:800;color:#244f78;min-width:0}
+.reic-app-record-form input,.reic-app-record-form textarea,.reic-app-tool textarea,.reic-app-url-form input{width:100%;min-width:0;padding:9px;border:1px solid #a9cce9;background:#fff;color:#153452;resize:vertical}
+.reic-app-record-heading{display:flex;justify-content:space-between;gap:8px;color:#0a3c70;font-size:13px}.reic-app-record-heading span{font-size:11px;color:#53799e}
+.reic-app-record-list{display:grid;gap:6px;max-height:280px;overflow:auto}
+.reic-app-record{display:flex;justify-content:space-between;gap:10px;padding:10px;background:#f8fcff;border:1px solid #c7dff3}
+.reic-app-record strong{color:#0c4d8d}.reic-app-record p{margin:4px 0;color:#365a7c;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}.reic-app-record small{color:#7892ab;font-size:10px}
+.reic-app-record button{align-self:center;border:1px solid #d28d9a;background:#fff0f2;color:#a22b40;padding:6px 9px;cursor:pointer}
+.reic-app-empty{padding:18px;text-align:center;color:#6484a3;background:#f4f9ff;border:1px dashed #aacbe8;font-size:12px}
+.reic-app-runtime-status{padding:8px 10px;background:#e7f5ff;border-left:3px solid #168dff;color:#315b80;font-size:11px}
+.reic-app-package-details{padding:9px;background:#f4f8fc;border:1px solid #d3e3f0;color:#3b5d7d;font-size:11px}
+.reic-app-url-form{display:flex;gap:7px}.reic-app-color-row{display:flex;align-items:center;gap:10px;color:#335a80;font-size:12px}
+.reic-app-tool{display:grid;gap:7px;padding:10px;background:#eef6ff;border:1px solid #c0dcf5}.reic-app-tool pre{white-space:pre-wrap;background:#09264a;color:#c5e5ff;padding:9px;max-height:120px;overflow:auto;font-size:11px}
+@media(max-width:900px){.reic-app-catalog-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:560px){.reic-app-catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.reic-app-record-form{grid-template-columns:1fr}.reic-app-stats{grid-template-columns:1fr}.reic-app-work-toolbar{flex-direction:column}.reic-app-work-toolbar>*{width:100%}.reic-product-app-head{flex-direction:column}.reic-app-url-form{flex-direction:column}}

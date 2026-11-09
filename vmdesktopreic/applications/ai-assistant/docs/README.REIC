@@ -1,0 +1,15 @@
+# AI Assistant (reic-app-051)
+
+Kategori: Produktivitas
+Ikon: 📑
+Fungsi: Workspace AI Assistant untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/ai-assistant.REIC — kontrak komponen dan lifecycle
+- ui/ai-assistant.REICSS — gaya modul
+- runtime/ai-assistant.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

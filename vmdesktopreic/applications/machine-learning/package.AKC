@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-053",
+  "name": "Machine Learning",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "✦",
+  "entry": "runtime/machine-learning.REICJS",
+  "component": "core/machine-learning.REIC",
+  "stylesheet": "ui/machine-learning.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-053"
+  }
+}

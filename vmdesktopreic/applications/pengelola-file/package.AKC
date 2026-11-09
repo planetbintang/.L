@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-031",
+  "name": "Pengelola File",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "📄",
+  "entry": "runtime/pengelola-file.REICJS",
+  "component": "core/pengelola-file.REIC",
+  "stylesheet": "ui/pengelola-file.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-031"
+  }
+}

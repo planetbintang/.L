@@ -1,0 +1,9 @@
+REIC_APPLICATION "Texture Lab" ID "reic-app-147" VERSION "1.0.0"
+CATEGORY "Desain" ICON "✧"
+COMPONENT "reic-component-147"
+DESCRIPTION "Workspace Texture Lab untuk mengelola data, konfigurasi, dan aktivitas desain REIC."
+MODE "DESIGN"
+CAPABILITIES [design-records, color-token, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-147"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

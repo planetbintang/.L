@@ -1,0 +1,15 @@
+# Optimasi Sistem (reic-app-015)
+
+Kategori: Sistem
+Ikon: ⬆
+Fungsi: Workspace Optimasi Sistem untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.
+
+## Paket
+- core/optimasi-sistem.REIC — kontrak komponen dan lifecycle
+- ui/optimasi-sistem.REICSS — gaya modul
+- runtime/optimasi-sistem.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

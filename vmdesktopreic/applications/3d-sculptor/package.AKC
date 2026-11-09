@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-145",
+  "name": "3D Sculptor",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "◇",
+  "entry": "runtime/3d-sculptor.REICJS",
+  "component": "core/3d-sculptor.REIC",
+  "stylesheet": "ui/3d-sculptor.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-145"
+  }
+}

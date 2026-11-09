@@ -1,0 +1,2 @@
+export function verifyCatalog(c){if(!c||c.total!==150||!Array.isArray(c.apps)||c.apps.length!==150)throw new Error("REIC app catalog integrity check failed");const ids=new Set(c.apps.map(x=>x.id));if(ids.size!==150)throw new Error("Duplicate application IDs");return {valid:true,total:ids.size};}
+export function installCatalog(c,storage){const v=verifyCatalog(c);for(const app of c.apps)storage.setItem("pb-reic-package-installed:"+app.id,"true");return {...v,installed:true};}

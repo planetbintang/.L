@@ -1,0 +1,3 @@
+export const REIC_CORE_VERSION="1.0.0";
+export function registerApplication(registry,app){if(!app||!/^reic-app-\d{3}$/.test(app.id))throw new TypeError("Invalid REIC application id");if(registry.has(app.id))throw new Error("Duplicate application id");registry.set(app.id,Object.freeze({...app}));return registry.get(app.id);}
+export const storageNamespace=id=>"pb-reic-app-data:"+id;

@@ -1,0 +1,15 @@
+# Machine Learning (reic-app-053)
+
+Kategori: Produktivitas
+Ikon: ✦
+Fungsi: Workspace Machine Learning untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/machine-learning.REIC — kontrak komponen dan lifecycle
+- ui/machine-learning.REICSS — gaya modul
+- runtime/machine-learning.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

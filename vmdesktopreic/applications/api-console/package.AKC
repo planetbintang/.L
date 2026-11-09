@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-101",
+  "name": "API Console",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "✉",
+  "entry": "runtime/api-console.REICJS",
+  "component": "core/api-console.REIC",
+  "stylesheet": "ui/api-console.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-101"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-086",
+  "name": "Subtitle Editor",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "♫",
+  "entry": "runtime/subtitle-editor.REICJS",
+  "component": "core/subtitle-editor.REIC",
+  "stylesheet": "ui/subtitle-editor.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-086"
+  }
+}

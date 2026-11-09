@@ -1,0 +1,15 @@
+# Pengolah Suara (reic-app-068)
+
+Kategori: Multimedia
+Ikon: ◇
+Fungsi: Workspace Pengolah Suara untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/pengolah-suara.REIC — kontrak komponen dan lifecycle
+- ui/pengolah-suara.REICSS — gaya modul
+- runtime/pengolah-suara.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

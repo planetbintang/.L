@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-129",
+  "name": "Font Manager",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "▧",
+  "entry": "runtime/font-manager.REICJS",
+  "component": "core/font-manager.REIC",
+  "stylesheet": "ui/font-manager.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-129"
+  }
+}

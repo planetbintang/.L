@@ -1,0 +1,3 @@
+export function validatePackage(m){if(!m||m.format!=="AKC"||!m.id||!m.entry)throw new TypeError("Invalid AKC package");const allowed=["REIC-KERNEL >=1.0.0","REIC-CORE >=1.0.0"];const missing=(m.dependencies||[]).filter(x=>!allowed.includes(x));if(missing.length)throw new Error("Missing dependency: "+missing.join(", "));return {id:m.id,valid:true};}
+export function installPackage(m,storage){const v=validatePackage(m);storage.setItem("pb-reic-package-installed:"+v.id,"true");return {...v,installed:true};}
+export function uninstallPackage(id,storage){storage.setItem("pb-reic-package-installed:"+id,"false");return {id,installed:false};}

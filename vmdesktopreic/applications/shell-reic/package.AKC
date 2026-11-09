@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-027",
+  "name": "Shell REIC",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "⌁",
+  "entry": "runtime/shell-reic.REICJS",
+  "component": "core/shell-reic.REIC",
+  "stylesheet": "ui/shell-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-027"
+  }
+}

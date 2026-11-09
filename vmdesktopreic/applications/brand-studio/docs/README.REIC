@@ -1,0 +1,15 @@
+# Brand Studio (reic-app-150)
+
+Kategori: Desain
+Ikon: Aa
+Fungsi: Workspace Brand Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC.
+
+## Paket
+- core/brand-studio.REIC — kontrak komponen dan lifecycle
+- ui/brand-studio.REICSS — gaya modul
+- runtime/brand-studio.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

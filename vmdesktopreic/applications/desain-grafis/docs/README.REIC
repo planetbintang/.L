@@ -1,0 +1,15 @@
+# Desain Grafis (reic-app-121)
+
+Kategori: Desain
+Ikon: 🧩
+Fungsi: Workspace Desain Grafis untuk mengelola data, konfigurasi, dan aktivitas desain REIC.
+
+## Paket
+- core/desain-grafis.REIC — kontrak komponen dan lifecycle
+- ui/desain-grafis.REICSS — gaya modul
+- runtime/desain-grafis.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

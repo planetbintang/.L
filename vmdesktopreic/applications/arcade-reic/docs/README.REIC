@@ -1,0 +1,15 @@
+# Arcade REIC (reic-app-074)
+
+Kategori: Multimedia
+Ikon: 🎨
+Fungsi: Workspace Arcade REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/arcade-reic.REIC — kontrak komponen dan lifecycle
+- ui/arcade-reic.REICSS — gaya modul
+- runtime/arcade-reic.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

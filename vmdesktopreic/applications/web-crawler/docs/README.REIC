@@ -1,0 +1,15 @@
+# Web Crawler (reic-app-118)
+
+Kategori: Internet
+Ikon: ◎
+Fungsi: Workspace Web Crawler untuk mengelola data, konfigurasi, dan aktivitas internet REIC.
+
+## Paket
+- core/web-crawler.REIC — kontrak komponen dan lifecycle
+- ui/web-crawler.REICSS — gaya modul
+- runtime/web-crawler.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

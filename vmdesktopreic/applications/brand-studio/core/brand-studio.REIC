@@ -1,0 +1,9 @@
+REIC_APPLICATION "Brand Studio" ID "reic-app-150" VERSION "1.0.0"
+CATEGORY "Desain" ICON "Aa"
+COMPONENT "reic-component-150"
+DESCRIPTION "Workspace Brand Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC."
+MODE "DESIGN"
+CAPABILITIES [design-records, color-token, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-150"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

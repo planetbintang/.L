@@ -1,0 +1,15 @@
+# Health Care (reic-app-079)
+
+Kategori: Multimedia
+Ikon: 🎮
+Fungsi: Workspace Health Care untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/health-care.REIC — kontrak komponen dan lifecycle
+- ui/health-care.REICSS — gaya modul
+- runtime/health-care.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

@@ -1,0 +1,9 @@
+REIC_APPLICATION "Speed Test" ID "reic-app-114" VERSION "1.0.0"
+CATEGORY "Internet" ICON "✉"
+COMPONENT "reic-component-114"
+DESCRIPTION "Workspace Speed Test untuk mengelola data, konfigurasi, dan aktivitas internet REIC."
+MODE "INTERNET"
+CAPABILITIES [endpoint-records, url-preview, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-114"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

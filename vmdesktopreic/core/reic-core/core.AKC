@@ -1,0 +1,16 @@
+{
+  "format": "AKC",
+  "id": "REIC-CORE",
+  "version": "1.0.0",
+  "type": "system-core",
+  "entry": "REIC-CORE.REICJS",
+  "component": "REIC-CORE.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0"
+  ],
+  "services": [
+    "application-registry",
+    "package-manager",
+    "storage-router"
+  ]
+}

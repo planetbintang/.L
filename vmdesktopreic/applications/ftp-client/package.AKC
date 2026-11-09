@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-095",
+  "name": "FTP Client",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "⬆",
+  "entry": "runtime/ftp-client.REICJS",
+  "component": "core/ftp-client.REIC",
+  "stylesheet": "ui/ftp-client.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-095"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-084",
+  "name": "Media Library",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "◉",
+  "entry": "runtime/media-library.REICJS",
+  "component": "core/media-library.REIC",
+  "stylesheet": "ui/media-library.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-084"
+  }
+}

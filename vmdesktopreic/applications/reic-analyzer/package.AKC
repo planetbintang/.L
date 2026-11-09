@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-010",
+  "name": "REIC Analyzer",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "∿",
+  "entry": "runtime/reic-analyzer.REICJS",
+  "component": "core/reic-analyzer.REIC",
+  "stylesheet": "ui/reic-analyzer.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-010"
+  }
+}

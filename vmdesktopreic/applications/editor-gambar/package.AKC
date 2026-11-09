@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-064",
+  "name": "Editor Gambar",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "●",
+  "entry": "runtime/editor-gambar.REICJS",
+  "component": "core/editor-gambar.REIC",
+  "stylesheet": "ui/editor-gambar.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-064"
+  }
+}

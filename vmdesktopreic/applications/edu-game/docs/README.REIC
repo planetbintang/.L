@@ -1,0 +1,15 @@
+# Edu Game (reic-app-076)
+
+Kategori: Multimedia
+Ikon: ✧
+Fungsi: Workspace Edu Game untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/edu-game.REIC — kontrak komponen dan lifecycle
+- ui/edu-game.REICSS — gaya modul
+- runtime/edu-game.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

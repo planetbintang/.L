@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-044",
+  "name": "To-Do List",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "📝",
+  "entry": "runtime/to-do-list.REICJS",
+  "component": "core/to-do-list.REIC",
+  "stylesheet": "ui/to-do-list.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-044"
+  }
+}

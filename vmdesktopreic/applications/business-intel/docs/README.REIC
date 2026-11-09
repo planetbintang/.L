@@ -1,0 +1,15 @@
+# Business Intel (reic-app-056)
+
+Kategori: Produktivitas
+Ikon: 🗂
+Fungsi: Workspace Business Intel untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/business-intel.REIC — kontrak komponen dan lifecycle
+- ui/business-intel.REICSS — gaya modul
+- runtime/business-intel.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

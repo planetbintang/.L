@@ -1,0 +1,15 @@
+# Remote Access (reic-app-116)
+
+Kategori: Internet
+Ikon: ∿
+Fungsi: Workspace Remote Access untuk mengelola data, konfigurasi, dan aktivitas internet REIC.
+
+## Paket
+- core/remote-access.REIC — kontrak komponen dan lifecycle
+- ui/remote-access.REICSS — gaya modul
+- runtime/remote-access.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

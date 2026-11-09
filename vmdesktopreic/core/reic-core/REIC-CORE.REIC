@@ -1,0 +1,4 @@
+REIC_SYSTEM "REIC-CORE" VERSION "1.0.0"
+DEPENDS "REIC-KERNEL >=1.0.0"
+MODULES [APPLICATION_REGISTRY, PACKAGE_MANAGER, APP_LIFECYCLE, STORAGE_ROUTER]
+POLICY "Each application has a unique id, package manifest, scoped storage and modal workspace."

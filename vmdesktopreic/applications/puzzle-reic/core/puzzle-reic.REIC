@@ -1,0 +1,9 @@
+REIC_APPLICATION "Puzzle REIC" ID "reic-app-075" VERSION "1.0.0"
+CATEGORY "Multimedia" ICON "🎞"
+COMPONENT "reic-component-075"
+DESCRIPTION "Workspace Puzzle REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC."
+MODE "MEDIA"
+CAPABILITIES [asset-catalog, metadata, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-075"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

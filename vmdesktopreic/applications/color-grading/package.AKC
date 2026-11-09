@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-089",
+  "name": "Color Grading",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "🎞",
+  "entry": "runtime/color-grading.REICJS",
+  "component": "core/color-grading.REIC",
+  "stylesheet": "ui/color-grading.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-089"
+  }
+}

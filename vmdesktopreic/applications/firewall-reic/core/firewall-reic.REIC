@@ -1,0 +1,9 @@
+REIC_APPLICATION "Firewall REIC" ID "reic-app-019" VERSION "1.0.0"
+CATEGORY "Sistem" ICON "🐞"
+COMPONENT "reic-component-019"
+DESCRIPTION "Workspace Firewall REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC."
+MODE "SYSTEM"
+CAPABILITIES [runtime-status, configuration, diagnostics]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-019"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

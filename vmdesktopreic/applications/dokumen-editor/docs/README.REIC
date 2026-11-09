@@ -1,0 +1,15 @@
+# Dokumen Editor (reic-app-048)
+
+Kategori: Produktivitas
+Ikon: 📅
+Fungsi: Workspace Dokumen Editor untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/dokumen-editor.REIC — kontrak komponen dan lifecycle
+- ui/dokumen-editor.REICSS — gaya modul
+- runtime/dokumen-editor.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

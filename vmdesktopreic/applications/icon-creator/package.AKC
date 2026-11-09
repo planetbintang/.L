@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-128",
+  "name": "Icon Creator",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "Aa",
+  "entry": "runtime/icon-creator.REICJS",
+  "component": "core/icon-creator.REIC",
+  "stylesheet": "ui/icon-creator.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-128"
+  }
+}

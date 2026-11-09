@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-108",
+  "name": "Certificate Monitor",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "⬆",
+  "entry": "runtime/certificate-monitor.REICJS",
+  "component": "core/certificate-monitor.REIC",
+  "stylesheet": "ui/certificate-monitor.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-108"
+  }
+}

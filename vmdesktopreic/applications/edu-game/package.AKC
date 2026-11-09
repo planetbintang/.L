@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-076",
+  "name": "Edu Game",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "✧",
+  "entry": "runtime/edu-game.REICJS",
+  "component": "core/edu-game.REIC",
+  "stylesheet": "ui/edu-game.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-076"
+  }
+}

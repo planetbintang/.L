@@ -1,0 +1,15 @@
+# Streaming REIC (reic-app-069)
+
+Kategori: Multimedia
+Ikon: ▤
+Fungsi: Workspace Streaming REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/streaming-reic.REIC — kontrak komponen dan lifecycle
+- ui/streaming-reic.REICSS — gaya modul
+- runtime/streaming-reic.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

@@ -1,0 +1,15 @@
+# Terminal REIC (reic-app-026)
+
+Kategori: Sistem
+Ikon: ◉
+Fungsi: Terminal REIC dengan perintah aman tanpa akses shell host.
+
+## Paket
+- core/terminal-reic.REIC — kontrak komponen dan lifecycle
+- ui/terminal-reic.REICSS — gaya modul
+- runtime/terminal-reic.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

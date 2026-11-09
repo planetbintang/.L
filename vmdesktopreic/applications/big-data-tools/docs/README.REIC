@@ -1,0 +1,15 @@
+# Big Data Tools (reic-app-040)
+
+Kategori: Produktivitas
+Ikon: ▤
+Fungsi: Workspace Big Data Tools untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/big-data-tools.REIC — kontrak komponen dan lifecycle
+- ui/big-data-tools.REICSS — gaya modul
+- runtime/big-data-tools.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

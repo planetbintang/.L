@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-096",
+  "name": "Cloud Sync",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "⇄",
+  "entry": "runtime/cloud-sync.REICJS",
+  "component": "core/cloud-sync.REIC",
+  "stylesheet": "ui/cloud-sync.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-096"
+  }
+}

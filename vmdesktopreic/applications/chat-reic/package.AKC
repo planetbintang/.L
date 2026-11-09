@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-110",
+  "name": "Chat REIC",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "🔒",
+  "entry": "runtime/chat-reic.REICJS",
+  "component": "core/chat-reic.REIC",
+  "stylesheet": "ui/chat-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-110"
+  }
+}

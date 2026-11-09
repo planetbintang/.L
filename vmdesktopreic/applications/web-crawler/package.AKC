@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-118",
+  "name": "Web Crawler",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "◎",
+  "entry": "runtime/web-crawler.REICJS",
+  "component": "core/web-crawler.REIC",
+  "stylesheet": "ui/web-crawler.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-118"
+  }
+}

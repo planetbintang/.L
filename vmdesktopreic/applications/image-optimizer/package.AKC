@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-083",
+  "name": "Image Optimizer",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "▤",
+  "entry": "runtime/image-optimizer.REICJS",
+  "component": "core/image-optimizer.REIC",
+  "stylesheet": "ui/image-optimizer.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-083"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-029",
+  "name": "Compiler REIC",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "∿",
+  "entry": "runtime/compiler-reic.REICJS",
+  "component": "core/compiler-reic.REIC",
+  "stylesheet": "ui/compiler-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-029"
+  }
+}

@@ -1,0 +1,15 @@
+# CDN Manager (reic-app-104)
+
+Kategori: Internet
+Ikon: ⌘
+Fungsi: Workspace CDN Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.
+
+## Paket
+- core/cdn-manager.REIC — kontrak komponen dan lifecycle
+- ui/cdn-manager.REICSS — gaya modul
+- runtime/cdn-manager.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

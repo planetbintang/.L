@@ -1,0 +1,15 @@
+# Certificate Monitor (reic-app-108)
+
+Kategori: Internet
+Ikon: ⬆
+Fungsi: Workspace Certificate Monitor untuk mengelola data, konfigurasi, dan aktivitas internet REIC.
+
+## Paket
+- core/certificate-monitor.REIC — kontrak komponen dan lifecycle
+- ui/certificate-monitor.REICSS — gaya modul
+- runtime/certificate-monitor.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

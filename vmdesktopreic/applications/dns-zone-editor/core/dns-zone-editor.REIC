@@ -1,0 +1,9 @@
+REIC_APPLICATION "DNS Zone Editor" ID "reic-app-107" VERSION "1.0.0"
+CATEGORY "Internet" ICON "⬇"
+COMPONENT "reic-component-107"
+DESCRIPTION "Workspace DNS Zone Editor untuk mengelola data, konfigurasi, dan aktivitas internet REIC."
+MODE "INTERNET"
+CAPABILITIES [endpoint-records, url-preview, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-107"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

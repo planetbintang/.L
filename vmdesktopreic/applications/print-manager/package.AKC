@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-050",
+  "name": "Print Manager",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "📊",
+  "entry": "runtime/print-manager.REICJS",
+  "component": "core/print-manager.REIC",
+  "stylesheet": "ui/print-manager.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-050"
+  }
+}

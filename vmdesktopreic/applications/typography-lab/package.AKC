@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-141",
+  "name": "Typography Lab",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "✦",
+  "entry": "runtime/typography-lab.REICJS",
+  "component": "core/typography-lab.REIC",
+  "stylesheet": "ui/typography-lab.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-141"
+  }
+}

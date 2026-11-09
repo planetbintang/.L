@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-094",
+  "name": "Upload Center",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "⬇",
+  "entry": "runtime/upload-center.REICJS",
+  "component": "core/upload-center.REIC",
+  "stylesheet": "ui/upload-center.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-094"
+  }
+}

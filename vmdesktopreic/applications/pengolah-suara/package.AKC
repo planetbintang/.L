@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-068",
+  "name": "Pengolah Suara",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "◇",
+  "entry": "runtime/pengolah-suara.REICJS",
+  "component": "core/pengolah-suara.REIC",
+  "stylesheet": "ui/pengolah-suara.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-068"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-063",
+  "name": "Studio Video",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "🎙",
+  "entry": "runtime/studio-video.REICJS",
+  "component": "core/studio-video.REIC",
+  "stylesheet": "ui/studio-video.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-063"
+  }
+}

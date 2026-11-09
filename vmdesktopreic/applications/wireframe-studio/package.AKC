@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-131",
+  "name": "Wireframe Studio",
+  "version": "1.0.0",
+  "category": "Desain",
+  "icon": "🖌",
+  "entry": "runtime/wireframe-studio.REICJS",
+  "component": "core/wireframe-studio.REIC",
+  "stylesheet": "ui/wireframe-studio.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "design-records",
+    "color-token",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-131"
+  }
+}

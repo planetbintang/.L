@@ -1,0 +1,9 @@
+REIC_APPLICATION "Arcade REIC" ID "reic-app-074" VERSION "1.0.0"
+CATEGORY "Multimedia" ICON "🎨"
+COMPONENT "reic-component-074"
+DESCRIPTION "Workspace Arcade REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC."
+MODE "MEDIA"
+CAPABILITIES [asset-catalog, metadata, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-074"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

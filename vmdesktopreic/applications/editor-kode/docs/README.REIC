@@ -1,0 +1,15 @@
+# Editor Kode (reic-app-028)
+
+Kategori: Sistem
+Ikon: 🔒
+Fungsi: Editor kode REIC dengan penyimpanan lokal dan pemeriksaan statis.
+
+## Paket
+- core/editor-kode.REIC — kontrak komponen dan lifecycle
+- ui/editor-kode.REICSS — gaya modul
+- runtime/editor-kode.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

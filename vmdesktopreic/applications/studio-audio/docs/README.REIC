@@ -1,0 +1,15 @@
+# Studio Audio (reic-app-062)
+
+Kategori: Multimedia
+Ikon: ✧
+Fungsi: Workspace Studio Audio untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/studio-audio.REIC — kontrak komponen dan lifecycle
+- ui/studio-audio.REICSS — gaya modul
+- runtime/studio-audio.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

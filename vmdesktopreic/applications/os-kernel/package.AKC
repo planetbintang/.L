@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-001",
+  "name": "OS Kernel",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "⚙",
+  "entry": "runtime/os-kernel.REICJS",
+  "component": "core/os-kernel.REIC",
+  "stylesheet": "ui/os-kernel.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-001"
+  }
+}

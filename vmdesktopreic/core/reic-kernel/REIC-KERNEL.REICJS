@@ -1,0 +1,3 @@
+export const REIC_KERNEL_VERSION="1.0.0";
+export function validateAKC(m){if(!m||m.format!=="AKC"||!m.id||!m.entry||!Array.isArray(m.dependencies))throw new TypeError("Invalid AKC manifest");return {valid:true,id:m.id,dependencies:m.dependencies};}
+export function createAppContext(m,storage){const key="pb-reic-app-data:"+m.id;return Object.freeze({id:m.id,version:m.version,get:()=>storage.get(key),set:v=>storage.set(key,v)});}

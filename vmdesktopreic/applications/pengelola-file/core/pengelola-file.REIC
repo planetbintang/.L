@@ -1,0 +1,9 @@
+REIC_APPLICATION "Pengelola File" ID "reic-app-031" VERSION "1.0.0"
+CATEGORY "Produktivitas" ICON "📄"
+COMPONENT "reic-component-031"
+DESCRIPTION "Pengelolaan referensi berkas, folder, dan metadata file."
+MODE "PRODUCTIVITY"
+CAPABILITIES [create-record, search-record, export-json]
+LIFECYCLE [INIT, LOAD, SAVE, EXPORT, CLOSE]
+STORAGE_NAMESPACE "pb-reic-app-data:reic-app-031"
+REQUIRES [REIC-KERNEL >=1.0.0, REIC-CORE >=1.0.0]

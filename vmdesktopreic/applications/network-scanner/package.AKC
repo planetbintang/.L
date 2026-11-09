@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-105",
+  "name": "Network Scanner",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "◎",
+  "entry": "runtime/network-scanner.REICJS",
+  "component": "core/network-scanner.REIC",
+  "stylesheet": "ui/network-scanner.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-105"
+  }
+}

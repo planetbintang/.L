@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-114",
+  "name": "Speed Test",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "✉",
+  "entry": "runtime/speed-test.REICJS",
+  "component": "core/speed-test.REIC",
+  "stylesheet": "ui/speed-test.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-114"
+  }
+}

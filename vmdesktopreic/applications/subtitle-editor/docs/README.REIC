@@ -1,0 +1,15 @@
+# Subtitle Editor (reic-app-086)
+
+Kategori: Multimedia
+Ikon: ♫
+Fungsi: Workspace Subtitle Editor untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/subtitle-editor.REIC — kontrak komponen dan lifecycle
+- ui/subtitle-editor.REICSS — gaya modul
+- runtime/subtitle-editor.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

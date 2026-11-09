@@ -1,0 +1,15 @@
+# Audio Converter (reic-app-082)
+
+Kategori: Multimedia
+Ikon: ◇
+Fungsi: Workspace Audio Converter untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/audio-converter.REIC — kontrak komponen dan lifecycle
+- ui/audio-converter.REICSS — gaya modul
+- runtime/audio-converter.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

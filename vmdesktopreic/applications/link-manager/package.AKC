@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-102",
+  "name": "Link Manager",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "☏",
+  "entry": "runtime/link-manager.REICJS",
+  "component": "core/link-manager.REIC",
+  "stylesheet": "ui/link-manager.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-102"
+  }
+}

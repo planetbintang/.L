@@ -1,0 +1,15 @@
+# Data Center (reic-app-039)
+
+Kategori: Produktivitas
+Ikon: ⌕
+Fungsi: Workspace Data Center untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.
+
+## Paket
+- core/data-center.REIC — kontrak komponen dan lifecycle
+- ui/data-center.REICSS — gaya modul
+- runtime/data-center.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

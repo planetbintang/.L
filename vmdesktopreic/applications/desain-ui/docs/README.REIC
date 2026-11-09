@@ -1,0 +1,15 @@
+# Desain UI (reic-app-122)
+
+Kategori: Desain
+Ikon: 🎨
+Fungsi: Workspace Desain UI untuk mengelola data, konfigurasi, dan aktivitas desain REIC.
+
+## Paket
+- core/desain-ui.REIC — kontrak komponen dan lifecycle
+- ui/desain-ui.REICSS — gaya modul
+- runtime/desain-ui.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

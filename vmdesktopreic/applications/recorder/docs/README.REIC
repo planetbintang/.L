@@ -1,0 +1,15 @@
+# Recorder (reic-app-070)
+
+Kategori: Multimedia
+Ikon: ◉
+Fungsi: Workspace Recorder untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/recorder.REIC — kontrak komponen dan lifecycle
+- ui/recorder.REICSS — gaya modul
+- runtime/recorder.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

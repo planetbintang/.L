@@ -1,0 +1,15 @@
+# Link Manager (reic-app-102)
+
+Kategori: Internet
+Ikon: ☏
+Fungsi: Workspace Link Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.
+
+## Paket
+- core/link-manager.REIC — kontrak komponen dan lifecycle
+- ui/link-manager.REICSS — gaya modul
+- runtime/link-manager.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

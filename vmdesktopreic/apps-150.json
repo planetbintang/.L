@@ -1,0 +1,3330 @@
+{
+  "name": "PlanetBintang REIC 150 Applications",
+  "version": "1.0.0",
+  "total": 150,
+  "runtime": "VMDESKTOPREIC / REIC-CORE",
+  "categories": [
+    {
+      "name": "Sistem",
+      "count": 30
+    },
+    {
+      "name": "Produktivitas",
+      "count": 30
+    },
+    {
+      "name": "Multimedia",
+      "count": 30
+    },
+    {
+      "name": "Internet",
+      "count": 30
+    },
+    {
+      "name": "Desain",
+      "count": 30
+    }
+  ],
+  "apps": [
+    {
+      "id": "reic-app-001",
+      "name": "OS Kernel",
+      "slug": "os-kernel",
+      "icon": "⚙",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Pusat layanan kernel dan status runtime REIC.",
+      "folder": "applications/os-kernel",
+      "componentId": "reic-component-001",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-002",
+      "name": "REIC Core",
+      "slug": "reic-core",
+      "icon": "✦",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Orkestrasi registri aplikasi, lifecycle, dan dependensi.",
+      "folder": "applications/reic-core",
+      "componentId": "reic-component-002",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-003",
+      "name": "REIC Engine",
+      "slug": "reic-engine",
+      "icon": "⚡",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Engine untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-engine",
+      "componentId": "reic-component-003",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-004",
+      "name": "REIC UI",
+      "slug": "reic-ui",
+      "icon": "▣",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC UI untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-ui",
+      "componentId": "reic-component-004",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-005",
+      "name": "REIC Studio",
+      "slug": "reic-studio",
+      "icon": "★",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Studio untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-studio",
+      "componentId": "reic-component-005",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-006",
+      "name": "REIC Builder",
+      "slug": "reic-builder",
+      "icon": "🛡",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Builder untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-builder",
+      "componentId": "reic-component-006",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-007",
+      "name": "REIC Designer",
+      "slug": "reic-designer",
+      "icon": "◉",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Designer untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-designer",
+      "componentId": "reic-component-007",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-008",
+      "name": "REIC Explorer",
+      "slug": "reic-explorer",
+      "icon": "⌁",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Explorer untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-explorer",
+      "componentId": "reic-component-008",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-009",
+      "name": "REIC Monitor",
+      "slug": "reic-monitor",
+      "icon": "🔒",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Monitor untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-monitor",
+      "componentId": "reic-component-009",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-010",
+      "name": "REIC Analyzer",
+      "slug": "reic-analyzer",
+      "icon": "∿",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace REIC Analyzer untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/reic-analyzer",
+      "componentId": "reic-component-010",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-011",
+      "name": "Sistem Info",
+      "slug": "sistem-info",
+      "icon": "⌕",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Sistem Info untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/sistem-info",
+      "componentId": "reic-component-011",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-012",
+      "name": "Manajer Proses",
+      "slug": "manajer-proses",
+      "icon": "🧩",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Manajer Proses untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/manajer-proses",
+      "componentId": "reic-component-012",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-013",
+      "name": "Manajer Memori",
+      "slug": "manajer-memori",
+      "icon": "▤",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Manajer Memori untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/manajer-memori",
+      "componentId": "reic-component-013",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-014",
+      "name": "Manajer Daya",
+      "slug": "manajer-daya",
+      "icon": "🔋",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Manajer Daya untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/manajer-daya",
+      "componentId": "reic-component-014",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-015",
+      "name": "Optimasi Sistem",
+      "slug": "optimasi-sistem",
+      "icon": "⬆",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Optimasi Sistem untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/optimasi-sistem",
+      "componentId": "reic-component-015",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-016",
+      "name": "Pembaruan REIC",
+      "slug": "pembaruan-reic",
+      "icon": "↶",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pembaruan REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/pembaruan-reic",
+      "componentId": "reic-component-016",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-017",
+      "name": "Backup Center",
+      "slug": "backup-center",
+      "icon": "🌐",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Backup Center untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/backup-center",
+      "componentId": "reic-component-017",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-018",
+      "name": "Restore Center",
+      "slug": "restore-center",
+      "icon": "</>",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Restore Center untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/restore-center",
+      "componentId": "reic-component-018",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-019",
+      "name": "Firewall REIC",
+      "slug": "firewall-reic",
+      "icon": "🐞",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Firewall REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/firewall-reic",
+      "componentId": "reic-component-019",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-020",
+      "name": "Keamanan Plus",
+      "slug": "keamanan-plus",
+      "icon": "⚙",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Keamanan Plus untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/keamanan-plus",
+      "componentId": "reic-component-020",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-021",
+      "name": "Jaringan REIC",
+      "slug": "jaringan-reic",
+      "icon": "✦",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Jaringan REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/jaringan-reic",
+      "componentId": "reic-component-021",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-022",
+      "name": "Koneksi Global",
+      "slug": "koneksi-global",
+      "icon": "⚡",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Koneksi Global untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/koneksi-global",
+      "componentId": "reic-component-022",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-023",
+      "name": "DNS Manager",
+      "slug": "dns-manager",
+      "icon": "▣",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace DNS Manager untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/dns-manager",
+      "componentId": "reic-component-023",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-024",
+      "name": "Proxy Manager",
+      "slug": "proxy-manager",
+      "icon": "★",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Proxy Manager untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/proxy-manager",
+      "componentId": "reic-component-024",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-025",
+      "name": "VPN REIC",
+      "slug": "vpn-reic",
+      "icon": "🛡",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace VPN REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/vpn-reic",
+      "componentId": "reic-component-025",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-026",
+      "name": "Terminal REIC",
+      "slug": "terminal-reic",
+      "icon": "◉",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Terminal REIC dengan perintah aman tanpa akses shell host.",
+      "folder": "applications/terminal-reic",
+      "componentId": "reic-component-026",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-027",
+      "name": "Shell REIC",
+      "slug": "shell-reic",
+      "icon": "⌁",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Shell REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/shell-reic",
+      "componentId": "reic-component-027",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-028",
+      "name": "Editor Kode",
+      "slug": "editor-kode",
+      "icon": "🔒",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Editor kode REIC dengan penyimpanan lokal dan pemeriksaan statis.",
+      "folder": "applications/editor-kode",
+      "componentId": "reic-component-028",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-029",
+      "name": "Compiler REIC",
+      "slug": "compiler-reic",
+      "icon": "∿",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Compiler REIC untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/compiler-reic",
+      "componentId": "reic-component-029",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-030",
+      "name": "Debugger",
+      "slug": "debugger",
+      "icon": "⌕",
+      "category": "Sistem",
+      "mode": "system",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Debugger untuk mengelola data, konfigurasi, dan aktivitas sistem REIC.",
+      "folder": "applications/debugger",
+      "componentId": "reic-component-030",
+      "capabilities": [
+        "runtime-status",
+        "configuration",
+        "diagnostics"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-031",
+      "name": "Pengelola File",
+      "slug": "pengelola-file",
+      "icon": "📄",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Pengelolaan referensi berkas, folder, dan metadata file.",
+      "folder": "applications/pengelola-file",
+      "componentId": "reic-component-031",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-032",
+      "name": "Pengelola Folder",
+      "slug": "pengelola-folder",
+      "icon": "📊",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pengelola Folder untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/pengelola-folder",
+      "componentId": "reic-component-032",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-033",
+      "name": "Pencarian Cepat",
+      "slug": "pencarian-cepat",
+      "icon": "📑",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pencarian Cepat untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/pencarian-cepat",
+      "componentId": "reic-component-033",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-034",
+      "name": "Indeks Data",
+      "slug": "indeks-data",
+      "icon": "🖨",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Indeks Data untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/indeks-data",
+      "componentId": "reic-component-034",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-035",
+      "name": "Database REIC",
+      "slug": "database-reic",
+      "icon": "✦",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace data dan skema dengan penyimpanan terpisah.",
+      "folder": "applications/database-reic",
+      "componentId": "reic-component-035",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-036",
+      "name": "SQLite REIC",
+      "slug": "sqlite-reic",
+      "icon": "◉",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace SQLite REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/sqlite-reic",
+      "componentId": "reic-component-036",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-037",
+      "name": "MySQL REIC",
+      "slug": "mysql-reic",
+      "icon": "📁",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace MySQL REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/mysql-reic",
+      "componentId": "reic-component-037",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-038",
+      "name": "PostgreSQL REIC",
+      "slug": "postgresql-reic",
+      "icon": "🗂",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace PostgreSQL REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/postgresql-reic",
+      "componentId": "reic-component-038",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-039",
+      "name": "Data Center",
+      "slug": "data-center",
+      "icon": "⌕",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Data Center untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/data-center",
+      "componentId": "reic-component-039",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-040",
+      "name": "Big Data Tools",
+      "slug": "big-data-tools",
+      "icon": "▤",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Big Data Tools untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/big-data-tools",
+      "componentId": "reic-component-040",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-041",
+      "name": "Produktivitas",
+      "slug": "produktivitas",
+      "icon": "▣",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Produktivitas untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/produktivitas",
+      "componentId": "reic-component-041",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-042",
+      "name": "Task Manager",
+      "slug": "task-manager",
+      "icon": "▥",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Task Manager untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/task-manager",
+      "componentId": "reic-component-042",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-043",
+      "name": "Kalender REIC",
+      "slug": "kalender-reic",
+      "icon": "☑",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Kalender REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/kalender-reic",
+      "componentId": "reic-component-043",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-044",
+      "name": "To-Do List",
+      "slug": "to-do-list",
+      "icon": "📝",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace To-Do List untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/to-do-list",
+      "componentId": "reic-component-044",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-045",
+      "name": "Notes REIC",
+      "slug": "notes-reic",
+      "icon": "▦",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Notes REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/notes-reic",
+      "componentId": "reic-component-045",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-046",
+      "name": "Spreadsheet",
+      "slug": "spreadsheet",
+      "icon": "∑",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Spreadsheet untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/spreadsheet",
+      "componentId": "reic-component-046",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-047",
+      "name": "Presentasi",
+      "slug": "presentasi",
+      "icon": "✧",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Presentasi untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/presentasi",
+      "componentId": "reic-component-047",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-048",
+      "name": "Dokumen Editor",
+      "slug": "dokumen-editor",
+      "icon": "📅",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Dokumen Editor untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/dokumen-editor",
+      "componentId": "reic-component-048",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-049",
+      "name": "PDF Tools",
+      "slug": "pdf-tools",
+      "icon": "📄",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace PDF Tools untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/pdf-tools",
+      "componentId": "reic-component-049",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-050",
+      "name": "Print Manager",
+      "slug": "print-manager",
+      "icon": "📊",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Print Manager untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/print-manager",
+      "componentId": "reic-component-050",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-051",
+      "name": "AI Assistant",
+      "slug": "ai-assistant",
+      "icon": "📑",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace AI Assistant untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/ai-assistant",
+      "componentId": "reic-component-051",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-052",
+      "name": "AI Generator",
+      "slug": "ai-generator",
+      "icon": "🖨",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace AI Generator untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/ai-generator",
+      "componentId": "reic-component-052",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-053",
+      "name": "Machine Learning",
+      "slug": "machine-learning",
+      "icon": "✦",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Machine Learning untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/machine-learning",
+      "componentId": "reic-component-053",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-054",
+      "name": "Data Science",
+      "slug": "data-science",
+      "icon": "◉",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Data Science untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/data-science",
+      "componentId": "reic-component-054",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-055",
+      "name": "Analitik Data",
+      "slug": "analitik-data",
+      "icon": "📁",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Analitik Data untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/analitik-data",
+      "componentId": "reic-component-055",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-056",
+      "name": "Business Intel",
+      "slug": "business-intel",
+      "icon": "🗂",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Business Intel untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/business-intel",
+      "componentId": "reic-component-056",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-057",
+      "name": "Laporan REIC",
+      "slug": "laporan-reic",
+      "icon": "⌕",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Laporan REIC untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/laporan-reic",
+      "componentId": "reic-component-057",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-058",
+      "name": "Dashboard",
+      "slug": "dashboard",
+      "icon": "▤",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Dashboard untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/dashboard",
+      "componentId": "reic-component-058",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-059",
+      "name": "Enterprise",
+      "slug": "enterprise",
+      "icon": "▣",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Enterprise untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/enterprise",
+      "componentId": "reic-component-059",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-060",
+      "name": "Kolaborasi",
+      "slug": "kolaborasi",
+      "icon": "▥",
+      "category": "Produktivitas",
+      "mode": "productivity",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Kolaborasi untuk mengelola data, konfigurasi, dan aktivitas produktivitas REIC.",
+      "folder": "applications/kolaborasi",
+      "componentId": "reic-component-060",
+      "capabilities": [
+        "create-record",
+        "search-record",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-061",
+      "name": "Multimedia Player",
+      "slug": "multimedia-player",
+      "icon": "🎞",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Multimedia Player untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/multimedia-player",
+      "componentId": "reic-component-061",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-062",
+      "name": "Studio Audio",
+      "slug": "studio-audio",
+      "icon": "✧",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Studio Audio untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/studio-audio",
+      "componentId": "reic-component-062",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-063",
+      "name": "Studio Video",
+      "slug": "studio-video",
+      "icon": "🎙",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Studio Video untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/studio-video",
+      "componentId": "reic-component-063",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-064",
+      "name": "Editor Gambar",
+      "slug": "editor-gambar",
+      "icon": "●",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Editor Gambar untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/editor-gambar",
+      "componentId": "reic-component-064",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-065",
+      "name": "Grafik Editor",
+      "slug": "grafik-editor",
+      "icon": "🎮",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Grafik Editor untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/grafik-editor",
+      "componentId": "reic-component-065",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-066",
+      "name": "Animasi Maker",
+      "slug": "animasi-maker",
+      "icon": "🧩",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Animasi Maker untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/animasi-maker",
+      "componentId": "reic-component-066",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-067",
+      "name": "Pembuat GIF",
+      "slug": "pembuat-gif",
+      "icon": "🎓",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pembuat GIF untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/pembuat-gif",
+      "componentId": "reic-component-067",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-068",
+      "name": "Pengolah Suara",
+      "slug": "pengolah-suara",
+      "icon": "◇",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pengolah Suara untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/pengolah-suara",
+      "componentId": "reic-component-068",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-069",
+      "name": "Streaming REIC",
+      "slug": "streaming-reic",
+      "icon": "▤",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Streaming REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/streaming-reic",
+      "componentId": "reic-component-069",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-070",
+      "name": "Recorder",
+      "slug": "recorder",
+      "icon": "◉",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Recorder untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/recorder",
+      "componentId": "reic-component-070",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-071",
+      "name": "Kreativitas",
+      "slug": "kreativitas",
+      "icon": "▶",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Kreativitas untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/kreativitas",
+      "componentId": "reic-component-071",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-072",
+      "name": "Game Center",
+      "slug": "game-center",
+      "icon": "♫",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Game Center untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/game-center",
+      "componentId": "reic-component-072",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-073",
+      "name": "Simulator",
+      "slug": "simulator",
+      "icon": "▧",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Simulator untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/simulator",
+      "componentId": "reic-component-073",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-074",
+      "name": "Arcade REIC",
+      "slug": "arcade-reic",
+      "icon": "🎨",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Arcade REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/arcade-reic",
+      "componentId": "reic-component-074",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-075",
+      "name": "Puzzle REIC",
+      "slug": "puzzle-reic",
+      "icon": "🎞",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Puzzle REIC untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/puzzle-reic",
+      "componentId": "reic-component-075",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-076",
+      "name": "Edu Game",
+      "slug": "edu-game",
+      "icon": "✧",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Edu Game untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/edu-game",
+      "componentId": "reic-component-076",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-077",
+      "name": "Family Apps",
+      "slug": "family-apps",
+      "icon": "🎙",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Family Apps untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/family-apps",
+      "componentId": "reic-component-077",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-078",
+      "name": "Anak Pintar",
+      "slug": "anak-pintar",
+      "icon": "●",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Anak Pintar untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/anak-pintar",
+      "componentId": "reic-component-078",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-079",
+      "name": "Health Care",
+      "slug": "health-care",
+      "icon": "🎮",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Health Care untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/health-care",
+      "componentId": "reic-component-079",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-080",
+      "name": "Lifestyle",
+      "slug": "lifestyle",
+      "icon": "🧩",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Lifestyle untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/lifestyle",
+      "componentId": "reic-component-080",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-081",
+      "name": "Video Transcoder",
+      "slug": "video-transcoder",
+      "icon": "🎓",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Video Transcoder untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/video-transcoder",
+      "componentId": "reic-component-081",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-082",
+      "name": "Audio Converter",
+      "slug": "audio-converter",
+      "icon": "◇",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Audio Converter untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/audio-converter",
+      "componentId": "reic-component-082",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-083",
+      "name": "Image Optimizer",
+      "slug": "image-optimizer",
+      "icon": "▤",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Image Optimizer untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/image-optimizer",
+      "componentId": "reic-component-083",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-084",
+      "name": "Media Library",
+      "slug": "media-library",
+      "icon": "◉",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Media Library untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/media-library",
+      "componentId": "reic-component-084",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-085",
+      "name": "Podcast Studio",
+      "slug": "podcast-studio",
+      "icon": "▶",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Podcast Studio untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/podcast-studio",
+      "componentId": "reic-component-085",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-086",
+      "name": "Subtitle Editor",
+      "slug": "subtitle-editor",
+      "icon": "♫",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Subtitle Editor untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/subtitle-editor",
+      "componentId": "reic-component-086",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-087",
+      "name": "Screen Capture",
+      "slug": "screen-capture",
+      "icon": "▧",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Screen Capture untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/screen-capture",
+      "componentId": "reic-component-087",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-088",
+      "name": "3D Viewer",
+      "slug": "3d-viewer",
+      "icon": "🎨",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace 3D Viewer untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/3d-viewer",
+      "componentId": "reic-component-088",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-089",
+      "name": "Color Grading",
+      "slug": "color-grading",
+      "icon": "🎞",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Color Grading untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/color-grading",
+      "componentId": "reic-component-089",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-090",
+      "name": "Sound Mixer",
+      "slug": "sound-mixer",
+      "icon": "✧",
+      "category": "Multimedia",
+      "mode": "media",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Sound Mixer untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.",
+      "folder": "applications/sound-mixer",
+      "componentId": "reic-component-090",
+      "capabilities": [
+        "asset-catalog",
+        "metadata",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-091",
+      "name": "Browser REIC",
+      "slug": "browser-reic",
+      "icon": "⌘",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Penjelajah URL internal yang tetap berada di modal desktop.",
+      "folder": "applications/browser-reic",
+      "componentId": "reic-component-091",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-092",
+      "name": "Web Analyzer",
+      "slug": "web-analyzer",
+      "icon": "◎",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Web Analyzer untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/web-analyzer",
+      "componentId": "reic-component-092",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-093",
+      "name": "Download Manager",
+      "slug": "download-manager",
+      "icon": "☁",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Download Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/download-manager",
+      "componentId": "reic-component-093",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-094",
+      "name": "Upload Center",
+      "slug": "upload-center",
+      "icon": "⬇",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Upload Center untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/upload-center",
+      "componentId": "reic-component-094",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-095",
+      "name": "FTP Client",
+      "slug": "ftp-client",
+      "icon": "⬆",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace FTP Client untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/ftp-client",
+      "componentId": "reic-component-095",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-096",
+      "name": "Cloud Sync",
+      "slug": "cloud-sync",
+      "icon": "⇄",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Cloud Sync untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/cloud-sync",
+      "componentId": "reic-component-096",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-097",
+      "name": "Web Server",
+      "slug": "web-server",
+      "icon": "🔒",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Web Server untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/web-server",
+      "componentId": "reic-component-097",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-098",
+      "name": "Hosting Panel",
+      "slug": "hosting-panel",
+      "icon": "⌕",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Hosting Panel untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/hosting-panel",
+      "componentId": "reic-component-098",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-099",
+      "name": "Domain Manager",
+      "slug": "domain-manager",
+      "icon": "↗",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Domain Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/domain-manager",
+      "componentId": "reic-component-099",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-100",
+      "name": "SSL Manager",
+      "slug": "ssl-manager",
+      "icon": "🌐",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace SSL Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/ssl-manager",
+      "componentId": "reic-component-100",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-101",
+      "name": "API Console",
+      "slug": "api-console",
+      "icon": "✉",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace API Console untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/api-console",
+      "componentId": "reic-component-101",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-102",
+      "name": "Link Manager",
+      "slug": "link-manager",
+      "icon": "☏",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Link Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/link-manager",
+      "componentId": "reic-component-102",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-103",
+      "name": "Site Publisher",
+      "slug": "site-publisher",
+      "icon": "∿",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Site Publisher untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/site-publisher",
+      "componentId": "reic-component-103",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-104",
+      "name": "CDN Manager",
+      "slug": "cdn-manager",
+      "icon": "⌘",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace CDN Manager untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/cdn-manager",
+      "componentId": "reic-component-104",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-105",
+      "name": "Network Scanner",
+      "slug": "network-scanner",
+      "icon": "◎",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Network Scanner untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/network-scanner",
+      "componentId": "reic-component-105",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-106",
+      "name": "Whois Lookup",
+      "slug": "whois-lookup",
+      "icon": "☁",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Whois Lookup untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/whois-lookup",
+      "componentId": "reic-component-106",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-107",
+      "name": "DNS Zone Editor",
+      "slug": "dns-zone-editor",
+      "icon": "⬇",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace DNS Zone Editor untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/dns-zone-editor",
+      "componentId": "reic-component-107",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-108",
+      "name": "Certificate Monitor",
+      "slug": "certificate-monitor",
+      "icon": "⬆",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Certificate Monitor untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/certificate-monitor",
+      "componentId": "reic-component-108",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-109",
+      "name": "Mail Center",
+      "slug": "mail-center",
+      "icon": "⇄",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Mail Center untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/mail-center",
+      "componentId": "reic-component-109",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-110",
+      "name": "Chat REIC",
+      "slug": "chat-reic",
+      "icon": "🔒",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Chat REIC untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/chat-reic",
+      "componentId": "reic-component-110",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-111",
+      "name": "WebSocket Lab",
+      "slug": "websocket-lab",
+      "icon": "⌕",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace WebSocket Lab untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/websocket-lab",
+      "componentId": "reic-component-111",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-112",
+      "name": "Proxy Console",
+      "slug": "proxy-console",
+      "icon": "↗",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Proxy Console untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/proxy-console",
+      "componentId": "reic-component-112",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-113",
+      "name": "VPN Console",
+      "slug": "vpn-console",
+      "icon": "🌐",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace VPN Console untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/vpn-console",
+      "componentId": "reic-component-113",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-114",
+      "name": "Speed Test",
+      "slug": "speed-test",
+      "icon": "✉",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Speed Test untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/speed-test",
+      "componentId": "reic-component-114",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-115",
+      "name": "Status Monitor",
+      "slug": "status-monitor",
+      "icon": "☏",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Status Monitor untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/status-monitor",
+      "componentId": "reic-component-115",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-116",
+      "name": "Remote Access",
+      "slug": "remote-access",
+      "icon": "∿",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Remote Access untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/remote-access",
+      "componentId": "reic-component-116",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-117",
+      "name": "File Transfer",
+      "slug": "file-transfer",
+      "icon": "⌘",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace File Transfer untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/file-transfer",
+      "componentId": "reic-component-117",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-118",
+      "name": "Web Crawler",
+      "slug": "web-crawler",
+      "icon": "◎",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Web Crawler untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/web-crawler",
+      "componentId": "reic-component-118",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-119",
+      "name": "SEO Analyzer",
+      "slug": "seo-analyzer",
+      "icon": "☁",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace SEO Analyzer untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/seo-analyzer",
+      "componentId": "reic-component-119",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-120",
+      "name": "Site Monitor",
+      "slug": "site-monitor",
+      "icon": "⬇",
+      "category": "Internet",
+      "mode": "internet",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Site Monitor untuk mengelola data, konfigurasi, dan aktivitas internet REIC.",
+      "folder": "applications/site-monitor",
+      "componentId": "reic-component-120",
+      "capabilities": [
+        "endpoint-records",
+        "url-preview",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-121",
+      "name": "Desain Grafis",
+      "slug": "desain-grafis",
+      "icon": "🧩",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Desain Grafis untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/desain-grafis",
+      "componentId": "reic-component-121",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-122",
+      "name": "Desain UI",
+      "slug": "desain-ui",
+      "icon": "🎨",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Desain UI untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/desain-ui",
+      "componentId": "reic-component-122",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-123",
+      "name": "Desain 3D",
+      "slug": "desain-3d",
+      "icon": "◇",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Desain 3D untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/desain-3d",
+      "componentId": "reic-component-123",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-124",
+      "name": "Render Engine",
+      "slug": "render-engine",
+      "icon": "✒",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Render Engine untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/render-engine",
+      "componentId": "reic-component-124",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-125",
+      "name": "Vector Editor",
+      "slug": "vector-editor",
+      "icon": "✧",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Vector Editor untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/vector-editor",
+      "componentId": "reic-component-125",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-126",
+      "name": "Layout Designer",
+      "slug": "layout-designer",
+      "icon": "▦",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Layout Designer untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/layout-designer",
+      "componentId": "reic-component-126",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-127",
+      "name": "Tema Desktop",
+      "slug": "tema-desktop",
+      "icon": "◉",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Pengaturan token warna dan tampilan desktop.",
+      "folder": "applications/tema-desktop",
+      "componentId": "reic-component-127",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-128",
+      "name": "Icon Creator",
+      "slug": "icon-creator",
+      "icon": "Aa",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Icon Creator untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/icon-creator",
+      "componentId": "reic-component-128",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-129",
+      "name": "Font Manager",
+      "slug": "font-manager",
+      "icon": "▧",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Font Manager untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/font-manager",
+      "componentId": "reic-component-129",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-130",
+      "name": "Color Picker",
+      "slug": "color-picker",
+      "icon": "✦",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Color Picker untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/color-picker",
+      "componentId": "reic-component-130",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-131",
+      "name": "Wireframe Studio",
+      "slug": "wireframe-studio",
+      "icon": "🖌",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Wireframe Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/wireframe-studio",
+      "componentId": "reic-component-131",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-132",
+      "name": "Prototype Lab",
+      "slug": "prototype-lab",
+      "icon": "🧩",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Prototype Lab untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/prototype-lab",
+      "componentId": "reic-component-132",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-133",
+      "name": "Component Designer",
+      "slug": "component-designer",
+      "icon": "🎨",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Component Designer untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/component-designer",
+      "componentId": "reic-component-133",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-134",
+      "name": "Design System",
+      "slug": "design-system",
+      "icon": "◇",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Design System untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/design-system",
+      "componentId": "reic-component-134",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-135",
+      "name": "Asset Manager",
+      "slug": "asset-manager",
+      "icon": "✒",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Asset Manager untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/asset-manager",
+      "componentId": "reic-component-135",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-136",
+      "name": "Pattern Studio",
+      "slug": "pattern-studio",
+      "icon": "✧",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pattern Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/pattern-studio",
+      "componentId": "reic-component-136",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-137",
+      "name": "Logo Maker",
+      "slug": "logo-maker",
+      "icon": "▦",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Logo Maker untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/logo-maker",
+      "componentId": "reic-component-137",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-138",
+      "name": "Pixel Editor",
+      "slug": "pixel-editor",
+      "icon": "◉",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Pixel Editor untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/pixel-editor",
+      "componentId": "reic-component-138",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-139",
+      "name": "Photo Retouch",
+      "slug": "photo-retouch",
+      "icon": "Aa",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Photo Retouch untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/photo-retouch",
+      "componentId": "reic-component-139",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-140",
+      "name": "Image Effects",
+      "slug": "image-effects",
+      "icon": "▧",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Image Effects untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/image-effects",
+      "componentId": "reic-component-140",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-141",
+      "name": "Typography Lab",
+      "slug": "typography-lab",
+      "icon": "✦",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Typography Lab untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/typography-lab",
+      "componentId": "reic-component-141",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-142",
+      "name": "Palette Studio",
+      "slug": "palette-studio",
+      "icon": "🖌",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Palette Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/palette-studio",
+      "componentId": "reic-component-142",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-143",
+      "name": "Grid Designer",
+      "slug": "grid-designer",
+      "icon": "🧩",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Grid Designer untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/grid-designer",
+      "componentId": "reic-component-143",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-144",
+      "name": "Motion Graphics",
+      "slug": "motion-graphics",
+      "icon": "🎨",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Motion Graphics untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/motion-graphics",
+      "componentId": "reic-component-144",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-145",
+      "name": "3D Sculptor",
+      "slug": "3d-sculptor",
+      "icon": "◇",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace 3D Sculptor untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/3d-sculptor",
+      "componentId": "reic-component-145",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-146",
+      "name": "Material Editor",
+      "slug": "material-editor",
+      "icon": "✒",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Material Editor untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/material-editor",
+      "componentId": "reic-component-146",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-147",
+      "name": "Texture Lab",
+      "slug": "texture-lab",
+      "icon": "✧",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Texture Lab untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/texture-lab",
+      "componentId": "reic-component-147",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-148",
+      "name": "Blueprint Designer",
+      "slug": "blueprint-designer",
+      "icon": "▦",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Blueprint Designer untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/blueprint-designer",
+      "componentId": "reic-component-148",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-149",
+      "name": "Canvas REIC",
+      "slug": "canvas-reic",
+      "icon": "◉",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Canvas REIC untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/canvas-reic",
+      "componentId": "reic-component-149",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    },
+    {
+      "id": "reic-app-150",
+      "name": "Brand Studio",
+      "slug": "brand-studio",
+      "icon": "Aa",
+      "category": "Desain",
+      "mode": "design",
+      "version": "1.0.0",
+      "status": "ready",
+      "description": "Workspace Brand Studio untuk mengelola data, konfigurasi, dan aktivitas desain REIC.",
+      "folder": "applications/brand-studio",
+      "componentId": "reic-component-150",
+      "capabilities": [
+        "design-records",
+        "color-token",
+        "export-json"
+      ],
+      "coreRequirements": [
+        "REIC-KERNEL >=1.0.0",
+        "REIC-CORE >=1.0.0"
+      ]
+    }
+  ]
+}

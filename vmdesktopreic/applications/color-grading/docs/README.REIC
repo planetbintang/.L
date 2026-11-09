@@ -1,0 +1,15 @@
+# Color Grading (reic-app-089)
+
+Kategori: Multimedia
+Ikon: 🎞
+Fungsi: Workspace Color Grading untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/color-grading.REIC — kontrak komponen dan lifecycle
+- ui/color-grading.REICSS — gaya modul
+- runtime/color-grading.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

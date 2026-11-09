@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-019",
+  "name": "Firewall REIC",
+  "version": "1.0.0",
+  "category": "Sistem",
+  "icon": "🐞",
+  "entry": "runtime/firewall-reic.REICJS",
+  "component": "core/firewall-reic.REIC",
+  "stylesheet": "ui/firewall-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "runtime-status",
+    "configuration",
+    "diagnostics"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-019"
+  }
+}

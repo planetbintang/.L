@@ -1,0 +1,15 @@
+# Video Transcoder (reic-app-081)
+
+Kategori: Multimedia
+Ikon: 🎓
+Fungsi: Workspace Video Transcoder untuk mengelola data, konfigurasi, dan aktivitas multimedia REIC.
+
+## Paket
+- core/video-transcoder.REIC — kontrak komponen dan lifecycle
+- ui/video-transcoder.REICSS — gaya modul
+- runtime/video-transcoder.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

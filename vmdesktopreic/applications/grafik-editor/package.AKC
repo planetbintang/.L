@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-065",
+  "name": "Grafik Editor",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "🎮",
+  "entry": "runtime/grafik-editor.REICJS",
+  "component": "core/grafik-editor.REIC",
+  "stylesheet": "ui/grafik-editor.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-065"
+  }
+}

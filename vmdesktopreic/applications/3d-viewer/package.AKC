@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-088",
+  "name": "3D Viewer",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "🎨",
+  "entry": "runtime/3d-viewer.REICJS",
+  "component": "core/3d-viewer.REIC",
+  "stylesheet": "ui/3d-viewer.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-088"
+  }
+}

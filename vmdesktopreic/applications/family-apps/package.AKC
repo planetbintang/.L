@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-077",
+  "name": "Family Apps",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "🎙",
+  "entry": "runtime/family-apps.REICJS",
+  "component": "core/family-apps.REIC",
+  "stylesheet": "ui/family-apps.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-077"
+  }
+}

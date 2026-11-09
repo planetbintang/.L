@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-071",
+  "name": "Kreativitas",
+  "version": "1.0.0",
+  "category": "Multimedia",
+  "icon": "▶",
+  "entry": "runtime/kreativitas.REICJS",
+  "component": "core/kreativitas.REIC",
+  "stylesheet": "ui/kreativitas.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "asset-catalog",
+    "metadata",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-071"
+  }
+}

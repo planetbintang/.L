@@ -1,0 +1,15 @@
+# Browser REIC (reic-app-091)
+
+Kategori: Internet
+Ikon: ⌘
+Fungsi: Penjelajah URL internal yang tetap berada di modal desktop.
+
+## Paket
+- core/browser-reic.REIC — kontrak komponen dan lifecycle
+- ui/browser-reic.REICSS — gaya modul
+- runtime/browser-reic.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.

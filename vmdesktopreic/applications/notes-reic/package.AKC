@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-045",
+  "name": "Notes REIC",
+  "version": "1.0.0",
+  "category": "Produktivitas",
+  "icon": "▦",
+  "entry": "runtime/notes-reic.REICJS",
+  "component": "core/notes-reic.REIC",
+  "stylesheet": "ui/notes-reic.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "create-record",
+    "search-record",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-045"
+  }
+}

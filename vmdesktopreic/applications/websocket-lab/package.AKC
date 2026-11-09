@@ -1,0 +1,26 @@
+{
+  "format": "AKC",
+  "id": "reic-app-111",
+  "name": "WebSocket Lab",
+  "version": "1.0.0",
+  "category": "Internet",
+  "icon": "⌕",
+  "entry": "runtime/websocket-lab.REICJS",
+  "component": "core/websocket-lab.REIC",
+  "stylesheet": "ui/websocket-lab.REICSS",
+  "dataSchema": "data/schema.REIC",
+  "configuration": "config/defaults.REIC",
+  "dependencies": [
+    "REIC-KERNEL >=1.0.0",
+    "REIC-CORE >=1.0.0"
+  ],
+  "capabilities": [
+    "endpoint-records",
+    "url-preview",
+    "export-json"
+  ],
+  "storage": {
+    "scope": "application",
+    "namespace": "pb-reic-app-data:reic-app-111"
+  }
+}

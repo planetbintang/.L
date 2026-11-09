@@ -1,0 +1,15 @@
+# Component Designer (reic-app-133)
+
+Kategori: Desain
+Ikon: 🎨
+Fungsi: Workspace Component Designer untuk mengelola data, konfigurasi, dan aktivitas desain REIC.
+
+## Paket
+- core/component-designer.REIC — kontrak komponen dan lifecycle
+- ui/component-designer.REICSS — gaya modul
+- runtime/component-designer.REICJS — controller data
+- data/schema.REIC — skema record
+- config/defaults.REIC — konfigurasi awal
+- package.AKC — manifest pemasangan
+
+Workspace modal mendukung tambah, cari, hapus, ekspor JSON dan penyimpanan lokal terpisah. Kode tidak mengeksekusi shell host.
