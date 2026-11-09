@@ -152,3 +152,19 @@
 .reic-language-chip button{border:0;background:transparent;color:#fff;font-size:16px;cursor:pointer}
 .reic-language-config{max-height:220px;overflow:auto;padding:10px;background:#010d20;border:1px solid #23618d;color:#a9e6ff;white-space:pre-wrap;overflow-wrap:anywhere;font-size:10px}
 @media(max-width:600px){.reic-language-input{padding:10px}.reic-language-chip{max-width:100%;overflow-wrap:anywhere}}
+
+/* REIC local host, authenticated repository explorer, and safe source preview */
+.reic-host{display:grid;gap:12px}
+.reic-host>label{display:grid;gap:6px;color:#a9ddff;font-size:11px}
+.reic-host input{width:100%;min-height:40px;padding:9px 11px;background:#03162e;border:1px solid #2877a8;color:#f4fbff}
+.reic-host-actions{display:flex;flex-wrap:wrap;gap:8px}
+.reic-host-actions button{min-height:38px;padding:8px 11px;background:linear-gradient(100deg,#087bc1,#07508c);border:1px solid #65caff;color:#fff;cursor:pointer}
+.reic-host [data-host-status]{padding:10px;background:#03162e;border-left:3px solid #35baff;color:#ccecff;font-size:12px;overflow-wrap:anywhere}
+.reic-host h3{margin:10px 0 0;color:#8cddff;font-size:13px}
+.reic-host ul{margin:0;padding-left:20px;color:#c9e4fa;font-size:12px;line-height:1.8}
+.reic-file-preview{display:grid;gap:10px;min-width:0}
+.reic-file-preview pre{max-height:65vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;background:#010b1a;border:1px solid #23618d;color:#d6efff;font:11px/1.6 ui-monospace,monospace}
+.reic-host .reic-stat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.reic-repo-card small{display:inline-block;margin:6px 0;padding:4px 7px;background:#0b4772;border:1px solid #287bb0;color:#c6eaff;letter-spacing:.04em}
+.reic-repo-card:has(small:first-of-type){min-width:0}
+@media(max-width:600px){.reic-host-actions{display:grid}.reic-host-actions button{width:100%}.reic-host .reic-stat-grid{grid-template-columns:1fr}}
