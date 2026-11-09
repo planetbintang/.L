@@ -5,7 +5,7 @@ import { mkdir, readdir, stat, readFile } from "node:fs/promises";
 const PORT = Number(process.env.REIC_PORT || 8787);
 const OWNER = process.env.GITHUB_OWNER || "planetbintang";
 const TOKEN = process.env.GITHUB_TOKEN || "";\nconst BING_KEY = process.env.BING_SEARCH_KEY || "";
-const ROOT = path.resolve(process.env.REIC_STORAGE_ROOT || "./data");
+const ROOT = path.resolve(process.env.REIC_STORAGE_ROOT || "./data");\nconst SEARCH_ROOTS = (process.env.REIC_SEARCH_ROOTS || [path.resolve(process.cwd(), "../.."), ROOT].join(","))\n  .split(",").map(x => path.resolve(x.trim())).filter(Boolean);
 const ORIGINS = (process.env.REIC_ALLOWED_ORIGINS || "http://127.0.0.1:8787,http://localhost:8787,https://planetbintang.github.io")
   .split(",").map(x => x.trim()).filter(Boolean);
 
@@ -79,7 +79,7 @@ const server = http.createServer(async (req, res) => {
           }
         }
       };
-      await walk(ROOT);
+      for (const searchRoot of SEARCH_ROOTS) { await walk(searchRoot); if (scanned >= 700 || results.length >= 24) break; }
       if (BING_KEY) {
         try {
           const response = await fetch("https://api.bing.microsoft.com/v7.0/search?q=" + encodeURIComponent(q) + "&count=8&textDecorations=false&textFormat=Raw", { headers: { "Ocp-Apim-Subscription-Key": BING_KEY } });
