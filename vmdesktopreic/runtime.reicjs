@@ -33,25 +33,62 @@ function makeWindow(title,icon,content){
  w.innerHTML='<header class="reic-app-title"><strong><span>'+safe(icon)+'</span> '+safe(title)+'</strong><div><button data-minimize aria-label="Minimalkan">−</button><button data-maximize aria-label="Maksimalkan">□</button><button data-close aria-label="Tutup">×</button></div></header><div class="reic-app-content">'+content+'</div>';
  apps.append(w);placeWindow(w);wireWindow(w);return w;
 }
-function placeWindow(w){const bounds=apps.getBoundingClientRect();const width=Math.min(760,Math.max(280,bounds.width-24));w.style.width=width+'px';w.style.maxHeight='calc(100% - 20px)';w.style.left=Math.max(8,(bounds.width-width)/2)+'px';w.style.top=Math.max(8,Math.min(24,bounds.height*.04))+'px';}
+function placeWindow(w){
+ const bounds=apps.getBoundingClientRect();
+ const width=Math.min(760,Math.max(260,bounds.width-24));
+ w.style.width=width+'px';w.style.height='';w.style.maxWidth='calc(100% - 16px)';w.style.maxHeight='calc(100% - 16px)';
+ w.style.left=Math.max(8,(bounds.width-width)/2)+'px';
+ w.style.top=Math.max(8,Math.min(24,bounds.height*.04))+'px';
+}
 function wireWindow(w){
+ const bar=$('.reic-app-title',w);
+ let drag=null,restoreBox=null;
+ w.addEventListener('pointerdown',()=>{w.style.zIndex=String(++windowZ);});
+ bar.addEventListener('pointerdown',e=>{
+  if(e.target.closest('button')||w.classList.contains('is-maximized'))return;
+  const r=w.getBoundingClientRect(),b=apps.getBoundingClientRect();
+  drag={x:e.clientX-r.left,y:e.clientY-r.top,b};
+  bar.setPointerCapture(e.pointerId);
+ });
+ bar.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  const x=Math.max(0,Math.min(drag.b.width-w.offsetWidth,e.clientX-drag.b.left-drag.x));
+  const y=Math.max(0,Math.min(drag.b.height-w.offsetHeight,e.clientY-drag.b.top-drag.y));
+  w.style.left=x+'px';w.style.top=y+'px';
+ });
+ const stopDrag=()=>{drag=null;};
+ bar.addEventListener('pointerup',stopDrag);bar.addEventListener('pointercancel',stopDrag);bar.addEventListener('lostpointercapture',stopDrag);
+ $('[data-close]',w).onclick=()=>{const chip=w._restoreChip;if(chip)chip.remove();w.remove();};
+ $('[data-minimize]',w).onclick=()=>{
+  if(w.hidden)return;w.hidden=true;
+  const chip=document.createElement('button');chip.type='button';chip.className='reic-restore-chip';
+  chip.textContent=$('.reic-app-title strong',w).textContent.trim();chip.setAttribute('aria-label','Pulihkan '+chip.textContent);
+  chip.onclick=()=>{w.hidden=false;chip.remove();w._restoreChip=null;w.style.zIndex=String(++windowZ);};
+  w._restoreChip=chip;apps.append(chip);
+ };
+ $('[data-maximize]',w).onclick=()=>{
+  if(!w.classList.contains('is-maximized')){
+   const b=apps.getBoundingClientRect(),r=w.getBoundingClientRect();
+   restoreBox={left:r.left-b.left,top:r.top-b.top,width:r.width,height:r.height};
+   w.classList.add('is-maximized');w.style.left='6px';w.style.top='6px';
+   w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';
+   w.setAttribute('aria-label',$('.reic-app-title strong',w).textContent+' — dimaksimalkan');
+  }else{
+   w.classList.remove('is-maximized');
+   if(restoreBox){w.style.left=restoreBox.left+'px';w.style.top=restoreBox.top+'px';w.style.width=Math.min(restoreBox.width,apps.clientWidth-16)+'px';w.style.height=restoreBox.height+'px';}
+   else placeWindow(w);
+   w.setAttribute('aria-label',$('.reic-app-title strong',w).textContent);
+  }
+ };
  w.addEventListener('click',e=>{
   const launch=e.target.closest('[data-launch]');
   if(launch){openApp(launch.dataset.launch);return;}
   const control=e.target.closest('button');
   if(control && control.type!=='submit' && !control.onclick && !control.dataset.close && !control.dataset.minimize && !control.dataset.maximize){
    const label=control.textContent.trim();
-   if(label){const child=makeWindow(label,'▣','<div class="reic-module-detail"><div class="reic-eyebrow">MODUL REIC</div><h2>'+safe(label)+'</h2><p>Panel '+safe(label)+' tersedia di ruang kerja VMDESKTOPREIC.</p><p>Gunakan navigasi File Manager, REIC Explorer, dan konfigurasi sistem untuk membuka sumber serta pengaturan terkait.</p></div>');}
+   if(label){makeWindow(label,'▣','<div class="reic-module-detail"><div class="reic-eyebrow">MODUL REIC</div><h2>'+safe(label)+'</h2><p>Panel '+safe(label)+' tersedia di ruang kerja VMDESKTOPREIC.</p><p>Gunakan navigasi File Manager, REIC Explorer, dan konfigurasi sistem untuk membuka sumber serta pengaturan terkait.</p></div>');}
   }
  });
- const bar=$('.reic-app-title',w);let drag=null;
- w.addEventListener('pointerdown',()=>w.style.zIndex=String(++windowZ));
- bar.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=w.getBoundingClientRect(),b=apps.getBoundingClientRect();drag={x:e.clientX-r.left,y:e.clientY-r.top,b};bar.setPointerCapture(e.pointerId);});
- bar.addEventListener('pointermove',e=>{if(!drag)return;const x=Math.max(0,Math.min(drag.b.width-w.offsetWidth,e.clientX-drag.b.left-drag.x));const y=Math.max(0,Math.min(drag.b.height-w.offsetHeight,e.clientY-drag.b.top-drag.y));w.style.left=x+'px';w.style.top=y+'px';});
- bar.addEventListener('pointerup',()=>drag=null);bar.addEventListener('pointercancel',()=>drag=null);
- $('[data-close]',w).onclick=()=>w.remove();
- $('[data-minimize]',w).onclick=()=>{w.hidden=true;const restore=document.createElement('button');restore.className='reic-restore-chip';restore.textContent=$('.reic-app-title strong',w).textContent;restore.onclick=()=>{w.hidden=false;restore.remove();w.style.zIndex=String(++windowZ)};apps.append(restore);};
- $('[data-maximize]',w).onclick=()=>{w.classList.toggle('is-maximized');if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{w.style.height='';placeWindow(w)}};
 }
 function openApp(name){
  if(name==='File Manager'){fileWindow.hidden=false;fileWindow.scrollIntoView({block:'nearest'});return;}
@@ -108,7 +145,16 @@ function drawFiles(path='Beranda'){
  status.textContent=items.children.length+' item · File System REIC · data runtime lokal';
 }
 function wireFileManager(){if(!items)return;drawFiles();$$('[data-folder]').forEach(b=>b.onclick=()=>drawFiles(b.dataset.folder));$('#search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();drawFiles(currentPath)});$('#back').onclick=()=>drawFiles('Beranda');$('#forward').onclick=()=>drawFiles('Beranda');$('#up').onclick=()=>drawFiles('Beranda');$('#grid').onclick=()=>items.classList.remove('list-mode');$('#list').onclick=()=>items.classList.add('list-mode');$$('[data-close],[data-min]',fileWindow).forEach(b=>b.onclick=()=>fileWindow.hidden=true);$('[data-max]',fileWindow).onclick=()=>fileWindow.classList.toggle('file-window-max');}
-function wireLauncher(){ $$('[data-open]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.open)));$$('[data-launch]').forEach(b=>b.addEventListener('click',()=>openApp(b.dataset.launch))); }
+function wireLauncher(){
+ $('[data-open]').forEach(b=>{
+  b.type='button';b.setAttribute('aria-label',b.getAttribute('aria-label')||b.dataset.open);
+  b.title=b.dataset.open;
+  b.addEventListener('click',e=>{e.preventDefault();openApp(b.dataset.open);});
+ });
+ $('[data-launch]').forEach(b=>{b.type='button';b.addEventListener('click',()=>openApp(b.dataset.launch));});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const visible=$('.reic-app-window',apps).filter(w=>!w.hidden).sort((a,b)=>Number(b.style.zIndex)-Number(a.style.zIndex))[0];if(visible){visible.remove();if(visible._restoreChip)visible._restoreChip.remove();}}});
+ window.addEventListener('resize',()=>{$('.reic-app-window',apps).forEach(w=>{if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{const maxX=Math.max(0,apps.clientWidth-w.offsetWidth),maxY=Math.max(0,apps.clientHeight-w.offsetHeight);w.style.left=Math.min(parseFloat(w.style.left)||0,maxX)+'px';w.style.top=Math.min(parseFloat(w.style.top)||0,maxY)+'px';}});});
+}
 function updateClock(){const el=$('#clock');if(el)el.textContent=new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date());}
 wireFileManager();wireLauncher();updateClock();setInterval(updateClock,30000);
 window.PB_REIC={version:'2.0',repositoryOwner:OWNER,githubAPI:'public-readonly',openApp,refreshRepositories:()=>{repoCache=null;},desktopBounds:()=>apps.getBoundingClientRect()};
