@@ -198,6 +198,7 @@ async function openRepoFile(w,repo,entry){
 }
 function wireHostLocal(w){
  const input=$('[data-host-url]',w),status=$('[data-host-status]',w),counts=$('[data-host-counts]',w),storage=$('[data-host-storage-list]',w);
+ input.value=localHostBase();
  const base=()=>input.value.trim().replace(/\/$/,'');
  const connect=async()=>{
   const value=base();if(!/^https?:\/\//i.test(value)){status.textContent='Alamat host harus berupa URL HTTP atau HTTPS.';return false;}
