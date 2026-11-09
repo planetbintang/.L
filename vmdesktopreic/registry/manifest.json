@@ -1,0 +1,1376 @@
+{
+  "schema": "PB-REIC-FS-1.0",
+  "physical_main_indexes": 150,
+  "virtual_sublinks": 1000000,
+  "page_size": 120,
+  "extensions": [
+    ".reic",
+    ".reicss",
+    ".reicjs"
+  ],
+  "roots": [
+    "acct",
+    "sys",
+    "system_ext",
+    "cache",
+    "config",
+    "media",
+    "data",
+    "repositori",
+    "vmdesktopreic",
+    "Aireber"
+  ],
+  "indexes": [
+    {
+      "id": 1,
+      "path": "indexes/index-001.reic",
+      "category": "Kernel",
+      "range": [
+        1,
+        6667
+      ]
+    },
+    {
+      "id": 2,
+      "path": "indexes/index-002.reic",
+      "category": "Desktop",
+      "range": [
+        6668,
+        13334
+      ]
+    },
+    {
+      "id": 3,
+      "path": "indexes/index-003.reic",
+      "category": "FileManager",
+      "range": [
+        13335,
+        20001
+      ]
+    },
+    {
+      "id": 4,
+      "path": "indexes/index-004.reic",
+      "category": "Explorer",
+      "range": [
+        20002,
+        26668
+      ]
+    },
+    {
+      "id": 5,
+      "path": "indexes/index-005.reic",
+      "category": "BlockLibrary",
+      "range": [
+        26669,
+        33335
+      ]
+    },
+    {
+      "id": 6,
+      "path": "indexes/index-006.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        33336,
+        40002
+      ]
+    },
+    {
+      "id": 7,
+      "path": "indexes/index-007.reic",
+      "category": "Infrastructure",
+      "range": [
+        40003,
+        46669
+      ]
+    },
+    {
+      "id": 8,
+      "path": "indexes/index-008.reic",
+      "category": "Configuration",
+      "range": [
+        46670,
+        53336
+      ]
+    },
+    {
+      "id": 9,
+      "path": "indexes/index-009.reic",
+      "category": "Security",
+      "range": [
+        53337,
+        60003
+      ]
+    },
+    {
+      "id": 10,
+      "path": "indexes/index-010.reic",
+      "category": "Network",
+      "range": [
+        60004,
+        66670
+      ]
+    },
+    {
+      "id": 11,
+      "path": "indexes/index-011.reic",
+      "category": "Storage",
+      "range": [
+        66671,
+        73337
+      ]
+    },
+    {
+      "id": 12,
+      "path": "indexes/index-012.reic",
+      "category": "Applications",
+      "range": [
+        73338,
+        80004
+      ]
+    },
+    {
+      "id": 13,
+      "path": "indexes/index-013.reic",
+      "category": "Terminal",
+      "range": [
+        80005,
+        86671
+      ]
+    },
+    {
+      "id": 14,
+      "path": "indexes/index-014.reic",
+      "category": "Monitoring",
+      "range": [
+        86672,
+        93338
+      ]
+    },
+    {
+      "id": 15,
+      "path": "indexes/index-015.reic",
+      "category": "Notifications",
+      "range": [
+        93339,
+        100005
+      ]
+    },
+    {
+      "id": 16,
+      "path": "indexes/index-016.reic",
+      "category": "Search",
+      "range": [
+        100006,
+        106672
+      ]
+    },
+    {
+      "id": 17,
+      "path": "indexes/index-017.reic",
+      "category": "Backup",
+      "range": [
+        106673,
+        113339
+      ]
+    },
+    {
+      "id": 18,
+      "path": "indexes/index-018.reic",
+      "category": "Integration",
+      "range": [
+        113340,
+        120006
+      ]
+    },
+    {
+      "id": 19,
+      "path": "indexes/index-019.reic",
+      "category": "Git",
+      "range": [
+        120007,
+        126673
+      ]
+    },
+    {
+      "id": 20,
+      "path": "indexes/index-020.reic",
+      "category": "Publishing",
+      "range": [
+        126674,
+        133340
+      ]
+    },
+    {
+      "id": 21,
+      "path": "indexes/index-021.reic",
+      "category": "Kernel",
+      "range": [
+        133341,
+        140007
+      ]
+    },
+    {
+      "id": 22,
+      "path": "indexes/index-022.reic",
+      "category": "Desktop",
+      "range": [
+        140008,
+        146674
+      ]
+    },
+    {
+      "id": 23,
+      "path": "indexes/index-023.reic",
+      "category": "FileManager",
+      "range": [
+        146675,
+        153341
+      ]
+    },
+    {
+      "id": 24,
+      "path": "indexes/index-024.reic",
+      "category": "Explorer",
+      "range": [
+        153342,
+        160008
+      ]
+    },
+    {
+      "id": 25,
+      "path": "indexes/index-025.reic",
+      "category": "BlockLibrary",
+      "range": [
+        160009,
+        166675
+      ]
+    },
+    {
+      "id": 26,
+      "path": "indexes/index-026.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        166676,
+        173342
+      ]
+    },
+    {
+      "id": 27,
+      "path": "indexes/index-027.reic",
+      "category": "Infrastructure",
+      "range": [
+        173343,
+        180009
+      ]
+    },
+    {
+      "id": 28,
+      "path": "indexes/index-028.reic",
+      "category": "Configuration",
+      "range": [
+        180010,
+        186676
+      ]
+    },
+    {
+      "id": 29,
+      "path": "indexes/index-029.reic",
+      "category": "Security",
+      "range": [
+        186677,
+        193343
+      ]
+    },
+    {
+      "id": 30,
+      "path": "indexes/index-030.reic",
+      "category": "Network",
+      "range": [
+        193344,
+        200010
+      ]
+    },
+    {
+      "id": 31,
+      "path": "indexes/index-031.reic",
+      "category": "Storage",
+      "range": [
+        200011,
+        206677
+      ]
+    },
+    {
+      "id": 32,
+      "path": "indexes/index-032.reic",
+      "category": "Applications",
+      "range": [
+        206678,
+        213344
+      ]
+    },
+    {
+      "id": 33,
+      "path": "indexes/index-033.reic",
+      "category": "Terminal",
+      "range": [
+        213345,
+        220011
+      ]
+    },
+    {
+      "id": 34,
+      "path": "indexes/index-034.reic",
+      "category": "Monitoring",
+      "range": [
+        220012,
+        226678
+      ]
+    },
+    {
+      "id": 35,
+      "path": "indexes/index-035.reic",
+      "category": "Notifications",
+      "range": [
+        226679,
+        233345
+      ]
+    },
+    {
+      "id": 36,
+      "path": "indexes/index-036.reic",
+      "category": "Search",
+      "range": [
+        233346,
+        240012
+      ]
+    },
+    {
+      "id": 37,
+      "path": "indexes/index-037.reic",
+      "category": "Backup",
+      "range": [
+        240013,
+        246679
+      ]
+    },
+    {
+      "id": 38,
+      "path": "indexes/index-038.reic",
+      "category": "Integration",
+      "range": [
+        246680,
+        253346
+      ]
+    },
+    {
+      "id": 39,
+      "path": "indexes/index-039.reic",
+      "category": "Git",
+      "range": [
+        253347,
+        260013
+      ]
+    },
+    {
+      "id": 40,
+      "path": "indexes/index-040.reic",
+      "category": "Publishing",
+      "range": [
+        260014,
+        266680
+      ]
+    },
+    {
+      "id": 41,
+      "path": "indexes/index-041.reic",
+      "category": "Kernel",
+      "range": [
+        266681,
+        273347
+      ]
+    },
+    {
+      "id": 42,
+      "path": "indexes/index-042.reic",
+      "category": "Desktop",
+      "range": [
+        273348,
+        280014
+      ]
+    },
+    {
+      "id": 43,
+      "path": "indexes/index-043.reic",
+      "category": "FileManager",
+      "range": [
+        280015,
+        286681
+      ]
+    },
+    {
+      "id": 44,
+      "path": "indexes/index-044.reic",
+      "category": "Explorer",
+      "range": [
+        286682,
+        293348
+      ]
+    },
+    {
+      "id": 45,
+      "path": "indexes/index-045.reic",
+      "category": "BlockLibrary",
+      "range": [
+        293349,
+        300015
+      ]
+    },
+    {
+      "id": 46,
+      "path": "indexes/index-046.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        300016,
+        306682
+      ]
+    },
+    {
+      "id": 47,
+      "path": "indexes/index-047.reic",
+      "category": "Infrastructure",
+      "range": [
+        306683,
+        313349
+      ]
+    },
+    {
+      "id": 48,
+      "path": "indexes/index-048.reic",
+      "category": "Configuration",
+      "range": [
+        313350,
+        320016
+      ]
+    },
+    {
+      "id": 49,
+      "path": "indexes/index-049.reic",
+      "category": "Security",
+      "range": [
+        320017,
+        326683
+      ]
+    },
+    {
+      "id": 50,
+      "path": "indexes/index-050.reic",
+      "category": "Network",
+      "range": [
+        326684,
+        333350
+      ]
+    },
+    {
+      "id": 51,
+      "path": "indexes/index-051.reic",
+      "category": "Storage",
+      "range": [
+        333351,
+        340017
+      ]
+    },
+    {
+      "id": 52,
+      "path": "indexes/index-052.reic",
+      "category": "Applications",
+      "range": [
+        340018,
+        346684
+      ]
+    },
+    {
+      "id": 53,
+      "path": "indexes/index-053.reic",
+      "category": "Terminal",
+      "range": [
+        346685,
+        353351
+      ]
+    },
+    {
+      "id": 54,
+      "path": "indexes/index-054.reic",
+      "category": "Monitoring",
+      "range": [
+        353352,
+        360018
+      ]
+    },
+    {
+      "id": 55,
+      "path": "indexes/index-055.reic",
+      "category": "Notifications",
+      "range": [
+        360019,
+        366685
+      ]
+    },
+    {
+      "id": 56,
+      "path": "indexes/index-056.reic",
+      "category": "Search",
+      "range": [
+        366686,
+        373352
+      ]
+    },
+    {
+      "id": 57,
+      "path": "indexes/index-057.reic",
+      "category": "Backup",
+      "range": [
+        373353,
+        380019
+      ]
+    },
+    {
+      "id": 58,
+      "path": "indexes/index-058.reic",
+      "category": "Integration",
+      "range": [
+        380020,
+        386686
+      ]
+    },
+    {
+      "id": 59,
+      "path": "indexes/index-059.reic",
+      "category": "Git",
+      "range": [
+        386687,
+        393353
+      ]
+    },
+    {
+      "id": 60,
+      "path": "indexes/index-060.reic",
+      "category": "Publishing",
+      "range": [
+        393354,
+        400020
+      ]
+    },
+    {
+      "id": 61,
+      "path": "indexes/index-061.reic",
+      "category": "Kernel",
+      "range": [
+        400021,
+        406687
+      ]
+    },
+    {
+      "id": 62,
+      "path": "indexes/index-062.reic",
+      "category": "Desktop",
+      "range": [
+        406688,
+        413354
+      ]
+    },
+    {
+      "id": 63,
+      "path": "indexes/index-063.reic",
+      "category": "FileManager",
+      "range": [
+        413355,
+        420021
+      ]
+    },
+    {
+      "id": 64,
+      "path": "indexes/index-064.reic",
+      "category": "Explorer",
+      "range": [
+        420022,
+        426688
+      ]
+    },
+    {
+      "id": 65,
+      "path": "indexes/index-065.reic",
+      "category": "BlockLibrary",
+      "range": [
+        426689,
+        433355
+      ]
+    },
+    {
+      "id": 66,
+      "path": "indexes/index-066.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        433356,
+        440022
+      ]
+    },
+    {
+      "id": 67,
+      "path": "indexes/index-067.reic",
+      "category": "Infrastructure",
+      "range": [
+        440023,
+        446689
+      ]
+    },
+    {
+      "id": 68,
+      "path": "indexes/index-068.reic",
+      "category": "Configuration",
+      "range": [
+        446690,
+        453356
+      ]
+    },
+    {
+      "id": 69,
+      "path": "indexes/index-069.reic",
+      "category": "Security",
+      "range": [
+        453357,
+        460023
+      ]
+    },
+    {
+      "id": 70,
+      "path": "indexes/index-070.reic",
+      "category": "Network",
+      "range": [
+        460024,
+        466690
+      ]
+    },
+    {
+      "id": 71,
+      "path": "indexes/index-071.reic",
+      "category": "Storage",
+      "range": [
+        466691,
+        473357
+      ]
+    },
+    {
+      "id": 72,
+      "path": "indexes/index-072.reic",
+      "category": "Applications",
+      "range": [
+        473358,
+        480024
+      ]
+    },
+    {
+      "id": 73,
+      "path": "indexes/index-073.reic",
+      "category": "Terminal",
+      "range": [
+        480025,
+        486691
+      ]
+    },
+    {
+      "id": 74,
+      "path": "indexes/index-074.reic",
+      "category": "Monitoring",
+      "range": [
+        486692,
+        493358
+      ]
+    },
+    {
+      "id": 75,
+      "path": "indexes/index-075.reic",
+      "category": "Notifications",
+      "range": [
+        493359,
+        500025
+      ]
+    },
+    {
+      "id": 76,
+      "path": "indexes/index-076.reic",
+      "category": "Search",
+      "range": [
+        500026,
+        506692
+      ]
+    },
+    {
+      "id": 77,
+      "path": "indexes/index-077.reic",
+      "category": "Backup",
+      "range": [
+        506693,
+        513359
+      ]
+    },
+    {
+      "id": 78,
+      "path": "indexes/index-078.reic",
+      "category": "Integration",
+      "range": [
+        513360,
+        520026
+      ]
+    },
+    {
+      "id": 79,
+      "path": "indexes/index-079.reic",
+      "category": "Git",
+      "range": [
+        520027,
+        526693
+      ]
+    },
+    {
+      "id": 80,
+      "path": "indexes/index-080.reic",
+      "category": "Publishing",
+      "range": [
+        526694,
+        533360
+      ]
+    },
+    {
+      "id": 81,
+      "path": "indexes/index-081.reic",
+      "category": "Kernel",
+      "range": [
+        533361,
+        540027
+      ]
+    },
+    {
+      "id": 82,
+      "path": "indexes/index-082.reic",
+      "category": "Desktop",
+      "range": [
+        540028,
+        546694
+      ]
+    },
+    {
+      "id": 83,
+      "path": "indexes/index-083.reic",
+      "category": "FileManager",
+      "range": [
+        546695,
+        553361
+      ]
+    },
+    {
+      "id": 84,
+      "path": "indexes/index-084.reic",
+      "category": "Explorer",
+      "range": [
+        553362,
+        560028
+      ]
+    },
+    {
+      "id": 85,
+      "path": "indexes/index-085.reic",
+      "category": "BlockLibrary",
+      "range": [
+        560029,
+        566695
+      ]
+    },
+    {
+      "id": 86,
+      "path": "indexes/index-086.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        566696,
+        573362
+      ]
+    },
+    {
+      "id": 87,
+      "path": "indexes/index-087.reic",
+      "category": "Infrastructure",
+      "range": [
+        573363,
+        580029
+      ]
+    },
+    {
+      "id": 88,
+      "path": "indexes/index-088.reic",
+      "category": "Configuration",
+      "range": [
+        580030,
+        586696
+      ]
+    },
+    {
+      "id": 89,
+      "path": "indexes/index-089.reic",
+      "category": "Security",
+      "range": [
+        586697,
+        593363
+      ]
+    },
+    {
+      "id": 90,
+      "path": "indexes/index-090.reic",
+      "category": "Network",
+      "range": [
+        593364,
+        600030
+      ]
+    },
+    {
+      "id": 91,
+      "path": "indexes/index-091.reic",
+      "category": "Storage",
+      "range": [
+        600031,
+        606697
+      ]
+    },
+    {
+      "id": 92,
+      "path": "indexes/index-092.reic",
+      "category": "Applications",
+      "range": [
+        606698,
+        613364
+      ]
+    },
+    {
+      "id": 93,
+      "path": "indexes/index-093.reic",
+      "category": "Terminal",
+      "range": [
+        613365,
+        620031
+      ]
+    },
+    {
+      "id": 94,
+      "path": "indexes/index-094.reic",
+      "category": "Monitoring",
+      "range": [
+        620032,
+        626698
+      ]
+    },
+    {
+      "id": 95,
+      "path": "indexes/index-095.reic",
+      "category": "Notifications",
+      "range": [
+        626699,
+        633365
+      ]
+    },
+    {
+      "id": 96,
+      "path": "indexes/index-096.reic",
+      "category": "Search",
+      "range": [
+        633366,
+        640032
+      ]
+    },
+    {
+      "id": 97,
+      "path": "indexes/index-097.reic",
+      "category": "Backup",
+      "range": [
+        640033,
+        646699
+      ]
+    },
+    {
+      "id": 98,
+      "path": "indexes/index-098.reic",
+      "category": "Integration",
+      "range": [
+        646700,
+        653366
+      ]
+    },
+    {
+      "id": 99,
+      "path": "indexes/index-099.reic",
+      "category": "Git",
+      "range": [
+        653367,
+        660033
+      ]
+    },
+    {
+      "id": 100,
+      "path": "indexes/index-100.reic",
+      "category": "Publishing",
+      "range": [
+        660034,
+        666700
+      ]
+    },
+    {
+      "id": 101,
+      "path": "indexes/index-101.reic",
+      "category": "Kernel",
+      "range": [
+        666701,
+        673367
+      ]
+    },
+    {
+      "id": 102,
+      "path": "indexes/index-102.reic",
+      "category": "Desktop",
+      "range": [
+        673368,
+        680034
+      ]
+    },
+    {
+      "id": 103,
+      "path": "indexes/index-103.reic",
+      "category": "FileManager",
+      "range": [
+        680035,
+        686701
+      ]
+    },
+    {
+      "id": 104,
+      "path": "indexes/index-104.reic",
+      "category": "Explorer",
+      "range": [
+        686702,
+        693368
+      ]
+    },
+    {
+      "id": 105,
+      "path": "indexes/index-105.reic",
+      "category": "BlockLibrary",
+      "range": [
+        693369,
+        700035
+      ]
+    },
+    {
+      "id": 106,
+      "path": "indexes/index-106.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        700036,
+        706702
+      ]
+    },
+    {
+      "id": 107,
+      "path": "indexes/index-107.reic",
+      "category": "Infrastructure",
+      "range": [
+        706703,
+        713369
+      ]
+    },
+    {
+      "id": 108,
+      "path": "indexes/index-108.reic",
+      "category": "Configuration",
+      "range": [
+        713370,
+        720036
+      ]
+    },
+    {
+      "id": 109,
+      "path": "indexes/index-109.reic",
+      "category": "Security",
+      "range": [
+        720037,
+        726703
+      ]
+    },
+    {
+      "id": 110,
+      "path": "indexes/index-110.reic",
+      "category": "Network",
+      "range": [
+        726704,
+        733370
+      ]
+    },
+    {
+      "id": 111,
+      "path": "indexes/index-111.reic",
+      "category": "Storage",
+      "range": [
+        733371,
+        740037
+      ]
+    },
+    {
+      "id": 112,
+      "path": "indexes/index-112.reic",
+      "category": "Applications",
+      "range": [
+        740038,
+        746704
+      ]
+    },
+    {
+      "id": 113,
+      "path": "indexes/index-113.reic",
+      "category": "Terminal",
+      "range": [
+        746705,
+        753371
+      ]
+    },
+    {
+      "id": 114,
+      "path": "indexes/index-114.reic",
+      "category": "Monitoring",
+      "range": [
+        753372,
+        760038
+      ]
+    },
+    {
+      "id": 115,
+      "path": "indexes/index-115.reic",
+      "category": "Notifications",
+      "range": [
+        760039,
+        766705
+      ]
+    },
+    {
+      "id": 116,
+      "path": "indexes/index-116.reic",
+      "category": "Search",
+      "range": [
+        766706,
+        773372
+      ]
+    },
+    {
+      "id": 117,
+      "path": "indexes/index-117.reic",
+      "category": "Backup",
+      "range": [
+        773373,
+        780039
+      ]
+    },
+    {
+      "id": 118,
+      "path": "indexes/index-118.reic",
+      "category": "Integration",
+      "range": [
+        780040,
+        786706
+      ]
+    },
+    {
+      "id": 119,
+      "path": "indexes/index-119.reic",
+      "category": "Git",
+      "range": [
+        786707,
+        793373
+      ]
+    },
+    {
+      "id": 120,
+      "path": "indexes/index-120.reic",
+      "category": "Publishing",
+      "range": [
+        793374,
+        800040
+      ]
+    },
+    {
+      "id": 121,
+      "path": "indexes/index-121.reic",
+      "category": "Kernel",
+      "range": [
+        800041,
+        806707
+      ]
+    },
+    {
+      "id": 122,
+      "path": "indexes/index-122.reic",
+      "category": "Desktop",
+      "range": [
+        806708,
+        813374
+      ]
+    },
+    {
+      "id": 123,
+      "path": "indexes/index-123.reic",
+      "category": "FileManager",
+      "range": [
+        813375,
+        820041
+      ]
+    },
+    {
+      "id": 124,
+      "path": "indexes/index-124.reic",
+      "category": "Explorer",
+      "range": [
+        820042,
+        826708
+      ]
+    },
+    {
+      "id": 125,
+      "path": "indexes/index-125.reic",
+      "category": "BlockLibrary",
+      "range": [
+        826709,
+        833375
+      ]
+    },
+    {
+      "id": 126,
+      "path": "indexes/index-126.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        833376,
+        840042
+      ]
+    },
+    {
+      "id": 127,
+      "path": "indexes/index-127.reic",
+      "category": "Infrastructure",
+      "range": [
+        840043,
+        846709
+      ]
+    },
+    {
+      "id": 128,
+      "path": "indexes/index-128.reic",
+      "category": "Configuration",
+      "range": [
+        846710,
+        853376
+      ]
+    },
+    {
+      "id": 129,
+      "path": "indexes/index-129.reic",
+      "category": "Security",
+      "range": [
+        853377,
+        860043
+      ]
+    },
+    {
+      "id": 130,
+      "path": "indexes/index-130.reic",
+      "category": "Network",
+      "range": [
+        860044,
+        866710
+      ]
+    },
+    {
+      "id": 131,
+      "path": "indexes/index-131.reic",
+      "category": "Storage",
+      "range": [
+        866711,
+        873377
+      ]
+    },
+    {
+      "id": 132,
+      "path": "indexes/index-132.reic",
+      "category": "Applications",
+      "range": [
+        873378,
+        880044
+      ]
+    },
+    {
+      "id": 133,
+      "path": "indexes/index-133.reic",
+      "category": "Terminal",
+      "range": [
+        880045,
+        886711
+      ]
+    },
+    {
+      "id": 134,
+      "path": "indexes/index-134.reic",
+      "category": "Monitoring",
+      "range": [
+        886712,
+        893378
+      ]
+    },
+    {
+      "id": 135,
+      "path": "indexes/index-135.reic",
+      "category": "Notifications",
+      "range": [
+        893379,
+        900045
+      ]
+    },
+    {
+      "id": 136,
+      "path": "indexes/index-136.reic",
+      "category": "Search",
+      "range": [
+        900046,
+        906712
+      ]
+    },
+    {
+      "id": 137,
+      "path": "indexes/index-137.reic",
+      "category": "Backup",
+      "range": [
+        906713,
+        913379
+      ]
+    },
+    {
+      "id": 138,
+      "path": "indexes/index-138.reic",
+      "category": "Integration",
+      "range": [
+        913380,
+        920046
+      ]
+    },
+    {
+      "id": 139,
+      "path": "indexes/index-139.reic",
+      "category": "Git",
+      "range": [
+        920047,
+        926713
+      ]
+    },
+    {
+      "id": 140,
+      "path": "indexes/index-140.reic",
+      "category": "Publishing",
+      "range": [
+        926714,
+        933380
+      ]
+    },
+    {
+      "id": 141,
+      "path": "indexes/index-141.reic",
+      "category": "Kernel",
+      "range": [
+        933381,
+        940047
+      ]
+    },
+    {
+      "id": 142,
+      "path": "indexes/index-142.reic",
+      "category": "Desktop",
+      "range": [
+        940048,
+        946714
+      ]
+    },
+    {
+      "id": 143,
+      "path": "indexes/index-143.reic",
+      "category": "FileManager",
+      "range": [
+        946715,
+        953381
+      ]
+    },
+    {
+      "id": 144,
+      "path": "indexes/index-144.reic",
+      "category": "Explorer",
+      "range": [
+        953382,
+        960048
+      ]
+    },
+    {
+      "id": 145,
+      "path": "indexes/index-145.reic",
+      "category": "BlockLibrary",
+      "range": [
+        960049,
+        966715
+      ]
+    },
+    {
+      "id": 146,
+      "path": "indexes/index-146.reic",
+      "category": "LayoutLibrary",
+      "range": [
+        966716,
+        973382
+      ]
+    },
+    {
+      "id": 147,
+      "path": "indexes/index-147.reic",
+      "category": "Infrastructure",
+      "range": [
+        973383,
+        980049
+      ]
+    },
+    {
+      "id": 148,
+      "path": "indexes/index-148.reic",
+      "category": "Configuration",
+      "range": [
+        980050,
+        986716
+      ]
+    },
+    {
+      "id": 149,
+      "path": "indexes/index-149.reic",
+      "category": "Security",
+      "range": [
+        986717,
+        993383
+      ]
+    },
+    {
+      "id": 150,
+      "path": "indexes/index-150.reic",
+      "category": "Network",
+      "range": [
+        993384,
+        1000000
+      ]
+    }
+  ],
+  "storage": "manifest-backed virtual filesystem"
+}
