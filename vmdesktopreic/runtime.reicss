@@ -168,3 +168,24 @@
 .reic-repo-card small{display:inline-block;margin:6px 0;padding:4px 7px;background:#0b4772;border:1px solid #287bb0;color:#c6eaff;letter-spacing:.04em}
 .reic-repo-card:has(small:first-of-type){min-width:0}
 @media(max-width:600px){.reic-host-actions{display:grid}.reic-host-actions button{width:100%}.reic-host .reic-stat-grid{grid-template-columns:1fr}}
+
+
+/* REIC Search application and desktop dock removal */
+.app-dock{display:none!important}
+.reic-search-app{display:grid;gap:12px;min-width:0}
+.reic-search-app h2{margin:0;color:#f4fbff;font-size:clamp(20px,3vw,28px)}
+.reic-search-app>p{margin:0;color:#c3def4;font-size:12px;line-height:1.6}
+.reic-search-form{display:flex;align-items:center;gap:8px;min-width:0;padding:6px 8px;background:#03162e;border:1px solid #399bd0;box-shadow:0 0 0 2px #0a4d7a55}
+.reic-search-form>span{color:#8ce2ff;font-size:24px;line-height:1}
+.reic-search-form input{flex:1;min-width:0;height:42px;border:0;outline:0;background:transparent;color:#fff;font-size:14px}
+.reic-search-form button{min-width:68px;min-height:40px;background:linear-gradient(100deg,#0789d4,#07518d);border:1px solid #7bdcff;color:#fff;font-weight:800;cursor:pointer}
+.reic-search-providers{display:flex;flex-wrap:wrap;align-items:center;gap:7px;color:#9acbe9;font-size:9px}
+.reic-search-providers b,.reic-search-providers a{padding:5px 7px;background:#082d50;border:1px solid #23628b;color:#d8f2ff;text-decoration:none}
+.reic-search-app [data-reic-search-status]{padding:9px 11px;background:#03162e;border-left:3px solid #37baff;color:#bfeaff;font-size:11px;overflow-wrap:anywhere}
+.reic-search-results{display:grid;gap:8px;max-height:48vh;overflow:auto}
+.reic-search-result{display:grid;gap:5px;padding:11px;background:linear-gradient(135deg,#08294a,#04152d);border:1px solid #1e5b86;overflow-wrap:anywhere}
+.reic-search-result small{color:#80d9ff;font-size:9px;font-weight:800;letter-spacing:.1em}
+.reic-search-result a{color:#d8f4ff;font-size:14px;font-weight:700;text-decoration:none}
+.reic-search-result a:hover{text-decoration:underline}
+.reic-search-result p{margin:0;color:#b9d4e9;font-size:11px;line-height:1.55}
+@media(max-width:600px){.reic-search-form{gap:5px;padding:4px}.reic-search-form button{min-width:58px}.reic-search-results{max-height:42vh}}
