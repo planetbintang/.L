@@ -181,6 +181,7 @@
     <link rel="stylesheet" href="./homepage-final-polish.css?v=20261108-home-polish-v2" />
     <link rel="stylesheet" href="./homepage-system-alignment.css?v=20261108-system-alignment-v1" />
     <link rel="stylesheet" href="./ocean-blue-system.css?v=20261109-ocean-blue-v1" />
+    <link rel="stylesheet" href="./live-tv.css?v=20261110-live-tv-v1" />
   
     <style id="hide-catalog-and-list-only-submenus">
       /* Sembunyikan submenu tingkat lanjut yang hanya berupa katalog atau daftar fitur/proyek. */
@@ -336,10 +337,33 @@
           <strong id="totalSystemFileCount" aria-live="polite">—</strong>
           <p id="fileCountCoverage">Menunggu data indeks seluruh repositori…</p>
         </div>
-        <aside class="system-development-warning" role="note" aria-label="Peringatan pengembangan">
-          <b>PERINGATAN PENGEMBANGAN</b>
-          <p>DILARANG SEMBARANGAN MENDOWNLOAD KODE REPOSITORI SEBELUM RILIS PRODUKSI. SISTEM SEDANG DALAM PENGEMBANGAN BESAR.</p>
-        </aside>
+        <section class="live-tv-panel" data-live-tv aria-label="Siaran televisi langsung Planetbintang">
+          <div class="live-tv-main">
+            <div class="live-tv-heading">
+              <h3 class="live-tv-title">PLANETBINTANG / LIVE TV</h3>
+              <span class="live-tv-live">LIVE CHANNEL</span>
+            </div>
+            <div class="live-tv-player">
+              <iframe data-live-tv-frame title="Siaran langsung televisi" src="https://www.tvrinews.com/live" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              <div class="live-tv-player-note">Pemutaran mengikuti izin embed dari penyedia siaran resmi</div>
+            </div>
+          </div>
+          <div class="live-tv-side">
+            <p>Pilih channel untuk memuat portal siaran langsung resmi di layar ini. Jika penyedia tidak mengizinkan pemutaran tertanam, buka situs resminya.</p>
+            <div class="live-tv-channels" role="group" aria-label="Pilih channel televisi">
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.tvrinews.com/live" data-live-tv-name="TVRI" aria-pressed="true">TVRI</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.metrotvnews.com/live" data-live-tv-name="Metro TV" aria-pressed="false">METRO TV</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.kompas.tv/live" data-live-tv-name="Kompas TV" aria-pressed="false">KOMPAS TV</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.tvonenews.com/live" data-live-tv-name="tvOne" aria-pressed="false">tvONE</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.transtv.co.id/live" data-live-tv-name="Trans TV" aria-pressed="false">TRANS TV</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.trans7.co.id/live-streaming" data-live-tv-name="Trans7" aria-pressed="false">TRANS7</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.inews.id/streaming" data-live-tv-name="iNews" aria-pressed="false">iNEWS</button>
+              <button class="live-tv-channel" type="button" data-live-tv-url="https://www.rctiplus.com/tv/rcti" data-live-tv-name="RCTI+" aria-pressed="false">RCTI+</button>
+            </div>
+            <p class="live-tv-status" data-live-tv-status role="status" aria-live="polite">Menyiapkan channel TVRI…</p>
+            <a class="live-tv-open" data-live-tv-open href="https://www.tvrinews.com/live" target="_blank" rel="noopener noreferrer">BUKA TVRI DI SITUS RESMI ↗</a>
+          </div>
+        </section>
       </section>
       <style id="system-file-count-styles">
         .system-file-count{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:1rem;margin:0 0 1.25rem;padding:1rem;background:linear-gradient(135deg,rgba(13,30,53,.96),rgba(5,12,25,.98));border:1px solid rgba(119,174,225,.28);color:#eaf4ff}
@@ -854,5 +878,6 @@
 
 
     <script src="./workspace-modern.js?v=20261030-workspace-25x150-v3" defer></script>
+    <script src="./live-tv.js?v=20261110-live-tv-v1" defer></script>
 </body>
 </html>
