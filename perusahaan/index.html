@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2742">
+<title>Perusahaan · PlanetBintang</title>
+<style>
+:root{color-scheme:dark;--bg:#071525;--panel:#102b46;--line:#315a7c;--text:#eef7ff;--muted:#a9c2d9;--accent:#8bd5ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#071525,#0d3452 58%,#e7f5ff 180%);color:var(--text);font:15px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+header{padding:22px clamp(18px,5vw,64px);border-bottom:1px solid #315a7c;background:#071525cc}
+header a{color:var(--accent);text-decoration:none;font-size:12px;letter-spacing:.12em;font-weight:700}
+main{width:min(1120px,92vw);margin:0 auto;padding:clamp(32px,7vw,76px) 0}
+.kicker{color:var(--accent);font-size:11px;letter-spacing:.2em;font-weight:800}
+h1{font-size:clamp(32px,6vw,58px);line-height:1.05;margin:12px 0}
+.intro{color:var(--muted);max-width:680px;margin-bottom:38px}
+h2{font-size:19px;letter-spacing:.08em;margin:36px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{border:1px solid var(--line);background:linear-gradient(145deg,#153754,#0b2035);padding:22px;min-height:180px}
+.number{font:12px monospace;color:var(--accent);letter-spacing:.12em}
+.card h3{font-size:23px;line-height:1.2;margin:18px 0 8px}
+.role{color:var(--muted);font-size:13px}
+.external{border:1px solid var(--line);background:#0d2943;padding:22px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:20px clamp(18px,5vw,64px);color:var(--muted);font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.card{min-height:140px}}
+</style>
+</head>
+<body>
+<header><a href="../">← PLANETBINTANG / MENU UTAMA</a></header>
+<main>
+<div class="kicker">PLANETBINTANG · ORGANISASI</div>
+<h1>PERUSAHAAN</h1>
+<p class="intro">Struktur jajaran eksekutif, direksi, serta kolaborator pengembangan PlanetBintang.</p>
+<section id="direksi" aria-labelledby="direksi-title">
+<h2 id="direksi-title">JAJARAN EKSEKUTIF / DIREKSI</h2>
+<div class="grid">
+<article class="card"><div class="number">01 / DIREKSI</div><h3>JAE DIR AL</h3><div class="role">EKSEKUTIF DIREKTUR 1</div></article>
+<article class="card"><div class="number">02 / DIREKSI</div><h3>KOL IN EL</h3><div class="role">EKSEKUTIF DIREKTUR 2</div></article>
+<article class="card"><div class="number">03 / DIREKSI</div><h3>KAPE TE EN</h3><div class="role">EKSEKUTIF DIREKTUR 3</div></article>
+</div>
+</section>
+<section id="developer">
+<h2>DEVELOPER DAN PENGEMBANG LUAR</h2>
+<div class="external">Ruang kolaborasi untuk developer, mitra teknis, kontributor, dan pengembang eksternal.</div>
+</section>
+</main>
+<footer>PLANETBINTANG · PERUSAHAAN</footer>
+</body>
+</html>
