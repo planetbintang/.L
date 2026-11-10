@@ -34,19 +34,23 @@
       .map(n => String(n).padStart(2, '0')).join(':');
   };
   const money = value => '$' + value.toFixed(2);
+  function updateActiveCount() {
+    const now = Date.now();
+    for (const [id, at] of activeTabs) if (now - at > 12000) activeTabs.delete(id);
+    if (activeCount) activeCount.textContent = String([...activeTabs.values()].filter(at => now-at < 12000).length);
+  }
   function announce() {
     const now = Date.now();
     activeTabs.set(tabId, now);
     if (bc) bc.postMessage({type:'heartbeat', id:tabId, at:now, visible:!document.hidden});
-    for (const [id, at] of activeTabs) if (now - at > 12000) activeTabs.delete(id);
-    activeCount.textContent = String([...activeTabs.values()].filter(at => now-at < 12000).length);
+    updateActiveCount();
   }
   function updateMetrics() {
     const current = elapsed + ((!document.hidden && selected) ? (Date.now()-lastTick)/1000 : 0);
-    viewClock.textContent = formatTime(current);
+    if (viewClock) viewClock.textContent = formatTime(current);
     totalMinutes = current / 60;
     viewMinutes.forEach(node => { node.textContent = totalMinutes.toFixed(2); });
-    revenue.textContent = money(totalMinutes * rate);
+    if (revenue) revenue.textContent = money(totalMinutes * rate);
   }
   function chooseChannel(button) {
     if (!button) return;
@@ -76,8 +80,11 @@
     const data = event.data || {};
     if (data.type === 'heartbeat' && data.id && data.id !== tabId) {
       activeTabs.set(data.id, data.at || Date.now());
-      announce();
-    } else if (data.type === 'bye' && data.id) activeTabs.delete(data.id);
+      updateActiveCount();
+    } else if (data.type === 'bye' && data.id) {
+      activeTabs.delete(data.id);
+      updateActiveCount();
+    }
   };
   document.addEventListener('visibilitychange', () => { lastTick = Date.now(); announce(); updateMetrics(); });
   window.addEventListener('pagehide', () => { if (bc) bc.postMessage({type:'bye',id:tabId}); });
