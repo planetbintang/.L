@@ -1,0 +1,41 @@
+/* PlanetBintang REIC Core — browser-native ES module */
+const VERSION="2.0.0";
+const FAMILIES=Object.freeze([
+ "DOCUMENT","STYLE","SCRIPT","LAYOUT","COMPONENT","STATE","EVENT","ROUTE",
+ "HTTP","API","DATA","DATABASE","SECURITY","IDENTITY","STORAGE","CACHE",
+ "MEDIA","STREAM","TELEMETRY","AUTOMATION","ACCESSIBILITY","MOTION",
+ "THEME","FORM","TABLE","CHART","MAP","SEARCH","WORKFLOW","DEPLOYMENT",
+ "IMPORT","EXPORT","READ","WRITE","VALIDATE","TRANSFORM","CONNECTOR",
+ "NOTIFICATION","SESSION","PERMISSION","AUDIT","BACKUP","RESTORE",
+ "DESKTOP","WINDOW","PANEL","DOCK","WIDGET","PLUGIN","INTEGRATION"
+]);
+const registry=new Map();
+const makeId=(family,index)=>`REIC.${family}.${String(index).padStart(4,"0")}`;
+function resolve(id){
+ const match=/^REIC\.([A-Z]+)\.(\d{4})$/.exec(String(id||""));
+ if(!match||!FAMILIES.includes(match[1]))return null;
+ const index=Number(match[2]);
+ return index>=0&&index<1024?Object.freeze({id:makeId(match[1],index),family:match[1],index,version:VERSION}):null;
+}
+function register(name,definition){
+ if(!/^[a-z][a-z0-9-]{1,63}$/.test(name))throw new TypeError("Nama modul REIC tidak valid.");
+ if(!definition||typeof definition!=="object")throw new TypeError("Definisi modul REIC wajib berupa objek.");
+ registry.set(name,Object.freeze({...definition,name,version:VERSION}));
+ return registry.get(name);
+}
+function list({family="",offset=0,limit=100}={}){
+ const selected=family?FAMILIES.filter(x=>x===String(family).toUpperCase()):FAMILIES;
+ const all=selected.flatMap(group=>Array.from({length:1024},(_,i)=>makeId(group,i)));
+ return all.slice(Math.max(0,offset),Math.max(0,offset)+Math.min(1000,Math.max(0,limit)));
+}
+function inspect(){return Object.freeze({version:VERSION,families:FAMILIES.length,syntaxProfiles:FAMILIES.length*1024,registeredModules:registry.size,extensions:[".reic",".reicss",".reicjs"],grammar:"HTML-compatible REIC documents + CSS + ECMAScript modules"});}
+function activate(){
+ document.documentElement.dataset.reicActive="true";
+ document.documentElement.dataset.reicVersion=VERSION;
+ document.querySelectorAll("reic-app").forEach(node=>node.dataset.reicMounted="true");
+}
+const REICCore=Object.freeze({version:VERSION,families:FAMILIES,resolve,register,list,inspect,activate});
+globalThis.REICCore=REICCore;
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",activate,{once:true});else activate();
+export {REICCore,VERSION,FAMILIES,resolve,register,list,inspect,activate};
+export default REICCore;
