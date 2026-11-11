@@ -20,7 +20,7 @@ Status: core foundation activated on the canonical root document (index.reic) on
 
 ## Syntax profile registry
 
-reic-core.reicjs defines 52 semantic families and 4,096 deterministic profile identifiers per family (212,992 profile identifiers total). Profiles are resolved and paginated on demand; they are not 212,992 separately generated source files and do not imply 212,992 independent executable language grammars.
+reic-core.reicjs defines 50 semantic families and 4,096 deterministic profile identifiers per family (204,800 profile identifiers total). Profiles are resolved and paginated on demand; they are not 204,800 separately generated source files and do not imply 212,992 independent executable language grammars.
 
 Public API:
 
