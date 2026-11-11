@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Planetbintang Media Root — pusat identitas dan publikasi sistem.">
+  <title>Planetbintang · Media Root</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07111f;--panel:#101d30;--line:#263b56;--text:#f6f9ff;--muted:#b5c3d8;--accent:#8cc8ff}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#173354 0%,var(--bg) 60%);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+    main{max-width:960px;margin:auto;padding:clamp(24px,6vw,72px) 20px}.brand{display:flex;align-items:center;gap:18px;margin-bottom:36px}.brand img{width:76px;height:76px;object-fit:contain;background:#fff;border-radius:20px;padding:8px}.brand strong{display:block;letter-spacing:.16em;font-size:clamp(20px,4vw,32px)}.brand span{color:var(--muted);font-size:12px;letter-spacing:.2em}
+    .panel{background:linear-gradient(145deg,#14243aee,#0b1728ee);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);box-shadow:0 24px 80px #0005}.tag{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:12px}h1{line-height:1.12;font-size:clamp(32px,6vw,58px);margin:.45em 0}p{color:var(--muted)}ul{padding-left:22px}a{color:#b7dcff;text-underline-offset:4px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}.tile{padding:18px;border:1px solid var(--line);border-radius:15px;background:#ffffff05}.tile h2{font-size:17px;margin:0 0 8px}.foot{font-size:13px;margin-top:28px}
+  </style>
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <img src="./brand/planetbintang-logo.svg" alt="Logo resmi Planetbintang">
+      <div><strong>PLANETBINTANG</strong><span>IDENTITAS SISTEM TERPUSAT</span></div>
+    </header>
+    <section class="panel">
+      <div class="tag">Media Root · /media/</div>
+      <h1>Satu identitas.<br>Satu katalog sumber.</h1>
+      <p>Folder Git nyata untuk manifest identitas dan kebijakan brand. Metadata repositori sumber—termasuk repositori privat—tidak ditampilkan dari halaman publik sebelum tinjauan privasi. Logo baru menunggu unggahan dan konfirmasi pemilik.</p>
+      <div class="grid">
+        <article class="tile"><h2>Manifest sistem</h2><p>Identitas, versi skema, sumber metadata, dan kebijakan integritas.</p><span>Menunggu tinjauan privasi</span></article>
+        <article class="tile"><h2>Repositori sumber</h2><p>Snapshot metadata disimpan terpisah. Katalog tidak ditautkan dari halaman publik sebelum tinjauan privasi selesai.</p><span>Menunggu tinjauan privasi</span></article>
+        <article class="tile"><h2>Indeks pusat</h2><p>Manifest dapat mencakup nama dan tautan repositori privat. Konten tidak ditautkan di sini sebelum ditinjau dan disetujui.</p><span>Menunggu review privasi</span></article>
+        <article class="tile"><h2>Aturan identitas</h2><p>Penggunaan logo, perubahan resmi, dan batas proteksi teknis.</p><a href="./brand/IDENTITY.md">Baca identitas brand</a></article>
+      </div>
+      <p class="foot">Catatan: halaman statis ini tidak dapat mengunci repository secara teknis. Terapkan branch protection/ruleset pada GitHub untuk mewajibkan review dan membatasi siapa yang dapat mengubah identitas inti.</p>
+    </section>
+  </main>
+</body>
+</html>

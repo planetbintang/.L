@@ -34,6 +34,15 @@ jobs:
       - name: Build and verify browser pages from canonical REIC files
         run: python3 scripts/build-reic-pages.py
 
+      - name: Build privacy-minimal snapshot freshness status
+        run: python3 scripts/build-public-monitor-status.py
+
+      - name: Validate live monitor and required static route outputs
+        run: python3 scripts/validate-live-monitor.py --require-output
+
+      - name: Validate production feature catalog and GitHub Operations
+        run: python3 scripts/validate-production-surface.py
+
       - name: Set up Node.js for VendorDomain validation
         uses: actions/setup-node@v4
         with:

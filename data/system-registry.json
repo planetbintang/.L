@@ -788,6 +788,25 @@
         "JSON export"
       ],
       "executionState": "browser-static-specification-catalog"
+    },
+    {
+      "id": "monitoring",
+      "label": "Monitoring Sistem",
+      "group": "infrastructure",
+      "route": "./monitoring/",
+      "sourceFiles": [
+        "monitoring/index.html",
+        "monitoring/monitoring.css",
+        "monitoring/monitoring.js",
+        "monitoring/snapshot-status.json",
+        "monitoring/targets.json"
+      ],
+      "capabilities": [
+        "public HTTP route reachability",
+        "browser foreground polling",
+        "repository snapshot age"
+      ],
+      "executionState": "browser-static-http-probes-no-backend-or-central-history"
     }
   ],
   "sourceFiles": [
@@ -819,6 +838,11 @@
     "file-manager.js",
     "index.html",
     "local-file-store.js",
+    "monitoring/index.html",
+    "monitoring/monitoring.css",
+    "monitoring/monitoring.js",
+    "monitoring/snapshot-status.json",
+    "monitoring/targets.json",
     "platform-view.js",
     "search-page.js",
     "snaps-bridge.js",

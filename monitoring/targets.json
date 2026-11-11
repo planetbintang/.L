@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "intervalSeconds": 60,
+  "timeoutSeconds": 12,
+  "scope": "Pemeriksaan keterjangkauan HTTP halaman/data statis publik; bukan health check backend atau eksekusi fitur aplikasi.",
+  "targets": [
+    { "id": "home", "label": "Dashboard utama", "path": "index.html", "type": "Halaman" },
+    { "id": "monitoring", "label": "Monitoring Sistem", "path": "monitoring/", "type": "Halaman" },
+    { "id": "snapshot-status", "label": "Status kesegaran snapshot", "path": "monitoring/snapshot-status.json", "type": "Metadata JSON" },
+    { "id": "system-registry", "label": "Registry sistem", "path": "data/system-registry.json", "type": "Data JSON" },
+    { "id": "feature-catalog", "label": "Katalog 1.500 fitur Git", "path": "git-feature-catalog.html", "type": "Halaman" },
+    { "id": "feature-workbench", "label": "Feature Workbench", "path": "feature-workbench.html", "type": "Halaman" },
+    { "id": "github-operations", "label": "GitHub Operations", "path": "github-operations.html", "type": "Halaman" },
+    { "id": "gallery", "label": "Galeri", "path": "galeri/", "type": "Halaman" },
+    { "id": "desktop", "label": "VMDESKTOPREIC", "path": "vmdesktopreic/", "type": "Halaman" },
+    { "id": "osmedia", "label": "OSMEDIA", "path": "osmedia/", "type": "Halaman" },
+    { "id": "library", "label": "Perpustakaan Digital", "path": "leksikon/", "type": "Halaman" },
+    { "id": "vendor-domain", "label": "VendorDomain", "path": "vendordomain/", "type": "Halaman" },
+    { "id": "vendor-enterprise", "label": "VendorDomain Enterprise", "path": "vendordomain/enterprise/", "type": "Halaman" },
+    { "id": "hosting", "label": "Hosting", "path": "hosting/", "type": "Halaman" },
+    { "id": "aircloud", "label": "AIR CLOUD / airz", "path": "airz/", "type": "Halaman" },
+    { "id": "aireber", "label": "AI Reber", "path": "aireber/", "type": "Halaman" },
+    { "id": "media", "label": "Media & dokumen", "path": "media/", "type": "Halaman" },
+    { "id": "development-center", "label": "Pusat Pengembangan", "path": "pusat-pengembangan/", "type": "Halaman" },
+    { "id": "documents", "label": "REIC Dokumen", "path": "dokumen/", "type": "Halaman" },
+    { "id": "bintang", "label": "BINTANG", "path": "bintang/", "type": "Halaman" }
+  ]
+}
