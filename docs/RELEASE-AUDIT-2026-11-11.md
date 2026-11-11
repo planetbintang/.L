@@ -21,6 +21,10 @@ Snapshot sumber terakhir yang ditemukan memiliki timestamp `2026-10-23T07:13:34Z
 
 Pada checkout kerja: `node --check` untuk JavaScript monitor; parsing JSON; validator monitor untuk 20 target; validator production surface untuk 1.500 spesifikasi fitur unik dan 30 modul; parsing sitemap XML; enam pasangan REIC/HTML identik byte demi byte; cek jumlah tag stylesheet; serta HTTP lokal 200 untuk sepuluh halaman/berkas inti. Hasil pemeriksaan itu bersifat lokal dan tidak menggantikan hasil workflow GitHub atau pemeriksaan URL setelah publikasi.
 
+## Hasil pipeline setelah push pertama
+
+Commit `3667b782425b3095222a8bd5e76a51b83460a23d` memicu [run deploy 43067899115](https://github.com/planetbintang/.L/actions/runs/43067899115), yang gagal pada gate `Validate live monitor` sebelum upload artefak atau langkah deploy. Builder menyalin sumber kanonis `index.reic` ke `index.html`; tautan monitoring sebelumnya hanya berada pada HTML, sehingga hilang setelah build. Koreksi lanjutan menambahkan tautan di `index.reic`, mencatat sumber itu pada system registry, dan memeriksa tautan pada sumber serta HTML hasil build. Simulasi lokal atas salinan root REIC dan validator kini lulus; itu belum menggantikan konfirmasi run GitHub berikutnya.
+
 ## Batas operasional dan langkah berikutnya
 
 Konfigurasi Pages masih mode `legacy`; perubahan konfigurasi sumber Pages tidak dilakukan di patch ini. Route inti yang memiliki HTML eksplisit dapat disajikan oleh branch, tetapi suksesnya workflow tidak membuktikan seluruh hasil generator REIC telah tersedia pada URL publik. Untuk menyajikan seluruh keluaran tanpa meng-commit ratusan ribu duplikat HTML, pemilik repo perlu meninjau dan menyetujui pemindahan Pages ke mode `workflow`.
@@ -32,6 +36,7 @@ Monitor hanya menguji keterjangkauan HTTP dari browser, bukan kesehatan JavaScri
 - Repository: <https://github.com/planetbintang/.L>
 - GitHub Pages: <https://planetbintang.github.io/.L/>
 - Workflow yang diaudit: <https://github.com/planetbintang/.L/actions/runs/42739943474>
+- Run deploy setelah push pertama: <https://github.com/planetbintang/.L/actions/runs/43067899115>
 - Spesifikasi rekonstruksi: <https://raw.githubusercontent.com/planetbintang/.L/io/REKONSTRUKSI-SISTEM.md>
 - Peta root: <https://raw.githubusercontent.com/planetbintang/.L/io/SYSTEM-ROOT-MAP.md>
 - Registry file: <https://raw.githubusercontent.com/planetbintang/.L/io/SYSTEM-FILE-REGISTRY.md>

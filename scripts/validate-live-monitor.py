@@ -90,8 +90,12 @@ script = (ROOT / "monitoring/monitoring.js").read_text(encoding="utf-8")
 snapshot_status = load_json("monitoring/snapshot-status.json") or {}
 require("./monitoring.css" in html and "./monitoring.js" in html,
         "monitor page must load its separated CSS and JavaScript")
-require("./monitoring/" in (ROOT / "index.html").read_text(encoding="utf-8"),
-        "root navigation must link to ./monitoring/")
+root_html = (ROOT / "index.html").read_text(encoding="utf-8")
+root_reic = (ROOT / "index.reic").read_text(encoding="utf-8")
+require("./monitoring/" in root_html,
+        "generated root HTML navigation must link to ./monitoring/")
+require("./monitoring/" in root_reic,
+        "canonical root REIC must preserve the monitoring link after build")
 require("credentials: 'omit'" in script and "mode: 'same-origin'" in script,
         "monitor probes must omit credentials and remain same-origin")
 require("redirect: 'manual'" in script and "redirect: 'follow'" not in script,
