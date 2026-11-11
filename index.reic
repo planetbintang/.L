@@ -776,6 +776,17 @@
 <!-- PlanetBintang CODE repository browser: added without replacing existing navigation -->
 
 
+    <script>
+      (async function(){
+        try {
+          const response = await fetch('./reic-core.reicjs', {cache:'no-cache'});
+          if (!response.ok) throw new Error('HTTP '+response.status);
+          const source = await response.text();
+          const url = URL.createObjectURL(new Blob([source+'\\n//# sourceURL=reic-core.reicjs'], {type:'text/javascript'}));
+          try { await import(url); } finally { URL.revokeObjectURL(url); }
+        } catch (error) { console.error('REIC Core:', error); }
+      })();
+    </script>
     <script src="./workspace-modern.js?v=20261030-workspace-25x150-v3" defer></script>
 </body>
 </html>
