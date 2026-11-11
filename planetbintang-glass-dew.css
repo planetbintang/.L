@@ -1,0 +1,58 @@
+/* PlanetBintang root — clear glass, ocean white-blue, morning dew */
+:root{
+ --pb-glass-ink:#103d68;--pb-glass-muted:#527493;--pb-glass-blue:#087bd2;
+ --pb-glass-line:rgba(93,166,224,.34);
+ --pb-glass-pane:linear-gradient(145deg,rgba(255,255,255,.88),rgba(224,242,255,.68));
+ --pb-glass-shadow:0 14px 38px rgba(31,112,177,.13),inset 0 1px 0 rgba(255,255,255,.92);
+}
+body:has(#overview){
+ color:var(--pb-glass-ink)!important;
+ background:
+  radial-gradient(ellipse at 12% 5%,rgba(255,255,255,.98),transparent 38%),
+  radial-gradient(ellipse at 88% 12%,rgba(117,198,246,.30),transparent 34%),
+  radial-gradient(ellipse at 48% 100%,rgba(176,222,250,.42),transparent 48%),
+  linear-gradient(145deg,#f9fdff 0%,#e8f5ff 46%,#d4ebfb 100%)!important;
+ background-attachment:fixed!important;
+}
+body:has(#overview)::before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.48;
+ background-image:radial-gradient(circle at 8% 18%,rgba(255,255,255,.95) 0 2px,transparent 5px),radial-gradient(circle at 84% 28%,rgba(255,255,255,.85) 0 3px,transparent 7px),radial-gradient(circle at 66% 82%,rgba(255,255,255,.75) 0 2px,transparent 6px);
+}
+body:has(#overview) :where(.topbar,.site-header,.main-header,.header,.navigation,.main-nav){
+ background:rgba(248,253,255,.78)!important;color:var(--pb-glass-ink)!important;
+ border:1px solid var(--pb-glass-line)!important;
+ box-shadow:0 8px 28px rgba(43,125,184,.10),inset 0 1px 0 #fff!important;
+ -webkit-backdrop-filter:blur(22px) saturate(155%);backdrop-filter:blur(22px) saturate(155%);
+}
+body:has(#overview) :where(.topbar a,.main-nav a,.main-nav summary,.system-nav a,.menu-link){color:#155b91!important}
+body:has(#overview) :where(.hero-copy,.hero-main,.hero-side,.hero-logo,.metric-card,.repo-card,.home-ai-card,.vm-home-showcase,.vm-home-card,.vm-home-heading>p,.snaps-heading,.snaps-connector,.snaps-rag-result,.panel,.card,.tile,.surface,.content-card,.feature-card,.workspace-card,.section-card){
+ background:var(--pb-glass-pane)!important;color:var(--pb-glass-ink)!important;
+ border:1px solid var(--pb-glass-line)!important;border-radius:18px!important;
+ box-shadow:var(--pb-glass-shadow)!important;
+ -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+}
+body:has(#overview) :where(h1,h2,h3,h4,.hero-title,.metric-card strong,.vm-home-card h3){color:#104b7d!important}
+body:has(#overview) :where(p,.hero-description,.metric-label,.vm-home-card p,.home-ai-card small,.vm-home-note){color:var(--pb-glass-muted)!important}
+body:has(#overview) :where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],.primary-button,.primary-btn){
+ border:1px solid rgba(67,151,218,.48)!important;border-radius:999px!important;
+ background:linear-gradient(120deg,#fff 0%,#dff2ff 42%,#8bc8f2 100%)!important;
+ color:#07518e!important;box-shadow:0 7px 20px rgba(40,129,194,.18),inset 0 1px 0 #fff!important;
+}
+body:has(#overview) :where(input,select,textarea){
+ background:rgba(255,255,255,.82)!important;color:#123f66!important;
+ border:1px solid var(--pb-glass-line)!important;border-radius:12px!important;
+ box-shadow:inset 0 1px 3px rgba(42,111,164,.06)!important;
+}
+body:has(#overview) :where(a){color:#0874bd}
+body:has(#overview) :where(a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible){outline:3px solid rgba(45,151,226,.55)!important;outline-offset:3px}
+body:has(#overview) .vm-home-showcase{padding:clamp(1rem,3vw,2rem)!important}
+body:has(#overview) .vm-home-card img,body:has(#overview) .home-ai-card img{border-radius:13px!important}
+body:has(#overview) .vm-home-tags span{background:rgba(255,255,255,.62)!important;color:#27628d!important;border:1px solid var(--pb-glass-line)!important;border-radius:999px!important}
+@media(max-width:700px){
+ body:has(#overview) :where(.topbar,.site-header,.main-header){-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+ body:has(#overview) :where(.metric-card,.repo-card,.home-ai-card,.vm-home-card,.panel,.card){border-radius:15px!important}
+}
+@media(prefers-reduced-motion:no-preference){
+ body:has(#overview) :where(.metric-card,.repo-card,.vm-home-card,.home-ai-card){transition:transform .22s ease,box-shadow .22s ease}
+ body:has(#overview) :where(.metric-card,.repo-card,.vm-home-card,.home-ai-card):hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(31,112,177,.18),inset 0 1px 0 #fff!important}
+}
