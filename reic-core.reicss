@@ -1,0 +1,44 @@
+/* REIC CORE — Ocean Elite Design System */
+:root{
+ --reic-ink:#071b31;--reic-ink-soft:#183b5b;--reic-blue-950:#04172d;
+ --reic-blue-900:#082747;--reic-blue-800:#0b3e68;--reic-blue-700:#12649a;
+ --reic-blue-500:#328fca;--reic-blue-300:#8bd4f4;--reic-blue-100:#e8f7ff;
+ --reic-white:#f8fcff;--reic-glass:rgba(235,247,255,.76);
+ --reic-line:rgba(108,183,226,.25);--reic-shadow:0 18px 48px rgba(3,29,55,.13);
+ --reic-radius:8px;--reic-focus:0 0 0 3px rgba(90,190,245,.32);
+ color-scheme:light;
+}
+html[data-reic-active="true"]{scroll-behavior:smooth}
+html[data-reic-active="true"] body{
+ background:linear-gradient(145deg,#f6fbff 0%,#eaf5fc 48%,#f9fcff 100%);
+ color:var(--reic-ink);
+}
+html[data-reic-active="true"] :where(button,input,select,textarea){
+ accent-color:var(--reic-blue-700);
+}
+html[data-reic-active="true"] :where(button,[role="button"],a):focus-visible{
+ outline:0;box-shadow:var(--reic-focus);
+}
+html[data-reic-active="true"] :where(button){
+ transition:background .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+html[data-reic-active="true"] :where(button:hover){filter:brightness(1.035)}
+[data-reic-layer]{
+ position:relative;isolation:isolate;border-color:var(--reic-line);
+}
+[data-reic-surface="glass"]{
+ background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(228,244,255,.72));
+ border:1px solid rgba(255,255,255,.9);
+ box-shadow:var(--reic-shadow);backdrop-filter:blur(18px);
+}
+[data-reic-accent="ocean"]{
+ color:var(--reic-white);
+ background:linear-gradient(115deg,var(--reic-blue-950),var(--reic-blue-800) 56%,var(--reic-blue-500));
+}
+[data-reic-motion="lift"]{transition:transform .22s ease,box-shadow .22s ease}
+[data-reic-motion="lift"]:hover{transform:translateY(-2px);box-shadow:var(--reic-shadow)}
+@media(prefers-reduced-motion:reduce){
+ html[data-reic-active="true"] *,html[data-reic-active="true"] *::before,html[data-reic-active="true"] *::after{
+  scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important
+ }
+}
