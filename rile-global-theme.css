@@ -184,3 +184,7 @@ html[data-reic-r-mode="on"] .reic-r-letter>.reic-r-source{
  color:transparent!important;
  -webkit-text-fill-color:transparent!important;
 }
+
+/* Final fit: keep the overlay inside the original character advance to avoid touching neighboring letters. */
+.reic-r-letter>.reic-r-glyph{width:.72em!important;height:1.04em!important;left:0!important}
+.reic-r-letter>.reic-r-glyph[data-case="lower"]{width:.48em!important;height:.76em!important;left:0!important}
