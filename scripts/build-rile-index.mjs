@@ -43,7 +43,7 @@ async function pool(items, limit, fn) {
 }
 const allRepos = await pages(`/users/${owner}/repos?type=all&sort=full_name`);
 const publicRepos = allRepos.filter(r => !r.private && !r.archived);
-const privateExcluded = allRepos.filter(r => r.private).length;
+const privateExcluded = Math.max(allRepos.filter(r => r.private).length, Number(process.env.KNOWN_PRIVATE_REPOSITORIES || 0));
 const repoResults = await pool(publicRepos, 5, async repo => {
   const [wf, rr] = await Promise.all([
     get(`/repos/${owner}/${repo.name}/actions/workflows?per_page=100`),
