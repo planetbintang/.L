@@ -130,6 +130,7 @@ const server = http.createServer(async (req, res) => {
       const name = path.basename(String(body.name || '')).slice(0, 240);
       const size = Number(body.sizeBytes);
       if (!name || !Number.isSafeInteger(size) || size < 0 || size > MAX_UPLOAD) return json(res, 400, { error: 'Metadata file tidak valid' });
+      if (body.folderId) { const folder = await pool.query('SELECT 1 FROM galeri.folders WHERE id=$1 AND user_id=$2', [body.folderId, user.id]); if (!folder.rowCount) return json(res, 400, { error: 'Folder tidak ditemukan pada akun ini' }); }
       const quota = await pool.query('SELECT quota_bytes,used_bytes FROM galeri.storage_quotas WHERE user_id=$1', [user.id]);
       if (!quota.rowCount || BigInt(quota.rows[0].used_bytes) + BigInt(size) > BigInt(quota.rows[0].quota_bytes)) return json(res, 413, { error: 'Kuota penyimpanan tidak mencukupi' });
       const id = randomUUID(); const key = `${user.id}/${id}`;
@@ -146,9 +147,12 @@ const server = http.createServer(async (req, res) => {
       const target = path.resolve(STORAGE, file.storage_key);
       if (!target.startsWith(STORAGE + path.sep)) return json(res, 400, { error: 'Storage key tidak valid' });
       await mkdir(path.dirname(target), { recursive: true });
+      const destination = createWriteStream(target, { flags: 'wx' });
+      let destinationCreated = false;
+      destination.once('open', () => { destinationCreated = true; });
       try {
-        await pipeline(req, createWriteStream(target, { flags: 'wx' }));
-      } catch (error) { await unlink(target).catch(() => {}); throw error; }
+        await pipeline(req, destination);
+      } catch (error) { if (destinationCreated) await unlink(target).catch(() => {}); throw error; }
       const info = await stat(target);
       if (info.size !== expected) { await unlink(target); return json(res, 400, { error: 'Ukuran file hasil upload tidak cocok' }); }
       await pool.query('UPDATE galeri.storage_quotas SET used_bytes=used_bytes+$2,updated_at=now() WHERE user_id=$1', [user.id, expected]);
