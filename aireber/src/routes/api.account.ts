@@ -23,7 +23,7 @@ const cors = (request: Request, response: Response) => {
   }
   return response;
 };
-const json = (request: Request, body: unknown, init?: ResponseInit) => cors(request, Response.json(body, { ...init, headers: { "cache-control": "no-store", ...(init?.headers || {}) } }));
+const json = (request: Request, body: unknown, init?: ResponseInit) => { const headers = new Headers(init?.headers); headers.set("cache-control", "no-store"); return cors(request, Response.json(body, { ...init, headers })); };
 const fail = (request: Request, message: string, status: number) => json(request, { ok: false, error: message }, { status });
 async function hashPassword(password: string, salt: string) {
   return (await deriveKey(password, salt, 210000, 64, "sha512") as Buffer).toString("hex");
@@ -61,7 +61,8 @@ const publicUser = (user: typeof aireberUsers.$inferSelect) => ({
 function safePath(input: unknown) {
   const parts = String(input ?? "").replaceAll("\\", "/").split("/").filter(Boolean);
   if (!parts.length || parts.some((p) => p === "." || p === ".." || p.length > 120 || /[\u0000-\u001f\u007f]/.test(p))) return null;
-  return parts.join("/");
+  const path = parts.join("/");
+  return path.startsWith("aireber/") ? path : null;
 }
 
 export const Route = createFileRoute("/api/account")({
@@ -101,7 +102,7 @@ export const Route = createFileRoute("/api/account")({
           const email = clean(body.email, 254).toLowerCase();
           const name = clean(body.name, 80);
           const password = String(body.password || "");
-          if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return fail(request, "Alamat email tidak valid.", 400);
+          if (!/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)) return fail(request, "Alamat email tidak valid.", 400);
           if (!name) return fail(request, "Nama pengguna wajib diisi.", 400);
           if (password.length < 10 || password.length > 128) return fail(request, "Kata sandi harus 10–128 karakter.", 400);
           const [existing] = await db.select({ id: aireberUsers.id }).from(aireberUsers).where(eq(aireberUsers.email, email)).limit(1);
