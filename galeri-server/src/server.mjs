@@ -2,7 +2,7 @@ import http from 'node:http';
 import { randomBytes, createHash, scrypt as scryptCallback, timingSafeEqual, randomUUID } from 'node:crypto';
 import { promisify } from 'node:util';
 import { createReadStream, createWriteStream } from 'node:fs';
-import { mkdir, stat, unlink } from 'node:fs/promises';
+import { mkdir, stat, unlink, open } from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import pg from 'pg';
@@ -26,7 +26,7 @@ async function audit(userId,event,details={}){await pool.query('INSERT INTO gale
 function isAdmin(u){return u?.role==='admin'} function isEditor(u){return u?.role==='editor'} function canManage(u){return isAdmin(u)||isEditor(u)}
 function originAllowed(req){const origin=req.headers.origin;return !origin||origins.has(origin)}
 function safeMime(value){return /^(image\/(jpeg|png|webp|gif)|video\/(mp4|webm|quicktime))$/.test(String(value||''))}
-function storagePath(key){const target=path.resolve(STORAGE,key);if(!target.startsWith(STORAGE+path.sep))throw Object.assign(new Error('Storage key tidak valid'),{status:400});return target}
+function storagePath(key){const target=path.resolve(STORAGE,key);if(!target.startsWith(STORAGE+path.sep))throw Object.assign(new Error('Storage key tidak valid'),{status:400});return target}\nasync function validMediaSignature(target,mime){const h=await open(target,'r');try{const b=Buffer.alloc(16);await h.read(b,0,b.length,0);if(mime==='image/jpeg')return b[0]===0xff&&b[1]===0xd8&&b[2]===0xff;if(mime==='image/png')return b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));if(mime==='image/gif')return b.toString('ascii',0,3)==='GIF';if(mime==='image/webp')return b.toString('ascii',0,4)==='RIFF'&&b.toString('ascii',8,12)==='WEBP';if(mime==='video/webm')return b.subarray(0,4).equals(Buffer.from([0x1a,0x45,0xdf,0xa3]));if(mime==='video/mp4'||mime==='video/quicktime')return b.toString('ascii',4,8)==='ftyp';return false}finally{await h.close()}}
 async function streamUpload(req,res,{id,userId,kind}) {
  const table=kind==='media'?'galeri.media':'galeri.files';
  const q=kind==='media'
@@ -39,8 +39,10 @@ async function streamUpload(req,res,{id,userId,kind}) {
  let opened=false;const out=createWriteStream(target,{flags:'wx'});out.once('open',()=>opened=true);
  try{await pipeline(req,out)}catch(error){if(opened)await unlink(target).catch(()=>{});throw error}
  const info=await stat(target);if(info.size!==expected){await unlink(target);return json(res,400,{error:'Ukuran file hasil upload tidak cocok'})}
- if(kind==='media')await pool.query('UPDATE galeri.media SET uploaded_at=now() WHERE id=$1',[id]);
- else await pool.query('UPDATE galeri.storage_quotas SET used_bytes=used_bytes+$2,updated_at=now() WHERE user_id=$1',[userId,expected]);
+ if(kind==='media'){
+  if(!await validMediaSignature(target,file.mime_type)){await unlink(target);return json(res,415,{error:'Isi berkas tidak sesuai MIME image/video yang diizinkan'})}
+  const client=await pool.connect();try{await client.query('BEGIN');const quota=await client.query('SELECT quota_bytes,used_bytes FROM galeri.storage_quotas WHERE user_id=$1 FOR UPDATE',[userId]);if(!quota.rowCount||BigInt(quota.rows[0].used_bytes)+BigInt(expected)>BigInt(quota.rows[0].quota_bytes)){await client.query('ROLLBACK');await unlink(target);return json(res,413,{error:'Kuota penyimpanan tidak mencukupi'})}await client.query('UPDATE galeri.storage_quotas SET used_bytes=used_bytes+$2,updated_at=now() WHERE user_id=$1',[userId,expected]);await client.query('UPDATE galeri.media SET uploaded_at=now() WHERE id=$1',[id]);await client.query('COMMIT')}catch(e){await client.query('ROLLBACK');await unlink(target).catch(()=>{});throw e}finally{client.release()}
+ }else await pool.query('UPDATE galeri.storage_quotas SET used_bytes=used_bytes+$2,updated_at=now() WHERE user_id=$1',[userId,expected]);
  await audit(userId,kind==='media'?'media.uploaded':'file.uploaded',{fileId:id,bytes:expected});
  return json(res,201,{ok:true,fileId:id,bytes:expected});
 }
@@ -101,7 +103,7 @@ const server=http.createServer(async(req,res)=>{
    if(!canManage(user))return json(res,403,{error:'Akses Admin/Editor diperlukan'});
    if(req.method==='GET'&&p==='/api/v1/admin/media'){
     const q=await pool.query(`SELECT m.id,m.title,m.description,m.media_type AS type,m.placement,m.status,m.mime_type,m.size_bytes,m.created_at,m.updated_at,m.published_at,m.uploaded_at,u.email AS owner_email,pr.display_name AS owner_name FROM galeri.media m JOIN galeri.users u ON u.id=m.owner_id LEFT JOIN galeri.profiles pr ON pr.user_id=u.id ORDER BY m.updated_at DESC LIMIT 500`);
-    const quota=await pool.query('SELECT COALESCE(SUM(used_bytes),0)::text AS used FROM galeri.storage_quotas');return json(res,200,{items:q.rows,storage_used_label:(Number(quota.rows[0].used)/1073741824).toFixed(2)+' GB'});
+    const quota=await pool.query("SELECT (COALESCE((SELECT SUM(used_bytes) FROM galeri.storage_quotas),0)+COALESCE((SELECT SUM(size_bytes) FROM galeri.media WHERE uploaded_at IS NOT NULL),0))::text AS used");return json(res,200,{items:q.rows,storage_used_label:(Number(quota.rows[0].used)/1073741824).toFixed(2)+' GB'});
    }
    if(req.method==='POST'&&p==='/api/v1/admin/media'){
     const b=await readJson(req),title=String(b.title||'').trim().slice(0,120),description=String(b.description||'').trim().slice(0,1000),type=String(b.type||'image'),placement=String(b.placement||'gallery'),status=String(b.status||'draft'),fileName=path.basename(String(b.fileName||'')).slice(0,240),size=Number(b.sizeBytes),mime=String(b.mimeType||'');
