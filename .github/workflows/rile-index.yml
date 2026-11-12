@@ -45,5 +45,15 @@ jobs:
             echo "RILE index unchanged"
           else
             git commit -m "chore(rile): refresh live workflow index"
-            git push origin HEAD:io
+            for attempt in 1 2 3; do
+              git fetch origin io
+              git rebase origin/io
+              if git push origin HEAD:io; then
+                exit 0
+              fi
+              echo "Push attempt $attempt raced with another PlanetBintang commit; retrying."
+              sleep 3
+            done
+            echo "Could not publish RILE data after three attempts."
+            exit 1
           fi
