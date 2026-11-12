@@ -19,6 +19,15 @@ Central Cloud menambahkan:
 - `cloud/database.schema.json` — skema logis proyek, domain, DNS, instance layanan, dan audit.
 - `cloud/README.md` — dokumentasi sistem.
 
+## Account System dan Dashboard Profil
+
+Portal utama VendorDomain menambahkan tombol **MASUK / REGISTER** pada header workspace. Setelah backend HTTPS dikonfigurasi, pengguna dapat membuat akun, login, membuka dashboard profil, mengubah pengaturan akun/kata sandi, mendaftarkan domain ke workspace, mencatat metadata dokumen ke File Manager, dan mengelola peran anggota workspace. Data akun, domain, file metadata, dan audit dibatasi per tenant.
+
+Sumber implementasi:
+- `account.js` dan `account.css` — antarmuka register, login, dashboard, profil, domain, File Manager, dan manajemen.
+- `backend/server.mjs` — autentikasi scrypt, token sesi, pembatasan percobaan login, dan endpoint tenant.
+- `backend/migrations/002_account_identity.sql` — kolom identitas, sesi, dan registri metadata File Manager.
+
 ## Batas integrasi produksi
 
 Portal dan tools lokal berjalan sebagai frontend statis di GitHub Pages. Pemeriksaan domain di portal memvalidasi sintaks saja, bukan ketersediaan registrar. Estimator adalah simulasi, bukan harga penawaran vendor. Keranjang dan draft website disimpan di browser hingga diekspor; tidak memproses pembayaran atau memublikasikan situs otomatis.
