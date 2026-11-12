@@ -126,4 +126,5 @@ $('themeToggle').addEventListener('click',()=>{document.body.classList.toggle('l
 $('menuToggle').addEventListener('click',()=>{const open=$('menuToggle').getAttribute('aria-expanded')!=='true';$('menuToggle').setAttribute('aria-expanded',String(open));$('menuToggle').setAttribute('aria-label',open?'Sembunyikan navigasi':'Tampilkan navigasi');document.querySelector('.layout').classList.toggle('sidebar-open',open);});
 document.querySelectorAll('.main-nav a,.side-links a').forEach(a=>a.addEventListener('click',()=>{document.querySelector('.layout').classList.remove('sidebar-open');$('menuToggle').setAttribute('aria-expanded','false');}));
 </script>
+<script src="./reic-account.js" defer></script>
 </body></html>
