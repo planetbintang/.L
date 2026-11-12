@@ -4,7 +4,7 @@ import { Script } from 'node:vm';
 const files = ['../../galeri/index.html', '../../galeri/admin.html'];
 for (const relative of files) {
   const html = await readFile(new URL(relative, import.meta.url), 'utf8');
-  const blocks = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)].map(match => match[1]).filter(code => code.trim());
+  const blocks = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(match => match[1]).filter(code => code.trim());
   if (!blocks.length) throw new Error('No inline scripts found in ' + relative);
   blocks.forEach((code, index) => new Script(code, { filename: relative + ' inline script ' + (index + 1) }));
   console.log(relative + ': JavaScript syntax OK (' + blocks.length + ' blocks)');
