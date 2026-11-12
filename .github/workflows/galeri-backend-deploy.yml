@@ -21,6 +21,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate backend and frontend before production
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install backend dependencies and run checks
+        working-directory: galeri-server
+        run: |
+          npm install --ignore-scripts
+          npm run check
+          npm test
+
       - name: Validate deployment secrets
         env:
           SSH_HOST: ${{ secrets.GALERI_SSH_HOST }}
