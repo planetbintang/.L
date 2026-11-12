@@ -385,7 +385,7 @@ async function loadPublishedMedia(){
 }
 const saveApiButton=$('#saveApiBase');
 if(saveApiButton)saveApiButton.addEventListener('click',()=>{setTimeout(()=>loadPublishedMedia(),0)});
-if(galeriApiBase){loadPublishedMedia();apiRequest('/api/v1/health').then(()=>loadGaleriProfile()).catch(()=>setAccountMessage('API publik dimuat bila tersedia; sesi akun belum login.'))}
+if(galeriApiBase){loadPublishedMedia();window.addEventListener('focus',loadPublishedMedia);setInterval(loadPublishedMedia,60000);apiRequest('/api/v1/health').then(()=>loadGaleriProfile()).catch(()=>setAccountMessage('API publik dimuat bila tersedia; sesi akun belum login.'))}
 
 // Tiga set glyph kapital dan tiga set glyph kecil; tiap gaya memakai pasangan berbeda.
 // PB-03: sistem glyph orisinal berbasis koordinat titik dan jalur garis SVG.
