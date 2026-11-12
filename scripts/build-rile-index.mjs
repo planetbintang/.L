@@ -102,6 +102,23 @@ for (const [key, span] of Object.entries(windows)) {
   }
   series[key] = { input, output, bucketMs: step };
 }
+// Calendar-month series: 12 rolling month buckets, aligned to local UTC month boundaries.
+{
+  const buckets = 12;
+  const input = Array(buckets).fill(0), output = Array(buckets).fill(0);
+  const currentMonth = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1);
+  for (const run of runs) {
+    const date = new Date(run.createdAt);
+    const monthIndex = (date.getUTCFullYear() - now.getUTCFullYear()) * 12
+      + date.getUTCMonth() - now.getUTCMonth();
+    const i = buckets - 1 + monthIndex;
+    if (i >= 0 && i < buckets) {
+      input[i]++;
+      if (run.status === "completed") output[i]++;
+    }
+  }
+  series.month = { input, output, bucketMs: null, buckets: 12, alignment: "calendar-month", currentMonthStart: new Date(currentMonth).toISOString() };
+}
 const totalWorkflows = workflows.length;
 const success = runs.filter(r => r.conclusion === "success").length;
 const failure = runs.filter(r => r.conclusion === "failure").length;
