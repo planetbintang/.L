@@ -18,6 +18,7 @@ const MAX_BODY=1024*1024;
 const RATE_WINDOW_MS=60_000;
 const RATE_LIMIT_MAX=Math.max(10,Number(process.env.RATE_LIMIT_MAX||120));
 const rateBuckets=new Map();
+const authRateBuckets=new Map();
 let db={records:[],audit:[],sales:[],users:[],tenants:[],memberships:[],sessions:[],accountDomains:[],accountFiles:[],accountAudit:[]};
 if(ADMIN_TOKEN && ADMIN_TOKEN.length<32)throw new Error('ADMIN_TOKEN harus minimal 32 karakter.');
 if(!ADMIN_TOKEN)console.warn('ADMIN_TOKEN belum diatur; endpoint /api/* akan menolak seluruh permintaan.');
@@ -39,6 +40,7 @@ function cors(req,res){
  res.setHeader('vary','Origin');res.setHeader('access-control-allow-methods','GET,POST,PUT,DELETE,OPTIONS');res.setHeader('access-control-allow-headers','Authorization,Content-Type,X-Request-ID');res.setHeader('access-control-max-age','600');
  return true;
 }
+function authRateLimited(req){const key=req.socket.remoteAddress||'unknown',now=Date.now();let b=authRateBuckets.get(key);if(!b||now-b.start>=15*60_000){b={start:now,count:0};authRateBuckets.set(key,b);}b.count++;if(authRateBuckets.size>5000)for(const [k,v] of authRateBuckets)if(now-v.start>=15*60_000)authRateBuckets.delete(k);return b.count>15;}
 function rateLimited(req){
  const key=req.socket.remoteAddress||'unknown',now=Date.now();
  let bucket=rateBuckets.get(key);
@@ -69,6 +71,7 @@ const server=http.createServer(async(req,res)=>{
 if(req.method==='GET'&&p==='/health')return send(res,200,{ok:true,service:'VendorDomain API',version:'1.0.0',storage:'persistent-file',cloudflareConfigured:Boolean(CF_TOKEN&&CF_ZONE),time:iso()});
 if(req.method==='POST'&&p==='/api/domain/validate'){const b=await body(req);return send(res,200,validateDomain(b.domain));}
 
+if((req.method==='POST'&&(p==='/api/auth/register'||p==='/api/auth/login'))&&authRateLimited(req))return send(res,429,{error:'Terlalu banyak percobaan autentikasi. Coba kembali setelah 15 menit.',requestId});
 if(req.method==='POST'&&p==='/api/auth/register'){
  const b=await body(req),email=String(b.email||'').trim().toLowerCase(),displayName=String(b.displayName||'').trim(),password=String(b.password||'');
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254)return send(res,400,{error:'Alamat email tidak valid.'});
