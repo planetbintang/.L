@@ -3,6 +3,9 @@
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const SESSION_KEY = 'pb-hosting-account-session-v1';
+  const CREDENTIAL_KEY = 'pb-hosting-auth-credentials-v1';
+  const readCredentials = () => { try { return JSON.parse(localStorage.getItem(CREDENTIAL_KEY) || '{}'); } catch { return {}; } };
+  const writeCredentials = (rows) => localStorage.setItem(CREDENTIAL_KEY, JSON.stringify(rows));
   const ROOT = 'hosting/accounts';
   const app = $('#pb-hosting-account-center');
   if (!app) return;
@@ -67,7 +70,10 @@
     const path = filePath(email);
     try { await readJson(path); throw new Error('Email sudah terdaftar pada workspace browser ini.'); } catch (e) { if (e.message === 'Email sudah terdaftar pada workspace browser ini.') throw e; }
     const salt = randomSalt();
-    const user = { schema: 'PB.HOSTING.USER/1', id: 'usr_' + crypto.randomUUID(), name, email, role: 'customer', status: 'active', createdAt: new Date().toISOString(), password: { algorithm: 'PBKDF2-SHA256', iterations: 210000, salt: toHex(salt), hash: await derive(password, salt) } };
+    const credentials = readCredentials();
+    credentials[email] = { algorithm: 'PBKDF2-SHA256', iterations: 210000, salt: toHex(salt), hash: await derive(password, salt), createdAt: new Date().toISOString() };
+    writeCredentials(credentials);
+    const user = { schema: 'PB.HOSTING.USER/1', id: 'usr_' + crypto.randomUUID(), name, email, role: 'customer', status: 'active', createdAt: new Date().toISOString() };
     await saveJson(path, user);
     await saveJson(profilePath(email), { schema: 'PB.HOSTING.PROFILE/1', userId: user.id, displayName: name, company: '', phone: '', timezone: 'Asia/Jakarta', updatedAt: new Date().toISOString() });
     sessionStorage.setItem(SESSION_KEY, JSON.stringify({ email, createdAt: new Date().toISOString() }));
@@ -81,8 +87,10 @@
     const password = String(data.get('password') || '');
     const user = await readJson(filePath(email)).catch(() => null);
     if (!user || user.status !== 'active') throw new Error('Akun tidak ditemukan atau tidak aktif pada workspace ini.');
-    const actual = await derive(password, fromHex(user.password.salt));
-    if (actual !== user.password.hash) throw new Error('Email atau kata sandi tidak cocok.');
+    const credential = readCredentials()[email];
+    if (!credential) throw new Error('Kredensial lokal tidak ditemukan. Buat ulang akun pada perangkat ini atau sambungkan backend produksi.');
+    const actual = await derive(password, fromHex(credential.salt));
+    if (actual !== credential.hash) throw new Error('Email atau kata sandi tidak cocok.');
     sessionStorage.setItem(SESSION_KEY, JSON.stringify({ email, createdAt: new Date().toISOString() }));
     state.user = user; state.view = 'overview'; await loadServices();
     await log('login', 'Login workspace hosting');
