@@ -1,0 +1,20 @@
+{
+  "reic": "HOSTING.DATA.TABLES",
+  "version": "1.0.0",
+  "storage": "PostgreSQL",
+  "file_manager_root": "/hosting/tenants/{tenant_id}/",
+  "tables": [
+    {"name":"hosting_tenants","primary_key":"id","columns":["id uuid","name text","status text","created_at timestamptz"]},
+    {"name":"hosting_users","primary_key":"id","columns":["id uuid","tenant_id uuid","email citext","display_name text","password_hash text","email_verified_at timestamptz","status text","created_at timestamptz"],"unique":["tenant_id,email"]},
+    {"name":"hosting_memberships","primary_key":"id","columns":["id uuid","tenant_id uuid","user_id uuid","role_id uuid","status text"]},
+    {"name":"hosting_roles","primary_key":"id","columns":["id uuid","tenant_id uuid","name text","permissions jsonb"]},
+    {"name":"hosting_sessions","primary_key":"id","columns":["id uuid","tenant_id uuid","user_id uuid","token_hash text","expires_at timestamptz","revoked_at timestamptz"]},
+    {"name":"hosting_services","primary_key":"id","columns":["id uuid","tenant_id uuid","service_type text","name text","status text","resource_quota jsonb","created_at timestamptz"]},
+    {"name":"hosting_domains","primary_key":"id","columns":["id uuid","tenant_id uuid","domain_name citext","status text","metadata jsonb"]},
+    {"name":"hosting_file_objects","primary_key":"id","columns":["id uuid","tenant_id uuid","owner_user_id uuid","parent_id uuid","name text","object_key text","mime_type text","size_bytes bigint","checksum_sha256 text","metadata jsonb","created_at timestamptz"]},
+    {"name":"hosting_file_permissions","primary_key":"id","columns":["id uuid","tenant_id uuid","file_id uuid","principal_type text","principal_id uuid","permission text"]},
+    {"name":"hosting_activity","primary_key":"id","columns":["id uuid","tenant_id uuid","actor_user_id uuid","action text","resource text","metadata jsonb","created_at timestamptz"]}
+  ],
+  "file_manager_policy": ["single_tenant_root_per_tenant","store_object_metadata_and_audit_in_database","binary_objects_in_private_object_storage","all modules reference canonical record_id and object_key","never store password, session token, or API secret in File Manager","tenant_id derived from authenticated session, never trusted from browser input"],
+  "authorization": {"default":"DENY","tenant_isolation":true,"audit":"append_only","server_secrets_only":true}
+}
