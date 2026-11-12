@@ -1,0 +1,953 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": null,
+  "root": "reictable",
+  "directories": [
+    {
+      "path": "reictable",
+      "items": 6
+    },
+    {
+      "path": "reictable/modules/core",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/identity",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/filesystem",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/reconstruction",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/automation",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/security",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/integration",
+      "items": 16
+    },
+    {
+      "path": "reictable/modules/observability",
+      "items": 16
+    }
+  ],
+  "files": [
+    {
+      "path": "reictable/README.md"
+    },
+    {
+      "path": "reictable/manifest.json"
+    },
+    {
+      "path": "reictable/registry.json"
+    },
+    {
+      "path": "reictable/file-manager-index.json"
+    },
+    {
+      "path": "reictable/modules/core/8800001-canonicalize-path.reic",
+      "id": "REIC-8800001",
+      "title": "Canonicalize Path",
+      "domain": "core",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/core/8800002-stable-id.reic",
+      "id": "REIC-8800002",
+      "title": "Stable Id",
+      "domain": "core",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/core/8800003-normalize-label.reic",
+      "id": "REIC-8800003",
+      "title": "Normalize Label",
+      "domain": "core",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/core/8800004-version-compare.reic",
+      "id": "REIC-8800004",
+      "title": "Version Compare",
+      "domain": "core",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/core/8800005-parse-timestamp.reic",
+      "id": "REIC-8800005",
+      "title": "Parse Timestamp",
+      "domain": "core",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/core/8800006-format-timestamp.reic",
+      "id": "REIC-8800006",
+      "title": "Format Timestamp",
+      "domain": "core",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/core/8800007-merge-metadata.reic",
+      "id": "REIC-8800007",
+      "title": "Merge Metadata",
+      "domain": "core",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/core/8800008-pick-fields.reic",
+      "id": "REIC-8800008",
+      "title": "Pick Fields",
+      "domain": "core",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/core/8800009-omit-empty.reic",
+      "id": "REIC-8800009",
+      "title": "Omit Empty",
+      "domain": "core",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/core/8800010-deep-freeze.reic",
+      "id": "REIC-8800010",
+      "title": "Deep Freeze",
+      "domain": "core",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/core/8800011-stable-sort.reic",
+      "id": "REIC-8800011",
+      "title": "Stable Sort",
+      "domain": "core",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/core/8800012-pagination.reic",
+      "id": "REIC-8800012",
+      "title": "Pagination",
+      "domain": "core",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/core/8800013-checksum-envelope.reic",
+      "id": "REIC-8800013",
+      "title": "Checksum Envelope",
+      "domain": "core",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/core/8800014-validate-identity.reic",
+      "id": "REIC-8800014",
+      "title": "Validate Identity",
+      "domain": "core",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/core/8800015-resolve-reference.reic",
+      "id": "REIC-8800015",
+      "title": "Resolve Reference",
+      "domain": "core",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/core/8800016-build-index.reic",
+      "id": "REIC-8800016",
+      "title": "Build Index",
+      "domain": "core",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/identity/8800017-account-record.reic",
+      "id": "REIC-8800017",
+      "title": "Account Record",
+      "domain": "identity",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/identity/8800018-serial-number.reic",
+      "id": "REIC-8800018",
+      "title": "Serial Number",
+      "domain": "identity",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/identity/8800019-role-policy.reic",
+      "id": "REIC-8800019",
+      "title": "Role Policy",
+      "domain": "identity",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/identity/8800020-session-claims.reic",
+      "id": "REIC-8800020",
+      "title": "Session Claims",
+      "domain": "identity",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/identity/8800021-login-attempt.reic",
+      "id": "REIC-8800021",
+      "title": "Login Attempt",
+      "domain": "identity",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/identity/8800022-registration-request.reic",
+      "id": "REIC-8800022",
+      "title": "Registration Request",
+      "domain": "identity",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/identity/8800023-profile-merge.reic",
+      "id": "REIC-8800023",
+      "title": "Profile Merge",
+      "domain": "identity",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/identity/8800024-permission-check.reic",
+      "id": "REIC-8800024",
+      "title": "Permission Check",
+      "domain": "identity",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/identity/8800025-password-policy.reic",
+      "id": "REIC-8800025",
+      "title": "Password Policy",
+      "domain": "identity",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/identity/8800026-token-expiry.reic",
+      "id": "REIC-8800026",
+      "title": "Token Expiry",
+      "domain": "identity",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/identity/8800027-device-binding.reic",
+      "id": "REIC-8800027",
+      "title": "Device Binding",
+      "domain": "identity",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/identity/8800028-audit-actor.reic",
+      "id": "REIC-8800028",
+      "title": "Audit Actor",
+      "domain": "identity",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/identity/8800029-access-scope.reic",
+      "id": "REIC-8800029",
+      "title": "Access Scope",
+      "domain": "identity",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/identity/8800030-session-revoke.reic",
+      "id": "REIC-8800030",
+      "title": "Session Revoke",
+      "domain": "identity",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/identity/8800031-recovery-request.reic",
+      "id": "REIC-8800031",
+      "title": "Recovery Request",
+      "domain": "identity",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/identity/8800032-principal-link.reic",
+      "id": "REIC-8800032",
+      "title": "Principal Link",
+      "domain": "identity",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800033-file-entry.reic",
+      "id": "REIC-8800033",
+      "title": "File Entry",
+      "domain": "filesystem",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800034-folder-node.reic",
+      "id": "REIC-8800034",
+      "title": "Folder Node",
+      "domain": "filesystem",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800035-path-normalize.reic",
+      "id": "REIC-8800035",
+      "title": "Path Normalize",
+      "domain": "filesystem",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800036-tree-flatten.reic",
+      "id": "REIC-8800036",
+      "title": "Tree Flatten",
+      "domain": "filesystem",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800037-tree-rebuild.reic",
+      "id": "REIC-8800037",
+      "title": "Tree Rebuild",
+      "domain": "filesystem",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800038-folder-aggregate.reic",
+      "id": "REIC-8800038",
+      "title": "Folder Aggregate",
+      "domain": "filesystem",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800039-extension-classify.reic",
+      "id": "REIC-8800039",
+      "title": "Extension Classify",
+      "domain": "filesystem",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800040-file-hash.reic",
+      "id": "REIC-8800040",
+      "title": "File Hash",
+      "domain": "filesystem",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800041-manifest-merge.reic",
+      "id": "REIC-8800041",
+      "title": "Manifest Merge",
+      "domain": "filesystem",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800042-path-guard.reic",
+      "id": "REIC-8800042",
+      "title": "Path Guard",
+      "domain": "filesystem",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800043-file-search.reic",
+      "id": "REIC-8800043",
+      "title": "File Search",
+      "domain": "filesystem",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800044-pagination-cursor.reic",
+      "id": "REIC-8800044",
+      "title": "Pagination Cursor",
+      "domain": "filesystem",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800045-snapshot-compare.reic",
+      "id": "REIC-8800045",
+      "title": "Snapshot Compare",
+      "domain": "filesystem",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800046-virtual-mount.reic",
+      "id": "REIC-8800046",
+      "title": "Virtual Mount",
+      "domain": "filesystem",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800047-metadata-index.reic",
+      "id": "REIC-8800047",
+      "title": "Metadata Index",
+      "domain": "filesystem",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/filesystem/8800048-export-bundle.reic",
+      "id": "REIC-8800048",
+      "title": "Export Bundle",
+      "domain": "filesystem",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800049-repo-inventory.reic",
+      "id": "REIC-8800049",
+      "title": "Repo Inventory",
+      "domain": "reconstruction",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800050-route-inventory.reic",
+      "id": "REIC-8800050",
+      "title": "Route Inventory",
+      "domain": "reconstruction",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800051-module-map.reic",
+      "id": "REIC-8800051",
+      "title": "Module Map",
+      "domain": "reconstruction",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800052-dependency-graph.reic",
+      "id": "REIC-8800052",
+      "title": "Dependency Graph",
+      "domain": "reconstruction",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800053-missing-source.reic",
+      "id": "REIC-8800053",
+      "title": "Missing Source",
+      "domain": "reconstruction",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800054-stale-source.reic",
+      "id": "REIC-8800054",
+      "title": "Stale Source",
+      "domain": "reconstruction",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800055-source-link.reic",
+      "id": "REIC-8800055",
+      "title": "Source Link",
+      "domain": "reconstruction",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800056-snapshot-diff.reic",
+      "id": "REIC-8800056",
+      "title": "Snapshot Diff",
+      "domain": "reconstruction",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800057-manifest-repair.reic",
+      "id": "REIC-8800057",
+      "title": "Manifest Repair",
+      "domain": "reconstruction",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800058-index-rebuild.reic",
+      "id": "REIC-8800058",
+      "title": "Index Rebuild",
+      "domain": "reconstruction",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800059-orphan-detect.reic",
+      "id": "REIC-8800059",
+      "title": "Orphan Detect",
+      "domain": "reconstruction",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800060-integrity-score.reic",
+      "id": "REIC-8800060",
+      "title": "Integrity Score",
+      "domain": "reconstruction",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800061-recovery-plan.reic",
+      "id": "REIC-8800061",
+      "title": "Recovery Plan",
+      "domain": "reconstruction",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800062-migration-map.reic",
+      "id": "REIC-8800062",
+      "title": "Migration Map",
+      "domain": "reconstruction",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800063-state-classify.reic",
+      "id": "REIC-8800063",
+      "title": "State Classify",
+      "domain": "reconstruction",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/reconstruction/8800064-release-manifest.reic",
+      "id": "REIC-8800064",
+      "title": "Release Manifest",
+      "domain": "reconstruction",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/automation/8800065-workflow-event.reic",
+      "id": "REIC-8800065",
+      "title": "Workflow Event",
+      "domain": "automation",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/automation/8800066-job-state.reic",
+      "id": "REIC-8800066",
+      "title": "Job State",
+      "domain": "automation",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/automation/8800067-queue-order.reic",
+      "id": "REIC-8800067",
+      "title": "Queue Order",
+      "domain": "automation",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/automation/8800068-retry-policy.reic",
+      "id": "REIC-8800068",
+      "title": "Retry Policy",
+      "domain": "automation",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/automation/8800069-idempotency-key.reic",
+      "id": "REIC-8800069",
+      "title": "Idempotency Key",
+      "domain": "automation",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/automation/8800070-change-record.reic",
+      "id": "REIC-8800070",
+      "title": "Change Record",
+      "domain": "automation",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/automation/8800071-request-validate.reic",
+      "id": "REIC-8800071",
+      "title": "Request Validate",
+      "domain": "automation",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/automation/8800072-batch-plan.reic",
+      "id": "REIC-8800072",
+      "title": "Batch Plan",
+      "domain": "automation",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/automation/8800073-commit-summary.reic",
+      "id": "REIC-8800073",
+      "title": "Commit Summary",
+      "domain": "automation",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/automation/8800074-deploy-gate.reic",
+      "id": "REIC-8800074",
+      "title": "Deploy Gate",
+      "domain": "automation",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/automation/8800075-rollback-plan.reic",
+      "id": "REIC-8800075",
+      "title": "Rollback Plan",
+      "domain": "automation",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/automation/8800076-schedule-window.reic",
+      "id": "REIC-8800076",
+      "title": "Schedule Window",
+      "domain": "automation",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/automation/8800077-artifact-index.reic",
+      "id": "REIC-8800077",
+      "title": "Artifact Index",
+      "domain": "automation",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/automation/8800078-status-transition.reic",
+      "id": "REIC-8800078",
+      "title": "Status Transition",
+      "domain": "automation",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/automation/8800079-task-dependency.reic",
+      "id": "REIC-8800079",
+      "title": "Task Dependency",
+      "domain": "automation",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/automation/8800080-run-report.reic",
+      "id": "REIC-8800080",
+      "title": "Run Report",
+      "domain": "automation",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/security/8800081-secret-scan.reic",
+      "id": "REIC-8800081",
+      "title": "Secret Scan",
+      "domain": "security",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/security/8800082-path-traversal.reic",
+      "id": "REIC-8800082",
+      "title": "Path Traversal",
+      "domain": "security",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/security/8800083-content-limit.reic",
+      "id": "REIC-8800083",
+      "title": "Content Limit",
+      "domain": "security",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/security/8800084-permission-matrix.reic",
+      "id": "REIC-8800084",
+      "title": "Permission Matrix",
+      "domain": "security",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/security/8800085-rate-limit.reic",
+      "id": "REIC-8800085",
+      "title": "Rate Limit",
+      "domain": "security",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/security/8800086-csrf-token-meta.reic",
+      "id": "REIC-8800086",
+      "title": "Csrf Token Meta",
+      "domain": "security",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/security/8800087-origin-policy.reic",
+      "id": "REIC-8800087",
+      "title": "Origin Policy",
+      "domain": "security",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/security/8800088-input-schema.reic",
+      "id": "REIC-8800088",
+      "title": "Input Schema",
+      "domain": "security",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/security/8800089-audit-chain.reic",
+      "id": "REIC-8800089",
+      "title": "Audit Chain",
+      "domain": "security",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/security/8800090-private-path-redact.reic",
+      "id": "REIC-8800090",
+      "title": "Private Path Redact",
+      "domain": "security",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/security/8800091-safe-render.reic",
+      "id": "REIC-8800091",
+      "title": "Safe Render",
+      "domain": "security",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/security/8800092-code-policy.reic",
+      "id": "REIC-8800092",
+      "title": "Code Policy",
+      "domain": "security",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/security/8800093-key-rotation-plan.reic",
+      "id": "REIC-8800093",
+      "title": "Key Rotation Plan",
+      "domain": "security",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/security/8800094-session-policy.reic",
+      "id": "REIC-8800094",
+      "title": "Session Policy",
+      "domain": "security",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/security/8800095-data-classify.reic",
+      "id": "REIC-8800095",
+      "title": "Data Classify",
+      "domain": "security",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/security/8800096-integrity-guard.reic",
+      "id": "REIC-8800096",
+      "title": "Integrity Guard",
+      "domain": "security",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/integration/8800097-connector-manifest.reic",
+      "id": "REIC-8800097",
+      "title": "Connector Manifest",
+      "domain": "integration",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/integration/8800098-api-request.reic",
+      "id": "REIC-8800098",
+      "title": "Api Request",
+      "domain": "integration",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/integration/8800099-response-normalize.reic",
+      "id": "REIC-8800099",
+      "title": "Response Normalize",
+      "domain": "integration",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/integration/8800100-timeout-policy.reic",
+      "id": "REIC-8800100",
+      "title": "Timeout Policy",
+      "domain": "integration",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/integration/8800101-retry-backoff.reic",
+      "id": "REIC-8800101",
+      "title": "Retry Backoff",
+      "domain": "integration",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/integration/8800102-webhook-verify.reic",
+      "id": "REIC-8800102",
+      "title": "Webhook Verify",
+      "domain": "integration",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/integration/8800103-event-map.reic",
+      "id": "REIC-8800103",
+      "title": "Event Map",
+      "domain": "integration",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/integration/8800104-provider-status.reic",
+      "id": "REIC-8800104",
+      "title": "Provider Status",
+      "domain": "integration",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/integration/8800105-sync-cursor.reic",
+      "id": "REIC-8800105",
+      "title": "Sync Cursor",
+      "domain": "integration",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/integration/8800106-import-validate.reic",
+      "id": "REIC-8800106",
+      "title": "Import Validate",
+      "domain": "integration",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/integration/8800107-export-validate.reic",
+      "id": "REIC-8800107",
+      "title": "Export Validate",
+      "domain": "integration",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/integration/8800108-schema-map.reic",
+      "id": "REIC-8800108",
+      "title": "Schema Map",
+      "domain": "integration",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/integration/8800109-conflict-resolve.reic",
+      "id": "REIC-8800109",
+      "title": "Conflict Resolve",
+      "domain": "integration",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/integration/8800110-health-check.reic",
+      "id": "REIC-8800110",
+      "title": "Health Check",
+      "domain": "integration",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/integration/8800111-capability-map.reic",
+      "id": "REIC-8800111",
+      "title": "Capability Map",
+      "domain": "integration",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/integration/8800112-adapter-registry.reic",
+      "id": "REIC-8800112",
+      "title": "Adapter Registry",
+      "domain": "integration",
+      "operation": "snapshot"
+    },
+    {
+      "path": "reictable/modules/observability/8800113-event-metric.reic",
+      "id": "REIC-8800113",
+      "title": "Event Metric",
+      "domain": "observability",
+      "operation": "normalizePath"
+    },
+    {
+      "path": "reictable/modules/observability/8800114-uptime-window.reic",
+      "id": "REIC-8800114",
+      "title": "Uptime Window",
+      "domain": "observability",
+      "operation": "stableId"
+    },
+    {
+      "path": "reictable/modules/observability/8800115-error-classify.reic",
+      "id": "REIC-8800115",
+      "title": "Error Classify",
+      "domain": "observability",
+      "operation": "validateRecord"
+    },
+    {
+      "path": "reictable/modules/observability/8800116-log-normalize.reic",
+      "id": "REIC-8800116",
+      "title": "Log Normalize",
+      "domain": "observability",
+      "operation": "aggregate"
+    },
+    {
+      "path": "reictable/modules/observability/8800117-trace-context.reic",
+      "id": "REIC-8800117",
+      "title": "Trace Context",
+      "domain": "observability",
+      "operation": "compare"
+    },
+    {
+      "path": "reictable/modules/observability/8800118-latency-summary.reic",
+      "id": "REIC-8800118",
+      "title": "Latency Summary",
+      "domain": "observability",
+      "operation": "merge"
+    },
+    {
+      "path": "reictable/modules/observability/8800119-trend-bucket.reic",
+      "id": "REIC-8800119",
+      "title": "Trend Bucket",
+      "domain": "observability",
+      "operation": "classify"
+    },
+    {
+      "path": "reictable/modules/observability/8800120-alert-threshold.reic",
+      "id": "REIC-8800120",
+      "title": "Alert Threshold",
+      "domain": "observability",
+      "operation": "checksum"
+    },
+    {
+      "path": "reictable/modules/observability/8800121-anomaly-score.reic",
+      "id": "REIC-8800121",
+      "title": "Anomaly Score",
+      "domain": "observability",
+      "operation": "redact"
+    },
+    {
+      "path": "reictable/modules/observability/8800122-health-snapshot.reic",
+      "id": "REIC-8800122",
+      "title": "Health Snapshot",
+      "domain": "observability",
+      "operation": "paginate"
+    },
+    {
+      "path": "reictable/modules/observability/8800123-deploy-observe.reic",
+      "id": "REIC-8800123",
+      "title": "Deploy Observe",
+      "domain": "observability",
+      "operation": "resolve"
+    },
+    {
+      "path": "reictable/modules/observability/8800124-file-change-metric.reic",
+      "id": "REIC-8800124",
+      "title": "File Change Metric",
+      "domain": "observability",
+      "operation": "score"
+    },
+    {
+      "path": "reictable/modules/observability/8800125-workflow-metric.reic",
+      "id": "REIC-8800125",
+      "title": "Workflow Metric",
+      "domain": "observability",
+      "operation": "plan"
+    },
+    {
+      "path": "reictable/modules/observability/8800126-registry-health.reic",
+      "id": "REIC-8800126",
+      "title": "Registry Health",
+      "domain": "observability",
+      "operation": "transition"
+    },
+    {
+      "path": "reictable/modules/observability/8800127-audit-summary.reic",
+      "id": "REIC-8800127",
+      "title": "Audit Summary",
+      "domain": "observability",
+      "operation": "summarize"
+    },
+    {
+      "path": "reictable/modules/observability/8800128-readiness-check.reic",
+      "id": "REIC-8800128",
+      "title": "Readiness Check",
+      "domain": "observability",
+      "operation": "snapshot"
+    }
+  ]
+}
