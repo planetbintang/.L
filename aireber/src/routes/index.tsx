@@ -105,33 +105,13 @@ function WelcomeScreen({ onSend }: { onSend: (msg: string) => void }) {
   return (
     <div className="reber-welcome">
       <div className="reber-welcome-logo">Re</div>
-      <h1>AI Reber</h1>
+      <h1>AIREBER AI</h1>
       <p className="reber-welcome-tagline">
-        Re:Bersama
+        AI Production Workspace
       </p>
 
-      <div className="reber-welcome-philosophy">
-        <h3>Filosofi Reber</h3>
-        <div className="reber-phil-row">
-          <span className="reber-phil-key">Re:</span>
-          <span className="reber-phil-val">Bertindak — Bertindak dengan Tujuan</span>
-        </div>
-        <div className="reber-phil-row">
-          <span className="reber-phil-key">Be:</span>
-          <span className="reber-phil-val">Berdua · Bersama — Kebersamaan</span>
-        </div>
-        <div className="reber-phil-row">
-          <span className="reber-phil-key">Ber:</span>
-          <span className="reber-phil-val">Bener · Mener — Benar & Menuntun</span>
-        </div>
-        <div className="reber-phil-row">
-          <span className="reber-phil-key">Be_r:</span>
-          <span className="reber-phil-val">Bener + Mener — Memimpin dengan Benar</span>
-        </div>
-      </div>
-
       <div style={{ fontSize: 13, color: "var(--reber-text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" }}>
-        Mulai dengan prompt:
+        Pilih produk untuk mulai produksi:
       </div>
 
       <div className="reber-welcome-chips">
