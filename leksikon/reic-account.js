@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const DB='pb-reic-kamus-v1',T=['users','collections','history','settings','files','audit'];let db,me,tab='dashboard';
-const API_BASE=(document.querySelector('meta[name="reic-api-base"]')?.content||'').trim().replace(/\\/$/,'');
+const API_BASE=(document.querySelector('meta[name="reic-api-base"]')?.content||'').trim().replace(/\/$/,'');
 const TOKEN_KEY='pb-reic-api-token';
 async function api(action,method='GET',payload){const token=sessionStorage.getItem(TOKEN_KEY)||'';const url=API_BASE+'/api/kamus'+(method==='GET'?'?action='+encodeURIComponent(action):'');const response=await fetch(url,{method,credentials:'omit',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},...(method==='GET'?{}:{body:JSON.stringify({action,...(payload||{})})})});let data={};try{data=await response.json()}catch{}if(!response.ok||data.ok===false)throw Error(data.error||'Layanan REIC tidak dapat dihubungi.');return data}
 
