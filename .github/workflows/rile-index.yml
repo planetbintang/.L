@@ -2,6 +2,8 @@ name: RILE · PlanetBintang Live Workflow Index
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [rile-sync]
   schedule:
     - cron: "*/15 * * * *"
   push:
