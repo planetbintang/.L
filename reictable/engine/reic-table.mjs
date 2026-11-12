@@ -1,0 +1,18 @@
+import{createHash}from"node:crypto";export const OPERATION_NAMES=["normalizePath","stableId","validateRecord","aggregate","compare","merge","classify","checksum","redact","paginate","resolve","score","plan","transition","summarize","snapshot"];const obj=x=>x!==null&&typeof x==="object"&&!Array.isArray(x),canon=x=>Array.isArray(x)?x.map(canon):!obj(x)?x:Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])),hash=x=>createHash("sha256").update(JSON.stringify(canon(x))).digest("hex");export const OPERATIONS={
+normalizePath(i){let a=[];for(const p of String(i.path??"").replaceAll("\\","/").split("/")){if(!p||p===".")continue;if(p===".."){if(!a.length)throw Error("Path traversal");a.pop()}else a.push(p)}return{path:a.join("/")}},
+stableId(i){return{id:"PB-"+hash(String(i.namespace??"pb")+":"+String(i.key??i.path??"")).slice(0,20)}},
+validateRecord(i){const e=[];if(!obj(i.record))e.push("record must be object");else if(i.record.id!==undefined&&typeof i.record.id!=="string")e.push("id must be string");return{valid:!e.length,errors:e}},
+aggregate(i){const g={};for(const r of i.rows??[]){const k=String(r?.[i.key??"status"]??"unknown");g[k]=(g[k]??0)+1}return{count:(i.rows??[]).length,groups:g}},
+compare(i){return{equal:JSON.stringify(canon(i.left))===JSON.stringify(canon(i.right)),leftHash:hash(i.left),rightHash:hash(i.right)}},
+merge(i){const a=obj(i.base)?i.base:{},b=obj(i.patch)?i.patch:{};return{record:{...a,...b},changedKeys:Object.keys(b).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k]))}},
+classify(i){const p=String(i.path??""),restricted=/(^|\/)(\.env|secrets?|credentials?)(\/|\.|$)/i.test(p);return{extension:p.includes(".")?p.split(".").pop().toLowerCase():"directory",restricted,kind:restricted?"restricted":"file"}},
+checksum(i){return{algorithm:"sha256",checksum:hash(i.record??i.value??null)}},
+redact(i){return{value:String(i.value??"").replace(/(token|password|secret|authorization)\s*[:=]\s*[^\s,;]+/gi,"$1=[REDACTED]")}},
+paginate(i){const rows=i.rows??[],limit=Math.max(1,Math.min(500,Number(i.limit)||50)),offset=Math.max(0,Number(i.offset)||0);return{items:rows.slice(offset,offset+limit),total:rows.length,nextOffset:offset+limit<rows.length?offset+limit:null}},
+resolve(i){const r=(i.records??[]).find(x=>x?.[i.key??"id"]===i.value)??null;return{record:r,found:r!==null}},
+score(i){const c=i.checks??[],passed=c.filter(x=>x===true||x?.passed===true).length;return{score:c.length?Math.round(passed/c.length*100):0,passed,total:c.length}},
+plan(i){const t=i.tasks??[],ids=new Set(t.map(x=>x.id)),unresolved=t.flatMap(x=>(x.dependsOn??[]).filter(d=>!ids.has(d)).map(dependency=>({task:x.id,dependency})));return{ordered:t.map(x=>x.id),unresolved,ready:!unresolved.length}},
+transition(i){const allowed=(i.transitions?.[i.from]??[]).includes(i.to);return{from:i.from,to:i.to,allowed,state:allowed?i.to:i.from}},
+summarize(i){const r=i.rows??[];return{count:r.length,first:r[0]??null,last:r.at(-1)??null,checksum:hash(r)}},
+snapshot(i){const d=i.data??{};return{schemaVersion:1,createdAt:new Date().toISOString(),checksum:hash(d),data:d}}
+};export function evaluateFormula(f,i={}){if(!OPERATION_NAMES.includes(f?.operation))throw Error("Formula not allowlisted");return OPERATIONS[f.operation](i)}export function validateModule(m){const e=[];if(!/^REIC-[0-9]{7}$/.test(m?.id??""))e.push("invalid id");if(typeof m?.title!=="string")e.push("missing title");if(!OPERATION_NAMES.includes(m?.formula?.operation))e.push("invalid formula");if(m?.execution?.mode!=="allowlisted"||m?.execution?.browserSafe!==false)e.push("invalid execution policy");if(!Array.isArray(m?.inputs)||!Array.isArray(m?.outputs))e.push("missing contracts");return e}

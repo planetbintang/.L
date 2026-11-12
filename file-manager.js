@@ -13,7 +13,7 @@
   // Folder tingkat root yang dikelola pada ROOT .L — termasuk folder sistem
   // virtual (/proc /sys /media /acct /pro /config /cache /system_ext) yang
   // selalu ditampilkan di samping folder nyata repositori (.github data scripts).
-  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'systsm_ext', 'system_ext', '0.1', 'workspace', 'planetbintang.com'];
+  const VIRTUAL_SHORTCUTS = ['data', 'proc', 'sys', 'media', 'acct', 'pro', 'config', 'cache', 'systsm_ext', 'system_ext', '0.1', 'workspace', 'planetbintang.com', 'reictable'];
   const VIRTUAL_ROOT_META = {
     proc: { desc: 'Snapshot proses dan diagnostik; data contoh, bukan /proc perangkat langsung', items: 3 },
     sys: { desc: 'Sistem inti permanen: registry, status, dan rekonstruksi modul yang telah divalidasi', items: 6 },
@@ -26,6 +26,7 @@
     system_ext: { desc: 'Alias kompatibilitas untuk systsm_ext dan katalog modul virtual terdahulu', items: 20692 },
     '0.1': { desc: 'Katalog seluruh repositori GitHub planetbintang; setiap entri menunjuk ke sumber asli tanpa menyalin isi repositori privat', items: 47 },
     workspace: { desc: 'Penyimpanan workspace lokal dari menu Manage', items: 0 },
+    reictable: { desc: 'REICTABLE · 128 modul REIC, 16 rumus allowlist, dan rekonstruksi PlanetBintang', items: 138 },
   };
   const GENERATED_EXTENSIONS = ['html', 'css', 'js', 'nz'];
   const GENERATED_MODULES = ['core', 'ui', 'data', 'api', 'device', 'app', 'docs', 'brand', 'pipeline', 'ai', 'integration', 'security', 'storage'];
@@ -53,6 +54,180 @@
     return `# Planetbintang feature ${feature}\ndomain = ${domain}\nfeature_id = ${feature}\nstatus = ready\nexecution = disabled-by-default`;
   }
   function generatedSystemEntries(path) {
+    if (path === 'reictable') return [
+      { path: 'reictable/README.md', type: 'file', mode: '0100644', fetchPath: 'reictable/README.md', function: 'Dokumentasi REICTABLE' },
+      { path: 'reictable/manifest.json', type: 'file', mode: '0100644', fetchPath: 'reictable/manifest.json', function: 'Manifest 128 modul REIC' },
+      { path: 'reictable/registry.json', type: 'file', mode: '0100644', fetchPath: 'reictable/registry.json', function: 'Registri hasil validasi' },
+      { path: 'reictable/file-manager-index.json', type: 'file', mode: '0100644', fetchPath: 'reictable/file-manager-index.json', function: 'Indeks File Manager' },
+      { path: 'reictable/engine', type: 'directory', mode: '040755', items: 4, function: 'Formula engine dan rekonstruksi' },
+      { path: 'reictable/modules', type: 'directory', mode: '040755', items: 8, function: 'Delapan domain REIC' }
+    ];
+    if (path === 'reictable/engine') return [
+      { path: 'reictable/engine/reic-table.mjs', type: 'file', mode: '0100644', fetchPath: 'reictable/engine/reic-table.mjs', function: 'Mesin formula allowlist' },
+      { path: 'reictable/engine/build-registry.mjs', type: 'file', mode: '0100644', fetchPath: 'reictable/engine/build-registry.mjs', function: 'Generator registry dan indeks' },
+      { path: 'reictable/engine/test.mjs', type: 'file', mode: '0100644', fetchPath: 'reictable/engine/test.mjs', function: 'Tes formula' },
+      { path: 'reictable/engine/reconstruct.mjs', type: 'file', mode: '0100644', fetchPath: 'reictable/engine/reconstruct.mjs', function: 'Snapshot rekonstruksi' }
+    ];
+    if (path === 'reictable/modules') return [
+      { path: 'reictable/modules/core', type: 'directory', mode: '040755', items: 16, function: 'Normalisasi metadata dan indeks' },
+      { path: 'reictable/modules/identity', type: 'directory', mode: '040755', items: 16, function: 'Registrasi, serial number, sesi, profil, dan otorisasi' },
+      { path: 'reictable/modules/filesystem', type: 'directory', mode: '040755', items: 16, function: 'Pohon file dan sinkronisasi File Manager' },
+      { path: 'reictable/modules/reconstruction', type: 'directory', mode: '040755', items: 16, function: 'Inventaris dan rekonstruksi repositori' },
+      { path: 'reictable/modules/automation', type: 'directory', mode: '040755', items: 16, function: 'Workflow, antrean, dan audit' },
+      { path: 'reictable/modules/security', type: 'directory', mode: '040755', items: 16, function: 'Validasi, kontrol akses, dan integritas' },
+      { path: 'reictable/modules/integration', type: 'directory', mode: '040755', items: 16, function: 'Adapter dan sinkronisasi' },
+      { path: 'reictable/modules/observability', type: 'directory', mode: '040755', items: 16, function: 'Metrik dan kesehatan sistem' }
+    ];
+    const reicDomain = path.match(/^reictable\/modules\/([a-z-]+)$/);
+    if (reicDomain) {
+      const rows = {
+        'core': [
+          { path: 'reictable/modules/core/8800001-canonicalize-path.reic', type: 'file', mode: '0100644', function: 'canonicalize-path · formula normalizePath', fetchPath: 'reictable/modules/core/8800001-canonicalize-path.reic' },
+          { path: 'reictable/modules/core/8800002-stable-id.reic', type: 'file', mode: '0100644', function: 'stable-id · formula stableId', fetchPath: 'reictable/modules/core/8800002-stable-id.reic' },
+          { path: 'reictable/modules/core/8800003-normalize-label.reic', type: 'file', mode: '0100644', function: 'normalize-label · formula validateRecord', fetchPath: 'reictable/modules/core/8800003-normalize-label.reic' },
+          { path: 'reictable/modules/core/8800004-version-compare.reic', type: 'file', mode: '0100644', function: 'version-compare · formula aggregate', fetchPath: 'reictable/modules/core/8800004-version-compare.reic' },
+          { path: 'reictable/modules/core/8800005-parse-timestamp.reic', type: 'file', mode: '0100644', function: 'parse-timestamp · formula compare', fetchPath: 'reictable/modules/core/8800005-parse-timestamp.reic' },
+          { path: 'reictable/modules/core/8800006-format-timestamp.reic', type: 'file', mode: '0100644', function: 'format-timestamp · formula merge', fetchPath: 'reictable/modules/core/8800006-format-timestamp.reic' },
+          { path: 'reictable/modules/core/8800007-merge-metadata.reic', type: 'file', mode: '0100644', function: 'merge-metadata · formula classify', fetchPath: 'reictable/modules/core/8800007-merge-metadata.reic' },
+          { path: 'reictable/modules/core/8800008-pick-fields.reic', type: 'file', mode: '0100644', function: 'pick-fields · formula checksum', fetchPath: 'reictable/modules/core/8800008-pick-fields.reic' },
+          { path: 'reictable/modules/core/8800009-omit-empty.reic', type: 'file', mode: '0100644', function: 'omit-empty · formula redact', fetchPath: 'reictable/modules/core/8800009-omit-empty.reic' },
+          { path: 'reictable/modules/core/8800010-deep-freeze.reic', type: 'file', mode: '0100644', function: 'deep-freeze · formula paginate', fetchPath: 'reictable/modules/core/8800010-deep-freeze.reic' },
+          { path: 'reictable/modules/core/8800011-stable-sort.reic', type: 'file', mode: '0100644', function: 'stable-sort · formula resolve', fetchPath: 'reictable/modules/core/8800011-stable-sort.reic' },
+          { path: 'reictable/modules/core/8800012-pagination.reic', type: 'file', mode: '0100644', function: 'pagination · formula score', fetchPath: 'reictable/modules/core/8800012-pagination.reic' },
+          { path: 'reictable/modules/core/8800013-checksum-envelope.reic', type: 'file', mode: '0100644', function: 'checksum-envelope · formula plan', fetchPath: 'reictable/modules/core/8800013-checksum-envelope.reic' },
+          { path: 'reictable/modules/core/8800014-validate-identity.reic', type: 'file', mode: '0100644', function: 'validate-identity · formula transition', fetchPath: 'reictable/modules/core/8800014-validate-identity.reic' },
+          { path: 'reictable/modules/core/8800015-resolve-reference.reic', type: 'file', mode: '0100644', function: 'resolve-reference · formula summarize', fetchPath: 'reictable/modules/core/8800015-resolve-reference.reic' },
+          { path: 'reictable/modules/core/8800016-build-index.reic', type: 'file', mode: '0100644', function: 'build-index · formula snapshot', fetchPath: 'reictable/modules/core/8800016-build-index.reic' }
+        ],
+        'identity': [
+          { path: 'reictable/modules/identity/8800017-account-record.reic', type: 'file', mode: '0100644', function: 'account-record · formula normalizePath', fetchPath: 'reictable/modules/identity/8800017-account-record.reic' },
+          { path: 'reictable/modules/identity/8800018-serial-number.reic', type: 'file', mode: '0100644', function: 'serial-number · formula stableId', fetchPath: 'reictable/modules/identity/8800018-serial-number.reic' },
+          { path: 'reictable/modules/identity/8800019-role-policy.reic', type: 'file', mode: '0100644', function: 'role-policy · formula validateRecord', fetchPath: 'reictable/modules/identity/8800019-role-policy.reic' },
+          { path: 'reictable/modules/identity/8800020-session-claims.reic', type: 'file', mode: '0100644', function: 'session-claims · formula aggregate', fetchPath: 'reictable/modules/identity/8800020-session-claims.reic' },
+          { path: 'reictable/modules/identity/8800021-login-attempt.reic', type: 'file', mode: '0100644', function: 'login-attempt · formula compare', fetchPath: 'reictable/modules/identity/8800021-login-attempt.reic' },
+          { path: 'reictable/modules/identity/8800022-registration-request.reic', type: 'file', mode: '0100644', function: 'registration-request · formula merge', fetchPath: 'reictable/modules/identity/8800022-registration-request.reic' },
+          { path: 'reictable/modules/identity/8800023-profile-merge.reic', type: 'file', mode: '0100644', function: 'profile-merge · formula classify', fetchPath: 'reictable/modules/identity/8800023-profile-merge.reic' },
+          { path: 'reictable/modules/identity/8800024-permission-check.reic', type: 'file', mode: '0100644', function: 'permission-check · formula checksum', fetchPath: 'reictable/modules/identity/8800024-permission-check.reic' },
+          { path: 'reictable/modules/identity/8800025-password-policy.reic', type: 'file', mode: '0100644', function: 'password-policy · formula redact', fetchPath: 'reictable/modules/identity/8800025-password-policy.reic' },
+          { path: 'reictable/modules/identity/8800026-token-expiry.reic', type: 'file', mode: '0100644', function: 'token-expiry · formula paginate', fetchPath: 'reictable/modules/identity/8800026-token-expiry.reic' },
+          { path: 'reictable/modules/identity/8800027-device-binding.reic', type: 'file', mode: '0100644', function: 'device-binding · formula resolve', fetchPath: 'reictable/modules/identity/8800027-device-binding.reic' },
+          { path: 'reictable/modules/identity/8800028-audit-actor.reic', type: 'file', mode: '0100644', function: 'audit-actor · formula score', fetchPath: 'reictable/modules/identity/8800028-audit-actor.reic' },
+          { path: 'reictable/modules/identity/8800029-access-scope.reic', type: 'file', mode: '0100644', function: 'access-scope · formula plan', fetchPath: 'reictable/modules/identity/8800029-access-scope.reic' },
+          { path: 'reictable/modules/identity/8800030-session-revoke.reic', type: 'file', mode: '0100644', function: 'session-revoke · formula transition', fetchPath: 'reictable/modules/identity/8800030-session-revoke.reic' },
+          { path: 'reictable/modules/identity/8800031-recovery-request.reic', type: 'file', mode: '0100644', function: 'recovery-request · formula summarize', fetchPath: 'reictable/modules/identity/8800031-recovery-request.reic' },
+          { path: 'reictable/modules/identity/8800032-principal-link.reic', type: 'file', mode: '0100644', function: 'principal-link · formula snapshot', fetchPath: 'reictable/modules/identity/8800032-principal-link.reic' }
+        ],
+        'filesystem': [
+          { path: 'reictable/modules/filesystem/8800033-file-entry.reic', type: 'file', mode: '0100644', function: 'file-entry · formula normalizePath', fetchPath: 'reictable/modules/filesystem/8800033-file-entry.reic' },
+          { path: 'reictable/modules/filesystem/8800034-folder-node.reic', type: 'file', mode: '0100644', function: 'folder-node · formula stableId', fetchPath: 'reictable/modules/filesystem/8800034-folder-node.reic' },
+          { path: 'reictable/modules/filesystem/8800035-path-normalize.reic', type: 'file', mode: '0100644', function: 'path-normalize · formula validateRecord', fetchPath: 'reictable/modules/filesystem/8800035-path-normalize.reic' },
+          { path: 'reictable/modules/filesystem/8800036-tree-flatten.reic', type: 'file', mode: '0100644', function: 'tree-flatten · formula aggregate', fetchPath: 'reictable/modules/filesystem/8800036-tree-flatten.reic' },
+          { path: 'reictable/modules/filesystem/8800037-tree-rebuild.reic', type: 'file', mode: '0100644', function: 'tree-rebuild · formula compare', fetchPath: 'reictable/modules/filesystem/8800037-tree-rebuild.reic' },
+          { path: 'reictable/modules/filesystem/8800038-folder-aggregate.reic', type: 'file', mode: '0100644', function: 'folder-aggregate · formula merge', fetchPath: 'reictable/modules/filesystem/8800038-folder-aggregate.reic' },
+          { path: 'reictable/modules/filesystem/8800039-extension-classify.reic', type: 'file', mode: '0100644', function: 'extension-classify · formula classify', fetchPath: 'reictable/modules/filesystem/8800039-extension-classify.reic' },
+          { path: 'reictable/modules/filesystem/8800040-file-hash.reic', type: 'file', mode: '0100644', function: 'file-hash · formula checksum', fetchPath: 'reictable/modules/filesystem/8800040-file-hash.reic' },
+          { path: 'reictable/modules/filesystem/8800041-manifest-merge.reic', type: 'file', mode: '0100644', function: 'manifest-merge · formula redact', fetchPath: 'reictable/modules/filesystem/8800041-manifest-merge.reic' },
+          { path: 'reictable/modules/filesystem/8800042-path-guard.reic', type: 'file', mode: '0100644', function: 'path-guard · formula paginate', fetchPath: 'reictable/modules/filesystem/8800042-path-guard.reic' },
+          { path: 'reictable/modules/filesystem/8800043-file-search.reic', type: 'file', mode: '0100644', function: 'file-search · formula resolve', fetchPath: 'reictable/modules/filesystem/8800043-file-search.reic' },
+          { path: 'reictable/modules/filesystem/8800044-pagination-cursor.reic', type: 'file', mode: '0100644', function: 'pagination-cursor · formula score', fetchPath: 'reictable/modules/filesystem/8800044-pagination-cursor.reic' },
+          { path: 'reictable/modules/filesystem/8800045-snapshot-compare.reic', type: 'file', mode: '0100644', function: 'snapshot-compare · formula plan', fetchPath: 'reictable/modules/filesystem/8800045-snapshot-compare.reic' },
+          { path: 'reictable/modules/filesystem/8800046-virtual-mount.reic', type: 'file', mode: '0100644', function: 'virtual-mount · formula transition', fetchPath: 'reictable/modules/filesystem/8800046-virtual-mount.reic' },
+          { path: 'reictable/modules/filesystem/8800047-metadata-index.reic', type: 'file', mode: '0100644', function: 'metadata-index · formula summarize', fetchPath: 'reictable/modules/filesystem/8800047-metadata-index.reic' },
+          { path: 'reictable/modules/filesystem/8800048-export-bundle.reic', type: 'file', mode: '0100644', function: 'export-bundle · formula snapshot', fetchPath: 'reictable/modules/filesystem/8800048-export-bundle.reic' }
+        ],
+        'reconstruction': [
+          { path: 'reictable/modules/reconstruction/8800049-repo-inventory.reic', type: 'file', mode: '0100644', function: 'repo-inventory · formula normalizePath', fetchPath: 'reictable/modules/reconstruction/8800049-repo-inventory.reic' },
+          { path: 'reictable/modules/reconstruction/8800050-route-inventory.reic', type: 'file', mode: '0100644', function: 'route-inventory · formula stableId', fetchPath: 'reictable/modules/reconstruction/8800050-route-inventory.reic' },
+          { path: 'reictable/modules/reconstruction/8800051-module-map.reic', type: 'file', mode: '0100644', function: 'module-map · formula validateRecord', fetchPath: 'reictable/modules/reconstruction/8800051-module-map.reic' },
+          { path: 'reictable/modules/reconstruction/8800052-dependency-graph.reic', type: 'file', mode: '0100644', function: 'dependency-graph · formula aggregate', fetchPath: 'reictable/modules/reconstruction/8800052-dependency-graph.reic' },
+          { path: 'reictable/modules/reconstruction/8800053-missing-source.reic', type: 'file', mode: '0100644', function: 'missing-source · formula compare', fetchPath: 'reictable/modules/reconstruction/8800053-missing-source.reic' },
+          { path: 'reictable/modules/reconstruction/8800054-stale-source.reic', type: 'file', mode: '0100644', function: 'stale-source · formula merge', fetchPath: 'reictable/modules/reconstruction/8800054-stale-source.reic' },
+          { path: 'reictable/modules/reconstruction/8800055-source-link.reic', type: 'file', mode: '0100644', function: 'source-link · formula classify', fetchPath: 'reictable/modules/reconstruction/8800055-source-link.reic' },
+          { path: 'reictable/modules/reconstruction/8800056-snapshot-diff.reic', type: 'file', mode: '0100644', function: 'snapshot-diff · formula checksum', fetchPath: 'reictable/modules/reconstruction/8800056-snapshot-diff.reic' },
+          { path: 'reictable/modules/reconstruction/8800057-manifest-repair.reic', type: 'file', mode: '0100644', function: 'manifest-repair · formula redact', fetchPath: 'reictable/modules/reconstruction/8800057-manifest-repair.reic' },
+          { path: 'reictable/modules/reconstruction/8800058-index-rebuild.reic', type: 'file', mode: '0100644', function: 'index-rebuild · formula paginate', fetchPath: 'reictable/modules/reconstruction/8800058-index-rebuild.reic' },
+          { path: 'reictable/modules/reconstruction/8800059-orphan-detect.reic', type: 'file', mode: '0100644', function: 'orphan-detect · formula resolve', fetchPath: 'reictable/modules/reconstruction/8800059-orphan-detect.reic' },
+          { path: 'reictable/modules/reconstruction/8800060-integrity-score.reic', type: 'file', mode: '0100644', function: 'integrity-score · formula score', fetchPath: 'reictable/modules/reconstruction/8800060-integrity-score.reic' },
+          { path: 'reictable/modules/reconstruction/8800061-recovery-plan.reic', type: 'file', mode: '0100644', function: 'recovery-plan · formula plan', fetchPath: 'reictable/modules/reconstruction/8800061-recovery-plan.reic' },
+          { path: 'reictable/modules/reconstruction/8800062-migration-map.reic', type: 'file', mode: '0100644', function: 'migration-map · formula transition', fetchPath: 'reictable/modules/reconstruction/8800062-migration-map.reic' },
+          { path: 'reictable/modules/reconstruction/8800063-state-classify.reic', type: 'file', mode: '0100644', function: 'state-classify · formula summarize', fetchPath: 'reictable/modules/reconstruction/8800063-state-classify.reic' },
+          { path: 'reictable/modules/reconstruction/8800064-release-manifest.reic', type: 'file', mode: '0100644', function: 'release-manifest · formula snapshot', fetchPath: 'reictable/modules/reconstruction/8800064-release-manifest.reic' }
+        ],
+        'automation': [
+          { path: 'reictable/modules/automation/8800065-workflow-event.reic', type: 'file', mode: '0100644', function: 'workflow-event · formula normalizePath', fetchPath: 'reictable/modules/automation/8800065-workflow-event.reic' },
+          { path: 'reictable/modules/automation/8800066-job-state.reic', type: 'file', mode: '0100644', function: 'job-state · formula stableId', fetchPath: 'reictable/modules/automation/8800066-job-state.reic' },
+          { path: 'reictable/modules/automation/8800067-queue-order.reic', type: 'file', mode: '0100644', function: 'queue-order · formula validateRecord', fetchPath: 'reictable/modules/automation/8800067-queue-order.reic' },
+          { path: 'reictable/modules/automation/8800068-retry-policy.reic', type: 'file', mode: '0100644', function: 'retry-policy · formula aggregate', fetchPath: 'reictable/modules/automation/8800068-retry-policy.reic' },
+          { path: 'reictable/modules/automation/8800069-idempotency-key.reic', type: 'file', mode: '0100644', function: 'idempotency-key · formula compare', fetchPath: 'reictable/modules/automation/8800069-idempotency-key.reic' },
+          { path: 'reictable/modules/automation/8800070-change-record.reic', type: 'file', mode: '0100644', function: 'change-record · formula merge', fetchPath: 'reictable/modules/automation/8800070-change-record.reic' },
+          { path: 'reictable/modules/automation/8800071-request-validate.reic', type: 'file', mode: '0100644', function: 'request-validate · formula classify', fetchPath: 'reictable/modules/automation/8800071-request-validate.reic' },
+          { path: 'reictable/modules/automation/8800072-batch-plan.reic', type: 'file', mode: '0100644', function: 'batch-plan · formula checksum', fetchPath: 'reictable/modules/automation/8800072-batch-plan.reic' },
+          { path: 'reictable/modules/automation/8800073-commit-summary.reic', type: 'file', mode: '0100644', function: 'commit-summary · formula redact', fetchPath: 'reictable/modules/automation/8800073-commit-summary.reic' },
+          { path: 'reictable/modules/automation/8800074-deploy-gate.reic', type: 'file', mode: '0100644', function: 'deploy-gate · formula paginate', fetchPath: 'reictable/modules/automation/8800074-deploy-gate.reic' },
+          { path: 'reictable/modules/automation/8800075-rollback-plan.reic', type: 'file', mode: '0100644', function: 'rollback-plan · formula resolve', fetchPath: 'reictable/modules/automation/8800075-rollback-plan.reic' },
+          { path: 'reictable/modules/automation/8800076-schedule-window.reic', type: 'file', mode: '0100644', function: 'schedule-window · formula score', fetchPath: 'reictable/modules/automation/8800076-schedule-window.reic' },
+          { path: 'reictable/modules/automation/8800077-artifact-index.reic', type: 'file', mode: '0100644', function: 'artifact-index · formula plan', fetchPath: 'reictable/modules/automation/8800077-artifact-index.reic' },
+          { path: 'reictable/modules/automation/8800078-status-transition.reic', type: 'file', mode: '0100644', function: 'status-transition · formula transition', fetchPath: 'reictable/modules/automation/8800078-status-transition.reic' },
+          { path: 'reictable/modules/automation/8800079-task-dependency.reic', type: 'file', mode: '0100644', function: 'task-dependency · formula summarize', fetchPath: 'reictable/modules/automation/8800079-task-dependency.reic' },
+          { path: 'reictable/modules/automation/8800080-run-report.reic', type: 'file', mode: '0100644', function: 'run-report · formula snapshot', fetchPath: 'reictable/modules/automation/8800080-run-report.reic' }
+        ],
+        'security': [
+          { path: 'reictable/modules/security/8800081-secret-scan.reic', type: 'file', mode: '0100644', function: 'secret-scan · formula normalizePath', fetchPath: 'reictable/modules/security/8800081-secret-scan.reic' },
+          { path: 'reictable/modules/security/8800082-path-traversal.reic', type: 'file', mode: '0100644', function: 'path-traversal · formula stableId', fetchPath: 'reictable/modules/security/8800082-path-traversal.reic' },
+          { path: 'reictable/modules/security/8800083-content-limit.reic', type: 'file', mode: '0100644', function: 'content-limit · formula validateRecord', fetchPath: 'reictable/modules/security/8800083-content-limit.reic' },
+          { path: 'reictable/modules/security/8800084-permission-matrix.reic', type: 'file', mode: '0100644', function: 'permission-matrix · formula aggregate', fetchPath: 'reictable/modules/security/8800084-permission-matrix.reic' },
+          { path: 'reictable/modules/security/8800085-rate-limit.reic', type: 'file', mode: '0100644', function: 'rate-limit · formula compare', fetchPath: 'reictable/modules/security/8800085-rate-limit.reic' },
+          { path: 'reictable/modules/security/8800086-csrf-token-meta.reic', type: 'file', mode: '0100644', function: 'csrf-token-meta · formula merge', fetchPath: 'reictable/modules/security/8800086-csrf-token-meta.reic' },
+          { path: 'reictable/modules/security/8800087-origin-policy.reic', type: 'file', mode: '0100644', function: 'origin-policy · formula classify', fetchPath: 'reictable/modules/security/8800087-origin-policy.reic' },
+          { path: 'reictable/modules/security/8800088-input-schema.reic', type: 'file', mode: '0100644', function: 'input-schema · formula checksum', fetchPath: 'reictable/modules/security/8800088-input-schema.reic' },
+          { path: 'reictable/modules/security/8800089-audit-chain.reic', type: 'file', mode: '0100644', function: 'audit-chain · formula redact', fetchPath: 'reictable/modules/security/8800089-audit-chain.reic' },
+          { path: 'reictable/modules/security/8800090-private-path-redact.reic', type: 'file', mode: '0100644', function: 'private-path-redact · formula paginate', fetchPath: 'reictable/modules/security/8800090-private-path-redact.reic' },
+          { path: 'reictable/modules/security/8800091-safe-render.reic', type: 'file', mode: '0100644', function: 'safe-render · formula resolve', fetchPath: 'reictable/modules/security/8800091-safe-render.reic' },
+          { path: 'reictable/modules/security/8800092-code-policy.reic', type: 'file', mode: '0100644', function: 'code-policy · formula score', fetchPath: 'reictable/modules/security/8800092-code-policy.reic' },
+          { path: 'reictable/modules/security/8800093-key-rotation-plan.reic', type: 'file', mode: '0100644', function: 'key-rotation-plan · formula plan', fetchPath: 'reictable/modules/security/8800093-key-rotation-plan.reic' },
+          { path: 'reictable/modules/security/8800094-session-policy.reic', type: 'file', mode: '0100644', function: 'session-policy · formula transition', fetchPath: 'reictable/modules/security/8800094-session-policy.reic' },
+          { path: 'reictable/modules/security/8800095-data-classify.reic', type: 'file', mode: '0100644', function: 'data-classify · formula summarize', fetchPath: 'reictable/modules/security/8800095-data-classify.reic' },
+          { path: 'reictable/modules/security/8800096-integrity-guard.reic', type: 'file', mode: '0100644', function: 'integrity-guard · formula snapshot', fetchPath: 'reictable/modules/security/8800096-integrity-guard.reic' }
+        ],
+        'integration': [
+          { path: 'reictable/modules/integration/8800097-connector-manifest.reic', type: 'file', mode: '0100644', function: 'connector-manifest · formula normalizePath', fetchPath: 'reictable/modules/integration/8800097-connector-manifest.reic' },
+          { path: 'reictable/modules/integration/8800098-api-request.reic', type: 'file', mode: '0100644', function: 'api-request · formula stableId', fetchPath: 'reictable/modules/integration/8800098-api-request.reic' },
+          { path: 'reictable/modules/integration/8800099-response-normalize.reic', type: 'file', mode: '0100644', function: 'response-normalize · formula validateRecord', fetchPath: 'reictable/modules/integration/8800099-response-normalize.reic' },
+          { path: 'reictable/modules/integration/8800100-timeout-policy.reic', type: 'file', mode: '0100644', function: 'timeout-policy · formula aggregate', fetchPath: 'reictable/modules/integration/8800100-timeout-policy.reic' },
+          { path: 'reictable/modules/integration/8800101-retry-backoff.reic', type: 'file', mode: '0100644', function: 'retry-backoff · formula compare', fetchPath: 'reictable/modules/integration/8800101-retry-backoff.reic' },
+          { path: 'reictable/modules/integration/8800102-webhook-verify.reic', type: 'file', mode: '0100644', function: 'webhook-verify · formula merge', fetchPath: 'reictable/modules/integration/8800102-webhook-verify.reic' },
+          { path: 'reictable/modules/integration/8800103-event-map.reic', type: 'file', mode: '0100644', function: 'event-map · formula classify', fetchPath: 'reictable/modules/integration/8800103-event-map.reic' },
+          { path: 'reictable/modules/integration/8800104-provider-status.reic', type: 'file', mode: '0100644', function: 'provider-status · formula checksum', fetchPath: 'reictable/modules/integration/8800104-provider-status.reic' },
+          { path: 'reictable/modules/integration/8800105-sync-cursor.reic', type: 'file', mode: '0100644', function: 'sync-cursor · formula redact', fetchPath: 'reictable/modules/integration/8800105-sync-cursor.reic' },
+          { path: 'reictable/modules/integration/8800106-import-validate.reic', type: 'file', mode: '0100644', function: 'import-validate · formula paginate', fetchPath: 'reictable/modules/integration/8800106-import-validate.reic' },
+          { path: 'reictable/modules/integration/8800107-export-validate.reic', type: 'file', mode: '0100644', function: 'export-validate · formula resolve', fetchPath: 'reictable/modules/integration/8800107-export-validate.reic' },
+          { path: 'reictable/modules/integration/8800108-schema-map.reic', type: 'file', mode: '0100644', function: 'schema-map · formula score', fetchPath: 'reictable/modules/integration/8800108-schema-map.reic' },
+          { path: 'reictable/modules/integration/8800109-conflict-resolve.reic', type: 'file', mode: '0100644', function: 'conflict-resolve · formula plan', fetchPath: 'reictable/modules/integration/8800109-conflict-resolve.reic' },
+          { path: 'reictable/modules/integration/8800110-health-check.reic', type: 'file', mode: '0100644', function: 'health-check · formula transition', fetchPath: 'reictable/modules/integration/8800110-health-check.reic' },
+          { path: 'reictable/modules/integration/8800111-capability-map.reic', type: 'file', mode: '0100644', function: 'capability-map · formula summarize', fetchPath: 'reictable/modules/integration/8800111-capability-map.reic' },
+          { path: 'reictable/modules/integration/8800112-adapter-registry.reic', type: 'file', mode: '0100644', function: 'adapter-registry · formula snapshot', fetchPath: 'reictable/modules/integration/8800112-adapter-registry.reic' }
+        ],
+        'observability': [
+          { path: 'reictable/modules/observability/8800113-event-metric.reic', type: 'file', mode: '0100644', function: 'event-metric · formula normalizePath', fetchPath: 'reictable/modules/observability/8800113-event-metric.reic' },
+          { path: 'reictable/modules/observability/8800114-uptime-window.reic', type: 'file', mode: '0100644', function: 'uptime-window · formula stableId', fetchPath: 'reictable/modules/observability/8800114-uptime-window.reic' },
+          { path: 'reictable/modules/observability/8800115-error-classify.reic', type: 'file', mode: '0100644', function: 'error-classify · formula validateRecord', fetchPath: 'reictable/modules/observability/8800115-error-classify.reic' },
+          { path: 'reictable/modules/observability/8800116-log-normalize.reic', type: 'file', mode: '0100644', function: 'log-normalize · formula aggregate', fetchPath: 'reictable/modules/observability/8800116-log-normalize.reic' },
+          { path: 'reictable/modules/observability/8800117-trace-context.reic', type: 'file', mode: '0100644', function: 'trace-context · formula compare', fetchPath: 'reictable/modules/observability/8800117-trace-context.reic' },
+          { path: 'reictable/modules/observability/8800118-latency-summary.reic', type: 'file', mode: '0100644', function: 'latency-summary · formula merge', fetchPath: 'reictable/modules/observability/8800118-latency-summary.reic' },
+          { path: 'reictable/modules/observability/8800119-trend-bucket.reic', type: 'file', mode: '0100644', function: 'trend-bucket · formula classify', fetchPath: 'reictable/modules/observability/8800119-trend-bucket.reic' },
+          { path: 'reictable/modules/observability/8800120-alert-threshold.reic', type: 'file', mode: '0100644', function: 'alert-threshold · formula checksum', fetchPath: 'reictable/modules/observability/8800120-alert-threshold.reic' },
+          { path: 'reictable/modules/observability/8800121-anomaly-score.reic', type: 'file', mode: '0100644', function: 'anomaly-score · formula redact', fetchPath: 'reictable/modules/observability/8800121-anomaly-score.reic' },
+          { path: 'reictable/modules/observability/8800122-health-snapshot.reic', type: 'file', mode: '0100644', function: 'health-snapshot · formula paginate', fetchPath: 'reictable/modules/observability/8800122-health-snapshot.reic' },
+          { path: 'reictable/modules/observability/8800123-deploy-observe.reic', type: 'file', mode: '0100644', function: 'deploy-observe · formula resolve', fetchPath: 'reictable/modules/observability/8800123-deploy-observe.reic' },
+          { path: 'reictable/modules/observability/8800124-file-change-metric.reic', type: 'file', mode: '0100644', function: 'file-change-metric · formula score', fetchPath: 'reictable/modules/observability/8800124-file-change-metric.reic' },
+          { path: 'reictable/modules/observability/8800125-workflow-metric.reic', type: 'file', mode: '0100644', function: 'workflow-metric · formula plan', fetchPath: 'reictable/modules/observability/8800125-workflow-metric.reic' },
+          { path: 'reictable/modules/observability/8800126-registry-health.reic', type: 'file', mode: '0100644', function: 'registry-health · formula transition', fetchPath: 'reictable/modules/observability/8800126-registry-health.reic' },
+          { path: 'reictable/modules/observability/8800127-audit-summary.reic', type: 'file', mode: '0100644', function: 'audit-summary · formula summarize', fetchPath: 'reictable/modules/observability/8800127-audit-summary.reic' },
+          { path: 'reictable/modules/observability/8800128-readiness-check.reic', type: 'file', mode: '0100644', function: 'readiness-check · formula snapshot', fetchPath: 'reictable/modules/observability/8800128-readiness-check.reic' }
+        ]
+      };
+      return rows[reicDomain[1]] || [];
+    }
     // Pemetaan domain + template konfigurasi deployment (virtual File Manager; bukan server aktif).
     if (path === 'planetbintang.com') return [
       { path: 'planetbintang.com/index.html', type: 'file', mode: '0100644', size: 220, sizeKnown: true, function: 'Halaman indeks domain tanpa redirect ke alamat GitHub Pages', codeContent: `<!doctype html>
