@@ -66,6 +66,19 @@ if (hasLog) {
       if (event.schemaVersion !== 1) throw new Error('schemaVersion tidak didukung');
       if (!event.eventId || eventIds.has(event.eventId)) throw new Error('eventId kosong atau duplikat');
       if (!event.timestamp || Number.isNaN(Date.parse(event.timestamp))) throw new Error('timestamp tidak valid');
+
+      // Keep the original append-only history readable: catalog queue records
+      // predate request records and intentionally have no requestPath.
+      if (event.event === 'git.catalog.queued') {
+        if (!event.catalogPath || !event.catalogPath.startsWith('data/')) throw new Error('catalogPath tidak valid');
+        if (!Number.isInteger(event.selectedCount) || event.selectedCount < 0) throw new Error('selectedCount tidak valid');
+        if (!Number.isInteger(event.batchCount) || event.batchCount < 0) throw new Error('batchCount tidak valid');
+        if (event.status !== 'queued-for-implementation') throw new Error('status katalog tidak valid');
+        eventIds.add(event.eventId);
+        validLines++;
+        continue;
+      }
+
       if (event.event !== 'automation.request.prepared') throw new Error('jenis event tidak dikenal');
       if (!event.requestPath || !event.requestPath.startsWith('automation/requests/')) throw new Error('requestPath tidak valid');
       if (!requests.has(event.eventId)) throw new Error(`request tidak ditemukan untuk ${event.eventId}`);
