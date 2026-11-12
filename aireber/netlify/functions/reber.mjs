@@ -89,4 +89,4 @@ export default async (request) => {
   }
 };
 
-export const config = { path: "/api/reber" };
+// Legacy function intentionally has no /api/reber path alias; TanStack server route owns the authenticated SSE endpoint.
