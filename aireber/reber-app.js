@@ -13,7 +13,7 @@ let currentPage = 0;
 let currentNodes = [];
 let currentTotal = 0;
 let currentNode = null;
-let currentView = 'studio';
+let currentView = 'dashboard';
 let store;
 
 function normalizePath(input) {
@@ -321,4 +321,4 @@ store=getStore();
 $('#storageBadge').textContent=window.PBLocalFiles?'FILE MANAGER INDEXEDDB':'INDEXEDDB PERANGKAT';
 void refreshPrompts();
 void loadSourceIndex();
-setView('studio');
+setView('dashboard');
