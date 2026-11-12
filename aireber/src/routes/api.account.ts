@@ -56,7 +56,7 @@ async function issueSession(userId: number) {
 }
 const publicUser = (user: typeof aireberUsers.$inferSelect) => ({
   id: user.id, email: user.email, name: user.displayName, role: user.role,
-  plan: user.plan, quotaRequests: user.quotaRequests, usedRequests: user.usedRequests, quotaResetAt: user.quotaResetAt,
+  status: user.status, plan: user.plan, quotaRequests: user.quotaRequests, usedRequests: user.usedRequests, quotaResetAt: user.quotaResetAt,
   createdAt: user.createdAt, lastLoginAt: user.lastLoginAt,
 });
 function safePath(input: unknown) {
@@ -89,8 +89,13 @@ export const Route = createFileRoute("/api/account")({
           return json(request, { ok: true, audit: rows });
         }
         if (action === "usage") {
-          const rows = await db.select().from(aireberUsage).where(eq(aireberUsage.userId, auth.user.id)).orderBy(desc(aireberUsage.createdAt)).limit(100);
-          return json(request, { ok: true, quota: { plan: auth.user.plan, limit: auth.user.quotaRequests, used: auth.user.usedRequests, remaining: Math.max(0, auth.user.quotaRequests - auth.user.usedRequests), resetAt: auth.user.quotaResetAt }, usage: rows });
+          const rows = auth.user.role === "admin"
+            ? await db.select().from(aireberUsage).orderBy(desc(aireberUsage.createdAt)).limit(200)
+            : await db.select().from(aireberUsage).where(eq(aireberUsage.userId, auth.user.id)).orderBy(desc(aireberUsage.createdAt)).limit(100);
+          const members = auth.user.role === "admin"
+            ? (await db.select().from(aireberUsers).orderBy(desc(aireberUsers.createdAt)).limit(250)).map((member) => ({ id: member.id, email: member.email, name: member.displayName, plan: member.plan, quotaRequests: member.quotaRequests, usedRequests: member.usedRequests, status: member.status }))
+            : undefined;
+          return json(request, { ok: true, quota: { plan: auth.user.plan, limit: auth.user.quotaRequests, used: auth.user.usedRequests, remaining: Math.max(0, auth.user.quotaRequests - auth.user.usedRequests), resetAt: auth.user.quotaResetAt }, usage: rows, members });
         }
         if (action === "members") {
           if (auth.user.role !== "admin") return fail(request, "Akses khusus administrator.", 403);
