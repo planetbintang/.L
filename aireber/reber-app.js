@@ -16,6 +16,39 @@ let currentNode = null;
 let currentView = 'dashboard';
 let store;
 
+
+const AIREBER_DASHBOARD_STARTED = Date.now();
+async function refreshAireberDashboard(){
+  const put=(id,value)=>{const el=document.getElementById(id);if(el)el.textContent=String(value);};
+  const setFeed=(id,rows)=>{const host=document.getElementById(id);if(!host)return;host.replaceChildren();if(!rows.length){const empty=document.createElement('div');empty.className='aireber-feed-empty';empty.textContent='Belum ada catatan aktivitas.';host.append(empty);return;}for(const row of rows){const item=document.createElement('div');item.className='aireber-feed-row';const icon=document.createElement('i');icon.textContent=row.icon||'•';const body=document.createElement('span');const title=document.createElement('b');title.textContent=row.title;const detail=document.createElement('small');detail.textContent=row.detail||'';body.append(title,detail);const time=document.createElement('time');time.textContent=row.time||'';item.append(icon,body,time);host.append(item);}};
+  let files=[],folders=[],storage=null;
+  try{files=await store.list(STORE_ROOT);folders=await store.list(PROJECT_ROOT);}catch(e){}
+  const fileCount=files.filter(x=>x.type==='file').length,folderCount=files.filter(x=>x.type==='directory').length;
+  const projectCount=folders.filter(x=>x.type==='file').length;
+  put('aireberWorkspaceCount',fileCount+folderCount+projectCount);
+  put('aireberWorkspaceMeta',fileCount+' file · '+folderCount+' folder · '+projectCount+' proyek');
+  put('aireberPipelineCount','0');
+  put('aireberLatency','—');
+  put('aireberModelCount','0');
+  put('aireberGpuState','Tidak tersedia');
+  put('aireberRuntimeLabel',window.PBLocalFiles?'File Manager IndexedDB':'IndexedDB browser');
+  put('aireberEngineStatus','Mesin lokal tersedia');
+  put('aireberEngineDetail','Backend model generatif belum tersambung');
+  put('aireberSystemState','RUNTIME LOKAL');
+  const dot=document.getElementById('aireberEngineDot');if(dot)dot.classList.add('is-local');
+  const memory=performance&&performance.memory?performance.memory.usedJSHeapSize:null;
+  put('aireberMemoryState',memory?((memory/1048576).toFixed(0)+' MB'):'Tidak tersedia');
+  const elapsed=Math.max(0,Math.floor((Date.now()-AIREBER_DASHBOARD_STARTED)/60000));put('aireberUptime',elapsed<60?elapsed+' mnt':Math.floor(elapsed/60)+'j '+(elapsed%60)+'m');
+  try{if(navigator.storage?.estimate)storage=await navigator.storage.estimate();}catch(e){}
+  if(storage&&Number.isFinite(storage.usage)){put('aireberStorageUsed',(storage.usage/1073741824).toFixed(2)+' GB');put('aireberStorageMeta','Kuota tersedia '+(storage.quota?(storage.quota/1073741824).toFixed(2)+' GB':'tidak diketahui'));}else{put('aireberStorageUsed','—');put('aireberStorageMeta','Estimasi kuota tidak tersedia');}
+  const activity=[];
+  files.filter(x=>x.type==='file').slice(0,5).forEach(x=>activity.push({icon:'▤',title:x.path.split('/').pop(),detail:'Item workspace lokal',time:'Tersimpan'}));
+  if(projectCount)activity.push({icon:'▦',title:projectCount+' metadata proyek',detail:'Terdaftar di projects lokal',time:'Lokal'});
+  setFeed('aireberRecentActivity',activity.slice(0,6));
+  const alerts=[{icon:'!',title:'Backend model AI belum tersambung',detail:'Chat generatif membutuhkan endpoint backend yang tepercaya.',time:'Konfigurasi',tone:'warning'},{icon:'i',title:'GPU dan metrik performa tidak tersedia',detail:'Browser tidak memberikan telemetri GPU atau latency model.',time:'Runtime',tone:'info'}];
+  setFeed('aireberAlerts',alerts);put('aireberAlertCount',alerts.length+' INFO');
+}
+
 function normalizePath(input) {
   const pieces = String(input ?? '').replaceAll('\\', '/').trim().split('/').filter(Boolean);
   if (pieces.some((part) => part === '.' || part === '..' || /[\u0000-\u001f\u007f]/.test(part))) throw new Error('Path tidak valid.');
@@ -117,7 +150,7 @@ document.addEventListener('planetbintang:theme-change', (event) => {
 
 function setView(view) {
   currentView = view;
-  $$('[data-view-tab]').forEach((button) => {
+  $('[data-view-tab]').forEach((button) => {
     const active = button.dataset.viewTab === view;
     button.classList.toggle('active', active);
     button.setAttribute('aria-selected', String(active));
@@ -318,6 +351,8 @@ async function loadSourceIndex(){
 $('#kataTotal').textContent=`${getTotalKataCount().toLocaleString('id-ID')}+`;
 $('#nextPage').title=`Kategori: ${KATA_CATEGORIES.length}`;
 store=getStore();
+void refreshAireberDashboard();
+
 $('#storageBadge').textContent=window.PBLocalFiles?'FILE MANAGER INDEXEDDB':'INDEXEDDB PERANGKAT';
 void refreshPrompts();
 void loadSourceIndex();
