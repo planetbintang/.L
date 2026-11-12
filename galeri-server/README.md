@@ -33,6 +33,10 @@ Persyaratan: Linux dengan systemd, Node.js 20+, PostgreSQL 14+, Nginx, domain AP
 
 Catatan: domain API dan frontend GitHub Pages berbeda situs. Cookie sesi memakai SameSite=None; Secure; Partitioned untuk mendukung penyimpanan cookie terpartisi pada browser yang kompatibel. Kebijakan browser dapat berbeda; uji login dan refresh sesi pada Android serta desktop. Untuk dukungan lintas-browser yang paling konsisten, gunakan frontend dan API pada domain situs yang sama (mis. www.domain-anda.tld dan api.domain-anda.tld) dan masukkan origin frontend sebenarnya pada ALLOWED_ORIGINS.
 
+## Deploy melalui GitHub Actions (opsional)
+
+Workflow manual berada di .github/workflows/galeri-backend-deploy.yml dan hanya berjalan jika input confirm_production disetujui. Siapkan environment GitHub bernama production dan secrets berikut sebelum menjalankan workflow: GALERI_SSH_HOST, GALERI_SSH_USER, GALERI_SSH_PRIVATE_KEY, GALERI_SSH_KNOWN_HOSTS (host key yang sudah diverifikasi), dan GALERI_API_HEALTH_URL (URL HTTPS lengkap ke /api/v1/health). Akun SSH harus memiliki sudo non-interaktif untuk memasang service. File .env dan data database tidak dikirim dari GitHub. Workflow akan mengirim source, menjalankan installer, lalu memeriksa endpoint health. Jangan menyalakan workflow sebelum database, file environment, TLS, dan host key sudah disiapkan.
+
 ## API v1
 
 - GET /api/v1/health
