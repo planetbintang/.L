@@ -3,7 +3,7 @@ import { createHash, randomBytes, timingSafeEqual, pbkdf2 } from "node:crypto";
 import { promisify } from "node:util";
 import { and, desc, eq, gt, isNull } from "drizzle-orm";
 import { db } from "../../db/index.js";
-import { aireberAudit, aireberFiles, aireberSessions, aireberSettings, aireberUsers } from "../../db/schema.js";
+import { aireberAudit, aireberFiles, aireberSessions, aireberSettings, aireberUsers, aireberUsage } from "../../db/schema.js";
 
 const deriveKey = promisify(pbkdf2);
 const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
@@ -56,6 +56,7 @@ async function issueSession(userId: number) {
 }
 const publicUser = (user: typeof aireberUsers.$inferSelect) => ({
   id: user.id, email: user.email, name: user.displayName, role: user.role,
+  plan: user.plan, quotaRequests: user.quotaRequests, usedRequests: user.usedRequests, quotaResetAt: user.quotaResetAt,
   createdAt: user.createdAt, lastLoginAt: user.lastLoginAt,
 });
 function safePath(input: unknown) {
@@ -87,6 +88,15 @@ export const Route = createFileRoute("/api/account")({
           const rows = await db.select().from(aireberAudit).where(eq(aireberAudit.userId, auth.user.id)).orderBy(desc(aireberAudit.createdAt)).limit(100);
           return json(request, { ok: true, audit: rows });
         }
+        if (action === "usage") {
+          const rows = await db.select().from(aireberUsage).where(eq(aireberUsage.userId, auth.user.id)).orderBy(desc(aireberUsage.createdAt)).limit(100);
+          return json(request, { ok: true, quota: { plan: auth.user.plan, limit: auth.user.quotaRequests, used: auth.user.usedRequests, remaining: Math.max(0, auth.user.quotaRequests - auth.user.usedRequests), resetAt: auth.user.quotaResetAt }, usage: rows });
+        }
+        if (action === "members") {
+          if (auth.user.role !== "admin") return fail(request, "Akses khusus administrator.", 403);
+          const members = await db.select().from(aireberUsers).orderBy(desc(aireberUsers.createdAt)).limit(250);
+          return json(request, { ok: true, members: members.map(publicUser) });
+        }
         return fail(request, "Aksi akun tidak dikenal.", 400);
       },
       POST: async ({ request }) => {
@@ -109,10 +119,11 @@ export const Route = createFileRoute("/api/account")({
           if (existing) return fail(request, "Email sudah terdaftar.", 409);
           const salt = randomBytes(16).toString("hex");
           const passwordHash = await hashPassword(password, salt);
-          const [user] = await db.insert(aireberUsers).values({ email, displayName: name, passwordHash, passwordSalt: salt }).returning();
+          const adminEmails = new Set((process.env.AIREBER_ADMIN_EMAILS || "").split(",").map((v) => v.trim().toLowerCase()).filter(Boolean));
+          const [user] = await db.insert(aireberUsers).values({ email, displayName: name, passwordHash, passwordSalt: salt, role: adminEmails.has(email) ? "admin" : "member" }).returning();
           const token = await issueSession(user.id);
           await audit(user.id, "REGISTER");
-          return json(request, { ok: true, user: publicUser(user), token, expiresIn: SESSION_TTL_MS / 1000 }, { status: 201 });
+          return json(request, { ok: true, user: publicUser(user), token, expiresIn: SESSION_TTL_MS / 1000 }, { status: 201, headers: { "set-cookie": "aireber_session=" + token + "; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=43200" } });
         }
         if (action === "login") {
           const email = clean(body.email, 254).toLowerCase(), password = String(body.password || "");
@@ -123,14 +134,14 @@ export const Route = createFileRoute("/api/account")({
           const token = await issueSession(user.id);
           await db.update(aireberUsers).set({ lastLoginAt: new Date(), updatedAt: new Date() }).where(eq(aireberUsers.id, user.id));
           await audit(user.id, "LOGIN_SUCCESS");
-          return json(request, { ok: true, user: publicUser(user), token, expiresIn: SESSION_TTL_MS / 1000 });
+          return json(request, { ok: true, user: publicUser(user), token, expiresIn: SESSION_TTL_MS / 1000 }, { headers: { "set-cookie": "aireber_session=" + token + "; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=43200" } });
         }
         const auth = await currentUser(request);
         if (!auth) return fail(request, "Silakan login kembali.", 401);
         if (action === "logout") {
           await db.update(aireberSessions).set({ revokedAt: new Date() }).where(eq(aireberSessions.id, auth.session.id));
           await audit(auth.user.id, "LOGOUT");
-          return json(request, { ok: true });
+          return json(request, { ok: true }, { headers: { "set-cookie": "aireber_session=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0" } });
         }
         if (action === "update-profile") {
           const name = clean(body.name, 80);
@@ -157,6 +168,16 @@ export const Route = createFileRoute("/api/account")({
             .onConflictDoUpdate({ target: [aireberFiles.userId, aireberFiles.path], set: { name, content, mime, size, updatedAt: new Date(), metadata: body.metadata && typeof body.metadata === "object" ? body.metadata : {} } }).returning();
           await audit(auth.user.id, "SAVE_FILE", { path, size });
           return json(request, { ok: true, file }, { status: 201 });
+        }
+        if (action === "update-member") {
+          if (auth.user.role !== "admin") return fail(request, "Akses khusus administrator.", 403);
+          const id = Number(body.id), plan = clean(body.plan, 24), status = clean(body.status, 24);
+          const plans: Record<string, number> = { free: 30, creator: 500, pro: 3000, enterprise: 30000 };
+          if (!Number.isSafeInteger(id) || id < 1 || !(plan in plans) || !["active", "suspended"].includes(status)) return fail(request, "Data keanggotaan tidak valid.", 400);
+          const [member] = await db.update(aireberUsers).set({ plan, quotaRequests: plans[plan], usedRequests: 0, quotaResetAt: new Date(), status, updatedAt: new Date() }).where(eq(aireberUsers.id, id)).returning();
+          if (!member) return fail(request, "Pengguna tidak ditemukan.", 404);
+          await audit(auth.user.id, "ADMIN_UPDATE_MEMBER", { memberId: id, plan, status });
+          return json(request, { ok: true, member: publicUser(member) });
         }
         if (action === "delete-file") {
           const id = Number(body.id);
