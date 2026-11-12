@@ -77,7 +77,7 @@ async function audit(client, auth, action, resourceType, resourceId, metadata = 
 async function writeFileRecord(client, auth, filePath, name, content, contentType = 'application/reic+json') {
   const size = Buffer.byteLength(content, 'utf8');
   await client.query(
-    'INSERT INTO file_manager_entries (tenant_id,created_by,path,name,entry_kind,content_type,content,byte_size,updated_at) VALUES ($1,$2,$3,$4,\\'file\\',$5,$6,$7,now()) ON CONFLICT (tenant_id,path) DO UPDATE SET name=EXCLUDED.name,content_type=EXCLUDED.content_type,content=EXCLUDED.content,byte_size=EXCLUDED.byte_size,updated_at=now()',
+    'INSERT INTO file_manager_entries (tenant_id,created_by,path,name,entry_kind,content_type,content,byte_size,updated_at) VALUES ($1,$2,$3,$4,\'file\',$5,$6,$7,now()) ON CONFLICT (tenant_id,path) DO UPDATE SET name=EXCLUDED.name,content_type=EXCLUDED.content_type,content=EXCLUDED.content,byte_size=EXCLUDED.byte_size,updated_at=now()',
     [auth.tenant_id, auth.user_id, filePath, name, contentType, content, size]
   );
 }
@@ -85,7 +85,7 @@ async function authenticate(req, client) {
   const token = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
   if (token.length < 40) return null;
   const result = await client.query(
-    'SELECT s.id AS session_id,s.expires_at,u.id AS user_id,u.email,u.display_name,u.status,u.profile,u.created_at,t.id AS tenant_id,t.name AS tenant_name,t.slug,m.role FROM auth_sessions s JOIN users u ON u.id=s.user_id JOIN tenant_memberships m ON m.user_id=u.id JOIN tenants t ON t.id=m.tenant_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND u.status=\\'active\\' ORDER BY m.created_at ASC LIMIT 1',
+    'SELECT s.id AS session_id,s.expires_at,u.id AS user_id,u.email,u.display_name,u.status,u.profile,u.created_at,t.id AS tenant_id,t.name AS tenant_name,t.slug,m.role FROM auth_sessions s JOIN users u ON u.id=s.user_id JOIN tenant_memberships m ON m.user_id=u.id JOIN tenants t ON t.id=m.tenant_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND u.status=\'active\' ORDER BY m.created_at ASC LIMIT 1',
     [sha256(token)]
   );
   return result.rows[0] || null;
@@ -129,17 +129,17 @@ export default async function handler(req, res) {
       const email = String(body.email || '').trim().toLowerCase();
       const displayName = String(body.displayName || body.name || '').trim();
       const password = String(body.password || '');
-      if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email) || email.length > 254) return json(res, 400, { error: 'Alamat email tidak valid.' });
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) return json(res, 400, { error: 'Alamat email tidak valid.' });
       if (displayName.length < 2 || displayName.length > 100) return json(res, 400, { error: 'Nama harus berisi 2–100 karakter.' });
       if (password.length < 12 || password.length > 128) return json(res, 400, { error: 'Kata sandi harus berisi 12–128 karakter.' });
       if ((await client.query('SELECT id FROM users WHERE email=$1', [email])).rowCount) return json(res, 409, { error: 'Email sudah terdaftar. Silakan login.' });
       const result = await transaction(db, async (tx) => {
         const workspaceName = String(body.workspaceName || (displayName + ' Workspace')).trim().slice(0, 160);
-        const user = (await tx.query('INSERT INTO users (email,display_name,status,password_hash,profile) VALUES ($1,$2,\\'active\\',$3,$4::jsonb) RETURNING *', [email, displayName, await hashPassword(password), JSON.stringify({ company: '', phone: '', timezone: 'Asia/Jakarta' })])).rows[0];
+        const user = (await tx.query('INSERT INTO users (email,display_name,status,password_hash,profile) VALUES ($1,$2,\'active\',$3,$4::jsonb) RETURNING *', [email, displayName, await hashPassword(password), JSON.stringify({ company: '', phone: '', timezone: 'Asia/Jakarta' })])).rows[0];
         let slug = slugify(workspaceName);
         if ((await tx.query('SELECT 1 FROM tenants WHERE slug=$1', [slug])).rowCount) slug += '-' + crypto.randomBytes(3).toString('hex');
         const tenant = (await tx.query('INSERT INTO tenants (name,slug) VALUES ($1,$2) RETURNING *', [workspaceName, slug])).rows[0];
-        await tx.query('INSERT INTO tenant_memberships (tenant_id,user_id,role) VALUES ($1,$2,\\'owner\\')', [tenant.id, user.id]);
+        await tx.query('INSERT INTO tenant_memberships (tenant_id,user_id,role) VALUES ($1,$2,\'owner\')', [tenant.id, user.id]);
         const session = await createSession(tx, user.id);
         const auth = { tenant_id: tenant.id, user_id: user.id };
         await writeFileRecord(tx, auth, 'hosting/accounts/profiles/' + user.id + '.reic', user.id + '.reic', JSON.stringify({ schema: 'PB.HOSTING.PROFILE/2', userId: user.id, displayName, company: '', phone: '', timezone: 'Asia/Jakarta', updatedAt: now() }, null, 2));
@@ -170,7 +170,7 @@ export default async function handler(req, res) {
     }
     if (route === 'account/overview' && req.method === 'GET') {
       const [services, files, activity] = await Promise.all([
-        client.query('SELECT count(*)::int AS total,count(*) FILTER (WHERE status=\\'active\\')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>\\'deleted\\'', [auth.tenant_id]),
+        client.query('SELECT count(*)::int AS total,count(*) FILTER (WHERE status=\'active\')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>\'deleted\'', [auth.tenant_id]),
         client.query('SELECT count(*)::int AS total,coalesce(sum(byte_size),0)::bigint AS bytes FROM file_manager_entries WHERE tenant_id=$1', [auth.tenant_id]),
         client.query('SELECT action,resource_type,resource_id,metadata,created_at FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 8', [auth.tenant_id])
       ]);
@@ -199,7 +199,7 @@ export default async function handler(req, res) {
       return json(res, 200, { updated: true });
     }
     if (route === 'services' && req.method === 'GET') {
-      const rows = await client.query('SELECT id,service_type AS type,name,status,notes,configuration,created_at,updated_at FROM hosting_services WHERE tenant_id=$1 AND status<>\\'deleted\\' ORDER BY created_at DESC', [auth.tenant_id]);
+      const rows = await client.query('SELECT id,service_type AS type,name,status,notes,configuration,created_at,updated_at FROM hosting_services WHERE tenant_id=$1 AND status<>\'deleted\' ORDER BY created_at DESC', [auth.tenant_id]);
       return json(res, 200, { services: rows.rows });
     }
     if (route === 'services' && req.method === 'POST') {
@@ -208,7 +208,7 @@ export default async function handler(req, res) {
       if (!SERVICE_TYPES.has(type)) return json(res, 400, { error: 'Jenis resource hosting tidak dikenal.' });
       if (name.length < 1 || name.length > 180) return json(res, 400, { error: 'Nama layanan harus berisi 1–180 karakter.' });
       const notes = String(body.notes || '').slice(0, 2000), configuration = body.configuration && typeof body.configuration === 'object' ? body.configuration : {};
-      const row = (await client.query('INSERT INTO hosting_services (tenant_id,created_by,service_type,name,status,notes,configuration) VALUES ($1,$2,$3,$4,\\'planned\\',$5,$6::jsonb) RETURNING id,service_type AS type,name,status,notes,configuration,created_at,updated_at', [auth.tenant_id, auth.user_id, type, name, notes, JSON.stringify(configuration)])).rows[0];
+      const row = (await client.query('INSERT INTO hosting_services (tenant_id,created_by,service_type,name,status,notes,configuration) VALUES ($1,$2,$3,$4,\'planned\',$5,$6::jsonb) RETURNING id,service_type AS type,name,status,notes,configuration,created_at,updated_at', [auth.tenant_id, auth.user_id, type, name, notes, JSON.stringify(configuration)])).rows[0];
       const filePath = 'hosting/accounts/services/' + auth.tenant_id + '/' + row.id + '.reic';
       await writeFileRecord(client, auth, filePath, row.id + '.reic', JSON.stringify({ schema: 'PB.HOSTING.SERVICE/2', ...row, tenantId: auth.tenant_id }, null, 2));
       await audit(client, auth, 'service.create', 'hosting_service', row.id, { type, name });
@@ -217,7 +217,7 @@ export default async function handler(req, res) {
     const serviceMatch = route.startsWith('services/') && /^[0-9a-f-]{36}$/i.test(route.slice(9)) ? [route, route.slice(9)] : null;
     if (serviceMatch && req.method === 'PUT') {
       requireRole(auth);
-      const body = await readBody(req), existing = await client.query('SELECT id,service_type AS type,name,status,notes,configuration,created_at,updated_at FROM hosting_services WHERE id=$1 AND tenant_id=$2 AND status<>\\'deleted\\'', [serviceMatch[1], auth.tenant_id]);
+      const body = await readBody(req), existing = await client.query('SELECT id,service_type AS type,name,status,notes,configuration,created_at,updated_at FROM hosting_services WHERE id=$1 AND tenant_id=$2 AND status<>\'deleted\'', [serviceMatch[1], auth.tenant_id]);
       if (!existing.rowCount) return json(res, 404, { error: 'Resource hosting tidak ditemukan.' });
       const old = existing.rows[0], name = body.name === undefined ? old.name : String(body.name).trim(), status = body.status === undefined ? old.status : String(body.status);
       if (name.length < 1 || name.length > 180 || !SERVICE_STATES.has(status)) return json(res, 400, { error: 'Nama atau status resource tidak valid.' });
@@ -231,7 +231,7 @@ export default async function handler(req, res) {
     }
     if (serviceMatch && req.method === 'DELETE') {
       requireRole(auth);
-      const found = await client.query('UPDATE hosting_services SET status=\\'deleted\\',updated_at=now() WHERE id=$1 AND tenant_id=$2 AND status<>\\'deleted\\' RETURNING id,service_type AS type,name,status,notes,configuration,created_at,updated_at', [serviceMatch[1], auth.tenant_id]);
+      const found = await client.query('UPDATE hosting_services SET status=\'deleted\',updated_at=now() WHERE id=$1 AND tenant_id=$2 AND status<>\'deleted\' RETURNING id,service_type AS type,name,status,notes,configuration,created_at,updated_at', [serviceMatch[1], auth.tenant_id]);
       if (!found.rowCount) return json(res, 404, { error: 'Resource hosting tidak ditemukan.' });
       const row = found.rows[0], filePath = 'hosting/accounts/services/' + auth.tenant_id + '/' + row.id + '.reic';
       await writeFileRecord(client, auth, filePath, row.id + '.reic', JSON.stringify({ schema: 'PB.HOSTING.SERVICE/2', ...row, tenantId: auth.tenant_id }, null, 2));
@@ -256,7 +256,7 @@ export default async function handler(req, res) {
       const filePath = safePath(body.path);
       if (!filePath.startsWith('hosting/accounts/')) return json(res, 400, { error: 'File hanya boleh dibuat di ruang akun hosting.' });
       if (!name || name.length > 180 || Buffer.byteLength(content,'utf8') > 512 * 1024) return json(res, 400, { error: 'Nama file atau ukuran konten tidak valid (maksimum 512 KB).' });
-      const row = (await client.query('INSERT INTO file_manager_entries (tenant_id,created_by,path,name,entry_kind,content_type,content,byte_size,metadata) VALUES ($1,$2,$3,$4,\\'file\\',$5,$6,$7,$8::jsonb) RETURNING id,path,name,entry_kind AS type,content_type,byte_size AS size,updated_at', [auth.tenant_id,auth.user_id,filePath,name,String(body.contentType||'application/reic+json'),content,Buffer.byteLength(content,'utf8'),JSON.stringify(body.metadata||{})])).rows[0];
+      const row = (await client.query('INSERT INTO file_manager_entries (tenant_id,created_by,path,name,entry_kind,content_type,content,byte_size,metadata) VALUES ($1,$2,$3,$4,\'file\',$5,$6,$7,$8::jsonb) RETURNING id,path,name,entry_kind AS type,content_type,byte_size AS size,updated_at', [auth.tenant_id,auth.user_id,filePath,name,String(body.contentType||'application/reic+json'),content,Buffer.byteLength(content,'utf8'),JSON.stringify(body.metadata||{})])).rows[0];
       await audit(client,auth,'file.create','file_manager_entry',row.id,{path:filePath});
       return json(res,201,{file:row});
     }
