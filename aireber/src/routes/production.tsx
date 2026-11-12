@@ -17,6 +17,7 @@ function ProductionPage() {
   const [authorized, setAuthorized] = useState(false);
   const [checking, setChecking] = useState(true);
   const [accountName, setAccountName] = useState("");
+  const [saveStatus, setSaveStatus] = useState("");
   const { messages, sendMessage, isLoading, stop } = useReberAI();
   const activeMode = useMemo(() => MODES.find((item) => item.id === mode)!, [mode]);
 
@@ -34,6 +35,22 @@ function ProductionPage() {
     if (!prompt.trim() || isLoading || !authorized) return;
     sendMessage(activeMode.prompt + "\n\n" + prompt.trim() + "\n\nOutputkan hasil produksi secara terstruktur. Berikan file dan kode yang saling terhubung, jelaskan dependensi, cara menjalankan, pengujian, serta batasan integrasi yang belum memiliki kredensial. Jangan mengklaim deployment atau pembayaran sudah aktif jika belum dikonfigurasi.");
   };
+  
+  const saveOutput = async () => {
+    const token = window.localStorage.getItem("aireber.account.token.v1");
+    const output = messages.filter((message) => message.role === "assistant").flatMap((message) => message.parts.filter((part) => part.type === "text" && part.content).map((part) => part.content)).join("\n\n");
+    if (!token || !output.trim()) return;
+    setSaveStatus("Menyimpan hasil ke File Manager…");
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const filename = "production-" + mode + "-" + stamp + ".md";
+    try {
+      const response = await fetch("/api/account", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + token }, body: JSON.stringify({ action: "save-file", path: "aireber/workspace/production/" + filename, name: filename, content: output, mime: "text/markdown;charset=utf-8", metadata: { module: "ai-production", mode } }) });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || "File gagal disimpan.");
+      setSaveStatus("Hasil tersimpan di File Manager: " + data.file.path);
+    } catch (error) { setSaveStatus(error instanceof Error ? error.message : "Gagal menyimpan hasil."); }
+  };
+
 
   return (
     <main className="production-shell">
@@ -53,7 +70,7 @@ function ProductionPage() {
           <div className="production-workbench-head"><div><p className="account-eyebrow">MODE TERPILIH</p><h2>{activeMode.title}</h2><p>{activeMode.subtitle}</p></div><span className="production-engine">REBER AI ENGINE</span></div>
           <label className="production-prompt-label" htmlFor="production-prompt">Jelaskan produk yang ingin dibuat</label>
           <textarea id="production-prompt" rows={7} value={prompt} onChange={(event) => setPrompt(event.target.value)} placeholder="Contoh: Buat website layanan hosting dengan halaman harga, registrasi anggota, dashboard pelanggan, pengelolaan domain, dan sistem kuota." />
-          <div className="production-actions"><span>Permintaan dihitung sebagai 1 unit kuota AI.</span><div><button className="reber-btn reber-btn-ghost" onClick={() => setPrompt("")}>Bersihkan</button>{isLoading ? <button className="account-primary" onClick={stop}>Hentikan</button> : <button className="account-primary" disabled={!authorized || !prompt.trim()} onClick={produce}>Mulai Produksi AI →</button>}</div></div>
+          <div className="production-actions"><span>Permintaan dihitung sebagai 1 unit kuota AI.</span><div><button className="reber-btn reber-btn-ghost" onClick={() => setPrompt("")}>Bersihkan</button><button className="reber-btn reber-btn-ghost" disabled={isLoading || !messages.some((message) => message.role === "assistant")} onClick={() => void saveOutput()}>Simpan hasil ke File Manager</button>{isLoading ? <button className="account-primary" onClick={stop}>Hentikan</button> : <button className="account-primary" disabled={!authorized || !prompt.trim()} onClick={produce}>Mulai Produksi AI →</button>}</div></div><p className="account-status" role="status">{saveStatus}</p>
           <div className="production-result">
             <div className="production-result-head"><b>HASIL PRODUKSI</b><span>{isLoading ? "GENERATING…" : messages.length ? "OUTPUT" : "MENUNGGU BRIEF"}</span></div>
             {messages.length ? <div className="production-messages">{messages.map((message) => <article key={message.id} className={"production-message " + message.role}><small>{message.role === "assistant" ? "AIREBER AI" : "BRIEF PENGGUNA"}</small>{message.parts.map((part, index) => part.type === "text" && part.content ? <div key={index} className="prose prose-sm max-w-none"><Streamdown>{part.content}</Streamdown></div> : null)}</article>)}</div> : <div className="production-empty"><span>✧</span><b>Hasil produksi akan tampil di sini</b><small>Pilih jenis AI, tulis brief, lalu jalankan proses produksi.</small></div>}
