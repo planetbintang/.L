@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   KATA_CATEGORIES,
   getTotalKataCount,
@@ -494,6 +494,9 @@ function FileManager() {
           <Breadcrumb path={currentPath} onNavigate={handleNavigate} />
 
           <div style={{ display: "flex", gap: 4, marginLeft: "auto" }}>
+            <Link to="/account" className="reber-btn reber-btn-ghost" style={{ fontSize: 12, padding: "6px 10px", textDecoration: "none" }}>
+              Akun &amp; File AIREBER
+            </Link>
             <button
               className={`reber-btn reber-btn-ghost`}
               style={{ fontSize: 12, padding: "6px 10px" }}
