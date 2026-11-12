@@ -9,6 +9,7 @@
   <link rel="icon" href="../system-icon.png" />
   <link rel="stylesheet" href="./reber.css?v=20261027-search-ai-unified-v1" />
   <link rel="stylesheet" href="./reber-dashboard.css?v=20261104-reber-dashboard-v1" />
+  <link rel="stylesheet" href="./aireber-dashboard-home.css?v=20261113-login-dashboard-v1" />
   <link rel="stylesheet" href="./ai-capability-dashboard.css?v=20261104-ai-runtime-v2" />
   <link rel="stylesheet" href="../shared-osmediavm-theme.css?v=20261029-shared-v1" />
 </head>
@@ -19,6 +20,7 @@
         <span class="brand-mark brand-mark-image"><img src="./reber-brand.svg" alt="" /></span><span><b>AI REBER</b><small>ALLUNIVERS_OS · LOCAL CHAT ENGINE</small></span>
       </a>
       <nav class="tabs" role="tablist" aria-label="Menu AI Reber">
+        <button type="button" id="tab-dashboard" role="tab" aria-controls="view-dashboard" aria-selected="true" tabindex="0" data-view-tab="dashboard" class="active">Dashboard</button>
         <button type="button" id="tab-studio" role="tab" aria-controls="view-studio" aria-selected="false" tabindex="-1" data-view-tab="studio">Studio</button>
         <button type="button" id="tab-chat" role="tab" aria-controls="view-chat" aria-selected="true" tabindex="0" data-view-tab="chat" class="active">Chat Reber</button>
         <button type="button" id="tab-filesystem" role="tab" aria-controls="view-filesystem" aria-selected="false" tabindex="-1" data-view-tab="filesystem">File System</button>
@@ -87,7 +89,13 @@
       </aside>
 
       <main class="main-area">
-        <section class="view-panel active" id="view-studio" data-view="studio" role="tabpanel" aria-labelledby="tab-studio" hidden tabindex="0">
+        <section class="view-panel active" id="view-dashboard" data-view="dashboard" role="tabpanel" aria-labelledby="tab-dashboard" tabindex="0">
+<div class="aireber-welcome"><div><p class="eyebrow">AIREBER / AI OPERATIONS CENTER</p><h1>Selamat datang kembali.</h1><p>Ringkasan pusat kerja AI, model, data, alur kerja, dan aktivitas Aireber.</p></div><span class="aireber-session-chip"><i></i> WORKSPACE SIAP</span></div>
+<div class="aireber-kpi-grid"><article class="aireber-kpi"><span>STATUS MESIN AI</span><strong>LOKAL</strong><small>Backend model: belum dikonfigurasi</small></article><article class="aireber-kpi"><span>MODEL TERHUBUNG</span><strong>0</strong><small>Belum ada provider aktif</small></article><article class="aireber-kpi"><span>WORKSPACE DATA</span><strong>SIAP</strong><small>Penyimpanan browser / perangkat</small></article><article class="aireber-kpi"><span>STATUS PIPELINE</span><strong>0</strong><small>Belum ada workflow berjalan</small></article></div>
+<div class="aireber-dashboard-grid"><section class="aireber-panel"><div class="aireber-panel-head"><div><span>ANALITIK</span><h2>Aktivitas Workspace</h2></div><small>Menunggu data runtime</small></div><div class="aireber-empty-chart"><div class="aireber-chart-grid"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div><div class="aireber-chart-placeholder"><span>Grafik akan tampil setelah aktivitas tercatat</span></div></div><div class="aireber-chart-legend"><i></i> Aktivitas lokal <i></i> Proses AI</div></section><section class="aireber-panel"><div class="aireber-panel-head"><div><span>OPERASI AI</span><h2>Distribusi Sistem</h2></div></div><div class="aireber-module-list"><div><b>Manajemen AI</b><span>Model, evaluasi, penerapan</span></div><div><b>Data &amp; Fitur</b><span>Dataset, penyimpanan, monitor</span></div><div><b>Integrasi</b><span>API, konektor, cloud, ERP</span></div><div><b>Tata Kelola</b><span>Akses, audit, kepatuhan</span></div></div></section></div>
+<div class="aireber-lower-grid"><section class="aireber-panel"><div class="aireber-panel-head"><div><span>AKSES CEPAT</span><h2>Ruang Kerja AI</h2></div></div><div class="aireber-quick-grid"><button type="button" data-view-tab="chat"><b>AI Chat</b><small>Mulai percakapan</small></button><button type="button" data-view-tab="studio"><b>Prompt Studio</b><small>Susun prompt</small></button><button type="button" data-view-tab="ai-tools"><b>Manajemen AI</b><small>Fitur dan tindakan</small></button><button type="button" data-view-tab="filesystem"><b>Data &amp; File</b><small>Kelola workspace</small></button><button type="button" data-view-tab="projects"><b>Projects</b><small>Kelola proyek</small></button><button type="button" data-view-tab="config"><b>Konfigurasi</b><small>Atur mesin AI</small></button></div></section><section class="aireber-panel"><div class="aireber-panel-head"><div><span>PEMANTAUAN</span><h2>Aktivitas &amp; Peringatan</h2></div></div><div class="aireber-alert"><b>Backend AI belum terhubung</b><p>Hubungkan layanan model melalui konfigurasi backend tepercaya untuk mengaktifkan inferensi AI.</p><button type="button" data-view-tab="config">Buka Konfigurasi →</button></div><div class="aireber-alert is-muted"><b>Data operasional belum tersedia</b><p>Statistik akan diisi dari aktivitas nyata, bukan angka contoh.</p></div></section></div>
+</section>
+<section class="view-panel active" id="view-studio" data-view="studio" role="tabpanel" aria-labelledby="tab-studio" hidden tabindex="0">
           <div class="view-heading"><div><p class="eyebrow">AI STUDIO / LOCAL PROMPT DESK</p><h2 id="studioTitle">Studio Reber</h2><p>Prompt disimpan sebagai file di Workspace File Manager. Tidak dikirim ke model dan tidak ada jawaban AI yang disimulasikan.</p></div><span class="status-tag">MODEL OFFLINE</span></div>
           <div class="studio-grid">
             <div class="chat-panel surface">
