@@ -103,7 +103,7 @@ const server=http.createServer(async(req,res)=>{
    if(!canManage(user))return json(res,403,{error:'Akses Admin/Editor diperlukan'});
    if(req.method==='GET'&&p==='/api/v1/admin/media'){
     const q=await pool.query(`SELECT m.id,m.title,m.description,m.media_type AS type,m.placement,m.status,m.mime_type,m.size_bytes,m.created_at,m.updated_at,m.published_at,m.uploaded_at,u.email AS owner_email,pr.display_name AS owner_name FROM galeri.media m JOIN galeri.users u ON u.id=m.owner_id LEFT JOIN galeri.profiles pr ON pr.user_id=u.id ORDER BY m.updated_at DESC LIMIT 500`);
-    const quota=await pool.query("SELECT (COALESCE((SELECT SUM(used_bytes) FROM galeri.storage_quotas),0)+COALESCE((SELECT SUM(size_bytes) FROM galeri.media WHERE uploaded_at IS NOT NULL),0))::text AS used");return json(res,200,{items:q.rows,storage_used_label:(Number(quota.rows[0].used)/1073741824).toFixed(2)+' GB'});
+    const quota=await pool.query("SELECT COALESCE(SUM(used_bytes),0)::text AS used FROM galeri.storage_quotas");return json(res,200,{items:q.rows,storage_used_label:(Number(quota.rows[0].used)/1073741824).toFixed(2)+' GB'});
    }
    if(req.method==='POST'&&p==='/api/v1/admin/media'){
     const b=await readJson(req),title=String(b.title||'').trim().slice(0,120),description=String(b.description||'').trim().slice(0,1000),type=String(b.type||'image'),placement=String(b.placement||'gallery'),status=String(b.status||'draft'),fileName=path.basename(String(b.fileName||'')).slice(0,240),size=Number(b.sizeBytes),mime=String(b.mimeType||'');
