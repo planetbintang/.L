@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#06123c"><title>RILE · PlanetBintang</title>
+<link rel="stylesheet" href="./rile.css">
+</head>
+<body>
+<div class="rile-shell">
+<header class="top"><a class="brand" href="../">PLANETBINTANG <b>.</b></a><div class="top-meta"><span class="pulse"></span><span id="connection">MENGHUBUNGKAN KE GITHUB</span><time id="clock">—</time></div></header>
+<main>
+<section class="hero"><div><p class="eyebrow">. / ROOT SYSTEM / DELIVERY INTELLIGENCE</p><h1>RILE<span>.</span></h1><p class="intro">Pusat pemantauan deployment pipeline dan workflow seluruh sistem PlanetBintang.</p></div><div class="hero-mark" aria-hidden="true"><i>.</i><i>.</i><i>.</i><i>.</i><i>.</i><i>.</i><i>.</i><i>.</i><i>.</i></div></section>
+<section class="metrics" aria-label="Ringkasan pipeline">
+<article><small>REPOSITORI TERJANGKAU</small><strong id="repoCount">—</strong><span id="repoNote">Menunggu indeks</span></article>
+<article><small>WORKFLOW TERINDEKS</small><strong id="workflowCount">—</strong><span>Workflow yang ditemukan</span></article>
+<article><small>RUN BERHASIL</small><strong id="successCount">—</strong><span>Dalam data tersinkron</span></article>
+<article><small>RUN GAGAL</small><strong id="failureCount">—</strong><span>Perlu pemeriksaan</span></article>
+</section>
+<section class="panel">
+<div class="panel-head"><div><p class="eyebrow">. / LIVE DEPLOYMENT</p><h2>Daftar deploy pipeline</h2></div><div class="actions"><span id="updated">BELUM DIPERBARUI</span><button id="refresh" type="button">SEGARKAN ↻</button></div></div>
+<div class="filters"><input id="filter" type="search" placeholder="Cari repositori atau workflow…" aria-label="Cari repositori atau workflow"><select id="state" aria-label="Filter status"><option value="all">SEMUA STATUS</option><option value="success">BERHASIL</option><option value="failure">GAGAL</option><option value="in_progress">BERJALAN</option><option value="queued">ANTRE</option><option value="unknown">LAINNYA</option></select></div>
+<div class="table-wrap"><table><thead><tr><th>REPOSITORY / WORKFLOW</th><th>BRANCH</th><th>STATUS</th><th>TRIGGER</th><th>WAKTU</th><th>DETAIL</th></tr></thead><tbody id="runs"><tr><td colspan="6" class="empty">Mengambil data workflow GitHub…</td></tr></tbody></table></div>
+<p class="footnote" id="coverage">Data akan ditampilkan sesuai akses API GitHub. Repositori privat memerlukan token pada sinkronisasi backend.</p>
+</section>
+<section class="panel chart-panel">
+<div class="panel-head"><div><p class="eyebrow">. / INPUT × OUTPUT</p><h2>Indeks aktivitas pipeline</h2></div><label class="period">PERIODE <select id="period"><option value="minute">PER MENIT</option><option value="hour" selected>PER JAM</option><option value="day">PER HARI</option><option value="week">PER MINGGU</option><option value="year">PER TAHUN</option><option value="quarter">PER KUADRATTAHUN</option></select></label></div>
+<div class="chart-legend"><span><i class="in"></i> INPUT · WORKFLOW RUN</span><span><i class="out"></i> OUTPUT · HASIL SELESAI</span></div>
+<div class="chart-wrap"><svg id="activityChart" viewBox="0 0 900 250" role="img" aria-label="Grafik aktivitas input dan output pipeline"><text x="450" y="125" text-anchor="middle">Menunggu data pipeline</text></svg></div>
+<div class="chart-summary"><span>INPUT <b id="inputTotal">0</b></span><span>OUTPUT <b id="outputTotal">0</b></span><span>RENTANG <b id="rangeLabel">60 MENIT</b></span></div>
+</section>
+<footer>RILE <b>.</b> · PLANETBINTANG SYSTEM INTELLIGENCE <span id="source">SUMBER: GITHUB ACTIONS API</span></footer>
+</main></div><script src="./rile.js" defer></script>
+</body></html>
