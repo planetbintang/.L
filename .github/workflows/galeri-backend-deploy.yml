@@ -1,0 +1,72 @@
+name: GALERI Backend Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_production:
+        description: "Confirm deployment to the PlanetBintang production server"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: \${{ inputs.confirm_production == true }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate deployment secrets
+        env:
+          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
+          SSH_PRIVATE_KEY: \${{ secrets.GALERI_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: \${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
+          HEALTH_URL: \${{ secrets.GALERI_API_HEALTH_URL }}
+        run: |
+          set -euo pipefail
+          for name in SSH_HOST SSH_USER SSH_PRIVATE_KEY SSH_KNOWN_HOSTS HEALTH_URL; do
+            if [[ -z "\${!name}" ]]; then echo "Missing repository/environment secret: $name"; exit 1; fi
+          done
+          [[ "$HEALTH_URL" == https://* ]] || { echo "Health URL must use HTTPS"; exit 1; }
+
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: \${{ secrets.GALERI_SSH_PRIVATE_KEY }}
+
+      - name: Pin server host key
+        env:
+          SSH_KNOWN_HOSTS: \${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Transfer backend source
+        env:
+          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
+        run: |
+          set -euo pipefail
+          tar --exclude='.env' --exclude='node_modules' -czf - -C galeri-server . |
+            ssh "$SSH_USER@$SSH_HOST" 'sudo mkdir -p /opt/planetbintang/galeri-server && sudo tar -xzf - -C /opt/planetbintang/galeri-server'
+
+      - name: Install and restart service
+        env:
+          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
+        run: |
+          ssh "$SSH_USER@$SSH_HOST" 'sudo bash /opt/planetbintang/galeri-server/deploy/install.sh'
+
+      - name: Verify production health
+        env:
+          HEALTH_URL: \${{ secrets.GALERI_API_HEALTH_URL }}
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --retry 8 --retry-delay 5 "$HEALTH_URL"
