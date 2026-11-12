@@ -86,7 +86,7 @@ if(req.method==='POST'&&p==='/api/auth/register'){
  if(password.length<12||password.length>128)return send(res,400,{error:'Kata sandi harus berisi 12–128 karakter.'});
  if(db.users.some(x=>x.email===email))return send(res,409,{error:'Email sudah terdaftar. Silakan login.'});
  const now=iso(),user={id:crypto.randomUUID(),email,displayName,status:'active',passwordHash:await hashPassword(password),profile:{company:'',phone:'',timezone:'Asia/Jakarta'},createdAt:now,updatedAt:now};
- const tenant={id:crypto.randomUUID(),name:String(b.workspaceName||displayName+' Workspace').trim().slice(0,160),slug:accountSlug(b.workspaceName||displayName),createdAt:now};
+ const workspaceName=String(b.workspaceName||'').trim()||displayName+' Workspace';const tenant={id:crypto.randomUUID(),name:workspaceName.slice(0,160),slug:accountSlug(workspaceName),createdAt:now};
  if(db.tenants.some(x=>x.slug===tenant.slug))tenant.slug=tenant.slug+'-'+crypto.randomBytes(3).toString('hex');
  db.users.push(user);db.tenants.push(tenant);db.memberships.push({tenantId:tenant.id,userId:user.id,role:'owner',createdAt:now});
  const issued=await createSession(user),auth={user,tenant,membership:db.memberships.at(-1)};
