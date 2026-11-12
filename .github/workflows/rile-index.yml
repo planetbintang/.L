@@ -1,0 +1,49 @@
+name: RILE · PlanetBintang Live Workflow Index
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+  push:
+    branches: [io]
+    paths:
+      - "scripts/build-rile-index.mjs"
+      - ".github/workflows/rile-index.yml"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: rile-live-index
+  cancel-in-progress: true
+
+jobs:
+  refresh-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout PlanetBintang
+        uses: actions/checkout@v4
+        with:
+          ref: io
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Collect public PlanetBintang repositories and Actions
+        env:
+          GITHUB_OWNER: planetbintang
+          GH_TOKEN: ${{ secrets.PLANETBINTANG_GH_TOKEN || github.token }}
+        run: node scripts/build-rile-index.mjs
+      - name: Commit refreshed RILE data when changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rile/data/index.json
+          if git diff --cached --quiet; then
+            echo "RILE index unchanged"
+          else
+            git commit -m "chore(rile): refresh live workflow index"
+            git push origin HEAD:io
+          fi
