@@ -18,6 +18,7 @@ import { Route as ApiFilesystemRouteImport } from './routes/api.filesystem'
 import { Route as ApiChatRouteImport } from './routes/api.chat'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as ApiAccountRouteImport } from './routes/api.account'
+import { Route as ProductionRouteImport } from './routes/production'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -64,6 +65,11 @@ const ApiAccountRoute = ApiAccountRouteImport.update({
   path: '/api/account',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductionRoute = ProductionRouteImport.update({
+  id: '/production',
+  path: '/production',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
   '/account': typeof AccountRoute
+  '/production': typeof ProductionRoute
   '/api/account': typeof ApiAccountRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
   '/account': typeof AccountRoute
+  '/production': typeof ProductionRoute
   '/api/account': typeof ApiAccountRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
   '/account': typeof AccountRoute
+  '/production': typeof ProductionRoute
   '/api/account': typeof ApiAccountRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/api/projects'
     | '/api/reber'
     | '/account'
+    | '/production'
     | '/api/account'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/api/projects'
     | '/api/reber'
     | '/account'
+    | '/production'
     | '/api/account'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/api/projects'
     | '/api/reber'
     | '/account'
+    | '/production'
     | '/api/account'
   fileRoutesById: FileRoutesById
 }
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   ApiReberRoute: typeof ApiReberRoute
   AccountRoute: typeof AccountRoute
   ApiAccountRoute: typeof ApiAccountRoute
+  ProductionRoute: typeof ProductionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAccountRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/production': {
+      id: '/production'
+      path: '/production'
+      fullPath: '/production'
+      preLoaderRoute: typeof ProductionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiReberRoute: ApiReberRoute,
   AccountRoute: AccountRoute,
   ApiAccountRoute: ApiAccountRoute,
+  ProductionRoute: ProductionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
