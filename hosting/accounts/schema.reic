@@ -1,0 +1,68 @@
+# PB HOSTING ACCOUNT — REIC TABLE CONTRACT
+schema: PB.HOSTING.ACCOUNT/1
+version: 1
+storage_namespace: hosting/accounts/
+file_manager_owner: PBLocalFiles (IndexedDB workspace)
+
+tables:
+  hosting_users:
+    file_pattern: hosting/accounts/users/{email-key}.reic
+    fields:
+      id: string
+      name: string
+      email: string
+      role: enum(customer,operator,admin)
+      status: enum(active,suspended,pending)
+      password.algorithm: string
+      password.iterations: integer
+      password.salt: hex
+      password.hash: hex
+      createdAt: datetime
+  hosting_profiles:
+    file_pattern: hosting/accounts/profiles/{email-key}.reic
+    fields: [userId, displayName, company, phone, timezone, updatedAt]
+  hosting_services:
+    file_pattern: hosting/accounts/services/{email-key}/{service-id}.reic
+    fields: [id, userId, type, name, notes, status, createdAt, updatedAt]
+    type_enum: [website,domain,database,email,storage,application,ssl]
+  hosting_sessions:
+    storage: browser_session_storage
+    fields: [email, createdAt]
+    production_required: server_side_session_cookie_httponly_secure_samesite
+  hosting_audit:
+    file_pattern: hosting/accounts/activity/{email-key}.jsonl
+    fields: [at,module,action,detail]
+
+file_manager_integration:
+  list_path: hosting/accounts/
+  account_file: hosting/accounts/users/
+  profile_file: hosting/accounts/profiles/
+  service_files: hosting/accounts/services/
+  audit_files: hosting/accounts/activity/
+  operations: [create,read,update,delete,export]
+  source: local-file-store.js
+  shared_database: planetbintang-file-workspace
+  indexeddb_store: files
+
+security_and_runtime:
+  current_mode: browser_local_prototype
+  password_hash: PBKDF2-SHA256
+  iterations: 210000
+  production_authentication: not_implemented
+  server_authorization: not_implemented
+  cross_device_sync: not_implemented
+  github_pages_backend: static_only
+  production_requirements:
+    - authenticated_API_and_database
+    - server_side_password_hashing_with_argon2id_or_bcrypt
+    - secure_HttpOnly_SameSite_cookies
+    - CSRF_and_rate_limit_controls
+    - email_verification_and_password_reset
+    - role_based_access_control_on_server
+    - audit_log_on_server
+    - encrypted_backups_and_key_management
+
+important:
+  - This REIC file is a data contract, not a running database server.
+  - Local browser records are visible only in the same browser profile and origin.
+  - Never store plaintext passwords, API keys, private keys, or payment secrets in File Manager.
