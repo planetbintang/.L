@@ -37,7 +37,7 @@ footer{background:#092e69;color:#d9e9ff;padding:22px clamp(16px,3vw,42px);displa
 
 <section id="bintang-news" style="margin-top:34px">
  <div class="section-head"><div><h2>Global News · Informasi Terbaru</h2><p>Berita dari berbagai publisher dunia, dibaca langsung di BINTANG tanpa berpindah browser.</p></div><div class="filters"><button type="button" id="news-refresh">PERBARUI</button></div></div>
- <div class="stats" style="margin-top:10px">
+ <div class="stats" style="margin-top:10px"><div class="stat"><b id="reic-domain-target">450 JUTA+</b><span>Target cakupan domain REIC .NZ</span></div><div class="stat"><b id="reic-domain-count">—</b><span>Domain yang sudah diimpor</span></div><div class="stat"><b id="reic-news-count">—</b><span>Domain berita terverifikasi feed</span></div><div class="stat"><b id="reic-domain-pending">—</b><span>Domain menunggu verifikasi</span></div></div><div class="stats" style="margin-top:10px">
   <div class="stat"><b id="news-total">—</b><span>Berita terindeks</span></div>
   <div class="stat"><b id="news-sources">—</b><span>Media terhubung</span></div>
   <div class="stat"><b id="news-updated">—</b><span>Pembaruan terakhir</span></div>
@@ -63,7 +63,7 @@ try{const r=await fetch('../data/bintang-index.json',{cache:'no-store'});if(!r.o
 </script>
 <script>
 (()=> {
- const root='../bintang/news/news-index.json';
+ const root='../bintang/news/news-index.json';\n const registryUrl='../bintang/news/reic-domain-registry.json';
  const grid=document.getElementById('news-grid'),status=document.getElementById('news-status');
  const search=document.getElementById('news-search'),cats=document.getElementById('news-categories');
  const dialog=document.getElementById('news-reader');
@@ -83,7 +83,7 @@ try{const r=await fetch('../data/bintang-index.json',{cache:'no-store'});if(!r.o
   document.getElementById('reader-summary').textContent=x.summary||'Publisher belum menyediakan ringkasan dalam feed. Informasi judul, sumber, dan tautan asli tetap tercatat dalam indeks BINTANG.';
   if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
  }
- async function load(){
+ async function loadRegistry(){try{const r=await fetch(registryUrl+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();document.getElementById('reic-domain-count').textContent=Number(d.indexedDomains||0).toLocaleString('id-ID');document.getElementById('reic-news-count').textContent=Number(d.verifiedNewsDomains||0).toLocaleString('id-ID');document.getElementById('reic-domain-pending').textContent=Number(d.pendingReview||0).toLocaleString('id-ID');document.getElementById('reic-domain-target').textContent=Number(d.targetDomains||450000000).toLocaleString('id-ID')+'+';}catch(e){document.getElementById('reic-domain-count').textContent='0';document.getElementById('reic-news-count').textContent='0';document.getElementById('reic-domain-pending').textContent='0';}}\n async function load(){
   status.textContent='Memperbarui indeks berita…';
   try{
    const r=await fetch(root+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
