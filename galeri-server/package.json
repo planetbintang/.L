@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node src/server.mjs",
     "check": "node --check src/server.mjs && node scripts/check-frontend.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "set-role": "node scripts/set-role.mjs"
   },
   "dependencies": {
     "pg": "^8.13.1"
