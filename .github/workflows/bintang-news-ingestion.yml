@@ -7,6 +7,8 @@ on:
     branches: [io]
     paths:
       - "bintang/news/sources.json"
+      - "bintang/news/reic-domain-import.jsonl"
+      - "scripts/import-reic-news-domains.py"
       - "scripts/ingest-bintang-news.py"
       - ".github/workflows/bintang-news-ingestion.yml"
 permissions:
@@ -23,6 +25,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: io
+      - name: Import REIC .NZ domain registry
+        run: python3 scripts/import-reic-news-domains.py
       - name: Build news index
         run: python3 scripts/ingest-bintang-news.py
       - name: Publish index
