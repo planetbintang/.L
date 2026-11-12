@@ -1,0 +1,124 @@
+/* PlanetBintang · global accent + abstract dark default
+   Accent contract: #0981D1. Loaded last by root and VMDESKTOPREIC entry points. */
+:root {
+  color-scheme: dark !important;
+  --pb-accent: #0981D1;
+  --pb-accent-rgb: 9,129,209;
+  --pb-bg: #070B12;
+  --pb-bg-2: #0B1421;
+  --pb-surface: rgba(13,22,35,.92);
+  --pb-surface-2: rgba(17,31,49,.94);
+  --pb-line: rgba(9,129,209,.34);
+  --pb-text: #EAF3FC;
+  --pb-muted: #9AAFC3;
+  --lux-bg: var(--pb-bg) !important;
+  --lux-surface: var(--pb-surface) !important;
+  --lux-surface-2: var(--pb-surface-2) !important;
+  --lux-line: var(--pb-line) !important;
+  --lux-line-strong: rgba(9,129,209,.62) !important;
+  --lux-text: var(--pb-text) !important;
+  --lux-muted: var(--pb-muted) !important;
+  --lux-blue: #0981D1 !important;
+  --lux-blue-bright: #0981D1 !important;
+  --reic-accent-gradient: linear-gradient(115deg,#0981D1,#42A8E8) !important;
+  --reic-accent-gradient-soft: linear-gradient(120deg,#0981D1,#0874BD) !important;
+  --reic-accent-ink: #FFFFFF !important;
+  --reic-accent-line: rgba(9,129,209,.72) !important;
+  --reic-accent-glow: 0 5px 18px rgba(9,129,209,.2) !important;
+}
+html, body {
+  color-scheme: dark !important;
+  background-color: #070B12 !important;
+  color: #EAF3FC;
+}
+body {
+  background:
+    radial-gradient(ellipse 58rem 34rem at 82% 8%, rgba(9,129,209,.19), transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%, rgba(18,52,83,.28), transparent 70%),
+    linear-gradient(135deg,#070B12 0%,#0A111C 48%,#080D16 100%) fixed !important;
+  background-attachment: fixed !important;
+}
+:root[data-pb-theme] {
+  color-scheme: dark !important;
+  --lux-bg: #070B12 !important;
+  --lux-surface: rgba(13,22,35,.92) !important;
+  --lux-surface-2: rgba(17,31,49,.94) !important;
+  --lux-line: rgba(9,129,209,.34) !important;
+  --lux-line-strong: rgba(9,129,209,.62) !important;
+  --lux-text: #EAF3FC !important;
+  --lux-muted: #9AAFC3 !important;
+  --lux-blue: #0981D1 !important;
+  --lux-blue-bright: #0981D1 !important;
+}
+:root[data-pb-theme] body {
+  background:
+    radial-gradient(ellipse 58rem 34rem at 82% 8%, rgba(9,129,209,.19), transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%, rgba(18,52,83,.28), transparent 70%),
+    linear-gradient(135deg,#070B12 0%,#0A111C 48%,#080D16 100%) fixed !important;
+}
+:where(.topbar,.nav-dropdown-menu,.panel,.metric-card,.repo-card,.host-card,
+.settings-panel,.workspace-section,.toolbar,.common-site-menu-card,
+.fm-github-catalog,.fm-github-repo-card,.modal-window,.modal-bar,
+.detail-box,.file-preview,.pb-theme-picker) {
+  color: var(--pb-text);
+  border-color: var(--pb-line) !important;
+  background-color: var(--pb-surface) !important;
+}
+:where(.topbar,.nav-dropdown-menu,.panel,.metric-card,.repo-card,.host-card,
+.settings-panel,.workspace-section,.toolbar,.common-site-menu-card,
+.fm-github-catalog,.fm-github-repo-card) {
+  box-shadow: 0 18px 52px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035) !important;
+}
+:where(button,.button,.btn,[role="button"],input[type="button"],
+input[type="submit"],input[type="reset"],.action,.primary-action,
+.nav-link.is-active,.tab.is-active,.repo-action.primary,.text-button.primary) {
+  background: #0981D1 !important;
+  background-image: linear-gradient(120deg,#0981D1,#0874BD) !important;
+  border-color: #0981D1 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 5px 16px rgba(9,129,209,.2) !important;
+}
+:where(button,.button,.btn,[role="button"],input[type="button"],
+input[type="submit"],input[type="reset"]):hover {
+  background: #0874BD !important;
+  border-color: #42A8E8 !important;
+  color: #FFFFFF !important;
+}
+:where(a,.text-link,.repo-name a,.detail-value a,.fm-github-repo-actions a) {
+  color: #0981D1;
+  text-decoration-color: rgba(9,129,209,.58);
+}
+:where(a,.text-link,.repo-name a,.detail-value a):hover { color: #42A8E8; }
+:where(input,select,textarea,.search-box,.explorer-search) {
+  color: #EAF3FC !important;
+  background-color: #0A1421 !important;
+  border-color: rgba(9,129,209,.48) !important;
+  accent-color: #0981D1;
+}
+:where(input,select,textarea)::placeholder { color: #8299AF !important; }
+:where(a,input,select,textarea,button):focus-visible {
+  outline: 2px solid #0981D1 !important;
+  outline-offset: 2px;
+}
+:where(.eyebrow,.metric-label,.section-description,.connection-state,
+.nav-dropdown-menu small,.repo-name small,.detail-label,.metric-card small) {
+  color: #9AAFC3;
+}
+:where(.metric-card strong,.accent,.text-accent,.brand-accent,.nav-accent,.icon-accent) {
+  color: #0981D1 !important;
+  -webkit-text-fill-color: #0981D1 !important;
+  background: none !important;
+}
+.topbar,.nav-dropdown-menu {
+  background: rgba(8,14,23,.94) !important;
+  backdrop-filter: blur(22px) saturate(125%);
+}
+.nav-dropdown:hover > summary,.nav-dropdown[open] > summary,
+.nav-dropdown.has-active-route > summary,
+.main-nav a[aria-current="page"] {
+  color: #0981D1 !important;
+  border-color: rgba(9,129,209,.55) !important;
+  background: rgba(9,129,209,.12) !important;
+}
+.pb-theme-picker { background: rgba(13,22,35,.92) !important; color: #EAF3FC !important; }
+.pb-theme-picker option { color: #EAF3FC; background: #0B1421; }
