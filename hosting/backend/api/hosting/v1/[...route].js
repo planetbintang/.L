@@ -18,7 +18,7 @@ async function verifyPassword(password,stored){const [kind,saltHex,keyHex]=Strin
 function validEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)&&email.length<=254;}
 export default async function handler(req,res){
   res.setHeader("Vary","Origin");const origin=req.headers.origin;const allowed=(process.env.ALLOWED_ORIGINS||"").split(",").map(x=>x.trim()).filter(Boolean);if(origin&&allowed.includes(origin)){res.setHeader("Access-Control-Allow-Origin",origin);res.setHeader("Access-Control-Allow-Credentials","true");res.setHeader("Access-Control-Allow-Headers","Content-Type, Authorization");res.setHeader("Access-Control-Allow-Methods","GET,POST,OPTIONS");}if(!originAllowed(req))return json(res,403,{error:"ORIGIN_FORBIDDEN"});if(req.method==="OPTIONS")return res.status(204).end();
-  const route="/"+(Array.isArray(req.query.route)?req.query.route.join("/"):String(req.query.route||"")).replace(/^\\/+|\\/+$/g,"");const method=req.method||"GET";
+  const route="/" + String(Array.isArray(req.query.route)?req.query.route.join("/"):req.query.route||"").replace(/^\/+|\/+$/g,"");const method=req.method||"GET";
   try{
     if(route==="/health"&&method==="GET"){try{await db().query("select 1");return json(res,200,{ok:true,service:"hosting-reic-api",database:"connected"});}catch(e){return json(res,503,{ok:false,service:"hosting-reic-api",database:"unavailable",error:e.message==="DATABASE_NOT_CONFIGURED"?"DATABASE_NOT_CONFIGURED":"DATABASE_CONNECTION_FAILED"});}}
     if(route==="/auth/register"&&method==="POST"){
