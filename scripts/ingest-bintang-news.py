@@ -110,13 +110,13 @@ def main():
         registry["pendingReview"]=sum(1 for d in registry["domains"] if d.get("status")!="verified-feed")
         registry["candidateNewsDomains"]=sum(1 for d in registry["domains"] if d.get("kind","").lower()=="news" and d.get("feedUrl"))
         registry["generatedAt"]=checked_at
-        REGISTRY.write_text(json.dumps(registry,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+        REGISTRY.write_text(json.dumps(registry,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     items=list(all_items.values())
     items.sort(key=lambda x:x["publishedAt"] or "",reverse=True)
     payload={"generatedAt":checked_at,"sourceCount":len(feeds),"curatedSourceCount":len(curated),
       "reicSourceCount":len(reic[:MAX_REIC_FEEDS_PER_RUN]),"itemCount":len(items),
       "sources":statuses,"items":items[:500]}
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    OUTPUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Indexed {len(payload['items'])} stories; {sum(s['ok'] for s in statuses)}/{len(statuses)} feeds succeeded; {payload['reicSourceCount']} REIC candidates checked.")
 if __name__=="__main__": main()
