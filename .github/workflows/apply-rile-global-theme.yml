@@ -1,0 +1,35 @@
+name: Apply RILE Global Theme
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type APPLY-RILE to modify tracked HTML/CSS files"
+        required: true
+        type: string
+permissions:
+  contents: write
+jobs:
+  apply-rile-theme:
+    if: ${{ inputs.confirm == 'APPLY-RILE' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Inject shared RILE theme
+        run: node scripts/apply-rile-theme.mjs
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' '*.htm' '*.css'
+          if git diff --cached --quiet; then
+            echo "No files required an update."
+            exit 0
+          fi
+          git commit -m "Apply RILE global theme to tracked HTML and CSS"
+          git push origin HEAD:io
