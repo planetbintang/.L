@@ -34,6 +34,7 @@ jobs:
       - name: Collect public PlanetBintang repositories and Actions
         env:
           GITHUB_OWNER: planetbintang
+          KNOWN_PRIVATE_REPOSITORIES: "41"
           GH_TOKEN: ${{ secrets.PLANETBINTANG_GH_TOKEN || github.token }}
         run: node scripts/build-rile-index.mjs
       - name: Commit refreshed RILE data when changed
