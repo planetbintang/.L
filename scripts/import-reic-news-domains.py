@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 INPUT=ROOT/"bintang/news/reic-domain-import.jsonl"
 OUTPUT=ROOT/"bintang/news/reic-domain-registry.json"
 TARGET=450_000_000
-HOST=re.compile(r"^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$",re.I)
+HOST=re.compile(r"^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$",re.I)
 
 def valid_feed(value):
     if not value: return ""
@@ -63,6 +63,6 @@ def main():
       "categories":cats,"domains":domains
     }
     OUTPUT.parent.mkdir(parents=True,exist_ok=True)
-    OUTPUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    OUTPUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Imported {len(domains)} unique domains; {result['verifiedNewsDomains']} feeds verified; {result['pendingReview']} pending.")
 if __name__=="__main__": main()
