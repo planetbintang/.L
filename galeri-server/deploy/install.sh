@@ -21,7 +21,7 @@ id galeri >/dev/null 2>&1 || useradd --system --home-dir /nonexistent --shell /u
 install -d -o root -g galeri -m 0750 "$(dirname "$ENV_FILE")"
 chown root:galeri "$ENV_FILE"; chmod 0640 "$ENV_FILE"
 install -d -o galeri -g galeri -m 0750 "$STORAGE_DIR"
-chown -R galeri:galeri "$APP_DIR"
+chown -R root:galeri "$APP_DIR"
 cd "$APP_DIR"
 npm install --omit=dev --ignore-scripts
 set -a; source "$ENV_FILE"; set +a
