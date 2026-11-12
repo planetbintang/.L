@@ -25,8 +25,8 @@ const json = (res, status, body, headers = {}) => {
   res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff', ...headers });
   res.end(JSON.stringify(body));
 };
-const cookie = token => `galeri_session=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${SESSION_HOURS * 3600}${COOKIE_SECURE ? '; Secure' : ''}`;
-const clearCookie = 'galeri_session=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0' + (COOKIE_SECURE ? '; Secure' : '');
+const cookie = token => `galeri_session=${token}; Path=/; HttpOnly; SameSite=None; Max-Age=${SESSION_HOURS * 3600}${COOKIE_SECURE ? '; Secure' : ''}`;
+const clearCookie = 'galeri_session=; Path=/; HttpOnly; SameSite=None; Max-Age=0' + (COOKIE_SECURE ? '; Secure' : '');
 function getToken(req) {
   const raw = req.headers.cookie || '';
   const match = raw.split(';').map(x => x.trim()).find(x => x.startsWith('galeri_session='));
