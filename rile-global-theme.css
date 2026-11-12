@@ -188,3 +188,66 @@ html[data-reic-r-mode="on"] .reic-r-letter>.reic-r-source{
 /* Final fit: keep the overlay inside the original character advance to avoid touching neighboring letters. */
 .reic-r-letter>.reic-r-glyph{width:.72em!important;height:1.04em!important;left:0!important}
 .reic-r-letter>.reic-r-glyph[data-case="lower"]{width:.48em!important;height:.76em!important;left:0!important}
+
+
+/* RILE GLOBAL LOCK — final cascade for the root application and its integrated views. */
+:root{
+  color-scheme:dark!important;
+  --rile-font:Inter,"Segoe UI",Arial,sans-serif;
+  --rile-font-mono:"DM Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+  --lux-bg:var(--rile-bg)!important;
+  --lux-surface:rgba(3,17,62,.91)!important;
+  --lux-surface-2:rgba(3,28,91,.82)!important;
+  --lux-line:var(--rile-line)!important;
+  --lux-line-strong:var(--rile-line-strong)!important;
+  --lux-text:var(--rile-text)!important;
+  --lux-muted:var(--rile-muted)!important;
+  --lux-blue:var(--rile-blue)!important;
+  --lux-blue-bright:var(--rile-blue-bright)!important;
+  --reic-accent-gradient:linear-gradient(115deg,#fff 0%,#d8efff 36%,#8adfff 68%,#287fd8 100%)!important;
+  --reic-accent-gradient-soft:linear-gradient(135deg,rgba(8,36,91,.96),rgba(7,83,200,.78))!important;
+  --reic-accent-ink:#f4fbff!important;
+  --reic-accent-line:var(--rile-line)!important;
+  --reic-accent-glow:var(--rile-glow)!important;
+}
+html,body{font-family:var(--rile-font)!important}
+:where(button,input,select,textarea){font-family:inherit}
+:where(.topbar,.main-nav,.sidebar,.side-nav,.toolbar,.action-bar,.tab-bar,.tabs,.panel,.card,.tile,.metric-card,.stat-card,.surface,.workspace-card,.content-card,.modal,.dialog,.drawer,.popover,.widget,.console-panel,.dashboard-panel,.section-panel,.view-panel){
+  border-color:var(--rile-line)!important;
+  background-color:rgba(3,17,62,.82);
+}
+:where(.accent,.text-accent,.brand-accent,.eyebrow,.kicker,.section-kicker,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent){
+  background-image:var(--reic-accent-gradient)!important;
+}
+:where(button,.button,.btn,[role=button],input[type=button],input[type=submit],input[type=reset],.action,.primary-action,.secondary-action,.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary){
+  border-radius:0!important;
+  border-color:var(--rile-line)!important;
+  color:var(--rile-text)!important;
+  background:var(--rile-glass-soft)!important;
+}
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary):hover,
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary)[aria-current=page]{
+  border-color:var(--rile-line-strong)!important;
+  background:linear-gradient(135deg,rgba(8,67,151,.94),rgba(7,83,200,.78))!important;
+  color:#fff!important;
+}
+:where(input:not([type=checkbox]):not([type=radio]),select,textarea){
+  border-radius:0!important;
+  background:rgba(1,13,44,.9)!important;
+  border-color:var(--rile-line)!important;
+  color:var(--rile-text)!important;
+}
+:where(a){text-decoration-color:rgba(138,223,255,.48)}
+:where(a:hover,a:focus-visible){color:#fff!important}
+.reic-r-letter{isolation:isolate}
+.reic-r-letter>.reic-r-glyph{
+  width:.72em!important;height:1.04em!important;left:0!important;
+  color:inherit!important;fill:currentColor!important;
+}
+.reic-r-letter>.reic-r-source{
+  font-family:inherit!important;font-kerning:inherit!important;
+  font-variant-ligatures:inherit!important;
+}
+@media(prefers-reduced-motion:reduce){
+  :where(button,.button,.btn,[role=button],a){transition:none!important;transform:none!important}
+}
