@@ -90,3 +90,64 @@ input[type="reset"]):hover { background:#0874BD; border-color:#42A8E8; color:#ff
 :root:not([data-pb-theme]) .brand-name span,
 :root:not([data-pb-theme]) .brand-reic,
 :root:not([data-pb-theme]) .caption { color:#0981D1 !important; }
+
+
+/* Tema alternatif: Cahaya Air Kaca */
+:root[data-pb-theme="water-glass"] {
+  color-scheme:light;
+  --pb-accent:#168BCB; --pb-accent-rgb:22,139,203;
+  --lux-bg:#EAF7FC; --lux-surface:rgba(255,255,255,.78);
+  --lux-surface-2:rgba(226,244,251,.88); --lux-line:rgba(48,153,198,.28);
+  --lux-line-strong:rgba(22,139,203,.52); --lux-text:#17364A; --lux-muted:#587789;
+}
+:root[data-pb-theme="water-glass"] body {
+  color:#17364A;
+  background:
+    radial-gradient(ellipse 55rem 34rem at 82% 8%,rgba(104,210,239,.36),transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%,rgba(183,235,245,.55),transparent 70%),
+    linear-gradient(135deg,#F7FCFF 0%,#DFF3FA 48%,#F4FBFD 100%) fixed;
+  background-attachment:fixed;
+}
+:root[data-pb-theme="water-glass"] :where(.topbar,.nav-dropdown-menu,.panel,.metric-card,.repo-card,.host-card,
+.settings-panel,.workspace-section,.toolbar,.common-site-menu-card,.fm-github-catalog,
+.fm-github-repo-card,.modal-window,.modal-bar,.detail-box,.file-preview,.pb-theme-picker) {
+  color:#17364A; border-color:rgba(48,153,198,.28);
+  background:rgba(255,255,255,.72);
+  box-shadow:0 16px 44px rgba(48,112,143,.13),inset 0 1px rgba(255,255,255,.9);
+  backdrop-filter:blur(20px) saturate(145%);
+}
+:root[data-pb-theme="water-glass"] :where(input,select,textarea,.search-box,.explorer-search) {
+  color:#17364A;background:rgba(255,255,255,.82);border-color:rgba(48,153,198,.4);
+}
+:root[data-pb-theme="water-glass"] :where(input,select,textarea)::placeholder {color:#718D9B}
+:root[data-pb-theme="water-glass"] :where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],input[type="reset"],.action,.primary-action) {
+  color:#fff;background:linear-gradient(120deg,#168BCB,#56B9D9);border-color:#168BCB;
+}
+:root[data-pb-theme="water-glass"] :where(a,.text-link,.repo-name a,.detail-value a) {color:#087FB8}
+:root[data-pb-theme="water-glass"] .topbar,:root[data-pb-theme="water-glass"] .nav-dropdown-menu {
+  background:rgba(248,253,255,.82);backdrop-filter:blur(24px) saturate(150%);
+}
+:root[data-pb-theme="water-glass"] .universe {
+  color:#17364A!important;
+  background:
+    radial-gradient(ellipse 58rem 34rem at 82% 8%,rgba(104,210,239,.38),transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%,rgba(183,235,245,.5),transparent 70%),
+    linear-gradient(135deg,#F7FCFF 0%,#DFF3FA 48%,#F4FBFD 100%)!important;
+}
+:root[data-pb-theme="water-glass"] :where(.system-bar,.window,.file-nav,.file-main,.launcher,.footer,.caption,#apps .app-window,#apps .modal-window) {
+  color:#17364A;border-color:rgba(48,153,198,.32);background:rgba(255,255,255,.76);
+  box-shadow:0 16px 44px rgba(48,112,143,.14),inset 0 1px rgba(255,255,255,.9);backdrop-filter:blur(20px);
+}
+:root[data-pb-theme="water-glass"] .brand-name span,
+:root[data-pb-theme="water-glass"] .brand-reic,
+:root[data-pb-theme="water-glass"] .caption {color:#168BCB!important}
+.pb-theme-switcher {
+  position:fixed;right:16px;bottom:16px;z-index:99999;display:flex;align-items:center;gap:9px;
+  padding:9px 11px;border:1px solid rgba(9,129,209,.42);background:rgba(10,19,32,.92);
+  color:#EAF3FC;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(18px);
+  font:600 11px/1.2 system-ui,sans-serif;letter-spacing:.07em;
+}
+.pb-theme-switcher select {max-width:170px;padding:7px 9px;border:1px solid rgba(9,129,209,.45);background:#0A1421;color:#EAF3FC;font:600 12px system-ui}
+:root[data-pb-theme="water-glass"] .pb-theme-switcher {background:rgba(255,255,255,.84);color:#17364A;border-color:rgba(48,153,198,.35)}
+:root[data-pb-theme="water-glass"] .pb-theme-switcher select {background:rgba(255,255,255,.9);color:#17364A;border-color:rgba(48,153,198,.4)}
+@media(max-width:600px){.pb-theme-switcher{right:8px;bottom:8px;padding:7px 8px}.pb-theme-switcher select{max-width:145px}}
