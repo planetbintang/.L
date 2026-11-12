@@ -109,3 +109,17 @@ body>*{position:relative;z-index:1}
 @media(max-width:650px){
   body:before{opacity:.28!important;background-size:7px 7px,54px 54px,54px 54px!important}
 }
+
+/* REIC R MODE — vector letterform derived from the Galeri geometric-script system and supplied grid reference. */
+:root{--reic-r-mode-size:1em;--reic-r-mode-color:currentColor}
+.reic-r-glyph{display:inline-block;width:.66em;height:.88em;max-width:1em;vertical-align:-.105em;overflow:visible;color:inherit;fill:currentColor;flex:none;filter:drop-shadow(0 0 .12em rgba(97,191,255,.2));}
+.reic-r-glyph path{fill:currentColor}
+.reic-r-glyph[data-case="lower"]{width:.54em;height:.68em;vertical-align:-.035em}
+html[data-reic-r-mode="off"] .reic-r-glyph{display:none}
+html[data-reic-r-mode="off"] .reic-r-source{display:inline}
+html:not([data-reic-r-mode="off"]) .reic-r-source{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.reic-r-toggle{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:7px 10px;border:1px solid var(--rile-line,rgba(157,220,255,.34));background:var(--rile-glass,rgba(3,17,62,.9));color:var(--rile-text,#f4fbff);font:inherit;font-size:.82rem;cursor:pointer}
+.reic-r-toggle[aria-pressed="true"]{border-color:var(--rile-line-strong,#bfeaff);box-shadow:0 0 14px rgba(97,191,255,.25)}
+.reic-r-toggle:focus-visible{outline:2px solid #8adfff;outline-offset:2px}
+.reic-r-setting{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid var(--rile-line,rgba(157,220,255,.34));background:var(--rile-glass-soft,rgba(4,21,61,.82))}
+.reic-r-setting-copy{display:grid;gap:4px}.reic-r-setting-copy small{opacity:.78}
