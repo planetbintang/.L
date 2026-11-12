@@ -57,3 +57,38 @@ export const kataCustom = pgTable("kata_custom", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+/**
+ * BIOS Registry — REIC Table authoritative records.
+ * Secrets are represented only by password hashes and random salts.
+ */
+export const biosDevices = pgTable("bios_devices", {
+  id: serial().primaryKey(),
+  serialNumber: text("serial_number").notNull().unique(),
+  displayName: text("display_name").notNull(),
+  passwordHash: text("password_hash").notNull(),
+  passwordSalt: text("password_salt").notNull(),
+  role: text().notNull().default("member"), // member | admin; assigned by server only
+  status: text().notNull().default("active"), // active | disabled
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  lastLoginAt: timestamp("last_login_at"),
+});
+
+export const biosSessions = pgTable("bios_sessions", {
+  id: serial().primaryKey(),
+  deviceId: integer("device_id").notNull().references(() => biosDevices.id),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  revokedAt: timestamp("revoked_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const biosAudit = pgTable("bios_audit", {
+  id: serial().primaryKey(),
+  deviceId: integer("device_id").references(() => biosDevices.id),
+  serialNumber: text("serial_number").notNull(),
+  event: text().notNull(),
+  detail: jsonb(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
