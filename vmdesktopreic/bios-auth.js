@@ -13,7 +13,7 @@
  const serialValue=value=>String(value||'').trim().toUpperCase().replace(/\\s+/g,'');
  const safe=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const randomHex=bytes=>{const data=crypto.getRandomValues(new Uint8Array(bytes));return [...data].map(x=>x.toString(16).padStart(2,'0')).join('');};
- const hash=async(salt,password)=>{if(!crypto?.subtle)throw Error('Web Crypto tidak tersedia. Buka desktop melalui HTTPS.');const data=new TextEncoder().encode(salt+':'+password);const digest=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('');};
+ const hash=async(salt,password)=>{if(!crypto?.subtle)throw Error('Web Crypto tidak tersedia. Buka desktop melalui HTTPS.');const material=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode(salt),iterations:180000,hash:'SHA-256'},material,256);return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('');};
  const audit=(event,user)=>{const rows=read(AUDIT_KEY,[]);rows.unshift({event,serialNumber:user?.serialNumber||'',userId:user?.id||'',at:new Date().toISOString()});write(AUDIT_KEY,rows.slice(0,200));};
  let overlay=null,mode='login';
  function activeUser(){try{const session=JSON.parse(sessionStorage.getItem(SESSION_KEY)||'null');if(!session)return null;return users().find(u=>u.id===session.userId&&!u.disabled)||null;}catch{return null;}}
@@ -45,7 +45,7 @@
   });
   setMode(users().length?'login':'register');
  }
- function boot(){mount();const user=activeUser();if(user){overlay.hidden=true;document.documentElement.classList.remove('pb-bios-locked');}else lock();}
+ function boot(){mount();const user=activeUser();if(user){overlay.hidden=true;document.documentElement.classList.remove('pb-bios-locked');}else{sessionStorage.removeItem(SESSION_KEY);overlay.hidden=false;document.documentElement.classList.add('pb-bios-locked');setMode(users().length?'login':'register');}}
  function renderFileManager(container,status){
   mount();container.replaceChildren();
   const panel=document.createElement('section');panel.className='pb-bios-registry';
