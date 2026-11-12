@@ -122,8 +122,6 @@ export interface FileRouteTypes {
     | '/api/reber'
     | '/account'
     | '/api/account'
-    | '/account'
-    | '/api/account'
   id:
     | '__root__'
     | '/'
