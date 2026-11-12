@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 type User = { id: number; email: string; name: string; role: string; createdAt?: string; lastLoginAt?: string | null };
@@ -44,7 +45,7 @@ function AccountPage() {
     if (saved) { setToken(saved); refresh(saved).catch(() => { window.localStorage.removeItem(TOKEN_KEY); setToken(""); }); }
   }, []);
 
-  const submitAuth = async (event: React.FormEvent) => {
+  const submitAuth = async (event: FormEvent) => {
     event.preventDefault(); setBusy(true); setStatus("");
     try {
       const result = await api("POST", mode === "register" ? "register" : "login", { name, email, password });
@@ -57,7 +58,7 @@ function AccountPage() {
     try { await api("POST", "logout", {}, token); } catch { /* token lokal tetap dibersihkan */ }
     window.localStorage.removeItem(TOKEN_KEY); setToken(""); setUser(null); setFiles([]); setStatus("Anda telah keluar.");
   };
-  const saveProfile = async (event: React.FormEvent) => {
+  const saveProfile = async (event: FormEvent) => {
     event.preventDefault(); setBusy(true);
     try { const result = await api("POST", "update-profile", { name }, token); setUser(result.user); setStatus("Profil berhasil diperbarui."); }
     catch (error) { setStatus(error instanceof Error ? error.message : "Profil gagal disimpan."); }
@@ -69,7 +70,7 @@ function AccountPage() {
     catch (error) { setStatus(error instanceof Error ? error.message : "Pengaturan gagal disimpan."); }
     finally { setBusy(false); }
   };
-  const saveFile = async (event: React.FormEvent) => {
+  const saveFile = async (event: FormEvent) => {
     event.preventDefault(); setBusy(true);
     try {
       const result = await api("POST", "save-file", { path: filePath, name: fileName || filePath.split("/").pop(), content: fileContent, mime: "text/plain;charset=utf-8", metadata: { module: "aireber", manager: "file-manager" } }, token);
