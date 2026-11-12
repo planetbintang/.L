@@ -16,6 +16,11 @@
     'file-manager': { group: 'file-manager', menu: 'code', hash: '#fileManager' },
     repositories: { group: 'repositories', menu: 'code', hash: '#repositories' },
     hosts: { group: 'hosts', menu: 'insights', hash: '#hosts' },
+    'control-repository-hub': { group: 'control-center', hash: '#control/repository-hub' },
+    'control-media-center': { group: 'control-center', hash: '#control/media-center' },
+    'control-system-integration': { group: 'control-center', hash: '#control/system-integration' },
+    'control-sync-deploy': { group: 'control-center', hash: '#control/sync-deploy' },
+    'control-insights-growth': { group: 'control-center', hash: '#control/insights-growth' },
   };
   const toolRoutes = [
     ['manage-files', 'manage'], ['manage-storage', 'manage'], ['manage-settings', 'manage'], ['manage-access', 'manage'], ['manage-activity', 'manage'],
@@ -76,6 +81,11 @@
       return routes[route]?.group === 'platform' ? route : null;
     }
     // Enterprise Map List: #enterprise/map → halaman registry hyper-enterprise.
+    if (hash.startsWith('control/')) {
+      const key = hash.slice('control/'.length).split('/')[0];
+      const route = `control-${key}`;
+      return routes[route]?.group === 'control-center' ? route : null;
+    }
     if (hash === 'enterprise/map') return 'enterprise-map';
     // Halaman arsitektur enterprise individual: #enterprise/arch/<slug>
     if (hash.startsWith('enterprise/arch/')) return 'enterprise-arch';
@@ -152,6 +162,7 @@
     closeMenus();
 
     if (route.view && window.PBWorkspace?.showView) window.PBWorkspace.showView(route.view, false);
+    if (route.group === 'control-center') window.PBControlCenter?.render?.(routeName);
     if (route.group === 'platform') window.PBPlatformView?.render(routeName);
     if (route.group === 'tools') window.PBSystemTools?.render(routeName);
     if (route.group === 'snaps') window.PBSnaps?.render(routeName);
