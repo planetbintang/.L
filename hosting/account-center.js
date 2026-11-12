@@ -7,7 +7,7 @@
   const app = $('#pb-hosting-account-center');
   if (!app) return;
   const isHome = app.dataset.view === 'home';
-  const state = { user: null, view: 'overview', services: [], message: '', busy: false };
+  const state = { user: null, view: location.hash === '#register' ? 'register' : 'overview', services: [], message: '', busy: false };
   const store = () => window.PBLocalFiles;
   const emailKey = (email) => btoa(unescape(encodeURIComponent(email.toLowerCase()))).replace(/[^a-z0-9]/gi, '').slice(0, 90);
   const filePath = (email) => ROOT + '/users/' + emailKey(email) + '.reic';
