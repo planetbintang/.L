@@ -10,7 +10,7 @@ import { createHash } from "node:crypto";
 
 const tokenFromCookie = (request: Request) => {
   const cookie = request.headers.get("cookie") || "";
-  const match = cookie.match(/(?:^|;\\s*)aireber_session=([^;]+)/);
+  const match = cookie.match(/(?:^|;\s*)aireber_session=([^;]+)/);
   return match ? decodeURIComponent(match[1]) : "";
 };
 
