@@ -327,7 +327,8 @@ function wireLibrary(w){
 function drawFiles(path='Beranda'){
  currentPath=path;pathEl.textContent='/ '+path;items.replaceChildren();
  if(path==='applications'&&!APP_CATALOG){status.textContent='Memuat 150 direktori aplikasi…';loadApplicationCatalog().then(()=>drawFiles('applications')).catch(e=>status.textContent='Katalog aplikasi gagal dimuat: '+e.message);return;}
- if(path==='repositori'){status.textContent='Repositori publik dan privat tersedia melalui REIC Explorer.';const b=document.createElement('button');b.className='file-entry';b.innerHTML='<b>🌐</b><span>Buka seluruh repositori GitHub</span>';b.onclick=()=>openApp('REIC Explorer');items.append(b);return;}\n if(path==='bios'){if(window.PB_BIOS_AUTH){window.PB_BIOS_AUTH.renderFileManager(items,status);}else{status.textContent='Modul BIOS Registry belum dimuat.';}return;}
+ if(path==='repositori'){status.textContent='Repositori publik dan privat tersedia melalui REIC Explorer.';const b=document.createElement('button');b.className='file-entry';b.innerHTML='<b>🌐</b><span>Buka seluruh repositori GitHub</span>';b.onclick=()=>openApp('REIC Explorer');items.append(b);return;}
+ if(path==='bios'){if(window.PB_BIOS_AUTH){window.PB_BIOS_AUTH.renderFileManager(items,status);}else{status.textContent='Modul BIOS Registry belum dimuat.';}return;}
  const match=path.match(/^applications\/([^/]+)(?:\/([^/]+))?$/);
  let names;
  if(path==='Beranda'||path==='File System')names=roots;
