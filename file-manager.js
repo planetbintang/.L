@@ -69,14 +69,14 @@
       { path: 'reictable/engine/reconstruct.mjs', type: 'file', mode: '0100644', fetchPath: 'reictable/engine/reconstruct.mjs', function: 'Snapshot rekonstruksi' }
     ];
     if (path === 'reictable/modules') return [
-      { path: 'reictable/modules/core', type: 'directory', mode: '040755', items: 16, function: 'Normalisasi metadata dan indeks' },
-      { path: 'reictable/modules/identity', type: 'directory', mode: '040755', items: 16, function: 'Registrasi, serial number, sesi, profil, dan otorisasi' },
-      { path: 'reictable/modules/filesystem', type: 'directory', mode: '040755', items: 16, function: 'Pohon file dan sinkronisasi File Manager' },
-      { path: 'reictable/modules/reconstruction', type: 'directory', mode: '040755', items: 16, function: 'Inventaris dan rekonstruksi repositori' },
-      { path: 'reictable/modules/automation', type: 'directory', mode: '040755', items: 16, function: 'Workflow, antrean, dan audit' },
-      { path: 'reictable/modules/security', type: 'directory', mode: '040755', items: 16, function: 'Validasi, kontrol akses, dan integritas' },
-      { path: 'reictable/modules/integration', type: 'directory', mode: '040755', items: 16, function: 'Adapter dan sinkronisasi' },
-      { path: 'reictable/modules/observability', type: 'directory', mode: '040755', items: 16, function: 'Metrik dan kesehatan sistem' }
+      { path: 'reictable/modules/core', type: 'directory', mode: '040755', items: 16, function: 'Domain core · 16 modul REIC' },
+      { path: 'reictable/modules/identity', type: 'directory', mode: '040755', items: 16, function: 'Domain identity · 16 modul REIC' },
+      { path: 'reictable/modules/filesystem', type: 'directory', mode: '040755', items: 16, function: 'Domain filesystem · 16 modul REIC' },
+      { path: 'reictable/modules/reconstruction', type: 'directory', mode: '040755', items: 16, function: 'Domain reconstruction · 16 modul REIC' },
+      { path: 'reictable/modules/automation', type: 'directory', mode: '040755', items: 16, function: 'Domain automation · 16 modul REIC' },
+      { path: 'reictable/modules/security', type: 'directory', mode: '040755', items: 16, function: 'Domain security · 16 modul REIC' },
+      { path: 'reictable/modules/integration', type: 'directory', mode: '040755', items: 16, function: 'Domain integration · 16 modul REIC' },
+      { path: 'reictable/modules/observability', type: 'directory', mode: '040755', items: 16, function: 'Domain observability · 16 modul REIC' }
     ];
     const reicDomain = path.match(/^reictable\/modules\/([a-z-]+)$/);
     if (reicDomain) {

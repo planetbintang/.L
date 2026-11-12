@@ -16,6 +16,8 @@ import { Route as ApiReberRouteImport } from './routes/api.reber'
 import { Route as ApiProjectsRouteImport } from './routes/api.projects'
 import { Route as ApiFilesystemRouteImport } from './routes/api.filesystem'
 import { Route as ApiChatRouteImport } from './routes/api.chat'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as ApiAccountRouteImport } from './routes/api.account'
 
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
@@ -52,6 +54,16 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAccountRoute = ApiAccountRouteImport.update({
+  id: '/api/account',
+  path: '/api/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +73,8 @@ export interface FileRoutesByFullPath {
   '/api/filesystem': typeof ApiFilesystemRoute
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
+  '/account': typeof AccountRoute
+  '/api/account': typeof ApiAccountRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +84,8 @@ export interface FileRoutesByTo {
   '/api/filesystem': typeof ApiFilesystemRoute
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
+  '/account': typeof AccountRoute
+  '/api/account': typeof ApiAccountRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +96,8 @@ export interface FileRoutesById {
   '/api/filesystem': typeof ApiFilesystemRoute
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
+  '/account': typeof AccountRoute
+  '/api/account': typeof ApiAccountRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +109,8 @@ export interface FileRouteTypes {
     | '/api/filesystem'
     | '/api/projects'
     | '/api/reber'
+    | '/account'
+    | '/api/account'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +120,8 @@ export interface FileRouteTypes {
     | '/api/filesystem'
     | '/api/projects'
     | '/api/reber'
+    | '/account'
+    | '/api/account'
   id:
     | '__root__'
     | '/'
@@ -109,6 +131,8 @@ export interface FileRouteTypes {
     | '/api/filesystem'
     | '/api/projects'
     | '/api/reber'
+    | '/account'
+    | '/api/account'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +143,8 @@ export interface RootRouteChildren {
   ApiFilesystemRoute: typeof ApiFilesystemRoute
   ApiProjectsRoute: typeof ApiProjectsRoute
   ApiReberRoute: typeof ApiReberRoute
+  AccountRoute: typeof AccountRoute
+  ApiAccountRoute: typeof ApiAccountRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +198,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/account': {
+      id: '/api/account'
+      path: '/api/account'
+      fullPath: '/api/account'
+      preLoaderRoute: typeof ApiAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +223,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiFilesystemRoute: ApiFilesystemRoute,
   ApiProjectsRoute: ApiProjectsRoute,
   ApiReberRoute: ApiReberRoute,
+  AccountRoute: AccountRoute,
+  ApiAccountRoute: ApiAccountRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

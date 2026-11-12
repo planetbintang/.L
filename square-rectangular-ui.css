@@ -1,0 +1,59 @@
+/* PlanetBintang · Square & Rectangular UI
+   Shared geometry standard for controls, navigation, cards, panels and windows. */
+:root {
+  --pb-radius:0px;
+  --pb-radius-sm:0px;
+  --pb-radius-md:0px;
+  --pb-radius-lg:0px;
+  --pb-radius-xl:0px;
+  --pb-radius-pill:0px;
+  --radius:0px;
+  --radius-sm:0px;
+  --radius-md:0px;
+  --radius-lg:0px;
+  --radius-xl:0px;
+  --radius-full:0px;
+}
+:where(
+  button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],
+  input[type="reset"],.action,.primary-action,.primary-button,.primary-btn,
+  .text-button,.repo-action,.nav-link,.main-nav-link,.nav-dropdown-menu,
+  .nav-dropdown-menu a,.tab,.tab-button,.chip,.badge,.pill,.tag,
+  .panel,.card,.tile,.surface,.content-card,.feature-card,.workspace-card,
+  .section-card,.metric-card,.repo-card,.host-card,.common-site-menu-card,
+  .home-ai-card,.vm-home-showcase,.vm-home-card,.fm-github-catalog,
+  .fm-github-repo-card,.fm-toolbar,.fm-sidebar,.fm-browser,.fm-inspector,
+  .fm-root-button,.fm-folder-shortcuts button,.fm-repo-shortcuts button,
+  .file-tile,.file-card,.file-preview,.modal,.modal-window,.modal-bar,
+  .dialog,.dialog-content,.detail-box,.setting-item,.settings-panel,
+  .toolbar,.search-box,.select-wrap,.form-control,.input-group,
+  .ac-top,.ac-sidebar,.ac-hero,.ac-stat,.ac-card,.ac-child-tile,.ac-modal,
+  .window,.app-window,.system-bar,.launcher,.file-nav,.file-main,
+  .snaps-heading,.snaps-connector,.snaps-rag-result,
+  .pb-theme-picker,.pb-theme-switcher,.pb-theme-switcher select
+) {
+  border-radius:0!important;
+}
+:where(
+  button,.button,.btn,[role="button"],input[type="button"],input[type="submit"],
+  input[type="reset"],.action,.primary-action,.primary-button,.primary-btn,
+  .text-button,.repo-action,.main-nav-link,.nav-dropdown-menu a,.tab,.tab-button,
+  .chip,.badge,.pill,.tag,.fm-root-button,.file-tile,.file-card,
+  .fm-folder-shortcuts button,.fm-repo-shortcuts button
+) {
+  min-height:36px;
+  border-radius:0!important;
+}
+:where(
+  .panel,.card,.tile,.surface,.content-card,.feature-card,.workspace-card,
+  .section-card,.metric-card,.repo-card,.host-card,.common-site-menu-card,
+  .home-ai-card,.vm-home-showcase,.vm-home-card,.fm-github-catalog,
+  .fm-github-repo-card,.fm-toolbar,.fm-sidebar,.fm-browser,.fm-inspector,
+  .file-preview,.modal,.modal-window,.modal-bar,.dialog,.dialog-content,
+  .detail-box,.setting-item,.settings-panel,.toolbar,.ac-top,.ac-sidebar,
+  .ac-hero,.ac-stat,.ac-card,.ac-child-tile,.ac-modal,.window,.app-window,
+  .system-bar,.launcher,.file-nav,.file-main,.snaps-heading,.snaps-connector,
+  .snaps-rag-result
+) {
+  border-radius:0!important;
+}
