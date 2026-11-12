@@ -85,7 +85,7 @@ const runs = repoResults.flatMap(repo => repo.runs.map(r => ({ ...r, repository:
 const now = new Date();
 const windows = {
   minute: 60_000, hour: 3_600_000, day: 86_400_000,
-  week: 604_800_000, year: 31_557_600_000, quarter: 7_889_400_000
+  week: 604_800_000, year: 31_557_600_000, quarter: 4 * 31_557_600_000
 };
 const series = {};
 for (const [key, span] of Object.entries(windows)) {
@@ -117,7 +117,7 @@ const payload = {
     inputEvents: runs.length, outputEvents: runs.filter(r => r.status === "completed").length,
     dotInputCount: runs.length, dotOutputCount: runs.filter(r => r.status === "completed").length
   },
-  api: { durationMs: Date.now() - started, averageRequestMs: requestMs.length ? Math.round(requestMs.reduce((a,b)=>a+b,0)/requestMs.length) : 0, requests: requestMs.length },
+  api: { durationMs: Date.now() - started, averageRequestMs: requestMs.length ? Math.round(requestMs.reduce((a,b)=>a+b,0)/requestMs.length) : 0, requests: requestMs.length, latencySamplesMs: requestMs },
   series,
   repositories: repoResults.map(({name,url,defaultBranch,workflowCount})=>({name,url,defaultBranch,workflowCount})),
   workflows, runs: runs.slice(0, 1000),
