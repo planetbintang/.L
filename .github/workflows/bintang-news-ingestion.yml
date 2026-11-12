@@ -19,24 +19,32 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: io
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Import REIC .NZ domain registry
         run: python3 scripts/import-reic-news-domains.py
-      - name: Build news index
+      - name: Build curated and REIC news index
         run: python3 scripts/ingest-bintang-news.py
-      - name: Publish index
+      - name: Validate published JSON
         run: |
-          if git diff --quiet -- bintang/news/news-index.json; then
-            echo "News index unchanged."
+          python3 -m json.tool bintang/news/news-index.json >/dev/null
+          python3 -m json.tool bintang/news/reic-domain-registry.json >/dev/null
+      - name: Publish index and registry
+        run: |
+          if git diff --quiet -- bintang/news/news-index.json bintang/news/reic-domain-registry.json; then
+            echo "News index and registry unchanged."
             exit 0
           fi
           git config user.name "planetbintang-news-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add bintang/news/news-index.json
-          git commit -m "chore(bintang): refresh global news index"
+          git add bintang/news/news-index.json bintang/news/reic-domain-registry.json
+          git commit -m "chore(bintang): refresh REIC global news index"
           git push origin HEAD:io
