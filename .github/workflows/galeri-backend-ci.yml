@@ -5,6 +5,7 @@ on:
     branches: [io]
     paths:
       - "galeri-server/**"
+      - "galeri/**"
       - ".github/workflows/galeri-backend-ci.yml"
   pull_request:
     branches: [io]
