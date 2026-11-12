@@ -152,6 +152,10 @@ export const aireberUsers = pgTable("aireber_users", {
   passwordSalt: text("password_salt").notNull(),
   role: text().notNull().default("member"),
   status: text().notNull().default("active"),
+  plan: text().notNull().default("free"),
+  quotaRequests: integer("quota_requests").notNull().default(30),
+  usedRequests: integer("used_requests").notNull().default(0),
+  quotaResetAt: timestamp("quota_reset_at").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   lastLoginAt: timestamp("last_login_at"),
@@ -191,5 +195,28 @@ export const aireberAudit = pgTable("aireber_audit", {
   userId: integer("user_id").references(() => aireberUsers.id),
   action: text().notNull(),
   detail: jsonb(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+
+/** AIREBER production membership and quota ledger. */
+export const aireberUsage = pgTable("aireber_usage", {
+  id: serial().primaryKey(),
+  userId: integer("user_id").notNull().references(() => aireberUsers.id),
+  action: text().notNull().default("chat"),
+  units: integer().notNull().default(1),
+  model: text(),
+  metadata: jsonb(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const aireberPlans = pgTable("aireber_plans", {
+  id: serial().primaryKey(),
+  planKey: text("plan_key").notNull().unique(),
+  name: text().notNull(),
+  monthlyPriceIdr: integer("monthly_price_idr").notNull().default(0),
+  monthlyRequests: integer("monthly_requests").notNull().default(30),
+  features: jsonb().notNull().default("[]"),
+  active: boolean().notNull().default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
