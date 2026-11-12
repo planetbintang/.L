@@ -1,0 +1,24 @@
+[Unit]
+Description=PlanetBintang GALERI API
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=galeri
+Group=galeri
+WorkingDirectory=/opt/planetbintang/galeri-server
+EnvironmentFile=/etc/planetbintang/galeri.env
+ExecStart=/usr/bin/node /opt/planetbintang/galeri-server/src/server.mjs
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/planetbintang/galeri-data
+UMask=0027
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
