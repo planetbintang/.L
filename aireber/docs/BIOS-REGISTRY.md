@@ -29,7 +29,7 @@ Set these environment variables in the Aireber Netlify site before deploying:
 - `BIOS_ADMIN_SERIALS`: comma-separated Serial Numbers that are permitted to register as administrators. Set this before registering the owner/admin device. Never assign admin role from browser input.
 - `BIOS_ALLOWED_ORIGINS`: comma-separated exact browser origins. Default: `https://planetbintang.github.io`. Include any other trusted production origin explicitly.
 
-The VMDESKTOPREIC GitHub Pages client can point to the deployed Aireber origin by setting this before `bios-auth.js` loads:
+Before activating the API, apply the SQL migration to the PostgreSQL database attached to the Aireber Netlify site. The migration file is a schema change only; committing it does not execute it. Deploy the Aireber server after the migration and environment variables are configured. GitHub Pages deployment alone does not publish this server route.\n\nThe VMDESKTOPREIC GitHub Pages client can point to the deployed Aireber origin by setting this before `bios-auth.js` loads:
 
 ```html
 <meta name="reic-api-base" content="https://YOUR-AIREBER-HOST">
