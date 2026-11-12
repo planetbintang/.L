@@ -65,7 +65,7 @@ function slugify(value) {
   return String(value || 'workspace').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48) || 'workspace';
 }
 function safePath(value) {
-  const p = String(value || '').replace(/\\/g, '/').replace(/^\/+/, '');
+  const p = String(value || '').split(String.fromCharCode(92)).join('/').replace(/^\/+/, '');
   if (!p || p.length > 500 || p.split('/').some(part => !part || part === '.' || part === '..') || /[\u0000-\u001f]/.test(p)) {
     throw Object.assign(new Error('Path File Manager tidak valid.'), { status: 400 });
   }
@@ -82,7 +82,7 @@ async function writeFileRecord(client, auth, filePath, name, content, contentTyp
   );
 }
 async function authenticate(req, client) {
-  const token = String(req.headers.authorization || '').replace(/^Bearer\\s+/i, '').trim();
+  const token = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
   if (token.length < 40) return null;
   const result = await client.query(
     'SELECT s.id AS session_id,s.expires_at,u.id AS user_id,u.email,u.display_name,u.status,u.profile,u.created_at,t.id AS tenant_id,t.name AS tenant_name,t.slug,m.role FROM auth_sessions s JOIN users u ON u.id=s.user_id JOIN tenant_memberships m ON m.user_id=u.id JOIN tenants t ON t.id=m.tenant_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now() AND u.status=\\'active\\' ORDER BY m.created_at ASC LIMIT 1',
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
   let client;
   try {
     const url = new URL(req.url, 'https://hosting-api.invalid');
-    const route = url.pathname.replace(/^\\/api\\/hosting\\/?/, '').replace(/\\/+$/, '');
+    const route = url.pathname.replace('/api/hosting/', '').replace(/\/+$/, '');
     if (route === 'health' && req.method === 'GET') {
       if (!process.env.DATABASE_URL) return json(res, 503, { ok: false, service: 'PlanetBintang Hosting API', database: 'not_configured' });
       await database().query('SELECT 1');
@@ -214,7 +214,7 @@ export default async function handler(req, res) {
       await audit(client, auth, 'service.create', 'hosting_service', row.id, { type, name });
       return json(res, 201, { service: row });
     }
-    const serviceMatch = route.match(/^services\\/([a-f0-9-]{36})$/i);
+    const serviceMatch = route.startsWith('services/') && /^[0-9a-f-]{36}$/i.test(route.slice(9)) ? [route, route.slice(9)] : null;
     if (serviceMatch && req.method === 'PUT') {
       requireRole(auth);
       const body = await readBody(req), existing = await client.query('SELECT id,service_type AS type,name,status,notes,configuration,created_at,updated_at FROM hosting_services WHERE id=$1 AND tenant_id=$2 AND status<>\\'deleted\\'', [serviceMatch[1], auth.tenant_id]);
@@ -241,10 +241,10 @@ export default async function handler(req, res) {
     if (route === 'files' && req.method === 'GET') {
       const prefix = url.searchParams.get('prefix') || 'hosting/accounts/';
       if (!prefix.startsWith('hosting/accounts/')) return json(res, 400, { error: 'Prefix File Manager harus berada di hosting/accounts/.' });
-      const rows = await client.query('SELECT id,path,name,entry_kind AS type,content_type,byte_size AS size,updated_at FROM file_manager_entries WHERE tenant_id=$1 AND path LIKE $2 ORDER BY path LIMIT 500', [auth.tenant_id, prefix.replace(/[\\\\%_]/g, '\\\\$&') + '%']);
+      const rows = await client.query('SELECT id,path,name,entry_kind AS type,content_type,byte_size AS size,updated_at FROM file_manager_entries WHERE tenant_id=$1 AND left(path,length($2))=$2 ORDER BY path LIMIT 500', [auth.tenant_id, prefix]);
       return json(res, 200, { files: rows.rows });
     }
-    const fileMatch = route.match(/^files\\/([a-f0-9-]{36})$/i);
+    const fileMatch = route.startsWith('files/') && /^[0-9a-f-]{36}$/i.test(route.slice(6)) ? [route, route.slice(6)] : null;
     if (fileMatch && req.method === 'GET') {
       const found = await client.query('SELECT id,path,name,entry_kind AS type,content_type,content,byte_size AS size,metadata,updated_at FROM file_manager_entries WHERE id=$1 AND tenant_id=$2', [fileMatch[1], auth.tenant_id]);
       if (!found.rowCount) return json(res, 404, { error: 'File tidak ditemukan.' });
