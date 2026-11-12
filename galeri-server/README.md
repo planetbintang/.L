@@ -1,45 +1,58 @@
 # GALERI Backend — REIC Server
 
-Backend Node.js 20 + PostgreSQL untuk layanan akun GALERI dan penyimpanan file privat PlanetBintang.
+Backend Node.js 20 + PostgreSQL untuk akun GALERI dan penyimpanan berkas privat PlanetBintang. Skema data memakai kontrak .reic; runtime yang menjalankan API saat ini adalah Node.js, bukan interpreter REIC native.
 
-## Status dan batas
+## Status
 
-Ini adalah runtime backend mandiri yang siap dipasang pada server PlanetBintang, bukan layanan yang berjalan di GitHub Pages. GitHub Actions hanya menjalankan pemeriksaan kode. Jangan mengarahkan pengguna produksi ke API sebelum server, TLS, database, reverse proxy, dan backup disiapkan.
+Kode dan konfigurasi instalasi berada di branch io. Ini belum berarti server sudah online. GitHub Pages hanya menyajikan frontend statis; API, PostgreSQL, dan penyimpanan harus dipasang pada server PlanetBintang.
 
-## Instalasi server
+## Komponen
 
-1. Pasang Node.js 20+ dan PostgreSQL 14+ pada server.
-2. Buat database dan user PostgreSQL khusus aplikasi dengan hak minimum.
-3. Salin `.env.example` menjadi `.env`; isi DATABASE_URL, direktori storage privat, origin frontend, dan COOKIE_SECURE=true.
-4. Jalankan `npm ci` setelah package-lock dibuat pada server, atau `npm install` untuk instalasi awal.
-5. Terapkan skema: `psql "$DATABASE_URL" -f schema/galeri.reic`.
-6. Jalankan `npm start` menggunakan systemd/PM2 dan reverse proxy HTTPS.
-7. Pastikan direktori storage berada di luar web root, hanya dapat dibaca user service, dan dicadangkan secara berkala.
+- src/server.mjs: REST API akun, sesi, profil, metadata file, upload, dan download.
+- schema/galeri.reic: tabel PostgreSQL untuk users, profiles, sessions, folders, files, storage quotas, dan audit events.
+- deploy/galeri.service: unit systemd dengan user service terpisah.
+- deploy/nginx-galeri.conf: reverse proxy HTTPS.
+- deploy/install.sh: instalasi dependensi, skema, dan service setelah konfigurasi server siap.
+- .github/workflows/galeri-backend-ci.yml: pemeriksaan otomatis kode dan kontrak frontend.
+
+## Instalasi pada server PlanetBintang
+
+Persyaratan: Linux dengan systemd, Node.js 20+, PostgreSQL 14+, Nginx, domain API milik PlanetBintang, sertifikat TLS, dan akses administrator.
+
+1. Checkout/salin branch io ke /opt/planetbintang; pastikan folder aplikasi berada di /opt/planetbintang/galeri-server.
+2. Buat database dan role khusus aplikasi. Contoh (jalankan sebagai administrator PostgreSQL dan ganti password):
+   ```sql
+   CREATE ROLE galeri_app LOGIN PASSWORD 'GANTI_DENGAN_SECRET_KUAT';
+   CREATE DATABASE planetbintang OWNER galeri_app;
+   ```
+3. Salin .env.example ke /etc/planetbintang/galeri.env. Isi DATABASE_URL, GALERI_STORAGE_DIR, ALLOWED_ORIGINS=https://planetbintang.github.io, COOKIE_SECURE=true, dan nilai rahasia yang benar. Jangan commit file env.
+4. Pastikan /srv/planetbintang/galeri-data berada di luar web root. Jalankan sudo bash deploy/install.sh dari folder aplikasi. Script akan menerapkan schema, memasang dependensi produksi, dan mengaktifkan galeri.service.
+5. Ganti api.example.com dan path sertifikat pada deploy/nginx-galeri.conf, aktifkan konfigurasi Nginx, lalu validasi dengan nginx -t dan reload Nginx.
+6. Uji https://NAMA-DOMAIN-API/api/v1/health. Hasil yang diharapkan: JSON status: ok.
+7. Pada halaman GALERI, masukkan origin HTTPS API (misalnya https://api.domain-anda.tld) di bagian Akun & Penyimpanan GALERI, lalu simpan. Setelah API terhubung, lakukan register/login dan coba unggah berkas kecil.
+
+Catatan: domain API dan frontend GitHub Pages berbeda situs. Cookie sesi memakai SameSite=None; Secure; Partitioned untuk mendukung penyimpanan cookie terpartisi pada browser yang kompatibel. Kebijakan browser dapat berbeda; uji login dan refresh sesi pada Android serta desktop. Untuk dukungan lintas-browser yang paling konsisten, gunakan frontend dan API pada domain situs yang sama (mis. www.domain-anda.tld dan api.domain-anda.tld) dan masukkan origin frontend sebenarnya pada ALLOWED_ORIGINS.
 
 ## API v1
 
-- `GET /api/v1/health`
-- `POST /api/v1/register` — email, password (min. 12 karakter), displayName
-- `POST /api/v1/login` — membuat sesi HttpOnly
-- `POST /api/v1/logout`
-- `GET /api/v1/me`
-- `PUT /api/v1/profile`
-- `GET /api/v1/files`
-- `POST /api/v1/files` — membuat metadata dan memperoleh uploadUrl
-- `PUT /api/v1/files/:id/content` — upload raw body dengan Content-Length
-- `GET /api/v1/files/:id/content` — unduh file milik akun sendiri
+- GET /api/v1/health
+- POST /api/v1/register — email, password (min. 12 karakter), displayName
+- POST /api/v1/login — membuat sesi HttpOnly
+- POST /api/v1/logout
+- GET /api/v1/me
+- PUT /api/v1/profile
+- GET /api/v1/files
+- POST /api/v1/files — membuat metadata dan memperoleh uploadUrl
+- PUT /api/v1/files/:id/content — upload raw body
+- GET /api/v1/files/:id/content — unduh file milik akun sendiri
 
-Frontend harus memakai `credentials: 'include'`. Untuk upload: buat metadata, lalu PUT byte file ke uploadUrl. Semua endpoint file memeriksa kepemilikan akun.
+Frontend memakai credentials: include. Upload dilakukan dalam dua tahap: buat metadata, lalu kirim byte file ke uploadUrl. API membatasi kepemilikan file per akun.
 
-## Data REIC
+## Keamanan sebelum produksi publik
 
-Skema `schema/galeri.reic` membuat tabel users, profiles, sessions, folders, files, storage_quotas, dan audit_events pada schema PostgreSQL `galeri`.
-
-## Keamanan dan pekerjaan sebelum produksi
-
-- Gunakan HTTPS dan COOKIE_SECURE=true.
-- Rahasia hanya di environment server/secret manager, bukan Git.
-- Batasi request di reverse proxy; tambahkan rate limiting login, verifikasi email, reset password, CSRF token untuk deployment lintas-origin, pemindaian file, dan kebijakan retensi sebelum membuka pendaftaran publik.
-- Upload awal disediakan sebagai endpoint raw PUT; folder CRUD dan sharing belum termasuk.
-- Siapkan backup database dan file storage, uji pemulihan, monitoring, serta rotasi sesi.
-- Jalankan migrasi database sebelum versi aplikasi baru.
+- Jangan membuka registrasi publik sebelum verifikasi email, reset password, rate limiting, CSRF/origin protections yang sesuai, dan pemantauan abuse disiapkan.
+- Tambahkan pemindaian malware/jenis berkas, kebijakan retensi, backup database + storage, dan uji pemulihan.
+- Batasi ukuran upload di aplikasi dan reverse proxy; storage harus privat.
+- Gunakan secret manager atau file environment dengan izin terbatas.
+- Pantau log systemd dan rotasi sesi yang kedaluwarsa.
+- Upload awal belum menyediakan folder CRUD, sharing, preview transcoding, maupun sinkronisasi File Manager global.
