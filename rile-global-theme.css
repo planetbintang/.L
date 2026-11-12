@@ -123,3 +123,64 @@ html:not([data-reic-r-mode="off"]) .reic-r-source{position:absolute!important;wi
 .reic-r-toggle:focus-visible{outline:2px solid #8adfff;outline-offset:2px}
 .reic-r-setting{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid var(--rile-line,rgba(157,220,255,.34));background:var(--rile-glass-soft,rgba(4,21,61,.82))}
 .reic-r-setting-copy{display:grid;gap:4px}.reic-r-setting-copy small{opacity:.78}
+
+
+/* REIC R MODE refinement: overlay glyphs without changing text metrics or layout. */
+.reic-r-letter{
+ position:relative!important;
+ display:inline!important;
+ font:inherit!important;
+ letter-spacing:inherit!important;
+ line-height:inherit!important;
+ vertical-align:baseline!important;
+ white-space:inherit!important;
+}
+.reic-r-letter>.reic-r-source{
+ position:static!important;
+ display:inline!important;
+ visibility:visible!important;
+ color:transparent!important;
+ -webkit-text-fill-color:transparent!important;
+ text-shadow:none!important;
+ font:inherit!important;
+ letter-spacing:inherit!important;
+ line-height:inherit!important;
+ padding:0!important;
+ margin:0!important;
+ border:0!important;
+ clip:auto!important;
+ width:auto!important;
+ height:auto!important;
+ overflow:visible!important;
+ white-space:inherit!important;
+}
+.reic-r-letter>.reic-r-glyph{
+ position:absolute!important;
+ display:block!important;
+ left:0!important;
+ top:50%!important;
+ width:1.02em!important;
+ height:1.08em!important;
+ max-width:none!important;
+ margin:0!important;
+ padding:0!important;
+ overflow:visible!important;
+ transform:translateY(-50%)!important;
+ pointer-events:none!important;
+ z-index:1!important;
+ filter:none!important;
+}
+.reic-r-letter>.reic-r-glyph[data-case="lower"]{
+ width:.88em!important;
+ height:.78em!important;
+ top:50%!important;
+}
+html[data-reic-r-mode="off"] .reic-r-letter>.reic-r-glyph{display:none!important}
+html[data-reic-r-mode="off"] .reic-r-letter>.reic-r-source{
+ color:inherit!important;
+ -webkit-text-fill-color:currentColor!important;
+}
+html[data-reic-r-mode="on"] .reic-r-letter>.reic-r-source{
+ color:transparent!important;
+ -webkit-text-fill-color:transparent!important;
+}
