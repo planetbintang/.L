@@ -1,0 +1,99 @@
+name: PLANETBINTANG WORKFLOW CENTER — ALL WORKFLOW PUBLISH
+
+on:
+  push:
+    branches:
+      - io
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: planetbintang-workflow-center-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    name: Central preflight and integrity gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact release commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Verify release branch and required source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF}" = "refs/heads/io" || {
+            echo "::error::Production publishing is restricted to branch io."
+            exit 1
+          }
+          required=(
+            "index.reic"
+            "index.html"
+            ".nojekyll"
+            "scripts/build-reic-pages.py"
+            "scripts/build-public-monitor-status.py"
+            "scripts/validate-live-monitor.py"
+            "scripts/validate-production-surface.py"
+            "vendordomain/features/verify-feature-system.mjs"
+            ".github/workflows/deploy-pages.yml"
+          )
+          for file in "${required[@]}"; do
+            test -s "$file" || {
+              echo "::error file=$file::Required release input is missing or empty."
+              exit 1
+            }
+          done
+          echo "Required release inputs are present."
+
+      - name: Check Python source syntax
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          files = [
+              Path("scripts/build-reic-pages.py"),
+              Path("scripts/build-public-monitor-status.py"),
+              Path("scripts/validate-live-monitor.py"),
+              Path("scripts/validate-production-surface.py"),
+          ]
+          for file in files:
+              ast.parse(file.read_text(encoding="utf-8"), filename=str(file))
+              print(f"OK: {file}")
+          PY
+
+      - name: Check VendorDomain validator syntax
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate Node.js source syntax
+        run: node --check vendordomain/features/verify-feature-system.mjs
+
+      - name: Check patch whitespace and record release identity
+        run: |
+          git diff --check
+          {
+            echo "## PlanetBintang Workflow Center"
+            echo ""
+            echo "- Branch: `$GITHUB_REF_NAME`"
+            echo "- Commit: `$GITHUB_SHA`"
+            echo "- Gate: central preflight passed"
+            echo "- Next: reusable Pages build, validation, and production publish"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  publish:
+    name: Build, validate, and publish production
+    needs: preflight
+    if: github.ref == 'refs/heads/io'
+    uses: ./.github/workflows/deploy-pages.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
