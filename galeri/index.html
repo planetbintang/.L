@@ -355,7 +355,37 @@ $('#galeriAuthForm').addEventListener('submit',e=>{e.preventDefault();submitGale
 $('#galeriRegister').addEventListener('click',()=>submitGaleriAuth('register'));
 $('#galeriLogout').addEventListener('click',async()=>{try{await apiRequest('/api/v1/logout',{method:'POST'});setGaleriUser(null);$('#galeriRemoteFiles').replaceChildren();setAccountMessage('Anda telah logout.')}catch(error){setAccountMessage(error.message)}});
 $('#refreshGaleriFiles').addEventListener('click',async()=>{try{await loadGaleriProfile();setAccountMessage('Daftar penyimpanan diperbarui.')}catch(error){setAccountMessage(error.message)}});
-if(galeriApiBase){apiRequest('/api/v1/health').then(()=>loadGaleriProfile()).catch(()=>setAccountMessage('API belum tersedia atau sesi belum login.'))}
+async function loadPublishedMedia(){
+ if(!galeriApiBase)return;
+ try{
+  const response=await fetch(galeriApiBase+'/api/v1/public/media?limit=100',{credentials:'omit',cache:'no-store'});
+  if(!response.ok)throw new Error('Feed publik belum tersedia ('+response.status+')');
+  const data=await response.json(),published=Array.isArray(data.items)?data.items:[];
+  const feed=$('#feed'),featured=$('#featuredGrid');
+  feed.querySelectorAll('[data-server-media="1"]').forEach(x=>x.remove());
+  featured.querySelectorAll('[data-server-media="1"]').forEach(x=>x.remove());
+  published.forEach(item=>{
+   if(!item||!item.id||!item.title||!item.public_url)return;
+   const url=galeriApiBase+item.public_url,card=document.createElement('article');
+   const type=String(item.type||'image');card.className='tile';card.dataset.serverMedia='1';
+   card.dataset.category=type==='image'?'image':type;card.dataset.title=(item.title+' '+(item.description||'')).toLocaleLowerCase('id');
+   const media=type==='video'||type==='film'?document.createElement('video'):document.createElement('img');
+   media.src=url;if(media.tagName==='VIDEO'){media.controls=false;media.preload='metadata';media.playsInline=true}else{media.alt=item.title;media.loading='lazy'}
+   const body=document.createElement('div');body.className='tile-body';
+   const title=document.createElement('h3');title.textContent=item.title;
+   const desc=document.createElement('p');desc.textContent=item.description||'Konten resmi PlanetBintang GALERI';
+   const footer=document.createElement('div');footer.className='tile-footer';
+   const meta=document.createElement('span');meta.textContent=type.toUpperCase()+' · PUBLIK';
+   const open=document.createElement('button');open.className='tile-open';open.type='button';open.textContent='Lihat detail ↗';
+   footer.append(meta,open);body.append(title,desc,footer);card.append(media,body);feed.prepend(card);wireCard(card);
+   if(item.placement==='hero'||item.placement==='featured'){const copy=card.cloneNode(true);copy.removeAttribute('data-wired');copy.dataset.serverMedia='1';featured.prepend(copy);wireCard(copy)}
+  });
+  filterItems();
+ }catch(error){console.warn('[GALERI public feed]',error)}
+}
+const saveApiButton=$('#saveApiBase');
+if(saveApiButton)saveApiButton.addEventListener('click',()=>{setTimeout(()=>loadPublishedMedia(),0)});
+if(galeriApiBase){loadPublishedMedia();apiRequest('/api/v1/health').then(()=>loadGaleriProfile()).catch(()=>setAccountMessage('API publik dimuat bila tersedia; sesi akun belum login.'))}
 
 // Tiga set glyph kapital dan tiga set glyph kecil; tiap gaya memakai pasangan berbeda.
 // PB-03: sistem glyph orisinal berbasis koordinat titik dan jalur garis SVG.
