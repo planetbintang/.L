@@ -1,0 +1,65 @@
+-- REIC GALERI DATA CONTRACT v1.0
+-- PostgreSQL schema. Apply with: psql "$DATABASE_URL" -f schema/galeri.reic
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE SCHEMA IF NOT EXISTS galeri;
+
+CREATE TABLE IF NOT EXISTS galeri.users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active','suspended','pending')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS galeri.profiles (
+  user_id UUID PRIMARY KEY REFERENCES galeri.users(id) ON DELETE CASCADE,
+  display_name TEXT NOT NULL DEFAULT '',
+  avatar_key TEXT,
+  timezone TEXT NOT NULL DEFAULT 'Asia/Jakarta',
+  preferences JSONB NOT NULL DEFAULT '{}'::jsonb,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS galeri.sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES galeri.users(id) ON DELETE CASCADE,
+  token_hash TEXT NOT NULL UNIQUE,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  last_seen_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS sessions_user_idx ON galeri.sessions(user_id);
+CREATE INDEX IF NOT EXISTS sessions_expiry_idx ON galeri.sessions(expires_at);
+CREATE TABLE IF NOT EXISTS galeri.folders (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES galeri.users(id) ON DELETE CASCADE,
+  parent_id UUID REFERENCES galeri.folders(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE(user_id, parent_id, name)
+);
+CREATE TABLE IF NOT EXISTS galeri.files (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES galeri.users(id) ON DELETE CASCADE,
+  folder_id UUID REFERENCES galeri.folders(id) ON DELETE SET NULL,
+  original_name TEXT NOT NULL,
+  storage_key TEXT NOT NULL UNIQUE,
+  mime_type TEXT NOT NULL DEFAULT 'application/octet-stream',
+  size_bytes BIGINT NOT NULL CHECK (size_bytes >= 0),
+  sha256 TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS files_owner_created_idx ON galeri.files(user_id, created_at DESC);
+CREATE TABLE IF NOT EXISTS galeri.storage_quotas (
+  user_id UUID PRIMARY KEY REFERENCES galeri.users(id) ON DELETE CASCADE,
+  quota_bytes BIGINT NOT NULL DEFAULT 1073741824,
+  used_bytes BIGINT NOT NULL DEFAULT 0 CHECK (used_bytes >= 0),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE TABLE IF NOT EXISTS galeri.audit_events (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES galeri.users(id) ON DELETE SET NULL,
+  event_type TEXT NOT NULL,
+  details JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
