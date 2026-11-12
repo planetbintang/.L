@@ -48,25 +48,123 @@ footer{border-top:1px solid #193653;padding:22px 26px;color:#91a8c2;font-size:11
 body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9cc8ec}body.light-mode .script-heading p,body.light-mode .script-note,body.light-mode .script-reference figcaption{color:#385775}body.light-mode .script-tool,body.light-mode .script-letter{background:#f5faff;color:#10263e}body.light-mode .script-tool textarea,body.light-mode .script-output{background:#fff;color:#10263e}
 </style>
 
+<style id="bintang-layout-system">
+:root{color-scheme:light;--blue:#0755c9;--deep:#073b91;--ink:#10213c;--muted:#60718c;--line:#dce6f4;--soft:#eef5ff;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0!important;background:#f5f8fd!important;color:var(--ink)!important;font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif!important}
+a{color:inherit;text-decoration:none}
+.utility{min-height:38px;background:#073e9f;color:#fff;padding:8px clamp(16px,3vw,42px);display:flex;justify-content:space-between;gap:14px;align-items:center;font-size:12px}
+.utility nav{display:flex;gap:13px;flex-wrap:wrap}
+.utility nav a{color:#fff}
+.brandbar{background:#fff;border-bottom:1px solid var(--line);padding:17px clamp(16px,3vw,42px);display:grid;grid-template-columns:minmax(190px,1fr) minmax(220px,1.4fr) auto;gap:22px;align-items:center}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand .mark{width:46px;height:42px;display:grid;place-items:center;color:#fff;background:linear-gradient(140deg,#1478ff,#073e9f);font-size:24px;font-weight:900;clip-path:polygon(50% 0,100% 100%,0 100%);flex:0 0 auto}
+.brand strong{display:block;font-size:23px;letter-spacing:-.04em;color:var(--ink)}
+.brand small{display:block;color:var(--muted);font-weight:650;font-size:11px}
+.search{display:flex;border:1px solid #bdcde5;min-width:0;background:#fff}
+.search input{width:100%;min-width:0;border:0;padding:12px 14px;font:inherit;outline:none;color:var(--ink);background:#fff}
+.search span{background:var(--blue);color:#fff;padding:11px 17px;font-size:18px}
+.utility-links{color:var(--blue);font-size:12px;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:0;overflow:auto;background:linear-gradient(90deg,#0755c9,#073e9f);color:#fff;padding:0 clamp(12px,2vw,28px);white-space:nowrap;flex:initial}
+.nav a{padding:13px 14px;font-size:12px;font-weight:800;letter-spacing:.035em;color:#fff;border:0;border-radius:0}
+.nav a+a{border-left:1px solid #ffffff55}
+main{width:100%;max-width:1540px;margin:0 auto;padding:22px clamp(14px,2vw,30px) 50px}
+.hero{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(250px,.9fr);gap:14px;margin:0 0 18px;min-height:260px;position:relative;border:0;background:transparent}
+.hero-main{min-height:260px;padding:clamp(22px,4vw,44px);display:flex;flex-direction:column;justify-content:end;color:#fff;background:#052c68;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:linear-gradient(90deg,#052c68e8,#063b8c77),url('./1782911782.png?v=20261104-gallery-assets-v2');background-position:center;background-size:cover;z-index:0}
+.hero-copy{position:relative;z-index:1;max-width:740px;padding:0}
+.eyebrow{font-size:11px;letter-spacing:.16em;font-weight:850;color:#b7d9ff;border:0;background:transparent;padding:0}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-.045em;margin:10px 0;color:#fff}
+.hero h1 span{display:block;color:#a9dcff}
+.hero p{max-width:680px;color:#e0edff;font-size:14px}
+.hero-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{min-height:38px;padding:0 13px;border:1px solid #cbdaf0;background:#fff;color:var(--blue);font-weight:800;box-shadow:none;border-radius:0}
+.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:none}
+.hero-side{display:grid;grid-template-columns:1fr;gap:12px}
+.hero-tile{padding:20px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;color:var(--ink)}
+.hero-tile b{font-size:24px;color:var(--blue)}
+.hero-tile span{color:var(--muted);font-size:12px}
+.hero-arrow{width:38px;height:38px;border-radius:0;border:1px solid #fff;background:#073b91cc;color:#fff;font-size:23px;box-shadow:none}
+.hero-arrow.prev{left:12px}.hero-arrow.next{right:12px}
+.hero-dots{bottom:12px}
+.hero-dots button{width:9px;height:9px;border-radius:0;background:#dce6f4}
+.hero-dots button[aria-current=true]{background:#fff;box-shadow:0 0 0 2px #0755c9}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.stat{background:#fff;border:1px solid var(--line);padding:14px;color:var(--ink)}
+.stat b{display:block;color:var(--blue);font-size:25px}
+.stat span{color:var(--muted);font-size:12px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:26px 0 12px}
+.section-head h2{font-size:22px;margin:0;letter-spacing:-.03em;color:var(--ink)}
+.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button,.categories button{border:1px solid #c9d8ed;background:#fff;color:#27456d;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer;border-radius:0}
+.filters button.active,.categories button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.featured{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mini-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile,.card{min-width:0;background:#fff;border:1px solid var(--line);box-shadow:0 3px 12px #173d6b0b;border-radius:0;color:var(--ink)}
+.tile:hover{border-color:#8db7e7;transform:translateY(-2px);box-shadow:0 6px 18px #173d6b12}
+.tile img,.tile video{background:#e8f2ff}
+.tile-body{padding:14px}
+.tile h3{color:var(--ink);font-size:16px}
+.tile p{color:var(--muted)}
+.tile-meta,.tile-footer{color:#536985}
+.tile-footer{border-top:1px solid var(--line)}
+.tile-open{border:1px solid #cbdaf0;background:#fff;color:var(--blue);border-radius:0;padding:7px 9px}
+.tile-open:hover{background:var(--blue);color:#fff}
+.categories{display:flex;align-items:center;gap:8px;overflow:auto;padding:10px;margin:0 0 24px;background:#fff;border:1px solid var(--line);scrollbar-width:thin}
+.categories button{flex:0 0 auto}
+.library-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:20px 0 12px;padding:12px;border:1px solid var(--line);background:#fff}
+.library-tools input,.library-tools select{min-height:42px;border:1px solid #bdcde5;background:#fff;color:var(--ink);padding:0 12px;border-radius:0}
+.library-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.library-grid .tile img,.library-grid .tile video{aspect-ratio:16/10}
+.count{font-size:11px;color:var(--muted)}
+.panel{border:1px solid var(--line);background:#fff;padding:18px;margin:18px 0;color:var(--ink);border-radius:0;box-shadow:0 3px 12px #173d6b0b}
+.composer label{color:#536985}
+.composer input,.composer textarea,.composer select{background:#fff;border:1px solid #bdcde5;color:var(--ink);border-radius:0}
+.hint,.upload-status{color:var(--muted)}
+.empty-state{padding:30px;background:#fff;border:1px dashed var(--line);color:var(--muted)}
+.viewer{background:#10213ccc}
+.viewer-card{background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:0}
+.viewer-media{background:#eef5ff}
+.viewer-info p{color:var(--muted)}
+.viewer-close{border:1px solid #cbdaf0;background:#fff;color:var(--blue);border-radius:0}
+.script-studio{background:#fff;border:1px solid var(--line);box-shadow:0 3px 12px #173d6b0b;color:var(--ink);border-radius:0}
+.script-kicker{color:var(--blue)}
+.script-heading p,.script-note,.script-reference figcaption{color:var(--muted)}
+.script-code{border:1px solid #cbdaf0;color:var(--blue)}
+.script-reference{background:#eef5ff;border-color:#cbdaf0}
+.script-reference figcaption{background:#eef5ff}
+.script-tool{background:#f8fbff;border-color:var(--line)}
+.script-tool label{color:var(--blue)}
+.script-tool textarea{background:#fff;border-color:#bdcde5;color:var(--ink)}
+.script-output{background:#075be8;border-color:#2678ff;color:#fff;border-radius:0}
+.script-alphabet{border-color:var(--line)}
+.script-letter{background:#fff;border-color:var(--line)}
+.script-letter b,.script-variant-label{color:var(--muted)}
+.script-letter .script-cases{color:var(--blue)}
+footer{background:#092e69;color:#d9e9ff;padding:22px clamp(16px,3vw,42px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;text-align:left;border:0}
+body.light-mode .script-tool{background:#f8fbff;color:var(--ink)}
+@media(max-width:980px){.featured,.mini-grid,.library-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.brandbar{grid-template-columns:1fr 1.5fr}.utility-links{display:none}}
+@media(max-width:680px){.utility{align-items:flex-start;flex-direction:column}.brandbar{grid-template-columns:1fr;gap:12px}.hero{grid-template-columns:1fr}.hero-main{min-height:240px}.hero-side{grid-template-columns:repeat(3,1fr)}.hero-tile{padding:12px}.hero-tile b{font-size:20px}.stats{grid-template-columns:repeat(2,1fr)}.featured,.mini-grid,.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{align-items:flex-start;flex-direction:column}.nav{padding:0 10px}.nav a{padding:12px 11px}}
+@media(max-width:380px){.featured,.mini-grid,.library-grid{grid-template-columns:1fr}.hero-side{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-<header class="sitebar">
-<a class="brand" href="../"><img src="../media/brand/planetbintang-logo.svg" alt="Logo PlanetBintang"><span><strong>PlanetBintang</strong><small>Satu pintu. Seluruh sistem.</small></span></a>
-<nav class="nav" aria-label="Navigasi utama"><a href="../">⌂ Beranda</a><a class="active" href="./" aria-current="page">▧ Galeri</a><a href="#koleksi" data-quick="video">▶ Video</a><a href="#koleksi" data-quick="film">▣ Film</a><a href="../#integrasi">♟ Integrasi</a><a href="../#vendordomain">◎ Vendor Domain</a><a href="../#aircloud">☁ Air Cloud</a></nav>
-<div class="nav-tools"><a href="#search" aria-label="Cari koleksi">⌕</a><button type="button" id="themeToggle" aria-label="Ganti tampilan" title="Ganti tema">☼</button><a href="../" aria-label="Kembali ke beranda">☰</a></div>
-</header>
-<section class="hero" aria-label="Sorotan galeri">
-<div class="hero-bg" id="heroBackground"></div><div class="hero-copy"><span class="eyebrow">▣ GALERI MULTIMEDIA</span><h1 id="heroTitle">Eksplorasi Tanpa Batas<span>Foto, Video &amp; Film</span></h1><p id="heroDescription">Nikmati koleksi galeri berkualitas tinggi dari seluruh dunia—foto menakjubkan, video inspiratif, dan film pilihan terbaik.</p><div class="hero-actions"><a class="btn primary" href="#koleksi">▶ Mulai Menjelajah</a><a class="btn" href="#kategori">▦ Lihat Kategori</a></div></div>
-<button class="hero-arrow prev" id="heroPrev" type="button" aria-label="Sorotan sebelumnya">‹</button><button class="hero-arrow next" id="heroNext" type="button" aria-label="Sorotan berikutnya">›</button><div class="hero-dots" id="heroDots"><button type="button" aria-label="Sorotan 1" aria-current="true"></button><button type="button" aria-label="Sorotan 2" aria-current="false"></button><button type="button" aria-label="Sorotan 3" aria-current="false"></button></div>
-</section>
+<div class="utility"><span>https://planetbintang.github.io/.L/galeri/</span><nav><a href="../">HUB</a><a href="../bintang/">BINTANG</a><a href="../vmdesktopreic/">VMDESKTOPREIC</a><a href="../aireber/">AIREBER</a><a href="https://github.com/planetbintang">GITHUB</a></nav></div>
+<header class="brandbar"><a class="brand" href="./"><span class="mark">✦</span><span><strong>PLANETBINTANG</strong><small>GALERI · PUSAT KONTEN MULTIMEDIA</small></span></a><label class="search"><input id="headerSearch" type="search" placeholder="Cari foto, video, film, atau kategori…" aria-label="Cari media GALERI"><span>⌕</span></label><div class="utility-links"><b>GALERI MULTIMEDIA</b></div></header>
+<nav class="nav" id="mainNav"><a href="../">BERANDA</a><a href="./">GALERI</a><a href="#kategori">KATEGORI</a><a href="#pilihan">GALERI PILIHAN</a><a href="#koleksi">SEMUA KOLEKSI</a><a href="#accountPanel">AKUN & PENYIMPANAN</a><a href="#aksara">AKSARA</a></nav>
 <main>
-<section class="overview" aria-label="Ringkasan koleksi">
-<div class="metric"><span class="metric-icon">▧</span><span><strong id="mediaMetric">13</strong><small>TOTAL MEDIA TERSEDIA</small></span></div><div class="metric"><span class="metric-icon">▶</span><span><strong id="videoMetric">0</strong><small>VIDEO &amp; FILM</small></span></div><div class="metric"><span class="metric-icon">▦</span><span><strong>12</strong><small>KATEGORI PENJELAJAHAN</small></span></div><div class="metric"><span class="metric-icon">✧</span><span><strong>Publik</strong><small>SUMBER KOLEKSI REPOSITORI</small></span></div>
+<section class="hero" aria-label="Sorotan galeri">
+<div class="hero-main"><div class="hero-bg" id="heroBackground"></div><div class="hero-copy"><span class="eyebrow">PLANETBINTANG / GALERI MULTIMEDIA</span><h1 id="heroTitle">Eksplorasi Tanpa Batas<span>Foto, Video &amp; Film</span></h1><p id="heroDescription">Nikmati koleksi galeri berkualitas tinggi dari seluruh dunia—foto menakjubkan, video inspiratif, dan film pilihan terbaik.</p><div class="hero-actions"><a class="btn primary" href="#koleksi">▶ Mulai Menjelajah</a><a class="btn" href="#kategori">▦ Lihat Kategori</a></div></div><button class="hero-arrow prev" id="heroPrev" type="button" aria-label="Sorotan sebelumnya">‹</button><button class="hero-arrow next" id="heroNext" type="button" aria-label="Sorotan berikutnya">›</button><div class="hero-dots" id="heroDots"><button type="button" aria-label="Sorotan 1" aria-current="true"></button><button type="button" aria-label="Sorotan 2" aria-current="false"></button><button type="button" aria-label="Sorotan 3" aria-current="false"></button></div></div>
+<div class="hero-side"><div class="hero-tile"><b id="heroMediaTotal">13</b><span>Total media dalam registri GALERI</span></div><div class="hero-tile"><b id="heroPhotoTotal">13</b><span>Foto dan visual pilihan</span></div><div class="hero-tile"><b id="heroVideoTotal">0</b><span>Video dan film tersedia</span></div></div>
 </section>
-<nav class="categories" id="categoryBar" aria-label="Kategori galeri">
+<section class="stats" aria-label="Ringkasan koleksi">
+<div class="stat"><b id="mediaMetric">13</b><span>TOTAL MEDIA TERSEDIA</span></div><div class="stat"><b id="videoMetric">0</b><span>VIDEO &amp; FILM</span></div><div class="stat"><b>12</b><span>KATEGORI PENJELAJAHAN</span></div><div class="stat"><b>Publik</b><span>SUMBER KOLEKSI REPOSITORI</span></div>
+</section>
+<nav class="filters categories" id="kategori" aria-label="Kategori galeri">
 <button class="active" data-category="all">▦ Semua</button><button data-category="image">▣ Foto</button><button data-category="video">▶ Video</button><button data-category="film">▣ Film</button><button data-category="animation">★ Animasi</button><button data-category="documentary">▤ Dokumenter</button><button data-category="sport">♜ Sport</button><button data-category="music">♫ Musik</button><button data-category="technology">⚙ Teknologi</button><button data-category="nature">❧ Alam</button><button data-category="science">⚗ Sains</button><button data-category="other">••• Lainnya</button>
 </nav>
-<section aria-labelledby="featuredTitle"><div class="section-head"><div><h2 id="featuredTitle">⭐ Galeri Pilihan</h2><p>Kurasi utama PlanetBintang · Buka kartu untuk melihat media lebih besar</p></div><a href="#koleksi">Lihat Semua →</a></div>
+<section id="pilihan" aria-labelledby="featuredTitle"><div class="section-head"><div><h2 id="featuredTitle">⭐ Galeri Pilihan</h2><p>Kurasi utama PlanetBintang · Buka kartu untuk melihat media lebih besar</p></div><a href="#koleksi">Lihat Semua →</a></div>
 <div class="featured" id="featuredGrid">
 <article class="tile" data-category="image nature" data-title="keindahan alam indonesia"><span class="tag">▣ FOTO</span><img src="./1782911782.png?v=20261104-gallery-assets-v2" alt="Pegunungan dan danau" loading="eager"><div class="tile-body"><h3>Keindahan Alam Indonesia</h3><p>Pegunungan, danau, dan lanskap alam pilihan.</p><div class="tile-meta"><span>▧ Foto</span><span>◉ Pilihan</span></div><div class="tile-footer"><span>Alam · 16:9</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div></article>
 <article class="tile" data-category="image technology" data-title="kota modern dunia"><span class="tag purple">▣ FOTO</span><img src="./1782912612.png?v=20261104-gallery-assets-v2" alt="Kota modern saat senja" loading="lazy"><div class="tile-body"><h3>Kota Modern Dunia</h3><p>Arsitektur, gedung pencakar langit, dan urban.</p><div class="tile-meta"><span>▧ Foto</span><span>◉ Pilihan</span></div><div class="tile-footer"><span>Teknologi · 16:9</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div></article>
@@ -141,7 +239,7 @@ body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9c
   </div>
   <div class="script-alphabet"><div class="script-alphabet-title"><h3>Atlas 26 karakter · enam bentuk per karakter</h3><span>3 kapital + 3 huruf kecil</span></div><div class="script-letters" id="scriptLetters"></div></div>
 </section>
-<footer><strong>PlanetBintang · Galeri Multimedia</strong><br>Satu pintu. Seluruh sistem. · Koleksi visual, video, dan karya digital.</footer>
+<footer><span>PLANETBINTANG · GALERI CENTRAL INDEX</span><span>Satu pintu. Seluruh sistem. · Koleksi visual, video, dan karya digital.</span></footer>
 <script>
 (()=>{'use strict';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],feed=$('#feed'),panel=$('#composerPanel'),form=$('#postForm'),storageKey='planetbintang.galeri.local.v2',themeKey='planetbintang.galeri.theme';
@@ -159,11 +257,12 @@ $('#viewerClose').addEventListener('click',closeMedia);viewer.addEventListener('
 $$('#feed .tile,#featuredGrid .tile,#miniGrid .tile').forEach(wireCard);
 $('#categoryBar')?.addEventListener('click',e=>{const b=e.target.closest('button[data-category]');if(!b)return;activeCategory=b.dataset.category;$$('#categoryBar button').forEach(x=>x.classList.toggle('active',x===b));$('#typeFilter').value='all';filterItems();$('#koleksi').scrollIntoView({behavior:'smooth',block:'start'})});
 $('#filter').addEventListener('input',filterItems);$('#typeFilter').addEventListener('change',filterItems);$('#sortFilter').addEventListener('change',filterItems);
+$('#headerSearch').addEventListener('input',e=>{$('#filter').value=e.target.value;filterItems()});
 $$('[data-quick]').forEach(a=>a.addEventListener('click',()=>{activeCategory=a.dataset.quick;$$('#categoryBar button').forEach(x=>x.classList.toggle('active',x.dataset.category===activeCategory));$('#typeFilter').value='all';filterItems()}));
 function showSlide(n){slide=(n+slides.length)%slides.length;const s=slides[slide];$('#heroBackground').style.backgroundImage='linear-gradient(90deg,rgba(2,9,20,.96),rgba(2,12,27,.82) 38%,rgba(3,12,25,.1) 83%),linear-gradient(0deg,rgba(3,10,21,.3),transparent 60%),url("'+s.image+'")';$('#heroTitle').innerHTML=esc(s.title)+'<span>'+esc(s.subtitle)+'</span>';$('#heroDescription').textContent=s.description;$$('#heroDots button').forEach((b,i)=>b.setAttribute('aria-current',String(i===slide)))}
 $('#heroPrev').addEventListener('click',()=>showSlide(slide-1));$('#heroNext').addEventListener('click',()=>showSlide(slide+1));$('#heroDots').addEventListener('click',e=>{const i=$$('#heroDots button').indexOf(e.target);if(i>=0)showSlide(i)});
 function applyTheme(mode){document.body.classList.toggle('light-mode',mode==='light');$('#themeToggle').textContent=mode==='light'?'☾':'☼';$('#themeToggle').setAttribute('aria-label',mode==='light'?'Gunakan tema gelap':'Gunakan tema terang')}
-let savedTheme='dark';try{savedTheme=localStorage.getItem(themeKey)||'dark'}catch{}applyTheme(savedTheme);$('#themeToggle').addEventListener('click',()=>{const next=document.body.classList.contains('light-mode')?'dark':'light';applyTheme(next);try{localStorage.setItem(themeKey,next)}catch{}});
+applyTheme('light');
 $('#toggleComposer').addEventListener('click',()=>{panel.classList.toggle('hidden');if(!panel.classList.contains('hidden')){panel.scrollIntoView({behavior:'smooth',block:'center'});form.elements.title.focus()}});$('#closeComposer').addEventListener('click',()=>panel.classList.add('hidden'));
 function renderLocalPosts(){let posts=[];try{posts=JSON.parse(localStorage.getItem(storageKey)||'[]');if(!Array.isArray(posts))posts=[]}catch{}localPosts=posts;posts.forEach(post=>{if(!post||!post.dataUrl||!post.title)return;const card=document.createElement('article');card.className='tile';card.dataset.category=post.type||'image';card.dataset.title=(post.title+' '+(post.description||'')).toLocaleLowerCase('id');const media=(post.type==='video'||post.type==='film')?'<video src="'+esc(post.dataUrl)+'" preload="metadata"></video>':'<img src="'+esc(post.dataUrl)+'" alt="'+esc(post.title)+'" loading="lazy">';card.innerHTML=media+'<div class="tile-body"><h3>'+esc(post.title)+'</h3><p>'+esc(post.description||'Media lokal')+'</p><div class="tile-footer"><span>Media lokal · '+esc(post.type)+'</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div>';feed.prepend(card);wireCard(card)})}
 renderLocalPosts();
