@@ -1,0 +1,15 @@
+{
+  "reic": "HOSTING.AUTHENTICATION",
+  "version": "1.0.0",
+  "status": "contract",
+  "description": "Kontrak backend autentikasi multi-tenant untuk Hosting. Implementasi server wajib; GitHub Pages tidak menjalankan API.",
+  "routes": [
+    {"method":"POST","path":"/auth/register","input":["name","email","password"],"output":["message","verification_required"],"rules":["normalize_email","unique_email","password_hash_argon2id","email_verification","rate_limit","audit_event"]},
+    {"method":"POST","path":"/auth/login","input":["email","password"],"output":["session.accessToken","session.expiresAt","profile"],"rules":["verify_password_hash","rate_limit","generic_failure_message","tenant_context","secure_session"]},
+    {"method":"POST","path":"/auth/logout","auth":"required","rules":["revoke_session","audit_event"]},
+    {"method":"GET","path":"/profile","auth":"required","scope":"tenant_id"},
+    {"method":"GET","path":"/services/summary","auth":"required","scope":"tenant_id"},
+    {"method":"POST","path":"/activity","auth":"required","rules":["append_only_audit","tenant_id_from_session"]}
+  ],
+  "security": {"transport":"HTTPS","password_storage":"Argon2id","session":"HttpOnly Secure SameSite cookie preferred; bearer tokens short-lived if used","authorization":"deny by default; tenant isolation; role and permission checks","secrets":"server-only","csrf":"required for cookie-authenticated mutations"}
+}
