@@ -1125,3 +1125,17 @@ body {
 @media(max-width:640px) { .production-shell { padding:20px 12px 42px; } .production-heading { flex-direction:column; } .production-mode-list { grid-template-columns:1fr; } .production-workbench { padding:14px; } .plan-grid { grid-template-columns:1fr; } .usage-table>div,.member-table>article { align-items:flex-start; flex-wrap:wrap; } .reber-header { overflow-x:auto; } .reber-nav { overflow:visible; } .reber-nav-btn { white-space:nowrap; padding:6px 9px; } }
 
 .plan-contact { color: var(--reber-text-muted); font-size: 11px; line-height: 1.5; margin-top: auto; }
+
+.production-chat-section { padding: 12px; display: grid; gap: 7px; }
+.production-chat-section>p { margin: 2px 4px 7px; color: #7fddec; font-size: 9px; letter-spacing: .16em; font-weight: 800; }
+.production-chat-mode { display: flex; align-items: center; gap: 10px; min-height: 54px; width: 100%; padding: 9px; border: 1px solid transparent; background: transparent; color: var(--reber-text-secondary); text-align: left; cursor: pointer; }
+.production-chat-mode:hover { border-color: var(--reber-border); background: rgba(23,94,140,.18); color: white; }
+.production-chat-mode>span:first-child { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--reber-border); color: #83e4f1; font-size: 17px; }
+.production-chat-mode>span:nth-child(2) { display: grid; gap: 3px; }
+.production-chat-mode b { font-size: 11px; }
+.production-chat-mode small { font-size: 9px; color: var(--reber-text-muted); }
+.production-chat-section>a { display: flex; justify-content: space-between; align-items: center; padding: 10px 9px; border: 1px solid transparent; color: var(--reber-text-secondary); text-decoration: none; font-size: 11px; }
+.production-chat-section>a:hover { border-color: var(--reber-border); color: #8be8f4; background: rgba(23,94,140,.18); }
+.production-chat-note { margin: 14px 12px; padding: 13px 10px; border-top: 1px solid var(--reber-border-light); display: grid; gap: 7px; color: var(--reber-text-muted); font-size: 10px; }
+.production-chat-note b { color: var(--reber-text-secondary); }
+.production-chat-note small { color: #80dfe9; }
