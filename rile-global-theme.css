@@ -110,86 +110,8 @@ body>*{position:relative;z-index:1}
   body:before{opacity:.28!important;background-size:7px 7px,54px 54px,54px 54px!important}
 }
 
-/* REIC R MODE — vector letterform derived from the Galeri geometric-script system and supplied grid reference. */
-:root{--reic-r-mode-size:1em;--reic-r-mode-color:currentColor}
-.reic-r-glyph{display:inline-block;width:.66em;height:.88em;max-width:1em;vertical-align:-.105em;overflow:visible;color:inherit;fill:currentColor;flex:none;filter:drop-shadow(0 0 .12em rgba(97,191,255,.2));}
-.reic-r-glyph path{fill:currentColor}
-.reic-r-glyph[data-case="lower"]{width:.54em;height:.68em;vertical-align:-.035em}
-html[data-reic-r-mode="off"] .reic-r-glyph{display:none}
-html[data-reic-r-mode="off"] .reic-r-source{display:inline}
-html:not([data-reic-r-mode="off"]) .reic-r-source{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.reic-r-toggle{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:7px 10px;border:1px solid var(--rile-line,rgba(157,220,255,.34));background:var(--rile-glass,rgba(3,17,62,.9));color:var(--rile-text,#f4fbff);font:inherit;font-size:.82rem;cursor:pointer}
-.reic-r-toggle[aria-pressed="true"]{border-color:var(--rile-line-strong,#bfeaff);box-shadow:0 0 14px rgba(97,191,255,.25)}
-.reic-r-toggle:focus-visible{outline:2px solid #8adfff;outline-offset:2px}
-.reic-r-setting{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid var(--rile-line,rgba(157,220,255,.34));background:var(--rile-glass-soft,rgba(4,21,61,.82))}
-.reic-r-setting-copy{display:grid;gap:4px}.reic-r-setting-copy small{opacity:.78}
-
-
-/* REIC R MODE refinement: overlay glyphs without changing text metrics or layout. */
-.reic-r-letter{
- position:relative!important;
- display:inline!important;
- font:inherit!important;
- letter-spacing:inherit!important;
- line-height:inherit!important;
- vertical-align:baseline!important;
- white-space:inherit!important;
-}
-.reic-r-letter>.reic-r-source{
- position:static!important;
- display:inline!important;
- visibility:visible!important;
- color:transparent!important;
- -webkit-text-fill-color:transparent!important;
- text-shadow:none!important;
- font:inherit!important;
- letter-spacing:inherit!important;
- line-height:inherit!important;
- padding:0!important;
- margin:0!important;
- border:0!important;
- clip:auto!important;
- width:auto!important;
- height:auto!important;
- overflow:visible!important;
- white-space:inherit!important;
-}
-.reic-r-letter>.reic-r-glyph{
- position:absolute!important;
- display:block!important;
- left:0!important;
- top:50%!important;
- width:1.02em!important;
- height:1.08em!important;
- max-width:none!important;
- margin:0!important;
- padding:0!important;
- overflow:visible!important;
- transform:translateY(-50%)!important;
- pointer-events:none!important;
- z-index:1!important;
- filter:none!important;
-}
-.reic-r-letter>.reic-r-glyph[data-case="lower"]{
- width:.88em!important;
- height:.78em!important;
- top:50%!important;
-}
-html[data-reic-r-mode="off"] .reic-r-letter>.reic-r-glyph{display:none!important}
-html[data-reic-r-mode="off"] .reic-r-letter>.reic-r-source{
- color:inherit!important;
- -webkit-text-fill-color:currentColor!important;
-}
-html[data-reic-r-mode="on"] .reic-r-letter>.reic-r-source{
- color:transparent!important;
- -webkit-text-fill-color:transparent!important;
-}
-
-/* Final fit: keep the overlay inside the original character advance to avoid touching neighboring letters. */
-.reic-r-letter>.reic-r-glyph{width:.72em!important;height:1.04em!important;left:0!important}
-.reic-r-letter>.reic-r-glyph[data-case="lower"]{width:.48em!important;height:.76em!important;left:0!important}
-
-
+/* Native typography policy: R and r use the same font metrics as all other letters. */
+.reic-r-letter,.reic-r-glyph,.reic-r-source,.reic-r-setting,.reic-r-toggle{all:revert}
 /* RILE GLOBAL LOCK — final cascade for the root application and its integrated views. */
 :root{
   color-scheme:dark!important;
@@ -251,3 +173,7 @@ html,body{font-family:var(--rile-font)!important}
 @media(prefers-reduced-motion:reduce){
   :where(button,.button,.btn,[role=button],a){transition:none!important;transform:none!important}
 }
+
+/* Final typography guard: do not replace or overlay native letterforms. */
+.reic-r-letter{display:inline;font:inherit;letter-spacing:inherit;line-height:inherit;vertical-align:baseline}
+.reic-r-glyph{display:none!important}
