@@ -86,6 +86,7 @@ input,select,textarea,.result{background:#071321;border-color:#29415d;color:#eaf
 @media(max-width:760px){.vd-stack-block{min-height:0}.vd-stack-actions{gap:6px}.vd-stack-actions button{flex:1 1 calc(50% - 6px)}}
 @media(max-width:420px){.vd-stack-actions button{flex:1 1 100%}}
 </style>
+<link rel="stylesheet" href="./account.css?v=20261112-account-v1">
 </head>
 <body>
 <header class="top"><a class="brand" href="./index.html"><span class="logo">VD</span><span>VendorDomain<small>PLANETBINTANG · DOMAIN & WEB PLATFORM</small></span></a><nav class="topnav"><a href="#services">Layanan</a><a href="#tools">Tools</a><a href="#modules">Semua modul</a><a href="./enterprise/index.html">Workspace</a><a href="./config/layout/pengguna-tim-akses/index.html">Pengguna, Tim & Akses ⚙</a></nav><a class="link" href="./enterprise/index.html">Buka Console ↗</a></header>
@@ -228,4 +229,5 @@ $('#disconnectApi').onclick=()=>{apiBase='';localStorage.removeItem('vd-portal-a
 renderCart();updateEstimate();loadFeatures();if(location.hash==='#api')showApi();
 })();
 </script>
+<script src="./account.js?v=20261112-account-v1" defer></script>
 </body></html>
