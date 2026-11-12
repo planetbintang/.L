@@ -84,6 +84,8 @@ export interface FileRoutesByTo {
   '/api/filesystem': typeof ApiFilesystemRoute
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
+  '/account': typeof AccountRoute
+  '/api/account': typeof ApiAccountRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,6 +96,8 @@ export interface FileRoutesById {
   '/api/filesystem': typeof ApiFilesystemRoute
   '/api/projects': typeof ApiProjectsRoute
   '/api/reber': typeof ApiReberRoute
+  '/account': typeof AccountRoute
+  '/api/account': typeof ApiAccountRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,6 +120,8 @@ export interface FileRouteTypes {
     | '/api/filesystem'
     | '/api/projects'
     | '/api/reber'
+    | '/account'
+    | '/api/account'
   id:
     | '__root__'
     | '/'
@@ -125,6 +131,8 @@ export interface FileRouteTypes {
     | '/api/filesystem'
     | '/api/projects'
     | '/api/reber'
+    | '/account'
+    | '/api/account'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
