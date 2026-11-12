@@ -6,6 +6,7 @@ import {
   integer,
   boolean,
   jsonb,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 
 export const fsNodes = pgTable("fs_nodes", {
@@ -116,7 +117,7 @@ export const reicKamusSessions = pgTable("reic_kamus_sessions", {
 export const reicKamusRecords = pgTable("reic_kamus_records", {
   id: serial().primaryKey(),
   userId: integer("user_id").notNull().references(() => reicKamusUsers.id),
-  kind: text().notNull(), // collection | file | history
+  kind: text().notNull(),
   recordKey: text("record_key").notNull(),
   name: text().notNull(),
   content: text(),
@@ -137,6 +138,57 @@ export const reicKamusSettings = pgTable("reic_kamus_settings", {
 export const reicKamusAudit = pgTable("reic_kamus_audit", {
   id: serial().primaryKey(),
   userId: integer("user_id").references(() => reicKamusUsers.id),
+  action: text().notNull(),
+  detail: jsonb(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/** AIREBER Account Registry — each user's account and files are isolated. */
+export const aireberUsers = pgTable("aireber_users", {
+  id: serial().primaryKey(),
+  email: text().notNull().unique(),
+  displayName: text("display_name").notNull(),
+  passwordHash: text("password_hash").notNull(),
+  passwordSalt: text("password_salt").notNull(),
+  role: text().notNull().default("member"),
+  status: text().notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  lastLoginAt: timestamp("last_login_at"),
+});
+
+export const aireberSessions = pgTable("aireber_sessions", {
+  id: serial().primaryKey(),
+  userId: integer("user_id").notNull().references(() => aireberUsers.id),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  revokedAt: timestamp("revoked_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const aireberFiles = pgTable("aireber_files", {
+  id: serial().primaryKey(),
+  userId: integer("user_id").notNull().references(() => aireberUsers.id),
+  path: text().notNull(),
+  name: text().notNull(),
+  mime: text().notNull().default("text/plain"),
+  content: text().notNull().default(""),
+  size: integer().notNull().default(0),
+  metadata: jsonb(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [uniqueIndex("aireber_files_user_path_idx").on(table.userId, table.path)]);
+
+export const aireberSettings = pgTable("aireber_settings", {
+  id: serial().primaryKey(),
+  userId: integer("user_id").notNull().unique().references(() => aireberUsers.id),
+  settings: jsonb().notNull().default("{}"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const aireberAudit = pgTable("aireber_audit", {
+  id: serial().primaryKey(),
+  userId: integer("user_id").references(() => aireberUsers.id),
   action: text().notNull(),
   detail: jsonb(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
