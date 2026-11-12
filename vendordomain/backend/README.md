@@ -65,7 +65,7 @@ This simplified recognition point is a system workflow choice, not accounting ad
 
 ## Limitations and safety
 
-- No registrar purchase/renewal, billing, user login, or domain transfer is implemented without a selected registrar/payment/auth provider.
+- No registrar purchase/renewal, payment processing, or domain transfer is implemented without a selected registrar/payment provider. Account registration and login are implemented in this API, but require the backend to be separately deployed and configured.
 - Browser pages must not contain `ADMIN_TOKEN` or Cloudflare secrets. Use a server-side session or secure proxy for real user-facing access; do not place admin secrets in static JavaScript.
 - JSON-file storage suits a single instance only. For multi-instance/high-availability production, use PostgreSQL or another managed database and add migrations/backups.
 - This repository contains source code, not a deployed server. The live API is not active until deployed and configured with secrets.
