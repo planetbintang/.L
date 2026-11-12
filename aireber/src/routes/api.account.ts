@@ -102,7 +102,7 @@ export const Route = createFileRoute("/api/account")({
           const email = clean(body.email, 254).toLowerCase();
           const name = clean(body.name, 80);
           const password = String(body.password || "");
-          if (!/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)) return fail(request, "Alamat email tidak valid.", 400);
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(request, "Alamat email tidak valid.", 400);
           if (!name) return fail(request, "Nama pengguna wajib diisi.", 400);
           if (password.length < 10 || password.length > 128) return fail(request, "Kata sandi harus 10–128 karakter.", 400);
           const [existing] = await db.select({ id: aireberUsers.id }).from(aireberUsers).where(eq(aireberUsers.email, email)).limit(1);
