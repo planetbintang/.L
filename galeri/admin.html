@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0755c9">
+<title>GALERI · Pusat Admin Konten</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#10213c;background:#f3f7fc;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}
+.top{height:68px;background:#fff;border-bottom:1px solid #dce6f2;display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:18px;position:sticky;top:0;z-index:4}
+.brand{font-weight:900;letter-spacing:.02em;color:#10213c}.brand span{color:#0755c9}.top a{color:#0755c9;text-decoration:none;font-weight:700}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:calc(100vh - 68px)}
+aside{background:#fff;border-right:1px solid #dce6f2;padding:22px 14px}
+.side-title{font-size:10px;letter-spacing:.15em;color:#8494aa;font-weight:800;padding:12px}
+.side button{display:flex;width:100%;text-align:left;padding:12px 14px;margin:3px 0;background:transparent;color:#52647d;font-weight:700;border-left:3px solid transparent}
+.side button.active,.side button:hover{background:#edf4ff;color:#0755c9;border-left-color:#0755c9}
+main{padding:26px;max-width:1600px;width:100%;margin:auto}
+.heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}.eyebrow{font-size:10px;letter-spacing:.16em;color:#0755c9;font-weight:900}.heading h1{margin:5px 0;font-size:30px}.muted{color:#718199;font-size:13px}
+.btn{min-height:42px;padding:0 16px;background:#eaf2ff;color:#0755c9;font-weight:800;border:1px solid #c9dcf7}.btn.primary{background:#0755c9;color:white;border-color:#0755c9}.btn.danger{color:#b42318;background:#fff1f0;border-color:#ffd1cc}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.stat,.panel{background:#fff;border:1px solid #dce6f2;padding:17px}.stat small{display:block;color:#75849a;font-size:11px;font-weight:700}.stat strong{display:block;font-size:27px;margin-top:5px}
+.panel{margin:16px 0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.panel h2{font-size:17px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px;font-size:12px;font-weight:700;color:#52647d}.field input,.field select,.field textarea{width:100%;min-height:42px;padding:10px;border:1px solid #cbd8e8;background:#fff;color:#10213c;border-radius:0}.field textarea{min-height:90px;resize:vertical}.wide{grid-column:1/-1}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.status{padding:10px 12px;background:#eef5ff;color:#33506f;border-left:3px solid #0755c9;font-size:12px;margin:12px 0}.status.error{background:#fff1f0;color:#9f271d;border-color:#d92d20}.status.ok{background:#ecfdf3;color:#067647;border-color:#12b76a}
+.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:12px;border-bottom:1px solid #e5ebf3;white-space:nowrap}th{color:#718199;font-size:10px;letter-spacing:.08em}
+.pill{display:inline-block;padding:4px 8px;background:#eef3fa;color:#52647d;font-weight:800;font-size:10px}.pill.live{background:#e9f8ef;color:#067647}.pill.draft{background:#fff7e6;color:#975a00}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}.media-card{border:1px solid #dce6f2;background:#fff;min-width:0}.media-card img,.media-card video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#edf2f8;display:block}.media-card div{padding:11px}.media-card h3{font-size:13px;margin:0 0 5px}.media-card p{font-size:11px;color:#718199;margin:0 0 9px}
+.view{display:none}.view.active{display:block}.login-wrap{max-width:520px;margin:7vh auto}.login-wrap .panel{padding:24px}
+.notice{font-size:11px;color:#75849a;line-height:1.6}.hidden{display:none!important}
+@media(max-width:850px){.shell{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #dce6f2;padding:8px}.side{display:flex;overflow:auto}.side-title{display:none}.side button{width:auto;white-space:nowrap}.stats{grid-template-columns:repeat(2,1fr)}main{padding:16px}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.top{padding:0 14px}.heading{flex-direction:column}.heading h1{font-size:24px}.stats{gap:8px}.stat{padding:12px}.grid{grid-template-columns:1fr}.wide{grid-column:auto}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="./">PLANETBINTANG <span>/ GALERI ADMIN</span></a><div class="row"><a href="./">← Tampilan Publik</a><button class="btn" id="logout" type="button">Logout</button></div></header>
+<div id="loginView" class="login-wrap">
+ <section class="panel">
+  <p class="eyebrow">GALERI / ADMIN ACCESS</p><h1>Login Pusat Konten</h1><p class="muted">Masuk dengan akun GALERI yang memiliki peran administrator atau editor.</p>
+  <form id="loginForm" class="grid">
+   <label class="field wide">Alamat API GALERI<input id="apiBase" type="url" placeholder="https://api.domain-anda.tld" required></label>
+   <label class="field wide">Email<input name="email" type="email" autocomplete="username" required></label>
+   <label class="field wide">Kata sandi<input name="password" type="password" autocomplete="current-password" required></label>
+   <div class="wide"><button class="btn primary" type="submit">Login dan verifikasi peran</button></div>
+  </form>
+  <p class="notice">Akses admin diverifikasi oleh server. Halaman ini tidak menyimpan kata sandi dan tidak menganggap login biasa sebagai akses administrator.</p>
+  <div id="loginStatus" class="status" role="status">Masukkan alamat API HTTPS dan kredensial akun.</div>
+ </section>
+</div>
+<div id="appView" class="shell hidden">
+ <aside><div class="side-title">PUSAT PENGELOLAAN</div><nav class="side" id="sideNav">
+  <button class="active" data-view="overview">▦ Ringkasan</button><button data-view="library">▣ Konten Media</button><button data-view="upload">＋ Unggah Konten</button><button data-view="featured">★ Konten Sorotan</button><button data-view="activity">◷ Aktivitas</button><button data-view="settings">⚙ Pengaturan</button>
+ </nav></aside>
+ <main>
+  <section class="view active" id="view-overview">
+   <div class="heading"><div><p class="eyebrow">CONTROL CENTER / GALERI</p><h1>Dashboard Admin</h1><p class="muted">Pusat kendali konten publik PlanetBintang GALERI.</p></div><button class="btn primary" data-goto="upload">＋ Buat publikasi</button></div>
+   <div class="stats"><div class="stat"><small>SEMUA KONTEN</small><strong id="statAll">—</strong></div><div class="stat"><small>SUDAH DIPUBLIKASIKAN</small><strong id="statLive">—</strong></div><div class="stat"><small>DRAF / REVIEW</small><strong id="statDraft">—</strong></div><div class="stat"><small>PENYIMPANAN TERPAKAI</small><strong id="statStorage">—</strong></div></div>
+   <section class="panel"><div class="panel-head"><h2>Publikasi terbaru</h2><button class="btn" id="refreshOverview">Segarkan</button></div><div id="recentList" class="card-grid"></div></section>
+  </section>
+  <section class="view" id="view-library">
+   <div class="heading"><div><p class="eyebrow">CONTENT MANAGEMENT</p><h1>Konten Media</h1><p class="muted">Kelola draf, tinjau, terbitkan, atau arsipkan media.</p></div><button class="btn primary" data-goto="upload">＋ Tambah media</button></div>
+   <section class="panel"><div class="panel-head"><h2>Daftar konten</h2><div class="row"><select id="statusFilter" class="btn"><option value="all">Semua status</option><option value="published">Published</option><option value="draft">Draft</option><option value="review">Review</option><option value="archived">Archived</option></select><button class="btn" id="refreshLibrary">Segarkan</button></div></div><div class="table-wrap"><table><thead><tr><th>JUDUL</th><th>KATEGORI</th><th>STATUS</th><th>PEMILIK</th><th>DIUBAH</th><th>AKSI</th></tr></thead><tbody id="contentRows"><tr><td colspan="6">Memuat data…</td></tr></tbody></table></div></section>
+  </section>
+  <section class="view" id="view-upload">
+   <div class="heading"><div><p class="eyebrow">CONTENT STUDIO</p><h1>Unggah & Publikasikan</h1><p class="muted">Buat konten, simpan sebagai draf, atau kirim untuk publikasi.</p></div></div>
+   <section class="panel"><form id="contentForm" class="grid">
+    <label class="field">Judul konten<input name="title" maxlength="120" required></label>
+    <label class="field">Kategori<select name="type"><option value="image">Foto</option><option value="video">Video</option><option value="film">Film</option><option value="animation">Animasi</option><option value="documentary">Dokumenter</option><option value="sport">Sport</option><option value="music">Musik</option><option value="technology">Teknologi</option><option value="nature">Alam</option><option value="science">Sains</option><option value="other">Lainnya</option></select></label>
+    <label class="field">Penempatan<select name="placement"><option value="gallery">Koleksi Galeri</option><option value="featured">Galeri Pilihan</option><option value="hero">Sorotan Utama</option></select></label>
+    <label class="field wide">Deskripsi<textarea name="description" maxlength="1000" required></textarea></label>
+    <label class="field wide">Berkas media<input name="file" type="file" accept="image/*,video/*" required></label>
+    <label class="field">Status awal<select name="status"><option value="draft">Simpan sebagai draf</option><option value="review">Kirim untuk review</option></select></label>
+    <div class="wide row"><button class="btn primary" type="submit">Unggah konten</button><button class="btn" type="reset">Kosongkan</button></div>
+   </form><p class="notice">Unggahan menggunakan storage server GALERI. Batas dan tipe file divalidasi oleh backend. Tombol publish hanya tersedia untuk peran yang diizinkan server.</p><div id="uploadStatus" class="status" role="status">Siap menerima konten.</div></section>
+  </section>
+  <section class="view" id="view-featured">
+   <div class="heading"><div><p class="eyebrow">EDITORIAL CONTROL</p><h1>Konten Sorotan</h1><p class="muted">Atur konten yang muncul pada banner dan bagian Galeri Pilihan.</p></div></div>
+   <section class="panel"><div class="panel-head"><h2>Daftar kandidat sorotan</h2><button class="btn" id="refreshFeatured">Segarkan</button></div><div id="featuredList" class="card-grid"></div></section>
+  </section>
+  <section class="view" id="view-activity">
+   <div class="heading"><div><p class="eyebrow">AUDIT TRAIL</p><h1>Aktivitas</h1><p class="muted">Riwayat perubahan dan publikasi yang dicatat server.</p></div></div>
+   <section class="panel"><div id="activityList" class="table-wrap">Belum ada data aktivitas.</div></section>
+  </section>
+  <section class="view" id="view-settings">
+   <div class="heading"><div><p class="eyebrow">ADMIN CONFIGURATION</p><h1>Pengaturan</h1></div></div>
+   <section class="panel"><h2>Sesi & hak akses</h2><p id="adminIdentity" class="muted">—</p><div class="status">Peran, izin publikasi, dan pemeriksaan sesi ditentukan oleh server. Jangan menaruh token rahasia di halaman statis.</div><button class="btn" id="recheckAccess">Periksa ulang akses</button></section>
+  </section>
+ </main>
+</div>
+<script>
+(()=>{'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const API_KEY='planetbintang.galeri.api.v1';let base='',admin=null,items=[];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function message(el,msg,type=''){el.textContent=msg;el.className='status'+(type?' '+type:'')}
+function setBase(value){const u=new URL(value);if(u.protocol!=='https:')throw Error('API produksi wajib menggunakan HTTPS.');base=u.origin;localStorage.setItem(API_KEY,base);$('#apiBase').value=base}
+async function api(path,options={}){if(!base)throw Error('Alamat API belum diatur.');const headers=new Headers(options.headers||{});if(options.body&&typeof options.body==='string')headers.set('content-type','application/json');const r=await fetch(base+path,{...options,headers,credentials:'include'});const type=r.headers.get('content-type')||'';const data=type.includes('json')?await r.json():{};if(!r.ok)throw Error(data.error||'Permintaan gagal ('+r.status+').');return data}
+function allowed(user){const roles=Array.isArray(user.roles)?user.roles:[];return user.is_admin===true||user.role==='admin'||user.role==='editor'||roles.includes('admin')||roles.includes('editor')}
+async function verify(){const data=await api('/api/v1/admin/session');const user=data.user||data;if(!allowed(user))throw Error('Akun berhasil dikenali, tetapi tidak memiliki peran admin/editor.');admin=user;$('#adminIdentity').textContent=(user.display_name||user.email||'Admin')+' · '+(user.role||'admin')+' · akses diverifikasi server';$('#loginView').classList.add('hidden');$('#appView').classList.remove('hidden');await refreshAll()}
+async function login(e){e.preventDefault();try{setBase($('#apiBase').value.trim());message($('#loginStatus'),'Memeriksa kredensial…');const fd=new FormData($('#loginForm'));await api('/api/v1/login',{method:'POST',body:JSON.stringify({email:fd.get('email'),password:fd.get('password')})});await verify()}catch(err){message($('#loginStatus'),err.message,'error')}}
+function statusPill(s){const label=String(s||'draft').toUpperCase();return '<span class="pill '+(s==='published'?'live':s==='draft'?'draft':'')+'">'+esc(label)+'</span>'}
+function mediaCard(item){const src=item.thumbnail_url||item.public_url||item.url||'';return '<article class="media-card">'+(src?'<img src="'+esc(src)+'" alt="">':'<div style="aspect-ratio:16/9;background:#edf2f8"></div>')+'<div><h3>'+esc(item.title)+'</h3><p>'+esc(item.type||'media')+' · '+esc(item.status||'draft')+'</p></div></article>'}
+async function loadItems(){const data=await api('/api/v1/admin/media');items=Array.isArray(data.items)?data.items:[];drawItems();drawFeatured();drawStats(data)}
+function drawItems(){const filter=$('#statusFilter').value;const list=items.filter(x=>filter==='all'||x.status===filter);$('#contentRows').innerHTML=list.length?list.map(x=>'<tr><td>'+esc(x.title)+'</td><td>'+esc(x.type)+'</td><td>'+statusPill(x.status)+'</td><td>'+esc(x.owner_name||x.owner_email||'—')+'</td><td>'+esc(x.updated_at||'—')+'</td><td><div class="row">'+(x.status!=='published'?'<button class="btn primary" data-action="publish" data-id="'+esc(x.id)+'">Publish</button>':'<button class="btn" data-action="unpublish" data-id="'+esc(x.id)+'">Tarik</button>')+'<button class="btn danger" data-action="archive" data-id="'+esc(x.id)+'">Arsip</button></div></td></tr>').join(''):'<tr><td colspan="6">Belum ada konten untuk filter ini.</td></tr>'}
+function drawFeatured(){const list=items.filter(x=>x.status==='published');$('#featuredList').innerHTML=list.length?list.map(x=>'<div class="panel"><h3>'+esc(x.title)+'</h3><p class="muted">'+esc(x.placement||'gallery')+'</p><button class="btn" data-action="feature" data-id="'+esc(x.id)+'">Jadikan sorotan</button></div>').join(''):'<p class="muted">Belum ada konten publik.</p>'}
+function drawStats(data={}){$('#statAll').textContent=items.length;$('#statLive').textContent=items.filter(x=>x.status==='published').length;$('#statDraft').textContent=items.filter(x=>['draft','review'].includes(x.status)).length;$('#statStorage').textContent=data.storage_used_label||'—';$('#recentList').innerHTML=items.slice(0,6).map(mediaCard).join('')||'<p class="muted">Belum ada publikasi.</p>'}
+async function refreshAll(){await loadItems();try{const data=await api('/api/v1/admin/activity');const logs=data.items||[];$('#activityList').innerHTML=logs.length?'<table><thead><tr><th>WAKTU</th><th>AKTIVITAS</th><th>AKTOR</th></tr></thead><tbody>'+logs.map(x=>'<tr><td>'+esc(x.created_at)+'</td><td>'+esc(x.action)+'</td><td>'+esc(x.actor||'—')+'</td></tr>').join('')+'</tbody></table>':'Belum ada aktivitas.'}catch{}}
+async function action(id,action,extra={}){await api('/api/v1/admin/media/'+encodeURIComponent(id)+'/'+action,{method:'POST',body:JSON.stringify(extra)});await refreshAll()}
+$('#loginForm').addEventListener('submit',login);
+try{const saved=localStorage.getItem(API_KEY);if(saved){base=saved;$('#apiBase').value=saved}}catch{}
+$('#sideNav').addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(!b)return;show(b.dataset.view)});
+function show(name){$$('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+name));$$('#sideNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===name))}
+$$('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));
+$('#contentRows').addEventListener('click',async e=>{const b=e.target.closest('[data-action]');if(!b)return;try{await action(b.dataset.id,b.dataset.action,b.dataset.action==='feature'?{placement:'featured'}:{})}catch(err){alert(err.message)}});
+$('#statusFilter').addEventListener('change',drawItems);
+['refreshOverview','refreshLibrary','refreshFeatured'].forEach(id=>$('#'+id).addEventListener('click',()=>refreshAll().catch(err=>alert(err.message))));
+$('#contentForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,fd=new FormData(f),file=fd.get('file');try{message($('#uploadStatus'),'Mengirim metadata ke server…');const meta=await api('/api/v1/admin/media',{method:'POST',body:JSON.stringify({title:fd.get('title'),type:fd.get('type'),placement:fd.get('placement'),description:fd.get('description'),status:fd.get('status'),fileName:file.name,sizeBytes:file.size,mimeType:file.type})});if(!meta.uploadUrl)throw Error('Server tidak mengembalikan uploadUrl.');message($('#uploadStatus'),'Mengunggah berkas…');const put=await fetch(meta.uploadUrl,{method:'PUT',headers:{'content-type':file.type||'application/octet-stream'},body:file});if(!put.ok)throw Error('Upload berkas gagal ('+put.status+').');message($('#uploadStatus'),'Konten tersimpan. Status: '+(fd.get('status')||'draft'),'ok');f.reset();await refreshAll()}catch(err){message($('#uploadStatus'),err.message,'error')}});
+$('#recheckAccess').addEventListener('click',()=>verify().catch(err=>{alert(err.message);location.reload()}));
+$('#logout').addEventListener('click',async()=>{try{await api('/api/v1/logout',{method:'POST'})}catch{}location.href='./'});
+if(base){verify().catch(()=>{})}
+})();
+</script>
+</body></html>
