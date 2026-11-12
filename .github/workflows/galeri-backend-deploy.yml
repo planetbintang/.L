@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   deploy:
-    if: \${{ inputs.confirm_production == true }}
+    if: ${{ inputs.confirm_production == true }}
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -23,26 +23,26 @@ jobs:
 
       - name: Validate deployment secrets
         env:
-          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
-          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
-          SSH_PRIVATE_KEY: \${{ secrets.GALERI_SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: \${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
-          HEALTH_URL: \${{ secrets.GALERI_API_HEALTH_URL }}
+          SSH_HOST: ${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: ${{ secrets.GALERI_SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.GALERI_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
+          HEALTH_URL: ${{ secrets.GALERI_API_HEALTH_URL }}
         run: |
           set -euo pipefail
           for name in SSH_HOST SSH_USER SSH_PRIVATE_KEY SSH_KNOWN_HOSTS HEALTH_URL; do
-            if [[ -z "\${!name}" ]]; then echo "Missing repository/environment secret: $name"; exit 1; fi
+            if [[ -z "${!name}" ]]; then echo "Missing repository/environment secret: $name"; exit 1; fi
           done
           [[ "$HEALTH_URL" == https://* ]] || { echo "Health URL must use HTTPS"; exit 1; }
 
       - name: Configure SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: \${{ secrets.GALERI_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.GALERI_SSH_PRIVATE_KEY }}
 
       - name: Pin server host key
         env:
-          SSH_KNOWN_HOSTS: \${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
+          SSH_KNOWN_HOSTS: ${{ secrets.GALERI_SSH_KNOWN_HOSTS }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
@@ -50,8 +50,8 @@ jobs:
 
       - name: Transfer backend source
         env:
-          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
-          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
+          SSH_HOST: ${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: ${{ secrets.GALERI_SSH_USER }}
         run: |
           set -euo pipefail
           tar --exclude='.env' --exclude='node_modules' -czf - -C galeri-server . |
@@ -59,14 +59,14 @@ jobs:
 
       - name: Install and restart service
         env:
-          SSH_HOST: \${{ secrets.GALERI_SSH_HOST }}
-          SSH_USER: \${{ secrets.GALERI_SSH_USER }}
+          SSH_HOST: ${{ secrets.GALERI_SSH_HOST }}
+          SSH_USER: ${{ secrets.GALERI_SSH_USER }}
         run: |
           ssh "$SSH_USER@$SSH_HOST" 'sudo bash /opt/planetbintang/galeri-server/deploy/install.sh'
 
       - name: Verify production health
         env:
-          HEALTH_URL: \${{ secrets.GALERI_API_HEALTH_URL }}
+          HEALTH_URL: ${{ secrets.GALERI_API_HEALTH_URL }}
         run: |
           set -euo pipefail
           curl --fail --silent --show-error --retry 8 --retry-delay 5 "$HEALTH_URL"
