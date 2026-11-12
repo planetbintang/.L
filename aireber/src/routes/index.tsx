@@ -1,13 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Streamdown } from "streamdown";
 import { useReberAI } from "@/lib/reber-hook";
 import type { ChatMessages } from "@/lib/reber-hook";
-import {
-  REBER_PHILOSOPHY,
-  OPENSOURCE_REFS,
-} from "@/lib/reber-system";
-import { PERPUSNAS_REF, KATA_CATEGORIES, getTotalKataCount } from "@/lib/kata-data";
 import { executePlanetbintangFileCommand } from "@/lib/planetbintang-files";
 
 // ── Messages Component ─────────────────────────────────────────────────────
@@ -65,222 +60,34 @@ function Messages({ messages }: { messages: ChatMessages }) {
   );
 }
 
-// ── Sidebar System Info ────────────────────────────────────────────────────
+// ── Production Navigation ───────────────────────────────────────────────────
 function SystemSidebar({ onSendMessage }: { onSendMessage: (msg: string) => void }) {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    philosophy: true,
-    kata: false,
-    refs: false,
-  });
-
-  const toggle = (key: string) =>
-    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
-
+  const modes = [
+    { icon: "⌘", label: "Website AI", detail: "Website & landing page", prompt: "Buat rancangan dan kode website produksi lengkap berdasarkan kebutuhan berikut: " },
+    { icon: "▣", label: "Application AI", detail: "Web app & dashboard", prompt: "Rancang dan buat aplikasi web produksi lengkap berdasarkan kebutuhan berikut: " },
+    { icon: "◫", label: "Chat AI", detail: "Chatbot & asisten", prompt: "Rancang dan implementasikan chatbot produksi berdasarkan kebutuhan berikut: " },
+    { icon: "⎇", label: "Agent AI", detail: "Agent & workflow", prompt: "Rancang workflow AI agent dengan tools, approval, monitoring, dan fail-safe berdasarkan kebutuhan berikut: " },
+  ];
   return (
-    <aside className="reber-sidebar">
-      <div className="reber-sidebar-header">AlluniverS_OS</div>
+    <aside className="reber-sidebar production-chat-sidebar">
+      <div className="reber-sidebar-header">AIREBER / PRODUKSI</div>
       <div className="reber-sidebar-scroll">
-
-        {/* System Tree */}
-        <div className="reber-sidebar-header" style={{ cursor: "pointer" }} onClick={() => toggle("tree")}>
-          📁 Pohon Sistem
+        <div className="production-chat-section">
+          <p>JENIS PRODUK AI</p>
+          {modes.map((mode) => <button key={mode.label} className="production-chat-mode" onClick={() => onSendMessage(mode.prompt)}><span>{mode.icon}</span><span><b>{mode.label}</b><small>{mode.detail}</small></span></button>)}
         </div>
-        <div>
-          <div className="reber-tree-item" onClick={() => onSendMessage("Tampilkan struktur direktori /allunivers_os/")}>
-            <span>📁</span> allunivers_os/
-          </div>
-          <div className="reber-tree-item" style={{ paddingLeft: 28 }} onClick={() => onSendMessage("Tampilkan file di /allunivers_os/reber_ai/")}>
-            <span>📁</span> reber_ai/
-          </div>
-          <div className="reber-tree-item" style={{ paddingLeft: 28 }} onClick={() => onSendMessage("Tampilkan direktori /allunivers_os/kata/ dengan 1,45 juta node kata")}>
-            <span>📁</span> kata/ <span style={{ fontSize: 10, color: "var(--reber-text-muted)", marginLeft: 4 }}>1.45M</span>
-          </div>
-        </div>
-
         <div className="reber-divider" />
-
-        {/* Philosophy */}
-        <div
-          className="reber-sidebar-header"
-          style={{ cursor: "pointer" }}
-          onClick={() => toggle("philosophy")}
-        >
-          {expanded.philosophy ? "▼" : "▶"} Filosofi Reber
+        <div className="production-chat-section">
+          <p>WORKSPACE</p>
+          <Link to="/production">AI Production Workspace <span>↗</span></Link>
+          <Link to="/projects">Proyek &amp; Produk <span>↗</span></Link>
+          <Link to="/manager">File Manager <span>↗</span></Link>
+          <Link to="/account">Member, Paket &amp; Kuota <span>↗</span></Link>
         </div>
-        {expanded.philosophy && (
-          <div style={{ padding: "8px 16px" }}>
-            {Object.entries(REBER_PHILOSOPHY).filter(([k]) => k !== "full").map(([key, val]) => (
-              <div key={key} className="reber-phil-row" style={{ marginBottom: 6, fontSize: 12 }}>
-                <span className="reber-phil-key">{key.replace("_", ":")}:</span>
-                <span className="reber-phil-val">{val.split("(")[0].trim()}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="reber-divider" />
-
-        {/* Kata Stats */}
-        <div
-          className="reber-sidebar-header"
-          style={{ cursor: "pointer" }}
-          onClick={() => toggle("kata")}
-        >
-          {expanded.kata ? "▼" : "▶"} Sistem Kata
-        </div>
-        {expanded.kata && (
-          <div style={{ padding: "8px 12px" }}>
-            <div className="reber-stat" style={{ marginBottom: 8 }}>
-              <span>Total: </span>
-              <span className="reber-stat-value">{getTotalKataCount().toLocaleString()}+</span>
-            </div>
-            {KATA_CATEGORIES.map((cat) => (
-              <div
-                key={cat.id}
-                className="reber-tree-item"
-                style={{ paddingLeft: 8, paddingRight: 8 }}
-                onClick={() => onSendMessage(`Tampilkan daftar kata dalam kategori "${cat.nameid}"`)}
-              >
-                <span style={{ fontSize: 11, flex: 1 }}>{cat.nameid}</span>
-                <span style={{ fontSize: 10, color: "var(--reber-text-muted)" }}>
-                  {cat.count.toLocaleString()}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="reber-divider" />
-
-        {/* References */}
-        <div
-          className="reber-sidebar-header"
-          style={{ cursor: "pointer" }}
-          onClick={() => toggle("refs")}
-        >
-          {expanded.refs ? "▼" : "▶"} Referensi
-        </div>
-        {expanded.refs && (
-          <div style={{ padding: "8px 12px" }}>
-            <div
-              className="reber-ref-item"
-              style={{ cursor: "pointer" }}
-              onClick={() => onSendMessage("Apa saja yang bisa saya temukan di Perpustakaan Nasional Indonesia (perpusnas.go.id)?")}
-            >
-              <span className="reber-ref-icon">🏛️</span>
-              <div className="reber-ref-info">
-                <div className="reber-ref-name">Perpusnas RI</div>
-                <div className="reber-ref-desc">{PERPUSNAS_REF.url}</div>
-              </div>
-            </div>
-            {OPENSOURCE_REFS.slice(0, 8).map((ref) => (
-              <div key={ref} className="reber-ref-item" style={{ cursor: "pointer" }}
-                onClick={() => onSendMessage(`Ceritakan tentang ${ref} dan kaitannya dengan sistem AlluniverS_OS`)}>
-                <span className="reber-ref-icon">🔗</span>
-                <div className="reber-ref-info">
-                  <div className="reber-ref-name" style={{ fontSize: 11 }}>
-                    {ref.replace("https://", "")}
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div style={{ padding: "4px 8px", fontSize: 11, color: "var(--reber-text-muted)" }}>
-              + {OPENSOURCE_REFS.length - 8} referensi open source lainnya
-            </div>
-          </div>
-        )}
-
-        <div className="reber-divider" />
-
-        {/* Quick Actions */}
-        <div className="reber-sidebar-header">Aksi Cepat</div>
-        {[
-          { label: "Jelajahi kata/", msg: "Jelajahi direktori allunivers_os/kata/ dan tampilkan 20 kata pertama" },
-          { label: "Buat kata baru", msg: "Bantu saya membuat node kata baru di sistem" },
-          { label: "Bangun sistem", msg: "Bantu saya membangun sistem turunan baru di bawah allunivers_os dengan domainnya sendiri" },
-          { label: "Buat kode", msg: "Buatkan komponen aplikasi web menggunakan format file allunivers_os" },
-          { label: "Tentang AI Reber", msg: "Jelaskan sistem AI Reber, filosofinya, dan kemampuannya" },
-        ].map((action) => (
-          <div
-            key={action.label}
-            className="reber-tree-item"
-            onClick={() => onSendMessage(action.msg)}
-          >
-            <span>›</span> {action.label}
-          </div>
-        ))}
-
-      </div>
-    </aside>
-  );
-}
-
-// ── Preview Sidebar ────────────────────────────────────────────────────────
-function PreviewSidebar() {
-  return (
-    <aside className="reber-sidebar" style={{ width: 220, borderLeft: "1px solid var(--reber-border-light)", borderRight: "none" }}>
-      <div className="reber-sidebar-header">Info Sistem</div>
-      <div className="reber-sidebar-scroll">
-        <div style={{ padding: "12px 16px" }}>
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--reber-text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Status</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-              {[
-                { label: "Mesin AI", status: "online" },
-                { label: "Sistem Kata", status: "online" },
-                { label: "Sistem File", status: "online" },
-                { label: "Basis Data Terhubung", status: "online" },
-              ].map((item) => (
-                <div key={item.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 12, color: "var(--reber-text-secondary)" }}>
-                  <span>{item.label}</span>
-                  <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                    <span className="reber-status-dot" />
-                    <span style={{ fontSize: 11, color: "#22c55e" }}>Aktif</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="reber-divider" />
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--reber-text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Ekstensi File</div>
-            {[
-              { ext: ".ieje", label: "Lapisan Tampilan" },
-              { ext: ".aeea", label: "Lapisan Gaya" },
-              { ext: ".nz", label: "Lapisan Logika" },
-              { ext: ".ck", label: "Komponen" },
-              { ext: ".regs", label: "Registri" },
-              { ext: ".log", label: "Log Sistem" },
-            ].map((item) => (
-              <div key={item.ext} style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4 }}>
-                <span className={`reber-tag reber-tag-${item.ext.slice(1)}`}>{item.ext}</span>
-                <span style={{ fontSize: 11, color: "var(--reber-text-secondary)" }}>{item.label}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="reber-divider" />
-
-          <div style={{ marginBottom: 12 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--reber-text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Node Kata</div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: "var(--reber-primary)" }}>
-              {getTotalKataCount().toLocaleString()}+
-            </div>
-            <div style={{ fontSize: 11, color: "var(--reber-text-muted)", marginTop: 2 }}>total kata dalam sistem</div>
-          </div>
-
-          <div className="reber-divider" />
-
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "var(--reber-text-muted)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 6 }}>Domain Kustom</div>
-            <div style={{ fontSize: 12, color: "var(--reber-primary)", fontFamily: "monospace", background: "var(--reber-primary-pale)", padding: "4px 8px", borderRadius: 4 }}>
-              *.allunivers.digital
-            </div>
-          </div>
-
+        <div className="production-chat-note">
+          <b>Alur kerja</b>
+          <span>Brief → Generate → Review → Simpan → Rilis</span>
+          <small>Setiap permintaan AI menggunakan kuota akun.</small>
         </div>
       </div>
     </aside>
@@ -290,16 +97,11 @@ function PreviewSidebar() {
 // ── Welcome Screen ─────────────────────────────────────────────────────────
 function WelcomeScreen({ onSend }: { onSend: (msg: string) => void }) {
   const prompts = [
-    "Apa tips agar tidur lebih nyenyak?",
-    "Jelaskan cara kerja internet secara sederhana",
-    "Berikan ide resep masakan untuk makan malam",
-    "Bagaimana cara mulai belajar pemrograman?",
-    "Apa perbedaan cuaca dan iklim?",
-    "Buatkan rencana olahraga ringan untuk pemula",
-    "Ceritakan sejarah singkat Candi Borobudur",
-    "Bagaimana cara mengatur keuangan pribadi?",
+    "Buat website profil perusahaan dengan halaman layanan dan kontak",
+    "Buat dashboard aplikasi manajemen pelanggan",
+    "Buat chatbot customer support dengan knowledge base",
+    "Buat agent AI untuk memproses alur persetujuan dokumen",
   ];
-
   return (
     <div className="reber-welcome">
       <div className="reber-welcome-logo">Re</div>
@@ -385,16 +187,12 @@ function ReberStudio() {
             <span className="reber-stat-value">AI Reber</span>
           </div>
           <div className="reber-stat">
-            <span>Kata:</span>
-            <span className="reber-stat-value">{getTotalKataCount().toLocaleString()}+</span>
+            <span>Mode produksi:</span>
+            <span className="reber-stat-value">Web · App · Chat · Agent</span>
           </div>
           <div className="reber-stat">
-            <span>Sistem:</span>
-            <span className="reber-stat-value">AlluniverS_OS v1.0</span>
-          </div>
-          <div className="reber-stat">
-            <span>Referensi:</span>
-            <span className="reber-stat-value">perpusnas.go.id + {OPENSOURCE_REFS.length} sumber terbuka</span>
+            <span>Workspace:</span>
+            <span className="reber-stat-value">RILE Global</span>
           </div>
         </div>
 
@@ -458,7 +256,7 @@ function ReberStudio() {
         </div>
       </main>
 
-      <PreviewSidebar />
+
     </div>
   );
 }
