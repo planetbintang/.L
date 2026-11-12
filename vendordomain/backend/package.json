@@ -1,6 +1,6 @@
 {
-  "name": "vendordomain-api",
-  "version": "1.0.0",
+  "name": "planetbintang-hosting-api",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -11,5 +11,8 @@
     "test": "node --test",
     "validate:reic": "node ../reic/verify-reic.mjs"
   },
-  "description": "Hardened VendorDomain API scaffold with persistent records, audit trail, and optional Cloudflare DNS integration"
+  "dependencies": {
+    "pg": "^8.16.3"
+  },
+  "description": "PlanetBintang server-side Hosting API for account identity, tenant services, REIC records and File Manager integration"
 }
