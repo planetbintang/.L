@@ -1,123 +1,95 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "PlanetBintang REIC Tables · Kamus Digital",
-  "version": "1.0.0",
-  "description": "Logical table contract for the Kamus Digital account, dictionary collections and File Manager. The current GitHub Pages client stores these records in browser IndexedDB; this schema is the migration contract for a server-side REIC API.",
+  "version": "2.0.0",
+  "description": "Server-side PostgreSQL tables used by the Aireber/TanStack Start API. Browser IndexedDB is only an offline fallback, never the production identity authority.",
   "tables": {
-    "users": {
+    "reic_kamus_users": {
       "primaryKey": "id",
       "unique": [
         "email"
       ],
       "fields": {
-        "id": "uuid",
+        "id": "serial",
         "email": "string",
-        "name": "string",
-        "passwordHash": "string",
-        "salt": "string",
+        "display_name": "string",
+        "password_hash": "PBKDF2-SHA512 hex",
+        "password_salt": "random hex",
         "role": "member|admin",
         "status": "active|suspended",
-        "createdAt": "datetime"
+        "created_at": "datetime",
+        "last_login_at": "datetime|null"
       }
     },
-    "sessions": {
+    "reic_kamus_sessions": {
       "primaryKey": "id",
       "fields": {
-        "id": "uuid",
-        "userId": "users.id",
-        "tokenHash": "string",
-        "expiresAt": "datetime",
-        "revokedAt": "datetime|null"
+        "id": "serial",
+        "user_id": "reic_kamus_users.id",
+        "token_hash": "SHA-256 hex",
+        "expires_at": "datetime",
+        "revoked_at": "datetime|null"
       }
     },
-    "collections": {
-      "primaryKey": "id",
-      "indexes": [
-        "userId",
-        "word",
-        "category"
-      ],
-      "fields": {
-        "id": "uuid",
-        "userId": "users.id",
-        "word": "string",
-        "category": "string",
-        "createdAt": "datetime"
-      }
-    },
-    "history": {
+    "reic_kamus_records": {
       "primaryKey": "id",
       "indexes": [
-        "userId",
-        "createdAt"
+        "user_id,kind"
       ],
       "fields": {
-        "id": "uuid",
-        "userId": "users.id",
-        "query": "string",
-        "createdAt": "datetime"
+        "id": "serial",
+        "user_id": "reic_kamus_users.id",
+        "kind": "collection|file|history",
+        "record_key": "string",
+        "name": "string",
+        "content": "text|null",
+        "mime": "string|null",
+        "size": "integer",
+        "metadata": "jsonb",
+        "created_at": "datetime",
+        "updated_at": "datetime"
       }
     },
-    "settings": {
+    "reic_kamus_settings": {
       "primaryKey": "id",
       "unique": [
-        "userId"
+        "user_id"
       ],
       "fields": {
-        "id": "users.id",
-        "userId": "users.id",
-        "language": "id|en",
-        "theme": "dark|light",
-        "updatedAt": "datetime"
+        "id": "serial",
+        "user_id": "reic_kamus_users.id",
+        "settings": "jsonb",
+        "updated_at": "datetime"
       }
     },
-    "files": {
+    "reic_kamus_audit": {
       "primaryKey": "id",
       "indexes": [
-        "userId",
-        "createdAt"
+        "user_id,created_at"
       ],
       "fields": {
-        "id": "uuid",
-        "userId": "users.id",
-        "name": "string",
-        "mime": "string",
-        "size": "integer",
-        "contentRef": "string",
-        "createdAt": "datetime"
-      }
-    },
-    "audit": {
-      "primaryKey": "id",
-      "indexes": [
-        "userId",
-        "createdAt"
-      ],
-      "fields": {
-        "id": "uuid",
-        "userId": "users.id",
+        "id": "serial",
+        "user_id": "reic_kamus_users.id|null",
         "action": "string",
-        "detail": "string",
-        "createdAt": "datetime"
+        "detail": "jsonb",
+        "created_at": "datetime"
       }
     }
   },
-  "securityRequirements": [
-    "Password verification and password hashing must run server-side for production accounts; never expose password hashes or salts to public read APIs.",
-    "Enforce ownership checks on every collection, history, settings, file and audit query using the authenticated userId.",
-    "Issue opaque, short-lived sessions; store only token hashes server-side; support revocation and rate limiting.",
-    "Validate uploads by size, MIME sniffing and file policy; store binary objects outside the Git repository.",
-    "Admin roles must be assigned only by a trusted server-side administrator.",
-    "Do not use GitHub Pages, public JSON files, localStorage or IndexedDB as the authority for production identity or cross-device cloud storage."
-  ],
   "apiContract": {
-    "POST /api/reic/auth/register": "Create a user; server hashes password and returns session.",
-    "POST /api/reic/auth/login": "Verify credentials and return session.",
-    "POST /api/reic/auth/logout": "Revoke current session.",
-    "GET /api/reic/me": "Return current user's profile.",
-    "GET|POST /api/reic/collections": "List or save dictionary entries for current user.",
-    "GET|POST /api/reic/files": "List or upload files for current user.",
-    "GET|PATCH /api/reic/settings": "Read or update current user's settings.",
-    "GET /api/reic/audit": "Read own activity; admin views require server authorization."
-  }
+    "GET /api/kamus?action=health": "Public health check.",
+    "POST /api/kamus register|login": "Create account or verify password; returns short-lived bearer token once.",
+    "GET /api/kamus?action=me|collections|files|history|settings|audit": "Return only the authenticated user's records.",
+    "POST /api/kamus logout|save-word|save-file|save-history|delete-record|update-settings|update-profile": "Mutate only the authenticated user's data."
+  },
+  "securityRequirements": [
+    "Password hashing and verification run server-side using PBKDF2-SHA512 with per-user random salts.",
+    "Only SHA-256 digests of opaque session tokens are stored in the database; sessions expire and can be revoked.",
+    "Every user-owned query is constrained by the authenticated user ID.",
+    "Admin roles are never assigned by the public client.",
+    "The API accepts configured origins only; set REIC_ALLOWED_ORIGINS to the exact trusted frontend origins.",
+    "Configure the public API base URL in leksikon/index.html using meta[name=reic-api-base].",
+    "Apply the migration in aireber/netlify/database/migrations before enabling the API.",
+    "The current file endpoint stores text content up to 5 MB in PostgreSQL; binary object storage requires a separate storage provider."
+  ]
 }
