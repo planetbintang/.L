@@ -7,11 +7,79 @@ let enabled=true,observer=null;
 try{enabled=localStorage.getItem(KEY)!=='off'}catch{}
 const upperPath='M5 5H48C77 5 94 22 94 46C94 67 81 81 61 87L96 145H69L39 91H28V145H5ZM28 28V68H49C63 68 72 60 72 47C72 35 63 28 49 28Z';
 const lowerPath='M12 47H34V60C42 49 52 44 66 45V66C48 64 35 73 35 91V121H12Z';
-function svgGlyph(lower){const svg=document.createElementNS(SVG_NS,'svg');svg.setAttribute('class','reic-r-glyph');svg.setAttribute('viewBox','0 0 100 150');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');svg.dataset.case=lower?'lower':'upper';const path=document.createElementNS(SVG_NS,'path');path.setAttribute('d',lower?lowerPath:upperPath);if(!lower)path.setAttribute('fill-rule','evenodd');svg.append(path);return svg}
-function renderTextNode(node){if(!node||!node.nodeValue||!/[Rr]/.test(node.nodeValue))return;const parent=node.parentElement;if(!parent||parent.closest(SKIP)||parent.closest('.reic-r-letter')||parent.isContentEditable||parent.closest('[data-reic-r-skip]'))return;const value=node.nodeValue;const frag=document.createDocumentFragment();let last=0;for(const match of value.matchAll(/[Rr]/g)){const index=match.index;if(index>last)frag.append(document.createTextNode(value.slice(last,index)));const lower=match[0]==='r';const wrap=document.createElement('span');wrap.className='reic-r-letter';wrap.append(svgGlyph(lower));const source=document.createElement('span');source.className='reic-r-source';source.textContent=match[0];wrap.append(source);frag.append(wrap);last=index+1}if(last<value.length)frag.append(document.createTextNode(value.slice(last)));node.parentNode?.replaceChild(frag,node)}
-function scan(root){if(!enabled||!root)return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(renderTextNode)}
-function apply(){document.documentElement.toggleAttribute('data-reic-r-mode',enabled);if(!enabled)document.documentElement.setAttribute('data-reic-r-mode','off');else document.documentElement.setAttribute('data-reic-r-mode','on');try{localStorage.setItem(KEY,enabled?'on':'off')}catch{}const button=document.getElementById('reicRModeToggle');if(button){button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?'R MODE · AKTIF':'R MODE · NONAKTIF'}if(enabled)scan(document.body)}
-function mountSettings(){const panel=document.getElementById('settingsPanel');if(!panel||document.getElementById('reicRModeSetting'))return;const row=document.createElement('div');row.id='reicRModeSetting';row.className='reic-r-setting';const copy=document.createElement('span');copy.className='reic-r-setting-copy';const title=document.createElement('b');title.textContent='R MODE · Tipografi REIC';const note=document.createElement('small');note.textContent='Gunakan bentuk huruf R geometris dari sistem aksara Galeri pada teks antarmuka.';copy.append(title,note);const button=document.createElement('button');button.type='button';button.id='reicRModeToggle';button.className='reic-r-toggle';button.addEventListener('click',()=>{enabled=!enabled;apply()});row.append(copy,button);const grid=panel.querySelector('.settings-grid');if(grid)grid.append(row);else panel.append(row);apply()}
-function start(){apply();scan(document.body);mountSettings();observer=new MutationObserver(records=>{if(!enabled)return;for(const record of records){if(record.type==='characterData')renderTextNode(record.target);record.addedNodes?.forEach(node=>{if(node.nodeType===Node.TEXT_NODE)renderTextNode(node);else if(node.nodeType===Node.ELEMENT_NODE&&!node.matches(SKIP))scan(node)})}});observer.observe(document.body,{subtree:true,childList:true,characterData:true});}
+function svgGlyph(lower){
+ const svg=document.createElementNS(SVG_NS,'svg');
+ svg.setAttribute('class','reic-r-glyph');
+ svg.setAttribute('viewBox','0 0 100 150');
+ svg.setAttribute('aria-hidden','true');
+ svg.setAttribute('focusable','false');
+ svg.dataset.case=lower?'lower':'upper';
+ const path=document.createElementNS(SVG_NS,'path');
+ path.setAttribute('d',lower?lowerPath:upperPath);
+ if(!lower)path.setAttribute('fill-rule','evenodd');
+ svg.append(path);return svg;
+}
+function renderTextNode(node){
+ if(!node||!node.nodeValue||!/[Rr]/.test(node.nodeValue))return;
+ const parent=node.parentElement;
+ if(!parent||parent.closest(SKIP)||parent.closest('.reic-r-letter')||parent.isContentEditable||parent.closest('[data-reic-r-skip]'))return;
+ const value=node.nodeValue,frag=document.createDocumentFragment();
+ let last=0;
+ for(const match of value.matchAll(/[Rr]/g)){
+  const index=match.index;
+  if(index>last)frag.append(document.createTextNode(value.slice(last,index)));
+  const letter=match[0],wrap=document.createElement('span');
+  wrap.className='reic-r-letter';
+  wrap.setAttribute('data-letter',letter);
+  wrap.append(svgGlyph(letter==='r'));
+  const source=document.createElement('span');
+  source.className='reic-r-source';
+  source.textContent=letter;
+  wrap.append(source);frag.append(wrap);last=index+1;
+ }
+ if(last<value.length)frag.append(document.createTextNode(value.slice(last)));
+ node.parentNode?.replaceChild(frag,node);
+}
+function scan(root){
+ if(!enabled||!root)return;
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(renderTextNode);
+}
+function apply(){
+ document.documentElement.setAttribute('data-reic-r-mode',enabled?'on':'off');
+ try{localStorage.setItem(KEY,enabled?'on':'off')}catch{}
+ const button=document.getElementById('reicRModeToggle');
+ if(button){button.setAttribute('aria-pressed',String(enabled));button.textContent=enabled?'R MODE · AKTIF':'R MODE · NONAKTIF'}
+ if(enabled)scan(document.body);
+}
+function mountSettings(){
+ const panel=document.getElementById('settingsPanel');
+ if(!panel||document.getElementById('reicRModeSetting'))return;
+ const row=document.createElement('div');row.id='reicRModeSetting';row.className='reic-r-setting';
+ const copy=document.createElement('span');copy.className='reic-r-setting-copy';
+ const title=document.createElement('b');title.textContent='R MODE · Tipografi REIC';
+ const note=document.createElement('small');note.textContent='Bentuk R geometris tanpa mengubah ukuran, jarak, atau susunan teks.';
+ copy.append(title,note);
+ const button=document.createElement('button');button.type='button';button.id='reicRModeToggle';button.className='reic-r-toggle';
+ button.addEventListener('click',()=>{enabled=!enabled;apply()});
+ row.append(copy,button);
+ const grid=panel.querySelector('.settings-grid');if(grid)grid.append(row);else panel.append(row);
+ apply();
+}
+function start(){
+ apply();scan(document.body);mountSettings();
+ observer=new MutationObserver(records=>{
+  if(!enabled)return;
+  for(const record of records){
+   if(record.type==='characterData')renderTextNode(record.target);
+   record.addedNodes?.forEach(node=>{
+    if(node.nodeType===Node.TEXT_NODE)renderTextNode(node);
+    else if(node.nodeType===Node.ELEMENT_NODE&&!node.matches(SKIP))scan(node);
+   });
+  }
+ });
+ observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
