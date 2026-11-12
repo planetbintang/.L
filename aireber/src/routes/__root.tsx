@@ -19,6 +19,7 @@ function Header() {
   const isStudio = location.pathname === "/" || location.pathname === "/studio";
   const isManager = location.pathname === "/manager";
   const isProjects = location.pathname === "/projects";
+  const isProduction = location.pathname === "/production";
 
   return (
     <header className="reber-header">
@@ -28,6 +29,7 @@ function Header() {
       </div>
 
       <nav className="reber-nav">
+        <Link to="/production" className={`reber-nav-btn ${isProduction ? "active" : ""}`}>AI Produksi</Link>
         <Link to="/" className={`reber-nav-btn ${isStudio ? "active" : ""}`}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -57,12 +59,8 @@ function Header() {
       </nav>
 
       <div className="reber-header-right">
-        <span className="reber-badge">⚡ AlluniverS_OS</span>
-        <span className="reber-badge">v1.0.0</span>
-        <span className="reber-badge">
-          <span className="reber-status-dot" style={{ marginRight: 4 }} />
-          Daring
-        </span>
+        <span className="reber-badge">RILE GLOBAL</span>
+        <Link to="/account" className="reber-badge reber-account-shortcut">MEMBER / LOGIN</Link>
       </div>
     </header>
   );
