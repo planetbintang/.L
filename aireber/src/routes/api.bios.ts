@@ -10,7 +10,20 @@ const SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 const COOKIE = "pb_reic_bios_session";
 const serialise = (value: unknown) => String(value ?? "").trim().toUpperCase().replace(/\s+/g, "");
 const tokenDigest = (token: string) => createHash("sha256").update(token).digest("hex");
-const jsonError = (message: string, status: number) => Response.json({ ok: false, error: message }, { status });
+const cors = (request: Request, response: Response) => {
+  const origin = request.headers.get("origin") || "";
+  const allowed = new Set((process.env.BIOS_ALLOWED_ORIGINS || "https://planetbintang.github.io").split(",").map(x => x.trim()).filter(Boolean));
+  if (allowed.has(origin)) {
+    response.headers.set("Access-Control-Allow-Origin", origin);
+    response.headers.set("Access-Control-Allow-Credentials", "true");
+    response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+    response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    response.headers.append("Vary", "Origin");
+  }
+  return response;
+};
+const json = (request: Request, body: unknown, init?: ResponseInit) => cors(request, Response.json(body, init));
+const jsonError = (request: Request, message: string, status: number) => json(request, { ok: false, error: message }, { status });
 const adminSerials = () => new Set((process.env.BIOS_ADMIN_SERIALS || "").split(",").map(serialise).filter(Boolean));
 
 async function passwordHash(password: string, salt: string) {
@@ -27,7 +40,7 @@ function cookieValue(request: Request) {
   return item ? decodeURIComponent(item.slice(COOKIE.length + 1)) : "";
 }
 function sessionCookie(token: string, maxAge: number) {
-  return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${maxAge}`;
+  return `${COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=${maxAge}`;
 }
 async function currentDevice(request: Request) {
   const token = cookieValue(request);
@@ -63,10 +76,10 @@ export const Route = createFileRoute("/api/bios")({
     handlers: {
       GET: async ({ request }) => {
         const action = new URL(request.url).searchParams.get("action") || "health";
-        if (action === "health") return Response.json({ ok: true, service: "REIC BIOS Registry", storage: "reic-table", version: "1.0" });
+        if (action === "health") return json(request, { ok: true, service: "REIC BIOS Registry", storage: "reic-table", version: "1.0" });
         const auth = await currentDevice(request);
-        if (!auth) return jsonError("BIOS session tidak valid atau telah berakhir.", 401);
-        if (action === "me") return Response.json({ ok: true, device: publicDevice(auth.device) });
+        if (!auth) return jsonError(request, "BIOS session tidak valid atau telah berakhir.", 401);
+        if (action === "me") return json(request, { ok: true, device: publicDevice(auth.device) });
         if (action === "devices") {
           const rows = auth.device.role === "admin" ? await db.select().from(biosDevices).orderBy(desc(biosDevices.createdAt)) : [auth.device];
           return Response.json({ ok: true, devices: rows.map(publicDevice), canManage: auth.device.role === "admin" });
