@@ -1,0 +1,69 @@
+/* PlanetBintang root homepage — OS MEDIA VM visual system.
+   Scoped to the root overview so embedded external views keep their own presentation. */
+body:has(#overview){
+  color-scheme:dark;
+  --pb-bg:#050a14;--pb-panel:#0b1728;--pb-panel-2:#10243a;--pb-line:#29415d;
+  --pb-text:#eaf4ff;--pb-muted:#9cb2cc;--pb-blue:#73cfff;--pb-cyan:#63e4d1;
+  --pb-shadow:0 16px 42px rgba(0,0,0,.22);
+  background:radial-gradient(ellipse at 82% -12%,#14375a 0,transparent 42%),linear-gradient(180deg,#050a14,#071321 55%,#050a14)!important;
+  color:var(--pb-text)!important;
+}
+body:has(#overview) :where(.topbar,.shell,.section-block,.section-heading){color:var(--pb-text)}
+body:has(#overview) .topbar{
+  background:rgba(5,10,20,.96)!important;border-bottom:1px solid var(--pb-line)!important;
+  box-shadow:0 8px 30px rgba(0,0,0,.2);backdrop-filter:blur(18px)
+}
+body:has(#overview) :where(.brand-wordmark strong,.brand-wordmark small,.brand-wordmark small b,.main-nav a,.connection-state,.hero h1,.hero h1 em,.logo-entry-label,.hero-corner,.section-heading h2,.metric-card strong,.repo-name h3,.detail-value,.root-details summary){color:var(--pb-text)!important}
+body:has(#overview) :where(.brand-wordmark small,.connection-state,.hero-description,.metric-card small,.section-description,.repo-name small,.detail-label,.results-line,.root-details summary){color:var(--pb-muted)!important}
+body:has(#overview) .brand-icon-frame,
+body:has(#overview) .logo-outline,
+body:has(#overview) .hero,
+body:has(#overview) .metric-card,
+body:has(#overview) .toolbar,
+body:has(#overview) .repo-card,
+body:has(#overview) .repo-glyph,
+body:has(#overview) .root-chip,
+body:has(#overview) .sync-chip,
+body:has(#overview) .visibility-badge,
+body:has(#overview) .app-tag,
+body:has(#overview) .search-box,
+body:has(#overview) .select-wrap select,
+body:has(#overview) .text-button,
+body:has(#overview) .repo-action,
+body:has(#overview) .root-details{
+  background-color:#0a192a!important;
+  background-image:linear-gradient(rgba(115,207,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(115,207,255,.025) 1px,transparent 1px),linear-gradient(145deg,#0d1b2d,#081321)!important;
+  background-size:18px 18px,18px 18px,auto!important;
+  border-color:var(--pb-line)!important;border-radius:0!important;
+  box-shadow:inset 0 1px 0 rgba(164,222,255,.07),0 12px 28px rgba(0,0,0,.18)!important;
+  color:var(--pb-text)!important
+}
+body:has(#overview) .hero:before{border-color:rgba(115,207,255,.16)!important}
+body:has(#overview) .hero-logo:hover .logo-outline{box-shadow:0 12px 32px rgba(30,112,177,.25)!important;transform:translateY(-3px)}
+body:has(#overview) .metric-card-dark{background-image:linear-gradient(145deg,#123454,#081321)!important}
+body:has(#overview) :where(.repo-head,.repo-details,.root-details){border-color:var(--pb-line)!important}
+body:has(#overview) :where(.search-box input,.select-wrap select){background:#071321!important;color:var(--pb-text)!important}
+body:has(#overview) :where(.search-box input)::placeholder{color:#819ab5}
+body:has(#overview) :where(.main-nav a:hover,.text-link:hover,.repo-name a:hover){color:var(--pb-blue)!important}
+body:has(#overview) :where(button,.button,.btn,.text-button,.repo-action,.icon-button,.select-wrap select){
+  border-radius:0!important;transition:background .18s ease,border-color .18s ease,color .18s ease
+}
+body:has(#overview) :where(.text-button,.icon-button,.repo-action){
+  background:linear-gradient(120deg,#f7fcff,#c9e7ff 48%,#4b9fe8)!important;
+  border:1px solid rgba(126,190,244,.72)!important;color:#124f88!important
+}
+body:has(#overview) :where(.text-button,.icon-button,.repo-action):hover{
+  background:linear-gradient(120deg,#fff,#d9efff 38%,#78baf0)!important;color:#083f78!important
+}
+body:has(#overview) :where(.repo-action.primary){color:#083f78!important}
+body:has(#overview) :where(.repo-card:hover,.vm-home-card:hover){border-color:var(--pb-blue)!important}
+body:has(#overview) :where(.eyebrow,.metric-label,.detail-label,.section-heading .eyebrow){color:var(--pb-cyan)!important}
+body:has(#overview) :where(.metric-card strong,.hero h1,.section-heading h2){text-shadow:0 0 24px rgba(115,207,255,.08)}
+body:has(#overview) :where(a,input,select,textarea,button):focus-visible{outline:2px solid var(--pb-cyan)!important;outline-offset:3px}
+body:has(#overview) .visibility-badge.private,
+body:has(#overview) .visibility-badge.public{background:#10243a!important;color:#dceeff!important;border-color:var(--pb-line)!important}
+body:has(#overview) :where(.repo-glyph img,.brand-icon-frame img,.logo-outline img){background:transparent!important}
+@media(max-width:760px){
+  body:has(#overview) .topbar{background:rgba(5,10,20,.98)!important}
+  body:has(#overview) .hero{background-image:linear-gradient(145deg,#0d1b2d,#081321)!important}
+}
