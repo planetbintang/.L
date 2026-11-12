@@ -1,0 +1,91 @@
+name: PlanetBintang Workflow Fleet Rerun
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch yang dijalankan ulang"
+        required: true
+        default: "io"
+        type: string
+      mode:
+        description: "dry-run hanya inventaris; execute benar-benar menjalankan ulang run lama"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - dry-run
+          - execute
+      max_runs:
+        description: "Batas maksimum run lama per eksekusi (maksimum 2500)"
+        required: true
+        default: "2500"
+        type: string
+      include_success:
+        description: "Sertakan run yang sebelumnya sukses"
+        required: true
+        default: false
+        type: boolean
+      confirm_execute:
+        description: "Wajib dicentang untuk mode execute"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: planetbintang-workflow-fleet-${{ inputs.branch }}
+  cancel-in-progress: false
+
+jobs:
+  inventory-and-rerun:
+    name: Inventory and controlled rerun
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate request and enumerate existing workflow runs
+        id: inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPOSITORY: ${{ github.repository }}
+          TARGET_BRANCH: ${{ inputs.branch }}
+          MODE: ${{ inputs.mode }}
+          MAX_RUNS: ${{ inputs.max_runs }}
+          INCLUDE_SUCCESS: ${{ inputs.include_success }}
+          CONFIRM_EXECUTE: ${{ inputs.confirm_execute }}
+          CURRENT_RUN_ID: ${{ github.run_id }}
+        run: node scripts/rerun-workflow-fleet.mjs
+
+      - name: Publish fleet inventory and execution summary
+        if: always()
+        run: |
+          if [ -f automation/records/workflow-fleet-summary.md ]; then
+            cat automation/records/workflow-fleet-summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Ringkasan inventaris belum tersedia." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload auditable inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: planetbintang-workflow-fleet-${{ github.run_id }}
+          path: |
+            automation/records/workflow-fleet-inventory.json
+            automation/records/workflow-fleet-summary.md
+          if-no-files-found: warn
+          retention-days: 30
