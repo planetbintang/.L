@@ -1,6 +1,6 @@
 /* HOSTING REIC client. Production data is server-owned; browser storage is never the source of truth. */
 (()=>{"use strict";
-const API= document.querySelector('meta[name="hosting-api"]')?.content || "/api/hosting/v1";
+const API= String(window.PB_HOSTING_API_BASE || document.querySelector('meta[name="hosting-api"]')?.content || "/api/hosting/v1").replace(/\/+$/, "");
 const sessionKey="pb.hosting.session";
 const readSession=()=>{try{return JSON.parse(sessionStorage.getItem(sessionKey)||"null")}catch{return null}};
 const saveSession=s=>{if(s?.accessToken)sessionStorage.setItem(sessionKey,JSON.stringify(s));else sessionStorage.removeItem(sessionKey)};
