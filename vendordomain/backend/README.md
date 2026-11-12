@@ -12,6 +12,26 @@ Requires Node.js 20+. Deploy this directory to a trusted server/container with p
 4. Run `npm start` behind HTTPS and a reverse proxy. Restrict access, configure backups/monitoring, and rotate credentials.
 5. Configure the frontend API base URL to the deployed HTTPS API URL. Never expose the admin token in browser JavaScript; the authenticated admin API should be called by a trusted server-side session/proxy.
 
+## Account identity and tenant workspace
+
+The account API adds register/login, profile settings, password changes, tenant-scoped domain inventory, File Manager metadata references, member-role management, and an account activity trail.
+
+- `POST /api/auth/register` — create an active account, a private workspace, and the initial owner membership.
+- `POST /api/auth/login` — authenticate by email and password.
+- `GET /api/auth/me`, `POST /api/auth/logout` — inspect or revoke the current bearer session.
+- `GET /api/account/overview` — workspace metrics and recent activity.
+- `GET/PUT /api/account/profile` — read or update profile fields.
+- `POST /api/account/password` — verify the current password and change it.
+- `GET/POST /api/account/domains` — tenant-scoped domain inventory (not a registrar purchase).
+- `GET/POST /api/account/files` — tenant-scoped File Manager metadata and path references. This does not upload file bytes.
+- `GET /api/account/members`, `PUT /api/account/members/:id/role` — view workspace members and change non-owner roles when authorized.
+
+Passwords are hashed with Node.js scrypt and a per-user random salt. Only SHA-256 hashes of random session tokens are persisted; raw session tokens are returned once at login/register. Sessions expire after 30 days. Login and registration share an additional per-IP attempt limit. User-facing account routes require the session bearer token; existing administrative endpoints continue to require the server-only ADMIN_TOKEN. Account records are isolated by tenant ID.
+
+Register currently activates an account immediately and does not send email verification or password-reset email. Add a verified email delivery flow, recovery process, MFA, and operational abuse controls before opening public registration broadly. The current JSON-file backend is single-instance only; use the PostgreSQL migration below for a multi-instance production deployment.
+
+Apply `migrations/002_account_identity.sql` after backing up and reviewing the database. It adds password/profile fields, session records, and a File Manager metadata registry. Existing user rows are not assigned passwords automatically.
+
 ## Endpoints
 
 - `GET /health` — service and integration readiness.
