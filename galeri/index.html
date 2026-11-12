@@ -188,7 +188,7 @@ filterItems();
 const API_KEY='planetbintang.galeri.api.v1';
 let galeriApiBase='',galeriUser=null;
 const apiInput=$('#galeriApiBase'),accountState=$('#accountState'),accountStatus=$('#galeriAccountStatus');
-try{galeriApiBase=(localStorage.getItem(API_KEY)||'').replace(/\\/$/,'')}catch{}
+try{galeriApiBase=localStorage.getItem(API_KEY)||'';if(galeriApiBase.endsWith('/'))galeriApiBase=galeriApiBase.slice(0,-1)}catch{}
 apiInput.value=galeriApiBase;
 function setAccountMessage(message){accountStatus.textContent=message}
 async function apiRequest(route,options={}){
