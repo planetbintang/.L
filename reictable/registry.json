@@ -1,0 +1,1723 @@
+{
+  "schemaVersion": 1,
+  "registryId": "planetbintang.reictable",
+  "generatedAt": null,
+  "moduleCount": 128,
+  "domains": [
+    {
+      "id": "core",
+      "title": "Core",
+      "description": "Normalisasi metadata dan indeks",
+      "moduleCount": 16
+    },
+    {
+      "id": "identity",
+      "title": "Identity",
+      "description": "Registrasi, serial number, sesi, profil, dan otorisasi",
+      "moduleCount": 16
+    },
+    {
+      "id": "filesystem",
+      "title": "Filesystem",
+      "description": "Pohon file dan sinkronisasi File Manager",
+      "moduleCount": 16
+    },
+    {
+      "id": "reconstruction",
+      "title": "Reconstruction",
+      "description": "Inventaris dan rekonstruksi repositori",
+      "moduleCount": 16
+    },
+    {
+      "id": "automation",
+      "title": "Automation",
+      "description": "Workflow, antrean, dan audit",
+      "moduleCount": 16
+    },
+    {
+      "id": "security",
+      "title": "Security",
+      "description": "Validasi, kontrol akses, dan integritas",
+      "moduleCount": 16
+    },
+    {
+      "id": "integration",
+      "title": "Integration",
+      "description": "Adapter dan sinkronisasi",
+      "moduleCount": 16
+    },
+    {
+      "id": "observability",
+      "title": "Observability",
+      "description": "Metrik dan kesehatan sistem",
+      "moduleCount": 16
+    }
+  ],
+  "modules": [
+    {
+      "id": "REIC-8800001",
+      "title": "Canonicalize Path",
+      "domain": "core",
+      "slug": "canonicalize-path",
+      "path": "reictable/modules/core/8800001-canonicalize-path.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800002",
+      "title": "Stable Id",
+      "domain": "core",
+      "slug": "stable-id",
+      "path": "reictable/modules/core/8800002-stable-id.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800003",
+      "title": "Normalize Label",
+      "domain": "core",
+      "slug": "normalize-label",
+      "path": "reictable/modules/core/8800003-normalize-label.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800004",
+      "title": "Version Compare",
+      "domain": "core",
+      "slug": "version-compare",
+      "path": "reictable/modules/core/8800004-version-compare.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800005",
+      "title": "Parse Timestamp",
+      "domain": "core",
+      "slug": "parse-timestamp",
+      "path": "reictable/modules/core/8800005-parse-timestamp.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800006",
+      "title": "Format Timestamp",
+      "domain": "core",
+      "slug": "format-timestamp",
+      "path": "reictable/modules/core/8800006-format-timestamp.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800007",
+      "title": "Merge Metadata",
+      "domain": "core",
+      "slug": "merge-metadata",
+      "path": "reictable/modules/core/8800007-merge-metadata.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800008",
+      "title": "Pick Fields",
+      "domain": "core",
+      "slug": "pick-fields",
+      "path": "reictable/modules/core/8800008-pick-fields.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800009",
+      "title": "Omit Empty",
+      "domain": "core",
+      "slug": "omit-empty",
+      "path": "reictable/modules/core/8800009-omit-empty.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800010",
+      "title": "Deep Freeze",
+      "domain": "core",
+      "slug": "deep-freeze",
+      "path": "reictable/modules/core/8800010-deep-freeze.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800011",
+      "title": "Stable Sort",
+      "domain": "core",
+      "slug": "stable-sort",
+      "path": "reictable/modules/core/8800011-stable-sort.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800012",
+      "title": "Pagination",
+      "domain": "core",
+      "slug": "pagination",
+      "path": "reictable/modules/core/8800012-pagination.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800013",
+      "title": "Checksum Envelope",
+      "domain": "core",
+      "slug": "checksum-envelope",
+      "path": "reictable/modules/core/8800013-checksum-envelope.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800014",
+      "title": "Validate Identity",
+      "domain": "core",
+      "slug": "validate-identity",
+      "path": "reictable/modules/core/8800014-validate-identity.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800015",
+      "title": "Resolve Reference",
+      "domain": "core",
+      "slug": "resolve-reference",
+      "path": "reictable/modules/core/8800015-resolve-reference.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800016",
+      "title": "Build Index",
+      "domain": "core",
+      "slug": "build-index",
+      "path": "reictable/modules/core/8800016-build-index.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800017",
+      "title": "Account Record",
+      "domain": "identity",
+      "slug": "account-record",
+      "path": "reictable/modules/identity/8800017-account-record.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800018",
+      "title": "Serial Number",
+      "domain": "identity",
+      "slug": "serial-number",
+      "path": "reictable/modules/identity/8800018-serial-number.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800019",
+      "title": "Role Policy",
+      "domain": "identity",
+      "slug": "role-policy",
+      "path": "reictable/modules/identity/8800019-role-policy.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800020",
+      "title": "Session Claims",
+      "domain": "identity",
+      "slug": "session-claims",
+      "path": "reictable/modules/identity/8800020-session-claims.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800021",
+      "title": "Login Attempt",
+      "domain": "identity",
+      "slug": "login-attempt",
+      "path": "reictable/modules/identity/8800021-login-attempt.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800022",
+      "title": "Registration Request",
+      "domain": "identity",
+      "slug": "registration-request",
+      "path": "reictable/modules/identity/8800022-registration-request.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800023",
+      "title": "Profile Merge",
+      "domain": "identity",
+      "slug": "profile-merge",
+      "path": "reictable/modules/identity/8800023-profile-merge.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800024",
+      "title": "Permission Check",
+      "domain": "identity",
+      "slug": "permission-check",
+      "path": "reictable/modules/identity/8800024-permission-check.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800025",
+      "title": "Password Policy",
+      "domain": "identity",
+      "slug": "password-policy",
+      "path": "reictable/modules/identity/8800025-password-policy.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800026",
+      "title": "Token Expiry",
+      "domain": "identity",
+      "slug": "token-expiry",
+      "path": "reictable/modules/identity/8800026-token-expiry.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800027",
+      "title": "Device Binding",
+      "domain": "identity",
+      "slug": "device-binding",
+      "path": "reictable/modules/identity/8800027-device-binding.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800028",
+      "title": "Audit Actor",
+      "domain": "identity",
+      "slug": "audit-actor",
+      "path": "reictable/modules/identity/8800028-audit-actor.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800029",
+      "title": "Access Scope",
+      "domain": "identity",
+      "slug": "access-scope",
+      "path": "reictable/modules/identity/8800029-access-scope.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800030",
+      "title": "Session Revoke",
+      "domain": "identity",
+      "slug": "session-revoke",
+      "path": "reictable/modules/identity/8800030-session-revoke.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800031",
+      "title": "Recovery Request",
+      "domain": "identity",
+      "slug": "recovery-request",
+      "path": "reictable/modules/identity/8800031-recovery-request.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800032",
+      "title": "Principal Link",
+      "domain": "identity",
+      "slug": "principal-link",
+      "path": "reictable/modules/identity/8800032-principal-link.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800033",
+      "title": "File Entry",
+      "domain": "filesystem",
+      "slug": "file-entry",
+      "path": "reictable/modules/filesystem/8800033-file-entry.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800034",
+      "title": "Folder Node",
+      "domain": "filesystem",
+      "slug": "folder-node",
+      "path": "reictable/modules/filesystem/8800034-folder-node.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800035",
+      "title": "Path Normalize",
+      "domain": "filesystem",
+      "slug": "path-normalize",
+      "path": "reictable/modules/filesystem/8800035-path-normalize.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800036",
+      "title": "Tree Flatten",
+      "domain": "filesystem",
+      "slug": "tree-flatten",
+      "path": "reictable/modules/filesystem/8800036-tree-flatten.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800037",
+      "title": "Tree Rebuild",
+      "domain": "filesystem",
+      "slug": "tree-rebuild",
+      "path": "reictable/modules/filesystem/8800037-tree-rebuild.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800038",
+      "title": "Folder Aggregate",
+      "domain": "filesystem",
+      "slug": "folder-aggregate",
+      "path": "reictable/modules/filesystem/8800038-folder-aggregate.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800039",
+      "title": "Extension Classify",
+      "domain": "filesystem",
+      "slug": "extension-classify",
+      "path": "reictable/modules/filesystem/8800039-extension-classify.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800040",
+      "title": "File Hash",
+      "domain": "filesystem",
+      "slug": "file-hash",
+      "path": "reictable/modules/filesystem/8800040-file-hash.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800041",
+      "title": "Manifest Merge",
+      "domain": "filesystem",
+      "slug": "manifest-merge",
+      "path": "reictable/modules/filesystem/8800041-manifest-merge.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800042",
+      "title": "Path Guard",
+      "domain": "filesystem",
+      "slug": "path-guard",
+      "path": "reictable/modules/filesystem/8800042-path-guard.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800043",
+      "title": "File Search",
+      "domain": "filesystem",
+      "slug": "file-search",
+      "path": "reictable/modules/filesystem/8800043-file-search.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800044",
+      "title": "Pagination Cursor",
+      "domain": "filesystem",
+      "slug": "pagination-cursor",
+      "path": "reictable/modules/filesystem/8800044-pagination-cursor.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800045",
+      "title": "Snapshot Compare",
+      "domain": "filesystem",
+      "slug": "snapshot-compare",
+      "path": "reictable/modules/filesystem/8800045-snapshot-compare.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800046",
+      "title": "Virtual Mount",
+      "domain": "filesystem",
+      "slug": "virtual-mount",
+      "path": "reictable/modules/filesystem/8800046-virtual-mount.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800047",
+      "title": "Metadata Index",
+      "domain": "filesystem",
+      "slug": "metadata-index",
+      "path": "reictable/modules/filesystem/8800047-metadata-index.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800048",
+      "title": "Export Bundle",
+      "domain": "filesystem",
+      "slug": "export-bundle",
+      "path": "reictable/modules/filesystem/8800048-export-bundle.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800049",
+      "title": "Repo Inventory",
+      "domain": "reconstruction",
+      "slug": "repo-inventory",
+      "path": "reictable/modules/reconstruction/8800049-repo-inventory.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800050",
+      "title": "Route Inventory",
+      "domain": "reconstruction",
+      "slug": "route-inventory",
+      "path": "reictable/modules/reconstruction/8800050-route-inventory.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800051",
+      "title": "Module Map",
+      "domain": "reconstruction",
+      "slug": "module-map",
+      "path": "reictable/modules/reconstruction/8800051-module-map.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800052",
+      "title": "Dependency Graph",
+      "domain": "reconstruction",
+      "slug": "dependency-graph",
+      "path": "reictable/modules/reconstruction/8800052-dependency-graph.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800053",
+      "title": "Missing Source",
+      "domain": "reconstruction",
+      "slug": "missing-source",
+      "path": "reictable/modules/reconstruction/8800053-missing-source.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800054",
+      "title": "Stale Source",
+      "domain": "reconstruction",
+      "slug": "stale-source",
+      "path": "reictable/modules/reconstruction/8800054-stale-source.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800055",
+      "title": "Source Link",
+      "domain": "reconstruction",
+      "slug": "source-link",
+      "path": "reictable/modules/reconstruction/8800055-source-link.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800056",
+      "title": "Snapshot Diff",
+      "domain": "reconstruction",
+      "slug": "snapshot-diff",
+      "path": "reictable/modules/reconstruction/8800056-snapshot-diff.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800057",
+      "title": "Manifest Repair",
+      "domain": "reconstruction",
+      "slug": "manifest-repair",
+      "path": "reictable/modules/reconstruction/8800057-manifest-repair.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800058",
+      "title": "Index Rebuild",
+      "domain": "reconstruction",
+      "slug": "index-rebuild",
+      "path": "reictable/modules/reconstruction/8800058-index-rebuild.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800059",
+      "title": "Orphan Detect",
+      "domain": "reconstruction",
+      "slug": "orphan-detect",
+      "path": "reictable/modules/reconstruction/8800059-orphan-detect.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800060",
+      "title": "Integrity Score",
+      "domain": "reconstruction",
+      "slug": "integrity-score",
+      "path": "reictable/modules/reconstruction/8800060-integrity-score.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800061",
+      "title": "Recovery Plan",
+      "domain": "reconstruction",
+      "slug": "recovery-plan",
+      "path": "reictable/modules/reconstruction/8800061-recovery-plan.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800062",
+      "title": "Migration Map",
+      "domain": "reconstruction",
+      "slug": "migration-map",
+      "path": "reictable/modules/reconstruction/8800062-migration-map.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800063",
+      "title": "State Classify",
+      "domain": "reconstruction",
+      "slug": "state-classify",
+      "path": "reictable/modules/reconstruction/8800063-state-classify.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800064",
+      "title": "Release Manifest",
+      "domain": "reconstruction",
+      "slug": "release-manifest",
+      "path": "reictable/modules/reconstruction/8800064-release-manifest.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800065",
+      "title": "Workflow Event",
+      "domain": "automation",
+      "slug": "workflow-event",
+      "path": "reictable/modules/automation/8800065-workflow-event.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800066",
+      "title": "Job State",
+      "domain": "automation",
+      "slug": "job-state",
+      "path": "reictable/modules/automation/8800066-job-state.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800067",
+      "title": "Queue Order",
+      "domain": "automation",
+      "slug": "queue-order",
+      "path": "reictable/modules/automation/8800067-queue-order.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800068",
+      "title": "Retry Policy",
+      "domain": "automation",
+      "slug": "retry-policy",
+      "path": "reictable/modules/automation/8800068-retry-policy.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800069",
+      "title": "Idempotency Key",
+      "domain": "automation",
+      "slug": "idempotency-key",
+      "path": "reictable/modules/automation/8800069-idempotency-key.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800070",
+      "title": "Change Record",
+      "domain": "automation",
+      "slug": "change-record",
+      "path": "reictable/modules/automation/8800070-change-record.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800071",
+      "title": "Request Validate",
+      "domain": "automation",
+      "slug": "request-validate",
+      "path": "reictable/modules/automation/8800071-request-validate.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800072",
+      "title": "Batch Plan",
+      "domain": "automation",
+      "slug": "batch-plan",
+      "path": "reictable/modules/automation/8800072-batch-plan.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800073",
+      "title": "Commit Summary",
+      "domain": "automation",
+      "slug": "commit-summary",
+      "path": "reictable/modules/automation/8800073-commit-summary.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800074",
+      "title": "Deploy Gate",
+      "domain": "automation",
+      "slug": "deploy-gate",
+      "path": "reictable/modules/automation/8800074-deploy-gate.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800075",
+      "title": "Rollback Plan",
+      "domain": "automation",
+      "slug": "rollback-plan",
+      "path": "reictable/modules/automation/8800075-rollback-plan.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800076",
+      "title": "Schedule Window",
+      "domain": "automation",
+      "slug": "schedule-window",
+      "path": "reictable/modules/automation/8800076-schedule-window.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800077",
+      "title": "Artifact Index",
+      "domain": "automation",
+      "slug": "artifact-index",
+      "path": "reictable/modules/automation/8800077-artifact-index.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800078",
+      "title": "Status Transition",
+      "domain": "automation",
+      "slug": "status-transition",
+      "path": "reictable/modules/automation/8800078-status-transition.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800079",
+      "title": "Task Dependency",
+      "domain": "automation",
+      "slug": "task-dependency",
+      "path": "reictable/modules/automation/8800079-task-dependency.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800080",
+      "title": "Run Report",
+      "domain": "automation",
+      "slug": "run-report",
+      "path": "reictable/modules/automation/8800080-run-report.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800081",
+      "title": "Secret Scan",
+      "domain": "security",
+      "slug": "secret-scan",
+      "path": "reictable/modules/security/8800081-secret-scan.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800082",
+      "title": "Path Traversal",
+      "domain": "security",
+      "slug": "path-traversal",
+      "path": "reictable/modules/security/8800082-path-traversal.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800083",
+      "title": "Content Limit",
+      "domain": "security",
+      "slug": "content-limit",
+      "path": "reictable/modules/security/8800083-content-limit.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800084",
+      "title": "Permission Matrix",
+      "domain": "security",
+      "slug": "permission-matrix",
+      "path": "reictable/modules/security/8800084-permission-matrix.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800085",
+      "title": "Rate Limit",
+      "domain": "security",
+      "slug": "rate-limit",
+      "path": "reictable/modules/security/8800085-rate-limit.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800086",
+      "title": "Csrf Token Meta",
+      "domain": "security",
+      "slug": "csrf-token-meta",
+      "path": "reictable/modules/security/8800086-csrf-token-meta.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800087",
+      "title": "Origin Policy",
+      "domain": "security",
+      "slug": "origin-policy",
+      "path": "reictable/modules/security/8800087-origin-policy.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800088",
+      "title": "Input Schema",
+      "domain": "security",
+      "slug": "input-schema",
+      "path": "reictable/modules/security/8800088-input-schema.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800089",
+      "title": "Audit Chain",
+      "domain": "security",
+      "slug": "audit-chain",
+      "path": "reictable/modules/security/8800089-audit-chain.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800090",
+      "title": "Private Path Redact",
+      "domain": "security",
+      "slug": "private-path-redact",
+      "path": "reictable/modules/security/8800090-private-path-redact.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800091",
+      "title": "Safe Render",
+      "domain": "security",
+      "slug": "safe-render",
+      "path": "reictable/modules/security/8800091-safe-render.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800092",
+      "title": "Code Policy",
+      "domain": "security",
+      "slug": "code-policy",
+      "path": "reictable/modules/security/8800092-code-policy.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800093",
+      "title": "Key Rotation Plan",
+      "domain": "security",
+      "slug": "key-rotation-plan",
+      "path": "reictable/modules/security/8800093-key-rotation-plan.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800094",
+      "title": "Session Policy",
+      "domain": "security",
+      "slug": "session-policy",
+      "path": "reictable/modules/security/8800094-session-policy.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800095",
+      "title": "Data Classify",
+      "domain": "security",
+      "slug": "data-classify",
+      "path": "reictable/modules/security/8800095-data-classify.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800096",
+      "title": "Integrity Guard",
+      "domain": "security",
+      "slug": "integrity-guard",
+      "path": "reictable/modules/security/8800096-integrity-guard.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800097",
+      "title": "Connector Manifest",
+      "domain": "integration",
+      "slug": "connector-manifest",
+      "path": "reictable/modules/integration/8800097-connector-manifest.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800098",
+      "title": "Api Request",
+      "domain": "integration",
+      "slug": "api-request",
+      "path": "reictable/modules/integration/8800098-api-request.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800099",
+      "title": "Response Normalize",
+      "domain": "integration",
+      "slug": "response-normalize",
+      "path": "reictable/modules/integration/8800099-response-normalize.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800100",
+      "title": "Timeout Policy",
+      "domain": "integration",
+      "slug": "timeout-policy",
+      "path": "reictable/modules/integration/8800100-timeout-policy.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800101",
+      "title": "Retry Backoff",
+      "domain": "integration",
+      "slug": "retry-backoff",
+      "path": "reictable/modules/integration/8800101-retry-backoff.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800102",
+      "title": "Webhook Verify",
+      "domain": "integration",
+      "slug": "webhook-verify",
+      "path": "reictable/modules/integration/8800102-webhook-verify.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800103",
+      "title": "Event Map",
+      "domain": "integration",
+      "slug": "event-map",
+      "path": "reictable/modules/integration/8800103-event-map.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800104",
+      "title": "Provider Status",
+      "domain": "integration",
+      "slug": "provider-status",
+      "path": "reictable/modules/integration/8800104-provider-status.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800105",
+      "title": "Sync Cursor",
+      "domain": "integration",
+      "slug": "sync-cursor",
+      "path": "reictable/modules/integration/8800105-sync-cursor.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800106",
+      "title": "Import Validate",
+      "domain": "integration",
+      "slug": "import-validate",
+      "path": "reictable/modules/integration/8800106-import-validate.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800107",
+      "title": "Export Validate",
+      "domain": "integration",
+      "slug": "export-validate",
+      "path": "reictable/modules/integration/8800107-export-validate.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800108",
+      "title": "Schema Map",
+      "domain": "integration",
+      "slug": "schema-map",
+      "path": "reictable/modules/integration/8800108-schema-map.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800109",
+      "title": "Conflict Resolve",
+      "domain": "integration",
+      "slug": "conflict-resolve",
+      "path": "reictable/modules/integration/8800109-conflict-resolve.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800110",
+      "title": "Health Check",
+      "domain": "integration",
+      "slug": "health-check",
+      "path": "reictable/modules/integration/8800110-health-check.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800111",
+      "title": "Capability Map",
+      "domain": "integration",
+      "slug": "capability-map",
+      "path": "reictable/modules/integration/8800111-capability-map.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800112",
+      "title": "Adapter Registry",
+      "domain": "integration",
+      "slug": "adapter-registry",
+      "path": "reictable/modules/integration/8800112-adapter-registry.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800113",
+      "title": "Event Metric",
+      "domain": "observability",
+      "slug": "event-metric",
+      "path": "reictable/modules/observability/8800113-event-metric.reic",
+      "operation": "normalizePath",
+      "status": "implemented",
+      "formula": {
+        "operation": "normalizePath",
+        "expression": "normalizePath(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800114",
+      "title": "Uptime Window",
+      "domain": "observability",
+      "slug": "uptime-window",
+      "path": "reictable/modules/observability/8800114-uptime-window.reic",
+      "operation": "stableId",
+      "status": "implemented",
+      "formula": {
+        "operation": "stableId",
+        "expression": "stableId(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800115",
+      "title": "Error Classify",
+      "domain": "observability",
+      "slug": "error-classify",
+      "path": "reictable/modules/observability/8800115-error-classify.reic",
+      "operation": "validateRecord",
+      "status": "implemented",
+      "formula": {
+        "operation": "validateRecord",
+        "expression": "validateRecord(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800116",
+      "title": "Log Normalize",
+      "domain": "observability",
+      "slug": "log-normalize",
+      "path": "reictable/modules/observability/8800116-log-normalize.reic",
+      "operation": "aggregate",
+      "status": "implemented",
+      "formula": {
+        "operation": "aggregate",
+        "expression": "aggregate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800117",
+      "title": "Trace Context",
+      "domain": "observability",
+      "slug": "trace-context",
+      "path": "reictable/modules/observability/8800117-trace-context.reic",
+      "operation": "compare",
+      "status": "implemented",
+      "formula": {
+        "operation": "compare",
+        "expression": "compare(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800118",
+      "title": "Latency Summary",
+      "domain": "observability",
+      "slug": "latency-summary",
+      "path": "reictable/modules/observability/8800118-latency-summary.reic",
+      "operation": "merge",
+      "status": "implemented",
+      "formula": {
+        "operation": "merge",
+        "expression": "merge(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800119",
+      "title": "Trend Bucket",
+      "domain": "observability",
+      "slug": "trend-bucket",
+      "path": "reictable/modules/observability/8800119-trend-bucket.reic",
+      "operation": "classify",
+      "status": "implemented",
+      "formula": {
+        "operation": "classify",
+        "expression": "classify(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800120",
+      "title": "Alert Threshold",
+      "domain": "observability",
+      "slug": "alert-threshold",
+      "path": "reictable/modules/observability/8800120-alert-threshold.reic",
+      "operation": "checksum",
+      "status": "implemented",
+      "formula": {
+        "operation": "checksum",
+        "expression": "checksum(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800121",
+      "title": "Anomaly Score",
+      "domain": "observability",
+      "slug": "anomaly-score",
+      "path": "reictable/modules/observability/8800121-anomaly-score.reic",
+      "operation": "redact",
+      "status": "implemented",
+      "formula": {
+        "operation": "redact",
+        "expression": "redact(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800122",
+      "title": "Health Snapshot",
+      "domain": "observability",
+      "slug": "health-snapshot",
+      "path": "reictable/modules/observability/8800122-health-snapshot.reic",
+      "operation": "paginate",
+      "status": "implemented",
+      "formula": {
+        "operation": "paginate",
+        "expression": "paginate(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800123",
+      "title": "Deploy Observe",
+      "domain": "observability",
+      "slug": "deploy-observe",
+      "path": "reictable/modules/observability/8800123-deploy-observe.reic",
+      "operation": "resolve",
+      "status": "implemented",
+      "formula": {
+        "operation": "resolve",
+        "expression": "resolve(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800124",
+      "title": "File Change Metric",
+      "domain": "observability",
+      "slug": "file-change-metric",
+      "path": "reictable/modules/observability/8800124-file-change-metric.reic",
+      "operation": "score",
+      "status": "implemented",
+      "formula": {
+        "operation": "score",
+        "expression": "score(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800125",
+      "title": "Workflow Metric",
+      "domain": "observability",
+      "slug": "workflow-metric",
+      "path": "reictable/modules/observability/8800125-workflow-metric.reic",
+      "operation": "plan",
+      "status": "implemented",
+      "formula": {
+        "operation": "plan",
+        "expression": "plan(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800126",
+      "title": "Registry Health",
+      "domain": "observability",
+      "slug": "registry-health",
+      "path": "reictable/modules/observability/8800126-registry-health.reic",
+      "operation": "transition",
+      "status": "implemented",
+      "formula": {
+        "operation": "transition",
+        "expression": "transition(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800127",
+      "title": "Audit Summary",
+      "domain": "observability",
+      "slug": "audit-summary",
+      "path": "reictable/modules/observability/8800127-audit-summary.reic",
+      "operation": "summarize",
+      "status": "implemented",
+      "formula": {
+        "operation": "summarize",
+        "expression": "summarize(input.record)"
+      }
+    },
+    {
+      "id": "REIC-8800128",
+      "title": "Readiness Check",
+      "domain": "observability",
+      "slug": "readiness-check",
+      "path": "reictable/modules/observability/8800128-readiness-check.reic",
+      "operation": "snapshot",
+      "status": "implemented",
+      "formula": {
+        "operation": "snapshot",
+        "expression": "snapshot(input.record)"
+      }
+    }
+  ],
+  "status": "bootstrap-awaiting-workflow-refresh"
+}
