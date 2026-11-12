@@ -1123,3 +1123,5 @@ body {
 .production-message pre { max-width:100%; overflow:auto; }
 @media(max-width:900px) { .plan-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .production-grid { grid-template-columns:1fr; } .production-mode-list { border-right:0; border-bottom:1px solid var(--reber-border-light); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); } .production-label,.production-sidebar-foot { grid-column:1/-1; } }
 @media(max-width:640px) { .production-shell { padding:20px 12px 42px; } .production-heading { flex-direction:column; } .production-mode-list { grid-template-columns:1fr; } .production-workbench { padding:14px; } .plan-grid { grid-template-columns:1fr; } .usage-table>div,.member-table>article { align-items:flex-start; flex-wrap:wrap; } .reber-header { overflow-x:auto; } .reber-nav { overflow:visible; } .reber-nav-btn { white-space:nowrap; padding:6px 9px; } }
+
+.plan-contact { color: var(--reber-text-muted); font-size: 11px; line-height: 1.5; margin-top: auto; }
