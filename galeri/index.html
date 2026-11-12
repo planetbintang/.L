@@ -98,7 +98,23 @@ body.light-mode .script-studio{background:#eaf4ff;color:#10263e;border-color:#9c
 <article class="tile" data-category="image technology" data-title="karya digital"><img src="./2610271451244.jpg?v=20261104-gallery-assets-v2" alt="Karya digital" loading="lazy"><div class="tile-body"><h3>Karya Digital</h3><p>Foto · Digital</p></div></article>
 <article class="tile" data-category="image science" data-title="sains dan teknologi"><img src="./d482119cdabc9232339169.png?v=20261104-gallery-assets-v2" alt="Sains dan teknologi" loading="lazy"><div class="tile-body"><h3>Sains dan Teknologi</h3><p>Foto · Sains</p></div></article>
 <article class="tile" data-category="image" data-title="arsip fotografi 06 oktober 2026 — koleksi 01"><img src="./2610061644522.jpg?v=20261104-gallery-assets-v2" alt="Arsip Fotografi 06 Oktober 2026 — Koleksi 01" loading="lazy"><div class="tile-body"><h3>Arsip Fotografi 06 Oktober 2026 — Koleksi 01</h3><p>Foto · Arsip Galeri PlanetBintang</p></div></article><article class="tile" data-category="image" data-title="arsip fotografi 06 oktober 2026 — koleksi 03"><img src="./2610061649287.jpg?v=20261104-gallery-assets-v2" alt="Arsip Fotografi 06 Oktober 2026 — Koleksi 03" loading="lazy"><div class="tile-body"><h3>Arsip Fotografi 06 Oktober 2026 — Koleksi 03</h3><p>Foto · Arsip Galeri PlanetBintang</p></div></article><article class="tile" data-category="image" data-title="arsip fotografi 27 oktober 2026 — koleksi 02"><img src="./2610271456346.jpg?v=20261104-gallery-assets-v2" alt="Arsip Fotografi 27 Oktober 2026 — Koleksi 02" loading="lazy"><div class="tile-body"><h3>Arsip Fotografi 27 Oktober 2026 — Koleksi 02</h3><p>Foto · Arsip Galeri PlanetBintang</p></div></article></div></section>
-<section class="panel hidden" id="composerPanel"><div class="section-head"><div><h2>＋ Tambahkan Media</h2><p>Masukkan media ke koleksi lokal browser ini</p></div><button class="viewer-close" id="closeComposer" type="button">Tutup ✕</button></div><form id="postForm" class="composer"><label>Judul media<input name="title" maxlength="100" required placeholder="Contoh: Pemandangan Danau"></label><label>Kategori<select name="type"><option value="image">Foto</option><option value="video">Video</option><option value="film">Film</option><option value="animation">Animasi</option><option value="documentary">Dokumenter</option><option value="sport">Sport</option><option value="music">Musik</option><option value="technology">Teknologi</option><option value="nature">Alam</option><option value="science">Sains</option><option value="other">Lainnya</option></select></label><label class="wide">Deskripsi<textarea name="description" maxlength="600" placeholder="Tuliskan keterangan media"></textarea></label><label class="wide">Pilih berkas<input name="file" type="file" required accept="image/*,video/*"></label><div class="wide"><button class="btn primary" type="submit">Simpan media lokal</button><p class="hint">Berkas disimpan dalam penyimpanan browser perangkat ini. Berkas tidak otomatis diunggah ke GitHub atau terlihat oleh pengunjung lain. Untuk publikasi umum, berkas harus ditambahkan ke repositori.</p><p class="upload-status" id="uploadStatus" role="status"></p></div></form></section>
+<section class="panel" id="accountPanel" aria-labelledby="accountTitle">
+<div class="section-head"><div><h2 id="accountTitle">Akun & Penyimpanan GALERI</h2><p>Login, profil, dan berkas akun tersinkron melalui backend PlanetBintang</p></div><span id="accountState" class="hint">Belum terhubung</span></div>
+<div class="composer">
+<label class="wide">Alamat API GALERI<input id="galeriApiBase" type="url" placeholder="https://api.domain-planetbintang-anda.tld" autocomplete="url"></label>
+<div class="wide"><button class="btn" type="button" id="saveApiBase">Simpan alamat API</button><span class="hint">Gunakan alamat HTTPS API yang dipasang pada server. Jangan masukkan kata sandi atau token di sini.</span></div>
+<form id="galeriAuthForm" class="composer wide">
+<label>Email<input name="email" type="email" autocomplete="username" required></label>
+<label>Kata sandi<input name="password" type="password" minlength="12" autocomplete="current-password" required></label>
+<label class="wide" id="registerNameWrap">Nama tampilan (khusus register)<input name="displayName" maxlength="80" autocomplete="name"></label>
+<div class="wide script-actions"><button class="btn primary" type="submit" id="galeriLogin">Login</button><button class="btn" type="button" id="galeriRegister">Register</button><button class="btn" type="button" id="galeriLogout">Logout</button></div>
+</form>
+<div class="wide" id="galeriProfile" hidden></div>
+<div class="wide"><div class="section-head"><div><h3>File Manager · Penyimpanan Akun</h3><p id="galeriFileSummary">Login untuk melihat berkas yang tersimpan di server</p></div><button class="btn" type="button" id="refreshGaleriFiles">Muat ulang</button></div><div id="galeriRemoteFiles" class="library-grid"></div></div>
+<p class="hint wide" id="galeriAccountStatus" role="status">Akun dan berkas tidak disimpan ke GitHub Pages. Setelah API siap, data dikelola di server GALERI.</p>
+</div>
+</section>
+<section class="panel hidden" id="composerPanel"><div class="section-head"><div><h2>＋ Tambahkan Media</h2><p>Unggah media ke penyimpanan akun GALERI</p></div><button class="viewer-close" id="closeComposer" type="button">Tutup ✕</button></div><form id="postForm" class="composer"><label>Judul media<input name="title" maxlength="100" required placeholder="Contoh: Pemandangan Danau"></label><label>Kategori<select name="type"><option value="image">Foto</option><option value="video">Video</option><option value="film">Film</option><option value="animation">Animasi</option><option value="documentary">Dokumenter</option><option value="sport">Sport</option><option value="music">Musik</option><option value="technology">Teknologi</option><option value="nature">Alam</option><option value="science">Sains</option><option value="other">Lainnya</option></select></label><label class="wide">Deskripsi<textarea name="description" maxlength="600" placeholder="Tuliskan keterangan media"></textarea></label><label class="wide">Pilih berkas<input name="file" type="file" required accept="image/*,video/*"></label><div class="wide"><button class="btn primary" type="submit">Unggah ke GALERI</button><p class="hint">Berkas dikirim ke API GALERI dan disimpan pada storage privat server. Login dan alamat API aktif diperlukan.</p><p class="upload-status" id="uploadStatus" role="status"></p></div></form></section>
 </main>
 <div class="viewer" id="mediaViewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle"><div class="viewer-card"><div class="viewer-media" id="viewerMedia"></div><div class="viewer-info"><div><h2 id="viewerTitle">Detail media</h2><p id="viewerDescription">Informasi media</p></div><button class="viewer-close" id="viewerClose" type="button">Tutup ✕</button></div></div></div>
 <section class="script-studio" id="aksara" aria-labelledby="scriptTitle">
@@ -151,8 +167,96 @@ let savedTheme='dark';try{savedTheme=localStorage.getItem(themeKey)||'dark'}catc
 $('#toggleComposer').addEventListener('click',()=>{panel.classList.toggle('hidden');if(!panel.classList.contains('hidden')){panel.scrollIntoView({behavior:'smooth',block:'center'});form.elements.title.focus()}});$('#closeComposer').addEventListener('click',()=>panel.classList.add('hidden'));
 function renderLocalPosts(){let posts=[];try{posts=JSON.parse(localStorage.getItem(storageKey)||'[]');if(!Array.isArray(posts))posts=[]}catch{}localPosts=posts;posts.forEach(post=>{if(!post||!post.dataUrl||!post.title)return;const card=document.createElement('article');card.className='tile';card.dataset.category=post.type||'image';card.dataset.title=(post.title+' '+(post.description||'')).toLocaleLowerCase('id');const media=(post.type==='video'||post.type==='film')?'<video src="'+esc(post.dataUrl)+'" preload="metadata"></video>':'<img src="'+esc(post.dataUrl)+'" alt="'+esc(post.title)+'" loading="lazy">';card.innerHTML=media+'<div class="tile-body"><h3>'+esc(post.title)+'</h3><p>'+esc(post.description||'Media lokal')+'</p><div class="tile-footer"><span>Media lokal · '+esc(post.type)+'</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div>';feed.prepend(card);wireCard(card)})}
 renderLocalPosts();
-form.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(form),file=fd.get('file'),status=$('#uploadStatus');if(!(file instanceof File)||!file.size)return;const max=8*1024*1024;if(file.size>max){status.textContent='Ukuran berkas melebihi 8 MB. Pilih berkas yang lebih kecil.';return}if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){status.textContent='Format berkas tidak didukung.';return}status.textContent='Memproses berkas…';const reader=new FileReader();reader.onload=()=>{const post={id:String(Date.now()),title:fd.get('title').trim(),description:fd.get('description').trim(),type:fd.get('type'),dataUrl:reader.result,fileName:file.name,createdAt:new Date().toISOString()};let posts=[];try{posts=JSON.parse(localStorage.getItem(storageKey)||'[]')}catch{}posts.unshift(post);try{localStorage.setItem(storageKey,JSON.stringify(posts))}catch{status.textContent='Penyimpanan browser tidak cukup. Hapus beberapa data lokal atau pilih berkas lebih kecil.';return}const card=document.createElement('article');card.className='tile';card.dataset.category=post.type;card.dataset.title=(post.title+' '+post.description).toLocaleLowerCase('id');const media=post.type==='video'||post.type==='film'?'<video src="'+esc(post.dataUrl)+'" preload="metadata"></video>':'<img src="'+esc(post.dataUrl)+'" alt="'+esc(post.title)+'" loading="lazy">';card.innerHTML=media+'<div class="tile-body"><h3>'+esc(post.title)+'</h3><p>'+esc(post.description||'Media lokal')+'</p><div class="tile-footer"><span>Media lokal</span><button class="tile-open" type="button">Lihat detail ↗</button></div></div>';feed.prepend(card);wireCard(card);form.reset();status.textContent='Media berhasil disimpan pada perangkat ini.';activeCategory='all';$$('#categoryBar button').forEach(b=>b.classList.toggle('active',b.dataset.category==='all'));$('#typeFilter').value='all';filterItems()};reader.onerror=()=>status.textContent='Berkas gagal dibaca. Silakan coba kembali.';reader.readAsDataURL(file)});
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const fd=new FormData(form),file=fd.get('file'),status=$('#uploadStatus');
+ if(!(file instanceof File)||!file.size)return;
+ if(!galeriUser){status.textContent='Silakan login melalui Akun & Penyimpanan GALERI terlebih dahulu.';return}
+ if(file.size>50*1024*1024){status.textContent='Ukuran berkas melebihi batas upload 50 MB.';return}
+ if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){status.textContent='Format berkas tidak didukung.';return}
+ try{
+  status.textContent='Mengirim metadata ke server…';
+  const meta=await apiRequest('/api/v1/files',{method:'POST',body:JSON.stringify({name:file.name,sizeBytes:file.size,mimeType:file.type||'application/octet-stream'})});
+  status.textContent='Mengunggah berkas ke penyimpanan server…';
+  await apiRequest(meta.uploadUrl,{method:'PUT',headers:{'content-type':file.type||'application/octet-stream'},body:file});
+  form.reset();status.textContent='Media berhasil tersimpan di server GALERI.';
+  await loadRemoteFiles();
+ }catch(error){status.textContent=error.message||'Upload gagal. Periksa koneksi API.'}
+});
 filterItems();
+
+const API_KEY='planetbintang.galeri.api.v1';
+let galeriApiBase='',galeriUser=null;
+const apiInput=$('#galeriApiBase'),accountState=$('#accountState'),accountStatus=$('#galeriAccountStatus');
+try{galeriApiBase=(localStorage.getItem(API_KEY)||'').replace(/\\/$/,'')}catch{}
+apiInput.value=galeriApiBase;
+function setAccountMessage(message){accountStatus.textContent=message}
+async function apiRequest(route,options={}){
+ if(!galeriApiBase)throw new Error('Isi dan simpan alamat API GALERI terlebih dahulu.');
+ const url=route.startsWith('http')?route:galeriApiBase+route;
+ const headers=new Headers(options.headers||{});
+ if(options.body&&typeof options.body==='string'&&!headers.has('content-type'))headers.set('content-type','application/json');
+ const response=await fetch(url,{...options,headers,credentials:'include'});
+ const type=response.headers.get('content-type')||'';
+ const data=type.includes('application/json')?await response.json():null;
+ if(!response.ok)throw new Error(data?.error||('Permintaan gagal ('+response.status+')'));
+ return data;
+}
+function setGaleriUser(user){
+ galeriUser=user||null;
+ accountState.textContent=user?'LOGIN · '+(user.email||'AKUN AKTIF'):'BELUM LOGIN';
+ $('#galeriProfile').hidden=!user;
+ $('#galeriProfile').textContent=user?'Profil: '+(user.display_name||user.email)+' · '+user.email:'';
+}
+async function loadGaleriProfile(){
+ const user=await apiRequest('/api/v1/me');
+ setGaleriUser(user);
+ const quota=Number(user.quota_bytes||0),used=Number(user.used_bytes||0);
+ $('#galeriFileSummary').textContent='Terpakai '+(used/1048576).toFixed(1)+' MB dari '+(quota/1073741824).toFixed(2)+' GB';
+ await loadRemoteFiles();
+}
+async function loadRemoteFiles(){
+ const box=$('#galeriRemoteFiles');
+ box.replaceChildren();
+ const data=await apiRequest('/api/v1/files');
+ const files=data.files||[];
+ if(!files.length){box.textContent='Belum ada berkas pada penyimpanan akun.';return}
+ files.forEach(file=>{
+  const card=document.createElement('article');card.className='tile';
+  const body=document.createElement('div');body.className='tile-body';
+  const title=document.createElement('h3');title.textContent=file.original_name;
+  const detail=document.createElement('p');detail.textContent=(file.mime_type||'File')+' · '+(Number(file.size_bytes)/1048576).toFixed(2)+' MB';
+  const download=document.createElement('button');download.className='tile-open';download.type='button';download.textContent='Unduh';
+  download.addEventListener('click',async()=>{
+   try{const response=await fetch(galeriApiBase+'/api/v1/files/'+file.id+'/content',{credentials:'include'});if(!response.ok)throw new Error('Unduhan gagal');
+    const blob=await response.blob(),objectUrl=URL.createObjectURL(blob),a=document.createElement('a');a.href=objectUrl;a.download=file.original_name;a.click();URL.revokeObjectURL(objectUrl);
+   }catch(error){setAccountMessage(error.message)}
+  });
+  body.append(title,detail,download);card.append(body);box.append(card);
+ });
+ $('#galeriFileSummary').textContent=files.length+' berkas tersimpan di server';
+}
+$('#saveApiBase').addEventListener('click',async()=>{
+ try{const value=new URL(apiInput.value.trim());if(value.protocol!=='https:')throw new Error('Alamat API produksi harus menggunakan HTTPS.');
+  galeriApiBase=value.origin;localStorage.setItem(API_KEY,galeriApiBase);setAccountMessage('Memeriksa koneksi API…');
+  const health=await apiRequest('/api/v1/health');setAccountMessage('API GALERI terhubung · '+health.status);
+  try{await loadGaleriProfile()}catch{setGaleriUser(null);setAccountMessage('API terhubung. Silakan login atau register.')}
+ }catch(error){setAccountMessage(error.message)}
+});
+async function submitGaleriAuth(mode){
+ const fd=new FormData($('#galeriAuthForm'));
+ try{
+  setAccountMessage(mode==='register'?'Membuat akun…':'Memeriksa login…');
+  const data=await apiRequest('/api/v1/'+mode,{method:'POST',body:JSON.stringify({email:fd.get('email'),password:fd.get('password'),displayName:fd.get('displayName')||''})});
+  if(mode==='register'){setAccountMessage('Akun berhasil dibuat. Silakan login.');return}
+  setGaleriUser(data);await loadGaleriProfile();setAccountMessage('Login berhasil. Penyimpanan akun aktif.');
+ }catch(error){setAccountMessage(error.message)}
+}
+$('#galeriAuthForm').addEventListener('submit',e=>{e.preventDefault();submitGaleriAuth('login')});
+$('#galeriRegister').addEventListener('click',()=>submitGaleriAuth('register'));
+$('#galeriLogout').addEventListener('click',async()=>{try{await apiRequest('/api/v1/logout',{method:'POST'});setGaleriUser(null);$('#galeriRemoteFiles').replaceChildren();setAccountMessage('Anda telah logout.')}catch(error){setAccountMessage(error.message)}});
+$('#refreshGaleriFiles').addEventListener('click',async()=>{try{await loadGaleriProfile();setAccountMessage('Daftar penyimpanan diperbarui.')}catch(error){setAccountMessage(error.message)}});
+if(galeriApiBase){apiRequest('/api/v1/health').then(()=>loadGaleriProfile()).catch(()=>setAccountMessage('API belum tersedia atau sesi belum login.'))}
 
 // Tiga set glyph kapital dan tiga set glyph kecil; tiap gaya memakai pasangan berbeda.
 // PB-03: sistem glyph orisinal berbasis koordinat titik dan jalur garis SVG.
