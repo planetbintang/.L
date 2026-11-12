@@ -1,6 +1,10 @@
 name: PlanetBintang Workflow Fleet Rerun
 
 on:
+  push:
+    branches: [io]
+    paths:
+      - "automation/requests/rile-workflow-fleet.trigger.json"
   workflow_dispatch:
     inputs:
       branch:
@@ -62,11 +66,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPOSITORY: ${{ github.repository }}
-          TARGET_BRANCH: ${{ inputs.branch }}
-          MODE: ${{ inputs.mode }}
-          MAX_RUNS: ${{ inputs.max_runs }}
-          INCLUDE_SUCCESS: ${{ inputs.include_success }}
-          CONFIRM_EXECUTE: ${{ inputs.confirm_execute }}
+          TARGET_BRANCH: ${{ github.event_name == 'push' && 'io' || inputs.branch }}
+          MODE: ${{ github.event_name == 'push' && 'execute' || inputs.mode }}
+          MAX_RUNS: ${{ github.event_name == 'push' && '2500' || inputs.max_runs }}
+          INCLUDE_SUCCESS: ${{ github.event_name == 'push' && 'true' || inputs.include_success }}
+          CONFIRM_EXECUTE: ${{ github.event_name == 'push' && 'true' || inputs.confirm_execute }}
           CURRENT_RUN_ID: ${{ github.run_id }}
         run: node scripts/rerun-workflow-fleet.mjs
 
