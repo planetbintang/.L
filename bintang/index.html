@@ -28,12 +28,30 @@ footer{background:#092e69;color:#d9e9ff;padding:22px clamp(16px,3vw,42px);displa
 <body>
 <div class="utility"><span>https://planetbintang.github.io/.L</span><nav><a href="../">HUB</a><a href="../vmdesktopreic/">VMDESKTOPREIC</a><a href="../aireber/">AIREBER</a><a href="https://github.com/planetbintang">GITHUB</a></nav></div>
 <header class="brandbar"><a class="brand" href="./"><span class="mark">✦</span><span><strong>PLANETBINTANG</strong><small>BINTANG · PUSAT REPOSITORI & KONTEN</small></span></a><label class="search"><input id="search" type="search" placeholder="Cari repositori, paket, atau kategori…" aria-label="Cari repositori"><span>⌕</span></label><div class="utility-links"><b>500 BLOK SISTEM</b></div></header>
-<nav class="nav"><a href="../">BERANDA</a><a href="#repos">SEMUA PAKET</a><a href="#repos" data-filter="live">REPOSITORI AKTIF</a><a href="#repos" data-filter="planned">PAKET RENCANA</a><a href="#integrasi">INTEGRASI DATA</a></nav>
+<nav class="nav"><a href="../">BERANDA</a><a href="#repos">SEMUA PAKET</a><a href="#repos" data-filter="live">REPOSITORI AKTIF</a><a href="#repos" data-filter="planned">PAKET RENCANA</a><a href="#integrasi">INTEGRASI DATA</a><a href="#bintang-news">BERITA GLOBAL</a></nav>
 <main>
 <section class="hero"><div class="hero-main"><span class="eyebrow">PLANETBINTANG / CONTENT NETWORK</span><h1>Pusat Konten<br>dan Repositori</h1><p>Satu pusat navigasi untuk paket sistem, aplikasi, bacaan, dan konten PlanetBintang. Setiap paket memiliki identitas, halaman, serta tautan sumbernya sendiri.</p></div><div class="hero-side"><div class="hero-tile"><b id="liveTotal">—</b><span>Repositori GitHub aktif terdeteksi</span></div><div class="hero-tile"><b id="packageTotal">—</b><span>Paket dalam registri BINTANG</span></div><div class="hero-tile"><b id="plannedTotal">—</b><span>Paket yang belum menjadi repositori</span></div></div></section>
 <section class="stats"><div class="stat"><b>HTML</b><span>Halaman konten dan navigasi</span></div><div class="stat"><b>CSS</b><span>Tema visual bersama</span></div><div class="stat"><b>JS</b><span>Interaksi dan sinkronisasi</span></div><div class="stat"><b>DB</b><span>Registri konten pusat</span></div></section>
 <section id="integrasi"><div class="section-head"><div><h2>Integrasi konten</h2><p>Data katalog dikelola melalui registri pusat; perubahan sumber perlu disinkronkan dan dipublikasikan.</p></div></div></section>
 <section id="repos"><div class="section-head"><div><h2>Semua paket BINTANG</h2><p id="count">Memuat registri…</p></div><div class="filters"><button class="active" data-filter="all">SEMUA</button><button data-filter="live">AKTIF</button><button data-filter="planned">RENCANA</button></div></div><section id="grid" class="grid" aria-live="polite"></section></section>
+
+<section id="bintang-news" style="margin-top:34px">
+ <div class="section-head"><div><h2>Global News · Informasi Terbaru</h2><p>Berita dari berbagai publisher dunia, dibaca langsung di BINTANG tanpa berpindah browser.</p></div><div class="filters"><button type="button" id="news-refresh">PERBARUI</button></div></div>
+ <div class="stats" style="margin-top:10px">
+  <div class="stat"><b id="news-total">—</b><span>Berita terindeks</span></div>
+  <div class="stat"><b id="news-sources">—</b><span>Media terhubung</span></div>
+  <div class="stat"><b id="news-updated">—</b><span>Pembaruan terakhir</span></div>
+  <div class="stat"><b>30 MENIT</b><span>Jadwal sinkronisasi otomatis</span></div>
+ </div>
+ <div class="filters" id="news-categories" style="margin:12px 0"></div>
+ <label class="search" style="max-width:620px;margin:12px 0"><input id="news-search" type="search" placeholder="Cari berita, topik, negara, atau media…" aria-label="Cari berita global"><span>⌕</span></label>
+ <div id="news-status" class="meta" role="status">Memuat indeks berita…</div>
+ <div id="news-grid" class="grid" aria-live="polite"><div class="empty">Menghubungkan sumber berita…</div></div>
+</section>
+<dialog id="news-reader" style="width:min(820px,calc(100% - 24px));max-height:86vh;border:1px solid #cbdaf0;padding:0;color:#10213c;background:#fff;box-shadow:0 24px 80px #061d4380">
+ <div style="position:sticky;top:0;background:#073e9f;color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px"><strong>BINTANG · NEWS READER</strong><button id="news-close" type="button" style="border:1px solid #ffffff80;background:transparent;color:#fff;padding:7px 12px;cursor:pointer">TUTUP ✕</button></div>
+ <article style="padding:clamp(18px,4vw,34px)"><div id="reader-meta" class="meta"></div><h2 id="reader-title" style="font-size:clamp(24px,4vw,36px);line-height:1.15"></h2><p id="reader-summary" style="font-size:17px;line-height:1.8;color:#334b6b;white-space:pre-wrap"></p><div style="border-top:1px solid #dce6f4;padding-top:14px;margin-top:24px;color:#60718c;font-size:12px">Sumber dan hak cipta tetap milik publisher asli. Konten yang tersedia di pembaca internal berasal dari metadata dan ringkasan yang disediakan feed penerbit. Artikel penuh ditampilkan hanya jika tersedia melalui feed/API yang mengizinkan sindikasi.</div></article>
+</dialog>
 </main><footer><span>PLANETBINTANG · BINTANG CENTRAL INDEX</span><span>Data privat tidak disalin ke halaman publik.</span></footer>
 <script>
 (async()=>{const grid=document.getElementById('grid'),search=document.getElementById('search'),count=document.getElementById('count');let items=[],filter='all';
@@ -42,4 +60,50 @@ function draw(){const q=search.value.trim().toLocaleLowerCase('id'),rows=items.f
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('active',x===b));draw()}));search.addEventListener('input',draw);
 try{const r=await fetch('../data/bintang-index.json',{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const d=await r.json();items=Array.isArray(d.blocks)?d.blocks:[];draw()}catch(e){count.textContent='Registri tidak dapat dimuat';grid.innerHTML='<div class="empty">Periksa data/bintang-index.json.</div>'}
 })();
-</script></body></html>
+</script>
+<script>
+(()=> {
+ const root='../bintang/news/news-index.json';
+ const grid=document.getElementById('news-grid'),status=document.getElementById('news-status');
+ const search=document.getElementById('news-search'),cats=document.getElementById('news-categories');
+ const dialog=document.getElementById('news-reader');
+ if(!grid||!dialog)return;
+ let items=[],category='Semua';
+ const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ function render(){
+  const q=search.value.trim().toLocaleLowerCase('id');
+  const rows=items.filter(x=>(category==='Semua'||x.category===category)&&[x.title,x.summary,x.source,x.domain,x.category].join(' ').toLocaleLowerCase('id').includes(q));
+  status.textContent=rows.length+' berita ditampilkan · '+items.length+' berita dalam indeks';
+  grid.innerHTML=rows.length?rows.map((x,i)=>'<article class="card"><div class="card-top"><span class="glyph">◉</span><span class="status">'+esc(x.category||'Umum')+'</span></div><div class="card-body"><div class="meta">'+esc(x.source||x.domain)+' · '+esc(x.publishedAt?new Date(x.publishedAt).toLocaleString('id-ID'):'Waktu tidak tersedia')+'</div><h3>'+esc(x.title)+'</h3><p>'+esc(x.summary||'Ringkasan belum disediakan oleh publisher.')+'</p><div class="meta">'+esc(x.domain||'')+'</div><div class="actions"><button type="button" class="primary news-open" data-index="'+i+'" style="padding:8px 10px;border:1px solid #0755c9;background:#0755c9;color:#fff;font-size:11px;font-weight:800;cursor:pointer">BACA DI BINTANG</button></div></div></article>').join(''):'<div class="empty">Tidak ada berita yang sesuai filter. Coba kategori atau kata kunci lain.</div>';
+  grid.querySelectorAll('.news-open').forEach(btn=>btn.addEventListener('click',()=>openReader(rows[Number(btn.dataset.index)])));
+ }
+ function openReader(x){
+  document.getElementById('reader-title').textContent=x.title||'Berita';
+  document.getElementById('reader-meta').textContent=[x.source,x.domain,x.category,x.publishedAt?new Date(x.publishedAt).toLocaleString('id-ID'):null].filter(Boolean).join(' · ');
+  document.getElementById('reader-summary').textContent=x.summary||'Publisher belum menyediakan ringkasan dalam feed. Informasi judul, sumber, dan tautan asli tetap tercatat dalam indeks BINTANG.';
+  if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+ }
+ async function load(){
+  status.textContent='Memperbarui indeks berita…';
+  try{
+   const r=await fetch(root+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
+   const d=await r.json();items=Array.isArray(d.items)?d.items:[];
+   document.getElementById('news-total').textContent=items.length.toLocaleString('id-ID');
+   document.getElementById('news-sources').textContent=(d.sources||[]).filter(s=>s.ok).length+'/'+(d.sourceCount||0);
+   document.getElementById('news-updated').textContent=d.generatedAt?new Date(d.generatedAt).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}):'Belum';
+   const categories=['Semua',...new Set(items.map(x=>x.category).filter(Boolean))];
+   cats.innerHTML=categories.map(x=>'<button type="button" data-category="'+esc(x)+'" class="'+(x===category?'active':'')+'">'+esc(x.toUpperCase())+'</button>').join('');
+   cats.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;cats.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));render()}));
+   render();
+   const failed=(d.sources||[]).filter(s=>!s.ok).length;
+   status.textContent=(d.itemCount||items.length)+' berita · indeks '+(d.generatedAt?new Date(d.generatedAt).toLocaleString('id-ID'):'belum diperbarui')+(failed?' · '+failed+' sumber gagal diambil':'');
+  }catch(e){status.textContent='Indeks berita belum tersedia. Jalankan workflow BINTANG Global News Ingestion.';grid.innerHTML='<div class="empty">Belum ada data berita. Workflow akan mengisi indeks setelah proses pengambilan feed berhasil.</div>'}
+ }
+ search.addEventListener('input',render);
+ document.getElementById('news-refresh').addEventListener('click',load);
+ document.getElementById('news-close').addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+ load();
+})();
+</script>
+</body></html>
