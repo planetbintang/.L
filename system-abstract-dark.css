@@ -151,3 +151,97 @@ input[type="reset"]):hover { background:#0874BD; border-color:#42A8E8; color:#ff
 :root[data-pb-theme="water-glass"] .pb-theme-switcher {background:rgba(255,255,255,.84);color:#17364A;border-color:rgba(48,153,198,.35)}
 :root[data-pb-theme="water-glass"] .pb-theme-switcher select {background:rgba(255,255,255,.9);color:#17364A;border-color:rgba(48,153,198,.4)}
 @media(max-width:600px){.pb-theme-switcher{right:8px;bottom:8px;padding:7px 8px}.pb-theme-switcher select{max-width:145px}}
+
+
+/* GLOBAL SURFACE COVERAGE — dark abstract is the default across all site modules. */
+:root:not([data-pb-theme]) body,
+:root:not([data-pb-theme]) body:has(#overview) {
+  color-scheme:dark!important;
+  color:#EAF3FC!important;
+  background:
+    radial-gradient(ellipse 58rem 34rem at 82% 8%,rgba(9,129,209,.19),transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%,rgba(18,52,83,.28),transparent 70%),
+    linear-gradient(135deg,#070B12 0%,#0A111C 48%,#080D16 100%) fixed!important;
+  background-attachment:fixed!important;
+}
+:root:not([data-pb-theme]) body :where(
+  .hero-copy,.hero-main,.hero-side,.hero-logo,.metric-card,.repo-card,.host-card,
+  .home-ai-card,.vm-home-showcase,.vm-home-card,.vm-home-heading>p,.panel,.card,.tile,
+  .surface,.content-card,.feature-card,.workspace-card,.section-card,.snaps-heading,
+  .snaps-connector,.snaps-rag-result,.settings-panel,.workspace-section,.toolbar,
+  .common-site-menu-card,.fm-github-catalog,.fm-github-repo-card,.modal-window,
+  .modal-bar,.detail-box,.file-preview,.ac-top,.ac-sidebar,.ac-hero,.ac-stat,
+  .ac-metrics article,.ac-card,.ac-child-tile,.ac-airz-domain,.ac-modal
+) {
+  color:#EAF3FC!important;
+  background:linear-gradient(145deg,rgba(15,27,43,.96),rgba(8,16,28,.96))!important;
+  border-color:rgba(9,129,209,.34)!important;
+  box-shadow:0 16px 44px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)!important;
+}
+:root:not([data-pb-theme]) body :where(
+  h1,h2,h3,h4,h5,.hero-title,.section-title,.metric-label,.repo-name,
+  .vm-home-card h3,.ac-top h2,.ac-hero h3,.ac-card-head h4,.ac-child-tile b
+) { color:#EAF3FC!important; }
+:root:not([data-pb-theme]) body :where(p,.hero-description,.vm-home-card p,.home-ai-card small,
+  .vm-home-note,.ac-hero p,.ac-docs p,.ac-child-tile span) { color:#A9BCD0!important; }
+:root:not([data-pb-theme]) body :where(input,select,textarea,.search-box,.explorer-search,.ac-sidebar-head input,.ac-airz-filter) {
+  color:#EAF3FC!important;background:#0A1421!important;border-color:rgba(9,129,209,.48)!important;
+}
+:root:not([data-pb-theme]) body :where(input,select,textarea)::placeholder {color:#8299AF!important}
+:root:not([data-pb-theme]) body :where(button,.button,.btn,[role="button"],input[type="button"],
+  input[type="submit"],input[type="reset"],.action,.primary-action,.primary-button,.primary-btn,
+  .ac-nav-main.active,.ac-bin-chip) {
+  color:#fff!important;background:linear-gradient(120deg,#0981D1,#0874BD)!important;
+  border-color:#0981D1!important;
+}
+:root:not([data-pb-theme]) body :where(a,.text-link,.repo-name a,.detail-value a,.fm-github-repo-actions a) {
+  color:#42A8E8!important;
+}
+:root:not([data-pb-theme]) body :where(.ac-stat b,.ac-metrics b,.ac-hero-kicker,.ac-crumbs,
+  .ac-nav-count,.ac-action-note,.ac-top h2) {color:#42A8E8!important}
+:root:not([data-pb-theme]) body :where(.ac-table th,.ac-table td,.ac-table code,.ac-nav-sub,
+  .ac-nav-leaf,.ac-crumbs button,.ac-docs p,.ac-bullets) {color:#B7CBE0!important}
+:root:not([data-pb-theme]) body :where(.ac-nav-group,.ac-table td,.ac-table th,.ac-modal footer) {
+  border-color:rgba(9,129,209,.22)!important;
+}
+:root:not([data-pb-theme]) body :where(.ac-modal-body,.ac-modal) {
+  background:#0A1421!important;color:#DCEBFA!important;
+}
+:root:not([data-pb-theme]) body :where(.ac-top,.ac-hero,.ac-card,.ac-stat,.ac-metrics article,.ac-sidebar) {
+  background:linear-gradient(145deg,rgba(15,27,43,.98),rgba(8,16,28,.98))!important;
+}
+:root:not([data-pb-theme]) body :where(.ac-nav-main,.ac-nav-sub,.ac-nav-leaf,.ac-crumbs button) {
+  background:transparent!important;color:#B7CBE0!important;
+}
+:root:not([data-pb-theme]) body :where(.ac-nav-main.active,.ac-nav-sub.active,.ac-nav-leaf.active) {
+  background:rgba(9,129,209,.2)!important;color:#EAF3FC!important;
+}
+/* The glass theme remains an intentional opt-in and overrides the dark defaults. */
+:root[data-pb-theme="water-glass"] body:has(#overview) {
+  color-scheme:light!important;color:#17364A!important;
+  background:
+    radial-gradient(ellipse 55rem 34rem at 82% 8%,rgba(104,210,239,.36),transparent 68%),
+    radial-gradient(ellipse 42rem 30rem at 8% 88%,rgba(183,235,245,.55),transparent 70%),
+    linear-gradient(135deg,#F7FCFF 0%,#DFF3FA 48%,#F4FBFD 100%) fixed!important;
+}
+:root[data-pb-theme="water-glass"] body:has(#overview) :where(
+  .hero-copy,.hero-main,.hero-side,.hero-logo,.metric-card,.repo-card,.home-ai-card,
+  .vm-home-showcase,.vm-home-card,.vm-home-heading>p,.panel,.card,.tile,.surface,
+  .content-card,.feature-card,.workspace-card,.section-card,.snaps-heading,.snaps-connector,
+  .snaps-rag-result,.common-site-menu-card,.fm-github-catalog,.fm-github-repo-card,
+  .modal-window,.modal-bar,.detail-box,.file-preview
+) {
+  color:#17364A!important;background:rgba(255,255,255,.76)!important;
+  border-color:rgba(48,153,198,.28)!important;
+  box-shadow:0 16px 44px rgba(48,112,143,.13),inset 0 1px rgba(255,255,255,.9)!important;
+  backdrop-filter:blur(20px) saturate(145%);
+}
+:root[data-pb-theme="water-glass"] body:has(#overview) :where(h1,h2,h3,h4,p,.hero-description,.metric-label) {
+  color:#17364A!important;
+}
+:root[data-pb-theme="water-glass"] body:has(#overview) :where(input,select,textarea) {
+  color:#17364A!important;background:rgba(255,255,255,.88)!important;border-color:rgba(48,153,198,.4)!important;
+}
+:root[data-pb-theme="water-glass"] body:has(#overview) :where(button,.button,.btn,[role="button"],input[type="button"],input[type="submit"]) {
+  color:#fff!important;background:linear-gradient(120deg,#168BCB,#56B9D9)!important;border-color:#168BCB!important;
+}
