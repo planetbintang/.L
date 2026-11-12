@@ -4,7 +4,7 @@ const stage=$('.desktop-stage'),apps=$('#apps'),fileWindow=$('#file-window'),ite
 const OWNER='planetbintang',API='https://api.github.com';
 let currentPath='Beranda',searchTerm='',pendingSearchQuery='',repoCache=null,repoBusy=false,treeCache=new Map(),windowZ=20;
 let APP_CATALOG=null,APP_BY_NAME=new Map(),APP_CATALOG_PROMISE=null;
-const roots=['acct','sys','system_ext','cache','config','media','data','repositori','applications','vmdesktopreic','Aireber'];
+const roots=['acct','sys','system_ext','cache','config','media','data','bios','repositori','applications','vmdesktopreic','Aireber'];
 const modules={
 'Beranda':['Ringkasan sistem','Status desktop','Aplikasi terbaru','Pusat aktivitas'],
 'File Manager':['Beranda','Repositori GitHub','File System','Indeks REIC','Pencarian file'],
@@ -327,7 +327,7 @@ function wireLibrary(w){
 function drawFiles(path='Beranda'){
  currentPath=path;pathEl.textContent='/ '+path;items.replaceChildren();
  if(path==='applications'&&!APP_CATALOG){status.textContent='Memuat 150 direktori aplikasi…';loadApplicationCatalog().then(()=>drawFiles('applications')).catch(e=>status.textContent='Katalog aplikasi gagal dimuat: '+e.message);return;}
- if(path==='repositori'){status.textContent='Repositori publik dan privat tersedia melalui REIC Explorer.';const b=document.createElement('button');b.className='file-entry';b.innerHTML='<b>🌐</b><span>Buka seluruh repositori GitHub</span>';b.onclick=()=>openApp('REIC Explorer');items.append(b);return;}
+ if(path==='repositori'){status.textContent='Repositori publik dan privat tersedia melalui REIC Explorer.';const b=document.createElement('button');b.className='file-entry';b.innerHTML='<b>🌐</b><span>Buka seluruh repositori GitHub</span>';b.onclick=()=>openApp('REIC Explorer');items.append(b);return;}\n if(path==='bios'){if(window.PB_BIOS_AUTH){window.PB_BIOS_AUTH.renderFileManager(items,status);}else{status.textContent='Modul BIOS Registry belum dimuat.';}return;}
  const match=path.match(/^applications\/([^/]+)(?:\/([^/]+))?$/);
  let names;
  if(path==='Beranda'||path==='File System')names=roots;
@@ -407,6 +407,6 @@ function wireFileManager(){
  window.addEventListener('resize',()=>{$('.reic-app-window',apps).forEach(w=>{if(w.classList.contains('is-maximized')){w.style.left='6px';w.style.top='6px';w.style.width='calc(100% - 12px)';w.style.height='calc(100% - 12px)';}else{const maxX=Math.max(0,apps.clientWidth-w.offsetWidth),maxY=Math.max(0,apps.clientHeight-w.offsetHeight);w.style.left=Math.min(parseFloat(w.style.left)||0,maxX)+'px';w.style.top=Math.min(parseFloat(w.style.top)||0,maxY)+'px';}});});
 }
 function updateClock(){const el=$('#clock');if(el)el.textContent=new Intl.DateTimeFormat('id-ID',{hour:'2-digit',minute:'2-digit'}).format(new Date());}
-wireFileManager();wireLauncher();updateClock();setInterval(updateClock,30000);
+wireFileManager();wireLauncher();updateClock();setInterval(updateClock,30000);window.PB_BIOS_AUTH?.boot();
 window.PB_REIC={version:'3.0',coreVersion:'1.0.0',kernelVersion:'1.0.0',repositoryOwner:OWNER,githubAPI:'authenticated-local-proxy-with-public-fallback',io:REIC_IO,openApp,openApplication:openApp,loadApplicationCatalog,installApplicationPackage,refreshRepositories:()=>{repoCache=null;},desktopBounds:()=>apps.getBoundingClientRect(),localHost:()=>localHostBase()};
 })();
