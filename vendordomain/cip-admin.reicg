@@ -1,0 +1,55 @@
+{
+  "schema": "vendordomain.cip-admin.graph.v1",
+  "flow": [
+    "ADMIN",
+    "VENDORDOMAIN AUTH",
+    "CIP CONTROL API",
+    "HOSTING SERVER",
+    "AUDIT LOG"
+  ],
+  "nodes": [
+    {
+      "id": "admin",
+      "label": "Admin",
+      "type": "identity"
+    },
+    {
+      "id": "auth",
+      "label": "VendorDomain Auth",
+      "type": "security"
+    },
+    {
+      "id": "api",
+      "label": "CIP Control API",
+      "type": "gateway"
+    },
+    {
+      "id": "server",
+      "label": "Hosting Server",
+      "type": "infrastructure"
+    },
+    {
+      "id": "audit",
+      "label": "Audit Log",
+      "type": "storage"
+    }
+  ],
+  "edges": [
+    [
+      "admin",
+      "auth"
+    ],
+    [
+      "auth",
+      "api"
+    ],
+    [
+      "api",
+      "server"
+    ],
+    [
+      "api",
+      "audit"
+    ]
+  ]
+}
