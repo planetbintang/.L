@@ -16,7 +16,7 @@ function mount(host,ctx){
   catch(e){content.innerHTML='<div class="vdCip-error"><b>Data belum tersedia.</b><br>'+esc(e.message)+'<p>Pastikan CIP Control API sudah dipasang, endpoint memiliki autentikasi admin, dan server mengembalikan JSON.</p></div>'+ (section==='dashboard'?flowPanel():'');}
  }
  function flowPanel(){return '<section class="vdCip-panel"><h3>Alur kontrol sistem</h3><div class="vdCip-flow">'+graph.flow.map((x,i)=>'<div class="vdCip-node">'+esc(x)+'</div>'+(i<graph.flow.length-1?'<div class="vdCip-arrow">→</div>':'')).join('')+'</div><p class="vdCip-small">Alur otorisasi dan kontrol; koneksi aktual diverifikasi melalui API.</p></section>'}
- function metric(label,value,sub){return '<article class="vdCip-kpi"><small>'+esc(label)+'</small><strong>'+((value===undefined||value===null)?'—':esc(money(value)))+'</strong><em>'+esc(sub||'Dari backend')+'</em></article>'}
+ function metric(label,value,sub){const shown=value===undefined||value===null?'—':(typeof value==='number'?money(value):String(value));return '<article class="vdCip-kpi"><small>'+esc(label)+'</small><strong>'+esc(shown)+'</strong><em>'+esc(sub||'Dari backend')+'</em></article>'}
  function table(rows){if(!Array.isArray(rows)||!rows.length)return '<div class="vdCip-empty">Belum ada data dari endpoint ini.</div>';const keys=[...new Set(rows.flatMap(r=>Object.keys(r||{})))].slice(0,6);return '<div class="vdCip-table-wrap"><table><thead><tr>'+keys.map(k=>'<th>'+esc(k.replace(/([A-Z])/g,' $1').toUpperCase())+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+keys.map(k=>'<td>'+esc(typeof r[k]==='object'?JSON.stringify(r[k]):r[k]??'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>'}
  function render(section,d){
   if(section==='dashboard'){
