@@ -295,17 +295,18 @@ export default async function handler(req, res) {
       };
       if (req.method !== 'GET') return json(res, 405, { error: 'Operasi perubahan CIP belum diaktifkan; provider adapter dan kebijakan approval wajib dikonfigurasi.' });
       if (section === 'overview') {
-        const [counts, services, activity, files] = await Promise.all([
+        const [counts, services, activity, files, byType] = await Promise.all([
           client.query("SELECT count(*)::int AS resources,count(*) FILTER (WHERE status='active')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted'", [auth.tenant_id]),
           client.query("SELECT id,service_type AS type,name,status,updated_at AS "updatedAt" FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' ORDER BY updated_at DESC LIMIT 12", [auth.tenant_id]),
           client.query('SELECT action,resource_type AS "resourceType",resource_id AS "resourceId",created_at AS "createdAt" FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 12', [auth.tenant_id]),
-          client.query('SELECT count(*)::int AS total FROM file_manager_entries WHERE tenant_id=$1', [auth.tenant_id])
+          client.query('SELECT count(*)::int AS total FROM file_manager_entries WHERE tenant_id=$1', [auth.tenant_id]),
+          client.query("SELECT service_type AS type,count(*)::int AS total,count(*) FILTER (WHERE status='active')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' GROUP BY service_type", [auth.tenant_id])
         ]);
         const mem = process.memoryUsage();
         return json(res, 200, {
           apiStatus: 'CONNECTED',
           server: { status: 'API_PROCESS_RUNNING', hostname: process.env.HOSTNAME || null, uptimeSeconds: Math.floor(process.uptime()), memoryRssBytes: mem.rss, cpuLoad: null, memoryUsedPercent: null, diskUsedPercent: null },
-          counts: { resources: counts.rows[0].resources, activeResources: counts.rows[0].active, files: files.rows[0].total },
+          counts: { resources: counts.rows[0].resources, activeResources: counts.rows[0].active, files: files.rows[0].total, domains: Number(byType.rows.find(x=>x.type==='domain')?.total||0), accounts: Number(byType.rows.find(x=>x.type==='hosting')?.total||0), databases: Number(byType.rows.find(x=>x.type==='database')?.total||0) },
           services: services.rows, recentActivity: activity.rows, updatedAt: now(),
           limitations: ['Host CPU, disk, DNS propagation, mail queue, and provider service health require a configured infrastructure adapter.']
         });
