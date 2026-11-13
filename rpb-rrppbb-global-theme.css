@@ -348,3 +348,63 @@ html,body{
     transition:none!important;
   }
 }
+
+
+/* RPB RRPPBB — complete interface coverage for shared application surfaces. */
+:where(
+  [class*="sidebar"],[class*="side-nav"],[class*="topbar"],[class*="top-bar"],
+  [class*="toolbar"],[class*="menubar"],[class*="menu-bar"],[class*="navigation"],
+  [class*="nav-bar"],[class*="dropdown"],[class*="modal"],[class*="dialog"],
+  [class*="drawer"],[class*="popover"],[class*="window"],[class*="panel"],
+  [class*="card"],[class*="widget"],[class*="workspace"],[class*="file-list"],
+  [class*="file-pane"],[class*="file-browser"],[class*="inspector"]
+){
+  border-color:var(--rpb-line)!important;
+}
+:where(
+  [class*="sidebar"],[class*="side-nav"],[class*="topbar"],[class*="top-bar"],
+  [class*="toolbar"],[class*="menubar"],[class*="menu-bar"],[class*="navigation"],
+  [class*="nav-bar"],[class*="dropdown"],[class*="modal"],[class*="dialog"],
+  [class*="drawer"],[class*="popover"],[class*="window"],[class*="panel"],
+  [class*="card"],[class*="widget"],[class*="workspace"],[class*="file-list"],
+  [class*="file-pane"],[class*="file-browser"],[class*="inspector"]
+){
+  color:var(--rpb-white);
+}
+:where(
+  button,a[role="button"],[role="menuitem"],[role="tab"],[role="option"],
+  summary,.btn-primary,.btn-secondary,.action-button,.icon-button,
+  [class*="button"],[class*="-btn"],[class*="menu-item"],[class*="nav-item"],
+  [class*="tab-item"],[class*="action"]
+):not([disabled]):not([aria-disabled="true"]){
+  border-color:rgba(164,199,255,.48)!important;
+}
+:where(
+  button,a[role="button"],[role="menuitem"],[role="tab"],[role="option"],
+  summary,.btn-primary,.btn-secondary,.action-button,.icon-button,
+  [class*="button"],[class*="-btn"],[class*="menu-item"],[class*="nav-item"],
+  [class*="tab-item"],[class*="action"]
+):not([disabled]):not([aria-disabled="true"]):hover{
+  border-color:rgba(205,226,255,.86)!important;
+  filter:brightness(1.1) saturate(1.1);
+}
+:where(
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,textarea,[contenteditable="true"],[role="textbox"]
+){
+  caret-color:var(--rpb-light)!important;
+  border-color:var(--rpb-line-strong)!important;
+}
+:where(
+  [class*="active"],[aria-current="page"],[aria-selected="true"],
+  [aria-pressed="true"],[data-active="true"]
+){
+  border-color:var(--rpb-line-strong)!important;
+}
+:where(img,video,canvas,iframe){max-width:100%}
+:where(button,a,[role="button"],[role="menuitem"],[role="tab"],summary){-webkit-tap-highlight-color:rgba(131,181,255,.18)}
+@media(max-width:760px){
+  :where(button,.button,.btn,[role="button"],[role="menuitem"],[role="tab"],summary){
+    min-height:36px;
+  }
+}
