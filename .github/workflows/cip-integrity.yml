@@ -1,0 +1,33 @@
+name: CIP Integrity
+
+on:
+  push:
+    branches: [io]
+    paths:
+      - "vendordomain/cip/**"
+      - "vendordomain/cip-*.reic"
+      - "vendordomain/backend/api/hosting/**"
+      - ".github/workflows/cip-integrity.yml"
+  pull_request:
+    paths:
+      - "vendordomain/cip/**"
+      - "vendordomain/cip-*.reic"
+      - "vendordomain/backend/api/hosting/**"
+      - ".github/workflows/cip-integrity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-cip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate CIP registry and folder structure
+        run: node vendordomain/cip/verify-cip.mjs
