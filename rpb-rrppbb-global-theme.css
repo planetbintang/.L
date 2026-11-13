@@ -159,3 +159,82 @@ body:before{
   body:before{opacity:.22!important;background-size:8px 8px,54px 54px,54px 54px!important}
   :where(.panel,.card,.tile,.surface,.workspace-card,.content-card){box-shadow:0 8px 22px rgba(0,5,25,.28)!important}
 }
+
+/* RPB / RRPPBB clarity + polished brilliance layer */
+:root{
+  --rpb-crystal:#f8fbff;
+  --rpb-glint:rgba(225,239,255,.92);
+  --rpb-glint-soft:rgba(178,211,255,.22);
+  --rpb-crisp-line:rgba(169,203,255,.58);
+  --rpb-clear-shadow:0 12px 30px rgba(0,5,24,.28);
+}
+html,body{
+  -webkit-font-smoothing:antialiased!important;
+  -moz-osx-font-smoothing:grayscale!important;
+  text-rendering:optimizeLegibility!important;
+}
+:where(h1,h2,h3,h4,h5,h6,.page-title,.hero-title,.section-title,.panel-title,.modal-title){
+  color:var(--rpb-crystal)!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.25),0 0 18px rgba(112,166,255,.25)!important;
+  letter-spacing:.012em;
+}
+:where(p,li,dd,dt,td,th,label,.description,.subtitle,.lead,.body-copy,.secondary-text){
+  text-shadow:0 1px 1px rgba(0,0,0,.18);
+}
+:where(.panel,.card,.tile,.metric,.metric-card,.stat-card,.surface,.surface-card,.workspace-card,.content-card,.modal,.dialog,.drawer,.popover,.table-wrap,.table-container,.list-panel,.detail-panel,.section-panel,.view-panel,.dashboard-panel,.hero-panel,.widget,.console-panel,.fm-sidebar,.fm-browser,.fm-file-preview,.fm-preview,.fm-inspector){
+  border:1px solid var(--rpb-crisp-line)!important;
+  box-shadow:var(--rpb-clear-shadow),inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 24px rgba(95,153,255,.055)!important;
+  backdrop-filter:blur(10px) saturate(1.12);
+  -webkit-backdrop-filter:blur(10px) saturate(1.12);
+}
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary){
+  text-shadow:0 1px 2px rgba(0,0,0,.28);
+  transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,filter .18s ease!important;
+}
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary):hover{
+  filter:brightness(1.12) saturate(1.08);
+}
+:where(input:not([type=checkbox]):not([type=radio]),select,textarea){
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.24),0 0 0 1px rgba(171,205,255,.05)!important;
+}
+:where(hr,.divider,.separator){
+  box-shadow:0 0 8px rgba(105,166,255,.2)!important;
+}
+:where(svg){
+  filter:drop-shadow(0 0 6px rgba(115,169,255,.2))!important;
+}
+:where(.accent,.text-accent,.brand-accent,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent){
+  filter:drop-shadow(0 0 7px rgba(115,169,255,.2));
+}
+/* Restrained glass glints: decorative highlights, never obscure controls or text. */
+:where(.panel,.card,.tile,.surface-card,.workspace-card,.content-card,.modal,.dialog,.widget){
+  position:relative;
+  isolation:isolate;
+}
+:where(.panel,.card,.tile,.surface-card,.workspace-card,.content-card,.modal,.dialog,.widget)::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  z-index:0;
+  background:
+    linear-gradient(112deg,transparent 0%,rgba(230,242,255,.075) 18%,transparent 34%),
+    radial-gradient(ellipse at 92% 0%,rgba(134,184,255,.12),transparent 42%);
+  opacity:.72;
+}
+:where(.panel,.card,.tile,.surface-card,.workspace-card,.content-card,.modal,.dialog,.widget)>*{
+  position:relative;
+}
+::selection{background:rgba(93,153,255,.72)!important;color:#fff!important}
+@media(prefers-reduced-transparency:reduce){
+  :where(.panel,.card,.tile,.surface,.workspace-card,.content-card,.modal,.dialog,.widget){
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  }
+}
+@media(max-width:650px){
+  :where(.panel,.card,.tile,.surface,.workspace-card,.content-card,.modal,.dialog,.widget){
+    backdrop-filter:blur(6px) saturate(1.08);
+    -webkit-backdrop-filter:blur(6px) saturate(1.08);
+  }
+}
