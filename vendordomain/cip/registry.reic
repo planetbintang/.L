@@ -1,0 +1,264 @@
+{
+  "schema": "vendordomain.cip.registry.v1",
+  "product": "CIP",
+  "version": "1.1.0",
+  "sourceOfTruth": "vendordomain/cip-system.reic",
+  "moduleCapacity": {
+    "logical": 12000,
+    "shards": 120,
+    "slotsPerShard": 100,
+    "physicalModulesCreated": 16
+  },
+  "policy": {
+    "materializeOnlyTestedModules": true,
+    "noPlaceholderFiles": true,
+    "tenantScoped": true,
+    "readApi": "/admin/cip/{module}",
+    "writes": "disabled-until-provider-adapter-and-approval"
+  },
+  "domains": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard & Observability",
+      "path": "vendordomain/cip/modules/dashboard/index.reic",
+      "modules": [
+        "overview",
+        "health",
+        "resource-monitor",
+        "service-status",
+        "alerts",
+        "activity",
+        "reports"
+      ],
+      "api": "/admin/cip/overview"
+    },
+    {
+      "id": "identity",
+      "title": "Identity & Access",
+      "path": "vendordomain/cip/modules/identity/index.reic",
+      "modules": [
+        "users",
+        "roles",
+        "permissions",
+        "sessions",
+        "mfa",
+        "api-credentials",
+        "access-policies"
+      ],
+      "api": "/admin/cip/accounts"
+    },
+    {
+      "id": "accounts",
+      "title": "Hosting Accounts",
+      "path": "vendordomain/cip/modules/accounts/index.reic",
+      "modules": [
+        "accounts",
+        "resellers",
+        "quotas",
+        "suspension",
+        "account-transfer",
+        "account-migration"
+      ],
+      "api": "/admin/cip/accounts"
+    },
+    {
+      "id": "packages",
+      "title": "Plans & Quotas",
+      "path": "vendordomain/cip/modules/packages/index.reic",
+      "modules": [
+        "plans",
+        "limits",
+        "bandwidth",
+        "storage",
+        "feature-entitlements",
+        "billing-mapping"
+      ],
+      "api": "/admin/cip/packages"
+    },
+    {
+      "id": "domains",
+      "title": "Domain Center",
+      "path": "vendordomain/cip/modules/domains/index.reic",
+      "modules": [
+        "domains",
+        "subdomains",
+        "aliases",
+        "redirects",
+        "ownership",
+        "registrar-connectors"
+      ],
+      "api": "/admin/cip/domains"
+    },
+    {
+      "id": "dns",
+      "title": "DNS Fabric",
+      "path": "vendordomain/cip/modules/dns/index.reic",
+      "modules": [
+        "zones",
+        "records",
+        "templates",
+        "nameservers",
+        "dnssec",
+        "clusters",
+        "propagation"
+      ],
+      "api": "/admin/cip/dns"
+    },
+    {
+      "id": "email",
+      "title": "Mail Services",
+      "path": "vendordomain/cip/modules/email/index.reic",
+      "modules": [
+        "mailboxes",
+        "aliases",
+        "forwarders",
+        "queues",
+        "spam",
+        "dkim",
+        "deliverability"
+      ],
+      "api": "/admin/cip/email"
+    },
+    {
+      "id": "files",
+      "title": "Storage & File Manager",
+      "path": "vendordomain/cip/modules/files/index.reic",
+      "modules": [
+        "file-browser",
+        "uploads",
+        "downloads",
+        "permissions",
+        "quotas",
+        "ftp",
+        "object-storage"
+      ],
+      "api": "/admin/cip/files"
+    },
+    {
+      "id": "databases",
+      "title": "Database Center",
+      "path": "vendordomain/cip/modules/databases/index.reic",
+      "modules": [
+        "mysql",
+        "mariadb",
+        "postgresql",
+        "users",
+        "backups",
+        "replication",
+        "query-monitor"
+      ],
+      "api": "/admin/cip/databases"
+    },
+    {
+      "id": "security",
+      "title": "Security Center",
+      "path": "vendordomain/cip/modules/security/index.reic",
+      "modules": [
+        "ssl",
+        "certificates",
+        "firewall",
+        "ip-access",
+        "waf",
+        "malware-scan",
+        "security-audit"
+      ],
+      "api": "/admin/cip/security"
+    },
+    {
+      "id": "backup",
+      "title": "Backup & Recovery",
+      "path": "vendordomain/cip/modules/backup/index.reic",
+      "modules": [
+        "policies",
+        "schedules",
+        "snapshots",
+        "restore",
+        "remote-targets",
+        "retention"
+      ],
+      "api": "/admin/cip/backups"
+    },
+    {
+      "id": "runtime",
+      "title": "Web Runtime",
+      "path": "vendordomain/cip/modules/runtime/index.reic",
+      "modules": [
+        "apache",
+        "nginx",
+        "php",
+        "php-fpm",
+        "nodejs",
+        "containers",
+        "runtime-pools"
+      ],
+      "api": "/admin/cip/webserver"
+    },
+    {
+      "id": "infrastructure",
+      "title": "Infrastructure Control",
+      "path": "vendordomain/cip/modules/infrastructure/index.reic",
+      "modules": [
+        "hosts",
+        "clusters",
+        "services",
+        "processes",
+        "network",
+        "storage-pools",
+        "maintenance"
+      ],
+      "api": "/admin/cip/services"
+    },
+    {
+      "id": "integrations",
+      "title": "API & Integrations",
+      "path": "vendordomain/cip/modules/integrations/index.reic",
+      "modules": [
+        "api-gateway",
+        "webhooks",
+        "provider-adapters",
+        "git",
+        "billing-connectors"
+      ],
+      "api": "/admin/cip/integrations"
+    },
+    {
+      "id": "applications",
+      "title": "Application Catalog",
+      "path": "vendordomain/cip/modules/applications/index.reic",
+      "modules": [
+        "installers",
+        "application-runtime",
+        "extensions",
+        "deployment",
+        "app-health"
+      ],
+      "api": "/admin/cip/applications"
+    },
+    {
+      "id": "governance",
+      "title": "Governance & Audit",
+      "path": "vendordomain/cip/modules/governance/index.reic",
+      "modules": [
+        "audit-log",
+        "policy-engine",
+        "approvals",
+        "change-history",
+        "compliance",
+        "system-settings"
+      ],
+      "api": "/admin/cip/logs"
+    }
+  ],
+  "formats": [
+    ".reic",
+    ".reicss",
+    ".reicjs",
+    ".reicg"
+  ],
+  "sync": {
+    "manifest": "cip-admin.reic",
+    "architecture": "cip-system.reic",
+    "dashboard": "cip-admin.reicjs",
+    "backend": "backend/api/hosting/[...route].mjs"
+  }
+}
