@@ -1,0 +1,75 @@
+{
+  "schema": "vendordomain.cip.module-domain.v1",
+  "id": "files",
+  "title": "Storage & File Manager",
+  "version": "1.0.0",
+  "state": "registered",
+  "moduleCount": 7,
+  "modules": [
+    {
+      "id": "file-browser",
+      "slot": "module-000",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "uploads",
+      "slot": "module-001",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "downloads",
+      "slot": "module-002",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "permissions",
+      "slot": "module-003",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "quotas",
+      "slot": "module-004",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "ftp",
+      "slot": "module-005",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "object-storage",
+      "slot": "module-006",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    }
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/admin/cip/files",
+    "source": "PlanetBintang Hosting API",
+    "scope": "authenticated-tenant"
+  },
+  "writes": {
+    "enabled": false,
+    "requirements": [
+      "provider-adapter",
+      "role-and-scope-authorization",
+      "CSRF",
+      "input-validation",
+      "approval-policy",
+      "audit-log"
+    ]
+  },
+  "files": {
+    "manifest": "index.reic",
+    "styles": "index.reicss",
+    "logic": "index.reicjs",
+    "graph": "index.reicg"
+  }
+}
