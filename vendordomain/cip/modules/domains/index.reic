@@ -1,0 +1,69 @@
+{
+  "schema": "vendordomain.cip.module-domain.v1",
+  "id": "domains",
+  "title": "Domain Center",
+  "version": "1.0.0",
+  "state": "registered",
+  "moduleCount": 6,
+  "modules": [
+    {
+      "id": "domains",
+      "slot": "module-000",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "subdomains",
+      "slot": "module-001",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "aliases",
+      "slot": "module-002",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "redirects",
+      "slot": "module-003",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "ownership",
+      "slot": "module-004",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "registrar-connectors",
+      "slot": "module-005",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    }
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/admin/cip/domains",
+    "source": "PlanetBintang Hosting API",
+    "scope": "authenticated-tenant"
+  },
+  "writes": {
+    "enabled": false,
+    "requirements": [
+      "provider-adapter",
+      "role-and-scope-authorization",
+      "CSRF",
+      "input-validation",
+      "approval-policy",
+      "audit-log"
+    ]
+  },
+  "files": {
+    "manifest": "index.reic",
+    "styles": "index.reicss",
+    "logic": "index.reicjs",
+    "graph": "index.reicg"
+  }
+}
