@@ -282,6 +282,57 @@ form.addEventListener('submit',async e=>{
   await loadRemoteFiles();
  }catch(error){status.textContent=error.message||'Upload gagal. Periksa koneksi API.'}
 });
+// Sinkronisasi koleksi: tampilkan setiap gambar yang tersimpan di folder /galeri sebagai kartu posting.
+const repositoryGalleryImages = [
+'1777794051d51d.png','1783464948.png','1783464953.png','1792841119.png',
+'2610271456346.jpg','ALUNIVERSINDONESIA.jpg','APLIKASI.jpg','MONITOR.jpg',
+'MONITORLAYAR.jpg','PERSMEDIA.png','PLANETBINTANGREIC.png','_20260513_080045.jpg',
+'_20260513_080220.jpg','_2604121201484.jpg','_2604121203027.jpg','_2604130358577.jpg',
+'_2604130403186.jpg','_2604130404401.jpg','_2604130442179.jpg','_2604130444407.jpg',
+'_2604130447372.jpg','_2605190140057.jpg','_2605190141060.jpg','_2605190148281.jpg',
+'d482119cdabc9232339169.png'
+];
+function galleryArchiveTitle(filename){
+ const known={
+  'ALUNIVERSINDONESIA.jpg':'Alunivers Indonesia',
+  'APLIKASI.jpg':'Aplikasi PlanetBintang',
+  'MONITOR.jpg':'Monitor Sistem',
+  'MONITORLAYAR.jpg':'Monitor Layar',
+  'PERSMEDIA.png':'Pers Media Partner',
+  'PLANETBINTANGREIC.png':'PlanetBintang REIC'
+ };
+ if(known[filename])return known[filename];
+ return filename.replace(/\.[^.]+$/,'').replace(/^_+/,'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+}
+function addRepositoryGalleryPosts(){
+ const feed=$('#feed');
+ if(!feed)return;
+ repositoryGalleryImages.forEach(filename=>{
+  const alreadyInFeed=[...feed.querySelectorAll('.tile img')].some(img=>{
+   try{return decodeURIComponent(new URL(img.getAttribute('src'),location.href).pathname.split('/').pop())===filename}catch{return false}
+  });
+  if(alreadyInFeed)return;
+  const title=galleryArchiveTitle(filename);
+  const card=document.createElement('article');
+  card.className='tile';
+  card.dataset.category='image other';
+  card.dataset.title=(title+' '+filename+' planetbintang galeri arsip').toLocaleLowerCase('id');
+  card.dataset.sourceArchive='galeri';
+  const img=document.createElement('img');
+  img.src='./'+encodeURIComponent(filename);
+  img.alt=title+' — koleksi Galeri PlanetBintang';
+  img.loading='lazy';
+  img.decoding='async';
+  const body=document.createElement('div');body.className='tile-body';
+  const heading=document.createElement('h3');heading.textContent=title;
+  const description=document.createElement('p');description.textContent='Arsip gambar PlanetBintang · '+filename;
+  const footer=document.createElement('div');footer.className='tile-footer';
+  const label=document.createElement('span');label.textContent='GALERI · ARSIP REPOSITORI';
+  const open=document.createElement('button');open.className='tile-open';open.type='button';open.textContent='Lihat detail ↗';
+  footer.append(label,open);body.append(heading,description,footer);card.append(img,body);feed.append(card);wireCard(card);
+ });
+}
+addRepositoryGalleryPosts();
 filterItems();
 
 const API_KEY='planetbintang.galeri.api.v1';
