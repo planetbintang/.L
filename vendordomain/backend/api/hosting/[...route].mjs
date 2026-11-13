@@ -280,6 +280,55 @@ export default async function handler(req, res) {
       const rows = await client.query('SELECT id,action,resource_type,resource_id,metadata,created_at FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 100',[auth.tenant_id]);
       return json(res,200,{activity:rows.rows});
     }
+
+    // CIP Admin: authenticated, tenant-scoped read endpoints. Infrastructure mutations
+    // remain disabled until a real provider adapter and approval policy are configured.
+    if (route.startsWith('admin/cip/')) {
+      requireRole(auth, ['owner','admin']);
+      const section = route.slice('admin/cip/'.length).replace(/\\/+$/, '') || 'overview';
+      const serviceTypes = {
+        accounts: ['hosting'], packages: ['hosting'], domains: ['domain'],
+        dns: ['dns'], email: ['email'], files: ['storage'], databases: ['database'],
+        security: ['ssl'], backups: ['backup'], webserver: ['website','application'],
+        services: ['hosting','website','domain','dns','ssl','database','email','storage','application','backup'],
+        integrations: [], applications: ['application'], settings: [], logs: []
+      };
+      if (req.method !== 'GET') return json(res, 405, { error: 'Operasi perubahan CIP belum diaktifkan; provider adapter dan kebijakan approval wajib dikonfigurasi.' });
+      if (section === 'overview') {
+        const [counts, services, activity, files] = await Promise.all([
+          client.query("SELECT count(*)::int AS resources,count(*) FILTER (WHERE status='active')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted'", [auth.tenant_id]),
+          client.query("SELECT id,service_type AS type,name,status,updated_at AS "updatedAt" FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' ORDER BY updated_at DESC LIMIT 12", [auth.tenant_id]),
+          client.query('SELECT action,resource_type AS "resourceType",resource_id AS "resourceId",created_at AS "createdAt" FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 12', [auth.tenant_id]),
+          client.query('SELECT count(*)::int AS total FROM file_manager_entries WHERE tenant_id=$1', [auth.tenant_id])
+        ]);
+        const mem = process.memoryUsage();
+        return json(res, 200, {
+          apiStatus: 'CONNECTED',
+          server: { status: 'API_PROCESS_RUNNING', hostname: process.env.HOSTNAME || null, uptimeSeconds: Math.floor(process.uptime()), memoryRssBytes: mem.rss, cpuLoad: null, memoryUsedPercent: null, diskUsedPercent: null },
+          counts: { resources: counts.rows[0].resources, activeResources: counts.rows[0].active, files: files.rows[0].total },
+          services: services.rows, recentActivity: activity.rows, updatedAt: now(),
+          limitations: ['Host CPU, disk, DNS propagation, mail queue, and provider service health require a configured infrastructure adapter.']
+        });
+      }
+      if (!Object.hasOwn(serviceTypes, section)) return json(res, 404, { error: 'Modul CIP tidak dikenal.' });
+      if (section === 'logs') {
+        const rows = await client.query('SELECT action,resource_type AS "resourceType",resource_id AS "resourceId",metadata,created_at AS "createdAt" FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 100', [auth.tenant_id]);
+        return json(res, 200, { status: 'DATABASE_AUDIT_LOG', items: rows.rows });
+      }
+      if (section === 'files') {
+        const rows = await client.query('SELECT id,path,name,entry_kind AS type,content_type AS "contentType",byte_size AS size,updated_at AS "updatedAt" FROM file_manager_entries WHERE tenant_id=$1 ORDER BY updated_at DESC LIMIT 200', [auth.tenant_id]);
+        return json(res, 200, { status: 'FILE_MANAGER_DATABASE', items: rows.rows });
+      }
+      if (section === 'integrations' || section === 'settings') {
+        return json(res, 200, { status: 'NOT_CONFIGURED', items: [], notice: 'Belum ada adapter provider atau konfigurasi CIP yang tersimpan.' });
+      }
+      const types = serviceTypes[section];
+      const rows = types.length
+        ? await client.query("SELECT id,service_type AS type,name,status,notes,configuration,created_at AS \"createdAt\",updated_at AS \"updatedAt\" FROM hosting_services WHERE tenant_id=$1 AND service_type=ANY($2::text[]) AND status<>'deleted' ORDER BY updated_at DESC LIMIT 200", [auth.tenant_id, types])
+        : { rows: [] };
+      return json(res, 200, { status: 'HOSTING_SERVICE_REGISTRY', items: rows.rows });
+    }
+
     return json(res,404,{error:'Endpoint Hosting API tidak ditemukan.',requestId});
   } catch (error) {
     const status = error.status || (error.code === '42P01' ? 503 : 500);
