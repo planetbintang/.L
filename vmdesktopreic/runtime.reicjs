@@ -19,7 +19,7 @@ const modules={
 'Host Lokal REIC':['Host lokal','Repositori publik dan privat','Penyimpanan lokal','Domain dan TLS'],
 'Pencarian REIC':['Cari web','Wikipedia','Repositori','File lokal'],
 'Monitor Sistem':['Status runtime','Koneksi GitHub','Aktivitas aplikasi','Informasi browser'],
-'Bantuan Sistem':['Panduan desktop','Navigasi File Manager','Tentang REIC'],
+'Bantuan Sistem':['Panduan desktop','Navigasi RILEMANAJER','Tentang REIC'],
 'Browser':['PlanetBintang.L','GitHub','GitHub Pages'],
 'Dokumen':['Dokumen sistem','Dokumentasi REIC','README repositori'],
 'Galeri':['Media sistem','Wallpaper','Aset visual'],
@@ -89,7 +89,7 @@ function wireWindow(w){
   const control=e.target.closest('button');
   if(control && control.type!=='submit' && !control.onclick && !control.dataset.close && !control.dataset.minimize && !control.dataset.maximize){
    const label=control.textContent.trim();
-   if(label){makeWindow(label,'▣','<div class="reic-module-detail"><div class="reic-eyebrow">MODUL REIC</div><h2>'+safe(label)+'</h2><p>Panel '+safe(label)+' tersedia di ruang kerja VMDESKTOPREIC.</p><p>Gunakan navigasi File Manager, REIC Explorer, dan konfigurasi sistem untuk membuka sumber serta pengaturan terkait.</p></div>');}
+   if(label){makeWindow(label,'▣','<div class="reic-module-detail"><div class="reic-eyebrow">MODUL REIC</div><h2>'+safe(label)+'</h2><p>Panel '+safe(label)+' tersedia di ruang kerja VMDESKTOPREIC.</p><p>Gunakan navigasi RILEMANAJER, REIC Explorer, dan konfigurasi sistem untuk membuka sumber serta pengaturan terkait.</p></div>');}
   }
  });
 }
