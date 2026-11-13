@@ -1,0 +1,109 @@
+{
+  "schema": "vendordomain.cwp-admin.v1",
+  "title": "CWP Admin Dashboard",
+  "version": "1.0.0",
+  "access": [
+    "owner",
+    "admin"
+  ],
+  "dataPolicy": "backend-only",
+  "overviewEndpoint": "/api/admin/cwp/overview",
+  "sections": [
+    [
+      "dashboard",
+      "Dashboard",
+      "Ringkasan server, layanan, resource, dan aktivitas",
+      "/api/admin/cwp/overview"
+    ],
+    [
+      "accounts",
+      "User & Accounts",
+      "Akun hosting, reseller, sesi, suspend dan pemulihan",
+      "/api/admin/cwp/accounts"
+    ],
+    [
+      "packages",
+      "Packages",
+      "Paket hosting, kuota, bandwidth, dan batas layanan",
+      "/api/admin/cwp/packages"
+    ],
+    [
+      "domains",
+      "Domain Management",
+      "Domain, subdomain, alias, redirect, dan status",
+      "/api/admin/cwp/domains"
+    ],
+    [
+      "dns",
+      "DNS Manager",
+      "Zona DNS, record, nameserver, dan sinkronisasi",
+      "/api/admin/cwp/dns/zones"
+    ],
+    [
+      "email",
+      "Email Management",
+      "Mailbox, forwarder, queue, spam, dan DKIM",
+      "/api/admin/cwp/email"
+    ],
+    [
+      "files",
+      "File Manager",
+      "Direktori, file, permission, storage, dan FTP",
+      "/api/admin/cwp/files"
+    ],
+    [
+      "database",
+      "Database Center",
+      "MySQL/MariaDB, PostgreSQL, user, backup",
+      "/api/admin/cwp/databases"
+    ],
+    [
+      "ssl",
+      "SSL & Security",
+      "Sertifikat, AutoSSL, firewall, IP, dan audit",
+      "/api/admin/cwp/security"
+    ],
+    [
+      "backup",
+      "Backup & Restore",
+      "Jadwal, arsip, backup, dan pemulihan",
+      "/api/admin/cwp/backups"
+    ],
+    [
+      "webserver",
+      "Web Server",
+      "Apache, Nginx, PHP, PHP-FPM, dan konfigurasi",
+      "/api/admin/cwp/webserver"
+    ],
+    [
+      "services",
+      "System Services",
+      "Service status, restart, process, dan resource",
+      "/api/admin/cwp/services"
+    ],
+    [
+      "api",
+      "API & Integrations",
+      "API keys metadata, webhook, provider, dan integrasi",
+      "/api/admin/cwp/integrations"
+    ],
+    [
+      "apps",
+      "Applications",
+      "Aplikasi, runtime, installer, dan addons",
+      "/api/admin/cwp/applications"
+    ],
+    [
+      "settings",
+      "System Settings",
+      "Konfigurasi panel, preferensi, dan kebijakan",
+      "/api/admin/cwp/settings"
+    ],
+    [
+      "logs",
+      "Logs & Reports",
+      "Audit log, access log, error log, dan laporan",
+      "/api/admin/cwp/logs"
+    ]
+  ]
+}
