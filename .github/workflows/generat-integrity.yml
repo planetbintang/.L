@@ -1,0 +1,27 @@
+name: GENERAT Integrity
+on:
+  pull_request:
+    branches: [io]
+    paths: ["generat/**", ".github/workflows/generat-*.yml"]
+  push:
+    branches: [io]
+    paths: ["generat/**", ".github/workflows/generat-*.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: |
+          node --check generat/engine/binary.mjs
+          node --check generat/engine/path-policy.mjs
+          node --check generat/scripts/generate-modules.mjs
+          node --check generat/scripts/validate.mjs
+          node --check generat/scripts/org-sync.mjs
+      - run: node generat/scripts/generate-modules.mjs
+      - run: node generat/scripts/validate.mjs

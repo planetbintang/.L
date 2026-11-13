@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "GENERAT",
+  "canonicalRepository": "planetbintang/.L",
+  "canonicalBranch": "io",
+  "scope": "all-accessible-repositories-owned-by-planetbintang",
+  "moduleCount": 150,
+  "implementationLineTarget": 5000,
+  "role": {
+    "name": "REICADMIN",
+    "kind": "logical-role",
+    "requiresGitHubAuthorization": true,
+    "unlimitedPrivileges": false
+  },
+  "execution": {
+    "discover": true,
+    "validate": true,
+    "dispatch": true,
+    "overwriteExisting": false,
+    "executeUntrustedCode": false,
+    "applyRequiresReviewedTargetWorkflow": true
+  },
+  "preserveExistingFiles": true,
+  "dispatchEvent": "generat.repository.changed"
+}

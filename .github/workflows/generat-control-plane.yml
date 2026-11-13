@@ -1,0 +1,40 @@
+name: GENERAT Global Control Plane
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 */6 * * *"
+  push:
+    branches: [io]
+    paths: ["generat/**", ".github/workflows/generat-control-plane.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: generat-global-control-plane
+  cancel-in-progress: false
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: io
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Generate 150 module contracts
+        run: node generat/scripts/generate-modules.mjs
+      - name: Validate policy and modules
+        run: node generat/scripts/validate.mjs
+      - name: Scan all PlanetBintang repositories and dispatch changes
+        env:
+          PLANETBINTANG_ORG_TOKEN: ${{ secrets.PLANETBINTANG_ORG_TOKEN }}
+        run: node generat/scripts/org-sync.mjs
+      - name: Commit registry and scan report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add generat/modules generat/registry generat/state
+          if git diff --cached --quiet; then echo "No generated changes"; exit 0; fi
+          git commit -m "generat: update module registry and repository scan"
+          git push origin HEAD:io
