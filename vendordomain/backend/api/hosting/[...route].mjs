@@ -285,7 +285,7 @@ export default async function handler(req, res) {
     // remain disabled until a real provider adapter and approval policy are configured.
     if (route.startsWith('admin/cip/')) {
       requireRole(auth, ['owner','admin']);
-      const section = route.slice('admin/cip/'.length).replace(/\\/+$/, '') || 'overview';
+      const section = route.slice('admin/cip/'.length) || 'overview';
       const serviceTypes = {
         accounts: ['hosting'], packages: ['hosting'], domains: ['domain'],
         dns: ['dns'], email: ['email'], files: ['storage'], databases: ['database'],
@@ -297,7 +297,7 @@ export default async function handler(req, res) {
       if (section === 'overview') {
         const [counts, services, activity, files, byType] = await Promise.all([
           client.query("SELECT count(*)::int AS resources,count(*) FILTER (WHERE status='active')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted'", [auth.tenant_id]),
-          client.query('SELECT id,service_type AS type,name,status,updated_at AS "updatedAt" FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' ORDER BY updated_at DESC LIMIT 12', [auth.tenant_id]),
+          client.query(`SELECT id,service_type AS type,name,status,updated_at AS "updatedAt" FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' ORDER BY updated_at DESC LIMIT 12`, [auth.tenant_id]),
           client.query('SELECT action,resource_type AS "resourceType",resource_id AS "resourceId",created_at AS "createdAt" FROM hosting_audit_events WHERE tenant_id=$1 ORDER BY created_at DESC LIMIT 12', [auth.tenant_id]),
           client.query('SELECT count(*)::int AS total FROM file_manager_entries WHERE tenant_id=$1', [auth.tenant_id]),
           client.query("SELECT service_type AS type,count(*)::int AS total,count(*) FILTER (WHERE status='active')::int AS active FROM hosting_services WHERE tenant_id=$1 AND status<>'deleted' GROUP BY service_type", [auth.tenant_id])
