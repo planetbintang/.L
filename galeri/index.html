@@ -283,13 +283,31 @@ form.addEventListener('submit',async e=>{
  }catch(error){status.textContent=error.message||'Upload gagal. Periksa koneksi API.'}
 });
 // Sinkronisasi koleksi: tampilkan setiap gambar yang tersimpan di folder /galeri sebagai kartu posting.
+// Arsip posting Galeri diselaraskan dengan berkas gambar yang benar-benar tersedia di folder ini.
 const repositoryGalleryImages = [
-'1777794051d51d.png','1783464948.png','1783464953.png','1792841119.png',
-'2610271456346.jpg','ALUNIVERSINDONESIA.jpg','APLIKASI.jpg','MONITOR.jpg',
-'MONITORLAYAR.jpg','PERSMEDIA.png','PLANETBINTANGREIC.png','_20260513_080045.jpg',
-'_20260513_080220.jpg','_2604121201484.jpg','_2604121203027.jpg','_2604130358577.jpg',
-'_2604130403186.jpg','_2604130404401.jpg','_2604130442179.jpg','_2604130444407.jpg',
-'_2604130447372.jpg','_2605190140057.jpg','_2605190141060.jpg','_2605190148281.jpg',
+'1777794051d51d.png',
+'1783464948.png',
+'1783464953.png',
+'1792841119.png',
+'2610271456346.jpg',
+'ALUNIVERSINDONESIA.jpg',
+'APLIKASI.jpg',
+'MONITOR.jpg',
+'MONITORLAYAR.jpg',
+'PERSMEDIA.png',
+'PLANETBINTANGREIC.png',
+'_20260513_080220.jpg',
+'_2604121201484.jpg',
+'_2604121203027.jpg',
+'_2604130358577.jpg',
+'_2604130403186.jpg',
+'_2604130404401.jpg',
+'_2604130442179.jpg',
+'_2604130444407.jpg',
+'_2604130447372.jpg',
+'_2605190140057.jpg',
+'_2605190141060.jpg',
+'_2605190148281.jpg',
 'd482119cdabc9232339169.png'
 ];
 function galleryArchiveTitle(filename){
@@ -304,14 +322,30 @@ function galleryArchiveTitle(filename){
  if(known[filename])return known[filename];
  return filename.replace(/\.[^.]+$/,'').replace(/^_+/,'').replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 }
+function cleanUnavailableGalleryPosts(){
+ const available=new Set(repositoryGalleryImages);
+ ['#feed','#featuredGrid','#miniGrid'].forEach(selector=>{
+  const root=$(selector);
+  if(!root)return;
+  root.querySelectorAll('.tile').forEach(card=>{
+   const media=card.querySelector('img');
+   if(!media)return;
+   const raw=media.getAttribute('src')||'';
+   if(/^(https?:|data:|blob:)/i.test(raw))return;
+   let filename='';
+   try{filename=decodeURIComponent(new URL(raw,document.baseURI).pathname.split('/').pop())}catch{}
+   if(filename&&!available.has(filename))card.remove();
+  });
+ });
+}
 function addRepositoryGalleryPosts(){
  const feed=$('#feed');
  if(!feed)return;
+ const existing=new Set([...feed.querySelectorAll('.tile img')].map(img=>{
+  try{return decodeURIComponent(new URL(img.getAttribute('src'),document.baseURI).pathname.split('/').pop())}catch{return ''}
+ }));
  repositoryGalleryImages.forEach(filename=>{
-  const alreadyInFeed=[...feed.querySelectorAll('.tile img')].some(img=>{
-   try{return decodeURIComponent(new URL(img.getAttribute('src'),location.href).pathname.split('/').pop())===filename}catch{return false}
-  });
-  if(alreadyInFeed)return;
+  if(existing.has(filename))return;
   const title=galleryArchiveTitle(filename);
   const card=document.createElement('article');
   card.className='tile';
@@ -332,6 +366,7 @@ function addRepositoryGalleryPosts(){
   footer.append(label,open);body.append(heading,description,footer);card.append(img,body);feed.append(card);wireCard(card);
  });
 }
+cleanUnavailableGalleryPosts();
 addRepositoryGalleryPosts();
 filterItems();
 
