@@ -1,0 +1,63 @@
+{
+  "schema": "vendordomain.cip.module-domain.v1",
+  "id": "applications",
+  "title": "Application Catalog",
+  "version": "1.0.0",
+  "state": "registered",
+  "moduleCount": 5,
+  "modules": [
+    {
+      "id": "installers",
+      "slot": "module-000",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "application-runtime",
+      "slot": "module-001",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "extensions",
+      "slot": "module-002",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "deployment",
+      "slot": "module-003",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "app-health",
+      "slot": "module-004",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    }
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/admin/cip/applications",
+    "source": "PlanetBintang Hosting API",
+    "scope": "authenticated-tenant"
+  },
+  "writes": {
+    "enabled": false,
+    "requirements": [
+      "provider-adapter",
+      "role-and-scope-authorization",
+      "CSRF",
+      "input-validation",
+      "approval-policy",
+      "audit-log"
+    ]
+  },
+  "files": {
+    "manifest": "index.reic",
+    "styles": "index.reicss",
+    "logic": "index.reicjs",
+    "graph": "index.reicg"
+  }
+}
