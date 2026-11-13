@@ -1,0 +1,246 @@
+{
+  "schema": "vendordomain.cip.architecture.v1",
+  "product": "CIP",
+  "fullName": "Custom Infrastructure Panel",
+  "version": "1.1.0",
+  "principles": [
+    "modular-domain-packages",
+    "manifest-driven-navigation",
+    "lazy-loaded-modules",
+    "API-first-adapters",
+    "role-and-scope-authorization",
+    "audit-every-mutation",
+    "generated-catalog-not-empty-files",
+    "on-demand-module-materialization"
+  ],
+  "scale": {
+    "logicalModuleCapacity": 12000,
+    "physicalFilesNow": "core plus domain manifests",
+    "generation": "deterministic templates and registry; create physical module files only when implemented and tested",
+    "shards": 120,
+    "modulesPerShard": 100
+  },
+  "formats": {
+    "manifest": ".reic",
+    "styles": ".reicss",
+    "logic": ".reicjs",
+    "graph": ".reicg"
+  },
+  "moduleDomains": [
+    [
+      "dashboard",
+      "Dashboard & Observability",
+      [
+        "overview",
+        "health",
+        "resource-monitor",
+        "service-status",
+        "alerts",
+        "activity",
+        "reports"
+      ]
+    ],
+    [
+      "identity",
+      "Identity & Access",
+      [
+        "users",
+        "roles",
+        "permissions",
+        "sessions",
+        "mfa",
+        "api-credentials",
+        "access-policies"
+      ]
+    ],
+    [
+      "accounts",
+      "Hosting Accounts",
+      [
+        "accounts",
+        "resellers",
+        "quotas",
+        "suspension",
+        "account-transfer",
+        "account-migration"
+      ]
+    ],
+    [
+      "packages",
+      "Plans & Quotas",
+      [
+        "plans",
+        "limits",
+        "bandwidth",
+        "storage",
+        "feature-entitlements",
+        "billing-mapping"
+      ]
+    ],
+    [
+      "domains",
+      "Domain Center",
+      [
+        "domains",
+        "subdomains",
+        "aliases",
+        "redirects",
+        "ownership",
+        "registrar-connectors"
+      ]
+    ],
+    [
+      "dns",
+      "DNS Fabric",
+      [
+        "zones",
+        "records",
+        "templates",
+        "nameservers",
+        "dnssec",
+        "clusters",
+        "propagation"
+      ]
+    ],
+    [
+      "email",
+      "Mail Services",
+      [
+        "mailboxes",
+        "aliases",
+        "forwarders",
+        "queues",
+        "spam",
+        "dkim",
+        "deliverability"
+      ]
+    ],
+    [
+      "files",
+      "Storage & File Manager",
+      [
+        "file-browser",
+        "uploads",
+        "downloads",
+        "permissions",
+        "quotas",
+        "ftp",
+        "object-storage"
+      ]
+    ],
+    [
+      "databases",
+      "Database Center",
+      [
+        "mysql",
+        "mariadb",
+        "postgresql",
+        "users",
+        "backups",
+        "replication",
+        "query-monitor"
+      ]
+    ],
+    [
+      "security",
+      "Security Center",
+      [
+        "ssl",
+        "certificates",
+        "firewall",
+        "ip-access",
+        "waf",
+        "malware-scan",
+        "security-audit"
+      ]
+    ],
+    [
+      "backup",
+      "Backup & Recovery",
+      [
+        "policies",
+        "schedules",
+        "snapshots",
+        "restore",
+        "remote-targets",
+        "retention"
+      ]
+    ],
+    [
+      "runtime",
+      "Web Runtime",
+      [
+        "apache",
+        "nginx",
+        "php",
+        "php-fpm",
+        "nodejs",
+        "containers",
+        "runtime-pools"
+      ]
+    ],
+    [
+      "infrastructure",
+      "Infrastructure Control",
+      [
+        "hosts",
+        "clusters",
+        "services",
+        "processes",
+        "network",
+        "storage-pools",
+        "maintenance"
+      ]
+    ],
+    [
+      "integrations",
+      "API & Integrations",
+      [
+        "api-gateway",
+        "webhooks",
+        "provider-adapters",
+        "cwp-compatibility-adapter",
+        "git",
+        "billing-connectors"
+      ]
+    ],
+    [
+      "applications",
+      "Application Catalog",
+      [
+        "installers",
+        "application-runtime",
+        "extensions",
+        "deployment",
+        "app-health"
+      ]
+    ],
+    [
+      "governance",
+      "Governance & Audit",
+      [
+        "audit-log",
+        "policy-engine",
+        "approvals",
+        "change-history",
+        "compliance",
+        "system-settings"
+      ]
+    ]
+  ],
+  "backend": {
+    "basePath": "/api/admin/cip",
+    "adapter": "CIP provider adapter",
+    "required": true,
+    "readEndpoints": "domain-specific GET endpoints",
+    "writeEndpoints": "explicit POST/PATCH/DELETE endpoints with RBAC, CSRF, validation, approval policy and audit"
+  },
+  "generation": {
+    "namespace": "vendordomain/cip/modules/{domain}/{shard}/{module}.reic",
+    "registry": "vendordomain/cip/registry.reic",
+    "shardPattern": "shard-000..shard-119",
+    "modulePattern": "module-000..module-099",
+    "stableIds": true,
+    "noPlaceholderFiles": true
+  }
+}
