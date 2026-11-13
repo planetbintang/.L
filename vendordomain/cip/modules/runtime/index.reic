@@ -1,0 +1,75 @@
+{
+  "schema": "vendordomain.cip.module-domain.v1",
+  "id": "runtime",
+  "title": "Web Runtime",
+  "version": "1.0.0",
+  "state": "registered",
+  "moduleCount": 7,
+  "modules": [
+    {
+      "id": "apache",
+      "slot": "module-000",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "nginx",
+      "slot": "module-001",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "php",
+      "slot": "module-002",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "php-fpm",
+      "slot": "module-003",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "nodejs",
+      "slot": "module-004",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "containers",
+      "slot": "module-005",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "runtime-pools",
+      "slot": "module-006",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    }
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/admin/cip/webserver",
+    "source": "PlanetBintang Hosting API",
+    "scope": "authenticated-tenant"
+  },
+  "writes": {
+    "enabled": false,
+    "requirements": [
+      "provider-adapter",
+      "role-and-scope-authorization",
+      "CSRF",
+      "input-validation",
+      "approval-policy",
+      "audit-log"
+    ]
+  },
+  "files": {
+    "manifest": "index.reic",
+    "styles": "index.reicss",
+    "logic": "index.reicjs",
+    "graph": "index.reicg"
+  }
+}
