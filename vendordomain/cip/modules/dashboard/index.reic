@@ -1,0 +1,75 @@
+{
+  "schema": "vendordomain.cip.module-domain.v1",
+  "id": "dashboard",
+  "title": "Dashboard & Observability",
+  "version": "1.0.0",
+  "state": "registered",
+  "moduleCount": 7,
+  "modules": [
+    {
+      "id": "overview",
+      "slot": "module-000",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "health",
+      "slot": "module-001",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "resource-monitor",
+      "slot": "module-002",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "service-status",
+      "slot": "module-003",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "alerts",
+      "slot": "module-004",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "activity",
+      "slot": "module-005",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    },
+    {
+      "id": "reports",
+      "slot": "module-006",
+      "state": "catalogued",
+      "implementation": "lazy-materialize-after-provider-and-test"
+    }
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/admin/cip/overview",
+    "source": "PlanetBintang Hosting API",
+    "scope": "authenticated-tenant"
+  },
+  "writes": {
+    "enabled": false,
+    "requirements": [
+      "provider-adapter",
+      "role-and-scope-authorization",
+      "CSRF",
+      "input-validation",
+      "approval-policy",
+      "audit-log"
+    ]
+  },
+  "files": {
+    "manifest": "index.reic",
+    "styles": "index.reicss",
+    "logic": "index.reicjs",
+    "graph": "index.reicg"
+  }
+}
