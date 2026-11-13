@@ -242,5 +242,30 @@
     "modulePattern": "module-000..module-099",
     "stableIds": true,
     "noPlaceholderFiles": true
+  },
+  "synchronization": {
+    "sourceOfTruth": "vendordomain/cip-system.reic",
+    "registry": "vendordomain/cip/registry.reic",
+    "folderManifests": "vendordomain/cip/modules/*/index.reic",
+    "changeFlow": [
+      "file-or-folder-change",
+      "registry-review",
+      "schema-and-path-validation",
+      "github-commit",
+      "CIP-integrity-workflow",
+      "merge-only-after-checks"
+    ],
+    "atomicity": "one-commit-per-related-change-set",
+    "contentPolicy": "preserve-existing-content; update by current blob SHA; never overwrite unknown files",
+    "folderPolicy": "folder existence is represented by tracked files; no empty placeholder folders",
+    "rollback": "revert the exact Git commit; retain audit trail",
+    "validationWorkflow": ".github/workflows/cip-integrity.yml",
+    "validator": "vendordomain/cip/verify-cip.mjs"
+  },
+  "capabilities": {
+    "liveProviderProvisioning": "not-enabled",
+    "databaseBackedCipReadApi": "implemented-in-hosting-api",
+    "tenantScopedAdminAccess": "owner-admin",
+    "fileFolderIntegrityWorkflow": "added-pending-github-run"
   }
 }
