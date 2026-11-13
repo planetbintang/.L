@@ -1,0 +1,109 @@
+{
+  "schema": "vendordomain.cip-admin.v1",
+  "title": "CIP Admin Dashboard",
+  "version": "1.0.0",
+  "access": [
+    "owner",
+    "admin"
+  ],
+  "dataPolicy": "backend-only",
+  "overviewEndpoint": "/api/admin/cip/overview",
+  "sections": [
+    [
+      "dashboard",
+      "Dashboard",
+      "Ringkasan server, layanan, resource, dan aktivitas",
+      "/api/admin/cip/overview"
+    ],
+    [
+      "accounts",
+      "User & Accounts",
+      "Akun hosting, reseller, sesi, suspend dan pemulihan",
+      "/api/admin/cip/accounts"
+    ],
+    [
+      "packages",
+      "Packages",
+      "Paket hosting, kuota, bandwidth, dan batas layanan",
+      "/api/admin/cip/packages"
+    ],
+    [
+      "domains",
+      "Domain Management",
+      "Domain, subdomain, alias, redirect, dan status",
+      "/api/admin/cip/domains"
+    ],
+    [
+      "dns",
+      "DNS Manager",
+      "Zona DNS, record, nameserver, dan sinkronisasi",
+      "/api/admin/cip/dns/zones"
+    ],
+    [
+      "email",
+      "Email Management",
+      "Mailbox, forwarder, queue, spam, dan DKIM",
+      "/api/admin/cip/email"
+    ],
+    [
+      "files",
+      "File Manager",
+      "Direktori, file, permission, storage, dan FTP",
+      "/api/admin/cip/files"
+    ],
+    [
+      "database",
+      "Database Center",
+      "MySQL/MariaDB, PostgreSQL, user, backup",
+      "/api/admin/cip/databases"
+    ],
+    [
+      "ssl",
+      "SSL & Security",
+      "Sertifikat, AutoSSL, firewall, IP, dan audit",
+      "/api/admin/cip/security"
+    ],
+    [
+      "backup",
+      "Backup & Restore",
+      "Jadwal, arsip, backup, dan pemulihan",
+      "/api/admin/cip/backups"
+    ],
+    [
+      "webserver",
+      "Web Server",
+      "Apache, Nginx, PHP, PHP-FPM, dan konfigurasi",
+      "/api/admin/cip/webserver"
+    ],
+    [
+      "services",
+      "System Services",
+      "Service status, restart, process, dan resource",
+      "/api/admin/cip/services"
+    ],
+    [
+      "api",
+      "API & Integrations",
+      "API keys metadata, webhook, provider, dan integrasi",
+      "/api/admin/cip/integrations"
+    ],
+    [
+      "apps",
+      "Applications",
+      "Aplikasi, runtime, installer, dan addons",
+      "/api/admin/cip/applications"
+    ],
+    [
+      "settings",
+      "System Settings",
+      "Konfigurasi panel, preferensi, dan kebijakan",
+      "/api/admin/cip/settings"
+    ],
+    [
+      "logs",
+      "Logs & Reports",
+      "Audit log, access log, error log, dan laporan",
+      "/api/admin/cip/logs"
+    ]
+  ]
+}
