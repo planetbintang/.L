@@ -24,12 +24,18 @@ body::before{
   z-index:-1;
   pointer-events:none;
   opacity:.88;
-  background-image:
-    repeating-linear-gradient(to bottom,var(--pb-reic-grid) 0 2px,transparent 2px 6px),
-    repeating-linear-gradient(to right,var(--pb-reic-grid) 0 2px,transparent 2px 6px);
-  background-size:1.5px 72px,72px 1.5px;
-  background-position:23px 10px,23px 10px;
+  background-image:radial-gradient(circle,var(--pb-reic-grid) .85px,transparent 1.35px);
+  background-size:4px 4px;
+  background-position:23px 10px;
   background-repeat:repeat;
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg,#000 0 1.2px,transparent 1.2px 72px),
+    repeating-linear-gradient(0deg,#000 0 1.2px,transparent 1.2px 72px);
+  -webkit-mask-composite:source-over;
+  mask-image:
+    repeating-linear-gradient(90deg,#000 0 1.2px,transparent 1.2px 72px),
+    repeating-linear-gradient(0deg,#000 0 1.2px,transparent 1.2px 72px);
+  mask-composite:add;
   filter:drop-shadow(0 0 2px rgba(75,205,255,.5));
 }
 body::after{
