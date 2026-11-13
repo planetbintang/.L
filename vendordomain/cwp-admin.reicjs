@@ -1,0 +1,36 @@
+
+(()=>{'use strict';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>Number(n||0).toLocaleString('id-ID');
+const status=(s)=>{const v=String(s??'UNKNOWN').toUpperCase(),c=/ACTIVE|OK|RUNNING|HEALTHY|ONLINE/.test(v)?'ok':/WARN|PENDING|DEGRADED/.test(v)?'warn':'';return '<span class="vdcwp-status '+c+'">'+esc(v)+'</span>'};
+const apiPath=(manifest,id)=>manifest.sections.find(x=>x[0]===id)?.[3]||manifest.overviewEndpoint;
+function mount(host,ctx){
+ const {manifest,graph,api,role}=ctx;let current='dashboard',payload=null,loading=false;
+ if(!['owner','admin'].includes(String(role).toLowerCase())){host.innerHTML='<div class="vdcwp-error">Akses CWP Admin hanya tersedia untuk Owner dan Admin.</div>';return}
+ host.innerHTML='<div class="vdcwp"><header class="vdcwp-head"><div><div class="eyebrow">VENDORDOMAIN / CONTROL WEB PANEL</div><h2>CWP Admin Dashboard</h2><p class="vdcwp-muted">Pusat administrasi hosting, domain, server, keamanan, dan layanan.</p></div><div class="vdcwp-actions"><span class="vdcwp-status">ADMINISTRATOR</span><button type="button" data-refresh>MUAT ULANG</button></div></header><nav class="vdcwp-nav" aria-label="CWP Admin navigation">'+manifest.sections.map(s=>'<button type="button" data-section="'+esc(s[0])+'" aria-current="'+(s[0]==='dashboard'?'page':'false')+'">'+esc(s[1])+'</button>').join('')+'</nav><div id="vdcwp-content"><div class="vdcwp-empty">Memuat data dashboard dari CWP Control API…</div></div><p class="vdcwp-small">Sumber data: CWP Control API · Tidak ada angka server contoh yang ditampilkan sebagai data aktual.</p></div>';
+ const content=host.querySelector('#vdcwp-content');
+ async function load(section){
+  current=section;host.querySelectorAll('[data-section]').forEach(b=>b.setAttribute('aria-current',b.dataset.section===section?'page':'false'));
+  content.innerHTML='<div class="vdcwp-empty">Mengambil data dari server…</div>';
+  try{payload=await api(apiPath(manifest,section));render(section,payload)}
+  catch(e){content.innerHTML='<div class="vdcwp-error"><b>Data belum tersedia.</b><br>'+esc(e.message)+'<p>Pastikan CWP Control API sudah dipasang, endpoint memiliki autentikasi admin, dan server mengembalikan JSON.</p></div>'+ (section==='dashboard'?flowPanel():'');}
+ }
+ function flowPanel(){return '<section class="vdcwp-panel"><h3>Alur kontrol sistem</h3><div class="vdcwp-flow">'+graph.flow.map((x,i)=>'<div class="vdcwp-node">'+esc(x)+'</div>'+(i<graph.flow.length-1?'<div class="vdcwp-arrow">→</div>':'')).join('')+'</div><p class="vdcwp-small">Alur otorisasi dan kontrol; koneksi aktual diverifikasi melalui API.</p></section>'}
+ function metric(label,value,sub){return '<article class="vdcwp-kpi"><small>'+esc(label)+'</small><strong>'+((value===undefined||value===null)?'—':esc(money(value)))+'</strong><em>'+esc(sub||'Dari backend')+'</em></article>'}
+ function table(rows){if(!Array.isArray(rows)||!rows.length)return '<div class="vdcwp-empty">Belum ada data dari endpoint ini.</div>';const keys=[...new Set(rows.flatMap(r=>Object.keys(r||{})))].slice(0,6);return '<div class="vdcwp-table-wrap"><table><thead><tr>'+keys.map(k=>'<th>'+esc(k.replace(/([A-Z])/g,' $1').toUpperCase())+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+keys.map(k=>'<td>'+esc(typeof r[k]==='object'?JSON.stringify(r[k]):r[k]??'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>'}
+ function render(section,d){
+  if(section==='dashboard'){
+   const s=d.server||{},counts=d.counts||{},services=Array.isArray(d.services)?d.services:[];
+   content.innerHTML='<div class="vdcwp-kpis">'+metric('HOSTNAME',s.hostname,'Server identity')+metric('CPU LOAD',s.cpuLoad,'Nilai dari monitoring API')+metric('MEMORY USED',s.memoryUsedPercent,'% terpakai')+metric('DISK USED',s.diskUsedPercent,'% terpakai')+'</div><div class="vdcwp-layout"><section class="vdcwp-panel"><h3>Server & Service Status</h3>'+table(services)+'<p class="vdcwp-small">Domain: '+esc(counts.domains??'—')+' · Akun: '+esc(counts.accounts??'—')+' · Database: '+esc(counts.databases??'—')+'</p></section><section class="vdcwp-panel"><h3>System Health</h3><p>Server: '+status(s.status||'NOT REPORTED')+'</p><p>API: '+status(d.apiStatus||'CONNECTED')+'</p><p>Last update: '+esc(d.updatedAt||'—')+'</p><div class="vdcwp-note">Metrik hanya ditampilkan jika disediakan oleh CWP Control API.</div></section></div>'+flowPanel()+'<section class="vdcwp-panel"><h3>Aktivitas terbaru</h3>'+activity(d.recentActivity)+'</section>';
+  }else{
+   const rows=d.items||d[section]||d.records||[];
+   content.innerHTML='<div class="vdcwp-head"><div><h2>'+esc(manifest.sections.find(x=>x[0]===section)?.[1]||section)+'</h2><p class="vdcwp-muted">'+esc(manifest.sections.find(x=>x[0]===section)?.[2]||'Administrasi layanan')+'</p></div><span class="vdcwp-status">'+esc(d.status||'API RESPONSE')+'</span></div><section class="vdcwp-panel"><div class="vdcwp-toolbar"><input type="search" aria-label="Cari data" placeholder="Cari dalam data yang dimuat…" data-filter><button type="button" data-refresh>MUAT ULANG</button></div><div data-table>'+table(rows)+'</div></section><section class="vdcwp-panel"><h3>Operasi administrasi</h3><p class="vdcwp-muted">Tindakan perubahan hanya tersedia jika endpoint CWP Control API mendukungnya. Tidak ada perubahan server yang disimulasikan di browser.</p><div class="vdcwp-note">Endpoint baca: <code>'+esc(apiPath(manifest,section))+'</code>. Untuk aksi tulis, backend harus memvalidasi role, CSRF, audit, dan izin CWP sebelum menjalankan perintah.</div></section>';
+   const filter=content.querySelector('[data-filter]');filter?.addEventListener('input',()=>{const q=filter.value.toLowerCase();const filtered=rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q));content.querySelector('[data-table]').innerHTML=table(filtered)});
+  }
+ }
+ function activity(items){if(!Array.isArray(items)||!items.length)return '<div class="vdcwp-empty">Belum ada aktivitas audit yang dilaporkan.</div>';return '<div class="vdcwp-activity">'+items.slice(0,12).map(x=>'<article><span><b>'+esc(x.action||x.event||'Aktivitas')+'</b><br><small>'+esc(x.actor||x.user||'—')+' · '+esc(x.createdAt||x.timestamp||'—')+'</small></span>'+status(x.status||'RECORDED')+'</article>').join('')+'</div>'}
+ host.addEventListener('click',e=>{const b=e.target.closest('[data-section]');if(b)load(b.dataset.section);if(e.target.closest('[data-refresh]'))load(current)});
+ load('dashboard');
+}
+window.VDCWPAdmin={mount};
+})();
