@@ -1,0 +1,63 @@
+/* PLANETBINTANG REIC — shared dotted-grid blue identity */
+:root{
+  --pb-reic-blue-950:#030b43;
+  --pb-reic-blue-900:#07145f;
+  --pb-reic-blue-700:#073fc8;
+  --pb-reic-blue-500:#087cff;
+  --pb-reic-cyan:#69d9ff;
+  --pb-reic-grid:rgba(111,218,255,.76);
+}
+html{min-height:100%;background:#030b43}
+body{
+  position:relative;
+  isolation:isolate;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 88% 18%,rgba(0,113,255,.92) 0%,rgba(0,67,210,.62) 34%,transparent 67%),
+    linear-gradient(112deg,#03083b 0%,#06166e 44%,#063fcb 100%) !important;
+  background-attachment:fixed !important;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.88;
+  background-image:
+    repeating-linear-gradient(to bottom,var(--pb-reic-grid) 0 2px,transparent 2px 6px),
+    repeating-linear-gradient(to right,var(--pb-reic-grid) 0 2px,transparent 2px 6px);
+  background-size:1.5px 72px,72px 1.5px;
+  background-position:23px 10px,23px 10px;
+  background-repeat:repeat;
+  filter:drop-shadow(0 0 2px rgba(75,205,255,.5));
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,35,.28) 100%);
+}
+:where(main,header,nav,section,aside,footer,.window,.modal-window,.dashboard-card,.panel,.card,.metric-card){
+  --pb-reic-surface:rgba(3,17,75,.78);
+}
+:where(.window,.modal-window,.dashboard-card,.panel,.card,.metric-card){
+  border-color:rgba(107,211,255,.34);
+  box-shadow:0 8px 28px rgba(0,8,65,.22),inset 0 1px rgba(174,231,255,.08);
+}
+:where(button,.button,[role="button"]){
+  border-color:rgba(105,208,255,.42);
+}
+:where(button:hover,.button:hover,[role="button"]:hover){
+  border-color:rgba(133,226,255,.9);
+  box-shadow:0 0 0 1px rgba(77,184,255,.18),0 0 16px rgba(0,126,255,.2);
+}
+:where(a){text-decoration-color:rgba(117,215,255,.65)}
+:where(input,textarea,select){
+  border-color:rgba(103,202,255,.42);
+}
+@media(prefers-reduced-motion:no-preference){
+  :where(button,.button,[role="button"]){transition:border-color .16s ease,box-shadow .16s ease}
+}
