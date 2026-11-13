@@ -199,7 +199,7 @@
         "api-gateway",
         "webhooks",
         "provider-adapters",
-        "cwp-compatibility-adapter",
+        "legacy-provider-adapter",
         "git",
         "billing-connectors"
       ]
@@ -230,7 +230,7 @@
   ],
   "backend": {
     "basePath": "/api/admin/cip",
-    "adapter": "CIP provider adapter",
+    "adapter": "CIP-native provider adapter",
     "required": true,
     "readEndpoints": "domain-specific GET endpoints",
     "writeEndpoints": "explicit POST/PATCH/DELETE endpoints with RBAC, CSRF, validation, approval policy and audit"
