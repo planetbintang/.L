@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071321">
+<meta name="description" content="IRC — Internasional Rilei Chat, ruang percakapan PlanetBintang.">
+<title>IRC · Internasional Rilei Chat | PlanetBintang</title>
+<link rel="stylesheet" href="./irc.css">
+</head>
+<body>
+<header class="irc-top">
+  <a class="irc-brand" href="../" aria-label="Kembali ke PlanetBintang"><span class="brand-mark">PB</span><span><b>PLANETBINTANG</b><small>INTERNASIONAL RILEI CHAT</small></span></a>
+  <a class="back-link" href="../">← HALAMAN UTAMA</a>
+</header>
+<main class="irc-layout">
+  <section class="intro">
+    <p class="eyebrow">PLANETBINTANG / COMMUNICATION SYSTEM</p>
+    <h1>IRC <span>—</span> INTERNASIONAL RILEI CHAT</h1>
+    <p>Ruang komunikasi terpadu untuk percakapan, pertukaran informasi, dan koordinasi antar pengguna dalam ekosistem PlanetBintang.</p>
+    <div class="intro-tags"><span>CHAT INTERFACE</span><span>SERVER IDENTITY</span><span>RILE BLUE SYSTEM</span></div>
+  </section>
+  <section class="connection-banner" aria-live="polite">
+    <span class="status-dot"></span><div><b id="connectionTitle">MODE LOKAL · BELUM TERHUBUNG KE SERVER IRC</b><small id="connectionDetail">Antarmuka chat aktif di browser ini. Koneksi server memerlukan endpoint dan konfigurasi backend.</small></div>
+  </section>
+  <div class="irc-columns">
+    <section class="chat-panel" aria-labelledby="chatTitle">
+      <div class="panel-heading"><div><p class="eyebrow">COMMUNICATION / 01</p><h2 id="chatTitle">RUANG CHAT</h2></div><span class="mode-label">LOCAL PREVIEW</span></div>
+      <div id="chatLog" class="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+        <article class="message system-message"><span class="message-meta">IRC SYSTEM · INFO</span><p>Selamat datang di Internasional Rilei Chat. Mode pratinjau lokal aktif; pesan belum dikirim ke pengguna atau server lain.</p></article>
+      </div>
+      <form id="chatForm" class="chat-form">
+        <label for="chatInput">PESAN ANDA</label>
+        <div class="composer"><textarea id="chatInput" rows="2" maxlength="2000" placeholder="Tulis pesan..." required></textarea><button type="submit">KIRIM <span aria-hidden="true">↗</span></button></div>
+        <small>Enter untuk mengirim · Shift + Enter untuk baris baru · Maksimum 2.000 karakter</small>
+      </form>
+    </section>
+    <aside class="identity-panel" aria-labelledby="identityTitle">
+      <div class="panel-heading"><div><p class="eyebrow">INFRASTRUCTURE / 02</p><h2 id="identityTitle">IDENTITAS KONEKSI</h2></div><span class="identity-mark">IRC</span></div>
+      <dl class="identity-list">
+        <div><dt>SERVER</dt><dd id="serverValue">Belum dikonfigurasi</dd></div>
+        <div><dt>HOST</dt><dd id="hostValue">Belum dikonfigurasi</dd></div>
+        <div><dt>PORT</dt><dd id="portValue">—</dd></div>
+        <div><dt>IP</dt><dd id="ipValue">Tidak tersedia</dd></div>
+        <div><dt>JENIS PERANGKAT</dt><dd id="deviceValue">Mendeteksi…</dd></div>
+        <div><dt>ADMINISTRATOR</dt><dd id="adminValue">Belum ditetapkan</dd></div>
+        <div><dt>PENGEMBANG</dt><dd id="developerValue">Belum ditetapkan</dd></div>
+      </dl>
+      <p class="identity-note">Identitas server, host, port, IP, administrator, dan pengembang akan menampilkan data sebenarnya setelah konfigurasi layanan IRC/API disediakan. Halaman ini tidak mengarang alamat atau status koneksi.</p>
+    </aside>
+  </div>
+  <footer class="irc-footer"><span>PLANETBINTANG · IRC</span><span>INTERNASIONAL RILEI CHAT</span><a href="../">KEMBALI KE SISTEM ↗</a></footer>
+</main>
+<script src="./irc.js" defer></script>
+</body>
+</html>
