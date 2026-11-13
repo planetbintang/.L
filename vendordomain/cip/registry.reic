@@ -259,6 +259,9 @@
     "manifest": "cip-admin.reic",
     "architecture": "cip-system.reic",
     "dashboard": "cip-admin.reicjs",
-    "backend": "backend/api/hosting/[...route].mjs"
+    "backend": "backend/api/hosting/[...route].mjs",
+    "integrityWorkflow": ".github/workflows/cip-integrity.yml",
+    "validator": "vendordomain/cip/verify-cip.mjs",
+    "changePolicy": "commit-related-file-and-folder-updates-as-one-reviewed-change-set"
   }
 }
