@@ -1,0 +1,161 @@
+/* PLANETBINTANG · RPB / RRPPBB GLOBAL DESIGN SYSTEM
+   Shared accent, texture, lighting, typography, borders and surface tokens.
+   Loaded last by the root application; semantic status colors remain intact. */
+:root{
+  color-scheme:dark!important;
+  --rpb-ink:#02091f;
+  --rpb-night:#041334;
+  --rpb-deep:#08265d;
+  --rpb-blue:#164fc4;
+  --rpb-royal:#286be0;
+  --rpb-light:#83b5ff;
+  --rpb-ice:#dceaff;
+  --rpb-white:#f5f9ff;
+  --rpb-muted:#b7cbea;
+  --rpb-dim:#829fc8;
+  --rpb-line:rgba(105,151,235,.34);
+  --rpb-line-strong:rgba(151,190,255,.68);
+  --rpb-glass:linear-gradient(145deg,rgba(5,22,62,.94),rgba(4,39,96,.82));
+  --rpb-glass-soft:linear-gradient(135deg,rgba(7,31,79,.92),rgba(9,58,133,.76));
+  --rpb-texture:
+    linear-gradient(rgba(130,177,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(130,177,255,.035) 1px,transparent 1px),
+    linear-gradient(145deg,rgba(8,32,82,.96),rgba(3,15,43,.98));
+  --rpb-glow:0 0 18px rgba(44,111,235,.24);
+  --rpb-shadow:0 14px 34px rgba(0,5,25,.34);
+  --rrppbb-accent:linear-gradient(115deg,#fff 0%,#dceaff 28%,#9fc5ff 58%,#4f8fe9 82%,#2059c7 100%);
+  --rrppbb-accent-soft:linear-gradient(135deg,rgba(220,234,255,.16),rgba(37,99,210,.34));
+  --rrppbb-ink:#f5f9ff;
+  --rrppbb-line:var(--rpb-line);
+  --rrppbb-glow:var(--rpb-glow);
+  --lux-bg:var(--rpb-ink)!important;
+  --lux-surface:rgba(5,22,62,.94)!important;
+  --lux-surface-2:rgba(4,39,96,.82)!important;
+  --lux-line:var(--rpb-line)!important;
+  --lux-line-strong:var(--rpb-line-strong)!important;
+  --lux-text:var(--rpb-white)!important;
+  --lux-muted:var(--rpb-muted)!important;
+  --lux-blue:var(--rpb-blue)!important;
+  --lux-blue-bright:var(--rpb-royal)!important;
+  --pb-blue:var(--rpb-light)!important;
+  --pb-cyan:var(--rpb-light)!important;
+  --pb-line:rgba(105,151,235,.34)!important;
+  --pb-text:var(--rpb-white)!important;
+  --pb-muted:var(--rpb-muted)!important;
+  --reic-accent-gradient:var(--rrppbb-accent)!important;
+  --reic-accent-gradient-soft:var(--rrppbb-accent-soft)!important;
+  --reic-accent-ink:var(--rrppbb-ink)!important;
+  --reic-accent-line:var(--rrppbb-line)!important;
+  --reic-accent-glow:var(--rrppbb-glow)!important;
+}
+html,body{
+  color-scheme:dark!important;
+  background-color:var(--rpb-ink)!important;
+  color:var(--rpb-white)!important;
+}
+body{
+  background:
+    radial-gradient(ellipse at 84% 12%,rgba(27,91,205,.34),transparent 42%),
+    radial-gradient(ellipse at 12% 88%,rgba(27,66,156,.28),transparent 48%),
+    linear-gradient(135deg,#02091f 0%,#041334 48%,#08265d 100%)!important;
+  background-attachment:fixed!important;
+}
+body:before{
+  background-image:
+    radial-gradient(circle,rgba(190,216,255,.36) 1px,transparent 1.7px),
+    linear-gradient(rgba(125,169,246,.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,169,246,.09) 1px,transparent 1px)!important;
+  background-size:9px 9px,72px 72px,72px 72px!important;
+  opacity:.32!important;
+}
+:where(.app-shell,#fileManager,.workspace,.workspace-shell,.system-view,.view-container,.main-content){
+  color:var(--rpb-white)!important;
+  border-color:var(--rpb-line)!important;
+}
+:where(.app-shell,.workspace,.workspace-shell,.system-view,.view-container){
+  background-color:transparent;
+}
+:where(h1,h2,h3,h4,h5,h6,.page-title,.hero-title,.section-title,.panel-title,.modal-title){
+  color:var(--rpb-white)!important;
+  text-shadow:0 0 16px rgba(80,139,245,.22)!important;
+}
+:where(p,li,dd,dt,td,th,label,.description,.subtitle,.lead,.body-copy,.secondary-text){
+  color:var(--rpb-muted);
+}
+:where(small,.muted,.note,.hint,.helper-text,.meta,.caption){
+  color:var(--rpb-dim)!important;
+}
+:where(a){color:var(--rpb-ice);text-decoration-color:rgba(131,181,255,.48)}
+:where(a:hover,a:focus-visible){color:#fff;text-shadow:0 0 12px rgba(131,181,255,.5)}
+:where(button,.button,.btn,[role=button],input[type=button],input[type=submit],input[type=reset],.action,.primary-action,.secondary-action,.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary){
+  color:var(--rpb-white)!important;
+  background:var(--rpb-glass-soft)!important;
+  border:1px solid var(--rpb-line)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.07),0 5px 18px rgba(0,8,38,.2)!important;
+}
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary):hover,
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary)[aria-current=page],
+:where(button,.button,.btn,[role=button],.nav-link,.tab,.menu-item,.main-nav-link,.nav-dropdown>summary)[aria-pressed=true]{
+  color:#fff!important;
+  border-color:var(--rpb-line-strong)!important;
+  background:linear-gradient(135deg,rgba(18,75,170,.96),rgba(31,100,213,.82))!important;
+  box-shadow:0 0 0 1px rgba(159,197,255,.08),0 0 20px rgba(38,107,224,.28),inset 0 1px rgba(255,255,255,.13)!important;
+}
+:where(input:not([type=checkbox]):not([type=radio]),select,textarea){
+  color:var(--rpb-white)!important;
+  background:rgba(2,13,39,.9)!important;
+  border:1px solid var(--rpb-line)!important;
+}
+:where(input,select,textarea)::placeholder{color:var(--rpb-dim)!important;opacity:1}
+:where(input[type=checkbox],input[type=radio]){accent-color:var(--rpb-royal)!important}
+:where(input,select,textarea,button,a,[role=button],summary):focus-visible{
+  outline:2px solid var(--rpb-light)!important;outline-offset:2px!important;
+  box-shadow:0 0 0 4px rgba(131,181,255,.14),0 0 18px rgba(40,107,224,.3)!important;
+}
+:where(header,.topbar,.top-bar,.appbar,.navbar,.main-nav,.sidebar,.side-nav,.menu-panel,.dropdown-menu,.nav-dropdown-menu,.toolbar,.action-bar,.tab-bar,.tabs,.panel,.card,.tile,.metric,.metric-card,.stat-card,.surface,.surface-card,.workspace-card,.content-card,.modal,.dialog,.drawer,.popover,.table-wrap,.table-container,.list-panel,.detail-panel,.section-panel,.view-panel,.dashboard-panel,.hero-panel,.widget,.console-panel){
+  border-color:var(--rpb-line)!important;
+}
+:where(.panel,.card,.tile,.metric,.metric-card,.stat-card,.surface,.surface-card,.workspace-card,.content-card,.modal,.dialog,.drawer,.popover,.table-wrap,.table-container,.list-panel,.detail-panel,.section-panel,.view-panel,.dashboard-panel,.hero-panel,.widget,.console-panel,.fm-sidebar,.fm-browser,.fm-file-preview,.fm-preview,.fm-inspector){
+  color:var(--rpb-white)!important;
+  background-color:rgba(4,19,52,.94)!important;
+  background-image:var(--rpb-texture)!important;
+  background-size:18px 18px,18px 18px,auto!important;
+  box-shadow:var(--rpb-shadow),inset 0 1px rgba(255,255,255,.045)!important;
+}
+:where(hr,.divider,.separator){border-color:var(--rpb-line)!important;background-color:var(--rpb-line)!important}
+:where(table){color:var(--rpb-white);border-color:var(--rpb-line)!important}
+:where(th){color:#fff!important;background:rgba(12,52,122,.82)!important}
+:where(td){border-color:rgba(105,151,235,.2)!important}
+:where(tr:hover>td){background:rgba(32,91,190,.16)!important}
+:where(.badge,.pill,.tag,.chip,.status,.status-badge){
+  border:1px solid var(--rpb-line)!important;background:rgba(7,37,91,.82)!important;color:var(--rpb-white)!important;
+}
+/* Replace former cyan/turquoise accents with the unified RPB royal-blue spectrum. */
+:where(.eyebrow,.kicker,.section-kicker,.section-label,.side-label,.metric-label,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent,.fm-pane-heading,#fileManagerTitle,.snaps-heading,.snaps-kicker){
+  color:var(--rpb-light)!important;
+  text-shadow:0 0 12px rgba(70,133,235,.22)!important;
+}
+:where(.accent,.text-accent,.brand-accent,.eyebrow,.kicker,.section-kicker,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent){
+  background-image:var(--rrppbb-accent)!important;
+}
+:where(.accent,.text-accent,.brand-accent,.metric-value,.metric-card strong,.status-label,.nav-accent,.icon-accent){
+  background-clip:text!important;-webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+}
+:where(.icon-button,.icon-btn,.side-open-fm,.fm-root-button,.fm-folder-shortcuts button,.fm-repo-shortcuts button){
+  color:var(--rpb-white)!important;border-color:var(--rpb-line)!important;background:var(--rpb-glass-soft)!important;
+}
+:where(.active,.is-active,[aria-current=page]){text-shadow:0 0 12px rgba(131,181,255,.38)}
+:where(svg){filter:drop-shadow(0 0 5px rgba(65,125,230,.14))}
+:where(canvas,pre,code,.code-block,.terminal){border-color:var(--rpb-line)}
+::selection{background:rgba(40,107,224,.58);color:#fff}
+:where(.success,.ok,.status-success,[data-status=success]){color:#83e6b4!important}
+:where(.error,.danger,.failed,.bad,.status-error,[data-status=failure]){color:#ffb5c0!important}
+:where(.warning,.wait,.pending,.status-warning){color:#ffe0a0!important}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+@media(max-width:650px){
+  body:before{opacity:.22!important;background-size:8px 8px,54px 54px,54px 54px!important}
+  :where(.panel,.card,.tile,.surface,.workspace-card,.content-card){box-shadow:0 8px 22px rgba(0,5,25,.28)!important}
+}
