@@ -13,7 +13,11 @@ Base path: `/api/hosting`
 - `POST /account/password` — change password and revoke other sessions.
 - `GET/POST /services`, `PUT/DELETE /services/:id` — tenant-scoped hosting resources.
 - `GET/POST /files`, `GET/PUT/DELETE /files/:id` — tenant-scoped File Manager REIC records.
-- `GET /activity` — account audit stream.\n- `GET /admin/cip/overview` — authenticated Owner/Admin infrastructure overview.\n- `GET /admin/cip/{accounts|packages|domains|dns|email|files|databases|security|backups|webserver|services|integrations|applications|settings|logs}` — tenant-scoped CIP module data.\n\nCIP routes share the same `/api/hosting` API base, bearer session, tenant membership and PostgreSQL tables. Mutating CIP operations return HTTP 405 until a real provider adapter, approval flow and security checks are configured.
+- `GET /activity` — account audit stream.
+- `GET /admin/cip/overview` — authenticated Owner/Admin infrastructure overview.
+- `GET /admin/cip/{accounts|packages|domains|dns|email|files|databases|security|backups|webserver|services|integrations|applications|settings|logs}` — tenant-scoped CIP module data.
+
+CIP routes share the same `/api/hosting` API base, bearer session, tenant membership and PostgreSQL tables. Mutating CIP operations return HTTP 405 until a real provider adapter, approval flow and security checks are configured.
 
 Service records are mirrored to `file_manager_entries` under `hosting/accounts/services/{tenant-id}/{service-id}.reic`. Profile records are mirrored under `hosting/accounts/profiles/{user-id}.reic`. This is a database-backed File Manager namespace, not browser IndexedDB.
 
