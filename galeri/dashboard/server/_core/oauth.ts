@@ -1,4 +1,4 @@
-import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState, encodeOAuthState } from "@shared/const";
 import { parse as parseCookieHeader } from "cookie";
 import type { Express, Request, Response } from "express";
 import * as db from "../db";
@@ -11,6 +11,28 @@ function getQueryParam(req: Request, key: string): string | undefined {
 }
 
 export function registerOAuthRoutes(app: Express) {
+  app.get("/api/oauth/start", (req: Request, res: Response) => {
+    const projectId = process.env.MANUS_PROJECT_ID;
+    const oauthPortalUrl = process.env.MANUS_OAUTH_PORTAL_URL;
+    const apiBase = (process.env.MANUS_API_URL || `${req.protocol}://${req.get("host")}`).replace(/\\/+$/, "");
+    if (!projectId || !oauthPortalUrl) {
+      res.status(503).json({ error: "GALERI OAuth is not configured" });
+      return;
+    }
+    const nonce = crypto.randomUUID();
+    const redirectUri = `${apiBase}/api/oauth/callback`;
+    const state = encodeOAuthState({ redirectUri, nonce });
+    res.cookie(OAUTH_STATE_COOKIE, nonce, {
+      httpOnly: true, path: "/", maxAge: 10 * 60 * 1000, sameSite: "none", secure: true,
+    });
+    const url = new URL(`${oauthPortalUrl.replace(/\\/+$/, "")}/app-auth`);
+    url.searchParams.set("appId", projectId);
+    url.searchParams.set("redirectUri", redirectUri);
+    url.searchParams.set("state", state);
+    url.searchParams.set("responseType", "code");
+    res.redirect(302, url.toString());
+  });
+
   app.get("/api/oauth/callback", async (req: Request, res: Response) => {
     const code = getQueryParam(req, "code");
     const state = getQueryParam(req, "state");
@@ -56,7 +78,7 @@ export function registerOAuthRoutes(app: Express) {
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, "/");
+      res.redirect(302, process.env.GALERI_FRONTEND_URL || "https://planetbintang.github.io/.L/galeri/dashboard/");
     } catch (error) {
       console.error("[OAuth] Callback failed", error instanceof Error ? error.message : "unknown error");
       res.status(500).json({ error: "OAuth callback failed" });
