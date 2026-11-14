@@ -11,6 +11,28 @@ import { serveStatic, setupVite } from "./vite";
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  // Credentialed CORS for the static GitHub Pages frontend. Never use a wildcard
+  // origin with cookies; allow only explicitly configured trusted frontends.
+  const allowedOrigins = new Set(
+    (process.env.GALERI_ALLOWED_ORIGINS || "https://planetbintang.github.io")
+      .split(",").map(value => value.trim()).filter(Boolean)
+  );
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.has(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+      res.setHeader("Vary", "Origin");
+    }
+    if (req.method === "OPTIONS") {
+      if (!origin || !allowedOrigins.has(origin)) return res.sendStatus(403);
+      return res.sendStatus(204);
+    }
+    next();
+  });
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
