@@ -14,7 +14,7 @@ export function registerOAuthRoutes(app: Express) {
   app.get("/api/oauth/start", (req: Request, res: Response) => {
     const projectId = process.env.MANUS_PROJECT_ID;
     const oauthPortalUrl = process.env.MANUS_OAUTH_PORTAL_URL;
-    const apiBase = (process.env.MANUS_API_URL || `${req.protocol}://${req.get("host")}`).replace(/\/+$/, "");
+    const apiBase = (process.env.GALERI_PUBLIC_API_URL || `${req.protocol}://${req.get("host")}`).replace(/\/+$/, "");
     if (!projectId || !oauthPortalUrl) {
       res.status(503).json({ error: "GALERI OAuth is not configured" });
       return;
