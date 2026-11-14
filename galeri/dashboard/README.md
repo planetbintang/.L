@@ -27,7 +27,7 @@ Tambahkan GitHub Actions repository secrets berikut agar login dan operasi file 
 - `GALERI_API_URL` — URL HTTPS backend GALERI, tanpa garis miring di akhir.
 - `GALERI_API_BROWSER_KEY` — hanya kunci browser yang memang dirancang aman untuk dipublikasikan.
 
-Backend harus menyediakan `/api/trpc`, `/api/oauth/start`, dan `/api/oauth/callback`, mengizinkan CORS dari origin `https://planetbintang.github.io` dengan credentials, serta menjalankan database dan object storage. Atur `GALERI_PUBLIC_API_URL` pada server ke URL publik backend yang sama dengan secret `GALERI_API_URL`; `MANUS_API_URL` tetap dipakai oleh konektor object storage dan bukan URL frontend API. Jangan menaruh password database, secret OAuth, access token privat, atau S3 secret di frontend maupun GitHub Pages.
+Backend harus menyediakan `/api/trpc`, `/api/oauth/start`, dan `/api/oauth/callback`, mengizinkan CORS dari origin `https://planetbintang.github.io` dengan credentials, serta menjalankan database dan object storage. Pada REIC Server, atur `GALERI_PUBLIC_API_URL` (URL publik backend), `GALERI_FRONTEND_URL` (`https://planetbintang.github.io/.L/galeri/dashboard/`), dan `GALERI_ALLOWED_ORIGINS` (`https://planetbintang.github.io`). `MANUS_API_URL` tetap dipakai oleh konektor object storage dan bukan URL frontend API. Jangan menaruh password database, secret OAuth, access token privat, atau S3 secret di frontend maupun GitHub Pages.
 
 Jika secrets API belum diisi, halaman frontend tetap dapat dibangun dan ditampilkan, tetapi login, database, dan upload belum aktif. GitHub Pages sendiri tidak menjalankan Express/tRPC atau menyimpan file privat.
 
