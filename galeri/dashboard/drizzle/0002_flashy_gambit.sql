@@ -1,0 +1,1 @@
+ALTER TABLE `stored_files` DROP INDEX `stored_files_storageKey_unique`;

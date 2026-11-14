@@ -1,0 +1,19 @@
+{
+  "root": ".L/galeri/dashboard",
+  "storage": "durable-object-storage",
+  "index": "database",
+  "pagination": { "pageSize": 100, "supportsSearch": true },
+  "folders": [
+    { "id": "all-files", "name": "All Files", "path": "all-files" },
+    { "id": "photos", "name": "Photos", "path": "photos" },
+    { "id": "videos", "name": "Videos", "path": "videos" },
+    { "id": "movies", "name": "Movies", "path": "movies" },
+    { "id": "shared", "name": "Shared", "path": "shared" },
+    { "id": "favorites", "name": "Favorites", "path": "favorites" },
+    { "id": "documents", "name": "Documents", "path": "documents" }
+  ],
+  "virtualFilesystem": {
+    "supports": ["nested-folders", "search", "metadata", "upload", "rename", "move", "copy", "download", "soft-delete", "sharing"],
+    "scale": "hundreds-or-thousands-of-indexed-items"
+  }
+}
