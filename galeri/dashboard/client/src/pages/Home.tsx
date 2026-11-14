@@ -18,7 +18,7 @@ export default function Home() {
             <button className="pb-nav-link" type="button">GALERI <ChevronDown size={15} /></button>
             <div className="pb-dropdown-panel">
               <p className="pb-dropdown-label">RUANG KERJA</p>
-              <Link href="/galeri/dashboard" className="pb-dropdown-item">
+              <Link href="/" className="pb-dropdown-item">
                 <span><Cloud size={16} /> Dashboard</span><ArrowRight size={15} />
               </Link>
               {!user && <p className="pb-dropdown-hint">Login diperlukan untuk membuka file manager.</p>}
@@ -29,7 +29,7 @@ export default function Home() {
         </nav>
         <div className="pb-public-actions">
           {user ? (
-            <Link href="/galeri/dashboard" className="pb-button pb-button-primary">Buka Dashboard <ArrowRight size={16} /></Link>
+            <Link href="/" className="pb-button pb-button-primary">Buka Dashboard <ArrowRight size={16} /></Link>
           ) : (
             <button className="pb-button pb-button-primary" onClick={() => startLogin()} disabled={loading}>Masuk / Daftar <ArrowRight size={16} /></button>
           )}
@@ -42,7 +42,7 @@ export default function Home() {
           <h1>Ruang aman untuk semua <span>objek penting</span> Anda.</h1>
           <p>Simpan media, dokumen, dan filesistem kode di satu file manager yang tumbuh mengikuti kebutuhan Anda—tanpa menaruh file besar di server aplikasi.</p>
           <div className="pb-hero-actions">
-            {user ? <Link href="/galeri/dashboard" className="pb-button pb-button-primary pb-button-large">Masuk ke Galeri <ArrowRight size={18} /></Link> : <button onClick={() => startLogin()} className="pb-button pb-button-primary pb-button-large">Mulai dengan akun PlanetBintang <ArrowRight size={18} /></button>}
+            {user ? <Link href="/" className="pb-button pb-button-primary pb-button-large">Masuk ke Galeri <ArrowRight size={18} /></Link> : <button onClick={() => startLogin()} className="pb-button pb-button-primary pb-button-large">Mulai dengan akun PlanetBintang <ArrowRight size={18} /></button>}
             <a href="#cara-kerja" className="pb-text-link">Pelajari cara kerja <ArrowRight size={15} /></a>
           </div>
           <div className="pb-trust-row"><LockKeyhole size={15} /> Object storage terpisah &amp; metadata terindeks aman</div>
