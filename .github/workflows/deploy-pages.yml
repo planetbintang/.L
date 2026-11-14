@@ -28,6 +28,30 @@ jobs:
         with:
           enablement: true
 
+      - name: Set up Node.js for GALERI dashboard build
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.18.0
+
+      - name: Build GALERI dashboard for its GitHub Pages subpath
+        working-directory: galeri/dashboard
+        env:
+          MANUS_PROJECT_ID: ${{ secrets.GALERI_MANUS_PROJECT_ID }}
+          MANUS_OAUTH_PORTAL_URL: ${{ secrets.GALERI_MANUS_OAUTH_PORTAL_URL }}
+          MANUS_API_URL: ${{ secrets.GALERI_API_URL }}
+          MANUS_API_BROWSER_KEY: ${{ secrets.GALERI_API_BROWSER_KEY }}
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build:static
+          cp -a dist/public/. .
+          test -s index.html
+          test -s api/platform/config.js
+
       - name: Build and verify browser pages from canonical REIC files
         run: python3 scripts/build-reic-pages.py
 
