@@ -43,7 +43,7 @@ jobs:
         env:
           MANUS_PROJECT_ID: ${{ secrets.GALERI_MANUS_PROJECT_ID }}
           MANUS_OAUTH_PORTAL_URL: ${{ secrets.GALERI_MANUS_OAUTH_PORTAL_URL }}
-          MANUS_API_URL: ${{ secrets.GALERI_API_URL }}
+          GALERI_PUBLIC_API_URL: ${{ secrets.GALERI_API_URL }}
           MANUS_API_BROWSER_KEY: ${{ secrets.GALERI_API_BROWSER_KEY }}
         run: |
           pnpm install --frozen-lockfile
