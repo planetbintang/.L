@@ -3,7 +3,7 @@ export function publicPlatformConfig(env: NodeJS.ProcessEnv = process.env) {
   return {
     projectId: env.MANUS_PROJECT_ID ?? "",
     oauthPortalUrl: env.MANUS_OAUTH_PORTAL_URL ?? "",
-    apiUrl: env.MANUS_API_URL ?? "",
+    apiUrl: env.GALERI_PUBLIC_API_URL ?? "",
     apiBrowserKey: env.MANUS_API_BROWSER_KEY ?? "",
   };
 }
